@@ -1591,25 +1591,25 @@ end
 module PerformanceCounterResultKHR = struct
   type t
   let t : t union typ = union "VkPerformanceCounterResultKHR"
-  let _int_32 = field t "int32" (Vk_base.int32)
-  let int_32 = _int_32
-  let _int_64 = field t "int64" (Vk_base.int64)
-  let int_64 = _int_64
-  let _uint_32 = field t "uint32" (Vk_base.uint32)
-  let uint_32 = _uint_32
-  let _uint_64 = field t "uint64" (Vk_base.uint64)
-  let uint_64 = _uint_64
-  let _float_32 = field t "float32" (Ctypes.float)
-  let float_32 = _float_32
-  let _float_64 = field t "float64" (Ctypes.double)
-  let float_64 = _float_64
+  let _int32 = field t "int32" (Vk_base.int32)
+  let int32 = _int32
+  let _int64 = field t "int64" (Vk_base.int64)
+  let int64 = _int64
+  let _uint32 = field t "uint32" (Vk_base.uint32)
+  let uint32 = _uint32
+  let _uint64 = field t "uint64" (Vk_base.uint64)
+  let uint64 = _uint64
+  let _float32 = field t "float32" (Ctypes.float)
+  let float32 = _float32
+  let _float64 = field t "float64" (Ctypes.double)
+  let float64 = _float64
   let () = seal t
-  let int_32 x = let value = make t in setf value _int_32 x; value
-  let int_64 x = let value = make t in setf value _int_64 x; value
-  let uint_32 x = let value = make t in setf value _uint_32 x; value
-  let uint_64 x = let value = make t in setf value _uint_64 x; value
-  let float_32 x = let value = make t in setf value _float_32 x; value
-  let float_64 x = let value = make t in setf value _float_64 x; value
+  let int32 x = let value = make t in setf value _int32 x; value
+  let int64 x = let value = make t in setf value _int64 x; value
+  let uint32 x = let value = make t in setf value _uint32 x; value
+  let uint64 x = let value = make t in setf value _uint64 x; value
+  let float32 x = let value = make t in setf value _float32 x; value
+  let float64 x = let value = make t in setf value _float64 x; value
 end
 
 module PerformanceMarkerInfoINTEL = struct

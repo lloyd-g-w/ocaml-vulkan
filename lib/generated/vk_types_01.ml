@@ -1886,29 +1886,29 @@ end
 module ClearColorValue = struct
   type t
   let t : t union typ = union "VkClearColorValue"
-  let _float_32 = field t "float32" (array 4 (Ctypes.float))
-  let float_32 = _float_32
-  let _int_32 = field t "int32" (array 4 (Vk_base.int32))
-  let int_32 = _int_32
-  let _uint_32 = field t "uint32" (array 4 (Vk_base.uint32))
-  let uint_32 = _uint_32
+  let _float32 = field t "float32" (array 4 (Ctypes.float))
+  let float32 = _float32
+  let _int32 = field t "int32" (array 4 (Vk_base.int32))
+  let int32 = _int32
+  let _uint32 = field t "uint32" (array 4 (Vk_base.uint32))
+  let uint32 = _uint32
   let () = seal t
-  let float_32 values =
+  let float32 values =
     let value = make t in
     if List.length values > 4 then invalid_arg "float32: too many elements";
-    let destination = getf value _float_32 in
+    let destination = getf value _float32 in
     List.iteri (fun i x -> CArray.set (destination) (i mod 4) x) values;
     value
-  let int_32 values =
+  let int32 values =
     let value = make t in
     if List.length values > 4 then invalid_arg "int32: too many elements";
-    let destination = getf value _int_32 in
+    let destination = getf value _int32 in
     List.iteri (fun i x -> CArray.set (destination) (i mod 4) x) values;
     value
-  let uint_32 values =
+  let uint32 values =
     let value = make t in
     if List.length values > 4 then invalid_arg "uint32: too many elements";
-    let destination = getf value _uint_32 in
+    let destination = getf value _uint32 in
     List.iteri (fun i x -> CArray.set (destination) (i mod 4) x) values;
     value
 end

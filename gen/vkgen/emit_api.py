@@ -246,9 +246,11 @@ def _emit_enumeration(ctx: Context, command: Command, pair: tuple[Member, Member
         lines.extend([f"    let first = {first_call} in", "    if Result.to_int first < 0 then check first;"])
     else:
         lines.append(f"    {first_call};")
+    extra_success = [x for x in command.successcodes if x not in {"VK_SUCCESS", "VK_INCOMPLETE"}]
+    empty_result = "(first, [])" if _is_result(command) and extra_success else "[]"
     lines.extend([
         "    let requested = !@ count in",
-        "    if requested = 0 then [] else",
+        f"    if requested = 0 then {empty_result} else",
     ])
     elem_typ = ctx.base_typ(items.ctype)
     kind = ctx.kind(items.ctype)
@@ -263,7 +265,9 @@ def _emit_enumeration(ctx: Context, command: Command, pair: tuple[Member, Member
             f"    let result = {second_call} in",
             "    if Result.equal result Result.incomplete then fetch () else begin",
             "      check result;",
-            "      CArray.to_list (CArray.from_ptr (CArray.start storage) (!@ count))",
+            ("      (result, CArray.to_list (CArray.from_ptr (CArray.start storage) (!@ count)))"
+             if extra_success else
+             "      CArray.to_list (CArray.from_ptr (CArray.start storage) (!@ count))"),
             "    end",
         ])
     else:

@@ -3233,12 +3233,12 @@ let get_device_fault_reports_khr arg_device arg_timeout =
     let first = Vk_fn.get_device_fault_reports_khr (arg_device) (arg_timeout) (count) (Vk_base.null_ptr (DeviceFaultInfoKHR.t)) in
     if Result.to_int first < 0 then check first;
     let requested = !@ count in
-    if requested = 0 then [] else
+    if requested = 0 then (first, []) else
     let storage = CArray.of_list (DeviceFaultInfoKHR.t) (List.init requested (fun _ -> DeviceFaultInfoKHR.make ())) in
     let result = Vk_fn.get_device_fault_reports_khr (arg_device) (arg_timeout) (count) (CArray.start storage) in
     if Result.equal result Result.incomplete then fetch () else begin
       check result;
-      CArray.to_list (CArray.from_ptr (CArray.start storage) (!@ count))
+      (result, CArray.to_list (CArray.from_ptr (CArray.start storage) (!@ count)))
     end
   in
   fetch ()

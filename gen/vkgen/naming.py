@@ -64,6 +64,10 @@ def command_name(c_name: str) -> str:
 
 
 def member_name(c_name: str) -> str:
+    # Vulkan uses these spellings as scalar/array member names, not as a
+    # trailing numeric generation marker (ClearColorValue.float32, etc.).
+    if re.fullmatch(r"(?:u?int|float)\d+", c_name):
+        return escape(c_name.lower())
     return snake(c_name)
 
 
@@ -77,7 +81,7 @@ def argument_name(c_name: str, pointer_depth: int = 0) -> str:
             value = value[2:]
         elif value.startswith("p") and len(value) > 1 and value[1].isupper():
             value = value[1:]
-    return snake(value)
+    return member_name(value)
 
 
 def _strip_vendor_suffix(type_body: str, tags: Iterable[str]) -> str:

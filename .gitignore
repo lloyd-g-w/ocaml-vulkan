@@ -42,3 +42,10 @@ _opam/
 
 # local pi agent profiles
 .pi/
+__pycache__/
+*.pyc
+
+# dune-generated opam file (dune-project has (generate_opam_files true));
+# `dune build` recreates it from dune-project every time, so it's noise to
+# track until the project decides to commit a stable copy on purpose.
+/vulkan.opam

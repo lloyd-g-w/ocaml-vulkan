@@ -1,0 +1,17 @@
+; Alcotest suite for the `vulkan` library (DESIGN.md §12). All headless,
+; targeting the Mesa lavapipe software Vulkan device (VK_ICD_FILENAMES).
+;
+; NOTE for the integration lane: this cannot build yet in this lane's clone
+; -- lib/vk.ml is still a stub (the generator lane's work lands separately).
+; test_enums.ml/test_layout.ml/test_structs.ml/test_instance.ml/
+; test_compute.ml/test_graphics.ml were written directly against DESIGN.md
+; (each has its own TODO/assumptions comment block at the top); test_runner.ml
+; is the thin `Alcotest.run` entry point wiring their suites together. Once
+; lib/generated exists, run `dune build @runtest` (with VK_ICD_FILENAMES set,
+; see scripts/gen_layout.sh's sibling note in README.md) and fix whatever the
+; type errors point at -- start with the FIXME-tagged assumptions in
+; test_compute.ml/test_graphics.ml (the `module`/`type` keyword-escaped
+; struct fields and the batch-create-returns-a-list commands).
+(test
+ (name test_runner)
+ (libraries vulkan vk_test_shaders alcotest ctypes integers))

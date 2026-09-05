@@ -42,3 +42,5 @@ _opam/
 
 # local pi agent profiles
 .pi/
+__pycache__/
+*.pyc

@@ -1,0 +1,8327 @@
+VkAabbPositionsKHR 24
+  minX 0
+  minY 4
+  minZ 8
+  maxX 12
+  maxY 16
+  maxZ 20
+VkAccelerationStructureBuildGeometryInfoKHR 80
+  sType 0
+  pNext 8
+  type 16
+  flags 20
+  mode 24
+  srcAccelerationStructure 32
+  dstAccelerationStructure 40
+  geometryCount 48
+  pGeometries 56
+  ppGeometries 64
+  scratchData 72
+VkAccelerationStructureBuildRangeInfoKHR 16
+  primitiveCount 0
+  primitiveOffset 4
+  firstVertex 8
+  transformOffset 12
+VkAccelerationStructureBuildSizesInfoKHR 40
+  sType 0
+  pNext 8
+  accelerationStructureSize 16
+  updateScratchSize 24
+  buildScratchSize 32
+VkAccelerationStructureCaptureDescriptorDataInfoEXT 32
+  sType 0
+  pNext 8
+  accelerationStructure 16
+  accelerationStructureNV 24
+VkAccelerationStructureCreateInfo2KHR 48
+  sType 0
+  pNext 8
+  createFlags 16
+  addressRange 24
+  addressFlags 40
+  type 44
+VkAccelerationStructureCreateInfoKHR 64
+  sType 0
+  pNext 8
+  createFlags 16
+  buffer 24
+  offset 32
+  size 40
+  type 48
+  deviceAddress 56
+VkAccelerationStructureCreateInfoNV 64
+  sType 0
+  pNext 8
+  compactedSize 16
+  info 24
+VkAccelerationStructureDenseGeometryFormatTrianglesDataAMDX 56
+  sType 0
+  pNext 8
+  compressedData 16
+  dataSize 24
+  numTriangles 32
+  numVertices 36
+  maxPrimitiveIndex 40
+  maxGeometryIndex 44
+  format 48
+VkAccelerationStructureDeviceAddressInfoKHR 24
+  sType 0
+  pNext 8
+  accelerationStructure 16
+VkAccelerationStructureGeometryAabbsDataKHR 32
+  sType 0
+  pNext 8
+  data 16
+  stride 24
+VkAccelerationStructureGeometryDataKHR 64
+  triangles 0
+  aabbs 0
+  instances 0
+VkAccelerationStructureGeometryInstancesDataKHR 32
+  sType 0
+  pNext 8
+  arrayOfPointers 16
+  data 24
+VkAccelerationStructureGeometryKHR 96
+  sType 0
+  pNext 8
+  geometryType 16
+  geometry 24
+  flags 88
+VkAccelerationStructureGeometryLinearSweptSpheresDataNV 96
+  sType 0
+  pNext 8
+  vertexFormat 16
+  vertexData 24
+  vertexStride 32
+  radiusFormat 40
+  radiusData 48
+  radiusStride 56
+  indexType 64
+  indexData 72
+  indexStride 80
+  indexingMode 88
+  endCapsMode 92
+VkAccelerationStructureGeometryMicromapDataKHR 64
+  sType 0
+  pNext 8
+  usageCountsCount 16
+  pUsageCounts 24
+  ppUsageCounts 32
+  data 40
+  triangleArray 48
+  triangleArrayStride 56
+VkAccelerationStructureGeometryMotionTrianglesDataNV 24
+  sType 0
+  pNext 8
+  vertexData 16
+VkAccelerationStructureGeometrySpheresDataNV 88
+  sType 0
+  pNext 8
+  vertexFormat 16
+  vertexData 24
+  vertexStride 32
+  radiusFormat 40
+  radiusData 48
+  radiusStride 56
+  indexType 64
+  indexData 72
+  indexStride 80
+VkAccelerationStructureGeometryTrianglesDataKHR 64
+  sType 0
+  pNext 8
+  vertexFormat 16
+  vertexData 24
+  vertexStride 32
+  maxVertex 40
+  indexType 44
+  indexData 48
+  transformData 56
+VkAccelerationStructureInfoNV 40
+  sType 0
+  pNext 8
+  type 16
+  flags 20
+  instanceCount 24
+  geometryCount 28
+  pGeometries 32
+VkAccelerationStructureInstanceKHR 64
+  transform 0
+  accelerationStructureReference 56
+VkAccelerationStructureMatrixMotionInstanceNV 112
+  transformT0 0
+  transformT1 48
+  accelerationStructureReference 104
+VkAccelerationStructureMemoryRequirementsInfoNV 32
+  sType 0
+  pNext 8
+  type 16
+  accelerationStructure 24
+VkAccelerationStructureMotionInfoNV 24
+  sType 0
+  pNext 8
+  maxInstances 16
+  flags 20
+VkAccelerationStructureMotionInstanceDataNV 144
+  staticInstance 0
+  matrixMotionInstance 0
+  srtMotionInstance 0
+VkAccelerationStructureMotionInstanceNV 152
+  type 0
+  flags 4
+  data 8
+VkAccelerationStructureSRTMotionInstanceNV 144
+  transformT0 0
+  transformT1 64
+  accelerationStructureReference 136
+VkAccelerationStructureTrianglesDisplacementMicromapNV 128
+  sType 0
+  pNext 8
+  displacementBiasAndScaleFormat 16
+  displacementVectorFormat 20
+  displacementBiasAndScaleBuffer 24
+  displacementBiasAndScaleStride 32
+  displacementVectorBuffer 40
+  displacementVectorStride 48
+  displacedMicromapPrimitiveFlags 56
+  displacedMicromapPrimitiveFlagsStride 64
+  indexType 72
+  indexBuffer 80
+  indexStride 88
+  baseTriangle 96
+  usageCountsCount 100
+  pUsageCounts 104
+  ppUsageCounts 112
+  micromap 120
+VkAccelerationStructureTrianglesOpacityMicromapEXT 72
+  sType 0
+  pNext 8
+  indexType 16
+  indexBuffer 24
+  indexStride 32
+  baseTriangle 40
+  usageCountsCount 44
+  pUsageCounts 48
+  ppUsageCounts 56
+  micromap 64
+VkAccelerationStructureTrianglesOpacityMicromapKHR 56
+  sType 0
+  pNext 8
+  indexType 16
+  indexBuffer 24
+  indexStride 32
+  baseTriangle 40
+  micromap 48
+VkAccelerationStructureVersionInfoKHR 24
+  sType 0
+  pNext 8
+  pVersionData 16
+VkAcquireNextImageInfoKHR 56
+  sType 0
+  pNext 8
+  swapchain 16
+  timeout 24
+  semaphore 32
+  fence 40
+  deviceMask 48
+VkAcquireProfilingLockInfoKHR 32
+  sType 0
+  pNext 8
+  flags 16
+  timeout 24
+VkAllocationCallbacks 48
+  pUserData 0
+  pfnAllocation 8
+  pfnReallocation 16
+  pfnFree 24
+  pfnInternalAllocation 32
+  pfnInternalFree 40
+VkAmigoProfilingSubmitInfoSEC 32
+  sType 0
+  pNext 8
+  firstDrawTimestamp 16
+  swapBufferTimestamp 24
+VkAntiLagDataAMD 32
+  sType 0
+  pNext 8
+  mode 16
+  maxFPS 20
+  pPresentationInfo 24
+VkAntiLagPresentationInfoAMD 32
+  sType 0
+  pNext 8
+  stage 16
+  frameIndex 24
+VkApplicationInfo 48
+  sType 0
+  pNext 8
+  pApplicationName 16
+  applicationVersion 24
+  pEngineName 32
+  engineVersion 40
+  apiVersion 44
+VkAttachmentDescription 36
+  flags 0
+  format 4
+  samples 8
+  loadOp 12
+  storeOp 16
+  stencilLoadOp 20
+  stencilStoreOp 24
+  initialLayout 28
+  finalLayout 32
+VkAttachmentDescription2 56
+  sType 0
+  pNext 8
+  flags 16
+  format 20
+  samples 24
+  loadOp 28
+  storeOp 32
+  stencilLoadOp 36
+  stencilStoreOp 40
+  initialLayout 44
+  finalLayout 48
+VkAttachmentDescriptionStencilLayout 24
+  sType 0
+  pNext 8
+  stencilInitialLayout 16
+  stencilFinalLayout 20
+VkAttachmentFeedbackLoopInfoEXT 24
+  sType 0
+  pNext 8
+  feedbackLoopEnable 16
+VkAttachmentReference 8
+  attachment 0
+  layout 4
+VkAttachmentReference2 32
+  sType 0
+  pNext 8
+  attachment 16
+  layout 20
+  aspectMask 24
+VkAttachmentReferenceStencilLayout 24
+  sType 0
+  pNext 8
+  stencilLayout 16
+VkAttachmentSampleCountInfoAMD 40
+  sType 0
+  pNext 8
+  colorAttachmentCount 16
+  pColorAttachmentSamples 24
+  depthStencilAttachmentSamples 32
+VkAttachmentSampleLocationsEXT 48
+  attachmentIndex 0
+  sampleLocationsInfo 8
+VkBaseInStructure 16
+  sType 0
+  pNext 8
+VkBaseOutStructure 16
+  sType 0
+  pNext 8
+VkBeginCustomResolveInfoEXT 16
+  sType 0
+  pNext 8
+VkBindAccelerationStructureMemoryInfoNV 56
+  sType 0
+  pNext 8
+  accelerationStructure 16
+  memory 24
+  memoryOffset 32
+  deviceIndexCount 40
+  pDeviceIndices 48
+VkBindBufferMemoryDeviceGroupInfo 32
+  sType 0
+  pNext 8
+  deviceIndexCount 16
+  pDeviceIndices 24
+VkBindBufferMemoryInfo 40
+  sType 0
+  pNext 8
+  buffer 16
+  memory 24
+  memoryOffset 32
+VkBindDataGraphPipelineSessionMemoryInfoARM 48
+  sType 0
+  pNext 8
+  session 16
+  bindPoint 24
+  objectIndex 28
+  memory 32
+  memoryOffset 40
+VkBindDescriptorBufferEmbeddedSamplersInfoEXT 40
+  sType 0
+  pNext 8
+  stageFlags 16
+  layout 24
+  set 32
+VkBindDescriptorSetsInfo 64
+  sType 0
+  pNext 8
+  stageFlags 16
+  layout 24
+  firstSet 32
+  descriptorSetCount 36
+  pDescriptorSets 40
+  dynamicOffsetCount 48
+  pDynamicOffsets 56
+VkBindHeapInfoEXT 48
+  sType 0
+  pNext 8
+  heapRange 16
+  reservedRangeOffset 32
+  reservedRangeSize 40
+VkBindImageMemoryDeviceGroupInfo 48
+  sType 0
+  pNext 8
+  deviceIndexCount 16
+  pDeviceIndices 24
+  splitInstanceBindRegionCount 32
+  pSplitInstanceBindRegions 40
+VkBindImageMemoryInfo 40
+  sType 0
+  pNext 8
+  image 16
+  memory 24
+  memoryOffset 32
+VkBindImageMemorySwapchainInfoKHR 32
+  sType 0
+  pNext 8
+  swapchain 16
+  imageIndex 24
+VkBindImagePlaneMemoryInfo 24
+  sType 0
+  pNext 8
+  planeAspect 16
+VkBindIndexBuffer3InfoKHR 40
+  sType 0
+  pNext 8
+  addressRange 16
+  addressFlags 32
+  indexType 36
+VkBindIndexBufferIndirectCommandEXT 16
+  bufferAddress 0
+  size 8
+  indexType 12
+VkBindIndexBufferIndirectCommandNV 16
+  bufferAddress 0
+  size 8
+  indexType 12
+VkBindMemoryStatus 24
+  sType 0
+  pNext 8
+  pResult 16
+VkBindPipelineIndirectCommandNV 8
+  pipelineAddress 0
+VkBindShaderGroupIndirectCommandNV 4
+  groupIndex 0
+VkBindSparseInfo 96
+  sType 0
+  pNext 8
+  waitSemaphoreCount 16
+  pWaitSemaphores 24
+  bufferBindCount 32
+  pBufferBinds 40
+  imageOpaqueBindCount 48
+  pImageOpaqueBinds 56
+  imageBindCount 64
+  pImageBinds 72
+  signalSemaphoreCount 80
+  pSignalSemaphores 88
+VkBindTensorMemoryInfoARM 40
+  sType 0
+  pNext 8
+  tensor 16
+  memory 24
+  memoryOffset 32
+VkBindTransformFeedbackBuffer2InfoEXT 40
+  sType 0
+  pNext 8
+  addressRange 16
+  addressFlags 32
+VkBindVertexBuffer3InfoKHR 56
+  sType 0
+  pNext 8
+  setStride 16
+  addressRange 24
+  addressFlags 48
+VkBindVertexBufferIndirectCommandEXT 16
+  bufferAddress 0
+  size 8
+  stride 12
+VkBindVertexBufferIndirectCommandNV 16
+  bufferAddress 0
+  size 8
+  stride 12
+VkBindVideoSessionMemoryInfoKHR 48
+  sType 0
+  pNext 8
+  memoryBindIndex 16
+  memory 24
+  memoryOffset 32
+  memorySize 40
+VkBlitImageCubicWeightsInfoQCOM 24
+  sType 0
+  pNext 8
+  cubicWeights 16
+VkBlitImageInfo2 64
+  sType 0
+  pNext 8
+  srcImage 16
+  srcImageLayout 24
+  dstImage 32
+  dstImageLayout 40
+  regionCount 44
+  pRegions 48
+  filter 56
+VkBufferCaptureDescriptorDataInfoEXT 24
+  sType 0
+  pNext 8
+  buffer 16
+VkBufferCopy 24
+  srcOffset 0
+  dstOffset 8
+  size 16
+VkBufferCopy2 40
+  sType 0
+  pNext 8
+  srcOffset 16
+  dstOffset 24
+  size 32
+VkBufferCreateInfo 56
+  sType 0
+  pNext 8
+  flags 16
+  size 24
+  usage 32
+  sharingMode 36
+  queueFamilyIndexCount 40
+  pQueueFamilyIndices 48
+VkBufferDeviceAddressCreateInfoEXT 24
+  sType 0
+  pNext 8
+  deviceAddress 16
+VkBufferDeviceAddressInfo 24
+  sType 0
+  pNext 8
+  buffer 16
+VkBufferImageCopy 56
+  bufferOffset 0
+  bufferRowLength 8
+  bufferImageHeight 12
+  imageSubresource 16
+  imageOffset 32
+  imageExtent 44
+VkBufferImageCopy2 72
+  sType 0
+  pNext 8
+  bufferOffset 16
+  bufferRowLength 24
+  bufferImageHeight 28
+  imageSubresource 32
+  imageOffset 48
+  imageExtent 60
+VkBufferMemoryBarrier 56
+  sType 0
+  pNext 8
+  srcAccessMask 16
+  dstAccessMask 20
+  srcQueueFamilyIndex 24
+  dstQueueFamilyIndex 28
+  buffer 32
+  offset 40
+  size 48
+VkBufferMemoryBarrier2 80
+  sType 0
+  pNext 8
+  srcStageMask 16
+  srcAccessMask 24
+  dstStageMask 32
+  dstAccessMask 40
+  srcQueueFamilyIndex 48
+  dstQueueFamilyIndex 52
+  buffer 56
+  offset 64
+  size 72
+VkBufferMemoryRequirementsInfo2 24
+  sType 0
+  pNext 8
+  buffer 16
+VkBufferOpaqueCaptureAddressCreateInfo 24
+  sType 0
+  pNext 8
+  opaqueCaptureAddress 16
+VkBufferUsageFlags2CreateInfo 24
+  sType 0
+  pNext 8
+  usage 16
+VkBufferViewCreateInfo 56
+  sType 0
+  pNext 8
+  flags 16
+  buffer 24
+  format 32
+  offset 40
+  range 48
+VkBuildPartitionedAccelerationStructureIndirectCommandNV 24
+  opType 0
+  argCount 4
+  argData 8
+VkBuildPartitionedAccelerationStructureInfoNV 96
+  sType 0
+  pNext 8
+  input 16
+  srcAccelerationStructureData 56
+  dstAccelerationStructureData 64
+  scratchData 72
+  srcInfos 80
+  srcInfosCount 88
+VkCalibratedTimestampInfoKHR 24
+  sType 0
+  pNext 8
+  timeDomain 16
+VkCheckpointData2NV 32
+  sType 0
+  pNext 8
+  stage 16
+  pCheckpointMarker 24
+VkCheckpointDataNV 32
+  sType 0
+  pNext 8
+  stage 16
+  pCheckpointMarker 24
+VkClearAttachment 24
+  aspectMask 0
+  colorAttachment 4
+  clearValue 8
+VkClearColorValue 16
+  float32 0
+  int32 0
+  uint32 0
+VkClearDepthStencilValue 8
+  depth 0
+  stencil 4
+VkClearRect 24
+  rect 0
+  baseArrayLayer 16
+  layerCount 20
+VkClearValue 16
+  color 0
+  depthStencil 0
+VkClusterAccelerationStructureBuildClustersBottomLevelInfoNV 16
+  clusterReferencesCount 0
+  clusterReferencesStride 4
+  clusterReferences 8
+VkClusterAccelerationStructureBuildTriangleClusterInfoNV 64
+  clusterID 0
+  clusterFlags 4
+  baseGeometryIndexAndGeometryFlags 12
+  indexBufferStride 16
+  vertexBufferStride 18
+  geometryIndexAndFlagsBufferStride 20
+  opacityMicromapIndexBufferStride 22
+  indexBuffer 24
+  vertexBuffer 32
+  geometryIndexAndFlagsBuffer 40
+  opacityMicromapArray 48
+  opacityMicromapIndexBuffer 56
+VkClusterAccelerationStructureBuildTriangleClusterTemplateInfoNV 72
+  clusterID 0
+  clusterFlags 4
+  baseGeometryIndexAndGeometryFlags 12
+  indexBufferStride 16
+  vertexBufferStride 18
+  geometryIndexAndFlagsBufferStride 20
+  opacityMicromapIndexBufferStride 22
+  indexBuffer 24
+  vertexBuffer 32
+  geometryIndexAndFlagsBuffer 40
+  opacityMicromapArray 48
+  opacityMicromapIndexBuffer 56
+  instantiationBoundingBoxLimit 64
+VkClusterAccelerationStructureClustersBottomLevelInputNV 24
+  sType 0
+  pNext 8
+  maxTotalClusterCount 16
+  maxClusterCountPerAccelerationStructure 20
+VkClusterAccelerationStructureCommandsInfoNV 160
+  sType 0
+  pNext 8
+  input 16
+  dstImplicitData 56
+  scratchData 64
+  dstAddressesArray 72
+  dstSizesArray 96
+  srcInfosArray 120
+  srcInfosCount 144
+  addressResolutionFlags 152
+VkClusterAccelerationStructureGeometryIndexAndGeometryFlagsNV 4
+VkClusterAccelerationStructureGetTemplateIndicesInfoNV 8
+  clusterTemplateAddress 0
+VkClusterAccelerationStructureInputInfoNV 40
+  sType 0
+  pNext 8
+  maxAccelerationStructureCount 16
+  flags 20
+  opType 24
+  opMode 28
+  opInput 32
+VkClusterAccelerationStructureInstantiateClusterInfoNV 32
+  clusterIdOffset 0
+  clusterTemplateAddress 8
+  vertexBuffer 16
+VkClusterAccelerationStructureMoveObjectsInfoNV 8
+  srcAccelerationStructure 0
+VkClusterAccelerationStructureMoveObjectsInputNV 32
+  sType 0
+  pNext 8
+  type 16
+  noMoveOverlap 20
+  maxMovedBytes 24
+VkClusterAccelerationStructureOpInputNV 8
+  pClustersBottomLevel 0
+  pTriangleClusters 0
+  pMoveObjects 0
+VkClusterAccelerationStructureTriangleClusterInputNV 48
+  sType 0
+  pNext 8
+  vertexFormat 16
+  maxGeometryIndexValue 20
+  maxClusterUniqueGeometryCount 24
+  maxClusterTriangleCount 28
+  maxClusterVertexCount 32
+  maxTotalTriangleCount 36
+  maxTotalVertexCount 40
+  minPositionTruncateBitCount 44
+VkCoarseSampleLocationNV 12
+  pixelX 0
+  pixelY 4
+  sample 8
+VkCoarseSampleOrderCustomNV 24
+  shadingRate 0
+  sampleCount 4
+  sampleLocationCount 8
+  pSampleLocations 16
+VkColorBlendAdvancedEXT 20
+  advancedBlendOp 0
+  srcPremultiplied 4
+  dstPremultiplied 8
+  blendOverlap 12
+  clampResults 16
+VkColorBlendEquationEXT 24
+  srcColorBlendFactor 0
+  dstColorBlendFactor 4
+  colorBlendOp 8
+  srcAlphaBlendFactor 12
+  dstAlphaBlendFactor 16
+  alphaBlendOp 20
+VkCommandBufferAllocateInfo 32
+  sType 0
+  pNext 8
+  commandPool 16
+  level 24
+  commandBufferCount 28
+VkCommandBufferBeginInfo 32
+  sType 0
+  pNext 8
+  flags 16
+  pInheritanceInfo 24
+VkCommandBufferInheritanceConditionalRenderingInfoEXT 24
+  sType 0
+  pNext 8
+  conditionalRenderingEnable 16
+VkCommandBufferInheritanceDescriptorHeapInfoEXT 32
+  sType 0
+  pNext 8
+  pSamplerHeapBindInfo 16
+  pResourceHeapBindInfo 24
+VkCommandBufferInheritanceInfo 56
+  sType 0
+  pNext 8
+  renderPass 16
+  subpass 24
+  framebuffer 32
+  occlusionQueryEnable 40
+  queryFlags 44
+  pipelineStatistics 48
+VkCommandBufferInheritanceRenderPassTransformInfoQCOM 40
+  sType 0
+  pNext 8
+  transform 16
+  renderArea 20
+VkCommandBufferInheritanceRenderingInfo 56
+  sType 0
+  pNext 8
+  flags 16
+  viewMask 20
+  colorAttachmentCount 24
+  pColorAttachmentFormats 32
+  depthAttachmentFormat 40
+  stencilAttachmentFormat 44
+  rasterizationSamples 48
+VkCommandBufferInheritanceViewportScissorInfoNV 32
+  sType 0
+  pNext 8
+  viewportScissor2D 16
+  viewportDepthCount 20
+  pViewportDepths 24
+VkCommandBufferSubmitInfo 32
+  sType 0
+  pNext 8
+  commandBuffer 16
+  deviceMask 24
+VkCommandPoolCreateInfo 24
+  sType 0
+  pNext 8
+  flags 16
+  queueFamilyIndex 20
+VkComponentMapping 16
+  r 0
+  g 4
+  b 8
+  a 12
+VkComputeOccupancyPriorityParametersNV 24
+  sType 0
+  pNext 8
+  occupancyPriority 16
+  occupancyThrottling 20
+VkComputePipelineCreateInfo 96
+  sType 0
+  pNext 8
+  flags 16
+  stage 24
+  layout 72
+  basePipelineHandle 80
+  basePipelineIndex 88
+VkComputePipelineIndirectBufferInfoNV 40
+  sType 0
+  pNext 8
+  deviceAddress 16
+  size 24
+  pipelineDeviceAddressCaptureReplay 32
+VkConditionalRenderingBeginInfo2EXT 40
+  sType 0
+  pNext 8
+  addressRange 16
+  addressFlags 32
+  flags 36
+VkConditionalRenderingBeginInfoEXT 40
+  sType 0
+  pNext 8
+  buffer 16
+  offset 24
+  flags 32
+VkConformanceVersion 4
+  major 0
+  minor 1
+  subminor 2
+  patch 3
+VkConvertCooperativeVectorMatrixInfoNV 96
+  sType 0
+  pNext 8
+  srcSize 16
+  srcData 24
+  pDstSize 32
+  dstData 40
+  srcComponentType 48
+  dstComponentType 52
+  numRows 56
+  numColumns 60
+  srcLayout 64
+  srcStride 72
+  dstLayout 80
+  dstStride 88
+VkCooperativeMatrixFlexibleDimensionsPropertiesNV 56
+  sType 0
+  pNext 8
+  MGranularity 16
+  NGranularity 20
+  KGranularity 24
+  AType 28
+  BType 32
+  CType 36
+  ResultType 40
+  saturatingAccumulation 44
+  scope 48
+  workgroupInvocations 52
+VkCooperativeMatrixPropertiesKHR 56
+  sType 0
+  pNext 8
+  MSize 16
+  NSize 20
+  KSize 24
+  AType 28
+  BType 32
+  CType 36
+  ResultType 40
+  saturatingAccumulation 44
+  scope 48
+VkCooperativeMatrixPropertiesNV 48
+  sType 0
+  pNext 8
+  MSize 16
+  NSize 20
+  KSize 24
+  AType 28
+  BType 32
+  CType 36
+  DType 40
+  scope 44
+VkCooperativeVectorPropertiesNV 40
+  sType 0
+  pNext 8
+  inputType 16
+  inputInterpretation 20
+  matrixInterpretation 24
+  biasInterpretation 28
+  resultType 32
+  transpose 36
+VkCopyAccelerationStructureInfoKHR 40
+  sType 0
+  pNext 8
+  src 16
+  dst 24
+  mode 32
+VkCopyAccelerationStructureToMemoryInfoKHR 40
+  sType 0
+  pNext 8
+  src 16
+  dst 24
+  mode 32
+VkCopyBufferInfo2 48
+  sType 0
+  pNext 8
+  srcBuffer 16
+  dstBuffer 24
+  regionCount 32
+  pRegions 40
+VkCopyBufferToImageInfo2 48
+  sType 0
+  pNext 8
+  srcBuffer 16
+  dstImage 24
+  dstImageLayout 32
+  regionCount 36
+  pRegions 40
+VkCopyCommandTransformInfoQCOM 24
+  sType 0
+  pNext 8
+  transform 16
+VkCopyDescriptorSet 56
+  sType 0
+  pNext 8
+  srcSet 16
+  srcBinding 24
+  srcArrayElement 28
+  dstSet 32
+  dstBinding 40
+  dstArrayElement 44
+  descriptorCount 48
+VkCopyDeviceMemoryImageInfoKHR 40
+  sType 0
+  pNext 8
+  image 16
+  regionCount 24
+  pRegions 32
+VkCopyDeviceMemoryInfoKHR 32
+  sType 0
+  pNext 8
+  regionCount 16
+  pRegions 24
+VkCopyImageInfo2 56
+  sType 0
+  pNext 8
+  srcImage 16
+  srcImageLayout 24
+  dstImage 32
+  dstImageLayout 40
+  regionCount 44
+  pRegions 48
+VkCopyImageToBufferInfo2 56
+  sType 0
+  pNext 8
+  srcImage 16
+  srcImageLayout 24
+  dstBuffer 32
+  regionCount 40
+  pRegions 48
+VkCopyImageToImageInfo 64
+  sType 0
+  pNext 8
+  flags 16
+  srcImage 24
+  srcImageLayout 32
+  dstImage 40
+  dstImageLayout 48
+  regionCount 52
+  pRegions 56
+VkCopyImageToMemoryInfo 48
+  sType 0
+  pNext 8
+  flags 16
+  srcImage 24
+  srcImageLayout 32
+  regionCount 36
+  pRegions 40
+VkCopyMemoryIndirectCommandKHR 24
+  srcAddress 0
+  dstAddress 8
+  size 16
+VkCopyMemoryIndirectInfoKHR 56
+  sType 0
+  pNext 8
+  srcCopyFlags 16
+  dstCopyFlags 20
+  copyCount 24
+  copyAddressRange 32
+VkCopyMemoryToAccelerationStructureInfoKHR 40
+  sType 0
+  pNext 8
+  src 16
+  dst 24
+  mode 32
+VkCopyMemoryToImageIndirectCommandKHR 56
+  srcAddress 0
+  bufferRowLength 8
+  bufferImageHeight 12
+  imageSubresource 16
+  imageOffset 32
+  imageExtent 44
+VkCopyMemoryToImageIndirectInfoKHR 72
+  sType 0
+  pNext 8
+  srcCopyFlags 16
+  copyCount 20
+  copyAddressRange 24
+  dstImage 48
+  dstImageLayout 56
+  pImageSubresources 64
+VkCopyMemoryToImageInfo 48
+  sType 0
+  pNext 8
+  flags 16
+  dstImage 24
+  dstImageLayout 32
+  regionCount 36
+  pRegions 40
+VkCopyMemoryToMicromapInfoEXT 40
+  sType 0
+  pNext 8
+  src 16
+  dst 24
+  mode 32
+VkCopyMicromapInfoEXT 40
+  sType 0
+  pNext 8
+  src 16
+  dst 24
+  mode 32
+VkCopyMicromapToMemoryInfoEXT 40
+  sType 0
+  pNext 8
+  src 16
+  dst 24
+  mode 32
+VkCopyTensorInfoARM 48
+  sType 0
+  pNext 8
+  srcTensor 16
+  dstTensor 24
+  regionCount 32
+  pRegions 40
+VkCuFunctionCreateInfoNVX 32
+  sType 0
+  pNext 8
+  module 16
+  pName 24
+VkCuLaunchInfoNVX 88
+  sType 0
+  pNext 8
+  function 16
+  gridDimX 24
+  gridDimY 28
+  gridDimZ 32
+  blockDimX 36
+  blockDimY 40
+  blockDimZ 44
+  sharedMemBytes 48
+  paramCount 56
+  pParams 64
+  extraCount 72
+  pExtras 80
+VkCuModuleCreateInfoNVX 32
+  sType 0
+  pNext 8
+  dataSize 16
+  pData 24
+VkCuModuleTexturingModeCreateInfoNVX 24
+  sType 0
+  pNext 8
+  use64bitTexturing 16
+VkCudaFunctionCreateInfoNV 32
+  sType 0
+  pNext 8
+  module 16
+  pName 24
+VkCudaLaunchInfoNV 88
+  sType 0
+  pNext 8
+  function 16
+  gridDimX 24
+  gridDimY 28
+  gridDimZ 32
+  blockDimX 36
+  blockDimY 40
+  blockDimZ 44
+  sharedMemBytes 48
+  paramCount 56
+  pParams 64
+  extraCount 72
+  pExtras 80
+VkCudaModuleCreateInfoNV 32
+  sType 0
+  pNext 8
+  dataSize 16
+  pData 24
+VkCustomResolveCreateInfoEXT 40
+  sType 0
+  pNext 8
+  customResolve 16
+  colorAttachmentCount 20
+  pColorAttachmentFormats 24
+  depthAttachmentFormat 32
+  stencilAttachmentFormat 36
+VkDataGraphOpticalFlowImageFormatInfoARM 24
+  sType 0
+  pNext 8
+  usage 16
+VkDataGraphOpticalFlowImageFormatPropertiesARM 24
+  sType 0
+  pNext 8
+  format 16
+VkDataGraphPipelineBuiltinModelCreateInfoQCOM 24
+  sType 0
+  pNext 8
+  pOperation 16
+VkDataGraphPipelineCompilerControlCreateInfoARM 24
+  sType 0
+  pNext 8
+  pVendorOptions 16
+VkDataGraphPipelineConstantARM 32
+  sType 0
+  pNext 8
+  id 16
+  pConstantData 24
+VkDataGraphPipelineConstantTensorSemiStructuredSparsityInfoARM 32
+  sType 0
+  pNext 8
+  dimension 16
+  zeroCount 20
+  groupSize 24
+VkDataGraphPipelineCreateInfoARM 48
+  sType 0
+  pNext 8
+  flags 16
+  layout 24
+  resourceInfoCount 32
+  pResourceInfos 40
+VkDataGraphPipelineDispatchInfoARM 24
+  sType 0
+  pNext 8
+  flags 16
+VkDataGraphPipelineIdentifierCreateInfoARM 32
+  sType 0
+  pNext 8
+  identifierSize 16
+  pIdentifier 24
+VkDataGraphPipelineInfoARM 24
+  sType 0
+  pNext 8
+  dataGraphPipeline 16
+VkDataGraphPipelineNeuralStatisticsCreateInfoARM 24
+  sType 0
+  pNext 8
+  allowNeuralStatistics 16
+VkDataGraphPipelineOpticalFlowCreateInfoARM 56
+  sType 0
+  pNext 8
+  width 16
+  height 20
+  imageFormat 24
+  flowVectorFormat 28
+  costFormat 32
+  outputGridSize 36
+  hintGridSize 40
+  performanceLevel 44
+  flags 48
+VkDataGraphPipelineOpticalFlowDispatchInfoARM 24
+  sType 0
+  pNext 8
+  flags 16
+  meanFlowL1NormHint 20
+VkDataGraphPipelinePropertyQueryResultARM 40
+  sType 0
+  pNext 8
+  property 16
+  isText 20
+  dataSize 24
+  pData 32
+VkDataGraphPipelineResourceInfoARM 32
+  sType 0
+  pNext 8
+  descriptorSet 16
+  binding 20
+  arrayElement 24
+VkDataGraphPipelineResourceInfoImageLayoutARM 24
+  sType 0
+  pNext 8
+  layout 16
+VkDataGraphPipelineSessionBindPointRequirementARM 32
+  sType 0
+  pNext 8
+  bindPoint 16
+  bindPointType 20
+  numObjects 24
+VkDataGraphPipelineSessionBindPointRequirementsInfoARM 24
+  sType 0
+  pNext 8
+  session 16
+VkDataGraphPipelineSessionCreateInfoARM 32
+  sType 0
+  pNext 8
+  flags 16
+  dataGraphPipeline 24
+VkDataGraphPipelineSessionMemoryRequirementsInfoARM 32
+  sType 0
+  pNext 8
+  session 16
+  bindPoint 24
+  objectIndex 28
+VkDataGraphPipelineSessionNeuralStatisticsCreateInfoARM 24
+  sType 0
+  pNext 8
+  mode 16
+VkDataGraphPipelineShaderModuleCreateInfoARM 56
+  sType 0
+  pNext 8
+  module 16
+  pName 24
+  pSpecializationInfo 32
+  constantCount 40
+  pConstants 48
+VkDataGraphPipelineSingleNodeConnectionARM 32
+  sType 0
+  pNext 8
+  set 16
+  binding 20
+  connection 24
+VkDataGraphPipelineSingleNodeCreateInfoARM 32
+  sType 0
+  pNext 8
+  nodeType 16
+  connectionCount 20
+  pConnections 24
+VkDataGraphProcessingEngineCreateInfoARM 32
+  sType 0
+  pNext 8
+  processingEngineCount 16
+  pProcessingEngines 24
+VkDataGraphTOSANameQualityARM 132
+  name 0
+  qualityFlags 128
+VkDebugMarkerMarkerInfoEXT 40
+  sType 0
+  pNext 8
+  pMarkerName 16
+  color 24
+VkDebugMarkerObjectNameInfoEXT 40
+  sType 0
+  pNext 8
+  objectType 16
+  object 24
+  pObjectName 32
+VkDebugMarkerObjectTagInfoEXT 56
+  sType 0
+  pNext 8
+  objectType 16
+  object 24
+  tagName 32
+  tagSize 40
+  pTag 48
+VkDebugReportCallbackCreateInfoEXT 40
+  sType 0
+  pNext 8
+  flags 16
+  pfnCallback 24
+  pUserData 32
+VkDebugUtilsLabelEXT 40
+  sType 0
+  pNext 8
+  pLabelName 16
+  color 24
+VkDebugUtilsMessengerCallbackDataEXT 96
+  sType 0
+  pNext 8
+  flags 16
+  pMessageIdName 24
+  messageIdNumber 32
+  pMessage 40
+  queueLabelCount 48
+  pQueueLabels 56
+  cmdBufLabelCount 64
+  pCmdBufLabels 72
+  objectCount 80
+  pObjects 88
+VkDebugUtilsMessengerCreateInfoEXT 48
+  sType 0
+  pNext 8
+  flags 16
+  messageSeverity 20
+  messageType 24
+  pfnUserCallback 32
+  pUserData 40
+VkDebugUtilsObjectNameInfoEXT 40
+  sType 0
+  pNext 8
+  objectType 16
+  objectHandle 24
+  pObjectName 32
+VkDebugUtilsObjectTagInfoEXT 56
+  sType 0
+  pNext 8
+  objectType 16
+  objectHandle 24
+  tagName 32
+  tagSize 40
+  pTag 48
+VkDecompressMemoryInfoEXT 40
+  sType 0
+  pNext 8
+  decompressionMethod 16
+  regionCount 24
+  pRegions 32
+VkDecompressMemoryRegionEXT 32
+  srcAddress 0
+  dstAddress 8
+  compressedSize 16
+  decompressedSize 24
+VkDecompressMemoryRegionNV 40
+  srcAddress 0
+  dstAddress 8
+  compressedSize 16
+  decompressedSize 24
+  decompressionMethod 32
+VkDedicatedAllocationBufferCreateInfoNV 24
+  sType 0
+  pNext 8
+  dedicatedAllocation 16
+VkDedicatedAllocationImageCreateInfoNV 24
+  sType 0
+  pNext 8
+  dedicatedAllocation 16
+VkDedicatedAllocationMemoryAllocateInfoNV 32
+  sType 0
+  pNext 8
+  image 16
+  buffer 24
+VkDependencyInfo 64
+  sType 0
+  pNext 8
+  dependencyFlags 16
+  memoryBarrierCount 20
+  pMemoryBarriers 24
+  bufferMemoryBarrierCount 32
+  pBufferMemoryBarriers 40
+  imageMemoryBarrierCount 48
+  pImageMemoryBarriers 56
+VkDepthBiasInfoEXT 32
+  sType 0
+  pNext 8
+  depthBiasConstantFactor 16
+  depthBiasClamp 20
+  depthBiasSlopeFactor 24
+VkDepthBiasRepresentationInfoEXT 24
+  sType 0
+  pNext 8
+  depthBiasRepresentation 16
+  depthBiasExact 20
+VkDepthClampRangeEXT 8
+  minDepthClamp 0
+  maxDepthClamp 4
+VkDescriptorAddressInfoEXT 40
+  sType 0
+  pNext 8
+  address 16
+  range 24
+  format 32
+VkDescriptorBufferBindingInfoEXT 32
+  sType 0
+  pNext 8
+  address 16
+  usage 24
+VkDescriptorBufferBindingPushDescriptorBufferHandleEXT 24
+  sType 0
+  pNext 8
+  buffer 16
+VkDescriptorBufferInfo 24
+  buffer 0
+  offset 8
+  range 16
+VkDescriptorDataEXT 8
+  pSampler 0
+  pCombinedImageSampler 0
+  pInputAttachmentImage 0
+  pSampledImage 0
+  pStorageImage 0
+  pUniformTexelBuffer 0
+  pStorageTexelBuffer 0
+  pUniformBuffer 0
+  pStorageBuffer 0
+  accelerationStructure 0
+VkDescriptorGetInfoEXT 32
+  sType 0
+  pNext 8
+  type 16
+  data 24
+VkDescriptorGetTensorInfoARM 24
+  sType 0
+  pNext 8
+  tensorView 16
+VkDescriptorImageInfo 24
+  sampler 0
+  imageView 8
+  imageLayout 16
+VkDescriptorMappingSourceConstantOffsetEXT 24
+  heapOffset 0
+  heapArrayStride 4
+  pEmbeddedSampler 8
+  samplerHeapOffset 16
+  samplerHeapArrayStride 20
+VkDescriptorMappingSourceDataEXT 56
+  constantOffset 0
+  pushIndex 0
+  indirectIndex 0
+  indirectIndexArray 0
+  heapData 0
+  pushDataOffset 0
+  pushAddressOffset 0
+  indirectAddress 0
+  shaderRecordIndex 0
+  shaderRecordDataOffset 0
+  shaderRecordAddressOffset 0
+VkDescriptorMappingSourceHeapDataEXT 8
+  heapOffset 0
+  pushOffset 4
+VkDescriptorMappingSourceIndirectAddressEXT 8
+  pushOffset 0
+  addressOffset 4
+VkDescriptorMappingSourceIndirectIndexArrayEXT 48
+  heapOffset 0
+  pushOffset 4
+  addressOffset 8
+  heapIndexStride 12
+  pEmbeddedSampler 16
+  useCombinedImageSamplerIndex 24
+  samplerHeapOffset 28
+  samplerPushOffset 32
+  samplerAddressOffset 36
+  samplerHeapIndexStride 40
+VkDescriptorMappingSourceIndirectIndexEXT 56
+  heapOffset 0
+  pushOffset 4
+  addressOffset 8
+  heapIndexStride 12
+  heapArrayStride 16
+  pEmbeddedSampler 24
+  useCombinedImageSamplerIndex 32
+  samplerHeapOffset 36
+  samplerPushOffset 40
+  samplerAddressOffset 44
+  samplerHeapIndexStride 48
+  samplerHeapArrayStride 52
+VkDescriptorMappingSourcePushIndexEXT 48
+  heapOffset 0
+  pushOffset 4
+  heapIndexStride 8
+  heapArrayStride 12
+  pEmbeddedSampler 16
+  useCombinedImageSamplerIndex 24
+  samplerHeapOffset 28
+  samplerPushOffset 32
+  samplerHeapIndexStride 36
+  samplerHeapArrayStride 40
+VkDescriptorMappingSourceShaderRecordIndexEXT 48
+  heapOffset 0
+  shaderRecordOffset 4
+  heapIndexStride 8
+  heapArrayStride 12
+  pEmbeddedSampler 16
+  useCombinedImageSamplerIndex 24
+  samplerHeapOffset 28
+  samplerShaderRecordOffset 32
+  samplerHeapIndexStride 36
+  samplerHeapArrayStride 40
+VkDescriptorPoolCreateInfo 40
+  sType 0
+  pNext 8
+  flags 16
+  maxSets 20
+  poolSizeCount 24
+  pPoolSizes 32
+VkDescriptorPoolInlineUniformBlockCreateInfo 24
+  sType 0
+  pNext 8
+  maxInlineUniformBlockBindings 16
+VkDescriptorPoolSize 8
+  type 0
+  descriptorCount 4
+VkDescriptorSetAllocateInfo 40
+  sType 0
+  pNext 8
+  descriptorPool 16
+  descriptorSetCount 24
+  pSetLayouts 32
+VkDescriptorSetAndBindingMappingEXT 96
+  sType 0
+  pNext 8
+  descriptorSet 16
+  firstBinding 20
+  bindingCount 24
+  resourceMask 28
+  source 32
+  sourceData 40
+VkDescriptorSetBindingReferenceVALVE 32
+  sType 0
+  pNext 8
+  descriptorSetLayout 16
+  binding 24
+VkDescriptorSetLayoutBinding 24
+  binding 0
+  descriptorType 4
+  descriptorCount 8
+  stageFlags 12
+  pImmutableSamplers 16
+VkDescriptorSetLayoutBindingFlagsCreateInfo 32
+  sType 0
+  pNext 8
+  bindingCount 16
+  pBindingFlags 24
+VkDescriptorSetLayoutCreateInfo 32
+  sType 0
+  pNext 8
+  flags 16
+  bindingCount 20
+  pBindings 24
+VkDescriptorSetLayoutHostMappingInfoVALVE 32
+  sType 0
+  pNext 8
+  descriptorOffset 16
+  descriptorSize 24
+VkDescriptorSetLayoutSupport 24
+  sType 0
+  pNext 8
+  supported 16
+VkDescriptorSetVariableDescriptorCountAllocateInfo 32
+  sType 0
+  pNext 8
+  descriptorSetCount 16
+  pDescriptorCounts 24
+VkDescriptorSetVariableDescriptorCountLayoutSupport 24
+  sType 0
+  pNext 8
+  maxVariableDescriptorCount 16
+VkDescriptorUpdateTemplateCreateInfo 72
+  sType 0
+  pNext 8
+  flags 16
+  descriptorUpdateEntryCount 20
+  pDescriptorUpdateEntries 24
+  templateType 32
+  descriptorSetLayout 40
+  pipelineBindPoint 48
+  pipelineLayout 56
+  set 64
+VkDescriptorUpdateTemplateEntry 32
+  dstBinding 0
+  dstArrayElement 4
+  descriptorCount 8
+  descriptorType 12
+  offset 16
+  stride 24
+VkDeviceAddressBindingCallbackDataEXT 48
+  sType 0
+  pNext 8
+  flags 16
+  baseAddress 24
+  size 32
+  bindingType 40
+VkDeviceAddressRangeKHR 16
+  address 0
+  size 8
+VkDeviceBufferMemoryRequirements 24
+  sType 0
+  pNext 8
+  pCreateInfo 16
+VkDeviceCreateInfo 72
+  sType 0
+  pNext 8
+  flags 16
+  queueCreateInfoCount 20
+  pQueueCreateInfos 24
+  enabledLayerCount 32
+  ppEnabledLayerNames 40
+  enabledExtensionCount 48
+  ppEnabledExtensionNames 56
+  pEnabledFeatures 64
+VkDeviceDeviceMemoryReportCreateInfoEXT 40
+  sType 0
+  pNext 8
+  flags 16
+  pfnUserCallback 24
+  pUserData 32
+VkDeviceDiagnosticsConfigCreateInfoNV 24
+  sType 0
+  pNext 8
+  flags 16
+VkDeviceEventInfoEXT 24
+  sType 0
+  pNext 8
+  deviceEvent 16
+VkDeviceFaultAddressInfoKHR 24
+  addressType 0
+  reportedAddress 8
+  addressPrecision 16
+VkDeviceFaultCountsEXT 32
+  sType 0
+  pNext 8
+  addressInfoCount 16
+  vendorInfoCount 20
+  vendorBinarySize 24
+VkDeviceFaultDebugInfoKHR 32
+  sType 0
+  pNext 8
+  vendorBinarySize 16
+  pVendorBinaryData 24
+VkDeviceFaultInfoEXT 296
+  sType 0
+  pNext 8
+  description 16
+  pAddressInfos 272
+  pVendorInfos 280
+  pVendorBinaryData 288
+VkDeviceFaultInfoKHR 608
+  sType 0
+  pNext 8
+  flags 16
+  groupId 24
+  description 32
+  faultAddressInfo 288
+  instructionAddressInfo 312
+  vendorInfo 336
+VkDeviceFaultShaderAbortMessageInfoKHR 32
+  sType 0
+  pNext 8
+  messageDataSize 16
+  pMessageData 24
+VkDeviceFaultVendorBinaryHeaderVersionOneKHR 56
+  headerSize 0
+  headerVersion 4
+  vendorID 8
+  deviceID 12
+  driverVersion 16
+  pipelineCacheUUID 20
+  applicationNameOffset 36
+  applicationVersion 40
+  engineNameOffset 44
+  engineVersion 48
+  apiVersion 52
+VkDeviceFaultVendorInfoKHR 272
+  description 0
+  vendorFaultCode 256
+  vendorFaultData 264
+VkDeviceGroupBindSparseInfo 24
+  sType 0
+  pNext 8
+  resourceDeviceIndex 16
+  memoryDeviceIndex 20
+VkDeviceGroupCommandBufferBeginInfo 24
+  sType 0
+  pNext 8
+  deviceMask 16
+VkDeviceGroupDeviceCreateInfo 32
+  sType 0
+  pNext 8
+  physicalDeviceCount 16
+  pPhysicalDevices 24
+VkDeviceGroupPresentCapabilitiesKHR 152
+  sType 0
+  pNext 8
+  presentMask 16
+  modes 144
+VkDeviceGroupPresentInfoKHR 40
+  sType 0
+  pNext 8
+  swapchainCount 16
+  pDeviceMasks 24
+  mode 32
+VkDeviceGroupRenderPassBeginInfo 32
+  sType 0
+  pNext 8
+  deviceMask 16
+  deviceRenderAreaCount 20
+  pDeviceRenderAreas 24
+VkDeviceGroupSubmitInfo 64
+  sType 0
+  pNext 8
+  waitSemaphoreCount 16
+  pWaitSemaphoreDeviceIndices 24
+  commandBufferCount 32
+  pCommandBufferDeviceMasks 40
+  signalSemaphoreCount 48
+  pSignalSemaphoreDeviceIndices 56
+VkDeviceGroupSwapchainCreateInfoKHR 24
+  sType 0
+  pNext 8
+  modes 16
+VkDeviceImageMemoryRequirements 32
+  sType 0
+  pNext 8
+  pCreateInfo 16
+  planeAspect 24
+VkDeviceImageSubresourceInfo 32
+  sType 0
+  pNext 8
+  pCreateInfo 16
+  pSubresource 24
+VkDeviceMemoryCopyKHR 64
+  sType 0
+  pNext 8
+  srcRange 16
+  srcFlags 32
+  dstRange 40
+  dstFlags 56
+VkDeviceMemoryImageCopyKHR 88
+  sType 0
+  pNext 8
+  addressRange 16
+  addressFlags 32
+  addressRowLength 36
+  addressImageHeight 40
+  imageSubresource 44
+  imageLayout 60
+  imageOffset 64
+  imageExtent 76
+VkDeviceMemoryOpaqueCaptureAddressInfo 24
+  sType 0
+  pNext 8
+  memory 16
+VkDeviceMemoryOverallocationCreateInfoAMD 24
+  sType 0
+  pNext 8
+  overallocationBehavior 16
+VkDeviceMemoryReportCallbackDataEXT 64
+  sType 0
+  pNext 8
+  flags 16
+  type 20
+  memoryObjectId 24
+  size 32
+  objectType 40
+  objectHandle 48
+  heapIndex 56
+VkDeviceOrHostAddressConstAMDX 8
+  deviceAddress 0
+  hostAddress 0
+VkDeviceOrHostAddressConstKHR 8
+  deviceAddress 0
+  hostAddress 0
+VkDeviceOrHostAddressKHR 8
+  deviceAddress 0
+  hostAddress 0
+VkDevicePipelineBinaryInternalCacheControlKHR 24
+  sType 0
+  pNext 8
+  disableInternalCache 16
+VkDevicePrivateDataCreateInfo 24
+  sType 0
+  pNext 8
+  privateDataSlotRequestCount 16
+VkDeviceQueueCreateInfo 40
+  sType 0
+  pNext 8
+  flags 16
+  queueFamilyIndex 20
+  queueCount 24
+  pQueuePriorities 32
+VkDeviceQueueGlobalPriorityCreateInfo 24
+  sType 0
+  pNext 8
+  globalPriority 16
+VkDeviceQueueInfo2 32
+  sType 0
+  pNext 8
+  flags 16
+  queueFamilyIndex 20
+  queueIndex 24
+VkDeviceQueueShaderCoreControlCreateInfoARM 24
+  sType 0
+  pNext 8
+  shaderCoreCount 16
+VkDeviceTensorMemoryRequirementsARM 24
+  sType 0
+  pNext 8
+  pCreateInfo 16
+VkDirectDriverLoadingInfoLUNARG 32
+  sType 0
+  pNext 8
+  flags 16
+  pfnGetInstanceProcAddr 24
+VkDirectDriverLoadingListLUNARG 32
+  sType 0
+  pNext 8
+  mode 16
+  driverCount 20
+  pDrivers 24
+VkDispatchGraphCountInfoAMDX 24
+  count 0
+  infos 8
+  stride 16
+VkDispatchGraphInfoAMDX 24
+  nodeIndex 0
+  payloadCount 4
+  payloads 8
+  payloadStride 16
+VkDispatchIndirect2InfoKHR 40
+  sType 0
+  pNext 8
+  addressRange 16
+  addressFlags 32
+VkDispatchIndirectCommand 12
+  x 0
+  y 4
+  z 8
+VkDispatchParametersARM 32
+  sType 0
+  pNext 8
+  workGroupBatchSize 16
+  maxQueuedWorkGroupBatches 20
+  maxWarpsPerShaderCore 24
+VkDispatchTileInfoQCOM 16
+  sType 0
+  pNext 8
+VkDisplayEventInfoEXT 24
+  sType 0
+  pNext 8
+  displayEvent 16
+VkDisplayModeCreateInfoKHR 32
+  sType 0
+  pNext 8
+  flags 16
+  parameters 20
+VkDisplayModeParametersKHR 12
+  visibleRegion 0
+  refreshRate 8
+VkDisplayModeProperties2KHR 40
+  sType 0
+  pNext 8
+  displayModeProperties 16
+VkDisplayModePropertiesKHR 24
+  displayMode 0
+  parameters 8
+VkDisplayModeStereoPropertiesNV 24
+  sType 0
+  pNext 8
+  hdmi3DSupported 16
+VkDisplayNativeHdrSurfaceCapabilitiesAMD 24
+  sType 0
+  pNext 8
+  localDimmingSupport 16
+VkDisplayPlaneCapabilities2KHR 88
+  sType 0
+  pNext 8
+  capabilities 16
+VkDisplayPlaneCapabilitiesKHR 68
+  supportedAlpha 0
+  minSrcPosition 4
+  maxSrcPosition 12
+  minSrcExtent 20
+  maxSrcExtent 28
+  minDstPosition 36
+  maxDstPosition 44
+  minDstExtent 52
+  maxDstExtent 60
+VkDisplayPlaneInfo2KHR 32
+  sType 0
+  pNext 8
+  mode 16
+  planeIndex 24
+VkDisplayPlaneProperties2KHR 32
+  sType 0
+  pNext 8
+  displayPlaneProperties 16
+VkDisplayPlanePropertiesKHR 16
+  currentDisplay 0
+  currentStackIndex 8
+VkDisplayPowerInfoEXT 24
+  sType 0
+  pNext 8
+  powerState 16
+VkDisplayPresentInfoKHR 56
+  sType 0
+  pNext 8
+  srcRect 16
+  dstRect 32
+  persistent 48
+VkDisplayProperties2KHR 64
+  sType 0
+  pNext 8
+  displayProperties 16
+VkDisplayPropertiesKHR 48
+  display 0
+  displayName 8
+  physicalDimensions 16
+  physicalResolution 24
+  supportedTransforms 32
+  planeReorderPossible 36
+  persistentContent 40
+VkDisplaySurfaceCreateInfoKHR 64
+  sType 0
+  pNext 8
+  flags 16
+  displayMode 24
+  planeIndex 32
+  planeStackIndex 36
+  transform 40
+  globalAlpha 44
+  alphaMode 48
+  imageExtent 52
+VkDisplaySurfaceStereoCreateInfoNV 24
+  sType 0
+  pNext 8
+  stereoType 16
+VkDrawIndexedIndirectCommand 20
+  indexCount 0
+  instanceCount 4
+  firstIndex 8
+  vertexOffset 12
+  firstInstance 16
+VkDrawIndirect2InfoKHR 48
+  sType 0
+  pNext 8
+  addressRange 16
+  addressFlags 40
+  drawCount 44
+VkDrawIndirectCommand 16
+  vertexCount 0
+  instanceCount 4
+  firstVertex 8
+  firstInstance 12
+VkDrawIndirectCount2InfoKHR 72
+  sType 0
+  pNext 8
+  addressRange 16
+  addressFlags 40
+  countAddressRange 48
+  countAddressFlags 64
+  maxDrawCount 68
+VkDrawIndirectCountIndirectCommandEXT 16
+  bufferAddress 0
+  stride 8
+  commandCount 12
+VkDrawMeshTasksIndirectCommandEXT 12
+  groupCountX 0
+  groupCountY 4
+  groupCountZ 8
+VkDrawMeshTasksIndirectCommandNV 8
+  taskCount 0
+  firstTask 4
+VkDrmFormatModifierProperties2EXT 24
+  drmFormatModifier 0
+  drmFormatModifierPlaneCount 8
+  drmFormatModifierTilingFeatures 16
+VkDrmFormatModifierPropertiesEXT 16
+  drmFormatModifier 0
+  drmFormatModifierPlaneCount 8
+  drmFormatModifierTilingFeatures 12
+VkDrmFormatModifierPropertiesList2EXT 32
+  sType 0
+  pNext 8
+  drmFormatModifierCount 16
+  pDrmFormatModifierProperties 24
+VkDrmFormatModifierPropertiesListEXT 32
+  sType 0
+  pNext 8
+  drmFormatModifierCount 16
+  pDrmFormatModifierProperties 24
+VkEventCreateInfo 24
+  sType 0
+  pNext 8
+  flags 16
+VkExecutionGraphPipelineCreateInfoAMDX 64
+  sType 0
+  pNext 8
+  flags 16
+  stageCount 20
+  pStages 24
+  pLibraryInfo 32
+  layout 40
+  basePipelineHandle 48
+  basePipelineIndex 56
+VkExecutionGraphPipelineScratchSizeAMDX 40
+  sType 0
+  pNext 8
+  minSize 16
+  maxSize 24
+  sizeGranularity 32
+VkExportFenceCreateInfo 24
+  sType 0
+  pNext 8
+  handleTypes 16
+VkExportMemoryAllocateInfo 24
+  sType 0
+  pNext 8
+  handleTypes 16
+VkExportMemoryAllocateInfoNV 24
+  sType 0
+  pNext 8
+  handleTypes 16
+VkExportSemaphoreCreateInfo 24
+  sType 0
+  pNext 8
+  handleTypes 16
+VkExtensionProperties 260
+  extensionName 0
+  specVersion 256
+VkExtent2D 8
+  width 0
+  height 4
+VkExtent3D 12
+  width 0
+  height 4
+  depth 8
+VkExternalBufferProperties 32
+  sType 0
+  pNext 8
+  externalMemoryProperties 16
+VkExternalComputeQueueCreateInfoNV 24
+  sType 0
+  pNext 8
+  preferredQueue 16
+VkExternalComputeQueueDataParamsNV 24
+  sType 0
+  pNext 8
+  deviceIndex 16
+VkExternalComputeQueueDeviceCreateInfoNV 24
+  sType 0
+  pNext 8
+  reservedExternalQueues 16
+VkExternalFenceProperties 32
+  sType 0
+  pNext 8
+  exportFromImportedHandleTypes 16
+  compatibleHandleTypes 20
+  externalFenceFeatures 24
+VkExternalImageFormatProperties 32
+  sType 0
+  pNext 8
+  externalMemoryProperties 16
+VkExternalImageFormatPropertiesNV 48
+  imageFormatProperties 0
+  externalMemoryFeatures 32
+  exportFromImportedHandleTypes 36
+  compatibleHandleTypes 40
+VkExternalMemoryAcquireUnmodifiedEXT 24
+  sType 0
+  pNext 8
+  acquireUnmodifiedMemory 16
+VkExternalMemoryBufferCreateInfo 24
+  sType 0
+  pNext 8
+  handleTypes 16
+VkExternalMemoryImageCreateInfo 24
+  sType 0
+  pNext 8
+  handleTypes 16
+VkExternalMemoryImageCreateInfoNV 24
+  sType 0
+  pNext 8
+  handleTypes 16
+VkExternalMemoryProperties 12
+  externalMemoryFeatures 0
+  exportFromImportedHandleTypes 4
+  compatibleHandleTypes 8
+VkExternalMemoryTensorCreateInfoARM 24
+  sType 0
+  pNext 8
+  handleTypes 16
+VkExternalSemaphoreProperties 32
+  sType 0
+  pNext 8
+  exportFromImportedHandleTypes 16
+  compatibleHandleTypes 20
+  externalSemaphoreFeatures 24
+VkExternalTensorPropertiesARM 32
+  sType 0
+  pNext 8
+  externalMemoryProperties 16
+VkFenceCreateInfo 24
+  sType 0
+  pNext 8
+  flags 16
+VkFenceGetFdInfoKHR 32
+  sType 0
+  pNext 8
+  fence 16
+  handleType 24
+VkFilterCubicImageViewImageFormatPropertiesEXT 24
+  sType 0
+  pNext 8
+  filterCubic 16
+  filterCubicMinmax 20
+VkFormatProperties 12
+  linearTilingFeatures 0
+  optimalTilingFeatures 4
+  bufferFeatures 8
+VkFormatProperties2 32
+  sType 0
+  pNext 8
+  formatProperties 16
+VkFormatProperties3 40
+  sType 0
+  pNext 8
+  linearTilingFeatures 16
+  optimalTilingFeatures 24
+  bufferFeatures 32
+VkFormatProperties4KHR 40
+  sType 0
+  pNext 8
+  linearTilingFeatures 16
+  optimalTilingFeatures 24
+  bufferFeatures 32
+VkFragmentShadingRateAttachmentInfoKHR 32
+  sType 0
+  pNext 8
+  pFragmentShadingRateAttachment 16
+  shadingRateAttachmentTexelSize 24
+VkFrameBoundaryEXT 88
+  sType 0
+  pNext 8
+  flags 16
+  frameID 24
+  imageCount 32
+  pImages 40
+  bufferCount 48
+  pBuffers 56
+  tagName 64
+  tagSize 72
+  pTag 80
+VkFrameBoundaryTensorsARM 32
+  sType 0
+  pNext 8
+  tensorCount 16
+  pTensors 24
+VkFramebufferAttachmentImageInfo 48
+  sType 0
+  pNext 8
+  flags 16
+  usage 20
+  width 24
+  height 28
+  layerCount 32
+  viewFormatCount 36
+  pViewFormats 40
+VkFramebufferAttachmentsCreateInfo 32
+  sType 0
+  pNext 8
+  attachmentImageInfoCount 16
+  pAttachmentImageInfos 24
+VkFramebufferCreateInfo 64
+  sType 0
+  pNext 8
+  flags 16
+  renderPass 24
+  attachmentCount 32
+  pAttachments 40
+  width 48
+  height 52
+  layers 56
+VkFramebufferMixedSamplesCombinationNV 32
+  sType 0
+  pNext 8
+  coverageReductionMode 16
+  rasterizationSamples 20
+  depthStencilSamples 24
+  colorSamples 28
+VkGeneratedCommandsInfoEXT 96
+  sType 0
+  pNext 8
+  shaderStages 16
+  indirectExecutionSet 24
+  indirectCommandsLayout 32
+  indirectAddress 40
+  indirectAddressSize 48
+  preprocessAddress 56
+  preprocessSize 64
+  maxSequenceCount 72
+  sequenceCountAddress 80
+  maxDrawCount 88
+VkGeneratedCommandsInfoNV 120
+  sType 0
+  pNext 8
+  pipelineBindPoint 16
+  pipeline 24
+  indirectCommandsLayout 32
+  streamCount 40
+  pStreams 48
+  sequencesCount 56
+  preprocessBuffer 64
+  preprocessOffset 72
+  preprocessSize 80
+  sequencesCountBuffer 88
+  sequencesCountOffset 96
+  sequencesIndexBuffer 104
+  sequencesIndexOffset 112
+VkGeneratedCommandsMemoryRequirementsInfoEXT 40
+  sType 0
+  pNext 8
+  indirectExecutionSet 16
+  indirectCommandsLayout 24
+  maxSequenceCount 32
+  maxDrawCount 36
+VkGeneratedCommandsMemoryRequirementsInfoNV 48
+  sType 0
+  pNext 8
+  pipelineBindPoint 16
+  pipeline 24
+  indirectCommandsLayout 32
+  maxSequencesCount 40
+VkGeneratedCommandsPipelineInfoEXT 24
+  sType 0
+  pNext 8
+  pipeline 16
+VkGeneratedCommandsShaderInfoEXT 32
+  sType 0
+  pNext 8
+  shaderCount 16
+  pShaders 24
+VkGeometryAABBNV 40
+  sType 0
+  pNext 8
+  aabbData 16
+  numAABBs 24
+  stride 28
+  offset 32
+VkGeometryDataNV 136
+  triangles 0
+  aabbs 96
+VkGeometryNV 168
+  sType 0
+  pNext 8
+  geometryType 16
+  geometry 24
+  flags 160
+VkGeometryTrianglesNV 96
+  sType 0
+  pNext 8
+  vertexData 16
+  vertexOffset 24
+  vertexCount 32
+  vertexStride 40
+  vertexFormat 48
+  indexData 56
+  indexOffset 64
+  indexCount 72
+  indexType 76
+  transformData 80
+  transformOffset 88
+VkGetLatencyMarkerInfoNV 32
+  sType 0
+  pNext 8
+  timingCount 16
+  pTimings 24
+VkGpaDeviceClockModeInfoAMD 32
+  sType 0
+  pNext 8
+  clockMode 16
+  memoryClockRatioToPeak 20
+  engineClockRatioToPeak 24
+VkGpaDeviceGetClockInfoAMD 32
+  sType 0
+  pNext 8
+  memoryClockRatioToPeak 16
+  engineClockRatioToPeak 20
+  memoryClockFrequency 24
+  engineClockFrequency 28
+VkGpaPerfBlockPropertiesAMD 28
+  blockType 0
+  flags 4
+  instanceCount 8
+  maxEventID 12
+  maxGlobalOnlyCounters 16
+  maxGlobalSharedCounters 20
+  maxStreamingCounters 24
+VkGpaPerfCounterAMD 12
+  blockType 0
+  blockInstance 4
+  eventID 8
+VkGpaSampleBeginInfoAMD 88
+  sType 0
+  pNext 8
+  sampleType 16
+  sampleInternalOperations 20
+  cacheFlushOnCounterCollection 24
+  sqShaderMaskEnable 28
+  sqShaderMask 32
+  perfCounterCount 36
+  pPerfCounters 40
+  streamingPerfTraceSampleInterval 48
+  perfCounterDeviceMemoryLimit 56
+  sqThreadTraceEnable 64
+  sqThreadTraceSuppressInstructionTokens 68
+  sqThreadTraceDeviceMemoryLimit 72
+  timingPreSample 80
+  timingPostSample 84
+VkGpaSessionCreateInfoAMD 24
+  sType 0
+  pNext 8
+  secondaryCopySource 16
+VkGraphicsPipelineCreateInfo 144
+  sType 0
+  pNext 8
+  flags 16
+  stageCount 20
+  pStages 24
+  pVertexInputState 32
+  pInputAssemblyState 40
+  pTessellationState 48
+  pViewportState 56
+  pRasterizationState 64
+  pMultisampleState 72
+  pDepthStencilState 80
+  pColorBlendState 88
+  pDynamicState 96
+  layout 104
+  renderPass 112
+  subpass 120
+  basePipelineHandle 128
+  basePipelineIndex 136
+VkGraphicsPipelineLibraryCreateInfoEXT 24
+  sType 0
+  pNext 8
+  flags 16
+VkGraphicsPipelineShaderGroupsCreateInfoNV 48
+  sType 0
+  pNext 8
+  groupCount 16
+  pGroups 24
+  pipelineCount 32
+  pPipelines 40
+VkGraphicsShaderGroupCreateInfoNV 48
+  sType 0
+  pNext 8
+  stageCount 16
+  pStages 24
+  pVertexInputState 32
+  pTessellationState 40
+VkHdrMetadataEXT 64
+  sType 0
+  pNext 8
+  displayPrimaryRed 16
+  displayPrimaryGreen 24
+  displayPrimaryBlue 32
+  whitePoint 40
+  maxLuminance 48
+  minLuminance 52
+  maxContentLightLevel 56
+  maxFrameAverageLightLevel 60
+VkHdrVividDynamicMetadataHUAWEI 32
+  sType 0
+  pNext 8
+  dynamicMetadataSize 16
+  pDynamicMetadata 24
+VkHeadlessSurfaceCreateInfoEXT 24
+  sType 0
+  pNext 8
+  flags 16
+VkHostAddressRangeConstEXT 16
+  address 0
+  size 8
+VkHostAddressRangeEXT 16
+  address 0
+  size 8
+VkHostImageCopyDevicePerformanceQuery 24
+  sType 0
+  pNext 8
+  optimalDeviceAccess 16
+  identicalMemoryLayout 20
+VkHostImageLayoutTransitionInfo 56
+  sType 0
+  pNext 8
+  image 16
+  oldLayout 24
+  newLayout 28
+  subresourceRange 32
+VkImageAlignmentControlCreateInfoMESA 24
+  sType 0
+  pNext 8
+  maximumRequestedAlignment 16
+VkImageBlit 80
+  srcSubresource 0
+  srcOffsets 16
+  dstSubresource 40
+  dstOffsets 56
+VkImageBlit2 96
+  sType 0
+  pNext 8
+  srcSubresource 16
+  srcOffsets 32
+  dstSubresource 56
+  dstOffsets 72
+VkImageCaptureDescriptorDataInfoEXT 24
+  sType 0
+  pNext 8
+  image 16
+VkImageCompressionControlEXT 32
+  sType 0
+  pNext 8
+  flags 16
+  compressionControlPlaneCount 20
+  pFixedRateFlags 24
+VkImageCompressionPropertiesEXT 24
+  sType 0
+  pNext 8
+  imageCompressionFlags 16
+  imageCompressionFixedRateFlags 20
+VkImageCopy 68
+  srcSubresource 0
+  srcOffset 16
+  dstSubresource 28
+  dstOffset 44
+  extent 56
+VkImageCopy2 88
+  sType 0
+  pNext 8
+  srcSubresource 16
+  srcOffset 32
+  dstSubresource 44
+  dstOffset 60
+  extent 72
+VkImageCreateFlags2CreateInfoKHR 24
+  sType 0
+  pNext 8
+  flags 16
+VkImageCreateInfo 88
+  sType 0
+  pNext 8
+  flags 16
+  imageType 20
+  format 24
+  extent 28
+  mipLevels 40
+  arrayLayers 44
+  samples 48
+  tiling 52
+  usage 56
+  sharingMode 60
+  queueFamilyIndexCount 64
+  pQueueFamilyIndices 72
+  initialLayout 80
+VkImageDescriptorInfoEXT 32
+  sType 0
+  pNext 8
+  pView 16
+  layout 24
+VkImageDrmFormatModifierExplicitCreateInfoEXT 40
+  sType 0
+  pNext 8
+  drmFormatModifier 16
+  drmFormatModifierPlaneCount 24
+  pPlaneLayouts 32
+VkImageDrmFormatModifierListCreateInfoEXT 32
+  sType 0
+  pNext 8
+  drmFormatModifierCount 16
+  pDrmFormatModifiers 24
+VkImageDrmFormatModifierPropertiesEXT 24
+  sType 0
+  pNext 8
+  drmFormatModifier 16
+VkImageFormatListCreateInfo 32
+  sType 0
+  pNext 8
+  viewFormatCount 16
+  pViewFormats 24
+VkImageFormatProperties 32
+  maxExtent 0
+  maxMipLevels 12
+  maxArrayLayers 16
+  sampleCounts 20
+  maxResourceSize 24
+VkImageFormatProperties2 48
+  sType 0
+  pNext 8
+  imageFormatProperties 16
+VkImageMemoryBarrier 72
+  sType 0
+  pNext 8
+  srcAccessMask 16
+  dstAccessMask 20
+  oldLayout 24
+  newLayout 28
+  srcQueueFamilyIndex 32
+  dstQueueFamilyIndex 36
+  image 40
+  subresourceRange 48
+VkImageMemoryBarrier2 96
+  sType 0
+  pNext 8
+  srcStageMask 16
+  srcAccessMask 24
+  dstStageMask 32
+  dstAccessMask 40
+  oldLayout 48
+  newLayout 52
+  srcQueueFamilyIndex 56
+  dstQueueFamilyIndex 60
+  image 64
+  subresourceRange 72
+VkImageMemoryRequirementsInfo2 24
+  sType 0
+  pNext 8
+  image 16
+VkImagePlaneMemoryRequirementsInfo 24
+  sType 0
+  pNext 8
+  planeAspect 16
+VkImageResolve 68
+  srcSubresource 0
+  srcOffset 16
+  dstSubresource 28
+  dstOffset 44
+  extent 56
+VkImageResolve2 88
+  sType 0
+  pNext 8
+  srcSubresource 16
+  srcOffset 32
+  dstSubresource 44
+  dstOffset 60
+  extent 72
+VkImageSparseMemoryRequirementsInfo2 24
+  sType 0
+  pNext 8
+  image 16
+VkImageStencilUsage2CreateInfoKHR 24
+  sType 0
+  pNext 8
+  stencilUsage 16
+VkImageStencilUsageCreateInfo 24
+  sType 0
+  pNext 8
+  stencilUsage 16
+VkImageSubresource 12
+  aspectMask 0
+  mipLevel 4
+  arrayLayer 8
+VkImageSubresource2 32
+  sType 0
+  pNext 8
+  imageSubresource 16
+VkImageSubresourceLayers 16
+  aspectMask 0
+  mipLevel 4
+  baseArrayLayer 8
+  layerCount 12
+VkImageSubresourceRange 20
+  aspectMask 0
+  baseMipLevel 4
+  levelCount 8
+  baseArrayLayer 12
+  layerCount 16
+VkImageSwapchainCreateInfoKHR 24
+  sType 0
+  pNext 8
+  swapchain 16
+VkImageToMemoryCopy 72
+  sType 0
+  pNext 8
+  pHostPointer 16
+  memoryRowLength 24
+  memoryImageHeight 28
+  imageSubresource 32
+  imageOffset 48
+  imageExtent 60
+VkImageUsageFlags2CreateInfoKHR 24
+  sType 0
+  pNext 8
+  usage 16
+VkImageViewASTCDecodeModeEXT 24
+  sType 0
+  pNext 8
+  decodeMode 16
+VkImageViewAddressPropertiesNVX 32
+  sType 0
+  pNext 8
+  deviceAddress 16
+  size 24
+VkImageViewCaptureDescriptorDataInfoEXT 24
+  sType 0
+  pNext 8
+  imageView 16
+VkImageViewCreateInfo 80
+  sType 0
+  pNext 8
+  flags 16
+  image 24
+  viewType 32
+  format 36
+  components 40
+  subresourceRange 56
+VkImageViewHandleInfoNVX 40
+  sType 0
+  pNext 8
+  imageView 16
+  descriptorType 24
+  sampler 32
+VkImageViewMinLodCreateInfoEXT 24
+  sType 0
+  pNext 8
+  minLod 16
+VkImageViewSampleWeightCreateInfoQCOM 40
+  sType 0
+  pNext 8
+  filterCenter 16
+  filterSize 24
+  numPhases 32
+VkImageViewSlicedCreateInfoEXT 24
+  sType 0
+  pNext 8
+  sliceOffset 16
+  sliceCount 20
+VkImageViewUsage2CreateInfoKHR 24
+  sType 0
+  pNext 8
+  usage 16
+VkImageViewUsageCreateInfo 24
+  sType 0
+  pNext 8
+  usage 16
+VkImportFenceFdInfoKHR 40
+  sType 0
+  pNext 8
+  fence 16
+  flags 24
+  handleType 28
+  fd 32
+VkImportMemoryFdInfoKHR 24
+  sType 0
+  pNext 8
+  handleType 16
+  fd 20
+VkImportMemoryHostPointerInfoEXT 32
+  sType 0
+  pNext 8
+  handleType 16
+  pHostPointer 24
+VkImportSemaphoreFdInfoKHR 40
+  sType 0
+  pNext 8
+  semaphore 16
+  flags 24
+  handleType 28
+  fd 32
+VkIndirectCommandsExecutionSetTokenEXT 8
+  type 0
+  shaderStages 4
+VkIndirectCommandsIndexBufferTokenEXT 4
+  mode 0
+VkIndirectCommandsLayoutCreateInfoEXT 56
+  sType 0
+  pNext 8
+  flags 16
+  shaderStages 20
+  indirectStride 24
+  pipelineLayout 32
+  tokenCount 40
+  pTokens 48
+VkIndirectCommandsLayoutCreateInfoNV 56
+  sType 0
+  pNext 8
+  flags 16
+  pipelineBindPoint 20
+  tokenCount 24
+  pTokens 32
+  streamCount 40
+  pStreamStrides 48
+VkIndirectCommandsLayoutPushDataTokenNV 24
+  sType 0
+  pNext 8
+  pushDataOffset 16
+  pushDataSize 20
+VkIndirectCommandsLayoutTokenEXT 40
+  sType 0
+  pNext 8
+  type 16
+  data 24
+  offset 32
+VkIndirectCommandsLayoutTokenNV 88
+  sType 0
+  pNext 8
+  tokenType 16
+  stream 20
+  offset 24
+  vertexBindingUnit 28
+  vertexDynamicStride 32
+  pushconstantPipelineLayout 40
+  pushconstantShaderStageFlags 48
+  pushconstantOffset 52
+  pushconstantSize 56
+  indirectStateFlags 60
+  indexTypeCount 64
+  pIndexTypes 72
+  pIndexTypeValues 80
+VkIndirectCommandsPushConstantTokenEXT 12
+  updateRange 0
+VkIndirectCommandsStreamNV 16
+  buffer 0
+  offset 8
+VkIndirectCommandsTokenDataEXT 8
+  pPushConstant 0
+  pVertexBuffer 0
+  pIndexBuffer 0
+  pExecutionSet 0
+VkIndirectCommandsVertexBufferTokenEXT 4
+  vertexBindingUnit 0
+VkIndirectExecutionSetCreateInfoEXT 32
+  sType 0
+  pNext 8
+  type 16
+  info 24
+VkIndirectExecutionSetInfoEXT 8
+  pPipelineInfo 0
+  pShaderInfo 0
+VkIndirectExecutionSetPipelineInfoEXT 32
+  sType 0
+  pNext 8
+  initialPipeline 16
+  maxPipelineCount 24
+VkIndirectExecutionSetShaderInfoEXT 56
+  sType 0
+  pNext 8
+  shaderCount 16
+  pInitialShaders 24
+  pSetLayoutInfos 32
+  maxShaderCount 40
+  pushConstantRangeCount 44
+  pPushConstantRanges 48
+VkIndirectExecutionSetShaderLayoutInfoEXT 32
+  sType 0
+  pNext 8
+  setLayoutCount 16
+  pSetLayouts 24
+VkInitializePerformanceApiInfoINTEL 24
+  sType 0
+  pNext 8
+  pUserData 16
+VkInputAttachmentAspectReference 12
+  subpass 0
+  inputAttachmentIndex 4
+  aspectMask 8
+VkInstanceCreateInfo 64
+  sType 0
+  pNext 8
+  flags 16
+  pApplicationInfo 24
+  enabledLayerCount 32
+  ppEnabledLayerNames 40
+  enabledExtensionCount 48
+  ppEnabledExtensionNames 56
+VkLatencySleepInfoNV 32
+  sType 0
+  pNext 8
+  signalSemaphore 16
+  value 24
+VkLatencySleepModeInfoNV 32
+  sType 0
+  pNext 8
+  lowLatencyMode 16
+  lowLatencyBoost 20
+  minimumIntervalUs 24
+VkLatencySubmissionPresentIdNV 24
+  sType 0
+  pNext 8
+  presentID 16
+VkLatencySurfaceCapabilitiesNV 32
+  sType 0
+  pNext 8
+  presentModeCount 16
+  pPresentModes 24
+VkLatencyTimingsFrameReportNV 128
+  sType 0
+  pNext 8
+  presentID 16
+  inputSampleTimeUs 24
+  simStartTimeUs 32
+  simEndTimeUs 40
+  renderSubmitStartTimeUs 48
+  renderSubmitEndTimeUs 56
+  presentStartTimeUs 64
+  presentEndTimeUs 72
+  driverStartTimeUs 80
+  driverEndTimeUs 88
+  osRenderQueueStartTimeUs 96
+  osRenderQueueEndTimeUs 104
+  gpuRenderStartTimeUs 112
+  gpuRenderEndTimeUs 120
+VkLayerProperties 520
+  layerName 0
+  specVersion 256
+  implementationVersion 260
+  description 264
+VkLayerSettingEXT 32
+  pLayerName 0
+  pSettingName 8
+  type 16
+  valueCount 20
+  pValues 24
+VkLayerSettingsCreateInfoEXT 32
+  sType 0
+  pNext 8
+  settingCount 16
+  pSettings 24
+VkMappedMemoryRange 40
+  sType 0
+  pNext 8
+  memory 16
+  offset 24
+  size 32
+VkMemoryAllocateFlagsInfo 24
+  sType 0
+  pNext 8
+  flags 16
+  deviceMask 20
+VkMemoryAllocateInfo 32
+  sType 0
+  pNext 8
+  allocationSize 16
+  memoryTypeIndex 24
+VkMemoryBarrier 24
+  sType 0
+  pNext 8
+  srcAccessMask 16
+  dstAccessMask 20
+VkMemoryBarrier2 48
+  sType 0
+  pNext 8
+  srcStageMask 16
+  srcAccessMask 24
+  dstStageMask 32
+  dstAccessMask 40
+VkMemoryBarrierAccessFlags3KHR 32
+  sType 0
+  pNext 8
+  srcAccessMask3 16
+  dstAccessMask3 24
+VkMemoryDedicatedAllocateInfo 32
+  sType 0
+  pNext 8
+  image 16
+  buffer 24
+VkMemoryDedicatedAllocateInfoTensorARM 24
+  sType 0
+  pNext 8
+  tensor 16
+VkMemoryDedicatedRequirements 24
+  sType 0
+  pNext 8
+  prefersDedicatedAllocation 16
+  requiresDedicatedAllocation 20
+VkMemoryFdPropertiesKHR 24
+  sType 0
+  pNext 8
+  memoryTypeBits 16
+VkMemoryGetFdInfoKHR 32
+  sType 0
+  pNext 8
+  memory 16
+  handleType 24
+VkMemoryGetRemoteAddressInfoNV 32
+  sType 0
+  pNext 8
+  memory 16
+  handleType 24
+VkMemoryHeap 16
+  size 0
+  flags 8
+VkMemoryHostPointerPropertiesEXT 24
+  sType 0
+  pNext 8
+  memoryTypeBits 16
+VkMemoryMapInfo 48
+  sType 0
+  pNext 8
+  flags 16
+  memory 24
+  offset 32
+  size 40
+VkMemoryMapPlacedInfoEXT 24
+  sType 0
+  pNext 8
+  pPlacedAddress 16
+VkMemoryMarkerInfoAMD 48
+  sType 0
+  pNext 8
+  stage 16
+  dstRange 24
+  dstFlags 40
+  marker 44
+VkMemoryOpaqueCaptureAddressAllocateInfo 24
+  sType 0
+  pNext 8
+  opaqueCaptureAddress 16
+VkMemoryPriorityAllocateInfoEXT 24
+  sType 0
+  pNext 8
+  priority 16
+VkMemoryRangeBarrierKHR 80
+  sType 0
+  pNext 8
+  srcStageMask 16
+  srcAccessMask 24
+  dstStageMask 32
+  dstAccessMask 40
+  srcQueueFamilyIndex 48
+  dstQueueFamilyIndex 52
+  addressRange 56
+  addressFlags 72
+VkMemoryRangeBarriersInfoKHR 32
+  sType 0
+  pNext 8
+  memoryRangeBarrierCount 16
+  pMemoryRangeBarriers 24
+VkMemoryRequirements 24
+  size 0
+  alignment 8
+  memoryTypeBits 16
+VkMemoryRequirements2 40
+  sType 0
+  pNext 8
+  memoryRequirements 16
+VkMemoryToImageCopy 72
+  sType 0
+  pNext 8
+  pHostPointer 16
+  memoryRowLength 24
+  memoryImageHeight 28
+  imageSubresource 32
+  imageOffset 48
+  imageExtent 60
+VkMemoryType 8
+  propertyFlags 0
+  heapIndex 4
+VkMemoryUnmapInfo 32
+  sType 0
+  pNext 8
+  flags 16
+  memory 24
+VkMicromapBuildInfoEXT 96
+  sType 0
+  pNext 8
+  type 16
+  flags 20
+  mode 24
+  dstMicromap 32
+  usageCountsCount 40
+  pUsageCounts 48
+  ppUsageCounts 56
+  data 64
+  scratchData 72
+  triangleArray 80
+  triangleArrayStride 88
+VkMicromapBuildSizesInfoEXT 40
+  sType 0
+  pNext 8
+  micromapSize 16
+  buildScratchSize 24
+  discardable 32
+VkMicromapCreateInfoEXT 64
+  sType 0
+  pNext 8
+  createFlags 16
+  buffer 24
+  offset 32
+  size 40
+  type 48
+  deviceAddress 56
+VkMicromapTriangleKHR 8
+  dataOffset 0
+  subdivisionLevel 4
+  format 6
+VkMicromapUsageEXT 12
+  count 0
+  subdivisionLevel 4
+  format 8
+VkMicromapUsageKHR 12
+  count 0
+  subdivisionLevel 4
+  format 8
+VkMicromapVersionInfoEXT 24
+  sType 0
+  pNext 8
+  pVersionData 16
+VkMultiDrawIndexedInfoEXT 12
+  firstIndex 0
+  indexCount 4
+  vertexOffset 8
+VkMultiDrawInfoEXT 8
+  firstVertex 0
+  vertexCount 4
+VkMultisamplePropertiesEXT 24
+  sType 0
+  pNext 8
+  maxSampleLocationGridSize 16
+VkMultisampledRenderToSingleSampledInfoEXT 24
+  sType 0
+  pNext 8
+  multisampledRenderToSingleSampledEnable 16
+  rasterizationSamples 20
+VkMultiviewPerViewAttributesInfoNVX 24
+  sType 0
+  pNext 8
+  perViewAttributes 16
+  perViewAttributesPositionXOnly 20
+VkMultiviewPerViewRenderAreasRenderPassBeginInfoQCOM 32
+  sType 0
+  pNext 8
+  perViewRenderAreaCount 16
+  pPerViewRenderAreas 24
+VkMutableDescriptorTypeCreateInfoEXT 32
+  sType 0
+  pNext 8
+  mutableDescriptorTypeListCount 16
+  pMutableDescriptorTypeLists 24
+VkMutableDescriptorTypeListEXT 16
+  descriptorTypeCount 0
+  pDescriptorTypes 8
+VkOffset2D 8
+  x 0
+  y 4
+VkOffset3D 12
+  x 0
+  y 4
+  z 8
+VkOpaqueCaptureDataCreateInfoEXT 24
+  sType 0
+  pNext 8
+  pData 16
+VkOpaqueCaptureDescriptorDataCreateInfoEXT 24
+  sType 0
+  pNext 8
+  opaqueCaptureDescriptorData 16
+VkOpticalFlowExecuteInfoNV 32
+  sType 0
+  pNext 8
+  flags 16
+  regionCount 20
+  pRegions 24
+VkOpticalFlowImageFormatInfoNV 24
+  sType 0
+  pNext 8
+  usage 16
+VkOpticalFlowImageFormatPropertiesNV 24
+  sType 0
+  pNext 8
+  format 16
+VkOpticalFlowSessionCreateInfoNV 56
+  sType 0
+  pNext 8
+  width 16
+  height 20
+  imageFormat 24
+  flowVectorFormat 28
+  costFormat 32
+  outputGridSize 36
+  hintGridSize 40
+  performanceLevel 44
+  flags 48
+VkOpticalFlowSessionCreatePrivateDataInfoNV 32
+  sType 0
+  pNext 8
+  id 16
+  size 20
+  pPrivateData 24
+VkOutOfBandQueueTypeInfoNV 24
+  sType 0
+  pNext 8
+  queueType 16
+VkPartitionedAccelerationStructureFlagsNV 24
+  sType 0
+  pNext 8
+  enablePartitionTranslation 16
+VkPartitionedAccelerationStructureInstancesInputNV 40
+  sType 0
+  pNext 8
+  flags 16
+  instanceCount 20
+  maxInstancePerPartitionCount 24
+  partitionCount 28
+  maxInstanceInGlobalPartitionCount 32
+VkPartitionedAccelerationStructureUpdateInstanceDataNV 16
+  instanceIndex 0
+  instanceContributionToHitGroupIndex 4
+  accelerationStructure 8
+VkPartitionedAccelerationStructureWriteInstanceDataNV 104
+  transform 0
+  explicitAABB 48
+  instanceID 72
+  instanceMask 76
+  instanceContributionToHitGroupIndex 80
+  instanceFlags 84
+  instanceIndex 88
+  partitionIndex 92
+  accelerationStructure 96
+VkPartitionedAccelerationStructureWritePartitionTranslationDataNV 16
+  partitionIndex 0
+  partitionTranslation 4
+VkPastPresentationTimingEXT 72
+  sType 0
+  pNext 8
+  presentId 16
+  targetTime 24
+  presentStageCount 32
+  pPresentStages 40
+  timeDomain 48
+  timeDomainId 56
+  reportComplete 64
+VkPastPresentationTimingGOOGLE 40
+  presentID 0
+  desiredPresentTime 8
+  actualPresentTime 16
+  earliestPresentTime 24
+  presentMargin 32
+VkPastPresentationTimingInfoEXT 32
+  sType 0
+  pNext 8
+  flags 16
+  swapchain 24
+VkPastPresentationTimingPropertiesEXT 48
+  sType 0
+  pNext 8
+  timingPropertiesCounter 16
+  timeDomainsCounter 24
+  presentationTimingCount 32
+  pPresentationTimings 40
+VkPerTileBeginInfoQCOM 16
+  sType 0
+  pNext 8
+VkPerTileEndInfoQCOM 16
+  sType 0
+  pNext 8
+VkPerfHintInfoQCOM 24
+  sType 0
+  pNext 8
+  type 16
+  scale 20
+VkPerformanceConfigurationAcquireInfoINTEL 24
+  sType 0
+  pNext 8
+  type 16
+VkPerformanceCounterARM 24
+  sType 0
+  pNext 8
+  counterID 16
+VkPerformanceCounterDescriptionARM 280
+  sType 0
+  pNext 8
+  flags 16
+  name 20
+VkPerformanceCounterDescriptionKHR 792
+  sType 0
+  pNext 8
+  flags 16
+  name 20
+  category 276
+  description 532
+VkPerformanceCounterKHR 48
+  sType 0
+  pNext 8
+  unit 16
+  scope 20
+  storage 24
+  uuid 28
+VkPerformanceCounterResultKHR 8
+  int32 0
+  int64 0
+  uint32 0
+  uint64 0
+  float32 0
+  float64 0
+VkPerformanceMarkerInfoINTEL 24
+  sType 0
+  pNext 8
+  marker 16
+VkPerformanceOverrideInfoINTEL 32
+  sType 0
+  pNext 8
+  type 16
+  enable 20
+  parameter 24
+VkPerformanceQuerySubmitInfoKHR 24
+  sType 0
+  pNext 8
+  counterPassIndex 16
+VkPerformanceStreamMarkerInfoINTEL 24
+  sType 0
+  pNext 8
+  marker 16
+VkPerformanceValueDataINTEL 8
+  value32 0
+  value64 0
+  valueFloat 0
+  valueBool 0
+  valueString 0
+VkPerformanceValueINTEL 16
+  type 0
+  data 8
+VkPhysicalDevice16BitStorageFeatures 32
+  sType 0
+  pNext 8
+  storageBuffer16BitAccess 16
+  uniformAndStorageBuffer16BitAccess 20
+  storagePushConstant16 24
+  storageInputOutput16 28
+VkPhysicalDevice4444FormatsFeaturesEXT 24
+  sType 0
+  pNext 8
+  formatA4R4G4B4 16
+  formatA4B4G4R4 20
+VkPhysicalDevice8BitStorageFeatures 32
+  sType 0
+  pNext 8
+  storageBuffer8BitAccess 16
+  uniformAndStorageBuffer8BitAccess 20
+  storagePushConstant8 24
+VkPhysicalDeviceASTCDecodeFeaturesEXT 24
+  sType 0
+  pNext 8
+  decodeModeSharedExponent 16
+VkPhysicalDeviceAccelerationStructureFeaturesKHR 40
+  sType 0
+  pNext 8
+  accelerationStructure 16
+  accelerationStructureCaptureReplay 20
+  accelerationStructureIndirectBuild 24
+  accelerationStructureHostCommands 28
+  descriptorBindingAccelerationStructureUpdateAfterBind 32
+VkPhysicalDeviceAccelerationStructurePropertiesKHR 64
+  sType 0
+  pNext 8
+  maxGeometryCount 16
+  maxInstanceCount 24
+  maxPrimitiveCount 32
+  maxPerStageDescriptorAccelerationStructures 40
+  maxPerStageDescriptorUpdateAfterBindAccelerationStructures 44
+  maxDescriptorSetAccelerationStructures 48
+  maxDescriptorSetUpdateAfterBindAccelerationStructures 52
+  minAccelerationStructureScratchOffsetAlignment 56
+VkPhysicalDeviceAddressBindingReportFeaturesEXT 24
+  sType 0
+  pNext 8
+  reportAddressBinding 16
+VkPhysicalDeviceAmigoProfilingFeaturesSEC 24
+  sType 0
+  pNext 8
+  amigoProfiling 16
+VkPhysicalDeviceAntiLagFeaturesAMD 24
+  sType 0
+  pNext 8
+  antiLag 16
+VkPhysicalDeviceAttachmentFeedbackLoopDynamicStateFeaturesEXT 24
+  sType 0
+  pNext 8
+  attachmentFeedbackLoopDynamicState 16
+VkPhysicalDeviceAttachmentFeedbackLoopLayoutFeaturesEXT 24
+  sType 0
+  pNext 8
+  attachmentFeedbackLoopLayout 16
+VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT 24
+  sType 0
+  pNext 8
+  advancedBlendCoherentOperations 16
+VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT 40
+  sType 0
+  pNext 8
+  advancedBlendMaxColorAttachments 16
+  advancedBlendIndependentBlend 20
+  advancedBlendNonPremultipliedSrcColor 24
+  advancedBlendNonPremultipliedDstColor 28
+  advancedBlendCorrelatedOverlap 32
+  advancedBlendAllOperations 36
+VkPhysicalDeviceBorderColorSwizzleFeaturesEXT 24
+  sType 0
+  pNext 8
+  borderColorSwizzle 16
+  borderColorSwizzleFromImage 20
+VkPhysicalDeviceBufferDeviceAddressFeatures 32
+  sType 0
+  pNext 8
+  bufferDeviceAddress 16
+  bufferDeviceAddressCaptureReplay 20
+  bufferDeviceAddressMultiDevice 24
+VkPhysicalDeviceBufferDeviceAddressFeaturesEXT 32
+  sType 0
+  pNext 8
+  bufferDeviceAddress 16
+  bufferDeviceAddressCaptureReplay 20
+  bufferDeviceAddressMultiDevice 24
+VkPhysicalDeviceClusterAccelerationStructureFeaturesNV 24
+  sType 0
+  pNext 8
+  clusterAccelerationStructure 16
+VkPhysicalDeviceClusterAccelerationStructurePropertiesNV 48
+  sType 0
+  pNext 8
+  maxVerticesPerCluster 16
+  maxTrianglesPerCluster 20
+  clusterScratchByteAlignment 24
+  clusterByteAlignment 28
+  clusterTemplateByteAlignment 32
+  clusterBottomLevelByteAlignment 36
+  clusterTemplateBoundsByteAlignment 40
+  maxClusterGeometryIndex 44
+VkPhysicalDeviceClusterCullingShaderFeaturesHUAWEI 24
+  sType 0
+  pNext 8
+  clustercullingShader 16
+  multiviewClusterCullingShader 20
+VkPhysicalDeviceClusterCullingShaderPropertiesHUAWEI 56
+  sType 0
+  pNext 8
+  maxWorkGroupCount 16
+  maxWorkGroupSize 28
+  maxOutputClusterCount 40
+  indirectBufferOffsetAlignment 48
+VkPhysicalDeviceClusterCullingShaderVrsFeaturesHUAWEI 24
+  sType 0
+  pNext 8
+  clusterShadingRate 16
+VkPhysicalDeviceCoherentMemoryFeaturesAMD 24
+  sType 0
+  pNext 8
+  deviceCoherentMemory 16
+VkPhysicalDeviceColorWriteEnableFeaturesEXT 24
+  sType 0
+  pNext 8
+  colorWriteEnable 16
+VkPhysicalDeviceCommandBufferInheritanceFeaturesNV 24
+  sType 0
+  pNext 8
+  commandBufferInheritance 16
+VkPhysicalDeviceComputeOccupancyPriorityFeaturesNV 24
+  sType 0
+  pNext 8
+  computeOccupancyPriority 16
+VkPhysicalDeviceComputeShaderDerivativesFeaturesKHR 24
+  sType 0
+  pNext 8
+  computeDerivativeGroupQuads 16
+  computeDerivativeGroupLinear 20
+VkPhysicalDeviceComputeShaderDerivativesPropertiesKHR 24
+  sType 0
+  pNext 8
+  meshAndTaskShaderDerivatives 16
+VkPhysicalDeviceConditionalRenderingFeaturesEXT 24
+  sType 0
+  pNext 8
+  conditionalRendering 16
+  inheritedConditionalRendering 20
+VkPhysicalDeviceConservativeRasterizationPropertiesEXT 56
+  sType 0
+  pNext 8
+  primitiveOverestimationSize 16
+  maxExtraPrimitiveOverestimationSize 20
+  extraPrimitiveOverestimationSizeGranularity 24
+  primitiveUnderestimation 28
+  conservativePointAndLineRasterization 32
+  degenerateTrianglesRasterized 36
+  degenerateLinesRasterized 40
+  fullyCoveredFragmentShaderInputVariable 44
+  conservativeRasterizationPostDepthCoverage 48
+VkPhysicalDeviceCooperativeMatrix2FeaturesNV 48
+  sType 0
+  pNext 8
+  cooperativeMatrixWorkgroupScope 16
+  cooperativeMatrixFlexibleDimensions 20
+  cooperativeMatrixReductions 24
+  cooperativeMatrixConversions 28
+  cooperativeMatrixPerElementOperations 32
+  cooperativeMatrixTensorAddressing 36
+  cooperativeMatrixBlockLoads 40
+VkPhysicalDeviceCooperativeMatrix2PropertiesNV 32
+  sType 0
+  pNext 8
+  cooperativeMatrixWorkgroupScopeMaxWorkgroupSize 16
+  cooperativeMatrixFlexibleDimensionsMaxDimension 20
+  cooperativeMatrixWorkgroupScopeReservedSharedMemory 24
+VkPhysicalDeviceCooperativeMatrixConversionFeaturesQCOM 24
+  sType 0
+  pNext 8
+  cooperativeMatrixConversion 16
+VkPhysicalDeviceCooperativeMatrixDecodeVectorFeaturesNV 24
+  sType 0
+  pNext 8
+  cooperativeMatrixDecodeVector 16
+VkPhysicalDeviceCooperativeMatrixFeaturesKHR 24
+  sType 0
+  pNext 8
+  cooperativeMatrix 16
+  cooperativeMatrixRobustBufferAccess 20
+VkPhysicalDeviceCooperativeMatrixFeaturesNV 24
+  sType 0
+  pNext 8
+  cooperativeMatrix 16
+  cooperativeMatrixRobustBufferAccess 20
+VkPhysicalDeviceCooperativeMatrixPropertiesKHR 24
+  sType 0
+  pNext 8
+  cooperativeMatrixSupportedStages 16
+VkPhysicalDeviceCooperativeMatrixPropertiesNV 24
+  sType 0
+  pNext 8
+  cooperativeMatrixSupportedStages 16
+VkPhysicalDeviceCooperativeVectorFeaturesNV 24
+  sType 0
+  pNext 8
+  cooperativeVector 16
+  cooperativeVectorTraining 20
+VkPhysicalDeviceCooperativeVectorPropertiesNV 32
+  sType 0
+  pNext 8
+  cooperativeVectorSupportedStages 16
+  cooperativeVectorTrainingFloat16Accumulation 20
+  cooperativeVectorTrainingFloat32Accumulation 24
+  maxCooperativeVectorComponents 28
+VkPhysicalDeviceCopyMemoryIndirectFeaturesKHR 24
+  sType 0
+  pNext 8
+  indirectMemoryCopy 16
+  indirectMemoryToImageCopy 20
+VkPhysicalDeviceCopyMemoryIndirectFeaturesNV 24
+  sType 0
+  pNext 8
+  indirectCopy 16
+VkPhysicalDeviceCopyMemoryIndirectPropertiesKHR 24
+  sType 0
+  pNext 8
+  supportedQueues 16
+VkPhysicalDeviceCornerSampledImageFeaturesNV 24
+  sType 0
+  pNext 8
+  cornerSampledImage 16
+VkPhysicalDeviceCoverageReductionModeFeaturesNV 24
+  sType 0
+  pNext 8
+  coverageReductionMode 16
+VkPhysicalDeviceCubicClampFeaturesQCOM 24
+  sType 0
+  pNext 8
+  cubicRangeClamp 16
+VkPhysicalDeviceCubicWeightsFeaturesQCOM 24
+  sType 0
+  pNext 8
+  selectableCubicWeights 16
+VkPhysicalDeviceCudaKernelLaunchFeaturesNV 24
+  sType 0
+  pNext 8
+  cudaKernelLaunchFeatures 16
+VkPhysicalDeviceCudaKernelLaunchPropertiesNV 24
+  sType 0
+  pNext 8
+  computeCapabilityMinor 16
+  computeCapabilityMajor 20
+VkPhysicalDeviceCustomBorderColorFeaturesEXT 24
+  sType 0
+  pNext 8
+  customBorderColors 16
+  customBorderColorWithoutFormat 20
+VkPhysicalDeviceCustomBorderColorPropertiesEXT 24
+  sType 0
+  pNext 8
+  maxCustomBorderColorSamplers 16
+VkPhysicalDeviceCustomResolveFeaturesEXT 24
+  sType 0
+  pNext 8
+  customResolve 16
+VkPhysicalDeviceDataGraphFeaturesARM 40
+  sType 0
+  pNext 8
+  dataGraph 16
+  dataGraphUpdateAfterBind 20
+  dataGraphSpecializationConstants 24
+  dataGraphDescriptorBuffer 28
+  dataGraphShaderModule 32
+VkPhysicalDeviceDataGraphModelFeaturesQCOM 24
+  sType 0
+  pNext 8
+  dataGraphModel 16
+VkPhysicalDeviceDataGraphNeuralAcceleratorStatisticsFeaturesARM 24
+  sType 0
+  pNext 8
+  dataGraphNeuralAcceleratorStatistics 16
+VkPhysicalDeviceDataGraphOperationSupportARM 136
+  operationType 0
+  name 4
+  version 132
+VkPhysicalDeviceDataGraphOpticalFlowFeaturesARM 24
+  sType 0
+  pNext 8
+  dataGraphOpticalFlow 16
+VkPhysicalDeviceDataGraphProcessingEngineARM 8
+  type 0
+  isForeign 4
+VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV 24
+  sType 0
+  pNext 8
+  dedicatedAllocationImageAliasing 16
+VkPhysicalDeviceDenseGeometryFormatFeaturesAMDX 24
+  sType 0
+  pNext 8
+  denseGeometryFormat 16
+VkPhysicalDeviceDepthBiasControlFeaturesEXT 32
+  sType 0
+  pNext 8
+  depthBiasControl 16
+  leastRepresentableValueForceUnormRepresentation 20
+  floatRepresentation 24
+  depthBiasExact 28
+VkPhysicalDeviceDepthClampControlFeaturesEXT 24
+  sType 0
+  pNext 8
+  depthClampControl 16
+VkPhysicalDeviceDepthClampZeroOneFeaturesKHR 24
+  sType 0
+  pNext 8
+  depthClampZeroOne 16
+VkPhysicalDeviceDepthClipControlFeaturesEXT 24
+  sType 0
+  pNext 8
+  depthClipControl 16
+VkPhysicalDeviceDepthClipEnableFeaturesEXT 24
+  sType 0
+  pNext 8
+  depthClipEnable 16
+VkPhysicalDeviceDepthStencilResolveProperties 32
+  sType 0
+  pNext 8
+  supportedDepthResolveModes 16
+  supportedStencilResolveModes 20
+  independentResolveNone 24
+  independentResolve 28
+VkPhysicalDeviceDescriptorBufferDensityMapPropertiesEXT 24
+  sType 0
+  pNext 8
+  combinedImageSamplerDensityMapDescriptorSize 16
+VkPhysicalDeviceDescriptorBufferFeaturesEXT 32
+  sType 0
+  pNext 8
+  descriptorBuffer 16
+  descriptorBufferCaptureReplay 20
+  descriptorBufferImageLayoutIgnored 24
+  descriptorBufferPushDescriptors 28
+VkPhysicalDeviceDescriptorBufferPropertiesEXT 256
+  sType 0
+  pNext 8
+  combinedImageSamplerDescriptorSingleArray 16
+  bufferlessPushDescriptors 20
+  allowSamplerImageViewPostSubmitCreation 24
+  descriptorBufferOffsetAlignment 32
+  maxDescriptorBufferBindings 40
+  maxResourceDescriptorBufferBindings 44
+  maxSamplerDescriptorBufferBindings 48
+  maxEmbeddedImmutableSamplerBindings 52
+  maxEmbeddedImmutableSamplers 56
+  bufferCaptureReplayDescriptorDataSize 64
+  imageCaptureReplayDescriptorDataSize 72
+  imageViewCaptureReplayDescriptorDataSize 80
+  samplerCaptureReplayDescriptorDataSize 88
+  accelerationStructureCaptureReplayDescriptorDataSize 96
+  samplerDescriptorSize 104
+  combinedImageSamplerDescriptorSize 112
+  sampledImageDescriptorSize 120
+  storageImageDescriptorSize 128
+  uniformTexelBufferDescriptorSize 136
+  robustUniformTexelBufferDescriptorSize 144
+  storageTexelBufferDescriptorSize 152
+  robustStorageTexelBufferDescriptorSize 160
+  uniformBufferDescriptorSize 168
+  robustUniformBufferDescriptorSize 176
+  storageBufferDescriptorSize 184
+  robustStorageBufferDescriptorSize 192
+  inputAttachmentDescriptorSize 200
+  accelerationStructureDescriptorSize 208
+  maxSamplerDescriptorBufferRange 216
+  maxResourceDescriptorBufferRange 224
+  samplerDescriptorBufferAddressSpaceSize 232
+  resourceDescriptorBufferAddressSpaceSize 240
+  descriptorBufferAddressSpaceSize 248
+VkPhysicalDeviceDescriptorBufferTensorFeaturesARM 24
+  sType 0
+  pNext 8
+  descriptorBufferTensorDescriptors 16
+VkPhysicalDeviceDescriptorBufferTensorPropertiesARM 40
+  sType 0
+  pNext 8
+  tensorCaptureReplayDescriptorDataSize 16
+  tensorViewCaptureReplayDescriptorDataSize 24
+  tensorDescriptorSize 32
+VkPhysicalDeviceDescriptorHeapFeaturesEXT 24
+  sType 0
+  pNext 8
+  descriptorHeap 16
+  descriptorHeapCaptureReplay 20
+VkPhysicalDeviceDescriptorHeapPropertiesEXT 152
+  sType 0
+  pNext 8
+  samplerHeapAlignment 16
+  resourceHeapAlignment 24
+  maxSamplerHeapSize 32
+  maxResourceHeapSize 40
+  minSamplerHeapReservedRange 48
+  minSamplerHeapReservedRangeWithEmbedded 56
+  minResourceHeapReservedRange 64
+  samplerDescriptorSize 72
+  imageDescriptorSize 80
+  bufferDescriptorSize 88
+  samplerDescriptorAlignment 96
+  imageDescriptorAlignment 104
+  bufferDescriptorAlignment 112
+  maxPushDataSize 120
+  imageCaptureReplayOpaqueDataSize 128
+  maxDescriptorHeapEmbeddedSamplers 136
+  samplerYcbcrConversionCount 140
+  sparseDescriptorHeaps 144
+  protectedDescriptorHeaps 148
+VkPhysicalDeviceDescriptorHeapTensorPropertiesARM 40
+  sType 0
+  pNext 8
+  tensorDescriptorSize 16
+  tensorDescriptorAlignment 24
+  tensorCaptureReplayOpaqueDataSize 32
+VkPhysicalDeviceDescriptorIndexingFeatures 96
+  sType 0
+  pNext 8
+  shaderInputAttachmentArrayDynamicIndexing 16
+  shaderUniformTexelBufferArrayDynamicIndexing 20
+  shaderStorageTexelBufferArrayDynamicIndexing 24
+  shaderUniformBufferArrayNonUniformIndexing 28
+  shaderSampledImageArrayNonUniformIndexing 32
+  shaderStorageBufferArrayNonUniformIndexing 36
+  shaderStorageImageArrayNonUniformIndexing 40
+  shaderInputAttachmentArrayNonUniformIndexing 44
+  shaderUniformTexelBufferArrayNonUniformIndexing 48
+  shaderStorageTexelBufferArrayNonUniformIndexing 52
+  descriptorBindingUniformBufferUpdateAfterBind 56
+  descriptorBindingSampledImageUpdateAfterBind 60
+  descriptorBindingStorageImageUpdateAfterBind 64
+  descriptorBindingStorageBufferUpdateAfterBind 68
+  descriptorBindingUniformTexelBufferUpdateAfterBind 72
+  descriptorBindingStorageTexelBufferUpdateAfterBind 76
+  descriptorBindingUpdateUnusedWhilePending 80
+  descriptorBindingPartiallyBound 84
+  descriptorBindingVariableDescriptorCount 88
+  runtimeDescriptorArray 92
+VkPhysicalDeviceDescriptorIndexingProperties 112
+  sType 0
+  pNext 8
+  maxUpdateAfterBindDescriptorsInAllPools 16
+  shaderUniformBufferArrayNonUniformIndexingNative 20
+  shaderSampledImageArrayNonUniformIndexingNative 24
+  shaderStorageBufferArrayNonUniformIndexingNative 28
+  shaderStorageImageArrayNonUniformIndexingNative 32
+  shaderInputAttachmentArrayNonUniformIndexingNative 36
+  robustBufferAccessUpdateAfterBind 40
+  quadDivergentImplicitLod 44
+  maxPerStageDescriptorUpdateAfterBindSamplers 48
+  maxPerStageDescriptorUpdateAfterBindUniformBuffers 52
+  maxPerStageDescriptorUpdateAfterBindStorageBuffers 56
+  maxPerStageDescriptorUpdateAfterBindSampledImages 60
+  maxPerStageDescriptorUpdateAfterBindStorageImages 64
+  maxPerStageDescriptorUpdateAfterBindInputAttachments 68
+  maxPerStageUpdateAfterBindResources 72
+  maxDescriptorSetUpdateAfterBindSamplers 76
+  maxDescriptorSetUpdateAfterBindUniformBuffers 80
+  maxDescriptorSetUpdateAfterBindUniformBuffersDynamic 84
+  maxDescriptorSetUpdateAfterBindStorageBuffers 88
+  maxDescriptorSetUpdateAfterBindStorageBuffersDynamic 92
+  maxDescriptorSetUpdateAfterBindSampledImages 96
+  maxDescriptorSetUpdateAfterBindStorageImages 100
+  maxDescriptorSetUpdateAfterBindInputAttachments 104
+VkPhysicalDeviceDescriptorPoolOverallocationFeaturesNV 24
+  sType 0
+  pNext 8
+  descriptorPoolOverallocation 16
+VkPhysicalDeviceDescriptorSetHostMappingFeaturesVALVE 24
+  sType 0
+  pNext 8
+  descriptorSetHostMapping 16
+VkPhysicalDeviceDeviceAddressCommandsFeaturesKHR 24
+  sType 0
+  pNext 8
+  deviceAddressCommands 16
+VkPhysicalDeviceDeviceGeneratedCommandsComputeFeaturesNV 32
+  sType 0
+  pNext 8
+  deviceGeneratedCompute 16
+  deviceGeneratedComputePipelines 20
+  deviceGeneratedComputeCaptureReplay 24
+VkPhysicalDeviceDeviceGeneratedCommandsFeaturesEXT 24
+  sType 0
+  pNext 8
+  deviceGeneratedCommands 16
+  dynamicGeneratedPipelineLayout 20
+VkPhysicalDeviceDeviceGeneratedCommandsFeaturesNV 24
+  sType 0
+  pNext 8
+  deviceGeneratedCommands 16
+VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT 64
+  sType 0
+  pNext 8
+  maxIndirectPipelineCount 16
+  maxIndirectShaderObjectCount 20
+  maxIndirectSequenceCount 24
+  maxIndirectCommandsTokenCount 28
+  maxIndirectCommandsTokenOffset 32
+  maxIndirectCommandsIndirectStride 36
+  supportedIndirectCommandsInputModes 40
+  supportedIndirectCommandsShaderStages 44
+  supportedIndirectCommandsShaderStagesPipelineBinding 48
+  supportedIndirectCommandsShaderStagesShaderBinding 52
+  deviceGeneratedCommandsTransformFeedback 56
+  deviceGeneratedCommandsMultiDrawIndirectCount 60
+VkPhysicalDeviceDeviceGeneratedCommandsPropertiesNV 56
+  sType 0
+  pNext 8
+  maxGraphicsShaderGroupCount 16
+  maxIndirectSequenceCount 20
+  maxIndirectCommandsTokenCount 24
+  maxIndirectCommandsStreamCount 28
+  maxIndirectCommandsTokenOffset 32
+  maxIndirectCommandsStreamStride 36
+  minSequencesCountBufferOffsetAlignment 40
+  minSequencesIndexBufferOffsetAlignment 44
+  minIndirectCommandsBufferOffsetAlignment 48
+VkPhysicalDeviceDeviceMemoryReportFeaturesEXT 24
+  sType 0
+  pNext 8
+  deviceMemoryReport 16
+VkPhysicalDeviceDiagnosticsConfigFeaturesNV 24
+  sType 0
+  pNext 8
+  diagnosticsConfig 16
+VkPhysicalDeviceDiscardRectanglePropertiesEXT 24
+  sType 0
+  pNext 8
+  maxDiscardRectangles 16
+VkPhysicalDeviceDisplacementMicromapFeaturesNV 24
+  sType 0
+  pNext 8
+  displacementMicromap 16
+VkPhysicalDeviceDisplacementMicromapPropertiesNV 24
+  sType 0
+  pNext 8
+  maxDisplacementMicromapSubdivisionLevel 16
+VkPhysicalDeviceDriverProperties 536
+  sType 0
+  pNext 8
+  driverID 16
+  driverName 20
+  driverInfo 276
+  conformanceVersion 532
+VkPhysicalDeviceDrmPropertiesEXT 56
+  sType 0
+  pNext 8
+  hasPrimary 16
+  hasRender 20
+  primaryMajor 24
+  primaryMinor 32
+  renderMajor 40
+  renderMinor 48
+VkPhysicalDeviceDynamicRenderingFeatures 24
+  sType 0
+  pNext 8
+  dynamicRendering 16
+VkPhysicalDeviceDynamicRenderingLocalReadFeatures 24
+  sType 0
+  pNext 8
+  dynamicRenderingLocalRead 16
+VkPhysicalDeviceDynamicRenderingUnusedAttachmentsFeaturesEXT 24
+  sType 0
+  pNext 8
+  dynamicRenderingUnusedAttachments 16
+VkPhysicalDeviceElapsedTimerQueryFeaturesQCOM 24
+  sType 0
+  pNext 8
+  elapsedTimerQuery 16
+VkPhysicalDeviceExclusiveScissorFeaturesNV 24
+  sType 0
+  pNext 8
+  exclusiveScissor 16
+VkPhysicalDeviceExtendedDynamicState2FeaturesEXT 32
+  sType 0
+  pNext 8
+  extendedDynamicState2 16
+  extendedDynamicState2LogicOp 20
+  extendedDynamicState2PatchControlPoints 24
+VkPhysicalDeviceExtendedDynamicState3FeaturesEXT 144
+  sType 0
+  pNext 8
+  extendedDynamicState3TessellationDomainOrigin 16
+  extendedDynamicState3DepthClampEnable 20
+  extendedDynamicState3PolygonMode 24
+  extendedDynamicState3RasterizationSamples 28
+  extendedDynamicState3SampleMask 32
+  extendedDynamicState3AlphaToCoverageEnable 36
+  extendedDynamicState3AlphaToOneEnable 40
+  extendedDynamicState3LogicOpEnable 44
+  extendedDynamicState3ColorBlendEnable 48
+  extendedDynamicState3ColorBlendEquation 52
+  extendedDynamicState3ColorWriteMask 56
+  extendedDynamicState3RasterizationStream 60
+  extendedDynamicState3ConservativeRasterizationMode 64
+  extendedDynamicState3ExtraPrimitiveOverestimationSize 68
+  extendedDynamicState3DepthClipEnable 72
+  extendedDynamicState3SampleLocationsEnable 76
+  extendedDynamicState3ColorBlendAdvanced 80
+  extendedDynamicState3ProvokingVertexMode 84
+  extendedDynamicState3LineRasterizationMode 88
+  extendedDynamicState3LineStippleEnable 92
+  extendedDynamicState3DepthClipNegativeOneToOne 96
+  extendedDynamicState3ViewportWScalingEnable 100
+  extendedDynamicState3ViewportSwizzle 104
+  extendedDynamicState3CoverageToColorEnable 108
+  extendedDynamicState3CoverageToColorLocation 112
+  extendedDynamicState3CoverageModulationMode 116
+  extendedDynamicState3CoverageModulationTableEnable 120
+  extendedDynamicState3CoverageModulationTable 124
+  extendedDynamicState3CoverageReductionMode 128
+  extendedDynamicState3RepresentativeFragmentTestEnable 132
+  extendedDynamicState3ShadingRateImageEnable 136
+VkPhysicalDeviceExtendedDynamicState3PropertiesEXT 24
+  sType 0
+  pNext 8
+  dynamicPrimitiveTopologyUnrestricted 16
+VkPhysicalDeviceExtendedDynamicStateFeaturesEXT 24
+  sType 0
+  pNext 8
+  extendedDynamicState 16
+VkPhysicalDeviceExtendedFlagsFeaturesKHR 24
+  sType 0
+  pNext 8
+  extendedFlags 16
+VkPhysicalDeviceExtendedSparseAddressSpaceFeaturesNV 24
+  sType 0
+  pNext 8
+  extendedSparseAddressSpace 16
+VkPhysicalDeviceExtendedSparseAddressSpacePropertiesNV 32
+  sType 0
+  pNext 8
+  extendedSparseAddressSpaceSize 16
+  extendedSparseImageUsageFlags 24
+  extendedSparseBufferUsageFlags 28
+VkPhysicalDeviceExternalBufferInfo 32
+  sType 0
+  pNext 8
+  flags 16
+  usage 20
+  handleType 24
+VkPhysicalDeviceExternalComputeQueuePropertiesNV 24
+  sType 0
+  pNext 8
+  externalDataSize 16
+  maxExternalQueues 20
+VkPhysicalDeviceExternalFenceInfo 24
+  sType 0
+  pNext 8
+  handleType 16
+VkPhysicalDeviceExternalImageFormatInfo 24
+  sType 0
+  pNext 8
+  handleType 16
+VkPhysicalDeviceExternalMemoryHostPropertiesEXT 24
+  sType 0
+  pNext 8
+  minImportedHostPointerAlignment 16
+VkPhysicalDeviceExternalMemoryRDMAFeaturesNV 24
+  sType 0
+  pNext 8
+  externalMemoryRDMA 16
+VkPhysicalDeviceExternalSemaphoreInfo 24
+  sType 0
+  pNext 8
+  handleType 16
+VkPhysicalDeviceExternalTensorInfoARM 40
+  sType 0
+  pNext 8
+  flags 16
+  pDescription 24
+  handleType 32
+VkPhysicalDeviceFaultFeaturesEXT 24
+  sType 0
+  pNext 8
+  deviceFault 16
+  deviceFaultVendorBinary 20
+VkPhysicalDeviceFaultFeaturesKHR 32
+  sType 0
+  pNext 8
+  deviceFault 16
+  deviceFaultVendorBinary 20
+  deviceFaultReportMasked 24
+  deviceFaultDeviceLostOnMasked 28
+VkPhysicalDeviceFaultPropertiesKHR 24
+  sType 0
+  pNext 8
+  maxDeviceFaultCount 16
+VkPhysicalDeviceFeatures 220
+  robustBufferAccess 0
+  fullDrawIndexUint32 4
+  imageCubeArray 8
+  independentBlend 12
+  geometryShader 16
+  tessellationShader 20
+  sampleRateShading 24
+  dualSrcBlend 28
+  logicOp 32
+  multiDrawIndirect 36
+  drawIndirectFirstInstance 40
+  depthClamp 44
+  depthBiasClamp 48
+  fillModeNonSolid 52
+  depthBounds 56
+  wideLines 60
+  largePoints 64
+  alphaToOne 68
+  multiViewport 72
+  samplerAnisotropy 76
+  textureCompressionETC2 80
+  textureCompressionASTC_LDR 84
+  textureCompressionBC 88
+  occlusionQueryPrecise 92
+  pipelineStatisticsQuery 96
+  vertexPipelineStoresAndAtomics 100
+  fragmentStoresAndAtomics 104
+  shaderTessellationAndGeometryPointSize 108
+  shaderImageGatherExtended 112
+  shaderStorageImageExtendedFormats 116
+  shaderStorageImageMultisample 120
+  shaderStorageImageReadWithoutFormat 124
+  shaderStorageImageWriteWithoutFormat 128
+  shaderUniformBufferArrayDynamicIndexing 132
+  shaderSampledImageArrayDynamicIndexing 136
+  shaderStorageBufferArrayDynamicIndexing 140
+  shaderStorageImageArrayDynamicIndexing 144
+  shaderClipDistance 148
+  shaderCullDistance 152
+  shaderFloat64 156
+  shaderInt64 160
+  shaderInt16 164
+  shaderResourceResidency 168
+  shaderResourceMinLod 172
+  sparseBinding 176
+  sparseResidencyBuffer 180
+  sparseResidencyImage2D 184
+  sparseResidencyImage3D 188
+  sparseResidency2Samples 192
+  sparseResidency4Samples 196
+  sparseResidency8Samples 200
+  sparseResidency16Samples 204
+  sparseResidencyAliased 208
+  variableMultisampleRate 212
+  inheritedQueries 216
+VkPhysicalDeviceFeatures2 240
+  sType 0
+  pNext 8
+  features 16
+VkPhysicalDeviceFloatControlsProperties 88
+  sType 0
+  pNext 8
+  denormBehaviorIndependence 16
+  roundingModeIndependence 20
+  shaderSignedZeroInfNanPreserveFloat16 24
+  shaderSignedZeroInfNanPreserveFloat32 28
+  shaderSignedZeroInfNanPreserveFloat64 32
+  shaderDenormPreserveFloat16 36
+  shaderDenormPreserveFloat32 40
+  shaderDenormPreserveFloat64 44
+  shaderDenormFlushToZeroFloat16 48
+  shaderDenormFlushToZeroFloat32 52
+  shaderDenormFlushToZeroFloat64 56
+  shaderRoundingModeRTEFloat16 60
+  shaderRoundingModeRTEFloat32 64
+  shaderRoundingModeRTEFloat64 68
+  shaderRoundingModeRTZFloat16 72
+  shaderRoundingModeRTZFloat32 76
+  shaderRoundingModeRTZFloat64 80
+VkPhysicalDeviceFormatPackFeaturesARM 24
+  sType 0
+  pNext 8
+  formatPack 16
+VkPhysicalDeviceFragmentDensityMap2FeaturesEXT 24
+  sType 0
+  pNext 8
+  fragmentDensityMapDeferred 16
+VkPhysicalDeviceFragmentDensityMap2PropertiesEXT 32
+  sType 0
+  pNext 8
+  subsampledLoads 16
+  subsampledCoarseReconstructionEarlyAccess 20
+  maxSubsampledArrayLayers 24
+  maxDescriptorSetSubsampledSamplers 28
+VkPhysicalDeviceFragmentDensityMapFeaturesEXT 32
+  sType 0
+  pNext 8
+  fragmentDensityMap 16
+  fragmentDensityMapDynamic 20
+  fragmentDensityMapNonSubsampledImages 24
+VkPhysicalDeviceFragmentDensityMapLayeredFeaturesVALVE 24
+  sType 0
+  pNext 8
+  fragmentDensityMapLayered 16
+VkPhysicalDeviceFragmentDensityMapLayeredPropertiesVALVE 24
+  sType 0
+  pNext 8
+  maxFragmentDensityMapLayers 16
+VkPhysicalDeviceFragmentDensityMapOffsetFeaturesEXT 24
+  sType 0
+  pNext 8
+  fragmentDensityMapOffset 16
+VkPhysicalDeviceFragmentDensityMapOffsetPropertiesEXT 24
+  sType 0
+  pNext 8
+  fragmentDensityOffsetGranularity 16
+VkPhysicalDeviceFragmentDensityMapPropertiesEXT 40
+  sType 0
+  pNext 8
+  minFragmentDensityTexelSize 16
+  maxFragmentDensityTexelSize 24
+  fragmentDensityInvocations 32
+VkPhysicalDeviceFragmentShaderBarycentricFeaturesKHR 24
+  sType 0
+  pNext 8
+  fragmentShaderBarycentric 16
+VkPhysicalDeviceFragmentShaderBarycentricPropertiesKHR 24
+  sType 0
+  pNext 8
+  triStripVertexOrderIndependentOfProvokingVertex 16
+VkPhysicalDeviceFragmentShaderInterlockFeaturesEXT 32
+  sType 0
+  pNext 8
+  fragmentShaderSampleInterlock 16
+  fragmentShaderPixelInterlock 20
+  fragmentShaderShadingRateInterlock 24
+VkPhysicalDeviceFragmentShadingRateEnumsFeaturesNV 32
+  sType 0
+  pNext 8
+  fragmentShadingRateEnums 16
+  supersampleFragmentShadingRates 20
+  noInvocationFragmentShadingRates 24
+VkPhysicalDeviceFragmentShadingRateEnumsPropertiesNV 24
+  sType 0
+  pNext 8
+  maxFragmentShadingRateInvocationCount 16
+VkPhysicalDeviceFragmentShadingRateFeaturesKHR 32
+  sType 0
+  pNext 8
+  pipelineFragmentShadingRate 16
+  primitiveFragmentShadingRate 20
+  attachmentFragmentShadingRate 24
+VkPhysicalDeviceFragmentShadingRateKHR 32
+  sType 0
+  pNext 8
+  sampleCounts 16
+  fragmentSize 20
+VkPhysicalDeviceFragmentShadingRatePropertiesKHR 96
+  sType 0
+  pNext 8
+  minFragmentShadingRateAttachmentTexelSize 16
+  maxFragmentShadingRateAttachmentTexelSize 24
+  maxFragmentShadingRateAttachmentTexelSizeAspectRatio 32
+  primitiveFragmentShadingRateWithMultipleViewports 36
+  layeredShadingRateAttachments 40
+  fragmentShadingRateNonTrivialCombinerOps 44
+  maxFragmentSize 48
+  maxFragmentSizeAspectRatio 56
+  maxFragmentShadingRateCoverageSamples 60
+  maxFragmentShadingRateRasterizationSamples 64
+  fragmentShadingRateWithShaderDepthStencilWrites 68
+  fragmentShadingRateWithSampleMask 72
+  fragmentShadingRateWithShaderSampleMask 76
+  fragmentShadingRateWithConservativeRasterization 80
+  fragmentShadingRateWithFragmentShaderInterlock 84
+  fragmentShadingRateWithCustomSampleLocations 88
+  fragmentShadingRateStrictMultiplyCombiner 92
+VkPhysicalDeviceFrameBoundaryFeaturesEXT 24
+  sType 0
+  pNext 8
+  frameBoundary 16
+VkPhysicalDeviceGlobalPriorityQueryFeatures 24
+  sType 0
+  pNext 8
+  globalPriorityQuery 16
+VkPhysicalDeviceGpaFeaturesAMD 32
+  sType 0
+  pNext 8
+  perfCounters 16
+  streamingPerfCounters 20
+  sqThreadTracing 24
+  clockModes 28
+VkPhysicalDeviceGpaProperties2AMD 24
+  sType 0
+  pNext 8
+  revisionId 16
+VkPhysicalDeviceGpaPropertiesAMD 48
+  sType 0
+  pNext 8
+  flags 16
+  maxSqttSeBufferSize 24
+  shaderEngineCount 32
+  perfBlockCount 36
+  pPerfBlocks 40
+VkPhysicalDeviceGraphicsPipelineLibraryFeaturesEXT 24
+  sType 0
+  pNext 8
+  graphicsPipelineLibrary 16
+VkPhysicalDeviceGraphicsPipelineLibraryPropertiesEXT 24
+  sType 0
+  pNext 8
+  graphicsPipelineLibraryFastLinking 16
+  graphicsPipelineLibraryIndependentInterpolationDecoration 20
+VkPhysicalDeviceGroupProperties 288
+  sType 0
+  pNext 8
+  physicalDeviceCount 16
+  physicalDevices 24
+  subsetAllocation 280
+VkPhysicalDeviceHdrVividFeaturesHUAWEI 24
+  sType 0
+  pNext 8
+  hdrVivid 16
+VkPhysicalDeviceHostImageCopyFeatures 24
+  sType 0
+  pNext 8
+  hostImageCopy 16
+VkPhysicalDeviceHostImageCopyProperties 72
+  sType 0
+  pNext 8
+  copySrcLayoutCount 16
+  pCopySrcLayouts 24
+  copyDstLayoutCount 32
+  pCopyDstLayouts 40
+  optimalTilingLayoutUUID 48
+  identicalMemoryTypeRequirements 64
+VkPhysicalDeviceHostQueryResetFeatures 24
+  sType 0
+  pNext 8
+  hostQueryReset 16
+VkPhysicalDeviceIDProperties 64
+  sType 0
+  pNext 8
+  deviceUUID 16
+  driverUUID 32
+  deviceLUID 48
+  deviceNodeMask 56
+  deviceLUIDValid 60
+VkPhysicalDeviceImage2DViewOf3DFeaturesEXT 24
+  sType 0
+  pNext 8
+  image2DViewOf3D 16
+  sampler2DViewOf3D 20
+VkPhysicalDeviceImageAlignmentControlFeaturesMESA 24
+  sType 0
+  pNext 8
+  imageAlignmentControl 16
+VkPhysicalDeviceImageAlignmentControlPropertiesMESA 24
+  sType 0
+  pNext 8
+  supportedImageAlignmentMask 16
+VkPhysicalDeviceImageCompressionControlFeaturesEXT 24
+  sType 0
+  pNext 8
+  imageCompressionControl 16
+VkPhysicalDeviceImageCompressionControlSwapchainFeaturesEXT 24
+  sType 0
+  pNext 8
+  imageCompressionControlSwapchain 16
+VkPhysicalDeviceImageDrmFormatModifierInfoEXT 40
+  sType 0
+  pNext 8
+  drmFormatModifier 16
+  sharingMode 24
+  queueFamilyIndexCount 28
+  pQueueFamilyIndices 32
+VkPhysicalDeviceImageFormatInfo2 40
+  sType 0
+  pNext 8
+  format 16
+  type 20
+  tiling 24
+  usage 28
+  flags 32
+VkPhysicalDeviceImageProcessing2FeaturesQCOM 24
+  sType 0
+  pNext 8
+  textureBlockMatch2 16
+VkPhysicalDeviceImageProcessing2PropertiesQCOM 24
+  sType 0
+  pNext 8
+  maxBlockMatchWindow 16
+VkPhysicalDeviceImageProcessing3FeaturesQCOM 32
+  sType 0
+  pNext 8
+  imageGatherLinear 16
+  imageGatherExtendedModes 20
+  blockMatchExtendedClampToEdge 24
+VkPhysicalDeviceImageProcessingFeaturesQCOM 32
+  sType 0
+  pNext 8
+  textureSampleWeighted 16
+  textureBoxFilter 20
+  textureBlockMatch 24
+VkPhysicalDeviceImageProcessingPropertiesQCOM 48
+  sType 0
+  pNext 8
+  maxWeightFilterPhases 16
+  maxWeightFilterDimension 20
+  maxBlockMatchRegion 28
+  maxBoxFilterBlockSize 36
+VkPhysicalDeviceImageRobustnessFeatures 24
+  sType 0
+  pNext 8
+  robustImageAccess 16
+VkPhysicalDeviceImageSlicedViewOf3DFeaturesEXT 24
+  sType 0
+  pNext 8
+  imageSlicedViewOf3D 16
+VkPhysicalDeviceImageViewImageFormatInfoEXT 24
+  sType 0
+  pNext 8
+  imageViewType 16
+VkPhysicalDeviceImageViewMinLodFeaturesEXT 24
+  sType 0
+  pNext 8
+  minLod 16
+VkPhysicalDeviceImagelessFramebufferFeatures 24
+  sType 0
+  pNext 8
+  imagelessFramebuffer 16
+VkPhysicalDeviceIndexTypeUint8Features 24
+  sType 0
+  pNext 8
+  indexTypeUint8 16
+VkPhysicalDeviceInheritedViewportScissorFeaturesNV 24
+  sType 0
+  pNext 8
+  inheritedViewportScissor2D 16
+VkPhysicalDeviceInlineUniformBlockFeatures 24
+  sType 0
+  pNext 8
+  inlineUniformBlock 16
+  descriptorBindingInlineUniformBlockUpdateAfterBind 20
+VkPhysicalDeviceInlineUniformBlockProperties 40
+  sType 0
+  pNext 8
+  maxInlineUniformBlockSize 16
+  maxPerStageDescriptorInlineUniformBlocks 20
+  maxPerStageDescriptorUpdateAfterBindInlineUniformBlocks 24
+  maxDescriptorSetInlineUniformBlocks 28
+  maxDescriptorSetUpdateAfterBindInlineUniformBlocks 32
+VkPhysicalDeviceInternallySynchronizedQueuesFeaturesKHR 24
+  sType 0
+  pNext 8
+  internallySynchronizedQueues 16
+VkPhysicalDeviceInvocationMaskFeaturesHUAWEI 24
+  sType 0
+  pNext 8
+  invocationMask 16
+VkPhysicalDeviceLayeredApiPropertiesKHR 288
+  sType 0
+  pNext 8
+  vendorID 16
+  deviceID 20
+  layeredAPI 24
+  deviceName 28
+VkPhysicalDeviceLayeredApiPropertiesListKHR 32
+  sType 0
+  pNext 8
+  layeredApiCount 16
+  pLayeredApis 24
+VkPhysicalDeviceLayeredApiVulkanPropertiesKHR 856
+  sType 0
+  pNext 8
+  properties 16
+VkPhysicalDeviceLayeredDriverPropertiesMSFT 24
+  sType 0
+  pNext 8
+  underlyingAPI 16
+VkPhysicalDeviceLegacyDitheringFeaturesEXT 24
+  sType 0
+  pNext 8
+  legacyDithering 16
+VkPhysicalDeviceLegacyVertexAttributesFeaturesEXT 24
+  sType 0
+  pNext 8
+  legacyVertexAttributes 16
+VkPhysicalDeviceLegacyVertexAttributesPropertiesEXT 24
+  sType 0
+  pNext 8
+  nativeUnalignedPerformance 16
+VkPhysicalDeviceLimits 504
+  maxImageDimension1D 0
+  maxImageDimension2D 4
+  maxImageDimension3D 8
+  maxImageDimensionCube 12
+  maxImageArrayLayers 16
+  maxTexelBufferElements 20
+  maxUniformBufferRange 24
+  maxStorageBufferRange 28
+  maxPushConstantsSize 32
+  maxMemoryAllocationCount 36
+  maxSamplerAllocationCount 40
+  bufferImageGranularity 48
+  sparseAddressSpaceSize 56
+  maxBoundDescriptorSets 64
+  maxPerStageDescriptorSamplers 68
+  maxPerStageDescriptorUniformBuffers 72
+  maxPerStageDescriptorStorageBuffers 76
+  maxPerStageDescriptorSampledImages 80
+  maxPerStageDescriptorStorageImages 84
+  maxPerStageDescriptorInputAttachments 88
+  maxPerStageResources 92
+  maxDescriptorSetSamplers 96
+  maxDescriptorSetUniformBuffers 100
+  maxDescriptorSetUniformBuffersDynamic 104
+  maxDescriptorSetStorageBuffers 108
+  maxDescriptorSetStorageBuffersDynamic 112
+  maxDescriptorSetSampledImages 116
+  maxDescriptorSetStorageImages 120
+  maxDescriptorSetInputAttachments 124
+  maxVertexInputAttributes 128
+  maxVertexInputBindings 132
+  maxVertexInputAttributeOffset 136
+  maxVertexInputBindingStride 140
+  maxVertexOutputComponents 144
+  maxTessellationGenerationLevel 148
+  maxTessellationPatchSize 152
+  maxTessellationControlPerVertexInputComponents 156
+  maxTessellationControlPerVertexOutputComponents 160
+  maxTessellationControlPerPatchOutputComponents 164
+  maxTessellationControlTotalOutputComponents 168
+  maxTessellationEvaluationInputComponents 172
+  maxTessellationEvaluationOutputComponents 176
+  maxGeometryShaderInvocations 180
+  maxGeometryInputComponents 184
+  maxGeometryOutputComponents 188
+  maxGeometryOutputVertices 192
+  maxGeometryTotalOutputComponents 196
+  maxFragmentInputComponents 200
+  maxFragmentOutputAttachments 204
+  maxFragmentDualSrcAttachments 208
+  maxFragmentCombinedOutputResources 212
+  maxComputeSharedMemorySize 216
+  maxComputeWorkGroupCount 220
+  maxComputeWorkGroupInvocations 232
+  maxComputeWorkGroupSize 236
+  subPixelPrecisionBits 248
+  subTexelPrecisionBits 252
+  mipmapPrecisionBits 256
+  maxDrawIndexedIndexValue 260
+  maxDrawIndirectCount 264
+  maxSamplerLodBias 268
+  maxSamplerAnisotropy 272
+  maxViewports 276
+  maxViewportDimensions 280
+  viewportBoundsRange 288
+  viewportSubPixelBits 296
+  minMemoryMapAlignment 304
+  minTexelBufferOffsetAlignment 312
+  minUniformBufferOffsetAlignment 320
+  minStorageBufferOffsetAlignment 328
+  minTexelOffset 336
+  maxTexelOffset 340
+  minTexelGatherOffset 344
+  maxTexelGatherOffset 348
+  minInterpolationOffset 352
+  maxInterpolationOffset 356
+  subPixelInterpolationOffsetBits 360
+  maxFramebufferWidth 364
+  maxFramebufferHeight 368
+  maxFramebufferLayers 372
+  framebufferColorSampleCounts 376
+  framebufferDepthSampleCounts 380
+  framebufferStencilSampleCounts 384
+  framebufferNoAttachmentsSampleCounts 388
+  maxColorAttachments 392
+  sampledImageColorSampleCounts 396
+  sampledImageIntegerSampleCounts 400
+  sampledImageDepthSampleCounts 404
+  sampledImageStencilSampleCounts 408
+  storageImageSampleCounts 412
+  maxSampleMaskWords 416
+  timestampComputeAndGraphics 420
+  timestampPeriod 424
+  maxClipDistances 428
+  maxCullDistances 432
+  maxCombinedClipAndCullDistances 436
+  discreteQueuePriorities 440
+  pointSizeRange 444
+  lineWidthRange 452
+  pointSizeGranularity 460
+  lineWidthGranularity 464
+  strictLines 468
+  standardSampleLocations 472
+  optimalBufferCopyOffsetAlignment 480
+  optimalBufferCopyRowPitchAlignment 488
+  nonCoherentAtomSize 496
+VkPhysicalDeviceLineRasterizationFeatures 40
+  sType 0
+  pNext 8
+  rectangularLines 16
+  bresenhamLines 20
+  smoothLines 24
+  stippledRectangularLines 28
+  stippledBresenhamLines 32
+  stippledSmoothLines 36
+VkPhysicalDeviceLineRasterizationProperties 24
+  sType 0
+  pNext 8
+  lineSubPixelPrecisionBits 16
+VkPhysicalDeviceLinearColorAttachmentFeaturesNV 24
+  sType 0
+  pNext 8
+  linearColorAttachment 16
+VkPhysicalDeviceMaintenance10FeaturesKHR 24
+  sType 0
+  pNext 8
+  maintenance10 16
+VkPhysicalDeviceMaintenance10PropertiesKHR 32
+  sType 0
+  pNext 8
+  rgba4OpaqueBlackSwizzled 16
+  resolveSrgbFormatAppliesTransferFunction 20
+  resolveSrgbFormatSupportsTransferFunctionControl 24
+VkPhysicalDeviceMaintenance11FeaturesKHR 24
+  sType 0
+  pNext 8
+  maintenance11 16
+VkPhysicalDeviceMaintenance3Properties 32
+  sType 0
+  pNext 8
+  maxPerSetDescriptors 16
+  maxMemoryAllocationSize 24
+VkPhysicalDeviceMaintenance4Features 24
+  sType 0
+  pNext 8
+  maintenance4 16
+VkPhysicalDeviceMaintenance4Properties 24
+  sType 0
+  pNext 8
+  maxBufferSize 16
+VkPhysicalDeviceMaintenance5Features 24
+  sType 0
+  pNext 8
+  maintenance5 16
+VkPhysicalDeviceMaintenance5Properties 40
+  sType 0
+  pNext 8
+  earlyFragmentMultisampleCoverageAfterSampleCounting 16
+  earlyFragmentSampleMaskTestBeforeSampleCounting 20
+  depthStencilSwizzleOneSupport 24
+  polygonModePointSize 28
+  nonStrictSinglePixelWideLinesUseParallelogram 32
+  nonStrictWideLinesUseParallelogram 36
+VkPhysicalDeviceMaintenance6Features 24
+  sType 0
+  pNext 8
+  maintenance6 16
+VkPhysicalDeviceMaintenance6Properties 32
+  sType 0
+  pNext 8
+  blockTexelViewCompatibleMultipleLayers 16
+  maxCombinedImageSamplerDescriptorCount 20
+  fragmentShadingRateClampCombinerInputs 24
+VkPhysicalDeviceMaintenance7FeaturesKHR 24
+  sType 0
+  pNext 8
+  maintenance7 16
+VkPhysicalDeviceMaintenance7PropertiesKHR 48
+  sType 0
+  pNext 8
+  robustFragmentShadingRateAttachmentAccess 16
+  separateDepthStencilAttachmentAccess 20
+  maxDescriptorSetTotalUniformBuffersDynamic 24
+  maxDescriptorSetTotalStorageBuffersDynamic 28
+  maxDescriptorSetTotalBuffersDynamic 32
+  maxDescriptorSetUpdateAfterBindTotalUniformBuffersDynamic 36
+  maxDescriptorSetUpdateAfterBindTotalStorageBuffersDynamic 40
+  maxDescriptorSetUpdateAfterBindTotalBuffersDynamic 44
+VkPhysicalDeviceMaintenance8FeaturesKHR 24
+  sType 0
+  pNext 8
+  maintenance8 16
+VkPhysicalDeviceMaintenance9FeaturesKHR 24
+  sType 0
+  pNext 8
+  maintenance9 16
+VkPhysicalDeviceMaintenance9PropertiesKHR 24
+  sType 0
+  pNext 8
+  image2DViewOf3DSparse 16
+  defaultVertexAttributeValue 20
+VkPhysicalDeviceMapMemoryPlacedFeaturesEXT 32
+  sType 0
+  pNext 8
+  memoryMapPlaced 16
+  memoryMapRangePlaced 20
+  memoryUnmapReserve 24
+VkPhysicalDeviceMapMemoryPlacedPropertiesEXT 24
+  sType 0
+  pNext 8
+  minPlacedMemoryMapAlignment 16
+VkPhysicalDeviceMemoryBudgetPropertiesEXT 272
+  sType 0
+  pNext 8
+  heapBudget 16
+  heapUsage 144
+VkPhysicalDeviceMemoryDecompressionFeaturesEXT 24
+  sType 0
+  pNext 8
+  memoryDecompression 16
+VkPhysicalDeviceMemoryDecompressionPropertiesEXT 32
+  sType 0
+  pNext 8
+  decompressionMethods 16
+  maxDecompressionIndirectCount 24
+VkPhysicalDeviceMemoryPriorityFeaturesEXT 24
+  sType 0
+  pNext 8
+  memoryPriority 16
+VkPhysicalDeviceMemoryProperties 520
+  memoryTypeCount 0
+  memoryTypes 4
+  memoryHeapCount 260
+  memoryHeaps 264
+VkPhysicalDeviceMemoryProperties2 536
+  sType 0
+  pNext 8
+  memoryProperties 16
+VkPhysicalDeviceMeshShaderFeaturesEXT 40
+  sType 0
+  pNext 8
+  taskShader 16
+  meshShader 20
+  multiviewMeshShader 24
+  primitiveFragmentShadingRateMeshShader 28
+  meshShaderQueries 32
+VkPhysicalDeviceMeshShaderFeaturesNV 24
+  sType 0
+  pNext 8
+  taskShader 16
+  meshShader 20
+VkPhysicalDeviceMeshShaderPropertiesEXT 160
+  sType 0
+  pNext 8
+  maxTaskWorkGroupTotalCount 16
+  maxTaskWorkGroupCount 20
+  maxTaskWorkGroupInvocations 32
+  maxTaskWorkGroupSize 36
+  maxTaskPayloadSize 48
+  maxTaskSharedMemorySize 52
+  maxTaskPayloadAndSharedMemorySize 56
+  maxMeshWorkGroupTotalCount 60
+  maxMeshWorkGroupCount 64
+  maxMeshWorkGroupInvocations 76
+  maxMeshWorkGroupSize 80
+  maxMeshSharedMemorySize 92
+  maxMeshPayloadAndSharedMemorySize 96
+  maxMeshOutputMemorySize 100
+  maxMeshPayloadAndOutputMemorySize 104
+  maxMeshOutputComponents 108
+  maxMeshOutputVertices 112
+  maxMeshOutputPrimitives 116
+  maxMeshOutputLayers 120
+  maxMeshMultiviewViewCount 124
+  meshOutputPerVertexGranularity 128
+  meshOutputPerPrimitiveGranularity 132
+  maxPreferredTaskWorkGroupInvocations 136
+  maxPreferredMeshWorkGroupInvocations 140
+  prefersLocalInvocationVertexOutput 144
+  prefersLocalInvocationPrimitiveOutput 148
+  prefersCompactVertexOutput 152
+  prefersCompactPrimitiveOutput 156
+VkPhysicalDeviceMeshShaderPropertiesNV 88
+  sType 0
+  pNext 8
+  maxDrawMeshTasksCount 16
+  maxTaskWorkGroupInvocations 20
+  maxTaskWorkGroupSize 24
+  maxTaskTotalMemorySize 36
+  maxTaskOutputCount 40
+  maxMeshWorkGroupInvocations 44
+  maxMeshWorkGroupSize 48
+  maxMeshTotalMemorySize 60
+  maxMeshOutputVertices 64
+  maxMeshOutputPrimitives 68
+  maxMeshMultiviewViewCount 72
+  meshOutputPerVertexGranularity 76
+  meshOutputPerPrimitiveGranularity 80
+VkPhysicalDeviceMultiDrawFeaturesEXT 24
+  sType 0
+  pNext 8
+  multiDraw 16
+VkPhysicalDeviceMultiDrawPropertiesEXT 24
+  sType 0
+  pNext 8
+  maxMultiDrawCount 16
+VkPhysicalDeviceMultisampledRenderToSingleSampledFeaturesEXT 24
+  sType 0
+  pNext 8
+  multisampledRenderToSingleSampled 16
+VkPhysicalDeviceMultisampledRenderToSwapchainFeaturesEXT 24
+  sType 0
+  pNext 8
+  multisampledRenderToSwapchain 16
+VkPhysicalDeviceMultiviewFeatures 32
+  sType 0
+  pNext 8
+  multiview 16
+  multiviewGeometryShader 20
+  multiviewTessellationShader 24
+VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX 24
+  sType 0
+  pNext 8
+  perViewPositionAllComponents 16
+VkPhysicalDeviceMultiviewPerViewRenderAreasFeaturesQCOM 24
+  sType 0
+  pNext 8
+  multiviewPerViewRenderAreas 16
+VkPhysicalDeviceMultiviewPerViewViewportsFeaturesQCOM 24
+  sType 0
+  pNext 8
+  multiviewPerViewViewports 16
+VkPhysicalDeviceMultiviewProperties 24
+  sType 0
+  pNext 8
+  maxMultiviewViewCount 16
+  maxMultiviewInstanceIndex 20
+VkPhysicalDeviceMutableDescriptorTypeFeaturesEXT 24
+  sType 0
+  pNext 8
+  mutableDescriptorType 16
+VkPhysicalDeviceNestedCommandBufferFeaturesEXT 32
+  sType 0
+  pNext 8
+  nestedCommandBuffer 16
+  nestedCommandBufferRendering 20
+  nestedCommandBufferSimultaneousUse 24
+VkPhysicalDeviceNestedCommandBufferPropertiesEXT 24
+  sType 0
+  pNext 8
+  maxCommandBufferNestingLevel 16
+VkPhysicalDeviceNonSeamlessCubeMapFeaturesEXT 24
+  sType 0
+  pNext 8
+  nonSeamlessCubeMap 16
+VkPhysicalDeviceOpacityMicromapFeaturesEXT 32
+  sType 0
+  pNext 8
+  micromap 16
+  micromapCaptureReplay 20
+  micromapHostCommands 24
+VkPhysicalDeviceOpacityMicromapFeaturesKHR 24
+  sType 0
+  pNext 8
+  micromap 16
+VkPhysicalDeviceOpacityMicromapPropertiesEXT 24
+  sType 0
+  pNext 8
+  maxOpacity2StateSubdivisionLevel 16
+  maxOpacity4StateSubdivisionLevel 20
+VkPhysicalDeviceOpacityMicromapPropertiesKHR 40
+  sType 0
+  pNext 8
+  maxOpacity2StateSubdivisionLevel 16
+  maxOpacity4StateSubdivisionLevel 20
+  maxOpacityLossy4StateSubdivisionLevel 24
+  maxMicromapTriangles 32
+VkPhysicalDeviceOpticalFlowFeaturesNV 24
+  sType 0
+  pNext 8
+  opticalFlow 16
+VkPhysicalDeviceOpticalFlowPropertiesNV 64
+  sType 0
+  pNext 8
+  supportedOutputGridSizes 16
+  supportedHintGridSizes 20
+  hintSupported 24
+  costSupported 28
+  bidirectionalFlowSupported 32
+  globalFlowSupported 36
+  minWidth 40
+  minHeight 44
+  maxWidth 48
+  maxHeight 52
+  maxNumRegionsOfInterest 56
+VkPhysicalDevicePCIBusInfoPropertiesEXT 32
+  sType 0
+  pNext 8
+  pciDomain 16
+  pciBus 20
+  pciDevice 24
+  pciFunction 28
+VkPhysicalDevicePageableDeviceLocalMemoryFeaturesEXT 24
+  sType 0
+  pNext 8
+  pageableDeviceLocalMemory 16
+VkPhysicalDevicePartitionedAccelerationStructureFeaturesNV 24
+  sType 0
+  pNext 8
+  partitionedAccelerationStructure 16
+VkPhysicalDevicePartitionedAccelerationStructurePropertiesNV 24
+  sType 0
+  pNext 8
+  maxPartitionCount 16
+VkPhysicalDevicePerStageDescriptorSetFeaturesNV 24
+  sType 0
+  pNext 8
+  perStageDescriptorSet 16
+  dynamicPipelineLayout 20
+VkPhysicalDevicePerformanceCountersByRegionFeaturesARM 24
+  sType 0
+  pNext 8
+  performanceCountersByRegion 16
+VkPhysicalDevicePerformanceCountersByRegionPropertiesARM 40
+  sType 0
+  pNext 8
+  maxPerRegionPerformanceCounters 16
+  performanceCounterRegionSize 20
+  rowStrideAlignment 28
+  regionAlignment 32
+  identityTransformOrder 36
+VkPhysicalDevicePerformanceQueryFeaturesKHR 24
+  sType 0
+  pNext 8
+  performanceCounterQueryPools 16
+  performanceCounterMultipleQueryPools 20
+VkPhysicalDevicePerformanceQueryPropertiesKHR 24
+  sType 0
+  pNext 8
+  allowCommandBufferQueryCopies 16
+VkPhysicalDevicePipelineBinaryFeaturesKHR 24
+  sType 0
+  pNext 8
+  pipelineBinaries 16
+VkPhysicalDevicePipelineBinaryPropertiesKHR 40
+  sType 0
+  pNext 8
+  pipelineBinaryInternalCache 16
+  pipelineBinaryInternalCacheControl 20
+  pipelineBinaryPrefersInternalCache 24
+  pipelineBinaryPrecompiledInternalCache 28
+  pipelineBinaryCompressedData 32
+VkPhysicalDevicePipelineCacheIncrementalModeFeaturesSEC 24
+  sType 0
+  pNext 8
+  pipelineCacheIncrementalMode 16
+VkPhysicalDevicePipelineCreationCacheControlFeatures 24
+  sType 0
+  pNext 8
+  pipelineCreationCacheControl 16
+VkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR 24
+  sType 0
+  pNext 8
+  pipelineExecutableInfo 16
+VkPhysicalDevicePipelineLibraryGroupHandlesFeaturesEXT 24
+  sType 0
+  pNext 8
+  pipelineLibraryGroupHandles 16
+VkPhysicalDevicePipelineOpacityMicromapFeaturesARM 24
+  sType 0
+  pNext 8
+  pipelineOpacityMicromap 16
+VkPhysicalDevicePipelinePropertiesFeaturesEXT 24
+  sType 0
+  pNext 8
+  pipelinePropertiesIdentifier 16
+VkPhysicalDevicePipelineProtectedAccessFeatures 24
+  sType 0
+  pNext 8
+  pipelineProtectedAccess 16
+VkPhysicalDevicePipelineRobustnessFeatures 24
+  sType 0
+  pNext 8
+  pipelineRobustness 16
+VkPhysicalDevicePipelineRobustnessProperties 32
+  sType 0
+  pNext 8
+  defaultRobustnessStorageBuffers 16
+  defaultRobustnessUniformBuffers 20
+  defaultRobustnessVertexInputs 24
+  defaultRobustnessImages 28
+VkPhysicalDevicePointClippingProperties 24
+  sType 0
+  pNext 8
+  pointClippingBehavior 16
+VkPhysicalDevicePortabilitySubsetFeaturesKHR 80
+  sType 0
+  pNext 8
+  constantAlphaColorBlendFactors 16
+  events 20
+  imageViewFormatReinterpretation 24
+  imageViewFormatSwizzle 28
+  imageView2DOn3DImage 32
+  multisampleArrayImage 36
+  mutableComparisonSamplers 40
+  pointPolygons 44
+  samplerMipLodBias 48
+  separateStencilMaskRef 52
+  shaderSampleRateInterpolationFunctions 56
+  tessellationIsolines 60
+  tessellationPointMode 64
+  triangleFans 68
+  vertexAttributeAccessBeyondStride 72
+VkPhysicalDevicePortabilitySubsetPropertiesKHR 24
+  sType 0
+  pNext 8
+  minVertexInputBindingStrideAlignment 16
+VkPhysicalDevicePresentBarrierFeaturesNV 24
+  sType 0
+  pNext 8
+  presentBarrier 16
+VkPhysicalDevicePresentId2FeaturesKHR 24
+  sType 0
+  pNext 8
+  presentId2 16
+VkPhysicalDevicePresentIdFeaturesKHR 24
+  sType 0
+  pNext 8
+  presentId 16
+VkPhysicalDevicePresentMeteringFeaturesNV 24
+  sType 0
+  pNext 8
+  presentMetering 16
+VkPhysicalDevicePresentModeFifoLatestReadyFeaturesKHR 24
+  sType 0
+  pNext 8
+  presentModeFifoLatestReady 16
+VkPhysicalDevicePresentTimingFeaturesEXT 32
+  sType 0
+  pNext 8
+  presentTiming 16
+  presentAtAbsoluteTime 20
+  presentAtRelativeTime 24
+VkPhysicalDevicePresentWait2FeaturesKHR 24
+  sType 0
+  pNext 8
+  presentWait2 16
+VkPhysicalDevicePresentWaitFeaturesKHR 24
+  sType 0
+  pNext 8
+  presentWait 16
+VkPhysicalDevicePrimitiveRestartIndexFeaturesEXT 24
+  sType 0
+  pNext 8
+  primitiveRestartIndex 16
+VkPhysicalDevicePrimitiveTopologyListRestartFeaturesEXT 24
+  sType 0
+  pNext 8
+  primitiveTopologyListRestart 16
+  primitiveTopologyPatchListRestart 20
+VkPhysicalDevicePrimitivesGeneratedQueryFeaturesEXT 32
+  sType 0
+  pNext 8
+  primitivesGeneratedQuery 16
+  primitivesGeneratedQueryWithRasterizerDiscard 20
+  primitivesGeneratedQueryWithNonZeroStreams 24
+VkPhysicalDevicePrivateDataFeatures 24
+  sType 0
+  pNext 8
+  privateData 16
+VkPhysicalDeviceProperties 824
+  apiVersion 0
+  driverVersion 4
+  vendorID 8
+  deviceID 12
+  deviceType 16
+  deviceName 20
+  pipelineCacheUUID 276
+  limits 296
+  sparseProperties 800
+VkPhysicalDeviceProperties2 840
+  sType 0
+  pNext 8
+  properties 16
+VkPhysicalDeviceProtectedMemoryFeatures 24
+  sType 0
+  pNext 8
+  protectedMemory 16
+VkPhysicalDeviceProtectedMemoryProperties 24
+  sType 0
+  pNext 8
+  protectedNoFault 16
+VkPhysicalDeviceProvokingVertexFeaturesEXT 24
+  sType 0
+  pNext 8
+  provokingVertexLast 16
+  transformFeedbackPreservesProvokingVertex 20
+VkPhysicalDeviceProvokingVertexPropertiesEXT 24
+  sType 0
+  pNext 8
+  provokingVertexModePerPipeline 16
+  transformFeedbackPreservesTriangleFanProvokingVertex 20
+VkPhysicalDevicePushConstantBankFeaturesNV 24
+  sType 0
+  pNext 8
+  pushConstantBank 16
+VkPhysicalDevicePushConstantBankPropertiesNV 32
+  sType 0
+  pNext 8
+  maxGraphicsPushConstantBanks 16
+  maxComputePushConstantBanks 20
+  maxGraphicsPushDataBanks 24
+  maxComputePushDataBanks 28
+VkPhysicalDevicePushDescriptorProperties 24
+  sType 0
+  pNext 8
+  maxPushDescriptors 16
+VkPhysicalDeviceQueueFamilyDataGraphProcessingEngineInfoARM 24
+  sType 0
+  pNext 8
+  queueFamilyIndex 16
+  engineType 20
+VkPhysicalDeviceQueuePerfHintFeaturesQCOM 24
+  sType 0
+  pNext 8
+  queuePerfHint 16
+VkPhysicalDeviceQueuePerfHintPropertiesQCOM 24
+  sType 0
+  pNext 8
+  supportedQueues 16
+VkPhysicalDeviceRGBA10X6FormatsFeaturesEXT 24
+  sType 0
+  pNext 8
+  formatRgba10x6WithoutYCbCrSampler 16
+VkPhysicalDeviceRasterizationOrderAttachmentAccessFeaturesEXT 32
+  sType 0
+  pNext 8
+  rasterizationOrderColorAttachmentAccess 16
+  rasterizationOrderDepthAttachmentAccess 20
+  rasterizationOrderStencilAttachmentAccess 24
+VkPhysicalDeviceRawAccessChainsFeaturesNV 24
+  sType 0
+  pNext 8
+  shaderRawAccessChains 16
+VkPhysicalDeviceRayQueryFeaturesKHR 24
+  sType 0
+  pNext 8
+  rayQuery 16
+VkPhysicalDeviceRayTracingInvocationReorderFeaturesEXT 24
+  sType 0
+  pNext 8
+  rayTracingInvocationReorder 16
+VkPhysicalDeviceRayTracingInvocationReorderFeaturesNV 24
+  sType 0
+  pNext 8
+  rayTracingInvocationReorder 16
+VkPhysicalDeviceRayTracingInvocationReorderPropertiesEXT 24
+  sType 0
+  pNext 8
+  rayTracingInvocationReorderReorderingHint 16
+  maxShaderBindingTableRecordIndex 20
+VkPhysicalDeviceRayTracingInvocationReorderPropertiesNV 24
+  sType 0
+  pNext 8
+  rayTracingInvocationReorderReorderingHint 16
+VkPhysicalDeviceRayTracingLinearSweptSpheresFeaturesNV 24
+  sType 0
+  pNext 8
+  spheres 16
+  linearSweptSpheres 20
+VkPhysicalDeviceRayTracingMaintenance1FeaturesKHR 24
+  sType 0
+  pNext 8
+  rayTracingMaintenance1 16
+  rayTracingPipelineTraceRaysIndirect2 20
+VkPhysicalDeviceRayTracingMotionBlurFeaturesNV 24
+  sType 0
+  pNext 8
+  rayTracingMotionBlur 16
+  rayTracingMotionBlurPipelineTraceRaysIndirect 20
+VkPhysicalDeviceRayTracingPipelineFeaturesKHR 40
+  sType 0
+  pNext 8
+  rayTracingPipeline 16
+  rayTracingPipelineShaderGroupHandleCaptureReplay 20
+  rayTracingPipelineShaderGroupHandleCaptureReplayMixed 24
+  rayTracingPipelineTraceRaysIndirect 28
+  rayTraversalPrimitiveCulling 32
+VkPhysicalDeviceRayTracingPipelinePropertiesKHR 48
+  sType 0
+  pNext 8
+  shaderGroupHandleSize 16
+  maxRayRecursionDepth 20
+  maxShaderGroupStride 24
+  shaderGroupBaseAlignment 28
+  shaderGroupHandleCaptureReplaySize 32
+  maxRayDispatchInvocationCount 36
+  shaderGroupHandleAlignment 40
+  maxRayHitAttributeSize 44
+VkPhysicalDeviceRayTracingPositionFetchFeaturesKHR 24
+  sType 0
+  pNext 8
+  rayTracingPositionFetch 16
+VkPhysicalDeviceRayTracingPropertiesNV 64
+  sType 0
+  pNext 8
+  shaderGroupHandleSize 16
+  maxRecursionDepth 20
+  maxShaderGroupStride 24
+  shaderGroupBaseAlignment 28
+  maxGeometryCount 32
+  maxInstanceCount 40
+  maxTriangleCount 48
+  maxDescriptorSetAccelerationStructures 56
+VkPhysicalDeviceRayTracingValidationFeaturesNV 24
+  sType 0
+  pNext 8
+  rayTracingValidation 16
+VkPhysicalDeviceRelaxedLineRasterizationFeaturesIMG 24
+  sType 0
+  pNext 8
+  relaxedLineRasterization 16
+VkPhysicalDeviceRenderPassStripedFeaturesARM 24
+  sType 0
+  pNext 8
+  renderPassStriped 16
+VkPhysicalDeviceRenderPassStripedPropertiesARM 32
+  sType 0
+  pNext 8
+  renderPassStripeGranularity 16
+  maxRenderPassStripes 24
+VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV 24
+  sType 0
+  pNext 8
+  representativeFragmentTest 16
+VkPhysicalDeviceRobustness2FeaturesKHR 32
+  sType 0
+  pNext 8
+  robustBufferAccess2 16
+  robustImageAccess2 20
+  nullDescriptor 24
+VkPhysicalDeviceRobustness2PropertiesKHR 32
+  sType 0
+  pNext 8
+  robustStorageBufferAccessSizeAlignment 16
+  robustUniformBufferAccessSizeAlignment 24
+VkPhysicalDeviceSampleLocationsPropertiesEXT 48
+  sType 0
+  pNext 8
+  sampleLocationSampleCounts 16
+  maxSampleLocationGridSize 20
+  sampleLocationCoordinateRange 28
+  sampleLocationSubPixelBits 36
+  variableSampleLocations 40
+VkPhysicalDeviceSamplerFilterMinmaxProperties 24
+  sType 0
+  pNext 8
+  filterMinmaxSingleComponentFormats 16
+  filterMinmaxImageComponentMapping 20
+VkPhysicalDeviceSamplerYcbcrConversionFeatures 24
+  sType 0
+  pNext 8
+  samplerYcbcrConversion 16
+VkPhysicalDeviceScalarBlockLayoutFeatures 24
+  sType 0
+  pNext 8
+  scalarBlockLayout 16
+VkPhysicalDeviceSchedulingControlsDispatchParametersPropertiesARM 32
+  sType 0
+  pNext 8
+  schedulingControlsMaxWarpsCount 16
+  schedulingControlsMaxQueuedBatchesCount 20
+  schedulingControlsMaxWorkGroupBatchSize 24
+VkPhysicalDeviceSchedulingControlsFeaturesARM 24
+  sType 0
+  pNext 8
+  schedulingControls 16
+VkPhysicalDeviceSchedulingControlsPropertiesARM 24
+  sType 0
+  pNext 8
+  schedulingControlsFlags 16
+VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures 24
+  sType 0
+  pNext 8
+  separateDepthStencilLayouts 16
+VkPhysicalDeviceShader64BitIndexingFeaturesEXT 24
+  sType 0
+  pNext 8
+  shader64BitIndexing 16
+VkPhysicalDeviceShaderAbortFeaturesKHR 24
+  sType 0
+  pNext 8
+  shaderAbort 16
+VkPhysicalDeviceShaderAbortPropertiesKHR 24
+  sType 0
+  pNext 8
+  maxShaderAbortMessageSize 16
+VkPhysicalDeviceShaderAtomicFloat16VectorFeaturesNV 24
+  sType 0
+  pNext 8
+  shaderFloat16VectorAtomics 16
+VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT 64
+  sType 0
+  pNext 8
+  shaderBufferFloat16Atomics 16
+  shaderBufferFloat16AtomicAdd 20
+  shaderBufferFloat16AtomicMinMax 24
+  shaderBufferFloat32AtomicMinMax 28
+  shaderBufferFloat64AtomicMinMax 32
+  shaderSharedFloat16Atomics 36
+  shaderSharedFloat16AtomicAdd 40
+  shaderSharedFloat16AtomicMinMax 44
+  shaderSharedFloat32AtomicMinMax 48
+  shaderSharedFloat64AtomicMinMax 52
+  shaderImageFloat32AtomicMinMax 56
+  sparseImageFloat32AtomicMinMax 60
+VkPhysicalDeviceShaderAtomicFloatFeaturesEXT 64
+  sType 0
+  pNext 8
+  shaderBufferFloat32Atomics 16
+  shaderBufferFloat32AtomicAdd 20
+  shaderBufferFloat64Atomics 24
+  shaderBufferFloat64AtomicAdd 28
+  shaderSharedFloat32Atomics 32
+  shaderSharedFloat32AtomicAdd 36
+  shaderSharedFloat64Atomics 40
+  shaderSharedFloat64AtomicAdd 44
+  shaderImageFloat32Atomics 48
+  shaderImageFloat32AtomicAdd 52
+  sparseImageFloat32Atomics 56
+  sparseImageFloat32AtomicAdd 60
+VkPhysicalDeviceShaderAtomicInt64Features 24
+  sType 0
+  pNext 8
+  shaderBufferInt64Atomics 16
+  shaderSharedInt64Atomics 20
+VkPhysicalDeviceShaderBfloat16FeaturesKHR 32
+  sType 0
+  pNext 8
+  shaderBFloat16Type 16
+  shaderBFloat16DotProduct 20
+  shaderBFloat16CooperativeMatrix 24
+VkPhysicalDeviceShaderClockFeaturesKHR 24
+  sType 0
+  pNext 8
+  shaderSubgroupClock 16
+  shaderDeviceClock 20
+VkPhysicalDeviceShaderConstantDataFeaturesKHR 24
+  sType 0
+  pNext 8
+  shaderConstantData 16
+VkPhysicalDeviceShaderCoreBuiltinsFeaturesARM 24
+  sType 0
+  pNext 8
+  shaderCoreBuiltins 16
+VkPhysicalDeviceShaderCoreBuiltinsPropertiesARM 32
+  sType 0
+  pNext 8
+  shaderCoreMask 16
+  shaderCoreCount 24
+  shaderWarpsPerCore 28
+VkPhysicalDeviceShaderCoreProperties2AMD 24
+  sType 0
+  pNext 8
+  shaderCoreFeatures 16
+  activeComputeUnitCount 20
+VkPhysicalDeviceShaderCorePropertiesAMD 72
+  sType 0
+  pNext 8
+  shaderEngineCount 16
+  shaderArraysPerEngineCount 20
+  computeUnitsPerShaderArray 24
+  simdPerComputeUnit 28
+  wavefrontsPerSimd 32
+  wavefrontSize 36
+  sgprsPerSimd 40
+  minSgprAllocation 44
+  maxSgprAllocation 48
+  sgprAllocationGranularity 52
+  vgprsPerSimd 56
+  minVgprAllocation 60
+  maxVgprAllocation 64
+  vgprAllocationGranularity 68
+VkPhysicalDeviceShaderCorePropertiesARM 32
+  sType 0
+  pNext 8
+  pixelRate 16
+  texelRate 20
+  fmaRate 24
+VkPhysicalDeviceShaderDemoteToHelperInvocationFeatures 24
+  sType 0
+  pNext 8
+  shaderDemoteToHelperInvocation 16
+VkPhysicalDeviceShaderDrawParametersFeatures 24
+  sType 0
+  pNext 8
+  shaderDrawParameters 16
+VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD 24
+  sType 0
+  pNext 8
+  shaderEarlyAndLateFragmentTests 16
+VkPhysicalDeviceShaderEnqueueFeaturesAMDX 24
+  sType 0
+  pNext 8
+  shaderEnqueue 16
+  shaderMeshEnqueue 20
+VkPhysicalDeviceShaderEnqueuePropertiesAMDX 56
+  sType 0
+  pNext 8
+  maxExecutionGraphDepth 16
+  maxExecutionGraphShaderOutputNodes 20
+  maxExecutionGraphShaderPayloadSize 24
+  maxExecutionGraphShaderPayloadCount 28
+  executionGraphDispatchAddressAlignment 32
+  maxExecutionGraphWorkgroupCount 36
+  maxExecutionGraphWorkgroups 48
+VkPhysicalDeviceShaderExpectAssumeFeatures 24
+  sType 0
+  pNext 8
+  shaderExpectAssume 16
+VkPhysicalDeviceShaderFloat16Int8Features 24
+  sType 0
+  pNext 8
+  shaderFloat16 16
+  shaderInt8 20
+VkPhysicalDeviceShaderFloat8FeaturesEXT 24
+  sType 0
+  pNext 8
+  shaderFloat8 16
+  shaderFloat8CooperativeMatrix 20
+VkPhysicalDeviceShaderFloatControls2Features 24
+  sType 0
+  pNext 8
+  shaderFloatControls2 16
+VkPhysicalDeviceShaderFmaFeaturesKHR 32
+  sType 0
+  pNext 8
+  shaderFmaFloat16 16
+  shaderFmaFloat32 20
+  shaderFmaFloat64 24
+VkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT 24
+  sType 0
+  pNext 8
+  shaderImageInt64Atomics 16
+  sparseImageInt64Atomics 20
+VkPhysicalDeviceShaderImageFootprintFeaturesNV 24
+  sType 0
+  pNext 8
+  imageFootprint 16
+VkPhysicalDeviceShaderInstrumentationFeaturesARM 24
+  sType 0
+  pNext 8
+  shaderInstrumentation 16
+VkPhysicalDeviceShaderInstrumentationPropertiesARM 24
+  sType 0
+  pNext 8
+  numMetrics 16
+  perBasicBlockGranularity 20
+VkPhysicalDeviceShaderIntegerDotProductFeatures 24
+  sType 0
+  pNext 8
+  shaderIntegerDotProduct 16
+VkPhysicalDeviceShaderIntegerDotProductProperties 136
+  sType 0
+  pNext 8
+  integerDotProduct8BitUnsignedAccelerated 16
+  integerDotProduct8BitSignedAccelerated 20
+  integerDotProduct8BitMixedSignednessAccelerated 24
+  integerDotProduct4x8BitPackedUnsignedAccelerated 28
+  integerDotProduct4x8BitPackedSignedAccelerated 32
+  integerDotProduct4x8BitPackedMixedSignednessAccelerated 36
+  integerDotProduct16BitUnsignedAccelerated 40
+  integerDotProduct16BitSignedAccelerated 44
+  integerDotProduct16BitMixedSignednessAccelerated 48
+  integerDotProduct32BitUnsignedAccelerated 52
+  integerDotProduct32BitSignedAccelerated 56
+  integerDotProduct32BitMixedSignednessAccelerated 60
+  integerDotProduct64BitUnsignedAccelerated 64
+  integerDotProduct64BitSignedAccelerated 68
+  integerDotProduct64BitMixedSignednessAccelerated 72
+  integerDotProductAccumulatingSaturating8BitUnsignedAccelerated 76
+  integerDotProductAccumulatingSaturating8BitSignedAccelerated 80
+  integerDotProductAccumulatingSaturating8BitMixedSignednessAccelerated 84
+  integerDotProductAccumulatingSaturating4x8BitPackedUnsignedAccelerated 88
+  integerDotProductAccumulatingSaturating4x8BitPackedSignedAccelerated 92
+  integerDotProductAccumulatingSaturating4x8BitPackedMixedSignednessAccelerated 96
+  integerDotProductAccumulatingSaturating16BitUnsignedAccelerated 100
+  integerDotProductAccumulatingSaturating16BitSignedAccelerated 104
+  integerDotProductAccumulatingSaturating16BitMixedSignednessAccelerated 108
+  integerDotProductAccumulatingSaturating32BitUnsignedAccelerated 112
+  integerDotProductAccumulatingSaturating32BitSignedAccelerated 116
+  integerDotProductAccumulatingSaturating32BitMixedSignednessAccelerated 120
+  integerDotProductAccumulatingSaturating64BitUnsignedAccelerated 124
+  integerDotProductAccumulatingSaturating64BitSignedAccelerated 128
+  integerDotProductAccumulatingSaturating64BitMixedSignednessAccelerated 132
+VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL 24
+  sType 0
+  pNext 8
+  shaderIntegerFunctions2 16
+VkPhysicalDeviceShaderLongVectorFeaturesEXT 24
+  sType 0
+  pNext 8
+  longVector 16
+VkPhysicalDeviceShaderLongVectorPropertiesEXT 24
+  sType 0
+  pNext 8
+  maxVectorComponents 16
+VkPhysicalDeviceShaderMaximalReconvergenceFeaturesKHR 24
+  sType 0
+  pNext 8
+  shaderMaximalReconvergence 16
+VkPhysicalDeviceShaderMixedFloatDotProductFeaturesVALVE 32
+  sType 0
+  pNext 8
+  shaderMixedFloatDotProductFloat16AccFloat32 16
+  shaderMixedFloatDotProductFloat16AccFloat16 20
+  shaderMixedFloatDotProductBFloat16Acc 24
+  shaderMixedFloatDotProductFloat8AccFloat32 28
+VkPhysicalDeviceShaderModuleIdentifierFeaturesEXT 24
+  sType 0
+  pNext 8
+  shaderModuleIdentifier 16
+VkPhysicalDeviceShaderModuleIdentifierPropertiesEXT 32
+  sType 0
+  pNext 8
+  shaderModuleIdentifierAlgorithmUUID 16
+VkPhysicalDeviceShaderMultipleWaitQueuesFeaturesQCOM 24
+  sType 0
+  pNext 8
+  shaderMultipleWaitQueues 16
+VkPhysicalDeviceShaderMultipleWaitQueuesPropertiesQCOM 24
+  sType 0
+  pNext 8
+  maxShaderWaitQueues 16
+VkPhysicalDeviceShaderOCPMicroscalingTypesFeaturesEXT 32
+  sType 0
+  pNext 8
+  shaderFloat4 16
+  shaderFloat6 20
+  shaderFloat8UnsignedE8M0 24
+  shaderMXInt8 28
+VkPhysicalDeviceShaderObjectFeaturesEXT 24
+  sType 0
+  pNext 8
+  shaderObject 16
+VkPhysicalDeviceShaderObjectPropertiesEXT 40
+  sType 0
+  pNext 8
+  shaderBinaryUUID 16
+  shaderBinaryVersion 32
+VkPhysicalDeviceShaderQuadControlFeaturesKHR 24
+  sType 0
+  pNext 8
+  shaderQuadControl 16
+VkPhysicalDeviceShaderRelaxedExtendedInstructionFeaturesKHR 24
+  sType 0
+  pNext 8
+  shaderRelaxedExtendedInstruction 16
+VkPhysicalDeviceShaderReplicatedCompositesFeaturesEXT 24
+  sType 0
+  pNext 8
+  shaderReplicatedComposites 16
+VkPhysicalDeviceShaderSMBuiltinsFeaturesNV 24
+  sType 0
+  pNext 8
+  shaderSMBuiltins 16
+VkPhysicalDeviceShaderSMBuiltinsPropertiesNV 24
+  sType 0
+  pNext 8
+  shaderSMCount 16
+  shaderWarpsPerSM 20
+VkPhysicalDeviceShaderSplitBarrierFeaturesEXT 24
+  sType 0
+  pNext 8
+  shaderSplitBarrier 16
+VkPhysicalDeviceShaderSplitBarrierPropertiesEXT 24
+  sType 0
+  pNext 8
+  splitBarrierReservedSharedMemory 16
+VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures 24
+  sType 0
+  pNext 8
+  shaderSubgroupExtendedTypes 16
+VkPhysicalDeviceShaderSubgroupPartitionedFeaturesEXT 24
+  sType 0
+  pNext 8
+  shaderSubgroupPartitioned 16
+VkPhysicalDeviceShaderSubgroupRotateFeatures 24
+  sType 0
+  pNext 8
+  shaderSubgroupRotate 16
+  shaderSubgroupRotateClustered 20
+VkPhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR 24
+  sType 0
+  pNext 8
+  shaderSubgroupUniformControlFlow 16
+VkPhysicalDeviceShaderTerminateInvocationFeatures 24
+  sType 0
+  pNext 8
+  shaderTerminateInvocation 16
+VkPhysicalDeviceShaderTileImageFeaturesEXT 32
+  sType 0
+  pNext 8
+  shaderTileImageColorReadAccess 16
+  shaderTileImageDepthReadAccess 20
+  shaderTileImageStencilReadAccess 24
+VkPhysicalDeviceShaderTileImagePropertiesEXT 32
+  sType 0
+  pNext 8
+  shaderTileImageCoherentReadAccelerated 16
+  shaderTileImageReadSampleFromPixelRateInvocation 20
+  shaderTileImageReadFromHelperInvocation 24
+VkPhysicalDeviceShaderUniformBufferUnsizedArrayFeaturesEXT 24
+  sType 0
+  pNext 8
+  shaderUniformBufferUnsizedArray 16
+VkPhysicalDeviceShaderUntypedPointersFeaturesKHR 24
+  sType 0
+  pNext 8
+  shaderUntypedPointers 16
+VkPhysicalDeviceShadingRateImageFeaturesNV 24
+  sType 0
+  pNext 8
+  shadingRateImage 16
+  shadingRateCoarseSampleOrder 20
+VkPhysicalDeviceShadingRateImagePropertiesNV 32
+  sType 0
+  pNext 8
+  shadingRateTexelSize 16
+  shadingRatePaletteSize 24
+  shadingRateMaxCoarseSamples 28
+VkPhysicalDeviceSparseImageFormatInfo2 40
+  sType 0
+  pNext 8
+  format 16
+  type 20
+  samples 24
+  usage 28
+  tiling 32
+VkPhysicalDeviceSparseProperties 20
+  residencyStandard2DBlockShape 0
+  residencyStandard2DMultisampleBlockShape 4
+  residencyStandard3DBlockShape 8
+  residencyAlignedMipSize 12
+  residencyNonResidentStrict 16
+VkPhysicalDeviceSubgroupProperties 32
+  sType 0
+  pNext 8
+  subgroupSize 16
+  supportedStages 20
+  supportedOperations 24
+  quadOperationsInAllStages 28
+VkPhysicalDeviceSubgroupSizeControlFeatures 24
+  sType 0
+  pNext 8
+  subgroupSizeControl 16
+  computeFullSubgroups 20
+VkPhysicalDeviceSubgroupSizeControlProperties 32
+  sType 0
+  pNext 8
+  minSubgroupSize 16
+  maxSubgroupSize 20
+  maxComputeWorkgroupSubgroups 24
+  requiredSubgroupSizeStages 28
+VkPhysicalDeviceSubpassMergeFeedbackFeaturesEXT 24
+  sType 0
+  pNext 8
+  subpassMergeFeedback 16
+VkPhysicalDeviceSubpassShadingFeaturesHUAWEI 24
+  sType 0
+  pNext 8
+  subpassShading 16
+VkPhysicalDeviceSubpassShadingPropertiesHUAWEI 24
+  sType 0
+  pNext 8
+  maxSubpassShadingWorkgroupSizeAspectRatio 16
+VkPhysicalDeviceSurfaceInfo2KHR 24
+  sType 0
+  pNext 8
+  surface 16
+VkPhysicalDeviceSwapchainMaintenance1FeaturesKHR 24
+  sType 0
+  pNext 8
+  swapchainMaintenance1 16
+VkPhysicalDeviceSynchronization2Features 24
+  sType 0
+  pNext 8
+  synchronization2 16
+VkPhysicalDeviceTensorFeaturesARM 40
+  sType 0
+  pNext 8
+  tensorNonPacked 16
+  shaderTensorAccess 20
+  shaderStorageTensorArrayDynamicIndexing 24
+  shaderStorageTensorArrayNonUniformIndexing 28
+  descriptorBindingStorageTensorUpdateAfterBind 32
+  tensors 36
+VkPhysicalDeviceTensorPropertiesARM 88
+  sType 0
+  pNext 8
+  maxTensorDimensionCount 16
+  maxTensorElements 24
+  maxPerDimensionTensorElements 32
+  maxTensorStride 40
+  maxTensorSize 48
+  maxTensorShaderAccessArrayLength 56
+  maxTensorShaderAccessSize 60
+  maxDescriptorSetStorageTensors 64
+  maxPerStageDescriptorSetStorageTensors 68
+  maxDescriptorSetUpdateAfterBindStorageTensors 72
+  maxPerStageDescriptorUpdateAfterBindStorageTensors 76
+  shaderStorageTensorArrayNonUniformIndexingNative 80
+  shaderTensorSupportedStages 84
+VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT 24
+  sType 0
+  pNext 8
+  texelBufferAlignment 16
+VkPhysicalDeviceTexelBufferAlignmentProperties 48
+  sType 0
+  pNext 8
+  storageTexelBufferOffsetAlignmentBytes 16
+  storageTexelBufferOffsetSingleTexelAlignment 24
+  uniformTexelBufferOffsetAlignmentBytes 32
+  uniformTexelBufferOffsetSingleTexelAlignment 40
+VkPhysicalDeviceTextureCompressionASTC3DFeaturesEXT 24
+  sType 0
+  pNext 8
+  textureCompressionASTC_3D 16
+VkPhysicalDeviceTextureCompressionASTCHDRFeatures 24
+  sType 0
+  pNext 8
+  textureCompressionASTC_HDR 16
+VkPhysicalDeviceThrottleHintFeaturesSEC 24
+  sType 0
+  pNext 8
+  throttleHint 16
+VkPhysicalDeviceTileMemoryHeapFeaturesQCOM 24
+  sType 0
+  pNext 8
+  tileMemoryHeap 16
+VkPhysicalDeviceTileMemoryHeapPropertiesQCOM 24
+  sType 0
+  pNext 8
+  queueSubmitBoundary 16
+  tileBufferTransfers 20
+VkPhysicalDeviceTilePropertiesFeaturesQCOM 24
+  sType 0
+  pNext 8
+  tileProperties 16
+VkPhysicalDeviceTileShadingFeaturesQCOM 72
+  sType 0
+  pNext 8
+  tileShading 16
+  tileShadingFragmentStage 20
+  tileShadingColorAttachments 24
+  tileShadingDepthAttachments 28
+  tileShadingStencilAttachments 32
+  tileShadingInputAttachments 36
+  tileShadingSampledAttachments 40
+  tileShadingPerTileDraw 44
+  tileShadingPerTileDispatch 48
+  tileShadingDispatchTile 52
+  tileShadingApron 56
+  tileShadingAnisotropicApron 60
+  tileShadingAtomicOps 64
+  tileShadingImageProcessing 68
+VkPhysicalDeviceTileShadingPropertiesQCOM 40
+  sType 0
+  pNext 8
+  maxApronSize 16
+  preferNonCoherent 20
+  tileGranularity 24
+  maxTileShadingRate 32
+VkPhysicalDeviceTimelineSemaphoreFeatures 24
+  sType 0
+  pNext 8
+  timelineSemaphore 16
+VkPhysicalDeviceTimelineSemaphoreProperties 24
+  sType 0
+  pNext 8
+  maxTimelineSemaphoreValueDifference 16
+VkPhysicalDeviceToolProperties 1048
+  sType 0
+  pNext 8
+  name 16
+  version 272
+  purposes 528
+  description 532
+  layer 788
+VkPhysicalDeviceTransformFeedbackFeaturesEXT 24
+  sType 0
+  pNext 8
+  transformFeedback 16
+  geometryStreams 20
+VkPhysicalDeviceTransformFeedbackPropertiesEXT 64
+  sType 0
+  pNext 8
+  maxTransformFeedbackStreams 16
+  maxTransformFeedbackBuffers 20
+  maxTransformFeedbackBufferSize 24
+  maxTransformFeedbackStreamDataSize 32
+  maxTransformFeedbackBufferDataSize 36
+  maxTransformFeedbackBufferDataStride 40
+  transformFeedbackQueries 44
+  transformFeedbackStreamsLinesTriangles 48
+  transformFeedbackRasterizationStreamSelect 52
+  transformFeedbackDraw 56
+VkPhysicalDeviceUnifiedImageLayoutsFeaturesKHR 24
+  sType 0
+  pNext 8
+  unifiedImageLayouts 16
+  unifiedImageLayoutsVideo 20
+VkPhysicalDeviceUniformBufferStandardLayoutFeatures 24
+  sType 0
+  pNext 8
+  uniformBufferStandardLayout 16
+VkPhysicalDeviceVariablePointersFeatures 24
+  sType 0
+  pNext 8
+  variablePointersStorageBuffer 16
+  variablePointers 20
+VkPhysicalDeviceVertexAttributeDivisorFeatures 24
+  sType 0
+  pNext 8
+  vertexAttributeInstanceRateDivisor 16
+  vertexAttributeInstanceRateZeroDivisor 20
+VkPhysicalDeviceVertexAttributeDivisorProperties 24
+  sType 0
+  pNext 8
+  maxVertexAttribDivisor 16
+  supportsNonZeroFirstInstance 20
+VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT 24
+  sType 0
+  pNext 8
+  maxVertexAttribDivisor 16
+VkPhysicalDeviceVertexAttributeRobustnessFeaturesEXT 24
+  sType 0
+  pNext 8
+  vertexAttributeRobustness 16
+VkPhysicalDeviceVertexInputDynamicStateFeaturesEXT 24
+  sType 0
+  pNext 8
+  vertexInputDynamicState 16
+VkPhysicalDeviceVideoDecodeVP9FeaturesKHR 24
+  sType 0
+  pNext 8
+  videoDecodeVP9 16
+VkPhysicalDeviceVideoEncodeAV1FeaturesKHR 24
+  sType 0
+  pNext 8
+  videoEncodeAV1 16
+VkPhysicalDeviceVideoEncodeFeedback2FeaturesKHR 24
+  sType 0
+  pNext 8
+  videoEncodeFeedback2 16
+VkPhysicalDeviceVideoEncodeIntraRefreshFeaturesKHR 24
+  sType 0
+  pNext 8
+  videoEncodeIntraRefresh 16
+VkPhysicalDeviceVideoEncodeQualityLevelInfoKHR 32
+  sType 0
+  pNext 8
+  pVideoProfile 16
+  qualityLevel 24
+VkPhysicalDeviceVideoEncodeQuantizationMapFeaturesKHR 24
+  sType 0
+  pNext 8
+  videoEncodeQuantizationMap 16
+VkPhysicalDeviceVideoEncodeRgbConversionFeaturesVALVE 24
+  sType 0
+  pNext 8
+  videoEncodeRgbConversion 16
+VkPhysicalDeviceVideoFormatInfoKHR 24
+  sType 0
+  pNext 8
+  imageUsage 16
+VkPhysicalDeviceVideoMaintenance1FeaturesKHR 24
+  sType 0
+  pNext 8
+  videoMaintenance1 16
+VkPhysicalDeviceVideoMaintenance2FeaturesKHR 24
+  sType 0
+  pNext 8
+  videoMaintenance2 16
+VkPhysicalDeviceVulkan11Features 64
+  sType 0
+  pNext 8
+  storageBuffer16BitAccess 16
+  uniformAndStorageBuffer16BitAccess 20
+  storagePushConstant16 24
+  storageInputOutput16 28
+  multiview 32
+  multiviewGeometryShader 36
+  multiviewTessellationShader 40
+  variablePointersStorageBuffer 44
+  variablePointers 48
+  protectedMemory 52
+  samplerYcbcrConversion 56
+  shaderDrawParameters 60
+VkPhysicalDeviceVulkan11Properties 112
+  sType 0
+  pNext 8
+  deviceUUID 16
+  driverUUID 32
+  deviceLUID 48
+  deviceNodeMask 56
+  deviceLUIDValid 60
+  subgroupSize 64
+  subgroupSupportedStages 68
+  subgroupSupportedOperations 72
+  subgroupQuadOperationsInAllStages 76
+  pointClippingBehavior 80
+  maxMultiviewViewCount 84
+  maxMultiviewInstanceIndex 88
+  protectedNoFault 92
+  maxPerSetDescriptors 96
+  maxMemoryAllocationSize 104
+VkPhysicalDeviceVulkan12Features 208
+  sType 0
+  pNext 8
+  samplerMirrorClampToEdge 16
+  drawIndirectCount 20
+  storageBuffer8BitAccess 24
+  uniformAndStorageBuffer8BitAccess 28
+  storagePushConstant8 32
+  shaderBufferInt64Atomics 36
+  shaderSharedInt64Atomics 40
+  shaderFloat16 44
+  shaderInt8 48
+  descriptorIndexing 52
+  shaderInputAttachmentArrayDynamicIndexing 56
+  shaderUniformTexelBufferArrayDynamicIndexing 60
+  shaderStorageTexelBufferArrayDynamicIndexing 64
+  shaderUniformBufferArrayNonUniformIndexing 68
+  shaderSampledImageArrayNonUniformIndexing 72
+  shaderStorageBufferArrayNonUniformIndexing 76
+  shaderStorageImageArrayNonUniformIndexing 80
+  shaderInputAttachmentArrayNonUniformIndexing 84
+  shaderUniformTexelBufferArrayNonUniformIndexing 88
+  shaderStorageTexelBufferArrayNonUniformIndexing 92
+  descriptorBindingUniformBufferUpdateAfterBind 96
+  descriptorBindingSampledImageUpdateAfterBind 100
+  descriptorBindingStorageImageUpdateAfterBind 104
+  descriptorBindingStorageBufferUpdateAfterBind 108
+  descriptorBindingUniformTexelBufferUpdateAfterBind 112
+  descriptorBindingStorageTexelBufferUpdateAfterBind 116
+  descriptorBindingUpdateUnusedWhilePending 120
+  descriptorBindingPartiallyBound 124
+  descriptorBindingVariableDescriptorCount 128
+  runtimeDescriptorArray 132
+  samplerFilterMinmax 136
+  scalarBlockLayout 140
+  imagelessFramebuffer 144
+  uniformBufferStandardLayout 148
+  shaderSubgroupExtendedTypes 152
+  separateDepthStencilLayouts 156
+  hostQueryReset 160
+  timelineSemaphore 164
+  bufferDeviceAddress 168
+  bufferDeviceAddressCaptureReplay 172
+  bufferDeviceAddressMultiDevice 176
+  vulkanMemoryModel 180
+  vulkanMemoryModelDeviceScope 184
+  vulkanMemoryModelAvailabilityVisibilityChains 188
+  shaderOutputViewportIndex 192
+  shaderOutputLayer 196
+  subgroupBroadcastDynamicId 200
+VkPhysicalDeviceVulkan12Properties 736
+  sType 0
+  pNext 8
+  driverID 16
+  driverName 20
+  driverInfo 276
+  conformanceVersion 532
+  denormBehaviorIndependence 536
+  roundingModeIndependence 540
+  shaderSignedZeroInfNanPreserveFloat16 544
+  shaderSignedZeroInfNanPreserveFloat32 548
+  shaderSignedZeroInfNanPreserveFloat64 552
+  shaderDenormPreserveFloat16 556
+  shaderDenormPreserveFloat32 560
+  shaderDenormPreserveFloat64 564
+  shaderDenormFlushToZeroFloat16 568
+  shaderDenormFlushToZeroFloat32 572
+  shaderDenormFlushToZeroFloat64 576
+  shaderRoundingModeRTEFloat16 580
+  shaderRoundingModeRTEFloat32 584
+  shaderRoundingModeRTEFloat64 588
+  shaderRoundingModeRTZFloat16 592
+  shaderRoundingModeRTZFloat32 596
+  shaderRoundingModeRTZFloat64 600
+  maxUpdateAfterBindDescriptorsInAllPools 604
+  shaderUniformBufferArrayNonUniformIndexingNative 608
+  shaderSampledImageArrayNonUniformIndexingNative 612
+  shaderStorageBufferArrayNonUniformIndexingNative 616
+  shaderStorageImageArrayNonUniformIndexingNative 620
+  shaderInputAttachmentArrayNonUniformIndexingNative 624
+  robustBufferAccessUpdateAfterBind 628
+  quadDivergentImplicitLod 632
+  maxPerStageDescriptorUpdateAfterBindSamplers 636
+  maxPerStageDescriptorUpdateAfterBindUniformBuffers 640
+  maxPerStageDescriptorUpdateAfterBindStorageBuffers 644
+  maxPerStageDescriptorUpdateAfterBindSampledImages 648
+  maxPerStageDescriptorUpdateAfterBindStorageImages 652
+  maxPerStageDescriptorUpdateAfterBindInputAttachments 656
+  maxPerStageUpdateAfterBindResources 660
+  maxDescriptorSetUpdateAfterBindSamplers 664
+  maxDescriptorSetUpdateAfterBindUniformBuffers 668
+  maxDescriptorSetUpdateAfterBindUniformBuffersDynamic 672
+  maxDescriptorSetUpdateAfterBindStorageBuffers 676
+  maxDescriptorSetUpdateAfterBindStorageBuffersDynamic 680
+  maxDescriptorSetUpdateAfterBindSampledImages 684
+  maxDescriptorSetUpdateAfterBindStorageImages 688
+  maxDescriptorSetUpdateAfterBindInputAttachments 692
+  supportedDepthResolveModes 696
+  supportedStencilResolveModes 700
+  independentResolveNone 704
+  independentResolve 708
+  filterMinmaxSingleComponentFormats 712
+  filterMinmaxImageComponentMapping 716
+  maxTimelineSemaphoreValueDifference 720
+  framebufferIntegerColorSampleCounts 728
+VkPhysicalDeviceVulkan13Features 80
+  sType 0
+  pNext 8
+  robustImageAccess 16
+  inlineUniformBlock 20
+  descriptorBindingInlineUniformBlockUpdateAfterBind 24
+  pipelineCreationCacheControl 28
+  privateData 32
+  shaderDemoteToHelperInvocation 36
+  shaderTerminateInvocation 40
+  subgroupSizeControl 44
+  computeFullSubgroups 48
+  synchronization2 52
+  textureCompressionASTC_HDR 56
+  shaderZeroInitializeWorkgroupMemory 60
+  dynamicRendering 64
+  shaderIntegerDotProduct 68
+  maintenance4 72
+VkPhysicalDeviceVulkan13Properties 216
+  sType 0
+  pNext 8
+  minSubgroupSize 16
+  maxSubgroupSize 20
+  maxComputeWorkgroupSubgroups 24
+  requiredSubgroupSizeStages 28
+  maxInlineUniformBlockSize 32
+  maxPerStageDescriptorInlineUniformBlocks 36
+  maxPerStageDescriptorUpdateAfterBindInlineUniformBlocks 40
+  maxDescriptorSetInlineUniformBlocks 44
+  maxDescriptorSetUpdateAfterBindInlineUniformBlocks 48
+  maxInlineUniformTotalSize 52
+  integerDotProduct8BitUnsignedAccelerated 56
+  integerDotProduct8BitSignedAccelerated 60
+  integerDotProduct8BitMixedSignednessAccelerated 64
+  integerDotProduct4x8BitPackedUnsignedAccelerated 68
+  integerDotProduct4x8BitPackedSignedAccelerated 72
+  integerDotProduct4x8BitPackedMixedSignednessAccelerated 76
+  integerDotProduct16BitUnsignedAccelerated 80
+  integerDotProduct16BitSignedAccelerated 84
+  integerDotProduct16BitMixedSignednessAccelerated 88
+  integerDotProduct32BitUnsignedAccelerated 92
+  integerDotProduct32BitSignedAccelerated 96
+  integerDotProduct32BitMixedSignednessAccelerated 100
+  integerDotProduct64BitUnsignedAccelerated 104
+  integerDotProduct64BitSignedAccelerated 108
+  integerDotProduct64BitMixedSignednessAccelerated 112
+  integerDotProductAccumulatingSaturating8BitUnsignedAccelerated 116
+  integerDotProductAccumulatingSaturating8BitSignedAccelerated 120
+  integerDotProductAccumulatingSaturating8BitMixedSignednessAccelerated 124
+  integerDotProductAccumulatingSaturating4x8BitPackedUnsignedAccelerated 128
+  integerDotProductAccumulatingSaturating4x8BitPackedSignedAccelerated 132
+  integerDotProductAccumulatingSaturating4x8BitPackedMixedSignednessAccelerated 136
+  integerDotProductAccumulatingSaturating16BitUnsignedAccelerated 140
+  integerDotProductAccumulatingSaturating16BitSignedAccelerated 144
+  integerDotProductAccumulatingSaturating16BitMixedSignednessAccelerated 148
+  integerDotProductAccumulatingSaturating32BitUnsignedAccelerated 152
+  integerDotProductAccumulatingSaturating32BitSignedAccelerated 156
+  integerDotProductAccumulatingSaturating32BitMixedSignednessAccelerated 160
+  integerDotProductAccumulatingSaturating64BitUnsignedAccelerated 164
+  integerDotProductAccumulatingSaturating64BitSignedAccelerated 168
+  integerDotProductAccumulatingSaturating64BitMixedSignednessAccelerated 172
+  storageTexelBufferOffsetAlignmentBytes 176
+  storageTexelBufferOffsetSingleTexelAlignment 184
+  uniformTexelBufferOffsetAlignmentBytes 192
+  uniformTexelBufferOffsetSingleTexelAlignment 200
+  maxBufferSize 208
+VkPhysicalDeviceVulkan14Features 104
+  sType 0
+  pNext 8
+  globalPriorityQuery 16
+  shaderSubgroupRotate 20
+  shaderSubgroupRotateClustered 24
+  shaderFloatControls2 28
+  shaderExpectAssume 32
+  rectangularLines 36
+  bresenhamLines 40
+  smoothLines 44
+  stippledRectangularLines 48
+  stippledBresenhamLines 52
+  stippledSmoothLines 56
+  vertexAttributeInstanceRateDivisor 60
+  vertexAttributeInstanceRateZeroDivisor 64
+  indexTypeUint8 68
+  dynamicRenderingLocalRead 72
+  maintenance5 76
+  maintenance6 80
+  pipelineProtectedAccess 84
+  pipelineRobustness 88
+  hostImageCopy 92
+  pushDescriptor 96
+VkPhysicalDeviceVulkan14Properties 144
+  sType 0
+  pNext 8
+  lineSubPixelPrecisionBits 16
+  maxVertexAttribDivisor 20
+  supportsNonZeroFirstInstance 24
+  maxPushDescriptors 28
+  dynamicRenderingLocalReadDepthStencilAttachments 32
+  dynamicRenderingLocalReadMultisampledAttachments 36
+  earlyFragmentMultisampleCoverageAfterSampleCounting 40
+  earlyFragmentSampleMaskTestBeforeSampleCounting 44
+  depthStencilSwizzleOneSupport 48
+  polygonModePointSize 52
+  nonStrictSinglePixelWideLinesUseParallelogram 56
+  nonStrictWideLinesUseParallelogram 60
+  blockTexelViewCompatibleMultipleLayers 64
+  maxCombinedImageSamplerDescriptorCount 68
+  fragmentShadingRateClampCombinerInputs 72
+  defaultRobustnessStorageBuffers 76
+  defaultRobustnessUniformBuffers 80
+  defaultRobustnessVertexInputs 84
+  defaultRobustnessImages 88
+  copySrcLayoutCount 92
+  pCopySrcLayouts 96
+  copyDstLayoutCount 104
+  pCopyDstLayouts 112
+  optimalTilingLayoutUUID 120
+  identicalMemoryTypeRequirements 136
+VkPhysicalDeviceVulkanMemoryModelFeatures 32
+  sType 0
+  pNext 8
+  vulkanMemoryModel 16
+  vulkanMemoryModelDeviceScope 20
+  vulkanMemoryModelAvailabilityVisibilityChains 24
+VkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR 32
+  sType 0
+  pNext 8
+  workgroupMemoryExplicitLayout 16
+  workgroupMemoryExplicitLayoutScalarBlockLayout 20
+  workgroupMemoryExplicitLayout8BitAccess 24
+  workgroupMemoryExplicitLayout16BitAccess 28
+VkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT 24
+  sType 0
+  pNext 8
+  ycbcr2plane444Formats 16
+VkPhysicalDeviceYcbcrDegammaFeaturesQCOM 24
+  sType 0
+  pNext 8
+  ycbcrDegamma 16
+VkPhysicalDeviceYcbcrImageArraysFeaturesEXT 24
+  sType 0
+  pNext 8
+  ycbcrImageArrays 16
+VkPhysicalDeviceZeroInitializeDeviceMemoryFeaturesEXT 24
+  sType 0
+  pNext 8
+  zeroInitializeDeviceMemory 16
+VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeatures 24
+  sType 0
+  pNext 8
+  shaderZeroInitializeWorkgroupMemory 16
+VkPipelineBinaryCreateInfoKHR 40
+  sType 0
+  pNext 8
+  pKeysAndDataInfo 16
+  pipeline 24
+  pPipelineCreateInfo 32
+VkPipelineBinaryDataInfoKHR 24
+  sType 0
+  pNext 8
+  pipelineBinary 16
+VkPipelineBinaryDataKHR 16
+  dataSize 0
+  pData 8
+VkPipelineBinaryHandlesInfoKHR 32
+  sType 0
+  pNext 8
+  pipelineBinaryCount 16
+  pPipelineBinaries 24
+VkPipelineBinaryInfoKHR 32
+  sType 0
+  pNext 8
+  binaryCount 16
+  pPipelineBinaries 24
+VkPipelineBinaryKeyKHR 56
+  sType 0
+  pNext 8
+  keySize 16
+  key 20
+VkPipelineBinaryKeysAndDataKHR 24
+  binaryCount 0
+  pPipelineBinaryKeys 8
+  pPipelineBinaryData 16
+VkPipelineCacheCreateInfo 40
+  sType 0
+  pNext 8
+  flags 16
+  initialDataSize 24
+  pInitialData 32
+VkPipelineCacheHeaderVersionDataGraphQCOM 28
+  headerSize 0
+  headerVersion 4
+  cacheType 8
+  cacheVersion 12
+  toolchainVersion 16
+VkPipelineCacheHeaderVersionOne 32
+  headerSize 0
+  headerVersion 4
+  vendorID 8
+  deviceID 12
+  pipelineCacheUUID 16
+VkPipelineColorBlendAdvancedStateCreateInfoEXT 32
+  sType 0
+  pNext 8
+  srcPremultiplied 16
+  dstPremultiplied 20
+  blendOverlap 24
+VkPipelineColorBlendAttachmentState 32
+  blendEnable 0
+  srcColorBlendFactor 4
+  dstColorBlendFactor 8
+  colorBlendOp 12
+  srcAlphaBlendFactor 16
+  dstAlphaBlendFactor 20
+  alphaBlendOp 24
+  colorWriteMask 28
+VkPipelineColorBlendStateCreateInfo 56
+  sType 0
+  pNext 8
+  flags 16
+  logicOpEnable 20
+  logicOp 24
+  attachmentCount 28
+  pAttachments 32
+  blendConstants 40
+VkPipelineColorWriteCreateInfoEXT 32
+  sType 0
+  pNext 8
+  attachmentCount 16
+  pColorWriteEnables 24
+VkPipelineCompilerControlCreateInfoAMD 24
+  sType 0
+  pNext 8
+  compilerControlFlags 16
+VkPipelineCoverageModulationStateCreateInfoNV 40
+  sType 0
+  pNext 8
+  flags 16
+  coverageModulationMode 20
+  coverageModulationTableEnable 24
+  coverageModulationTableCount 28
+  pCoverageModulationTable 32
+VkPipelineCoverageReductionStateCreateInfoNV 24
+  sType 0
+  pNext 8
+  flags 16
+  coverageReductionMode 20
+VkPipelineCoverageToColorStateCreateInfoNV 32
+  sType 0
+  pNext 8
+  flags 16
+  coverageToColorEnable 20
+  coverageToColorLocation 24
+VkPipelineCreateFlags2CreateInfo 24
+  sType 0
+  pNext 8
+  flags 16
+VkPipelineCreateInfoKHR 16
+  sType 0
+  pNext 8
+VkPipelineCreationFeedback 16
+  flags 0
+  duration 8
+VkPipelineCreationFeedbackCreateInfo 40
+  sType 0
+  pNext 8
+  pPipelineCreationFeedback 16
+  pipelineStageCreationFeedbackCount 24
+  pPipelineStageCreationFeedbacks 32
+VkPipelineDepthStencilStateCreateInfo 104
+  sType 0
+  pNext 8
+  flags 16
+  depthTestEnable 20
+  depthWriteEnable 24
+  depthCompareOp 28
+  depthBoundsTestEnable 32
+  stencilTestEnable 36
+  front 40
+  back 68
+  minDepthBounds 96
+  maxDepthBounds 100
+VkPipelineDiscardRectangleStateCreateInfoEXT 40
+  sType 0
+  pNext 8
+  flags 16
+  discardRectangleMode 20
+  discardRectangleCount 24
+  pDiscardRectangles 32
+VkPipelineDynamicStateCreateInfo 32
+  sType 0
+  pNext 8
+  flags 16
+  dynamicStateCount 20
+  pDynamicStates 24
+VkPipelineExecutableInfoKHR 32
+  sType 0
+  pNext 8
+  pipeline 16
+  executableIndex 24
+VkPipelineExecutableInternalRepresentationKHR 552
+  sType 0
+  pNext 8
+  name 16
+  description 272
+  isText 528
+  dataSize 536
+  pData 544
+VkPipelineExecutablePropertiesKHR 536
+  sType 0
+  pNext 8
+  stages 16
+  name 20
+  description 276
+  subgroupSize 532
+VkPipelineExecutableStatisticKHR 544
+  sType 0
+  pNext 8
+  name 16
+  description 272
+  format 528
+  value 536
+VkPipelineExecutableStatisticValueKHR 8
+  b32 0
+  i64 0
+  u64 0
+  f64 0
+VkPipelineFragmentDensityMapLayeredCreateInfoVALVE 24
+  sType 0
+  pNext 8
+  maxFragmentDensityMapLayers 16
+VkPipelineFragmentShadingRateEnumStateCreateInfoNV 32
+  sType 0
+  pNext 8
+  shadingRateType 16
+  shadingRate 20
+  combinerOps 24
+VkPipelineFragmentShadingRateStateCreateInfoKHR 32
+  sType 0
+  pNext 8
+  fragmentSize 16
+  combinerOps 24
+VkPipelineIndirectDeviceAddressInfoNV 32
+  sType 0
+  pNext 8
+  pipelineBindPoint 16
+  pipeline 24
+VkPipelineInfoKHR 24
+  sType 0
+  pNext 8
+  pipeline 16
+VkPipelineInputAssemblyStateCreateInfo 32
+  sType 0
+  pNext 8
+  flags 16
+  topology 20
+  primitiveRestartEnable 24
+VkPipelineLayoutCreateInfo 48
+  sType 0
+  pNext 8
+  flags 16
+  setLayoutCount 20
+  pSetLayouts 24
+  pushConstantRangeCount 32
+  pPushConstantRanges 40
+VkPipelineLibraryCreateInfoKHR 32
+  sType 0
+  pNext 8
+  libraryCount 16
+  pLibraries 24
+VkPipelineMultisampleStateCreateInfo 48
+  sType 0
+  pNext 8
+  flags 16
+  rasterizationSamples 20
+  sampleShadingEnable 24
+  minSampleShading 28
+  pSampleMask 32
+  alphaToCoverageEnable 40
+  alphaToOneEnable 44
+VkPipelinePropertiesIdentifierEXT 32
+  sType 0
+  pNext 8
+  pipelineIdentifier 16
+VkPipelineRasterizationConservativeStateCreateInfoEXT 32
+  sType 0
+  pNext 8
+  flags 16
+  conservativeRasterizationMode 20
+  extraPrimitiveOverestimationSize 24
+VkPipelineRasterizationDepthClipStateCreateInfoEXT 24
+  sType 0
+  pNext 8
+  flags 16
+  depthClipEnable 20
+VkPipelineRasterizationLineStateCreateInfo 32
+  sType 0
+  pNext 8
+  lineRasterizationMode 16
+  stippledLineEnable 20
+  lineStippleFactor 24
+  lineStipplePattern 28
+VkPipelineRasterizationProvokingVertexStateCreateInfoEXT 24
+  sType 0
+  pNext 8
+  provokingVertexMode 16
+VkPipelineRasterizationStateCreateInfo 64
+  sType 0
+  pNext 8
+  flags 16
+  depthClampEnable 20
+  rasterizerDiscardEnable 24
+  polygonMode 28
+  cullMode 32
+  frontFace 36
+  depthBiasEnable 40
+  depthBiasConstantFactor 44
+  depthBiasClamp 48
+  depthBiasSlopeFactor 52
+  lineWidth 56
+VkPipelineRasterizationStateRasterizationOrderAMD 24
+  sType 0
+  pNext 8
+  rasterizationOrder 16
+VkPipelineRasterizationStateStreamCreateInfoEXT 24
+  sType 0
+  pNext 8
+  flags 16
+  rasterizationStream 20
+VkPipelineRenderingCreateInfo 40
+  sType 0
+  pNext 8
+  viewMask 16
+  colorAttachmentCount 20
+  pColorAttachmentFormats 24
+  depthAttachmentFormat 32
+  stencilAttachmentFormat 36
+VkPipelineRepresentativeFragmentTestStateCreateInfoNV 24
+  sType 0
+  pNext 8
+  representativeFragmentTestEnable 16
+VkPipelineRobustnessCreateInfo 32
+  sType 0
+  pNext 8
+  storageBuffers 16
+  uniformBuffers 20
+  vertexInputs 24
+  images 28
+VkPipelineSampleLocationsStateCreateInfoEXT 64
+  sType 0
+  pNext 8
+  sampleLocationsEnable 16
+  sampleLocationsInfo 24
+VkPipelineShaderStageCreateInfo 48
+  sType 0
+  pNext 8
+  flags 16
+  stage 20
+  module 24
+  pName 32
+  pSpecializationInfo 40
+VkPipelineShaderStageModuleIdentifierCreateInfoEXT 32
+  sType 0
+  pNext 8
+  identifierSize 16
+  pIdentifier 24
+VkPipelineShaderStageNodeCreateInfoAMDX 32
+  sType 0
+  pNext 8
+  pName 16
+  index 24
+VkPipelineShaderStageRequiredSubgroupSizeCreateInfo 24
+  sType 0
+  pNext 8
+  requiredSubgroupSize 16
+VkPipelineTessellationDomainOriginStateCreateInfo 24
+  sType 0
+  pNext 8
+  domainOrigin 16
+VkPipelineTessellationStateCreateInfo 24
+  sType 0
+  pNext 8
+  flags 16
+  patchControlPoints 20
+VkPipelineVertexInputDivisorStateCreateInfo 32
+  sType 0
+  pNext 8
+  vertexBindingDivisorCount 16
+  pVertexBindingDivisors 24
+VkPipelineVertexInputStateCreateInfo 48
+  sType 0
+  pNext 8
+  flags 16
+  vertexBindingDescriptionCount 20
+  pVertexBindingDescriptions 24
+  vertexAttributeDescriptionCount 32
+  pVertexAttributeDescriptions 40
+VkPipelineViewportCoarseSampleOrderStateCreateInfoNV 32
+  sType 0
+  pNext 8
+  sampleOrderType 16
+  customSampleOrderCount 20
+  pCustomSampleOrders 24
+VkPipelineViewportDepthClampControlCreateInfoEXT 32
+  sType 0
+  pNext 8
+  depthClampMode 16
+  pDepthClampRange 24
+VkPipelineViewportDepthClipControlCreateInfoEXT 24
+  sType 0
+  pNext 8
+  negativeOneToOne 16
+VkPipelineViewportExclusiveScissorStateCreateInfoNV 32
+  sType 0
+  pNext 8
+  exclusiveScissorCount 16
+  pExclusiveScissors 24
+VkPipelineViewportShadingRateImageStateCreateInfoNV 32
+  sType 0
+  pNext 8
+  shadingRateImageEnable 16
+  viewportCount 20
+  pShadingRatePalettes 24
+VkPipelineViewportStateCreateInfo 48
+  sType 0
+  pNext 8
+  flags 16
+  viewportCount 20
+  pViewports 24
+  scissorCount 32
+  pScissors 40
+VkPipelineViewportSwizzleStateCreateInfoNV 32
+  sType 0
+  pNext 8
+  flags 16
+  viewportCount 20
+  pViewportSwizzles 24
+VkPipelineViewportWScalingStateCreateInfoNV 32
+  sType 0
+  pNext 8
+  viewportWScalingEnable 16
+  viewportCount 20
+  pViewportWScalings 24
+VkPresentId2KHR 32
+  sType 0
+  pNext 8
+  swapchainCount 16
+  pPresentIds 24
+VkPresentIdKHR 32
+  sType 0
+  pNext 8
+  swapchainCount 16
+  pPresentIds 24
+VkPresentInfoKHR 64
+  sType 0
+  pNext 8
+  waitSemaphoreCount 16
+  pWaitSemaphores 24
+  swapchainCount 32
+  pSwapchains 40
+  pImageIndices 48
+  pResults 56
+VkPresentRegionKHR 16
+  rectangleCount 0
+  pRectangles 8
+VkPresentRegionsKHR 32
+  sType 0
+  pNext 8
+  swapchainCount 16
+  pRegions 24
+VkPresentStageTimeEXT 16
+  stage 0
+  time 8
+VkPresentTimeGOOGLE 16
+  presentID 0
+  desiredPresentTime 8
+VkPresentTimesInfoGOOGLE 32
+  sType 0
+  pNext 8
+  swapchainCount 16
+  pTimes 24
+VkPresentTimingInfoEXT 48
+  sType 0
+  pNext 8
+  flags 16
+  targetTime 24
+  timeDomainId 32
+  presentStageQueries 40
+  targetTimeDomainPresentStage 44
+VkPresentTimingSurfaceCapabilitiesEXT 32
+  sType 0
+  pNext 8
+  presentTimingSupported 16
+  presentAtAbsoluteTimeSupported 20
+  presentAtRelativeTimeSupported 24
+  presentStageQueries 28
+VkPresentTimingsInfoEXT 32
+  sType 0
+  pNext 8
+  swapchainCount 16
+  pTimingInfos 24
+VkPresentWait2InfoKHR 32
+  sType 0
+  pNext 8
+  presentId 16
+  timeout 24
+VkPrivateDataSlotCreateInfo 24
+  sType 0
+  pNext 8
+  flags 16
+VkProtectedSubmitInfo 24
+  sType 0
+  pNext 8
+  protectedSubmit 16
+VkPushConstantBankInfoNV 24
+  sType 0
+  pNext 8
+  bank 16
+VkPushConstantRange 12
+  stageFlags 0
+  offset 4
+  size 8
+VkPushConstantsInfo 48
+  sType 0
+  pNext 8
+  layout 16
+  stageFlags 24
+  offset 28
+  size 32
+  pValues 40
+VkPushDataInfoEXT 40
+  sType 0
+  pNext 8
+  offset 16
+  data 24
+VkPushDescriptorSetInfo 48
+  sType 0
+  pNext 8
+  stageFlags 16
+  layout 24
+  set 32
+  descriptorWriteCount 36
+  pDescriptorWrites 40
+VkPushDescriptorSetWithTemplateInfo 48
+  sType 0
+  pNext 8
+  descriptorUpdateTemplate 16
+  layout 24
+  set 32
+  pData 40
+VkQueryLowLatencySupportNV 24
+  sType 0
+  pNext 8
+  pQueriedLowLatencyData 16
+VkQueryPoolCreateInfo 32
+  sType 0
+  pNext 8
+  flags 16
+  queryType 20
+  queryCount 24
+  pipelineStatistics 28
+VkQueryPoolPerformanceCreateInfoKHR 32
+  sType 0
+  pNext 8
+  queueFamilyIndex 16
+  counterIndexCount 20
+  pCounterIndices 24
+VkQueryPoolPerformanceQueryCreateInfoINTEL 24
+  sType 0
+  pNext 8
+  performanceCountersSampling 16
+VkQueryPoolVideoEncodeFeedbackCreateInfoKHR 24
+  sType 0
+  pNext 8
+  encodeFeedbackFlags 16
+VkQueryPoolVideoEncodePerPartitionFeedbackCreateInfoKHR 24
+  sType 0
+  pNext 8
+  maxPerPartitionFeedbackEntries 16
+  perPartitionEncodeFeedbackFlags 20
+VkQueueFamilyCheckpointProperties2NV 24
+  sType 0
+  pNext 8
+  checkpointExecutionStageMask 16
+VkQueueFamilyCheckpointPropertiesNV 24
+  sType 0
+  pNext 8
+  checkpointExecutionStageMask 16
+VkQueueFamilyDataGraphOpticalFlowPropertiesARM 48
+  sType 0
+  pNext 8
+  supportedOutputGridSizes 16
+  supportedHintGridSizes 20
+  hintSupported 24
+  costSupported 28
+  minWidth 32
+  minHeight 36
+  maxWidth 40
+  maxHeight 44
+VkQueueFamilyDataGraphProcessingEnginePropertiesARM 24
+  sType 0
+  pNext 8
+  foreignSemaphoreHandleTypes 16
+  foreignMemoryHandleTypes 20
+VkQueueFamilyDataGraphPropertiesARM 160
+  sType 0
+  pNext 8
+  engine 16
+  operation 24
+VkQueueFamilyDataGraphTOSAPropertiesARM 56
+  sType 0
+  pNext 8
+  profileCount 16
+  pProfiles 24
+  extensionCount 32
+  pExtensions 40
+  level 48
+VkQueueFamilyGlobalPriorityProperties 88
+  sType 0
+  pNext 8
+  priorityCount 16
+  priorities 20
+VkQueueFamilyOptimalImageTransferGranularityPropertiesKHR 32
+  sType 0
+  pNext 8
+  optimalImageTransferGranularity 16
+VkQueueFamilyOwnershipTransferPropertiesKHR 24
+  sType 0
+  pNext 8
+  optimalImageTransferToQueueFamilies 16
+VkQueueFamilyProperties 24
+  queueFlags 0
+  queueCount 4
+  timestampValidBits 8
+  minImageTransferGranularity 12
+VkQueueFamilyProperties2 40
+  sType 0
+  pNext 8
+  queueFamilyProperties 16
+VkQueueFamilyQueryResultStatusPropertiesKHR 24
+  sType 0
+  pNext 8
+  queryResultStatusSupport 16
+VkQueueFamilyVideoPropertiesKHR 24
+  sType 0
+  pNext 8
+  videoCodecOperations 16
+VkRayTracingPipelineClusterAccelerationStructureCreateInfoNV 24
+  sType 0
+  pNext 8
+  allowClusterAccelerationStructure 16
+VkRayTracingPipelineCreateInfoKHR 104
+  sType 0
+  pNext 8
+  flags 16
+  stageCount 20
+  pStages 24
+  groupCount 32
+  pGroups 40
+  maxPipelineRayRecursionDepth 48
+  pLibraryInfo 56
+  pLibraryInterface 64
+  pDynamicState 72
+  layout 80
+  basePipelineHandle 88
+  basePipelineIndex 96
+VkRayTracingPipelineCreateInfoNV 80
+  sType 0
+  pNext 8
+  flags 16
+  stageCount 20
+  pStages 24
+  groupCount 32
+  pGroups 40
+  maxRecursionDepth 48
+  layout 56
+  basePipelineHandle 64
+  basePipelineIndex 72
+VkRayTracingPipelineInterfaceCreateInfoKHR 24
+  sType 0
+  pNext 8
+  maxPipelineRayPayloadSize 16
+  maxPipelineRayHitAttributeSize 20
+VkRayTracingShaderGroupCreateInfoKHR 48
+  sType 0
+  pNext 8
+  type 16
+  generalShader 20
+  closestHitShader 24
+  anyHitShader 28
+  intersectionShader 32
+  pShaderGroupCaptureReplayHandle 40
+VkRayTracingShaderGroupCreateInfoNV 40
+  sType 0
+  pNext 8
+  type 16
+  generalShader 20
+  closestHitShader 24
+  anyHitShader 28
+  intersectionShader 32
+VkRect2D 16
+  offset 0
+  extent 8
+VkRectLayerKHR 20
+  offset 0
+  extent 8
+  layer 16
+VkRefreshCycleDurationGOOGLE 8
+  refreshDuration 0
+VkReleaseCapturedPipelineDataInfoKHR 24
+  sType 0
+  pNext 8
+  pipeline 16
+VkReleaseSwapchainImagesInfoKHR 40
+  sType 0
+  pNext 8
+  swapchain 16
+  imageIndexCount 24
+  pImageIndices 32
+VkRenderPassAttachmentBeginInfo 32
+  sType 0
+  pNext 8
+  attachmentCount 16
+  pAttachments 24
+VkRenderPassBeginInfo 64
+  sType 0
+  pNext 8
+  renderPass 16
+  framebuffer 24
+  renderArea 32
+  clearValueCount 48
+  pClearValues 56
+VkRenderPassCreateInfo 64
+  sType 0
+  pNext 8
+  flags 16
+  attachmentCount 20
+  pAttachments 24
+  subpassCount 32
+  pSubpasses 40
+  dependencyCount 48
+  pDependencies 56
+VkRenderPassCreateInfo2 80
+  sType 0
+  pNext 8
+  flags 16
+  attachmentCount 20
+  pAttachments 24
+  subpassCount 32
+  pSubpasses 40
+  dependencyCount 48
+  pDependencies 56
+  correlatedViewMaskCount 64
+  pCorrelatedViewMasks 72
+VkRenderPassCreationControlEXT 24
+  sType 0
+  pNext 8
+  disallowMerging 16
+VkRenderPassCreationFeedbackCreateInfoEXT 24
+  sType 0
+  pNext 8
+  pRenderPassFeedback 16
+VkRenderPassCreationFeedbackInfoEXT 4
+  postMergeSubpassCount 0
+VkRenderPassFragmentDensityMapCreateInfoEXT 24
+  sType 0
+  pNext 8
+  fragmentDensityMapAttachment 16
+VkRenderPassFragmentDensityMapOffsetEndInfoEXT 32
+  sType 0
+  pNext 8
+  fragmentDensityOffsetCount 16
+  pFragmentDensityOffsets 24
+VkRenderPassInputAttachmentAspectCreateInfo 32
+  sType 0
+  pNext 8
+  aspectReferenceCount 16
+  pAspectReferences 24
+VkRenderPassMultiviewCreateInfo 64
+  sType 0
+  pNext 8
+  subpassCount 16
+  pViewMasks 24
+  dependencyCount 32
+  pViewOffsets 40
+  correlationMaskCount 48
+  pCorrelationMasks 56
+VkRenderPassPerformanceCountersByRegionBeginInfoARM 48
+  sType 0
+  pNext 8
+  counterAddressCount 16
+  pCounterAddresses 24
+  serializeRegions 32
+  counterIndexCount 36
+  pCounterIndices 40
+VkRenderPassSampleLocationsBeginInfoEXT 48
+  sType 0
+  pNext 8
+  attachmentInitialSampleLocationsCount 16
+  pAttachmentInitialSampleLocations 24
+  postSubpassSampleLocationsCount 32
+  pPostSubpassSampleLocations 40
+VkRenderPassStripeBeginInfoARM 32
+  sType 0
+  pNext 8
+  stripeInfoCount 16
+  pStripeInfos 24
+VkRenderPassStripeInfoARM 32
+  sType 0
+  pNext 8
+  stripeArea 16
+VkRenderPassStripeSubmitInfoARM 32
+  sType 0
+  pNext 8
+  stripeSemaphoreInfoCount 16
+  pStripeSemaphoreInfos 24
+VkRenderPassSubpassFeedbackCreateInfoEXT 24
+  sType 0
+  pNext 8
+  pSubpassFeedback 16
+VkRenderPassSubpassFeedbackInfoEXT 264
+  subpassMergeStatus 0
+  description 4
+  postMergeIndex 260
+VkRenderPassTileShadingCreateInfoQCOM 32
+  sType 0
+  pNext 8
+  flags 16
+  tileApronSize 20
+VkRenderPassTransformBeginInfoQCOM 24
+  sType 0
+  pNext 8
+  transform 16
+VkRenderingAreaInfo 40
+  sType 0
+  pNext 8
+  viewMask 16
+  colorAttachmentCount 20
+  pColorAttachmentFormats 24
+  depthAttachmentFormat 32
+  stencilAttachmentFormat 36
+VkRenderingAttachmentFlagsInfoKHR 24
+  sType 0
+  pNext 8
+  flags 16
+VkRenderingAttachmentInfo 72
+  sType 0
+  pNext 8
+  imageView 16
+  imageLayout 24
+  resolveMode 28
+  resolveImageView 32
+  resolveImageLayout 40
+  loadOp 44
+  storeOp 48
+  clearValue 52
+VkRenderingAttachmentLocationInfo 32
+  sType 0
+  pNext 8
+  colorAttachmentCount 16
+  pColorAttachmentLocations 24
+VkRenderingEndInfoKHR 16
+  sType 0
+  pNext 8
+VkRenderingFragmentDensityMapAttachmentInfoEXT 32
+  sType 0
+  pNext 8
+  imageView 16
+  imageLayout 24
+VkRenderingFragmentShadingRateAttachmentInfoKHR 40
+  sType 0
+  pNext 8
+  imageView 16
+  imageLayout 24
+  shadingRateAttachmentTexelSize 28
+VkRenderingInfo 72
+  sType 0
+  pNext 8
+  flags 16
+  renderArea 20
+  layerCount 36
+  viewMask 40
+  colorAttachmentCount 44
+  pColorAttachments 48
+  pDepthAttachment 56
+  pStencilAttachment 64
+VkRenderingInputAttachmentIndexInfo 48
+  sType 0
+  pNext 8
+  colorAttachmentCount 16
+  pColorAttachmentInputIndices 24
+  pDepthInputAttachmentIndex 32
+  pStencilInputAttachmentIndex 40
+VkResolveImageInfo2 56
+  sType 0
+  pNext 8
+  srcImage 16
+  srcImageLayout 24
+  dstImage 32
+  dstImageLayout 40
+  regionCount 44
+  pRegions 48
+VkResolveImageModeInfoKHR 32
+  sType 0
+  pNext 8
+  flags 16
+  resolveMode 20
+  stencilResolveMode 24
+VkResourceDescriptorDataEXT 8
+  pImage 0
+  pTexelBuffer 0
+  pAddressRange 0
+  pTensorARM 0
+VkResourceDescriptorInfoEXT 32
+  sType 0
+  pNext 8
+  type 16
+  data 24
+VkSRTDataNV 64
+  sx 0
+  a 4
+  b 8
+  pvx 12
+  sy 16
+  c 20
+  pvy 24
+  sz 28
+  pvz 32
+  qx 36
+  qy 40
+  qz 44
+  qw 48
+  tx 52
+  ty 56
+  tz 60
+VkSampleLocationEXT 8
+  x 0
+  y 4
+VkSampleLocationsInfoEXT 40
+  sType 0
+  pNext 8
+  sampleLocationsPerPixel 16
+  sampleLocationGridSize 20
+  sampleLocationsCount 28
+  pSampleLocations 32
+VkSamplerBlockMatchWindowCreateInfoQCOM 32
+  sType 0
+  pNext 8
+  windowExtent 16
+  windowCompareMode 24
+VkSamplerBorderColorComponentMappingCreateInfoEXT 40
+  sType 0
+  pNext 8
+  components 16
+  srgb 32
+VkSamplerCaptureDescriptorDataInfoEXT 24
+  sType 0
+  pNext 8
+  sampler 16
+VkSamplerCreateInfo 80
+  sType 0
+  pNext 8
+  flags 16
+  magFilter 20
+  minFilter 24
+  mipmapMode 28
+  addressModeU 32
+  addressModeV 36
+  addressModeW 40
+  mipLodBias 44
+  anisotropyEnable 48
+  maxAnisotropy 52
+  compareEnable 56
+  compareOp 60
+  minLod 64
+  maxLod 68
+  borderColor 72
+  unnormalizedCoordinates 76
+VkSamplerCubicWeightsCreateInfoQCOM 24
+  sType 0
+  pNext 8
+  cubicWeights 16
+VkSamplerCustomBorderColorCreateInfoEXT 40
+  sType 0
+  pNext 8
+  customBorderColor 16
+  format 32
+VkSamplerCustomBorderColorIndexCreateInfoEXT 24
+  sType 0
+  pNext 8
+  index 16
+VkSamplerReductionModeCreateInfo 24
+  sType 0
+  pNext 8
+  reductionMode 16
+VkSamplerYcbcrConversionCreateInfo 64
+  sType 0
+  pNext 8
+  format 16
+  ycbcrModel 20
+  ycbcrRange 24
+  components 28
+  xChromaOffset 44
+  yChromaOffset 48
+  chromaFilter 52
+  forceExplicitReconstruction 56
+VkSamplerYcbcrConversionImageFormatProperties 24
+  sType 0
+  pNext 8
+  combinedImageSamplerDescriptorCount 16
+VkSamplerYcbcrConversionInfo 24
+  sType 0
+  pNext 8
+  conversion 16
+VkSamplerYcbcrConversionYcbcrDegammaCreateInfoQCOM 24
+  sType 0
+  pNext 8
+  enableYDegamma 16
+  enableCbCrDegamma 20
+VkSemaphoreCreateInfo 24
+  sType 0
+  pNext 8
+  flags 16
+VkSemaphoreGetFdInfoKHR 32
+  sType 0
+  pNext 8
+  semaphore 16
+  handleType 24
+VkSemaphoreSignalInfo 32
+  sType 0
+  pNext 8
+  semaphore 16
+  value 24
+VkSemaphoreSubmitInfo 48
+  sType 0
+  pNext 8
+  semaphore 16
+  value 24
+  stageMask 32
+  deviceIndex 40
+VkSemaphoreTypeCreateInfo 32
+  sType 0
+  pNext 8
+  semaphoreType 16
+  initialValue 24
+VkSemaphoreWaitInfo 40
+  sType 0
+  pNext 8
+  flags 16
+  semaphoreCount 20
+  pSemaphores 24
+  pValues 32
+VkSetDescriptorBufferOffsetsInfoEXT 56
+  sType 0
+  pNext 8
+  stageFlags 16
+  layout 24
+  firstSet 32
+  setCount 36
+  pBufferIndices 40
+  pOffsets 48
+VkSetLatencyMarkerInfoNV 32
+  sType 0
+  pNext 8
+  presentID 16
+  marker 24
+VkSetPresentConfigNV 24
+  sType 0
+  pNext 8
+  numFramesPerBatch 16
+  presentConfigFeedback 20
+VkSetStateFlagsIndirectCommandNV 4
+  data 0
+VkShaderCreateInfoEXT 96
+  sType 0
+  pNext 8
+  flags 16
+  stage 20
+  nextStage 24
+  codeType 28
+  codeSize 32
+  pCode 40
+  pName 48
+  setLayoutCount 56
+  pSetLayouts 64
+  pushConstantRangeCount 72
+  pPushConstantRanges 80
+  pSpecializationInfo 88
+VkShaderDescriptorSetAndBindingMappingInfoEXT 32
+  sType 0
+  pNext 8
+  mappingCount 16
+  pMappings 24
+VkShaderInstrumentationCreateInfoARM 16
+  sType 0
+  pNext 8
+VkShaderInstrumentationMetricDataHeaderARM 16
+  resultIndex 0
+  resultSubIndex 4
+  stages 8
+  basicBlockIndex 12
+VkShaderInstrumentationMetricDescriptionARM 528
+  sType 0
+  pNext 8
+  name 16
+  description 272
+VkShaderModuleCreateInfo 40
+  sType 0
+  pNext 8
+  flags 16
+  codeSize 24
+  pCode 32
+VkShaderModuleIdentifierEXT 56
+  sType 0
+  pNext 8
+  identifierSize 16
+  identifier 20
+VkShaderModuleValidationCacheCreateInfoEXT 24
+  sType 0
+  pNext 8
+  validationCache 16
+VkShaderResourceUsageAMD 32
+  numUsedVgprs 0
+  numUsedSgprs 4
+  ldsSizePerLocalWorkGroup 8
+  ldsUsageSizeInBytes 16
+  scratchMemUsageInBytes 24
+VkShaderStatisticsInfoAMD 72
+  shaderStageMask 0
+  resourceUsage 8
+  numPhysicalVgprs 40
+  numPhysicalSgprs 44
+  numAvailableVgprs 48
+  numAvailableSgprs 52
+  computeWorkGroupSize 56
+VkShadingRatePaletteNV 16
+  shadingRatePaletteEntryCount 0
+  pShadingRatePaletteEntries 8
+VkSharedPresentSurfaceCapabilities2KHR 24
+  sType 0
+  pNext 8
+  sharedPresentSupportedUsageFlags 16
+VkSharedPresentSurfaceCapabilitiesKHR 24
+  sType 0
+  pNext 8
+  sharedPresentSupportedUsageFlags 16
+VkSparseBufferMemoryBindInfo 24
+  buffer 0
+  bindCount 8
+  pBinds 16
+VkSparseImageFormatProperties 20
+  aspectMask 0
+  imageGranularity 4
+  flags 16
+VkSparseImageFormatProperties2 40
+  sType 0
+  pNext 8
+  properties 16
+VkSparseImageMemoryBind 64
+  subresource 0
+  offset 12
+  extent 24
+  memory 40
+  memoryOffset 48
+  flags 56
+VkSparseImageMemoryBindInfo 24
+  image 0
+  bindCount 8
+  pBinds 16
+VkSparseImageMemoryRequirements 48
+  formatProperties 0
+  imageMipTailFirstLod 20
+  imageMipTailSize 24
+  imageMipTailOffset 32
+  imageMipTailStride 40
+VkSparseImageMemoryRequirements2 64
+  sType 0
+  pNext 8
+  memoryRequirements 16
+VkSparseImageOpaqueMemoryBindInfo 24
+  image 0
+  bindCount 8
+  pBinds 16
+VkSparseMemoryBind 40
+  resourceOffset 0
+  size 8
+  memory 16
+  memoryOffset 24
+  flags 32
+VkSpecializationInfo 32
+  mapEntryCount 0
+  pMapEntries 8
+  dataSize 16
+  pData 24
+VkSpecializationMapEntry 16
+  constantID 0
+  offset 4
+  size 8
+VkStencilOpState 28
+  failOp 0
+  passOp 4
+  depthFailOp 8
+  compareOp 12
+  compareMask 16
+  writeMask 20
+  reference 24
+VkStridedDeviceAddressNV 16
+  startAddress 0
+  strideInBytes 8
+VkStridedDeviceAddressRangeKHR 24
+  address 0
+  size 8
+  stride 16
+VkStridedDeviceAddressRegionKHR 24
+  deviceAddress 0
+  stride 8
+  size 16
+VkSubmitInfo 72
+  sType 0
+  pNext 8
+  waitSemaphoreCount 16
+  pWaitSemaphores 24
+  pWaitDstStageMask 32
+  commandBufferCount 40
+  pCommandBuffers 48
+  signalSemaphoreCount 56
+  pSignalSemaphores 64
+VkSubmitInfo2 64
+  sType 0
+  pNext 8
+  flags 16
+  waitSemaphoreInfoCount 20
+  pWaitSemaphoreInfos 24
+  commandBufferInfoCount 32
+  pCommandBufferInfos 40
+  signalSemaphoreInfoCount 48
+  pSignalSemaphoreInfos 56
+VkSubpassBeginInfo 24
+  sType 0
+  pNext 8
+  contents 16
+VkSubpassDependency 28
+  srcSubpass 0
+  dstSubpass 4
+  srcStageMask 8
+  dstStageMask 12
+  srcAccessMask 16
+  dstAccessMask 20
+  dependencyFlags 24
+VkSubpassDependency2 48
+  sType 0
+  pNext 8
+  srcSubpass 16
+  dstSubpass 20
+  srcStageMask 24
+  dstStageMask 28
+  srcAccessMask 32
+  dstAccessMask 36
+  dependencyFlags 40
+  viewOffset 44
+VkSubpassDescription 72
+  flags 0
+  pipelineBindPoint 4
+  inputAttachmentCount 8
+  pInputAttachments 16
+  colorAttachmentCount 24
+  pColorAttachments 32
+  pResolveAttachments 40
+  pDepthStencilAttachment 48
+  preserveAttachmentCount 56
+  pPreserveAttachments 64
+VkSubpassDescription2 88
+  sType 0
+  pNext 8
+  flags 16
+  pipelineBindPoint 20
+  viewMask 24
+  inputAttachmentCount 28
+  pInputAttachments 32
+  colorAttachmentCount 40
+  pColorAttachments 48
+  pResolveAttachments 56
+  pDepthStencilAttachment 64
+  preserveAttachmentCount 72
+  pPreserveAttachments 80
+VkSubpassDescriptionDepthStencilResolve 32
+  sType 0
+  pNext 8
+  depthResolveMode 16
+  stencilResolveMode 20
+  pDepthStencilResolveAttachment 24
+VkSubpassEndInfo 16
+  sType 0
+  pNext 8
+VkSubpassResolvePerformanceQueryEXT 24
+  sType 0
+  pNext 8
+  optimal 16
+VkSubpassSampleLocationsEXT 48
+  subpassIndex 0
+  sampleLocationsInfo 8
+VkSubpassShadingPipelineCreateInfoHUAWEI 32
+  sType 0
+  pNext 8
+  renderPass 16
+  subpass 24
+VkSubresourceHostMemcpySize 24
+  sType 0
+  pNext 8
+  size 16
+VkSubresourceLayout 40
+  offset 0
+  size 8
+  rowPitch 16
+  arrayPitch 24
+  depthPitch 32
+VkSubresourceLayout2 56
+  sType 0
+  pNext 8
+  subresourceLayout 16
+VkSubsampledImageFormatPropertiesEXT 24
+  sType 0
+  pNext 8
+  subsampledImageDescriptorCount 16
+VkSurfaceCapabilities2EXT 72
+  sType 0
+  pNext 8
+  minImageCount 16
+  maxImageCount 20
+  currentExtent 24
+  minImageExtent 32
+  maxImageExtent 40
+  maxImageArrayLayers 48
+  supportedTransforms 52
+  currentTransform 56
+  supportedCompositeAlpha 60
+  supportedUsageFlags 64
+  supportedSurfaceCounters 68
+VkSurfaceCapabilities2KHR 72
+  sType 0
+  pNext 8
+  surfaceCapabilities 16
+VkSurfaceCapabilitiesKHR 52
+  minImageCount 0
+  maxImageCount 4
+  currentExtent 8
+  minImageExtent 16
+  maxImageExtent 24
+  maxImageArrayLayers 32
+  supportedTransforms 36
+  currentTransform 40
+  supportedCompositeAlpha 44
+  supportedUsageFlags 48
+VkSurfaceCapabilitiesPresentBarrierNV 24
+  sType 0
+  pNext 8
+  presentBarrierSupported 16
+VkSurfaceCapabilitiesPresentId2KHR 24
+  sType 0
+  pNext 8
+  presentId2Supported 16
+VkSurfaceCapabilitiesPresentWait2KHR 24
+  sType 0
+  pNext 8
+  presentWait2Supported 16
+VkSurfaceFormat2KHR 24
+  sType 0
+  pNext 8
+  surfaceFormat 16
+VkSurfaceFormatKHR 8
+  format 0
+  colorSpace 4
+VkSurfacePresentModeCompatibilityKHR 32
+  sType 0
+  pNext 8
+  presentModeCount 16
+  pPresentModes 24
+VkSurfacePresentModeKHR 24
+  sType 0
+  pNext 8
+  presentMode 16
+VkSurfacePresentScalingCapabilitiesKHR 48
+  sType 0
+  pNext 8
+  supportedPresentScaling 16
+  supportedPresentGravityX 20
+  supportedPresentGravityY 24
+  minScaledImageExtent 28
+  maxScaledImageExtent 36
+VkSurfaceProtectedCapabilitiesKHR 24
+  sType 0
+  pNext 8
+  supportsProtected 16
+VkSwapchainCalibratedTimestampInfoEXT 40
+  sType 0
+  pNext 8
+  swapchain 16
+  presentStage 24
+  timeDomainId 32
+VkSwapchainCounterCreateInfoEXT 24
+  sType 0
+  pNext 8
+  surfaceCounters 16
+VkSwapchainCreateInfoKHR 104
+  sType 0
+  pNext 8
+  flags 16
+  surface 24
+  minImageCount 32
+  imageFormat 36
+  imageColorSpace 40
+  imageExtent 44
+  imageArrayLayers 52
+  imageUsage 56
+  imageSharingMode 60
+  queueFamilyIndexCount 64
+  pQueueFamilyIndices 72
+  preTransform 80
+  compositeAlpha 84
+  presentMode 88
+  clipped 92
+  oldSwapchain 96
+VkSwapchainDisplayNativeHdrCreateInfoAMD 24
+  sType 0
+  pNext 8
+  localDimmingEnable 16
+VkSwapchainFlagsSurfaceCapabilitiesEXT 24
+  sType 0
+  pNext 8
+  swapchainSupportedFlags 16
+VkSwapchainLatencyCreateInfoNV 24
+  sType 0
+  pNext 8
+  latencyModeEnable 16
+VkSwapchainPresentBarrierCreateInfoNV 24
+  sType 0
+  pNext 8
+  presentBarrierEnable 16
+VkSwapchainPresentFenceInfoKHR 32
+  sType 0
+  pNext 8
+  swapchainCount 16
+  pFences 24
+VkSwapchainPresentModeInfoKHR 32
+  sType 0
+  pNext 8
+  swapchainCount 16
+  pPresentModes 24
+VkSwapchainPresentModesCreateInfoKHR 32
+  sType 0
+  pNext 8
+  presentModeCount 16
+  pPresentModes 24
+VkSwapchainPresentScalingCreateInfoKHR 32
+  sType 0
+  pNext 8
+  scalingBehavior 16
+  presentGravityX 20
+  presentGravityY 24
+VkSwapchainTimeDomainPropertiesEXT 40
+  sType 0
+  pNext 8
+  timeDomainCount 16
+  pTimeDomains 24
+  pTimeDomainIds 32
+VkSwapchainTimingPropertiesEXT 32
+  sType 0
+  pNext 8
+  refreshDuration 16
+  refreshInterval 24
+VkTensorCaptureDescriptorDataInfoARM 24
+  sType 0
+  pNext 8
+  tensor 16
+VkTensorCopyARM 48
+  sType 0
+  pNext 8
+  dimensionCount 16
+  pSrcOffset 24
+  pDstOffset 32
+  pExtent 40
+VkTensorCreateInfoARM 48
+  sType 0
+  pNext 8
+  flags 16
+  pDescription 24
+  sharingMode 32
+  queueFamilyIndexCount 36
+  pQueueFamilyIndices 40
+VkTensorDependencyInfoARM 32
+  sType 0
+  pNext 8
+  tensorMemoryBarrierCount 16
+  pTensorMemoryBarriers 24
+VkTensorDescriptionARM 56
+  sType 0
+  pNext 8
+  tiling 16
+  format 20
+  dimensionCount 24
+  pDimensions 32
+  pStrides 40
+  usage 48
+VkTensorExplicitTilingFormatPropertiesARM 56
+  sType 0
+  pNext 8
+  brick16TilingTensorFeatures 16
+  brick8TilingTensorFeatures 24
+  brick4TilingTensorFeatures 32
+  blockUTilingTensorFeatures 40
+  blockU64kTilingTensorFeatures 48
+VkTensorFormatPropertiesARM 32
+  sType 0
+  pNext 8
+  optimalTilingTensorFeatures 16
+  linearTilingTensorFeatures 24
+VkTensorMemoryBarrierARM 64
+  sType 0
+  pNext 8
+  srcStageMask 16
+  srcAccessMask 24
+  dstStageMask 32
+  dstAccessMask 40
+  srcQueueFamilyIndex 48
+  dstQueueFamilyIndex 52
+  tensor 56
+VkTensorMemoryRequirementsInfoARM 24
+  sType 0
+  pNext 8
+  tensor 16
+VkTensorRollingBackingCreateInfoARM 32
+  sType 0
+  pNext 8
+  wraps 16
+VkTensorViewCaptureDescriptorDataInfoARM 24
+  sType 0
+  pNext 8
+  tensorView 16
+VkTensorViewCreateInfoARM 40
+  sType 0
+  pNext 8
+  flags 16
+  tensor 24
+  format 32
+VkTexelBufferDescriptorInfoEXT 40
+  sType 0
+  pNext 8
+  format 16
+  addressRange 24
+VkTextureLODGatherFormatPropertiesAMD 24
+  sType 0
+  pNext 8
+  supportsTextureGatherLODBiasAMD 16
+VkThrottleHintSubmitInfoSEC 24
+  sType 0
+  pNext 8
+  throttleHint 16
+VkTileMemoryBindInfoQCOM 24
+  sType 0
+  pNext 8
+  memory 16
+VkTileMemoryRequirementsQCOM 32
+  sType 0
+  pNext 8
+  size 16
+  alignment 24
+VkTileMemorySizeInfoQCOM 24
+  sType 0
+  pNext 8
+  size 16
+VkTilePropertiesQCOM 48
+  sType 0
+  pNext 8
+  tileSize 16
+  apronSize 28
+  origin 36
+VkTimelineSemaphoreSubmitInfo 48
+  sType 0
+  pNext 8
+  waitSemaphoreValueCount 16
+  pWaitSemaphoreValues 24
+  signalSemaphoreValueCount 32
+  pSignalSemaphoreValues 40
+VkTraceRaysIndirectCommand2KHR 104
+  raygenShaderRecordAddress 0
+  raygenShaderRecordSize 8
+  missShaderBindingTableAddress 16
+  missShaderBindingTableSize 24
+  missShaderBindingTableStride 32
+  hitShaderBindingTableAddress 40
+  hitShaderBindingTableSize 48
+  hitShaderBindingTableStride 56
+  callableShaderBindingTableAddress 64
+  callableShaderBindingTableSize 72
+  callableShaderBindingTableStride 80
+  width 88
+  height 92
+  depth 96
+VkTraceRaysIndirectCommandKHR 12
+  width 0
+  height 4
+  depth 8
+VkTransformMatrixKHR 48
+  matrix 0
+VkValidationCacheCreateInfoEXT 40
+  sType 0
+  pNext 8
+  flags 16
+  initialDataSize 24
+  pInitialData 32
+VkValidationFeaturesEXT 48
+  sType 0
+  pNext 8
+  enabledValidationFeatureCount 16
+  pEnabledValidationFeatures 24
+  disabledValidationFeatureCount 32
+  pDisabledValidationFeatures 40
+VkValidationFlagsEXT 32
+  sType 0
+  pNext 8
+  disabledValidationCheckCount 16
+  pDisabledValidationChecks 24
+VkVertexInputAttributeDescription 16
+  location 0
+  binding 4
+  format 8
+  offset 12
+VkVertexInputAttributeDescription2EXT 32
+  sType 0
+  pNext 8
+  location 16
+  binding 20
+  format 24
+  offset 28
+VkVertexInputBindingDescription 12
+  binding 0
+  stride 4
+  inputRate 8
+VkVertexInputBindingDescription2EXT 32
+  sType 0
+  pNext 8
+  binding 16
+  stride 20
+  inputRate 24
+  divisor 28
+VkVertexInputBindingDivisorDescription 8
+  binding 0
+  divisor 4
+VkVideoBeginCodingInfoKHR 56
+  sType 0
+  pNext 8
+  flags 16
+  videoSession 24
+  videoSessionParameters 32
+  referenceSlotCount 40
+  pReferenceSlots 48
+VkVideoCapabilitiesKHR 336
+  sType 0
+  pNext 8
+  flags 16
+  minBitstreamBufferOffsetAlignment 24
+  minBitstreamBufferSizeAlignment 32
+  pictureAccessGranularity 40
+  minCodedExtent 48
+  maxCodedExtent 56
+  maxDpbSlots 64
+  maxActiveReferencePictures 68
+  stdHeaderVersion 72
+VkVideoCodingControlInfoKHR 24
+  sType 0
+  pNext 8
+  flags 16
+VkVideoDecodeAV1CapabilitiesKHR 24
+  sType 0
+  pNext 8
+  maxLevel 16
+VkVideoDecodeAV1DpbSlotInfoKHR 24
+  sType 0
+  pNext 8
+  pStdReferenceInfo 16
+VkVideoDecodeAV1InlineSessionParametersInfoKHR 24
+  sType 0
+  pNext 8
+  pStdSequenceHeader 16
+VkVideoDecodeAV1PictureInfoKHR 80
+  sType 0
+  pNext 8
+  pStdPictureInfo 16
+  referenceNameSlotIndices 24
+  frameHeaderOffset 52
+  tileCount 56
+  pTileOffsets 64
+  pTileSizes 72
+VkVideoDecodeAV1ProfileInfoKHR 24
+  sType 0
+  pNext 8
+  stdProfile 16
+  filmGrainSupport 20
+VkVideoDecodeAV1SessionParametersCreateInfoKHR 24
+  sType 0
+  pNext 8
+  pStdSequenceHeader 16
+VkVideoDecodeCapabilitiesKHR 24
+  sType 0
+  pNext 8
+  flags 16
+VkVideoDecodeH264CapabilitiesKHR 32
+  sType 0
+  pNext 8
+  maxLevelIdc 16
+  fieldOffsetGranularity 20
+VkVideoDecodeH264DpbSlotInfoKHR 24
+  sType 0
+  pNext 8
+  pStdReferenceInfo 16
+VkVideoDecodeH264InlineSessionParametersInfoKHR 32
+  sType 0
+  pNext 8
+  pStdSPS 16
+  pStdPPS 24
+VkVideoDecodeH264PictureInfoKHR 40
+  sType 0
+  pNext 8
+  pStdPictureInfo 16
+  sliceCount 24
+  pSliceOffsets 32
+VkVideoDecodeH264ProfileInfoKHR 24
+  sType 0
+  pNext 8
+  stdProfileIdc 16
+  pictureLayout 20
+VkVideoDecodeH264SessionParametersAddInfoKHR 48
+  sType 0
+  pNext 8
+  stdSPSCount 16
+  pStdSPSs 24
+  stdPPSCount 32
+  pStdPPSs 40
+VkVideoDecodeH264SessionParametersCreateInfoKHR 32
+  sType 0
+  pNext 8
+  maxStdSPSCount 16
+  maxStdPPSCount 20
+  pParametersAddInfo 24
+VkVideoDecodeH265CapabilitiesKHR 24
+  sType 0
+  pNext 8
+  maxLevelIdc 16
+VkVideoDecodeH265DpbSlotInfoKHR 24
+  sType 0
+  pNext 8
+  pStdReferenceInfo 16
+VkVideoDecodeH265InlineSessionParametersInfoKHR 40
+  sType 0
+  pNext 8
+  pStdVPS 16
+  pStdSPS 24
+  pStdPPS 32
+VkVideoDecodeH265PictureInfoKHR 40
+  sType 0
+  pNext 8
+  pStdPictureInfo 16
+  sliceSegmentCount 24
+  pSliceSegmentOffsets 32
+VkVideoDecodeH265ProfileInfoKHR 24
+  sType 0
+  pNext 8
+  stdProfileIdc 16
+VkVideoDecodeH265SessionParametersAddInfoKHR 64
+  sType 0
+  pNext 8
+  stdVPSCount 16
+  pStdVPSs 24
+  stdSPSCount 32
+  pStdSPSs 40
+  stdPPSCount 48
+  pStdPPSs 56
+VkVideoDecodeH265SessionParametersCreateInfoKHR 40
+  sType 0
+  pNext 8
+  maxStdVPSCount 16
+  maxStdSPSCount 20
+  maxStdPPSCount 24
+  pParametersAddInfo 32
+VkVideoDecodeInfoKHR 120
+  sType 0
+  pNext 8
+  flags 16
+  srcBuffer 24
+  srcBufferOffset 32
+  srcBufferRange 40
+  dstPictureResource 48
+  pSetupReferenceSlot 96
+  referenceSlotCount 104
+  pReferenceSlots 112
+VkVideoDecodeUsageInfoKHR 24
+  sType 0
+  pNext 8
+  videoUsageHints 16
+VkVideoDecodeVP9CapabilitiesKHR 24
+  sType 0
+  pNext 8
+  maxLevel 16
+VkVideoDecodeVP9PictureInfoKHR 48
+  sType 0
+  pNext 8
+  pStdPictureInfo 16
+  referenceNameSlotIndices 24
+  uncompressedHeaderOffset 36
+  compressedHeaderOffset 40
+  tilesOffset 44
+VkVideoDecodeVP9ProfileInfoKHR 24
+  sType 0
+  pNext 8
+  stdProfile 16
+VkVideoEncodeAV1CapabilitiesKHR 128
+  sType 0
+  pNext 8
+  flags 16
+  maxLevel 20
+  codedPictureAlignment 24
+  maxTiles 32
+  minTileSize 40
+  maxTileSize 48
+  superblockSizes 56
+  maxSingleReferenceCount 60
+  singleReferenceNameMask 64
+  maxUnidirectionalCompoundReferenceCount 68
+  maxUnidirectionalCompoundGroup1ReferenceCount 72
+  unidirectionalCompoundReferenceNameMask 76
+  maxBidirectionalCompoundReferenceCount 80
+  maxBidirectionalCompoundGroup1ReferenceCount 84
+  maxBidirectionalCompoundGroup2ReferenceCount 88
+  bidirectionalCompoundReferenceNameMask 92
+  maxTemporalLayerCount 96
+  maxSpatialLayerCount 100
+  maxOperatingPoints 104
+  minQIndex 108
+  maxQIndex 112
+  prefersGopRemainingFrames 116
+  requiresGopRemainingFrames 120
+  stdSyntaxFlags 124
+VkVideoEncodeAV1DpbSlotInfoKHR 24
+  sType 0
+  pNext 8
+  pStdReferenceInfo 16
+VkVideoEncodeAV1FrameSizeKHR 12
+  intraFrameSize 0
+  predictiveFrameSize 4
+  bipredictiveFrameSize 8
+VkVideoEncodeAV1GopRemainingFrameInfoKHR 32
+  sType 0
+  pNext 8
+  useGopRemainingFrames 16
+  gopRemainingIntra 20
+  gopRemainingPredictive 24
+  gopRemainingBipredictive 28
+VkVideoEncodeAV1PictureInfoKHR 80
+  sType 0
+  pNext 8
+  predictionMode 16
+  rateControlGroup 20
+  constantQIndex 24
+  pStdPictureInfo 32
+  referenceNameSlotIndices 40
+  primaryReferenceCdfOnly 68
+  generateObuExtensionHeader 72
+VkVideoEncodeAV1ProfileInfoKHR 24
+  sType 0
+  pNext 8
+  stdProfile 16
+VkVideoEncodeAV1QIndexKHR 12
+  intraQIndex 0
+  predictiveQIndex 4
+  bipredictiveQIndex 8
+VkVideoEncodeAV1QualityLevelPropertiesKHR 88
+  sType 0
+  pNext 8
+  preferredRateControlFlags 16
+  preferredGopFrameCount 20
+  preferredKeyFramePeriod 24
+  preferredConsecutiveBipredictiveFrameCount 28
+  preferredTemporalLayerCount 32
+  preferredConstantQIndex 36
+  preferredMaxSingleReferenceCount 48
+  preferredSingleReferenceNameMask 52
+  preferredMaxUnidirectionalCompoundReferenceCount 56
+  preferredMaxUnidirectionalCompoundGroup1ReferenceCount 60
+  preferredUnidirectionalCompoundReferenceNameMask 64
+  preferredMaxBidirectionalCompoundReferenceCount 68
+  preferredMaxBidirectionalCompoundGroup1ReferenceCount 72
+  preferredMaxBidirectionalCompoundGroup2ReferenceCount 76
+  preferredBidirectionalCompoundReferenceNameMask 80
+VkVideoEncodeAV1QuantizationMapCapabilitiesKHR 24
+  sType 0
+  pNext 8
+  minQIndexDelta 16
+  maxQIndexDelta 20
+VkVideoEncodeAV1RateControlInfoKHR 40
+  sType 0
+  pNext 8
+  flags 16
+  gopFrameCount 20
+  keyFramePeriod 24
+  consecutiveBipredictiveFrameCount 28
+  temporalLayerCount 32
+VkVideoEncodeAV1RateControlLayerInfoKHR 64
+  sType 0
+  pNext 8
+  useMinQIndex 16
+  minQIndex 20
+  useMaxQIndex 32
+  maxQIndex 36
+  useMaxFrameSize 48
+  maxFrameSize 52
+VkVideoEncodeAV1SessionCreateInfoKHR 24
+  sType 0
+  pNext 8
+  useMaxLevel 16
+  maxLevel 20
+VkVideoEncodeAV1SessionParametersCreateInfoKHR 48
+  sType 0
+  pNext 8
+  pStdSequenceHeader 16
+  pStdDecoderModelInfo 24
+  stdOperatingPointCount 32
+  pStdOperatingPoints 40
+VkVideoEncodeCapabilitiesKHR 56
+  sType 0
+  pNext 8
+  flags 16
+  rateControlModes 20
+  maxRateControlLayers 24
+  maxBitrate 32
+  maxQualityLevels 40
+  encodeInputPictureGranularity 44
+  supportedEncodeFeedbackFlags 52
+VkVideoEncodeFeedback2CapabilitiesKHR 24
+  sType 0
+  pNext 8
+  maxPerPartitionFeedbackEntries 16
+  supportedPerPartitionEncodeFeedbackFlags 20
+VkVideoEncodeH264CapabilitiesKHR 72
+  sType 0
+  pNext 8
+  flags 16
+  maxLevelIdc 20
+  maxSliceCount 24
+  maxPPictureL0ReferenceCount 28
+  maxBPictureL0ReferenceCount 32
+  maxL1ReferenceCount 36
+  maxTemporalLayerCount 40
+  expectDyadicTemporalLayerPattern 44
+  minQp 48
+  maxQp 52
+  prefersGopRemainingFrames 56
+  requiresGopRemainingFrames 60
+  stdSyntaxFlags 64
+VkVideoEncodeH264DpbSlotInfoKHR 24
+  sType 0
+  pNext 8
+  pStdReferenceInfo 16
+VkVideoEncodeH264FrameSizeKHR 12
+  frameISize 0
+  framePSize 4
+  frameBSize 8
+VkVideoEncodeH264GopRemainingFrameInfoKHR 32
+  sType 0
+  pNext 8
+  useGopRemainingFrames 16
+  gopRemainingI 20
+  gopRemainingP 24
+  gopRemainingB 28
+VkVideoEncodeH264NaluSliceInfoKHR 32
+  sType 0
+  pNext 8
+  constantQp 16
+  pStdSliceHeader 24
+VkVideoEncodeH264PictureInfoKHR 48
+  sType 0
+  pNext 8
+  naluSliceEntryCount 16
+  pNaluSliceEntries 24
+  pStdPictureInfo 32
+  generatePrefixNalu 40
+VkVideoEncodeH264ProfileInfoKHR 24
+  sType 0
+  pNext 8
+  stdProfileIdc 16
+VkVideoEncodeH264QpKHR 12
+  qpI 0
+  qpP 4
+  qpB 8
+VkVideoEncodeH264QualityLevelPropertiesKHR 64
+  sType 0
+  pNext 8
+  preferredRateControlFlags 16
+  preferredGopFrameCount 20
+  preferredIdrPeriod 24
+  preferredConsecutiveBFrameCount 28
+  preferredTemporalLayerCount 32
+  preferredConstantQp 36
+  preferredMaxL0ReferenceCount 48
+  preferredMaxL1ReferenceCount 52
+  preferredStdEntropyCodingModeFlag 56
+VkVideoEncodeH264QuantizationMapCapabilitiesKHR 24
+  sType 0
+  pNext 8
+  minQpDelta 16
+  maxQpDelta 20
+VkVideoEncodeH264RateControlInfoKHR 40
+  sType 0
+  pNext 8
+  flags 16
+  gopFrameCount 20
+  idrPeriod 24
+  consecutiveBFrameCount 28
+  temporalLayerCount 32
+VkVideoEncodeH264RateControlLayerInfoKHR 64
+  sType 0
+  pNext 8
+  useMinQp 16
+  minQp 20
+  useMaxQp 32
+  maxQp 36
+  useMaxFrameSize 48
+  maxFrameSize 52
+VkVideoEncodeH264SessionCreateInfoKHR 24
+  sType 0
+  pNext 8
+  useMaxLevelIdc 16
+  maxLevelIdc 20
+VkVideoEncodeH264SessionParametersAddInfoKHR 48
+  sType 0
+  pNext 8
+  stdSPSCount 16
+  pStdSPSs 24
+  stdPPSCount 32
+  pStdPPSs 40
+VkVideoEncodeH264SessionParametersCreateInfoKHR 32
+  sType 0
+  pNext 8
+  maxStdSPSCount 16
+  maxStdPPSCount 20
+  pParametersAddInfo 24
+VkVideoEncodeH264SessionParametersFeedbackInfoKHR 24
+  sType 0
+  pNext 8
+  hasStdSPSOverrides 16
+  hasStdPPSOverrides 20
+VkVideoEncodeH264SessionParametersGetInfoKHR 32
+  sType 0
+  pNext 8
+  writeStdSPS 16
+  writeStdPPS 20
+  stdSPSId 24
+  stdPPSId 28
+VkVideoEncodeH265CapabilitiesKHR 88
+  sType 0
+  pNext 8
+  flags 16
+  maxLevelIdc 20
+  maxSliceSegmentCount 24
+  maxTiles 28
+  ctbSizes 36
+  transformBlockSizes 40
+  maxPPictureL0ReferenceCount 44
+  maxBPictureL0ReferenceCount 48
+  maxL1ReferenceCount 52
+  maxSubLayerCount 56
+  expectDyadicTemporalSubLayerPattern 60
+  minQp 64
+  maxQp 68
+  prefersGopRemainingFrames 72
+  requiresGopRemainingFrames 76
+  stdSyntaxFlags 80
+VkVideoEncodeH265DpbSlotInfoKHR 24
+  sType 0
+  pNext 8
+  pStdReferenceInfo 16
+VkVideoEncodeH265FrameSizeKHR 12
+  frameISize 0
+  framePSize 4
+  frameBSize 8
+VkVideoEncodeH265GopRemainingFrameInfoKHR 32
+  sType 0
+  pNext 8
+  useGopRemainingFrames 16
+  gopRemainingI 20
+  gopRemainingP 24
+  gopRemainingB 28
+VkVideoEncodeH265NaluSliceSegmentInfoKHR 32
+  sType 0
+  pNext 8
+  constantQp 16
+  pStdSliceSegmentHeader 24
+VkVideoEncodeH265PictureInfoKHR 40
+  sType 0
+  pNext 8
+  naluSliceSegmentEntryCount 16
+  pNaluSliceSegmentEntries 24
+  pStdPictureInfo 32
+VkVideoEncodeH265ProfileInfoKHR 24
+  sType 0
+  pNext 8
+  stdProfileIdc 16
+VkVideoEncodeH265QpKHR 12
+  qpI 0
+  qpP 4
+  qpB 8
+VkVideoEncodeH265QualityLevelPropertiesKHR 56
+  sType 0
+  pNext 8
+  preferredRateControlFlags 16
+  preferredGopFrameCount 20
+  preferredIdrPeriod 24
+  preferredConsecutiveBFrameCount 28
+  preferredSubLayerCount 32
+  preferredConstantQp 36
+  preferredMaxL0ReferenceCount 48
+  preferredMaxL1ReferenceCount 52
+VkVideoEncodeH265QuantizationMapCapabilitiesKHR 24
+  sType 0
+  pNext 8
+  minQpDelta 16
+  maxQpDelta 20
+VkVideoEncodeH265RateControlInfoKHR 40
+  sType 0
+  pNext 8
+  flags 16
+  gopFrameCount 20
+  idrPeriod 24
+  consecutiveBFrameCount 28
+  subLayerCount 32
+VkVideoEncodeH265RateControlLayerInfoKHR 64
+  sType 0
+  pNext 8
+  useMinQp 16
+  minQp 20
+  useMaxQp 32
+  maxQp 36
+  useMaxFrameSize 48
+  maxFrameSize 52
+VkVideoEncodeH265SessionCreateInfoKHR 24
+  sType 0
+  pNext 8
+  useMaxLevelIdc 16
+  maxLevelIdc 20
+VkVideoEncodeH265SessionParametersAddInfoKHR 64
+  sType 0
+  pNext 8
+  stdVPSCount 16
+  pStdVPSs 24
+  stdSPSCount 32
+  pStdSPSs 40
+  stdPPSCount 48
+  pStdPPSs 56
+VkVideoEncodeH265SessionParametersCreateInfoKHR 40
+  sType 0
+  pNext 8
+  maxStdVPSCount 16
+  maxStdSPSCount 20
+  maxStdPPSCount 24
+  pParametersAddInfo 32
+VkVideoEncodeH265SessionParametersFeedbackInfoKHR 32
+  sType 0
+  pNext 8
+  hasStdVPSOverrides 16
+  hasStdSPSOverrides 20
+  hasStdPPSOverrides 24
+VkVideoEncodeH265SessionParametersGetInfoKHR 40
+  sType 0
+  pNext 8
+  writeStdVPS 16
+  writeStdSPS 20
+  writeStdPPS 24
+  stdVPSId 28
+  stdSPSId 32
+  stdPPSId 36
+VkVideoEncodeInfoKHR 128
+  sType 0
+  pNext 8
+  flags 16
+  dstBuffer 24
+  dstBufferOffset 32
+  dstBufferRange 40
+  srcPictureResource 48
+  pSetupReferenceSlot 96
+  referenceSlotCount 104
+  pReferenceSlots 112
+  precedingExternallyEncodedBytes 120
+VkVideoEncodeIntraRefreshCapabilitiesKHR 40
+  sType 0
+  pNext 8
+  intraRefreshModes 16
+  maxIntraRefreshCycleDuration 20
+  maxIntraRefreshActiveReferencePictures 24
+  partitionIndependentIntraRefreshRegions 28
+  nonRectangularIntraRefreshRegions 32
+VkVideoEncodeIntraRefreshInfoKHR 24
+  sType 0
+  pNext 8
+  intraRefreshCycleDuration 16
+  intraRefreshIndex 20
+VkVideoEncodeProfileRgbConversionInfoVALVE 24
+  sType 0
+  pNext 8
+  performEncodeRgbConversion 16
+VkVideoEncodeQualityLevelInfoKHR 24
+  sType 0
+  pNext 8
+  qualityLevel 16
+VkVideoEncodeQualityLevelPropertiesKHR 24
+  sType 0
+  pNext 8
+  preferredRateControlMode 16
+  preferredRateControlLayerCount 20
+VkVideoEncodeQuantizationMapCapabilitiesKHR 24
+  sType 0
+  pNext 8
+  maxQuantizationMapExtent 16
+VkVideoEncodeQuantizationMapInfoKHR 32
+  sType 0
+  pNext 8
+  quantizationMap 16
+  quantizationMapExtent 24
+VkVideoEncodeQuantizationMapSessionParametersCreateInfoKHR 24
+  sType 0
+  pNext 8
+  quantizationMapTexelSize 16
+VkVideoEncodeRateControlInfoKHR 48
+  sType 0
+  pNext 8
+  flags 16
+  rateControlMode 20
+  layerCount 24
+  pLayers 32
+  virtualBufferSizeInMs 40
+  initialVirtualBufferSizeInMs 44
+VkVideoEncodeRateControlLayerInfoKHR 40
+  sType 0
+  pNext 8
+  averageBitrate 16
+  maxBitrate 24
+  frameRateNumerator 32
+  frameRateDenominator 36
+VkVideoEncodeRgbConversionCapabilitiesVALVE 32
+  sType 0
+  pNext 8
+  rgbModels 16
+  rgbRanges 20
+  xChromaOffsets 24
+  yChromaOffsets 28
+VkVideoEncodeSessionIntraRefreshCreateInfoKHR 24
+  sType 0
+  pNext 8
+  intraRefreshMode 16
+VkVideoEncodeSessionParametersFeedbackInfoKHR 24
+  sType 0
+  pNext 8
+  hasOverrides 16
+VkVideoEncodeSessionParametersGetInfoKHR 24
+  sType 0
+  pNext 8
+  videoSessionParameters 16
+VkVideoEncodeSessionRgbConversionCreateInfoVALVE 32
+  sType 0
+  pNext 8
+  rgbModel 16
+  rgbRange 20
+  xChromaOffset 24
+  yChromaOffset 28
+VkVideoEncodeUsageInfoKHR 32
+  sType 0
+  pNext 8
+  videoUsageHints 16
+  videoContentHints 20
+  tuningMode 24
+VkVideoEndCodingInfoKHR 24
+  sType 0
+  pNext 8
+  flags 16
+VkVideoFormatAV1QuantizationMapPropertiesKHR 24
+  sType 0
+  pNext 8
+  compatibleSuperblockSizes 16
+VkVideoFormatH265QuantizationMapPropertiesKHR 24
+  sType 0
+  pNext 8
+  compatibleCtbSizes 16
+VkVideoFormatPropertiesKHR 56
+  sType 0
+  pNext 8
+  format 16
+  componentMapping 20
+  imageCreateFlags 36
+  imageType 40
+  imageTiling 44
+  imageUsageFlags 48
+VkVideoFormatQuantizationMapPropertiesKHR 24
+  sType 0
+  pNext 8
+  quantizationMapTexelSize 16
+VkVideoInlineQueryInfoKHR 32
+  sType 0
+  pNext 8
+  queryPool 16
+  firstQuery 24
+  queryCount 28
+VkVideoPictureResourceInfoKHR 48
+  sType 0
+  pNext 8
+  codedOffset 16
+  codedExtent 24
+  baseArrayLayer 32
+  imageViewBinding 40
+VkVideoProfileInfoKHR 32
+  sType 0
+  pNext 8
+  videoCodecOperation 16
+  chromaSubsampling 20
+  lumaBitDepth 24
+  chromaBitDepth 28
+VkVideoProfileListInfoKHR 32
+  sType 0
+  pNext 8
+  profileCount 16
+  pProfiles 24
+VkVideoReferenceIntraRefreshInfoKHR 24
+  sType 0
+  pNext 8
+  dirtyIntraRefreshRegions 16
+VkVideoReferenceSlotInfoKHR 32
+  sType 0
+  pNext 8
+  slotIndex 16
+  pPictureResource 24
+VkVideoSessionCreateInfoKHR 64
+  sType 0
+  pNext 8
+  queueFamilyIndex 16
+  flags 20
+  pVideoProfile 24
+  pictureFormat 32
+  maxCodedExtent 36
+  referencePictureFormat 44
+  maxDpbSlots 48
+  maxActiveReferencePictures 52
+  pStdHeaderVersion 56
+VkVideoSessionMemoryRequirementsKHR 48
+  sType 0
+  pNext 8
+  memoryBindIndex 16
+  memoryRequirements 24
+VkVideoSessionParametersCreateInfoKHR 40
+  sType 0
+  pNext 8
+  flags 16
+  videoSessionParametersTemplate 24
+  videoSession 32
+VkVideoSessionParametersUpdateInfoKHR 24
+  sType 0
+  pNext 8
+  updateSequenceCount 16
+VkViewport 24
+  x 0
+  y 4
+  width 8
+  height 12
+  minDepth 16
+  maxDepth 20
+VkViewportSwizzleNV 16
+  x 0
+  y 4
+  z 8
+  w 12
+VkViewportWScalingNV 8
+  xcoeff 0
+  ycoeff 4
+VkWriteDescriptorSet 64
+  sType 0
+  pNext 8
+  dstSet 16
+  dstBinding 24
+  dstArrayElement 28
+  descriptorCount 32
+  descriptorType 36
+  pImageInfo 40
+  pBufferInfo 48
+  pTexelBufferView 56
+VkWriteDescriptorSetAccelerationStructureKHR 32
+  sType 0
+  pNext 8
+  accelerationStructureCount 16
+  pAccelerationStructures 24
+VkWriteDescriptorSetAccelerationStructureNV 32
+  sType 0
+  pNext 8
+  accelerationStructureCount 16
+  pAccelerationStructures 24
+VkWriteDescriptorSetInlineUniformBlock 32
+  sType 0
+  pNext 8
+  dataSize 16
+  pData 24
+VkWriteDescriptorSetPartitionedAccelerationStructureNV 32
+  sType 0
+  pNext 8
+  accelerationStructureCount 16
+  pAccelerationStructures 24
+VkWriteDescriptorSetTensorARM 32
+  sType 0
+  pNext 8
+  tensorViewCount 16
+  pTensorViews 24
+VkWriteIndirectExecutionSetPipelineEXT 32
+  sType 0
+  pNext 8
+  index 16
+  pipeline 24
+VkWriteIndirectExecutionSetShaderEXT 32
+  sType 0
+  pNext 8
+  index 16
+  shader 24
+VkXYColorEXT 8
+  x 0
+  y 4

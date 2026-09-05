@@ -33,7 +33,7 @@ module PipelineDiscardRectangleStateCreateInfoEXT = struct
   let _p_discard_rectangles = field t "pDiscardRectangles" (ptr (Rect2D.t))
   let p_discard_rectangles = _p_discard_rectangles
   let () = seal t
-  let structure_type = Some StructureType.pipeline_discard_rectangle_state_create_info_ext
+  let structure_type : StructureType.t option = Some StructureType.pipeline_discard_rectangle_state_create_info_ext
     let make ?next:arg_next ?flags:(arg_flags=PipelineDiscardRectangleStateCreateFlagsEXT.of_int 0) ?discard_rectangle_mode:(arg_discard_rectangle_mode=DiscardRectangleModeEXT.of_int 0) ?discard_rectangles:(arg_discard_rectangles=[]) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -64,7 +64,7 @@ module PipelineSampleLocationsStateCreateInfoEXT = struct
   let _sample_locations_info = field t "sampleLocationsInfo" (SampleLocationsInfoEXT.t)
   let sample_locations_info = _sample_locations_info
   let () = seal t
-  let structure_type = Some StructureType.pipeline_sample_locations_state_create_info_ext
+  let structure_type : StructureType.t option = Some StructureType.pipeline_sample_locations_state_create_info_ext
     let make ?next:arg_next ?sample_locations_enable:(arg_sample_locations_enable=false) ?sample_locations_info:arg_sample_locations_info () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -95,7 +95,7 @@ module PipelineShaderStageCreateInfo = struct
   let _p_specialization_info = field t "pSpecializationInfo" (ptr (SpecializationInfo.t))
   let p_specialization_info = _p_specialization_info
   let () = seal t
-  let structure_type = Some StructureType.pipeline_shader_stage_create_info
+  let structure_type : StructureType.t option = Some StructureType.pipeline_shader_stage_create_info
     let make ?next:arg_next ?flags:(arg_flags=PipelineShaderStageCreateFlags.of_int 0) ?stage:(arg_stage=ShaderStageFlags.of_int 0) ?module_:(arg_module_=ShaderModule.null) ?name:arg_name ?specialization_info:arg_specialization_info () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -130,7 +130,7 @@ module PipelineViewportCoarseSampleOrderStateCreateInfoNV = struct
   let _p_custom_sample_orders = field t "pCustomSampleOrders" (ptr (CoarseSampleOrderCustomNV.t))
   let p_custom_sample_orders = _p_custom_sample_orders
   let () = seal t
-  let structure_type = Some StructureType.pipeline_viewport_coarse_sample_order_state_create_info_nv
+  let structure_type : StructureType.t option = Some StructureType.pipeline_viewport_coarse_sample_order_state_create_info_nv
     let make ?next:arg_next ?sample_order_type:(arg_sample_order_type=CoarseSampleOrderTypeNV.of_int 0) ?custom_sample_orders:(arg_custom_sample_orders=[]) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -160,7 +160,7 @@ module PipelineViewportExclusiveScissorStateCreateInfoNV = struct
   let _p_exclusive_scissors = field t "pExclusiveScissors" (ptr (Rect2D.t))
   let p_exclusive_scissors = _p_exclusive_scissors
   let () = seal t
-  let structure_type = Some StructureType.pipeline_viewport_exclusive_scissor_state_create_info_nv
+  let structure_type : StructureType.t option = Some StructureType.pipeline_viewport_exclusive_scissor_state_create_info_nv
     let make ?next:arg_next ?exclusive_scissors:(arg_exclusive_scissors=[]) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -195,7 +195,7 @@ module PipelineViewportStateCreateInfo = struct
   let _p_scissors = field t "pScissors" (ptr (Rect2D.t))
   let p_scissors = _p_scissors
   let () = seal t
-  let structure_type = Some StructureType.pipeline_viewport_state_create_info
+  let structure_type : StructureType.t option = Some StructureType.pipeline_viewport_state_create_info
     let make ?next:arg_next ?flags:(arg_flags=PipelineViewportStateCreateFlags.of_int 0) ?viewports:(arg_viewports=[]) ?scissors:(arg_scissors=[]) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -227,7 +227,7 @@ module PresentRegionKHR = struct
   let _p_rectangles = field t "pRectangles" (ptr (RectLayerKHR.t))
   let p_rectangles = _p_rectangles
   let () = seal t
-  let structure_type = None
+  let structure_type : StructureType.t option = None
     let make ?rectangles:(arg_rectangles=[]) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -258,7 +258,7 @@ module PushDescriptorSetInfo = struct
   let _p_descriptor_writes = field t "pDescriptorWrites" (ptr (WriteDescriptorSet.t))
   let p_descriptor_writes = _p_descriptor_writes
   let () = seal t
-  let structure_type = Some StructureType.push_descriptor_set_info
+  let structure_type : StructureType.t option = Some StructureType.push_descriptor_set_info
     let make ?next:arg_next ?stage_flags:(arg_stage_flags=ShaderStageFlags.of_int 0) ?layout:(arg_layout=PipelineLayout.null) ?set:(arg_set=0) ?descriptor_writes:(arg_descriptor_writes=[]) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -288,7 +288,7 @@ module QueueFamilyProperties2 = struct
   let _queue_family_properties = field t "queueFamilyProperties" (QueueFamilyProperties.t)
   let queue_family_properties = _queue_family_properties
   let () = seal t
-  let structure_type = Some StructureType.queue_family_properties_2
+  let structure_type : StructureType.t option = Some StructureType.queue_family_properties_2
     let make ?next:arg_next () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -317,7 +317,7 @@ module RenderPassBeginInfo = struct
   let _p_clear_values = field t "pClearValues" (ptr (ClearValue.t))
   let p_clear_values = _p_clear_values
   let () = seal t
-  let structure_type = Some StructureType.render_pass_begin_info
+  let structure_type : StructureType.t option = Some StructureType.render_pass_begin_info
     let make ?next:arg_next ?render_pass:(arg_render_pass=RenderPass.null) ?framebuffer:(arg_framebuffer=Framebuffer.null) ?render_area:arg_render_area ?clear_values:(arg_clear_values=[]) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -359,7 +359,7 @@ module RenderPassCreateInfo = struct
   let _p_dependencies = field t "pDependencies" (ptr (SubpassDependency.t))
   let p_dependencies = _p_dependencies
   let () = seal t
-  let structure_type = Some StructureType.render_pass_create_info
+  let structure_type : StructureType.t option = Some StructureType.render_pass_create_info
     let make ?next:arg_next ?flags:(arg_flags=RenderPassCreateFlags.of_int 0) ?attachments:(arg_attachments=[]) ?subpasses:(arg_subpasses=[]) ?dependencies:(arg_dependencies=[]) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -415,7 +415,7 @@ module RenderPassCreateInfo2 = struct
   let _p_correlated_view_masks = field t "pCorrelatedViewMasks" (ptr (Vk_base.uint32))
   let p_correlated_view_masks = _p_correlated_view_masks
   let () = seal t
-  let structure_type = Some StructureType.render_pass_create_info_2
+  let structure_type : StructureType.t option = Some StructureType.render_pass_create_info_2
     let make ?next:arg_next ?flags:(arg_flags=RenderPassCreateFlags.of_int 0) ?attachments:(arg_attachments=[]) ?subpasses:(arg_subpasses=[]) ?dependencies:(arg_dependencies=[]) ?correlated_view_masks:(arg_correlated_view_masks=[]) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -461,7 +461,7 @@ module RenderPassStripeInfoARM = struct
   let _stripe_area = field t "stripeArea" (Rect2D.t)
   let stripe_area = _stripe_area
   let () = seal t
-  let structure_type = Some StructureType.render_pass_stripe_info_arm
+  let structure_type : StructureType.t option = Some StructureType.render_pass_stripe_info_arm
     let make ?next:arg_next ?stripe_area:arg_stripe_area () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -497,7 +497,7 @@ module RenderingAttachmentInfo = struct
   let _clear_value = field t "clearValue" (ClearValue.t)
   let clear_value = _clear_value
   let () = seal t
-  let structure_type = Some StructureType.rendering_attachment_info
+  let structure_type : StructureType.t option = Some StructureType.rendering_attachment_info
     let make ?next:arg_next ?image_view:(arg_image_view=ImageView.null) ?image_layout:(arg_image_layout=ImageLayout.of_int 0) ?resolve_mode:(arg_resolve_mode=ResolveModeFlags.of_int 0) ?resolve_image_view:(arg_resolve_image_view=ImageView.null) ?resolve_image_layout:(arg_resolve_image_layout=ImageLayout.of_int 0) ?load_op:(arg_load_op=AttachmentLoadOp.of_int 0) ?store_op:(arg_store_op=AttachmentStoreOp.of_int 0) ?clear_value:arg_clear_value () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -536,7 +536,7 @@ module ResolveImageInfo2 = struct
   let _p_regions = field t "pRegions" (ptr (ImageResolve2.t))
   let p_regions = _p_regions
   let () = seal t
-  let structure_type = Some StructureType.resolve_image_info_2
+  let structure_type : StructureType.t option = Some StructureType.resolve_image_info_2
     let make ?next:arg_next ?src_image:(arg_src_image=Image.null) ?src_image_layout:(arg_src_image_layout=ImageLayout.of_int 0) ?dst_image:(arg_dst_image=Image.null) ?dst_image_layout:(arg_dst_image_layout=ImageLayout.of_int 0) ?regions:(arg_regions=[]) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -589,7 +589,7 @@ module ShaderCreateInfoEXT = struct
   let _p_specialization_info = field t "pSpecializationInfo" (ptr (SpecializationInfo.t))
   let p_specialization_info = _p_specialization_info
   let () = seal t
-  let structure_type = Some StructureType.shader_create_info_ext
+  let structure_type : StructureType.t option = Some StructureType.shader_create_info_ext
     let make ?next:arg_next ?flags:(arg_flags=ShaderCreateFlagsEXT.of_int 0) ?stage:(arg_stage=ShaderStageFlags.of_int 0) ?next_stage:(arg_next_stage=ShaderStageFlags.of_int 0) ?code_type:(arg_code_type=ShaderCodeTypeEXT.of_int 0) ?code:(arg_code="") ?name:arg_name ?set_layouts:(arg_set_layouts=[]) ?push_constant_ranges:(arg_push_constant_ranges=[]) ?specialization_info:arg_specialization_info () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -638,7 +638,7 @@ module SparseImageFormatProperties2 = struct
   let _properties = field t "properties" (SparseImageFormatProperties.t)
   let properties = _properties
   let () = seal t
-  let structure_type = Some StructureType.sparse_image_format_properties_2
+  let structure_type : StructureType.t option = Some StructureType.sparse_image_format_properties_2
     let make ?next:arg_next () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -659,7 +659,7 @@ module SparseImageMemoryBindInfo = struct
   let _p_binds = field t "pBinds" (ptr (SparseImageMemoryBind.t))
   let p_binds = _p_binds
   let () = seal t
-  let structure_type = None
+  let structure_type : StructureType.t option = None
     let make ?image:(arg_image=Image.null) ?binds:(arg_binds=[]) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -687,7 +687,7 @@ module SparseImageMemoryRequirements = struct
   let _image_mip_tail_stride = field t "imageMipTailStride" (Vk_base.device_size)
   let image_mip_tail_stride = _image_mip_tail_stride
   let () = seal t
-  let structure_type = None
+  let structure_type : StructureType.t option = None
     let make () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -702,7 +702,7 @@ module SubpassSampleLocationsEXT = struct
   let _sample_locations_info = field t "sampleLocationsInfo" (SampleLocationsInfoEXT.t)
   let sample_locations_info = _sample_locations_info
   let () = seal t
-  let structure_type = None
+  let structure_type : StructureType.t option = None
     let make ?subpass_index:(arg_subpass_index=0) ?sample_locations_info:arg_sample_locations_info () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -721,7 +721,7 @@ module SurfaceCapabilities2KHR = struct
   let _surface_capabilities = field t "surfaceCapabilities" (SurfaceCapabilitiesKHR.t)
   let surface_capabilities = _surface_capabilities
   let () = seal t
-  let structure_type = Some StructureType.surface_capabilities_2_khr
+  let structure_type : StructureType.t option = Some StructureType.surface_capabilities_2_khr
     let make ?next:arg_next () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -744,7 +744,7 @@ module VideoReferenceSlotInfoKHR = struct
   let _p_picture_resource = field t "pPictureResource" (ptr (VideoPictureResourceInfoKHR.t))
   let p_picture_resource = _p_picture_resource
   let () = seal t
-  let structure_type = Some StructureType.video_reference_slot_info_khr
+  let structure_type : StructureType.t option = Some StructureType.video_reference_slot_info_khr
     let make ?next:arg_next ?slot_index:(arg_slot_index=0) ?picture_resource:arg_picture_resource () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -773,7 +773,7 @@ module AccelerationStructureGeometryKHR = struct
   let _flags = field t "flags" (GeometryFlagsKHR.t)
   let flags = _flags
   let () = seal t
-  let structure_type = Some StructureType.acceleration_structure_geometry_khr
+  let structure_type : StructureType.t option = Some StructureType.acceleration_structure_geometry_khr
     let make ?next:arg_next ?geometry_type:(arg_geometry_type=GeometryTypeKHR.of_int 0) ?geometry:arg_geometry ?flags:(arg_flags=GeometryFlagsKHR.of_int 0) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -805,7 +805,7 @@ module AccelerationStructureInfoNV = struct
   let _p_geometries = field t "pGeometries" (ptr (GeometryNV.t))
   let p_geometries = _p_geometries
   let () = seal t
-  let structure_type = Some StructureType.acceleration_structure_info_nv
+  let structure_type : StructureType.t option = Some StructureType.acceleration_structure_info_nv
     let make ?next:arg_next ?type_:(arg_type_=AccelerationStructureTypeKHR.of_int 0) ?flags:(arg_flags=BuildAccelerationStructureFlagsKHR.of_int 0) ?instance_count:(arg_instance_count=0) ?geometries:(arg_geometries=[]) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -835,7 +835,7 @@ module AccelerationStructureMotionInstanceNV = struct
   let _data = field t "data" (AccelerationStructureMotionInstanceDataNV.t)
   let data = _data
   let () = seal t
-  let structure_type = None
+  let structure_type : StructureType.t option = None
     let make ?type_:(arg_type_=AccelerationStructureMotionInstanceTypeNV.of_int 0) ?flags:(arg_flags=AccelerationStructureMotionInstanceFlagsNV.of_int 0) ?data:arg_data () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -873,7 +873,7 @@ module BindSparseInfo = struct
   let _p_signal_semaphores = field t "pSignalSemaphores" (ptr (Semaphore.t))
   let p_signal_semaphores = _p_signal_semaphores
   let () = seal t
-  let structure_type = Some StructureType.bind_sparse_info
+  let structure_type : StructureType.t option = Some StructureType.bind_sparse_info
     let make ?next:arg_next ?wait_semaphores:(arg_wait_semaphores=[]) ?buffer_binds:(arg_buffer_binds=[]) ?image_opaque_binds:(arg_image_opaque_binds=[]) ?image_binds:(arg_image_binds=[]) ?signal_semaphores:(arg_signal_semaphores=[]) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -938,7 +938,7 @@ module ClusterAccelerationStructureCommandsInfoNV = struct
   let _address_resolution_flags = field t "addressResolutionFlags" (ClusterAccelerationStructureAddressResolutionFlagsNV.t)
   let address_resolution_flags = _address_resolution_flags
   let () = seal t
-  let structure_type = Some StructureType.cluster_acceleration_structure_commands_info_nv
+  let structure_type : StructureType.t option = Some StructureType.cluster_acceleration_structure_commands_info_nv
     let make ?next:arg_next ?input:arg_input ?dst_implicit_data:(arg_dst_implicit_data=0) ?scratch_data:(arg_scratch_data=0) ?dst_addresses_array:arg_dst_addresses_array ?dst_sizes_array:arg_dst_sizes_array ?src_infos_array:arg_src_infos_array ?src_infos_count:(arg_src_infos_count=0) ?address_resolution_flags:(arg_address_resolution_flags=ClusterAccelerationStructureAddressResolutionFlagsNV.of_int 0) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -975,7 +975,7 @@ module ComputePipelineCreateInfo = struct
   let _base_pipeline_index = field t "basePipelineIndex" (Vk_base.int32)
   let base_pipeline_index = _base_pipeline_index
   let () = seal t
-  let structure_type = Some StructureType.compute_pipeline_create_info
+  let structure_type : StructureType.t option = Some StructureType.compute_pipeline_create_info
     let make ?next:arg_next ?flags:(arg_flags=PipelineCreateFlags.of_int 0) ?stage:arg_stage ?layout:(arg_layout=PipelineLayout.null) ?base_pipeline_handle:(arg_base_pipeline_handle=Pipeline.null) ?base_pipeline_index:(arg_base_pipeline_index=0) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -1009,7 +1009,7 @@ module DebugUtilsMessengerCreateInfoEXT = struct
   let _p_user_data = field t "pUserData" (ptr (Ctypes.void))
   let p_user_data = _p_user_data
   let () = seal t
-  let structure_type = Some StructureType.debug_utils_messenger_create_info_ext
+  let structure_type : StructureType.t option = Some StructureType.debug_utils_messenger_create_info_ext
     let make ?next:arg_next ?flags:(arg_flags=DebugUtilsMessengerCreateFlagsEXT.of_int 0) ?message_severity:(arg_message_severity=DebugUtilsMessageSeverityFlagsEXT.of_int 0) ?message_type:(arg_message_type=DebugUtilsMessageTypeFlagsEXT.of_int 0) ?pfn_user_callback:arg_pfn_user_callback ?p_user_data:arg_p_user_data () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -1047,7 +1047,7 @@ module DescriptorSetAndBindingMappingEXT = struct
   let _source_data = field t "sourceData" (DescriptorMappingSourceDataEXT.t)
   let source_data = _source_data
   let () = seal t
-  let structure_type = Some StructureType.descriptor_set_and_binding_mapping_ext
+  let structure_type : StructureType.t option = Some StructureType.descriptor_set_and_binding_mapping_ext
     let make ?next:arg_next ?descriptor_set:(arg_descriptor_set=0) ?first_binding:(arg_first_binding=0) ?binding_count:(arg_binding_count=0) ?resource_mask:(arg_resource_mask=SpirvResourceTypeFlagsEXT.of_int 0) ?source:(arg_source=DescriptorMappingSourceEXT.of_int 0) ?source_data:arg_source_data () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -1064,6 +1064,38 @@ module DescriptorSetAndBindingMappingEXT = struct
     value
 end
 
+module DirectDriverLoadingListLUNARG = struct
+  type t
+  let t : t structure typ = structure "VkDirectDriverLoadingListLUNARG"
+  let _s_type = field t "sType" (StructureType.t)
+  let s_type = _s_type
+  let _p_next = field t "pNext" (ptr (Ctypes.void))
+  let p_next = _p_next
+  let _mode = field t "mode" (DirectDriverLoadingModeLUNARG.t)
+  let mode = _mode
+  let _driver_count = field t "driverCount" (Vk_base.uint32)
+  let driver_count = _driver_count
+  let _p_drivers = field t "pDrivers" (ptr (DirectDriverLoadingInfoLUNARG.t))
+  let p_drivers = _p_drivers
+  let () = seal t
+  let structure_type : StructureType.t option = Some StructureType.direct_driver_loading_list_lunarg
+    let make ?next:arg_next ?mode:(arg_mode=DirectDriverLoadingModeLUNARG.of_int 0) ?drivers:(arg_drivers=[]) () =
+    let value, keep = Vk_base.make_kept t in
+    ignore keep;
+    setf value _s_type StructureType.direct_driver_loading_list_lunarg;
+    (match arg_next with
+     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
+     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
+    setf value _mode arg_mode;
+    setf value _driver_count (List.length arg_drivers);
+    if arg_drivers = [] then setf value _p_drivers (Vk_base.null_ptr (DirectDriverLoadingInfoLUNARG.t)) else begin
+      let items = CArray.of_list (DirectDriverLoadingInfoLUNARG.t) arg_drivers in
+      setf value _p_drivers (CArray.start items);
+      Vk_base.retain keep items; Vk_base.retain keep arg_drivers
+    end;
+    value
+end
+
 module DisplayModeProperties2KHR = struct
   type t
   let t : t structure typ = structure "VkDisplayModeProperties2KHR"
@@ -1074,7 +1106,7 @@ module DisplayModeProperties2KHR = struct
   let _display_mode_properties = field t "displayModeProperties" (DisplayModePropertiesKHR.t)
   let display_mode_properties = _display_mode_properties
   let () = seal t
-  let structure_type = Some StructureType.display_mode_properties_2_khr
+  let structure_type : StructureType.t option = Some StructureType.display_mode_properties_2_khr
     let make ?next:arg_next () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -1107,7 +1139,7 @@ module ExecutionGraphPipelineCreateInfoAMDX = struct
   let _base_pipeline_index = field t "basePipelineIndex" (Vk_base.int32)
   let base_pipeline_index = _base_pipeline_index
   let () = seal t
-  let structure_type = None
+  let structure_type : StructureType.t option = None
     let make ?next:arg_next ?flags:(arg_flags=PipelineCreateFlags.of_int 0) ?stages:(arg_stages=[]) ?library_info:arg_library_info ?layout:(arg_layout=PipelineLayout.null) ?base_pipeline_handle:(arg_base_pipeline_handle=Pipeline.null) ?base_pipeline_index:(arg_base_pipeline_index=0) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -1173,7 +1205,7 @@ module GraphicsPipelineCreateInfo = struct
   let _base_pipeline_index = field t "basePipelineIndex" (Vk_base.int32)
   let base_pipeline_index = _base_pipeline_index
   let () = seal t
-  let structure_type = Some StructureType.graphics_pipeline_create_info
+  let structure_type : StructureType.t option = Some StructureType.graphics_pipeline_create_info
     let make ?next:arg_next ?flags:(arg_flags=PipelineCreateFlags.of_int 0) ?stages:(arg_stages=[]) ?vertex_input_state:arg_vertex_input_state ?input_assembly_state:arg_input_assembly_state ?tessellation_state:arg_tessellation_state ?viewport_state:arg_viewport_state ?rasterization_state:arg_rasterization_state ?multisample_state:arg_multisample_state ?depth_stencil_state:arg_depth_stencil_state ?color_blend_state:arg_color_blend_state ?dynamic_state:arg_dynamic_state ?layout:(arg_layout=PipelineLayout.null) ?render_pass:(arg_render_pass=RenderPass.null) ?subpass:(arg_subpass=0) ?base_pipeline_handle:(arg_base_pipeline_handle=Pipeline.null) ?base_pipeline_index:(arg_base_pipeline_index=0) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -1239,7 +1271,7 @@ module GraphicsShaderGroupCreateInfoNV = struct
   let _p_tessellation_state = field t "pTessellationState" (ptr (PipelineTessellationStateCreateInfo.t))
   let p_tessellation_state = _p_tessellation_state
   let () = seal t
-  let structure_type = Some StructureType.graphics_shader_group_create_info_nv
+  let structure_type : StructureType.t option = Some StructureType.graphics_shader_group_create_info_nv
     let make ?next:arg_next ?stages:(arg_stages=[]) ?vertex_input_state:arg_vertex_input_state ?tessellation_state:arg_tessellation_state () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -1278,7 +1310,7 @@ module ImageConstraintsInfoFUCHSIA = struct
   let _flags = field t "flags" (ImageConstraintsInfoFlagsFUCHSIA.t)
   let flags = _flags
   let () = seal t
-  let structure_type = Some StructureType.image_constraints_info_fuchsia
+  let structure_type : StructureType.t option = Some StructureType.image_constraints_info_fuchsia
     let make ?next:arg_next ?format_constraints:(arg_format_constraints=[]) ?buffer_collection_constraints:arg_buffer_collection_constraints ?flags:(arg_flags=ImageConstraintsInfoFlagsFUCHSIA.of_int 0) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -1311,7 +1343,7 @@ module IndirectCommandsLayoutTokenEXT = struct
   let _offset = field t "offset" (Vk_base.uint32)
   let offset = _offset
   let () = seal t
-  let structure_type = Some StructureType.indirect_commands_layout_token_ext
+  let structure_type : StructureType.t option = Some StructureType.indirect_commands_layout_token_ext
     let make ?next:arg_next ?type_:(arg_type_=IndirectCommandsTokenTypeEXT.of_int 0) ?data:arg_data ?offset:(arg_offset=0) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -1337,7 +1369,7 @@ module IndirectExecutionSetCreateInfoEXT = struct
   let _info = field t "info" (IndirectExecutionSetInfoEXT.t)
   let info = _info
   let () = seal t
-  let structure_type = Some StructureType.indirect_execution_set_create_info_ext
+  let structure_type : StructureType.t option = Some StructureType.indirect_execution_set_create_info_ext
     let make ?next:arg_next ?type_:(arg_type_=IndirectExecutionSetInfoTypeEXT.of_int 0) ?info:arg_info () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -1360,7 +1392,7 @@ module PhysicalDeviceLayeredApiVulkanPropertiesKHR = struct
   let _properties = field t "properties" (PhysicalDeviceProperties2.t)
   let properties = _properties
   let () = seal t
-  let structure_type = Some StructureType.physical_device_layered_api_vulkan_properties_khr
+  let structure_type : StructureType.t option = Some StructureType.physical_device_layered_api_vulkan_properties_khr
     let make ?next:arg_next () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -1383,7 +1415,7 @@ module PresentRegionsKHR = struct
   let _p_regions = field t "pRegions" (ptr (PresentRegionKHR.t))
   let p_regions = _p_regions
   let () = seal t
-  let structure_type = Some StructureType.present_regions_khr
+  let structure_type : StructureType.t option = Some StructureType.present_regions_khr
     let make ?next:arg_next ?regions:(arg_regions=[]) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -1432,7 +1464,7 @@ module RayTracingPipelineCreateInfoKHR = struct
   let _base_pipeline_index = field t "basePipelineIndex" (Vk_base.int32)
   let base_pipeline_index = _base_pipeline_index
   let () = seal t
-  let structure_type = Some StructureType.ray_tracing_pipeline_create_info_khr
+  let structure_type : StructureType.t option = Some StructureType.ray_tracing_pipeline_create_info_khr
     let make ?next:arg_next ?flags:(arg_flags=PipelineCreateFlags.of_int 0) ?stages:(arg_stages=[]) ?groups:(arg_groups=[]) ?max_pipeline_ray_recursion_depth:(arg_max_pipeline_ray_recursion_depth=0) ?library_info:arg_library_info ?library_interface:arg_library_interface ?dynamic_state:arg_dynamic_state ?layout:(arg_layout=PipelineLayout.null) ?base_pipeline_handle:(arg_base_pipeline_handle=Pipeline.null) ?base_pipeline_index:(arg_base_pipeline_index=0) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -1495,7 +1527,7 @@ module RayTracingPipelineCreateInfoNV = struct
   let _base_pipeline_index = field t "basePipelineIndex" (Vk_base.int32)
   let base_pipeline_index = _base_pipeline_index
   let () = seal t
-  let structure_type = Some StructureType.ray_tracing_pipeline_create_info_nv
+  let structure_type : StructureType.t option = Some StructureType.ray_tracing_pipeline_create_info_nv
     let make ?next:arg_next ?flags:(arg_flags=PipelineCreateFlags.of_int 0) ?stages:(arg_stages=[]) ?groups:(arg_groups=[]) ?max_recursion_depth:(arg_max_recursion_depth=0) ?layout:(arg_layout=PipelineLayout.null) ?base_pipeline_handle:(arg_base_pipeline_handle=Pipeline.null) ?base_pipeline_index:(arg_base_pipeline_index=0) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -1539,7 +1571,7 @@ module RenderPassSampleLocationsBeginInfoEXT = struct
   let _p_post_subpass_sample_locations = field t "pPostSubpassSampleLocations" (ptr (SubpassSampleLocationsEXT.t))
   let p_post_subpass_sample_locations = _p_post_subpass_sample_locations
   let () = seal t
-  let structure_type = Some StructureType.render_pass_sample_locations_begin_info_ext
+  let structure_type : StructureType.t option = Some StructureType.render_pass_sample_locations_begin_info_ext
     let make ?next:arg_next ?attachment_initial_sample_locations:(arg_attachment_initial_sample_locations=[]) ?post_subpass_sample_locations:(arg_post_subpass_sample_locations=[]) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -1574,7 +1606,7 @@ module RenderPassStripeBeginInfoARM = struct
   let _p_stripe_infos = field t "pStripeInfos" (ptr (RenderPassStripeInfoARM.t))
   let p_stripe_infos = _p_stripe_infos
   let () = seal t
-  let structure_type = Some StructureType.render_pass_stripe_begin_info_arm
+  let structure_type : StructureType.t option = Some StructureType.render_pass_stripe_begin_info_arm
     let make ?next:arg_next ?stripe_infos:(arg_stripe_infos=[]) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -1615,7 +1647,7 @@ module RenderingInfo = struct
   let _p_stencil_attachment = field t "pStencilAttachment" (ptr (RenderingAttachmentInfo.t))
   let p_stencil_attachment = _p_stencil_attachment
   let () = seal t
-  let structure_type = Some StructureType.rendering_info
+  let structure_type : StructureType.t option = Some StructureType.rendering_info
     let make ?next:arg_next ?flags:(arg_flags=RenderingFlags.of_int 0) ?render_area:arg_render_area ?layer_count:(arg_layer_count=0) ?view_mask:(arg_view_mask=0) ?color_attachments:(arg_color_attachments=[]) ?depth_attachment:arg_depth_attachment ?stencil_attachment:arg_stencil_attachment () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -1670,7 +1702,7 @@ module SparseImageMemoryRequirements2 = struct
   let _memory_requirements = field t "memoryRequirements" (SparseImageMemoryRequirements.t)
   let memory_requirements = _memory_requirements
   let () = seal t
-  let structure_type = Some StructureType.sparse_image_memory_requirements_2
+  let structure_type : StructureType.t option = Some StructureType.sparse_image_memory_requirements_2
     let make ?next:arg_next () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -1699,7 +1731,7 @@ module VideoBeginCodingInfoKHR = struct
   let _p_reference_slots = field t "pReferenceSlots" (ptr (VideoReferenceSlotInfoKHR.t))
   let p_reference_slots = _p_reference_slots
   let () = seal t
-  let structure_type = Some StructureType.video_begin_coding_info_khr
+  let structure_type : StructureType.t option = Some StructureType.video_begin_coding_info_khr
     let make ?next:arg_next ?flags:(arg_flags=VideoBeginCodingFlagsKHR.of_int 0) ?video_session:(arg_video_session=VideoSessionKHR.null) ?video_session_parameters:(arg_video_session_parameters=VideoSessionParametersKHR.null) ?reference_slots:(arg_reference_slots=[]) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -1743,7 +1775,7 @@ module VideoDecodeInfoKHR = struct
   let _p_reference_slots = field t "pReferenceSlots" (ptr (VideoReferenceSlotInfoKHR.t))
   let p_reference_slots = _p_reference_slots
   let () = seal t
-  let structure_type = Some StructureType.video_decode_info_khr
+  let structure_type : StructureType.t option = Some StructureType.video_decode_info_khr
     let make ?next:arg_next ?flags:(arg_flags=VideoDecodeFlagsKHR.of_int 0) ?src_buffer:(arg_src_buffer=Buffer.null) ?src_buffer_offset:(arg_src_buffer_offset=0) ?src_buffer_range:(arg_src_buffer_range=0) ?dst_picture_resource:arg_dst_picture_resource ?setup_reference_slot:arg_setup_reference_slot ?reference_slots:(arg_reference_slots=[]) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -1794,7 +1826,7 @@ module VideoEncodeInfoKHR = struct
   let _preceding_externally_encoded_bytes = field t "precedingExternallyEncodedBytes" (Vk_base.uint32)
   let preceding_externally_encoded_bytes = _preceding_externally_encoded_bytes
   let () = seal t
-  let structure_type = Some StructureType.video_encode_info_khr
+  let structure_type : StructureType.t option = Some StructureType.video_encode_info_khr
     let make ?next:arg_next ?flags:(arg_flags=VideoEncodeFlagsKHR.of_int 0) ?dst_buffer:(arg_dst_buffer=Buffer.null) ?dst_buffer_offset:(arg_dst_buffer_offset=0) ?dst_buffer_range:(arg_dst_buffer_range=0) ?src_picture_resource:arg_src_picture_resource ?setup_reference_slot:arg_setup_reference_slot ?reference_slots:(arg_reference_slots=[]) ?preceding_externally_encoded_bytes:(arg_preceding_externally_encoded_bytes=0) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -1846,7 +1878,7 @@ module AccelerationStructureBuildGeometryInfoKHR = struct
   let _scratch_data = field t "scratchData" (DeviceOrHostAddressKHR.t)
   let scratch_data = _scratch_data
   let () = seal t
-  let structure_type = Some StructureType.acceleration_structure_build_geometry_info_khr
+  let structure_type : StructureType.t option = Some StructureType.acceleration_structure_build_geometry_info_khr
     let make ?next:arg_next ?type_:(arg_type_=AccelerationStructureTypeKHR.of_int 0) ?flags:(arg_flags=BuildAccelerationStructureFlagsKHR.of_int 0) ?mode:(arg_mode=BuildAccelerationStructureModeKHR.of_int 0) ?src_acceleration_structure:(arg_src_acceleration_structure=AccelerationStructureKHR.null) ?dst_acceleration_structure:(arg_dst_acceleration_structure=AccelerationStructureKHR.null) ?geometries:(arg_geometries=[]) ?geometries_2:arg_geometries_2 ?scratch_data:arg_scratch_data () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -1882,7 +1914,7 @@ module AccelerationStructureCreateInfoNV = struct
   let _info = field t "info" (AccelerationStructureInfoNV.t)
   let info = _info
   let () = seal t
-  let structure_type = Some StructureType.acceleration_structure_create_info_nv
+  let structure_type : StructureType.t option = Some StructureType.acceleration_structure_create_info_nv
     let make ?next:arg_next ?compacted_size:(arg_compacted_size=0) ?info:arg_info () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -1911,7 +1943,7 @@ module GraphicsPipelineShaderGroupsCreateInfoNV = struct
   let _p_pipelines = field t "pPipelines" (ptr (Pipeline.t))
   let p_pipelines = _p_pipelines
   let () = seal t
-  let structure_type = Some StructureType.graphics_pipeline_shader_groups_create_info_nv
+  let structure_type : StructureType.t option = Some StructureType.graphics_pipeline_shader_groups_create_info_nv
     let make ?next:arg_next ?groups:(arg_groups=[]) ?pipelines:(arg_pipelines=[]) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -1954,7 +1986,7 @@ module IndirectCommandsLayoutCreateInfoEXT = struct
   let _p_tokens = field t "pTokens" (ptr (IndirectCommandsLayoutTokenEXT.t))
   let p_tokens = _p_tokens
   let () = seal t
-  let structure_type = Some StructureType.indirect_commands_layout_create_info_ext
+  let structure_type : StructureType.t option = Some StructureType.indirect_commands_layout_create_info_ext
     let make ?next:arg_next ?flags:(arg_flags=IndirectCommandsLayoutUsageFlagsEXT.of_int 0) ?shader_stages:(arg_shader_stages=ShaderStageFlags.of_int 0) ?indirect_stride:(arg_indirect_stride=0) ?pipeline_layout:(arg_pipeline_layout=PipelineLayout.null) ?tokens:(arg_tokens=[]) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -1987,7 +2019,7 @@ module ResourceDescriptorInfoEXT = struct
   let _data = field t "data" (ResourceDescriptorDataEXT.t)
   let data = _data
   let () = seal t
-  let structure_type = Some StructureType.resource_descriptor_info_ext
+  let structure_type : StructureType.t option = Some StructureType.resource_descriptor_info_ext
     let make ?next:arg_next ?type_:(arg_type_=DescriptorType.of_int 0) ?data:arg_data () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -2012,7 +2044,7 @@ module ShaderDescriptorSetAndBindingMappingInfoEXT = struct
   let _p_mappings = field t "pMappings" (ptr (DescriptorSetAndBindingMappingEXT.t))
   let p_mappings = _p_mappings
   let () = seal t
-  let structure_type = Some StructureType.shader_descriptor_set_and_binding_mapping_info_ext
+  let structure_type : StructureType.t option = Some StructureType.shader_descriptor_set_and_binding_mapping_info_ext
     let make ?next:arg_next ?mappings:(arg_mappings=[]) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -2156,5 +2188,3 @@ module ExportMemoryAllocateInfoKHR = ExportMemoryAllocateInfo
 module ExportSemaphoreCreateInfoKHR = ExportSemaphoreCreateInfo
 
 module ExternalBufferPropertiesKHR = ExternalBufferProperties
-
-module ExternalFencePropertiesKHR = ExternalFenceProperties

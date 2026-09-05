@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 from pathlib import Path
+import re
 
 from .emit_common import Context, ocaml_int, ocaml_string, write_generated
 from . import naming
@@ -24,6 +25,12 @@ def emit(ctx: Context, out: Path) -> None:
         lines.append(f"let {naming.constant_name(c_name)} = {_literal(value)}")
     if "VK_HEADER_VERSION" in ctx.registry.constants:
         lines.append("let header_version = vk_header_version")
+    else:
+        header_define = ctx.registry.defines.get("VK_HEADER_VERSION", "")
+        match = re.search(r"#define VK_HEADER_VERSION (\d+)", header_define)
+        if not match:
+            raise ValueError("VK_HEADER_VERSION define is missing or malformed")
+        lines.append(f"let header_version = {match.group(1)}")
     if "VK_WHOLE_SIZE" not in ctx.registry.constants:
         lines.append("let whole_size = -1")
 

@@ -652,9 +652,10 @@ let cmd_bind_index_buffer arg_command_buffer arg_buffer arg_offset arg_index_typ
 let cmd_bind_vertex_buffers arg_command_buffer arg_first_binding arg_buffers arg_offsets =
   let array_buffers = CArray.of_list (Buffer.t) arg_buffers in
   let pointer_buffers = if arg_buffers = [] then Vk_base.null_ptr (Buffer.t) else CArray.start array_buffers in
+  if List.length arg_offsets <> List.length arg_buffers then invalid_arg "vkCmdBindVertexBuffers: array lengths differ";
   let array_offsets = CArray.of_list (Vk_base.device_size) arg_offsets in
   let pointer_offsets = if arg_offsets = [] then Vk_base.null_ptr (Vk_base.device_size) else CArray.start array_offsets in
-  Vk_fn.cmd_bind_vertex_buffers (arg_command_buffer) (arg_first_binding) (List.length arg_offsets) (pointer_buffers) (pointer_offsets)
+  Vk_fn.cmd_bind_vertex_buffers (arg_command_buffer) (arg_first_binding) (List.length arg_buffers) (pointer_buffers) (pointer_offsets)
 
 let cmd_draw arg_command_buffer arg_vertex_count arg_instance_count arg_first_vertex arg_first_instance =
   Vk_fn.cmd_draw (arg_command_buffer) (arg_vertex_count) (arg_instance_count) (arg_first_vertex) (arg_first_instance)
@@ -735,10 +736,8 @@ let cmd_copy_memory_to_image_indirect_nv arg_command_buffer arg_copy_buffer_addr
 let cmd_copy_memory_to_image_indirect_khr arg_command_buffer arg_copy_memory_to_image_indirect_info =
   Vk_fn.cmd_copy_memory_to_image_indirect_khr (arg_command_buffer) (addr arg_copy_memory_to_image_indirect_info)
 
-let cmd_update_buffer arg_command_buffer arg_dst_buffer arg_dst_offset arg_data =
-  let array_data = CArray.of_list (Ctypes.void) arg_data in
-  let pointer_data = if arg_data = [] then Vk_base.null_ptr (Ctypes.void) else CArray.start array_data in
-  Vk_fn.cmd_update_buffer (arg_command_buffer) (arg_dst_buffer) (arg_dst_offset) (List.length arg_data) (pointer_data)
+let cmd_update_buffer arg_command_buffer arg_dst_buffer arg_dst_offset arg_data_size arg_data =
+  Vk_fn.cmd_update_buffer (arg_command_buffer) (arg_dst_buffer) (arg_dst_offset) (arg_data_size) (arg_data)
 
 let cmd_fill_buffer arg_command_buffer arg_dst_buffer arg_dst_offset arg_size arg_data =
   Vk_fn.cmd_fill_buffer (arg_command_buffer) (arg_dst_buffer) (arg_dst_offset) (arg_size) (arg_data)
@@ -815,10 +814,8 @@ let cmd_write_timestamp arg_command_buffer arg_pipeline_stage arg_query_pool arg
 let cmd_copy_query_pool_results arg_command_buffer arg_query_pool arg_first_query arg_query_count arg_dst_buffer arg_dst_offset arg_stride arg_flags =
   Vk_fn.cmd_copy_query_pool_results (arg_command_buffer) (arg_query_pool) (arg_first_query) (arg_query_count) (arg_dst_buffer) (arg_dst_offset) (arg_stride) (arg_flags)
 
-let cmd_push_constants arg_command_buffer arg_layout arg_stage_flags arg_offset arg_values =
-  let array_values = CArray.of_list (Ctypes.void) arg_values in
-  let pointer_values = if arg_values = [] then Vk_base.null_ptr (Ctypes.void) else CArray.start array_values in
-  Vk_fn.cmd_push_constants (arg_command_buffer) (arg_layout) (arg_stage_flags) (arg_offset) (List.length arg_values) (pointer_values)
+let cmd_push_constants arg_command_buffer arg_layout arg_stage_flags arg_offset arg_size arg_values =
+  Vk_fn.cmd_push_constants (arg_command_buffer) (arg_layout) (arg_stage_flags) (arg_offset) (arg_size) (arg_values)
 
 let cmd_begin_render_pass arg_command_buffer arg_render_pass_begin arg_contents =
   Vk_fn.cmd_begin_render_pass (arg_command_buffer) (addr arg_render_pass_begin) (arg_contents)
@@ -1368,17 +1365,15 @@ let import_fence_fd_khr arg_device arg_import_fence_fd_info =
   check result;
   ()
 
-let get_fence_sci_sync_fence_nv arg_device arg_get_sci_sync_handle_info =
-  let output = allocate (Ctypes.void) (()) in
-  let result = Vk_fn.get_fence_sci_sync_fence_nv (arg_device) (addr arg_get_sci_sync_handle_info) (output) in
+let get_fence_sci_sync_fence_nv arg_device arg_get_sci_sync_handle_info arg_handle =
+  let result = Vk_fn.get_fence_sci_sync_fence_nv (arg_device) (addr arg_get_sci_sync_handle_info) (arg_handle) in
   check result;
-  !@ output
+  ()
 
-let get_fence_sci_sync_obj_nv arg_device arg_get_sci_sync_handle_info =
-  let output = allocate (Ctypes.void) (()) in
-  let result = Vk_fn.get_fence_sci_sync_obj_nv (arg_device) (addr arg_get_sci_sync_handle_info) (output) in
+let get_fence_sci_sync_obj_nv arg_device arg_get_sci_sync_handle_info arg_handle =
+  let result = Vk_fn.get_fence_sci_sync_obj_nv (arg_device) (addr arg_get_sci_sync_handle_info) (arg_handle) in
   check result;
-  !@ output
+  ()
 
 let import_fence_sci_sync_fence_nv arg_device arg_import_fence_sci_sync_info =
   let result = Vk_fn.import_fence_sci_sync_fence_nv (arg_device) (addr arg_import_fence_sci_sync_info) in
@@ -1390,11 +1385,10 @@ let import_fence_sci_sync_obj_nv arg_device arg_import_fence_sci_sync_info =
   check result;
   ()
 
-let get_semaphore_sci_sync_obj_nv arg_device arg_get_sci_sync_info =
-  let output = allocate (Ctypes.void) (()) in
-  let result = Vk_fn.get_semaphore_sci_sync_obj_nv (arg_device) (addr arg_get_sci_sync_info) (output) in
+let get_semaphore_sci_sync_obj_nv arg_device arg_get_sci_sync_info arg_handle =
+  let result = Vk_fn.get_semaphore_sci_sync_obj_nv (arg_device) (addr arg_get_sci_sync_info) (arg_handle) in
   check result;
-  !@ output
+  ()
 
 let import_semaphore_sci_sync_obj_nv arg_device arg_import_semaphore_sci_sync_info =
   let result = Vk_fn.import_semaphore_sci_sync_obj_nv (arg_device) (addr arg_import_semaphore_sci_sync_info) in
@@ -1562,9 +1556,10 @@ let cmd_push_descriptor_set_with_template arg_command_buffer arg_descriptor_upda
 let set_hdr_metadata_ext arg_device arg_swapchains arg_metadata =
   let array_swapchains = CArray.of_list (SwapchainKHR.t) arg_swapchains in
   let pointer_swapchains = if arg_swapchains = [] then Vk_base.null_ptr (SwapchainKHR.t) else CArray.start array_swapchains in
+  if List.length arg_metadata <> List.length arg_swapchains then invalid_arg "vkSetHdrMetadataEXT: array lengths differ";
   let array_metadata = CArray.of_list (HdrMetadataEXT.t) arg_metadata in
   let pointer_metadata = if arg_metadata = [] then Vk_base.null_ptr (HdrMetadataEXT.t) else CArray.start array_metadata in
-  Vk_fn.set_hdr_metadata_ext (arg_device) (List.length arg_metadata) (pointer_swapchains) (pointer_metadata)
+  Vk_fn.set_hdr_metadata_ext (arg_device) (List.length arg_swapchains) (pointer_swapchains) (pointer_metadata)
 
 let get_swapchain_status_khr arg_device arg_swapchain =
   let result = Vk_fn.get_swapchain_status_khr (arg_device) (arg_swapchain) in
@@ -1950,25 +1945,29 @@ let get_queue_checkpoint_data_nv arg_queue =
 let cmd_bind_transform_feedback_buffers_ext arg_command_buffer arg_first_binding arg_buffers arg_offsets arg_sizes =
   let array_buffers = CArray.of_list (Buffer.t) arg_buffers in
   let pointer_buffers = if arg_buffers = [] then Vk_base.null_ptr (Buffer.t) else CArray.start array_buffers in
+  if List.length arg_offsets <> List.length arg_buffers then invalid_arg "vkCmdBindTransformFeedbackBuffersEXT: array lengths differ";
+  if List.length arg_sizes <> List.length arg_buffers then invalid_arg "vkCmdBindTransformFeedbackBuffersEXT: array lengths differ";
   let array_offsets = CArray.of_list (Vk_base.device_size) arg_offsets in
   let pointer_offsets = if arg_offsets = [] then Vk_base.null_ptr (Vk_base.device_size) else CArray.start array_offsets in
   let array_sizes = CArray.of_list (Vk_base.device_size) arg_sizes in
   let pointer_sizes = if arg_sizes = [] then Vk_base.null_ptr (Vk_base.device_size) else CArray.start array_sizes in
-  Vk_fn.cmd_bind_transform_feedback_buffers_ext (arg_command_buffer) (arg_first_binding) (List.length arg_sizes) (pointer_buffers) (pointer_offsets) (pointer_sizes)
+  Vk_fn.cmd_bind_transform_feedback_buffers_ext (arg_command_buffer) (arg_first_binding) (List.length arg_buffers) (pointer_buffers) (pointer_offsets) (pointer_sizes)
 
 let cmd_begin_transform_feedback_ext arg_command_buffer arg_first_counter_buffer arg_counter_buffers arg_counter_buffer_offsets =
   let array_counter_buffers = CArray.of_list (Buffer.t) arg_counter_buffers in
   let pointer_counter_buffers = if arg_counter_buffers = [] then Vk_base.null_ptr (Buffer.t) else CArray.start array_counter_buffers in
+  if List.length arg_counter_buffer_offsets <> List.length arg_counter_buffers then invalid_arg "vkCmdBeginTransformFeedbackEXT: array lengths differ";
   let array_counter_buffer_offsets = CArray.of_list (Vk_base.device_size) arg_counter_buffer_offsets in
   let pointer_counter_buffer_offsets = if arg_counter_buffer_offsets = [] then Vk_base.null_ptr (Vk_base.device_size) else CArray.start array_counter_buffer_offsets in
-  Vk_fn.cmd_begin_transform_feedback_ext (arg_command_buffer) (arg_first_counter_buffer) (List.length arg_counter_buffer_offsets) (pointer_counter_buffers) (pointer_counter_buffer_offsets)
+  Vk_fn.cmd_begin_transform_feedback_ext (arg_command_buffer) (arg_first_counter_buffer) (List.length arg_counter_buffers) (pointer_counter_buffers) (pointer_counter_buffer_offsets)
 
 let cmd_end_transform_feedback_ext arg_command_buffer arg_first_counter_buffer arg_counter_buffers arg_counter_buffer_offsets =
   let array_counter_buffers = CArray.of_list (Buffer.t) arg_counter_buffers in
   let pointer_counter_buffers = if arg_counter_buffers = [] then Vk_base.null_ptr (Buffer.t) else CArray.start array_counter_buffers in
+  if List.length arg_counter_buffer_offsets <> List.length arg_counter_buffers then invalid_arg "vkCmdEndTransformFeedbackEXT: array lengths differ";
   let array_counter_buffer_offsets = CArray.of_list (Vk_base.device_size) arg_counter_buffer_offsets in
   let pointer_counter_buffer_offsets = if arg_counter_buffer_offsets = [] then Vk_base.null_ptr (Vk_base.device_size) else CArray.start array_counter_buffer_offsets in
-  Vk_fn.cmd_end_transform_feedback_ext (arg_command_buffer) (arg_first_counter_buffer) (List.length arg_counter_buffer_offsets) (pointer_counter_buffers) (pointer_counter_buffer_offsets)
+  Vk_fn.cmd_end_transform_feedback_ext (arg_command_buffer) (arg_first_counter_buffer) (List.length arg_counter_buffers) (pointer_counter_buffers) (pointer_counter_buffer_offsets)
 
 let cmd_begin_query_indexed_ext arg_command_buffer arg_query_pool arg_query arg_flags arg_index =
   Vk_fn.cmd_begin_query_indexed_ext (arg_command_buffer) (arg_query_pool) (arg_query) (arg_flags) (arg_index)
@@ -2424,11 +2423,13 @@ let cmd_build_acceleration_structures_khr arg_command_buffer arg_infos arg_build
 let cmd_build_acceleration_structures_indirect_khr arg_command_buffer arg_infos arg_indirect_device_addresses arg_indirect_strides arg_max_primitive_counts =
   let array_infos = CArray.of_list (AccelerationStructureBuildGeometryInfoKHR.t) arg_infos in
   let pointer_infos = if arg_infos = [] then Vk_base.null_ptr (AccelerationStructureBuildGeometryInfoKHR.t) else CArray.start array_infos in
+  if List.length arg_indirect_device_addresses <> List.length arg_infos then invalid_arg "vkCmdBuildAccelerationStructuresIndirectKHR: array lengths differ";
+  if List.length arg_indirect_strides <> List.length arg_infos then invalid_arg "vkCmdBuildAccelerationStructuresIndirectKHR: array lengths differ";
   let array_indirect_device_addresses = CArray.of_list (Vk_base.device_address) arg_indirect_device_addresses in
   let pointer_indirect_device_addresses = if arg_indirect_device_addresses = [] then Vk_base.null_ptr (Vk_base.device_address) else CArray.start array_indirect_device_addresses in
   let array_indirect_strides = CArray.of_list (Vk_base.uint32) arg_indirect_strides in
   let pointer_indirect_strides = if arg_indirect_strides = [] then Vk_base.null_ptr (Vk_base.uint32) else CArray.start array_indirect_strides in
-  Vk_fn.cmd_build_acceleration_structures_indirect_khr (arg_command_buffer) (List.length arg_indirect_strides) (pointer_infos) (pointer_indirect_device_addresses) (pointer_indirect_strides) (arg_max_primitive_counts)
+  Vk_fn.cmd_build_acceleration_structures_indirect_khr (arg_command_buffer) (List.length arg_infos) (pointer_infos) (pointer_indirect_device_addresses) (pointer_indirect_strides) (arg_max_primitive_counts)
 
 let build_acceleration_structures_khr arg_device arg_deferred_operation arg_infos arg_build_range_infos =
   let array_infos = CArray.of_list (AccelerationStructureBuildGeometryInfoKHR.t) arg_infos in
@@ -2496,13 +2497,16 @@ let cmd_bind_index_buffer_2 arg_command_buffer arg_buffer arg_offset arg_size ar
 let cmd_bind_vertex_buffers_2 arg_command_buffer arg_first_binding arg_buffers arg_offsets arg_sizes arg_strides =
   let array_buffers = CArray.of_list (Buffer.t) arg_buffers in
   let pointer_buffers = if arg_buffers = [] then Vk_base.null_ptr (Buffer.t) else CArray.start array_buffers in
+  if List.length arg_offsets <> List.length arg_buffers then invalid_arg "vkCmdBindVertexBuffers2: array lengths differ";
+  if List.length arg_sizes <> List.length arg_buffers then invalid_arg "vkCmdBindVertexBuffers2: array lengths differ";
+  if List.length arg_strides <> List.length arg_buffers then invalid_arg "vkCmdBindVertexBuffers2: array lengths differ";
   let array_offsets = CArray.of_list (Vk_base.device_size) arg_offsets in
   let pointer_offsets = if arg_offsets = [] then Vk_base.null_ptr (Vk_base.device_size) else CArray.start array_offsets in
   let array_sizes = CArray.of_list (Vk_base.device_size) arg_sizes in
   let pointer_sizes = if arg_sizes = [] then Vk_base.null_ptr (Vk_base.device_size) else CArray.start array_sizes in
   let array_strides = CArray.of_list (Vk_base.device_size) arg_strides in
   let pointer_strides = if arg_strides = [] then Vk_base.null_ptr (Vk_base.device_size) else CArray.start array_strides in
-  Vk_fn.cmd_bind_vertex_buffers_2 (arg_command_buffer) (arg_first_binding) (List.length arg_strides) (pointer_buffers) (pointer_offsets) (pointer_sizes) (pointer_strides)
+  Vk_fn.cmd_bind_vertex_buffers_2 (arg_command_buffer) (arg_first_binding) (List.length arg_buffers) (pointer_buffers) (pointer_offsets) (pointer_sizes) (pointer_strides)
 
 let cmd_set_depth_test_enable arg_command_buffer arg_depth_test_enable =
   Vk_fn.cmd_set_depth_test_enable (arg_command_buffer) (arg_depth_test_enable)
@@ -2744,9 +2748,10 @@ let cmd_reset_event_2 arg_command_buffer arg_event arg_stage_mask =
 let cmd_wait_events_2 arg_command_buffer arg_events arg_dependency_infos =
   let array_events = CArray.of_list (Event.t) arg_events in
   let pointer_events = if arg_events = [] then Vk_base.null_ptr (Event.t) else CArray.start array_events in
+  if List.length arg_dependency_infos <> List.length arg_events then invalid_arg "vkCmdWaitEvents2: array lengths differ";
   let array_dependency_infos = CArray.of_list (DependencyInfo.t) arg_dependency_infos in
   let pointer_dependency_infos = if arg_dependency_infos = [] then Vk_base.null_ptr (DependencyInfo.t) else CArray.start array_dependency_infos in
-  Vk_fn.cmd_wait_events_2 (arg_command_buffer) (List.length arg_dependency_infos) (pointer_events) (pointer_dependency_infos)
+  Vk_fn.cmd_wait_events_2 (arg_command_buffer) (List.length arg_events) (pointer_events) (pointer_dependency_infos)
 
 let cmd_pipeline_barrier_2 arg_command_buffer arg_dependency_info =
   Vk_fn.cmd_pipeline_barrier_2 (arg_command_buffer) (addr arg_dependency_info)
@@ -2955,42 +2960,38 @@ let cmd_bind_descriptor_buffers_ext arg_command_buffer arg_binding_infos =
 let cmd_set_descriptor_buffer_offsets_ext arg_command_buffer arg_pipeline_bind_point arg_layout arg_first_set arg_buffer_indices arg_offsets =
   let array_buffer_indices = CArray.of_list (Vk_base.uint32) arg_buffer_indices in
   let pointer_buffer_indices = if arg_buffer_indices = [] then Vk_base.null_ptr (Vk_base.uint32) else CArray.start array_buffer_indices in
+  if List.length arg_offsets <> List.length arg_buffer_indices then invalid_arg "vkCmdSetDescriptorBufferOffsetsEXT: array lengths differ";
   let array_offsets = CArray.of_list (Vk_base.device_size) arg_offsets in
   let pointer_offsets = if arg_offsets = [] then Vk_base.null_ptr (Vk_base.device_size) else CArray.start array_offsets in
-  Vk_fn.cmd_set_descriptor_buffer_offsets_ext (arg_command_buffer) (arg_pipeline_bind_point) (arg_layout) (arg_first_set) (List.length arg_offsets) (pointer_buffer_indices) (pointer_offsets)
+  Vk_fn.cmd_set_descriptor_buffer_offsets_ext (arg_command_buffer) (arg_pipeline_bind_point) (arg_layout) (arg_first_set) (List.length arg_buffer_indices) (pointer_buffer_indices) (pointer_offsets)
 
 let cmd_bind_descriptor_buffer_embedded_samplers_ext arg_command_buffer arg_pipeline_bind_point arg_layout arg_set =
   Vk_fn.cmd_bind_descriptor_buffer_embedded_samplers_ext (arg_command_buffer) (arg_pipeline_bind_point) (arg_layout) (arg_set)
 
-let get_buffer_opaque_capture_descriptor_data_ext arg_device arg_info =
-  let output = allocate (Ctypes.void) (()) in
-  let result = Vk_fn.get_buffer_opaque_capture_descriptor_data_ext (arg_device) (addr arg_info) (output) in
+let get_buffer_opaque_capture_descriptor_data_ext arg_device arg_info arg_data =
+  let result = Vk_fn.get_buffer_opaque_capture_descriptor_data_ext (arg_device) (addr arg_info) (arg_data) in
   check result;
-  !@ output
+  ()
 
-let get_image_opaque_capture_descriptor_data_ext arg_device arg_info =
-  let output = allocate (Ctypes.void) (()) in
-  let result = Vk_fn.get_image_opaque_capture_descriptor_data_ext (arg_device) (addr arg_info) (output) in
+let get_image_opaque_capture_descriptor_data_ext arg_device arg_info arg_data =
+  let result = Vk_fn.get_image_opaque_capture_descriptor_data_ext (arg_device) (addr arg_info) (arg_data) in
   check result;
-  !@ output
+  ()
 
-let get_image_view_opaque_capture_descriptor_data_ext arg_device arg_info =
-  let output = allocate (Ctypes.void) (()) in
-  let result = Vk_fn.get_image_view_opaque_capture_descriptor_data_ext (arg_device) (addr arg_info) (output) in
+let get_image_view_opaque_capture_descriptor_data_ext arg_device arg_info arg_data =
+  let result = Vk_fn.get_image_view_opaque_capture_descriptor_data_ext (arg_device) (addr arg_info) (arg_data) in
   check result;
-  !@ output
+  ()
 
-let get_sampler_opaque_capture_descriptor_data_ext arg_device arg_info =
-  let output = allocate (Ctypes.void) (()) in
-  let result = Vk_fn.get_sampler_opaque_capture_descriptor_data_ext (arg_device) (addr arg_info) (output) in
+let get_sampler_opaque_capture_descriptor_data_ext arg_device arg_info arg_data =
+  let result = Vk_fn.get_sampler_opaque_capture_descriptor_data_ext (arg_device) (addr arg_info) (arg_data) in
   check result;
-  !@ output
+  ()
 
-let get_acceleration_structure_opaque_capture_descriptor_data_ext arg_device arg_info =
-  let output = allocate (Ctypes.void) (()) in
-  let result = Vk_fn.get_acceleration_structure_opaque_capture_descriptor_data_ext (arg_device) (addr arg_info) (output) in
+let get_acceleration_structure_opaque_capture_descriptor_data_ext arg_device arg_info arg_data =
+  let result = Vk_fn.get_acceleration_structure_opaque_capture_descriptor_data_ext (arg_device) (addr arg_info) (arg_data) in
   check result;
-  !@ output
+  ()
 
 let set_device_memory_priority_ext arg_device arg_memory arg_priority =
   Vk_fn.set_device_memory_priority_ext (arg_device) (arg_memory) (arg_priority)
@@ -3287,9 +3288,10 @@ let get_shader_binary_data_ext arg_device arg_shader arg_data_size arg_data =
 let cmd_bind_shaders_ext arg_command_buffer arg_stages arg_shaders =
   let array_stages = CArray.of_list (ShaderStageFlags.t) arg_stages in
   let pointer_stages = if arg_stages = [] then Vk_base.null_ptr (ShaderStageFlags.t) else CArray.start array_stages in
+  if List.length arg_shaders <> List.length arg_stages then invalid_arg "vkCmdBindShadersEXT: array lengths differ";
   let array_shaders = CArray.of_list (ShaderEXT.t) arg_shaders in
   let pointer_shaders = if arg_shaders = [] then Vk_base.null_ptr (ShaderEXT.t) else CArray.start array_shaders in
-  Vk_fn.cmd_bind_shaders_ext (arg_command_buffer) (List.length arg_shaders) (pointer_stages) (pointer_shaders)
+  Vk_fn.cmd_bind_shaders_ext (arg_command_buffer) (List.length arg_stages) (pointer_stages) (pointer_shaders)
 
 let set_swapchain_present_timing_queue_size_ext arg_device arg_swapchain arg_size =
   let result = Vk_fn.set_swapchain_present_timing_queue_size_ext (arg_device) (arg_swapchain) (arg_size) in
@@ -3466,10 +3468,8 @@ let latency_sleep_legacy_nv arg_device arg_signal_semaphore arg_value =
 let set_latency_marker_legacy_nv arg_device arg_frame_id arg_marker =
   Vk_fn.set_latency_marker_legacy_nv (arg_device) (arg_frame_id) (arg_marker)
 
-let get_latency_timings_legacy_nv arg_device =
-  let output = allocate (Ctypes.void) (()) in
-  Vk_fn.get_latency_timings_legacy_nv (arg_device) (output);
-  !@ output
+let get_latency_timings_legacy_nv arg_device arg_timings =
+  Vk_fn.get_latency_timings_legacy_nv (arg_device) (arg_timings)
 
 let queue_notify_out_of_band_legacy_nv arg_queue arg_queue_type =
   Vk_fn.queue_notify_out_of_band_legacy_nv (arg_queue) (arg_queue_type)
@@ -3562,10 +3562,8 @@ let create_external_compute_queue_nv ?allocator:arg_allocator arg_device arg_cre
 let destroy_external_compute_queue_nv arg_device arg_external_queue ?allocator:arg_allocator () =
   Vk_fn.destroy_external_compute_queue_nv (arg_device) (arg_external_queue) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x))
 
-let get_external_compute_queue_data_nv arg_external_queue arg_params =
-  let output = allocate (Ctypes.void) (()) in
-  Vk_fn.get_external_compute_queue_data_nv (arg_external_queue) (addr arg_params) (output);
-  !@ output
+let get_external_compute_queue_data_nv arg_external_queue arg_params arg_data =
+  Vk_fn.get_external_compute_queue_data_nv (arg_external_queue) (addr arg_params) (arg_data)
 
 let enumerate_physical_device_shader_instrumentation_metrics_arm arg_physical_device =
   let count = allocate Vk_base.uint32 0 in
@@ -3640,17 +3638,15 @@ let get_device_tensor_memory_requirements_arm arg_device arg_info arg_memory_req
 let cmd_copy_tensor_arm arg_command_buffer arg_copy_tensor_info =
   Vk_fn.cmd_copy_tensor_arm (arg_command_buffer) (addr arg_copy_tensor_info)
 
-let get_tensor_opaque_capture_descriptor_data_arm arg_device arg_info =
-  let output = allocate (Ctypes.void) (()) in
-  let result = Vk_fn.get_tensor_opaque_capture_descriptor_data_arm (arg_device) (addr arg_info) (output) in
+let get_tensor_opaque_capture_descriptor_data_arm arg_device arg_info arg_data =
+  let result = Vk_fn.get_tensor_opaque_capture_descriptor_data_arm (arg_device) (addr arg_info) (arg_data) in
   check result;
-  !@ output
+  ()
 
-let get_tensor_view_opaque_capture_descriptor_data_arm arg_device arg_info =
-  let output = allocate (Ctypes.void) (()) in
-  let result = Vk_fn.get_tensor_view_opaque_capture_descriptor_data_arm (arg_device) (addr arg_info) (output) in
+let get_tensor_view_opaque_capture_descriptor_data_arm arg_device arg_info arg_data =
+  let result = Vk_fn.get_tensor_view_opaque_capture_descriptor_data_arm (arg_device) (addr arg_info) (arg_data) in
   check result;
-  !@ output
+  ()
 
 let get_physical_device_external_tensor_properties_arm arg_physical_device arg_external_tensor_info arg_external_tensor_properties =
   Vk_fn.get_physical_device_external_tensor_properties_arm (arg_physical_device) (addr arg_external_tensor_info) (addr arg_external_tensor_properties)
@@ -3796,18 +3792,20 @@ let cmd_set_compute_occupancy_priority_nv arg_command_buffer arg_parameters =
 let write_sampler_descriptors_ext arg_device arg_samplers arg_descriptors =
   let array_samplers = CArray.of_list (SamplerCreateInfo.t) arg_samplers in
   let pointer_samplers = if arg_samplers = [] then Vk_base.null_ptr (SamplerCreateInfo.t) else CArray.start array_samplers in
+  if List.length arg_descriptors <> List.length arg_samplers then invalid_arg "vkWriteSamplerDescriptorsEXT: array lengths differ";
   let array_descriptors = CArray.of_list (HostAddressRangeEXT.t) arg_descriptors in
   let pointer_descriptors = if arg_descriptors = [] then Vk_base.null_ptr (HostAddressRangeEXT.t) else CArray.start array_descriptors in
-  let result = Vk_fn.write_sampler_descriptors_ext (arg_device) (List.length arg_descriptors) (pointer_samplers) (pointer_descriptors) in
+  let result = Vk_fn.write_sampler_descriptors_ext (arg_device) (List.length arg_samplers) (pointer_samplers) (pointer_descriptors) in
   check result;
   ()
 
 let write_resource_descriptors_ext arg_device arg_resources arg_descriptors =
   let array_resources = CArray.of_list (ResourceDescriptorInfoEXT.t) arg_resources in
   let pointer_resources = if arg_resources = [] then Vk_base.null_ptr (ResourceDescriptorInfoEXT.t) else CArray.start array_resources in
+  if List.length arg_descriptors <> List.length arg_resources then invalid_arg "vkWriteResourceDescriptorsEXT: array lengths differ";
   let array_descriptors = CArray.of_list (HostAddressRangeEXT.t) arg_descriptors in
   let pointer_descriptors = if arg_descriptors = [] then Vk_base.null_ptr (HostAddressRangeEXT.t) else CArray.start array_descriptors in
-  let result = Vk_fn.write_resource_descriptors_ext (arg_device) (List.length arg_descriptors) (pointer_resources) (pointer_descriptors) in
+  let result = Vk_fn.write_resource_descriptors_ext (arg_device) (List.length arg_resources) (pointer_resources) (pointer_descriptors) in
   check result;
   ()
 
@@ -3855,10 +3853,8 @@ let cmd_copy_memory_to_image_khr arg_command_buffer arg_copy_memory_info =
 let cmd_copy_image_to_memory_khr arg_command_buffer arg_copy_memory_info =
   Vk_fn.cmd_copy_image_to_memory_khr (arg_command_buffer) (addr arg_copy_memory_info)
 
-let cmd_update_memory_khr arg_command_buffer arg_dst_range arg_dst_flags arg_data =
-  let array_data = CArray.of_list (Ctypes.void) arg_data in
-  let pointer_data = if arg_data = [] then Vk_base.null_ptr (Ctypes.void) else CArray.start array_data in
-  Vk_fn.cmd_update_memory_khr (arg_command_buffer) (addr arg_dst_range) (arg_dst_flags) (List.length arg_data) (pointer_data)
+let cmd_update_memory_khr arg_command_buffer arg_dst_range arg_dst_flags arg_data_size arg_data =
+  Vk_fn.cmd_update_memory_khr (arg_command_buffer) (addr arg_dst_range) (arg_dst_flags) (arg_data_size) (arg_data)
 
 let cmd_fill_memory_khr arg_command_buffer arg_dst_range arg_dst_flags arg_data =
   Vk_fn.cmd_fill_memory_khr (arg_command_buffer) (addr arg_dst_range) (arg_dst_flags) (arg_data)
@@ -4250,13 +4246,16 @@ let cmd_bind_index_buffer_2_khr arg_command_buffer arg_buffer arg_offset arg_siz
 let cmd_bind_vertex_buffers_2_ext arg_command_buffer arg_first_binding arg_buffers arg_offsets arg_sizes arg_strides =
   let array_buffers = CArray.of_list (Buffer.t) arg_buffers in
   let pointer_buffers = if arg_buffers = [] then Vk_base.null_ptr (Buffer.t) else CArray.start array_buffers in
+  if List.length arg_offsets <> List.length arg_buffers then invalid_arg "vkCmdBindVertexBuffers2EXT: array lengths differ";
+  if List.length arg_sizes <> List.length arg_buffers then invalid_arg "vkCmdBindVertexBuffers2EXT: array lengths differ";
+  if List.length arg_strides <> List.length arg_buffers then invalid_arg "vkCmdBindVertexBuffers2EXT: array lengths differ";
   let array_offsets = CArray.of_list (Vk_base.device_size) arg_offsets in
   let pointer_offsets = if arg_offsets = [] then Vk_base.null_ptr (Vk_base.device_size) else CArray.start array_offsets in
   let array_sizes = CArray.of_list (Vk_base.device_size) arg_sizes in
   let pointer_sizes = if arg_sizes = [] then Vk_base.null_ptr (Vk_base.device_size) else CArray.start array_sizes in
   let array_strides = CArray.of_list (Vk_base.device_size) arg_strides in
   let pointer_strides = if arg_strides = [] then Vk_base.null_ptr (Vk_base.device_size) else CArray.start array_strides in
-  Vk_fn.cmd_bind_vertex_buffers_2_ext (arg_command_buffer) (arg_first_binding) (List.length arg_strides) (pointer_buffers) (pointer_offsets) (pointer_sizes) (pointer_strides)
+  Vk_fn.cmd_bind_vertex_buffers_2_ext (arg_command_buffer) (arg_first_binding) (List.length arg_buffers) (pointer_buffers) (pointer_offsets) (pointer_sizes) (pointer_strides)
 
 let cmd_set_depth_test_enable_ext arg_command_buffer arg_depth_test_enable =
   Vk_fn.cmd_set_depth_test_enable_ext (arg_command_buffer) (arg_depth_test_enable)
@@ -4331,9 +4330,10 @@ let cmd_reset_event_2_khr arg_command_buffer arg_event arg_stage_mask =
 let cmd_wait_events_2_khr arg_command_buffer arg_events arg_dependency_infos =
   let array_events = CArray.of_list (Event.t) arg_events in
   let pointer_events = if arg_events = [] then Vk_base.null_ptr (Event.t) else CArray.start array_events in
+  if List.length arg_dependency_infos <> List.length arg_events then invalid_arg "vkCmdWaitEvents2KHR: array lengths differ";
   let array_dependency_infos = CArray.of_list (DependencyInfo.t) arg_dependency_infos in
   let pointer_dependency_infos = if arg_dependency_infos = [] then Vk_base.null_ptr (DependencyInfo.t) else CArray.start array_dependency_infos in
-  Vk_fn.cmd_wait_events_2_khr (arg_command_buffer) (List.length arg_dependency_infos) (pointer_events) (pointer_dependency_infos)
+  Vk_fn.cmd_wait_events_2_khr (arg_command_buffer) (List.length arg_events) (pointer_events) (pointer_dependency_infos)
 
 let cmd_pipeline_barrier_2_khr arg_command_buffer arg_dependency_info =
   Vk_fn.cmd_pipeline_barrier_2_khr (arg_command_buffer) (addr arg_dependency_info)

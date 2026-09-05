@@ -29,6 +29,7 @@ module type ENUM = sig
   val of_int : int -> t
   val to_int : t -> int
   val register : (t * string) list -> unit
+  val set_type_name : string -> unit
   val to_string : t -> string
   val pp : Format.formatter -> t -> unit
   val equal : t -> t -> bool
@@ -41,11 +42,13 @@ module Enum32 () : ENUM = struct
   let of_int x = x
   let to_int x = x
   let names = ref []
+  let type_name = ref "Enum32"
   let register xs = names := xs
+  let set_type_name name = type_name := name
   let to_string x =
     match List.find_opt (fun (v, _) -> v = x) !names with
     | Some (_, name) -> name
-    | None -> Printf.sprintf "Enum32(%d)" x
+    | None -> Printf.sprintf "%s(%d)" !type_name x
   let pp fmt x = Format.pp_print_string fmt (to_string x)
   let equal (a : t) b = a = b
   let compare (a : t) b = Stdlib.compare a b
@@ -57,11 +60,13 @@ module Enum64 () : ENUM = struct
   let of_int x = x
   let to_int x = x
   let names = ref []
+  let type_name = ref "Enum64"
   let register xs = names := xs
+  let set_type_name name = type_name := name
   let to_string x =
     match List.find_opt (fun (v, _) -> v = x) !names with
     | Some (_, name) -> name
-    | None -> Printf.sprintf "Enum64(%d)" x
+    | None -> Printf.sprintf "%s(%d)" !type_name x
   let pp fmt x = Format.pp_print_string fmt (to_string x)
   let equal (a : t) b = a = b
   let compare (a : t) b = Stdlib.compare a b
@@ -86,7 +91,9 @@ module Flags32 () : FLAGS = struct
   let of_int x = x
   let to_int x = x
   let names = ref []
+  let type_name = ref "Flags32"
   let register xs = names := xs
+  let set_type_name name = type_name := name
   let empty = 0
   let ( lor ) a b = Stdlib.(a lor b)
   let ( land ) a b = Stdlib.(a land b)
@@ -110,7 +117,7 @@ module Flags32 () : FLAGS = struct
           |> List.sort_uniq (fun (a, _) (b, _) -> Stdlib.compare a b)
           |> List.map snd
         in
-        if parts = [] then Printf.sprintf "Flags32(0x%x)" x
+        if parts = [] then Printf.sprintf "%s(0x%x)" !type_name x
         else String.concat " | " parts
   let pp fmt x = Format.pp_print_string fmt (to_string x)
   let equal (a : t) b = a = b
@@ -123,7 +130,9 @@ module Flags64 () : FLAGS = struct
   let of_int x = x
   let to_int x = x
   let names = ref []
+  let type_name = ref "Flags64"
   let register xs = names := xs
+  let set_type_name name = type_name := name
   let empty = 0
   let ( lor ) a b = Stdlib.(a lor b)
   let ( land ) a b = Stdlib.(a land b)
@@ -147,7 +156,7 @@ module Flags64 () : FLAGS = struct
           |> List.sort_uniq (fun (a, _) (b, _) -> Stdlib.compare a b)
           |> List.map snd
         in
-        if parts = [] then Printf.sprintf "Flags64(0x%x)" x
+        if parts = [] then Printf.sprintf "%s(0x%x)" !type_name x
         else String.concat " | " parts
   let pp fmt x = Format.pp_print_string fmt (to_string x)
   let equal (a : t) b = a = b

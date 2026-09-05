@@ -275,9 +275,7 @@ def _dependency_edges(ctx: Context) -> tuple[dict[str, set[str]], dict[tuple[str
     registry = ctx.registry
     nodes = {
         name for name, c in registry.composites.items() if not c.alias
-    } | {
-        name for name in registry.funcpointers if name != "PFN_vkVoidFunction"
-    }
+    } | set(registry.funcpointers)
     deps = {name: set() for name in nodes}
     breakable: dict[tuple[str, str], bool] = {}
 
@@ -299,8 +297,6 @@ def _dependency_edges(ctx: Context) -> tuple[dict[str, set[str]], dict[tuple[str
         for member in comp.members:
             add(name, member)
     for name, fp in registry.funcpointers.items():
-        if name == "PFN_vkVoidFunction":
-            continue
         add(name, fp.result)
         for param in fp.params:
             add(name, param)

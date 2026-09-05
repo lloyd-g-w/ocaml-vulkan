@@ -17,7 +17,7 @@ module ExportSemaphoreSciSyncInfoNV = struct
   let _p_attributes = field t "pAttributes" (ptr void)
   let p_attributes = _p_attributes
   let () = seal t
-  let structure_type = None
+  let structure_type : StructureType.t option = None
     let make ?next:arg_next ?p_attributes:arg_p_attributes () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -43,7 +43,7 @@ module ExportSemaphoreWin32HandleInfoKHR = struct
   let _name = field t "name" (ptr void)
   let name = _name
   let () = seal t
-  let structure_type = Some StructureType.export_semaphore_win32_handle_info_khr
+  let structure_type : StructureType.t option = Some StructureType.export_semaphore_win32_handle_info_khr
     let make ?next:arg_next ?attributes:arg_attributes ?dw_access:(arg_dw_access=0) ?name:arg_name () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -65,7 +65,7 @@ module ExtensionProperties = struct
   let _spec_version = field t "specVersion" (Vk_base.uint32)
   let spec_version = _spec_version
   let () = seal t
-  let structure_type = None
+  let structure_type : StructureType.t option = None
     let make () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -81,7 +81,7 @@ module Extent2D = struct
   let _height = field t "height" (Vk_base.uint32)
   let height = _height
   let () = seal t
-  let structure_type = None
+  let structure_type : StructureType.t option = None
     let make ?width:(arg_width=0) ?height:(arg_height=0) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -100,7 +100,7 @@ module Extent3D = struct
   let _depth = field t "depth" (Vk_base.uint32)
   let depth = _depth
   let () = seal t
-  let structure_type = None
+  let structure_type : StructureType.t option = None
     let make ?width:(arg_width=0) ?height:(arg_height=0) ?depth:(arg_depth=0) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -120,7 +120,7 @@ module ExternalComputeQueueCreateInfoNV = struct
   let _preferred_queue = field t "preferredQueue" (Queue.t)
   let preferred_queue = _preferred_queue
   let () = seal t
-  let structure_type = Some StructureType.external_compute_queue_create_info_nv
+  let structure_type : StructureType.t option = Some StructureType.external_compute_queue_create_info_nv
     let make ?next:arg_next ?preferred_queue:(arg_preferred_queue=Queue.null) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -142,7 +142,7 @@ module ExternalComputeQueueDataParamsNV = struct
   let _device_index = field t "deviceIndex" (Vk_base.uint32)
   let device_index = _device_index
   let () = seal t
-  let structure_type = Some StructureType.external_compute_queue_data_params_nv
+  let structure_type : StructureType.t option = Some StructureType.external_compute_queue_data_params_nv
     let make ?next:arg_next ?device_index:(arg_device_index=0) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -164,7 +164,7 @@ module ExternalComputeQueueDeviceCreateInfoNV = struct
   let _reserved_external_queues = field t "reservedExternalQueues" (Vk_base.uint32)
   let reserved_external_queues = _reserved_external_queues
   let () = seal t
-  let structure_type = Some StructureType.external_compute_queue_device_create_info_nv
+  let structure_type : StructureType.t option = Some StructureType.external_compute_queue_device_create_info_nv
     let make ?next:arg_next ?reserved_external_queues:(arg_reserved_external_queues=0) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -190,7 +190,7 @@ module ExternalFenceProperties = struct
   let _external_fence_features = field t "externalFenceFeatures" (ExternalFenceFeatureFlags.t)
   let external_fence_features = _external_fence_features
   let () = seal t
-  let structure_type = Some StructureType.external_fence_properties
+  let structure_type : StructureType.t option = Some StructureType.external_fence_properties
     let make ?next:arg_next () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -211,7 +211,7 @@ module ExternalFormatANDROID = struct
   let _external_format = field t "externalFormat" (Vk_base.uint64)
   let external_format = _external_format
   let () = seal t
-  let structure_type = Some StructureType.external_format_android
+  let structure_type : StructureType.t option = Some StructureType.external_format_android
     let make ?next:arg_next ?external_format:(arg_external_format=0) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -233,7 +233,7 @@ module ExternalFormatOHOS = struct
   let _external_format = field t "externalFormat" (Vk_base.uint64)
   let external_format = _external_format
   let () = seal t
-  let structure_type = Some StructureType.external_format_ohos
+  let structure_type : StructureType.t option = Some StructureType.external_format_ohos
     let make ?next:arg_next ?external_format:(arg_external_format=0) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -255,7 +255,7 @@ module ExternalFormatQNX = struct
   let _external_format = field t "externalFormat" (Vk_base.uint64)
   let external_format = _external_format
   let () = seal t
-  let structure_type = Some StructureType.external_format_qnx
+  let structure_type : StructureType.t option = Some StructureType.external_format_qnx
     let make ?next:arg_next ?external_format:(arg_external_format=0) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -277,7 +277,7 @@ module ExternalMemoryAcquireUnmodifiedEXT = struct
   let _acquire_unmodified_memory = field t "acquireUnmodifiedMemory" (Vk_base.bool32)
   let acquire_unmodified_memory = _acquire_unmodified_memory
   let () = seal t
-  let structure_type = Some StructureType.external_memory_acquire_unmodified_ext
+  let structure_type : StructureType.t option = Some StructureType.external_memory_acquire_unmodified_ext
     let make ?next:arg_next ?acquire_unmodified_memory:(arg_acquire_unmodified_memory=false) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -299,7 +299,7 @@ module ExternalMemoryBufferCreateInfo = struct
   let _handle_types = field t "handleTypes" (ExternalMemoryHandleTypeFlags.t)
   let handle_types = _handle_types
   let () = seal t
-  let structure_type = Some StructureType.external_memory_buffer_create_info
+  let structure_type : StructureType.t option = Some StructureType.external_memory_buffer_create_info
     let make ?next:arg_next ?handle_types:(arg_handle_types=ExternalMemoryHandleTypeFlags.of_int 0) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -321,7 +321,7 @@ module ExternalMemoryImageCreateInfo = struct
   let _handle_types = field t "handleTypes" (ExternalMemoryHandleTypeFlags.t)
   let handle_types = _handle_types
   let () = seal t
-  let structure_type = Some StructureType.external_memory_image_create_info
+  let structure_type : StructureType.t option = Some StructureType.external_memory_image_create_info
     let make ?next:arg_next ?handle_types:(arg_handle_types=ExternalMemoryHandleTypeFlags.of_int 0) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -343,7 +343,7 @@ module ExternalMemoryImageCreateInfoNV = struct
   let _handle_types = field t "handleTypes" (ExternalMemoryHandleTypeFlagsNV.t)
   let handle_types = _handle_types
   let () = seal t
-  let structure_type = Some StructureType.external_memory_image_create_info_nv
+  let structure_type : StructureType.t option = Some StructureType.external_memory_image_create_info_nv
     let make ?next:arg_next ?handle_types:(arg_handle_types=ExternalMemoryHandleTypeFlagsNV.of_int 0) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -365,7 +365,7 @@ module ExternalMemoryProperties = struct
   let _compatible_handle_types = field t "compatibleHandleTypes" (ExternalMemoryHandleTypeFlags.t)
   let compatible_handle_types = _compatible_handle_types
   let () = seal t
-  let structure_type = None
+  let structure_type : StructureType.t option = None
     let make () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -382,7 +382,7 @@ module ExternalMemoryTensorCreateInfoARM = struct
   let _handle_types = field t "handleTypes" (ExternalMemoryHandleTypeFlags.t)
   let handle_types = _handle_types
   let () = seal t
-  let structure_type = Some StructureType.external_memory_tensor_create_info_arm
+  let structure_type : StructureType.t option = Some StructureType.external_memory_tensor_create_info_arm
     let make ?next:arg_next ?handle_types:(arg_handle_types=ExternalMemoryHandleTypeFlags.of_int 0) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -408,7 +408,7 @@ module ExternalSemaphoreProperties = struct
   let _external_semaphore_features = field t "externalSemaphoreFeatures" (ExternalSemaphoreFeatureFlags.t)
   let external_semaphore_features = _external_semaphore_features
   let () = seal t
-  let structure_type = Some StructureType.external_semaphore_properties
+  let structure_type : StructureType.t option = Some StructureType.external_semaphore_properties
     let make ?next:arg_next () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -431,7 +431,7 @@ module FaultData = struct
   let _fault_type = field t "faultType" (FaultType.t)
   let fault_type = _fault_type
   let () = seal t
-  let structure_type = None
+  let structure_type : StructureType.t option = None
     let make ?next:arg_next () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -452,7 +452,7 @@ module FenceCreateInfo = struct
   let _flags = field t "flags" (FenceCreateFlags.t)
   let flags = _flags
   let () = seal t
-  let structure_type = Some StructureType.fence_create_info
+  let structure_type : StructureType.t option = Some StructureType.fence_create_info
     let make ?next:arg_next ?flags:(arg_flags=FenceCreateFlags.of_int 0) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -476,7 +476,7 @@ module FenceGetFdInfoKHR = struct
   let _handle_type = field t "handleType" (ExternalFenceHandleTypeFlags.t)
   let handle_type = _handle_type
   let () = seal t
-  let structure_type = Some StructureType.fence_get_fd_info_khr
+  let structure_type : StructureType.t option = Some StructureType.fence_get_fd_info_khr
     let make ?next:arg_next ?fence:(arg_fence=Fence.null) ?handle_type:(arg_handle_type=ExternalFenceHandleTypeFlags.of_int 0) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -501,7 +501,7 @@ module FenceGetSciSyncInfoNV = struct
   let _handle_type = field t "handleType" (ExternalFenceHandleTypeFlags.t)
   let handle_type = _handle_type
   let () = seal t
-  let structure_type = None
+  let structure_type : StructureType.t option = None
     let make ?next:arg_next ?fence:(arg_fence=Fence.null) ?handle_type:(arg_handle_type=ExternalFenceHandleTypeFlags.of_int 0) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -526,7 +526,7 @@ module FenceGetWin32HandleInfoKHR = struct
   let _handle_type = field t "handleType" (ExternalFenceHandleTypeFlags.t)
   let handle_type = _handle_type
   let () = seal t
-  let structure_type = Some StructureType.fence_get_win32_handle_info_khr
+  let structure_type : StructureType.t option = Some StructureType.fence_get_win32_handle_info_khr
     let make ?next:arg_next ?fence:(arg_fence=Fence.null) ?handle_type:(arg_handle_type=ExternalFenceHandleTypeFlags.of_int 0) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -551,7 +551,7 @@ module FilterCubicImageViewImageFormatPropertiesEXT = struct
   let _filter_cubic_minmax = field t "filterCubicMinmax" (Vk_base.bool32)
   let filter_cubic_minmax = _filter_cubic_minmax
   let () = seal t
-  let structure_type = Some StructureType.filter_cubic_image_view_image_format_properties_ext
+  let structure_type : StructureType.t option = Some StructureType.filter_cubic_image_view_image_format_properties_ext
     let make ?next:arg_next () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -572,7 +572,7 @@ module FormatProperties = struct
   let _buffer_features = field t "bufferFeatures" (FormatFeatureFlags.t)
   let buffer_features = _buffer_features
   let () = seal t
-  let structure_type = None
+  let structure_type : StructureType.t option = None
     let make () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -593,7 +593,7 @@ module FormatProperties3 = struct
   let _buffer_features = field t "bufferFeatures" (FormatFeatureFlags2.t)
   let buffer_features = _buffer_features
   let () = seal t
-  let structure_type = Some StructureType.format_properties_3
+  let structure_type : StructureType.t option = Some StructureType.format_properties_3
     let make ?next:arg_next () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -618,7 +618,7 @@ module FormatProperties4KHR = struct
   let _buffer_features = field t "bufferFeatures" (FormatFeatureFlags4KHR.t)
   let buffer_features = _buffer_features
   let () = seal t
-  let structure_type = Some StructureType.format_properties_4_khr
+  let structure_type : StructureType.t option = Some StructureType.format_properties_4_khr
     let make ?next:arg_next () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -655,7 +655,7 @@ module FrameBoundaryEXT = struct
   let _p_tag = field t "pTag" (ptr (Ctypes.void))
   let p_tag = _p_tag
   let () = seal t
-  let structure_type = Some StructureType.frame_boundary_ext
+  let structure_type : StructureType.t option = Some StructureType.frame_boundary_ext
     let make ?next:arg_next ?flags:(arg_flags=FrameBoundaryFlagsEXT.of_int 0) ?frame_id:(arg_frame_id=0) ?images:(arg_images=[]) ?buffers:(arg_buffers=[]) ?tag_name:(arg_tag_name=0) ?tag:(arg_tag="") () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -698,7 +698,7 @@ module FrameBoundaryTensorsARM = struct
   let _p_tensors = field t "pTensors" (ptr (TensorARM.t))
   let p_tensors = _p_tensors
   let () = seal t
-  let structure_type = Some StructureType.frame_boundary_tensors_arm
+  let structure_type : StructureType.t option = Some StructureType.frame_boundary_tensors_arm
     let make ?next:arg_next ?tensors:(arg_tensors=[]) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -737,7 +737,7 @@ module FramebufferAttachmentImageInfo = struct
   let _p_view_formats = field t "pViewFormats" (ptr (Format.t))
   let p_view_formats = _p_view_formats
   let () = seal t
-  let structure_type = Some StructureType.framebuffer_attachment_image_info
+  let structure_type : StructureType.t option = Some StructureType.framebuffer_attachment_image_info
     let make ?next:arg_next ?flags:(arg_flags=ImageCreateFlags.of_int 0) ?usage:(arg_usage=ImageUsageFlags.of_int 0) ?width:(arg_width=0) ?height:(arg_height=0) ?layer_count:(arg_layer_count=0) ?view_formats:(arg_view_formats=[]) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -781,7 +781,7 @@ module FramebufferCreateInfo = struct
   let _layers = field t "layers" (Vk_base.uint32)
   let layers = _layers
   let () = seal t
-  let structure_type = Some StructureType.framebuffer_create_info
+  let structure_type : StructureType.t option = Some StructureType.framebuffer_create_info
     let make ?next:arg_next ?flags:(arg_flags=FramebufferCreateFlags.of_int 0) ?render_pass:(arg_render_pass=RenderPass.null) ?attachments:(arg_attachments=[]) ?width:(arg_width=0) ?height:(arg_height=0) ?layers:(arg_layers=0) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -819,7 +819,7 @@ module FramebufferMixedSamplesCombinationNV = struct
   let _color_samples = field t "colorSamples" (SampleCountFlags.t)
   let color_samples = _color_samples
   let () = seal t
-  let structure_type = Some StructureType.framebuffer_mixed_samples_combination_nv
+  let structure_type : StructureType.t option = Some StructureType.framebuffer_mixed_samples_combination_nv
     let make ?next:arg_next () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -858,7 +858,7 @@ module GeneratedCommandsInfoEXT = struct
   let _max_draw_count = field t "maxDrawCount" (Vk_base.uint32)
   let max_draw_count = _max_draw_count
   let () = seal t
-  let structure_type = Some StructureType.generated_commands_info_ext
+  let structure_type : StructureType.t option = Some StructureType.generated_commands_info_ext
     let make ?next:arg_next ?shader_stages:(arg_shader_stages=ShaderStageFlags.of_int 0) ?indirect_execution_set:(arg_indirect_execution_set=IndirectExecutionSetEXT.null) ?indirect_commands_layout:(arg_indirect_commands_layout=IndirectCommandsLayoutEXT.null) ?indirect_address:(arg_indirect_address=0) ?indirect_address_size:(arg_indirect_address_size=0) ?preprocess_address:(arg_preprocess_address=0) ?preprocess_size:(arg_preprocess_size=0) ?max_sequence_count:(arg_max_sequence_count=0) ?sequence_count_address:(arg_sequence_count_address=0) ?max_draw_count:(arg_max_draw_count=0) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -895,7 +895,7 @@ module GeneratedCommandsMemoryRequirementsInfoEXT = struct
   let _max_draw_count = field t "maxDrawCount" (Vk_base.uint32)
   let max_draw_count = _max_draw_count
   let () = seal t
-  let structure_type = Some StructureType.generated_commands_memory_requirements_info_ext
+  let structure_type : StructureType.t option = Some StructureType.generated_commands_memory_requirements_info_ext
     let make ?next:arg_next ?indirect_execution_set:(arg_indirect_execution_set=IndirectExecutionSetEXT.null) ?indirect_commands_layout:(arg_indirect_commands_layout=IndirectCommandsLayoutEXT.null) ?max_sequence_count:(arg_max_sequence_count=0) ?max_draw_count:(arg_max_draw_count=0) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -926,7 +926,7 @@ module GeneratedCommandsMemoryRequirementsInfoNV = struct
   let _max_sequences_count = field t "maxSequencesCount" (Vk_base.uint32)
   let max_sequences_count = _max_sequences_count
   let () = seal t
-  let structure_type = Some StructureType.generated_commands_memory_requirements_info_nv
+  let structure_type : StructureType.t option = Some StructureType.generated_commands_memory_requirements_info_nv
     let make ?next:arg_next ?pipeline_bind_point:(arg_pipeline_bind_point=PipelineBindPoint.of_int 0) ?pipeline:(arg_pipeline=Pipeline.null) ?indirect_commands_layout:(arg_indirect_commands_layout=IndirectCommandsLayoutNV.null) ?max_sequences_count:(arg_max_sequences_count=0) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -951,7 +951,7 @@ module GeneratedCommandsPipelineInfoEXT = struct
   let _pipeline = field t "pipeline" (Pipeline.t)
   let pipeline = _pipeline
   let () = seal t
-  let structure_type = Some StructureType.generated_commands_pipeline_info_ext
+  let structure_type : StructureType.t option = Some StructureType.generated_commands_pipeline_info_ext
     let make ?next:arg_next ?pipeline:(arg_pipeline=Pipeline.null) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -975,7 +975,7 @@ module GeneratedCommandsShaderInfoEXT = struct
   let _p_shaders = field t "pShaders" (ptr (ShaderEXT.t))
   let p_shaders = _p_shaders
   let () = seal t
-  let structure_type = Some StructureType.generated_commands_shader_info_ext
+  let structure_type : StructureType.t option = Some StructureType.generated_commands_shader_info_ext
     let make ?next:arg_next ?shaders:(arg_shaders=[]) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -1008,7 +1008,7 @@ module GeometryAABBNV = struct
   let _offset = field t "offset" (Vk_base.device_size)
   let offset = _offset
   let () = seal t
-  let structure_type = Some StructureType.geometry_aabb_nv
+  let structure_type : StructureType.t option = Some StructureType.geometry_aabb_nv
     let make ?next:arg_next ?aabb_data:(arg_aabb_data=Buffer.null) ?num_aab_bs:(arg_num_aab_bs=0) ?stride:(arg_stride=0) ?offset:(arg_offset=0) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -1053,7 +1053,7 @@ module GeometryTrianglesNV = struct
   let _transform_offset = field t "transformOffset" (Vk_base.device_size)
   let transform_offset = _transform_offset
   let () = seal t
-  let structure_type = Some StructureType.geometry_triangles_nv
+  let structure_type : StructureType.t option = Some StructureType.geometry_triangles_nv
     let make ?next:arg_next ?vertex_data:(arg_vertex_data=Buffer.null) ?vertex_offset:(arg_vertex_offset=0) ?vertex_count:(arg_vertex_count=0) ?vertex_stride:(arg_vertex_stride=0) ?vertex_format:(arg_vertex_format=Format.of_int 0) ?index_data:(arg_index_data=Buffer.null) ?index_offset:(arg_index_offset=0) ?index_count:(arg_index_count=0) ?index_type:(arg_index_type=IndexType.of_int 0) ?transform_data:(arg_transform_data=Buffer.null) ?transform_offset:(arg_transform_offset=0) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -1089,7 +1089,7 @@ module GpaDeviceClockModeInfoAMD = struct
   let _engine_clock_ratio_to_peak = field t "engineClockRatioToPeak" (Ctypes.float)
   let engine_clock_ratio_to_peak = _engine_clock_ratio_to_peak
   let () = seal t
-  let structure_type = Some StructureType.gpa_device_clock_mode_info_amd
+  let structure_type : StructureType.t option = Some StructureType.gpa_device_clock_mode_info_amd
     let make ?next:arg_next ?clock_mode:(arg_clock_mode=GpaDeviceClockModeAMD.of_int 0) ?memory_clock_ratio_to_peak:(arg_memory_clock_ratio_to_peak=0.) ?engine_clock_ratio_to_peak:(arg_engine_clock_ratio_to_peak=0.) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -1119,7 +1119,7 @@ module GpaDeviceGetClockInfoAMD = struct
   let _engine_clock_frequency = field t "engineClockFrequency" (Vk_base.uint32)
   let engine_clock_frequency = _engine_clock_frequency
   let () = seal t
-  let structure_type = Some StructureType.gpa_device_get_clock_info_amd
+  let structure_type : StructureType.t option = Some StructureType.gpa_device_get_clock_info_amd
     let make ?next:arg_next ?memory_clock_ratio_to_peak:(arg_memory_clock_ratio_to_peak=0.) ?engine_clock_ratio_to_peak:(arg_engine_clock_ratio_to_peak=0.) ?memory_clock_frequency:(arg_memory_clock_frequency=0) ?engine_clock_frequency:(arg_engine_clock_frequency=0) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -1152,7 +1152,7 @@ module GpaPerfBlockPropertiesAMD = struct
   let _max_streaming_counters = field t "maxStreamingCounters" (Vk_base.uint32)
   let max_streaming_counters = _max_streaming_counters
   let () = seal t
-  let structure_type = None
+  let structure_type : StructureType.t option = None
     let make ?block_type:(arg_block_type=GpaPerfBlockAMD.of_int 0) ?flags:(arg_flags=GpaPerfBlockPropertiesFlagsAMD.of_int 0) ?instance_count:(arg_instance_count=0) ?max_event_id:(arg_max_event_id=0) ?max_global_only_counters:(arg_max_global_only_counters=0) ?max_global_shared_counters:(arg_max_global_shared_counters=0) ?max_streaming_counters:(arg_max_streaming_counters=0) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -1176,7 +1176,7 @@ module GpaPerfCounterAMD = struct
   let _event_id = field t "eventID" (Vk_base.uint32)
   let event_id = _event_id
   let () = seal t
-  let structure_type = None
+  let structure_type : StructureType.t option = None
     let make ?block_type:(arg_block_type=GpaPerfBlockAMD.of_int 0) ?block_instance:(arg_block_instance=0) ?event_id:(arg_event_id=0) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -1196,7 +1196,7 @@ module GpaSessionCreateInfoAMD = struct
   let _secondary_copy_source = field t "secondaryCopySource" (GpaSessionAMD.t)
   let secondary_copy_source = _secondary_copy_source
   let () = seal t
-  let structure_type = Some StructureType.gpa_session_create_info_amd
+  let structure_type : StructureType.t option = Some StructureType.gpa_session_create_info_amd
     let make ?next:arg_next ?secondary_copy_source:(arg_secondary_copy_source=GpaSessionAMD.null) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -1218,7 +1218,7 @@ module GraphicsPipelineLibraryCreateInfoEXT = struct
   let _flags = field t "flags" (GraphicsPipelineLibraryFlagsEXT.t)
   let flags = _flags
   let () = seal t
-  let structure_type = Some StructureType.graphics_pipeline_library_create_info_ext
+  let structure_type : StructureType.t option = Some StructureType.graphics_pipeline_library_create_info_ext
     let make ?next:arg_next ?flags:(arg_flags=GraphicsPipelineLibraryFlagsEXT.of_int 0) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -1242,7 +1242,7 @@ module HdrVividDynamicMetadataHUAWEI = struct
   let _p_dynamic_metadata = field t "pDynamicMetadata" (ptr (Ctypes.void))
   let p_dynamic_metadata = _p_dynamic_metadata
   let () = seal t
-  let structure_type = Some StructureType.hdr_vivid_dynamic_metadata_huawei
+  let structure_type : StructureType.t option = Some StructureType.hdr_vivid_dynamic_metadata_huawei
     let make ?next:arg_next ?dynamic_metadata:(arg_dynamic_metadata="") () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -1268,7 +1268,7 @@ module HeadlessSurfaceCreateInfoEXT = struct
   let _flags = field t "flags" (HeadlessSurfaceCreateFlagsEXT.t)
   let flags = _flags
   let () = seal t
-  let structure_type = Some StructureType.headless_surface_create_info_ext
+  let structure_type : StructureType.t option = Some StructureType.headless_surface_create_info_ext
     let make ?next:arg_next ?flags:(arg_flags=HeadlessSurfaceCreateFlagsEXT.of_int 0) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -1288,7 +1288,7 @@ module HostAddressRangeConstEXT = struct
   let _size = field t "size" (Vk_base.size_t)
   let size = _size
   let () = seal t
-  let structure_type = None
+  let structure_type : StructureType.t option = None
     let make ?address:(arg_address="") () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -1308,7 +1308,7 @@ module HostAddressRangeEXT = struct
   let _size = field t "size" (Vk_base.size_t)
   let size = _size
   let () = seal t
-  let structure_type = None
+  let structure_type : StructureType.t option = None
     let make ?address:(arg_address="") () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -1332,7 +1332,7 @@ module HostImageCopyDevicePerformanceQuery = struct
   let _identical_memory_layout = field t "identicalMemoryLayout" (Vk_base.bool32)
   let identical_memory_layout = _identical_memory_layout
   let () = seal t
-  let structure_type = Some StructureType.host_image_copy_device_performance_query
+  let structure_type : StructureType.t option = Some StructureType.host_image_copy_device_performance_query
     let make ?next:arg_next () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -1355,7 +1355,7 @@ module IOSSurfaceCreateInfoMVK = struct
   let _p_view = field t "pView" (ptr (Ctypes.void))
   let p_view = _p_view
   let () = seal t
-  let structure_type = Some StructureType.ios_surface_create_info_mvk
+  let structure_type : StructureType.t option = Some StructureType.ios_surface_create_info_mvk
     let make ?next:arg_next ?flags:(arg_flags=IOSSurfaceCreateFlagsMVK.of_int 0) ?view:arg_view () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -1378,7 +1378,7 @@ module ImageAlignmentControlCreateInfoMESA = struct
   let _maximum_requested_alignment = field t "maximumRequestedAlignment" (Vk_base.uint32)
   let maximum_requested_alignment = _maximum_requested_alignment
   let () = seal t
-  let structure_type = Some StructureType.image_alignment_control_create_info_mesa
+  let structure_type : StructureType.t option = Some StructureType.image_alignment_control_create_info_mesa
     let make ?next:arg_next ?maximum_requested_alignment:(arg_maximum_requested_alignment=0) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -1400,7 +1400,7 @@ module ImageCaptureDescriptorDataInfoEXT = struct
   let _image = field t "image" (Image.t)
   let image = _image
   let () = seal t
-  let structure_type = Some StructureType.image_capture_descriptor_data_info_ext
+  let structure_type : StructureType.t option = Some StructureType.image_capture_descriptor_data_info_ext
     let make ?next:arg_next ?image:(arg_image=Image.null) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -1426,7 +1426,7 @@ module ImageCompressionControlEXT = struct
   let _p_fixed_rate_flags = field t "pFixedRateFlags" (ptr (ImageCompressionFixedRateFlagsEXT.t))
   let p_fixed_rate_flags = _p_fixed_rate_flags
   let () = seal t
-  let structure_type = Some StructureType.image_compression_control_ext
+  let structure_type : StructureType.t option = Some StructureType.image_compression_control_ext
     let make ?next:arg_next ?flags:(arg_flags=ImageCompressionFlagsEXT.of_int 0) ?compression_control_plane_count:(arg_compression_control_plane_count=0) ?p_fixed_rate_flags:arg_p_fixed_rate_flags () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -1452,7 +1452,7 @@ module ImageCompressionPropertiesEXT = struct
   let _image_compression_fixed_rate_flags = field t "imageCompressionFixedRateFlags" (ImageCompressionFixedRateFlagsEXT.t)
   let image_compression_fixed_rate_flags = _image_compression_fixed_rate_flags
   let () = seal t
-  let structure_type = Some StructureType.image_compression_properties_ext
+  let structure_type : StructureType.t option = Some StructureType.image_compression_properties_ext
     let make ?next:arg_next () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -1473,7 +1473,7 @@ module ImageCreateFlags2CreateInfoKHR = struct
   let _flags = field t "flags" (ImageCreateFlags2KHR.t)
   let flags = _flags
   let () = seal t
-  let structure_type = Some StructureType.image_create_flags_2_create_info_khr
+  let structure_type : StructureType.t option = Some StructureType.image_create_flags_2_create_info_khr
     let make ?next:arg_next ?flags:(arg_flags=ImageCreateFlags2KHR.of_int 0) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -1497,7 +1497,7 @@ module ImageDrmFormatModifierListCreateInfoEXT = struct
   let _p_drm_format_modifiers = field t "pDrmFormatModifiers" (ptr (Vk_base.uint64))
   let p_drm_format_modifiers = _p_drm_format_modifiers
   let () = seal t
-  let structure_type = Some StructureType.image_drm_format_modifier_list_create_info_ext
+  let structure_type : StructureType.t option = Some StructureType.image_drm_format_modifier_list_create_info_ext
     let make ?next:arg_next ?drm_format_modifiers:(arg_drm_format_modifiers=[]) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -1524,7 +1524,7 @@ module ImageDrmFormatModifierPropertiesEXT = struct
   let _drm_format_modifier = field t "drmFormatModifier" (Vk_base.uint64)
   let drm_format_modifier = _drm_format_modifier
   let () = seal t
-  let structure_type = Some StructureType.image_drm_format_modifier_properties_ext
+  let structure_type : StructureType.t option = Some StructureType.image_drm_format_modifier_properties_ext
     let make ?next:arg_next () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -1547,7 +1547,7 @@ module ImageFormatListCreateInfo = struct
   let _p_view_formats = field t "pViewFormats" (ptr (Format.t))
   let p_view_formats = _p_view_formats
   let () = seal t
-  let structure_type = Some StructureType.image_format_list_create_info
+  let structure_type : StructureType.t option = Some StructureType.image_format_list_create_info
     let make ?next:arg_next ?view_formats:(arg_view_formats=[]) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -1574,7 +1574,7 @@ module ImageMemoryRequirementsInfo2 = struct
   let _image = field t "image" (Image.t)
   let image = _image
   let () = seal t
-  let structure_type = Some StructureType.image_memory_requirements_info_2
+  let structure_type : StructureType.t option = Some StructureType.image_memory_requirements_info_2
     let make ?next:arg_next ?image:(arg_image=Image.null) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -1598,7 +1598,7 @@ module ImagePipeSurfaceCreateInfoFUCHSIA = struct
   let _image_pipe_handle = field t "imagePipeHandle" (Vk_base.uint32)
   let image_pipe_handle = _image_pipe_handle
   let () = seal t
-  let structure_type = Some StructureType.imagepipe_surface_create_info_fuchsia
+  let structure_type : StructureType.t option = Some StructureType.imagepipe_surface_create_info_fuchsia
     let make ?next:arg_next ?flags:(arg_flags=ImagePipeSurfaceCreateFlagsFUCHSIA.of_int 0) ?image_pipe_handle:(arg_image_pipe_handle=0) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -1621,7 +1621,7 @@ module ImagePlaneMemoryRequirementsInfo = struct
   let _plane_aspect = field t "planeAspect" (ImageAspectFlags.t)
   let plane_aspect = _plane_aspect
   let () = seal t
-  let structure_type = Some StructureType.image_plane_memory_requirements_info
+  let structure_type : StructureType.t option = Some StructureType.image_plane_memory_requirements_info
     let make ?next:arg_next ?plane_aspect:(arg_plane_aspect=ImageAspectFlags.of_int 0) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -1643,7 +1643,7 @@ module ImageSparseMemoryRequirementsInfo2 = struct
   let _image = field t "image" (Image.t)
   let image = _image
   let () = seal t
-  let structure_type = Some StructureType.image_sparse_memory_requirements_info_2
+  let structure_type : StructureType.t option = Some StructureType.image_sparse_memory_requirements_info_2
     let make ?next:arg_next ?image:(arg_image=Image.null) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -1665,7 +1665,7 @@ module ImageStencilUsage2CreateInfoKHR = struct
   let _stencil_usage = field t "stencilUsage" (ImageUsageFlags2KHR.t)
   let stencil_usage = _stencil_usage
   let () = seal t
-  let structure_type = Some StructureType.image_stencil_usage_2_create_info_khr
+  let structure_type : StructureType.t option = Some StructureType.image_stencil_usage_2_create_info_khr
     let make ?next:arg_next ?stencil_usage:(arg_stencil_usage=ImageUsageFlags2KHR.of_int 0) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -1687,7 +1687,7 @@ module ImageStencilUsageCreateInfo = struct
   let _stencil_usage = field t "stencilUsage" (ImageUsageFlags.t)
   let stencil_usage = _stencil_usage
   let () = seal t
-  let structure_type = Some StructureType.image_stencil_usage_create_info
+  let structure_type : StructureType.t option = Some StructureType.image_stencil_usage_create_info
     let make ?next:arg_next ?stencil_usage:(arg_stencil_usage=ImageUsageFlags.of_int 0) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -1709,7 +1709,7 @@ module ImageSubresource = struct
   let _array_layer = field t "arrayLayer" (Vk_base.uint32)
   let array_layer = _array_layer
   let () = seal t
-  let structure_type = None
+  let structure_type : StructureType.t option = None
     let make ?aspect_mask:(arg_aspect_mask=ImageAspectFlags.of_int 0) ?mip_level:(arg_mip_level=0) ?array_layer:(arg_array_layer=0) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -1731,7 +1731,7 @@ module ImageSubresourceLayers = struct
   let _layer_count = field t "layerCount" (Vk_base.uint32)
   let layer_count = _layer_count
   let () = seal t
-  let structure_type = None
+  let structure_type : StructureType.t option = None
     let make ?aspect_mask:(arg_aspect_mask=ImageAspectFlags.of_int 0) ?mip_level:(arg_mip_level=0) ?base_array_layer:(arg_base_array_layer=0) ?layer_count:(arg_layer_count=0) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -1756,7 +1756,7 @@ module ImageSubresourceRange = struct
   let _layer_count = field t "layerCount" (Vk_base.uint32)
   let layer_count = _layer_count
   let () = seal t
-  let structure_type = None
+  let structure_type : StructureType.t option = None
     let make ?aspect_mask:(arg_aspect_mask=ImageAspectFlags.of_int 0) ?base_mip_level:(arg_base_mip_level=0) ?level_count:(arg_level_count=0) ?base_array_layer:(arg_base_array_layer=0) ?layer_count:(arg_layer_count=0) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -1778,7 +1778,7 @@ module ImageSwapchainCreateInfoKHR = struct
   let _swapchain = field t "swapchain" (SwapchainKHR.t)
   let swapchain = _swapchain
   let () = seal t
-  let structure_type = Some StructureType.image_swapchain_create_info_khr
+  let structure_type : StructureType.t option = Some StructureType.image_swapchain_create_info_khr
     let make ?next:arg_next ?swapchain:(arg_swapchain=SwapchainKHR.null) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -1800,7 +1800,7 @@ module ImageUsageFlags2CreateInfoKHR = struct
   let _usage = field t "usage" (ImageUsageFlags2KHR.t)
   let usage = _usage
   let () = seal t
-  let structure_type = Some StructureType.image_usage_flags_2_create_info_khr
+  let structure_type : StructureType.t option = Some StructureType.image_usage_flags_2_create_info_khr
     let make ?next:arg_next ?usage:(arg_usage=ImageUsageFlags2KHR.of_int 0) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -1822,7 +1822,7 @@ module ImageViewASTCDecodeModeEXT = struct
   let _decode_mode = field t "decodeMode" (Format.t)
   let decode_mode = _decode_mode
   let () = seal t
-  let structure_type = Some StructureType.image_view_astc_decode_mode_ext
+  let structure_type : StructureType.t option = Some StructureType.image_view_astc_decode_mode_ext
     let make ?next:arg_next ?decode_mode:(arg_decode_mode=Format.of_int 0) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -1846,7 +1846,7 @@ module ImageViewAddressPropertiesNVX = struct
   let _size = field t "size" (Vk_base.device_size)
   let size = _size
   let () = seal t
-  let structure_type = Some StructureType.image_view_address_properties_nvx
+  let structure_type : StructureType.t option = Some StructureType.image_view_address_properties_nvx
     let make ?next:arg_next () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -1867,7 +1867,7 @@ module ImageViewCaptureDescriptorDataInfoEXT = struct
   let _image_view = field t "imageView" (ImageView.t)
   let image_view = _image_view
   let () = seal t
-  let structure_type = Some StructureType.image_view_capture_descriptor_data_info_ext
+  let structure_type : StructureType.t option = Some StructureType.image_view_capture_descriptor_data_info_ext
     let make ?next:arg_next ?image_view:(arg_image_view=ImageView.null) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -1893,7 +1893,7 @@ module ImageViewHandleInfoNVX = struct
   let _sampler = field t "sampler" (Sampler.t)
   let sampler = _sampler
   let () = seal t
-  let structure_type = Some StructureType.image_view_handle_info_nvx
+  let structure_type : StructureType.t option = Some StructureType.image_view_handle_info_nvx
     let make ?next:arg_next ?image_view:(arg_image_view=ImageView.null) ?descriptor_type:(arg_descriptor_type=DescriptorType.of_int 0) ?sampler:(arg_sampler=Sampler.null) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -1917,7 +1917,7 @@ module ImageViewMinLodCreateInfoEXT = struct
   let _min_lod = field t "minLod" (Ctypes.float)
   let min_lod = _min_lod
   let () = seal t
-  let structure_type = Some StructureType.image_view_min_lod_create_info_ext
+  let structure_type : StructureType.t option = Some StructureType.image_view_min_lod_create_info_ext
     let make ?next:arg_next ?min_lod:(arg_min_lod=0.) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -1941,7 +1941,7 @@ module ImageViewSlicedCreateInfoEXT = struct
   let _slice_count = field t "sliceCount" (Vk_base.uint32)
   let slice_count = _slice_count
   let () = seal t
-  let structure_type = Some StructureType.image_view_sliced_create_info_ext
+  let structure_type : StructureType.t option = Some StructureType.image_view_sliced_create_info_ext
     let make ?next:arg_next ?slice_offset:(arg_slice_offset=0) ?slice_count:(arg_slice_count=0) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -1964,7 +1964,7 @@ module ImageViewUsage2CreateInfoKHR = struct
   let _usage = field t "usage" (ImageUsageFlags2KHR.t)
   let usage = _usage
   let () = seal t
-  let structure_type = Some StructureType.image_view_usage_2_create_info_khr
+  let structure_type : StructureType.t option = Some StructureType.image_view_usage_2_create_info_khr
     let make ?next:arg_next ?usage:(arg_usage=ImageUsageFlags2KHR.of_int 0) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -1986,7 +1986,7 @@ module ImageViewUsageCreateInfo = struct
   let _usage = field t "usage" (ImageUsageFlags.t)
   let usage = _usage
   let () = seal t
-  let structure_type = Some StructureType.image_view_usage_create_info
+  let structure_type : StructureType.t option = Some StructureType.image_view_usage_create_info
     let make ?next:arg_next ?usage:(arg_usage=ImageUsageFlags.of_int 0) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -2008,7 +2008,7 @@ module ImportAndroidHardwareBufferInfoANDROID = struct
   let _buffer = field t "buffer" (ptr (void))
   let buffer = _buffer
   let () = seal t
-  let structure_type = Some StructureType.import_android_hardware_buffer_info_android
+  let structure_type : StructureType.t option = Some StructureType.import_android_hardware_buffer_info_android
     let make ?next:arg_next ?buffer:arg_buffer () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -2036,7 +2036,7 @@ module ImportFenceFdInfoKHR = struct
   let _fd = field t "fd" (Ctypes.int)
   let fd = _fd
   let () = seal t
-  let structure_type = Some StructureType.import_fence_fd_info_khr
+  let structure_type : StructureType.t option = Some StructureType.import_fence_fd_info_khr
     let make ?next:arg_next ?fence:(arg_fence=Fence.null) ?flags:(arg_flags=FenceImportFlags.of_int 0) ?handle_type:(arg_handle_type=ExternalFenceHandleTypeFlags.of_int 0) ?fd:(arg_fd=0) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -2065,7 +2065,7 @@ module ImportFenceSciSyncInfoNV = struct
   let _handle = field t "handle" (ptr (Ctypes.void))
   let handle = _handle
   let () = seal t
-  let structure_type = None
+  let structure_type : StructureType.t option = None
     let make ?next:arg_next ?fence:(arg_fence=Fence.null) ?handle_type:(arg_handle_type=ExternalFenceHandleTypeFlags.of_int 0) ?handle:arg_handle () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -2097,7 +2097,7 @@ module ImportFenceWin32HandleInfoKHR = struct
   let _name = field t "name" (ptr void)
   let name = _name
   let () = seal t
-  let structure_type = Some StructureType.import_fence_win32_handle_info_khr
+  let structure_type : StructureType.t option = Some StructureType.import_fence_win32_handle_info_khr
     let make ?next:arg_next ?fence:(arg_fence=Fence.null) ?flags:(arg_flags=FenceImportFlags.of_int 0) ?handle_type:(arg_handle_type=ExternalFenceHandleTypeFlags.of_int 0) ?handle:arg_handle ?name:arg_name () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -2125,7 +2125,7 @@ module ImportMemoryBufferCollectionFUCHSIA = struct
   let _index = field t "index" (Vk_base.uint32)
   let index = _index
   let () = seal t
-  let structure_type = Some StructureType.import_memory_buffer_collection_fuchsia
+  let structure_type : StructureType.t option = Some StructureType.import_memory_buffer_collection_fuchsia
     let make ?next:arg_next ?collection:(arg_collection=BufferCollectionFUCHSIA.null) ?index:(arg_index=0) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -2150,7 +2150,7 @@ module ImportMemoryFdInfoKHR = struct
   let _fd = field t "fd" (Ctypes.int)
   let fd = _fd
   let () = seal t
-  let structure_type = Some StructureType.import_memory_fd_info_khr
+  let structure_type : StructureType.t option = Some StructureType.import_memory_fd_info_khr
     let make ?next:arg_next ?handle_type:(arg_handle_type=ExternalMemoryHandleTypeFlags.of_int 0) ?fd:(arg_fd=0) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -2175,7 +2175,7 @@ module ImportMemoryHostPointerInfoEXT = struct
   let _p_host_pointer = field t "pHostPointer" (ptr (Ctypes.void))
   let p_host_pointer = _p_host_pointer
   let () = seal t
-  let structure_type = Some StructureType.import_memory_host_pointer_info_ext
+  let structure_type : StructureType.t option = Some StructureType.import_memory_host_pointer_info_ext
     let make ?next:arg_next ?handle_type:(arg_handle_type=ExternalMemoryHandleTypeFlags.of_int 0) ?p_host_pointer:arg_p_host_pointer () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -2200,7 +2200,7 @@ module ImportMemoryMetalHandleInfoEXT = struct
   let _handle = field t "handle" (ptr (Ctypes.void))
   let handle = _handle
   let () = seal t
-  let structure_type = Some StructureType.import_memory_metal_handle_info_ext
+  let structure_type : StructureType.t option = Some StructureType.import_memory_metal_handle_info_ext
     let make ?next:arg_next ?handle_type:(arg_handle_type=ExternalMemoryHandleTypeFlags.of_int 0) ?handle:arg_handle () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -2225,7 +2225,7 @@ module ImportMemorySciBufInfoNV = struct
   let _handle = field t "handle" (ptr void)
   let handle = _handle
   let () = seal t
-  let structure_type = None
+  let structure_type : StructureType.t option = None
     let make ?next:arg_next ?handle_type:(arg_handle_type=ExternalMemoryHandleTypeFlags.of_int 0) ?handle:arg_handle () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -2252,7 +2252,7 @@ module ImportMemoryWin32HandleInfoKHR = struct
   let _name = field t "name" (ptr void)
   let name = _name
   let () = seal t
-  let structure_type = Some StructureType.import_memory_win32_handle_info_khr
+  let structure_type : StructureType.t option = Some StructureType.import_memory_win32_handle_info_khr
     let make ?next:arg_next ?handle_type:(arg_handle_type=ExternalMemoryHandleTypeFlags.of_int 0) ?handle:arg_handle ?name:arg_name () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -2278,7 +2278,7 @@ module ImportMemoryWin32HandleInfoNV = struct
   let _handle = field t "handle" (ptr void)
   let handle = _handle
   let () = seal t
-  let structure_type = Some StructureType.import_memory_win32_handle_info_nv
+  let structure_type : StructureType.t option = Some StructureType.import_memory_win32_handle_info_nv
     let make ?next:arg_next ?handle_type:(arg_handle_type=ExternalMemoryHandleTypeFlagsNV.of_int 0) ?handle:arg_handle () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -2303,7 +2303,7 @@ module ImportMemoryZirconHandleInfoFUCHSIA = struct
   let _handle = field t "handle" (Vk_base.uint32)
   let handle = _handle
   let () = seal t
-  let structure_type = Some StructureType.import_memory_zircon_handle_info_fuchsia
+  let structure_type : StructureType.t option = Some StructureType.import_memory_zircon_handle_info_fuchsia
     let make ?next:arg_next ?handle_type:(arg_handle_type=ExternalMemoryHandleTypeFlags.of_int 0) ?handle:(arg_handle=0) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -2326,7 +2326,7 @@ module ImportMetalBufferInfoEXT = struct
   let _mtl_buffer = field t "mtlBuffer" (ptr void)
   let mtl_buffer = _mtl_buffer
   let () = seal t
-  let structure_type = Some StructureType.import_metal_buffer_info_ext
+  let structure_type : StructureType.t option = Some StructureType.import_metal_buffer_info_ext
     let make ?next:arg_next ?mtl_buffer:arg_mtl_buffer () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -2348,7 +2348,7 @@ module ImportMetalIOSurfaceInfoEXT = struct
   let _io_surface = field t "ioSurface" (ptr void)
   let io_surface = _io_surface
   let () = seal t
-  let structure_type = Some StructureType.import_metal_io_surface_info_ext
+  let structure_type : StructureType.t option = Some StructureType.import_metal_io_surface_info_ext
     let make ?next:arg_next ?io_surface:arg_io_surface () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -2370,7 +2370,7 @@ module ImportMetalSharedEventInfoEXT = struct
   let _mtl_shared_event = field t "mtlSharedEvent" (ptr void)
   let mtl_shared_event = _mtl_shared_event
   let () = seal t
-  let structure_type = Some StructureType.import_metal_shared_event_info_ext
+  let structure_type : StructureType.t option = Some StructureType.import_metal_shared_event_info_ext
     let make ?next:arg_next ?mtl_shared_event:arg_mtl_shared_event () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -2394,7 +2394,7 @@ module ImportMetalTextureInfoEXT = struct
   let _mtl_texture = field t "mtlTexture" (ptr void)
   let mtl_texture = _mtl_texture
   let () = seal t
-  let structure_type = Some StructureType.import_metal_texture_info_ext
+  let structure_type : StructureType.t option = Some StructureType.import_metal_texture_info_ext
     let make ?next:arg_next ?plane:(arg_plane=ImageAspectFlags.of_int 0) ?mtl_texture:arg_mtl_texture () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -2417,7 +2417,7 @@ module ImportNativeBufferInfoOHOS = struct
   let _buffer = field t "buffer" (ptr (void))
   let buffer = _buffer
   let () = seal t
-  let structure_type = Some StructureType.import_native_buffer_info_ohos
+  let structure_type : StructureType.t option = Some StructureType.import_native_buffer_info_ohos
     let make ?next:arg_next ?buffer:arg_buffer () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -2439,7 +2439,7 @@ module ImportScreenBufferInfoQNX = struct
   let _buffer = field t "buffer" (ptr (void))
   let buffer = _buffer
   let () = seal t
-  let structure_type = Some StructureType.import_screen_buffer_info_qnx
+  let structure_type : StructureType.t option = Some StructureType.import_screen_buffer_info_qnx
     let make ?next:arg_next ?buffer:arg_buffer () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -2467,7 +2467,7 @@ module ImportSemaphoreFdInfoKHR = struct
   let _fd = field t "fd" (Ctypes.int)
   let fd = _fd
   let () = seal t
-  let structure_type = Some StructureType.import_semaphore_fd_info_khr
+  let structure_type : StructureType.t option = Some StructureType.import_semaphore_fd_info_khr
     let make ?next:arg_next ?semaphore:(arg_semaphore=Semaphore.null) ?flags:(arg_flags=SemaphoreImportFlags.of_int 0) ?handle_type:(arg_handle_type=ExternalSemaphoreHandleTypeFlags.of_int 0) ?fd:(arg_fd=0) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -2496,7 +2496,7 @@ module ImportSemaphoreSciSyncInfoNV = struct
   let _handle = field t "handle" (ptr (Ctypes.void))
   let handle = _handle
   let () = seal t
-  let structure_type = None
+  let structure_type : StructureType.t option = None
     let make ?next:arg_next ?semaphore:(arg_semaphore=Semaphore.null) ?handle_type:(arg_handle_type=ExternalSemaphoreHandleTypeFlags.of_int 0) ?handle:arg_handle () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -2528,7 +2528,7 @@ module ImportSemaphoreWin32HandleInfoKHR = struct
   let _name = field t "name" (ptr void)
   let name = _name
   let () = seal t
-  let structure_type = Some StructureType.import_semaphore_win32_handle_info_khr
+  let structure_type : StructureType.t option = Some StructureType.import_semaphore_win32_handle_info_khr
     let make ?next:arg_next ?semaphore:(arg_semaphore=Semaphore.null) ?flags:(arg_flags=SemaphoreImportFlags.of_int 0) ?handle_type:(arg_handle_type=ExternalSemaphoreHandleTypeFlags.of_int 0) ?handle:arg_handle ?name:arg_name () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -2560,7 +2560,7 @@ module ImportSemaphoreZirconHandleInfoFUCHSIA = struct
   let _zircon_handle = field t "zirconHandle" (Vk_base.uint32)
   let zircon_handle = _zircon_handle
   let () = seal t
-  let structure_type = Some StructureType.import_semaphore_zircon_handle_info_fuchsia
+  let structure_type : StructureType.t option = Some StructureType.import_semaphore_zircon_handle_info_fuchsia
     let make ?next:arg_next ?semaphore:(arg_semaphore=Semaphore.null) ?flags:(arg_flags=SemaphoreImportFlags.of_int 0) ?handle_type:(arg_handle_type=ExternalSemaphoreHandleTypeFlags.of_int 0) ?zircon_handle:(arg_zircon_handle=0) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -2583,7 +2583,7 @@ module IndirectCommandsExecutionSetTokenEXT = struct
   let _shader_stages = field t "shaderStages" (ShaderStageFlags.t)
   let shader_stages = _shader_stages
   let () = seal t
-  let structure_type = None
+  let structure_type : StructureType.t option = None
     let make ?type_:(arg_type_=IndirectExecutionSetInfoTypeEXT.of_int 0) ?shader_stages:(arg_shader_stages=ShaderStageFlags.of_int 0) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -2598,7 +2598,7 @@ module IndirectCommandsIndexBufferTokenEXT = struct
   let _mode = field t "mode" (IndirectCommandsInputModeFlagsEXT.t)
   let mode = _mode
   let () = seal t
-  let structure_type = None
+  let structure_type : StructureType.t option = None
     let make ?mode:(arg_mode=IndirectCommandsInputModeFlagsEXT.of_int 0) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -2618,7 +2618,7 @@ module IndirectCommandsLayoutPushDataTokenNV = struct
   let _push_data_size = field t "pushDataSize" (Vk_base.uint32)
   let push_data_size = _push_data_size
   let () = seal t
-  let structure_type = Some StructureType.indirect_commands_layout_push_data_token_nv
+  let structure_type : StructureType.t option = Some StructureType.indirect_commands_layout_push_data_token_nv
     let make ?next:arg_next ?push_data_offset:(arg_push_data_offset=0) ?push_data_size:(arg_push_data_size=0) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -2665,7 +2665,7 @@ module IndirectCommandsLayoutTokenNV = struct
   let _p_index_type_values = field t "pIndexTypeValues" (ptr (Vk_base.uint32))
   let p_index_type_values = _p_index_type_values
   let () = seal t
-  let structure_type = Some StructureType.indirect_commands_layout_token_nv
+  let structure_type : StructureType.t option = Some StructureType.indirect_commands_layout_token_nv
     let make ?next:arg_next ?token_type:(arg_token_type=IndirectCommandsTokenTypeNV.of_int 0) ?stream:(arg_stream=0) ?offset:(arg_offset=0) ?vertex_binding_unit:(arg_vertex_binding_unit=0) ?vertex_dynamic_stride:(arg_vertex_dynamic_stride=false) ?pushconstant_pipeline_layout:(arg_pushconstant_pipeline_layout=PipelineLayout.null) ?pushconstant_shader_stage_flags:(arg_pushconstant_shader_stage_flags=ShaderStageFlags.of_int 0) ?pushconstant_offset:(arg_pushconstant_offset=0) ?pushconstant_size:(arg_pushconstant_size=0) ?indirect_state_flags:(arg_indirect_state_flags=IndirectStateFlagsNV.of_int 0) ?index_types:(arg_index_types=[]) ?index_type_values:(arg_index_type_values=[]) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -2705,7 +2705,7 @@ module IndirectCommandsStreamNV = struct
   let _offset = field t "offset" (Vk_base.device_size)
   let offset = _offset
   let () = seal t
-  let structure_type = None
+  let structure_type : StructureType.t option = None
     let make ?buffer:(arg_buffer=Buffer.null) ?offset:(arg_offset=0) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -2720,7 +2720,7 @@ module IndirectCommandsVertexBufferTokenEXT = struct
   let _vertex_binding_unit = field t "vertexBindingUnit" (Vk_base.uint32)
   let vertex_binding_unit = _vertex_binding_unit
   let () = seal t
-  let structure_type = None
+  let structure_type : StructureType.t option = None
     let make ?vertex_binding_unit:(arg_vertex_binding_unit=0) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -2740,7 +2740,7 @@ module IndirectExecutionSetPipelineInfoEXT = struct
   let _max_pipeline_count = field t "maxPipelineCount" (Vk_base.uint32)
   let max_pipeline_count = _max_pipeline_count
   let () = seal t
-  let structure_type = Some StructureType.indirect_execution_set_pipeline_info_ext
+  let structure_type : StructureType.t option = Some StructureType.indirect_execution_set_pipeline_info_ext
     let make ?next:arg_next ?initial_pipeline:(arg_initial_pipeline=Pipeline.null) ?max_pipeline_count:(arg_max_pipeline_count=0) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -2765,7 +2765,7 @@ module IndirectExecutionSetShaderLayoutInfoEXT = struct
   let _p_set_layouts = field t "pSetLayouts" (ptr (DescriptorSetLayout.t))
   let p_set_layouts = _p_set_layouts
   let () = seal t
-  let structure_type = Some StructureType.indirect_execution_set_shader_layout_info_ext
+  let structure_type : StructureType.t option = Some StructureType.indirect_execution_set_shader_layout_info_ext
     let make ?next:arg_next ?set_layouts:(arg_set_layouts=[]) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -2792,7 +2792,7 @@ module InitializePerformanceApiInfoINTEL = struct
   let _p_user_data = field t "pUserData" (ptr (Ctypes.void))
   let p_user_data = _p_user_data
   let () = seal t
-  let structure_type = Some StructureType.initialize_performance_api_info_intel
+  let structure_type : StructureType.t option = Some StructureType.initialize_performance_api_info_intel
     let make ?next:arg_next ?p_user_data:arg_p_user_data () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -2814,7 +2814,7 @@ module InputAttachmentAspectReference = struct
   let _aspect_mask = field t "aspectMask" (ImageAspectFlags.t)
   let aspect_mask = _aspect_mask
   let () = seal t
-  let structure_type = None
+  let structure_type : StructureType.t option = None
     let make ?subpass:(arg_subpass=0) ?input_attachment_index:(arg_input_attachment_index=0) ?aspect_mask:(arg_aspect_mask=ImageAspectFlags.of_int 0) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -2836,7 +2836,7 @@ module LatencySleepInfoNV = struct
   let _value = field t "value" (Vk_base.uint64)
   let value = _value
   let () = seal t
-  let structure_type = Some StructureType.latency_sleep_info_nv
+  let structure_type : StructureType.t option = Some StructureType.latency_sleep_info_nv
     let make ?next:arg_next ?signal_semaphore:(arg_signal_semaphore=Semaphore.null) ?value:(arg_value=0) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -2863,7 +2863,7 @@ module LatencySleepModeInfoNV = struct
   let _minimum_interval_us = field t "minimumIntervalUs" (Vk_base.uint32)
   let minimum_interval_us = _minimum_interval_us
   let () = seal t
-  let structure_type = Some StructureType.latency_sleep_mode_info_nv
+  let structure_type : StructureType.t option = Some StructureType.latency_sleep_mode_info_nv
     let make ?next:arg_next ?low_latency_mode:(arg_low_latency_mode=false) ?low_latency_boost:(arg_low_latency_boost=false) ?minimum_interval_us:(arg_minimum_interval_us=0) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -2887,7 +2887,7 @@ module LatencySubmissionPresentIdNV = struct
   let _present_id = field t "presentID" (Vk_base.uint64)
   let present_id = _present_id
   let () = seal t
-  let structure_type = Some StructureType.latency_submission_present_id_nv
+  let structure_type : StructureType.t option = Some StructureType.latency_submission_present_id_nv
     let make ?next:arg_next ?present_id:(arg_present_id=0) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -2911,7 +2911,7 @@ module LatencySurfaceCapabilitiesNV = struct
   let _p_present_modes = field t "pPresentModes" (ptr (PresentModeKHR.t))
   let p_present_modes = _p_present_modes
   let () = seal t
-  let structure_type = Some StructureType.latency_surface_capabilities_nv
+  let structure_type : StructureType.t option = Some StructureType.latency_surface_capabilities_nv
     let make ?next:arg_next ?present_mode_count:(arg_present_mode_count=0) ?p_present_modes:arg_p_present_modes () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -2960,7 +2960,7 @@ module LatencyTimingsFrameReportNV = struct
   let _gpu_render_end_time_us = field t "gpuRenderEndTimeUs" (Vk_base.uint64)
   let gpu_render_end_time_us = _gpu_render_end_time_us
   let () = seal t
-  let structure_type = Some StructureType.latency_timings_frame_report_nv
+  let structure_type : StructureType.t option = Some StructureType.latency_timings_frame_report_nv
     let make ?next:arg_next () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -2983,7 +2983,7 @@ module LayerProperties = struct
   let _description = field t "description" (array 256 (Ctypes.char))
   let description = _description
   let () = seal t
-  let structure_type = None
+  let structure_type : StructureType.t option = None
     let make () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -3006,7 +3006,7 @@ module LayerSettingEXT = struct
   let _p_values = field t "pValues" (ptr (Ctypes.void))
   let p_values = _p_values
   let () = seal t
-  let structure_type = None
+  let structure_type : StructureType.t option = None
     let make ?layer_name:arg_layer_name ?setting_name:arg_setting_name ?type_:(arg_type_=LayerSettingTypeEXT.of_int 0) ?values:(arg_values="") () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -3039,7 +3039,7 @@ module MacOSSurfaceCreateInfoMVK = struct
   let _p_view = field t "pView" (ptr (Ctypes.void))
   let p_view = _p_view
   let () = seal t
-  let structure_type = Some StructureType.macos_surface_create_info_mvk
+  let structure_type : StructureType.t option = Some StructureType.macos_surface_create_info_mvk
     let make ?next:arg_next ?flags:(arg_flags=MacOSSurfaceCreateFlagsMVK.of_int 0) ?view:arg_view () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -3066,7 +3066,7 @@ module MappedMemoryRange = struct
   let _size = field t "size" (Vk_base.device_size)
   let size = _size
   let () = seal t
-  let structure_type = Some StructureType.mapped_memory_range
+  let structure_type : StructureType.t option = Some StructureType.mapped_memory_range
     let make ?next:arg_next ?memory:(arg_memory=DeviceMemory.null) ?offset:(arg_offset=0) ?size:(arg_size=0) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;

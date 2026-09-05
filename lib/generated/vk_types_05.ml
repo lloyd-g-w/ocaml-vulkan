@@ -19,7 +19,7 @@ module PhysicalDeviceCubicWeightsFeaturesQCOM = struct
   let _selectable_cubic_weights = field t "selectableCubicWeights" (Vk_base.bool32)
   let selectable_cubic_weights = _selectable_cubic_weights
   let () = seal t
-  let structure_type = Some StructureType.physical_device_cubic_weights_features_qcom
+  let structure_type : StructureType.t option = Some StructureType.physical_device_cubic_weights_features_qcom
     let make ?next:arg_next ?selectable_cubic_weights:(arg_selectable_cubic_weights=false) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -41,7 +41,7 @@ module PhysicalDeviceCudaKernelLaunchFeaturesNV = struct
   let _cuda_kernel_launch_features = field t "cudaKernelLaunchFeatures" (Vk_base.bool32)
   let cuda_kernel_launch_features = _cuda_kernel_launch_features
   let () = seal t
-  let structure_type = None
+  let structure_type : StructureType.t option = None
     let make ?next:arg_next ?cuda_kernel_launch_features:(arg_cuda_kernel_launch_features=false) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -65,7 +65,7 @@ module PhysicalDeviceCudaKernelLaunchPropertiesNV = struct
   let _compute_capability_major = field t "computeCapabilityMajor" (Vk_base.uint32)
   let compute_capability_major = _compute_capability_major
   let () = seal t
-  let structure_type = None
+  let structure_type : StructureType.t option = None
     let make ?next:arg_next () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -88,7 +88,7 @@ module PhysicalDeviceCustomBorderColorFeaturesEXT = struct
   let _custom_border_color_without_format = field t "customBorderColorWithoutFormat" (Vk_base.bool32)
   let custom_border_color_without_format = _custom_border_color_without_format
   let () = seal t
-  let structure_type = Some StructureType.physical_device_custom_border_color_features_ext
+  let structure_type : StructureType.t option = Some StructureType.physical_device_custom_border_color_features_ext
     let make ?next:arg_next ?custom_border_colors:(arg_custom_border_colors=false) ?custom_border_color_without_format:(arg_custom_border_color_without_format=false) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -111,7 +111,7 @@ module PhysicalDeviceCustomBorderColorPropertiesEXT = struct
   let _max_custom_border_color_samplers = field t "maxCustomBorderColorSamplers" (Vk_base.uint32)
   let max_custom_border_color_samplers = _max_custom_border_color_samplers
   let () = seal t
-  let structure_type = Some StructureType.physical_device_custom_border_color_properties_ext
+  let structure_type : StructureType.t option = Some StructureType.physical_device_custom_border_color_properties_ext
     let make ?next:arg_next () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -132,7 +132,7 @@ module PhysicalDeviceCustomResolveFeaturesEXT = struct
   let _custom_resolve = field t "customResolve" (Vk_base.bool32)
   let custom_resolve = _custom_resolve
   let () = seal t
-  let structure_type = Some StructureType.physical_device_custom_resolve_features_ext
+  let structure_type : StructureType.t option = Some StructureType.physical_device_custom_resolve_features_ext
     let make ?next:arg_next ?custom_resolve:(arg_custom_resolve=false) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -162,7 +162,7 @@ module PhysicalDeviceDataGraphFeaturesARM = struct
   let _data_graph_shader_module = field t "dataGraphShaderModule" (Vk_base.bool32)
   let data_graph_shader_module = _data_graph_shader_module
   let () = seal t
-  let structure_type = Some StructureType.physical_device_data_graph_features_arm
+  let structure_type : StructureType.t option = Some StructureType.physical_device_data_graph_features_arm
     let make ?next:arg_next ?data_graph:(arg_data_graph=false) ?data_graph_update_after_bind:(arg_data_graph_update_after_bind=false) ?data_graph_specialization_constants:(arg_data_graph_specialization_constants=false) ?data_graph_descriptor_buffer:(arg_data_graph_descriptor_buffer=false) ?data_graph_shader_module:(arg_data_graph_shader_module=false) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -188,7 +188,7 @@ module PhysicalDeviceDataGraphModelFeaturesQCOM = struct
   let _data_graph_model = field t "dataGraphModel" (Vk_base.bool32)
   let data_graph_model = _data_graph_model
   let () = seal t
-  let structure_type = Some StructureType.physical_device_data_graph_model_features_qcom
+  let structure_type : StructureType.t option = Some StructureType.physical_device_data_graph_model_features_qcom
     let make ?next:arg_next ?data_graph_model:(arg_data_graph_model=false) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -210,7 +210,7 @@ module PhysicalDeviceDataGraphNeuralAcceleratorStatisticsFeaturesARM = struct
   let _data_graph_neural_accelerator_statistics = field t "dataGraphNeuralAcceleratorStatistics" (Vk_base.bool32)
   let data_graph_neural_accelerator_statistics = _data_graph_neural_accelerator_statistics
   let () = seal t
-  let structure_type = Some StructureType.physical_device_data_graph_neural_accelerator_statistics_features_arm
+  let structure_type : StructureType.t option = Some StructureType.physical_device_data_graph_neural_accelerator_statistics_features_arm
     let make ?next:arg_next ?data_graph_neural_accelerator_statistics:(arg_data_graph_neural_accelerator_statistics=false) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -232,7 +232,7 @@ module PhysicalDeviceDataGraphOperationSupportARM = struct
   let _version = field t "version" (Vk_base.uint32)
   let version = _version
   let () = seal t
-  let structure_type = None
+  let structure_type : StructureType.t option = None
     let make ?operation_type:(arg_operation_type=PhysicalDeviceDataGraphOperationTypeARM.of_int 0) ?name:(arg_name="") ?version:(arg_version=0) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -255,7 +255,7 @@ module PhysicalDeviceDataGraphOpticalFlowFeaturesARM = struct
   let _data_graph_optical_flow = field t "dataGraphOpticalFlow" (Vk_base.bool32)
   let data_graph_optical_flow = _data_graph_optical_flow
   let () = seal t
-  let structure_type = Some StructureType.physical_device_data_graph_optical_flow_features_arm
+  let structure_type : StructureType.t option = Some StructureType.physical_device_data_graph_optical_flow_features_arm
     let make ?next:arg_next ?data_graph_optical_flow:(arg_data_graph_optical_flow=false) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -275,7 +275,7 @@ module PhysicalDeviceDataGraphProcessingEngineARM = struct
   let _is_foreign = field t "isForeign" (Vk_base.bool32)
   let is_foreign = _is_foreign
   let () = seal t
-  let structure_type = None
+  let structure_type : StructureType.t option = None
     let make ?type_:(arg_type_=PhysicalDeviceDataGraphProcessingEngineTypeARM.of_int 0) ?is_foreign:(arg_is_foreign=false) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -294,7 +294,7 @@ module PhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV = struct
   let _dedicated_allocation_image_aliasing = field t "dedicatedAllocationImageAliasing" (Vk_base.bool32)
   let dedicated_allocation_image_aliasing = _dedicated_allocation_image_aliasing
   let () = seal t
-  let structure_type = Some StructureType.physical_device_dedicated_allocation_image_aliasing_features_nv
+  let structure_type : StructureType.t option = Some StructureType.physical_device_dedicated_allocation_image_aliasing_features_nv
     let make ?next:arg_next ?dedicated_allocation_image_aliasing:(arg_dedicated_allocation_image_aliasing=false) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -316,7 +316,7 @@ module PhysicalDeviceDenseGeometryFormatFeaturesAMDX = struct
   let _dense_geometry_format = field t "denseGeometryFormat" (Vk_base.bool32)
   let dense_geometry_format = _dense_geometry_format
   let () = seal t
-  let structure_type = None
+  let structure_type : StructureType.t option = None
     let make ?next:arg_next ?dense_geometry_format:(arg_dense_geometry_format=false) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -344,7 +344,7 @@ module PhysicalDeviceDepthBiasControlFeaturesEXT = struct
   let _depth_bias_exact = field t "depthBiasExact" (Vk_base.bool32)
   let depth_bias_exact = _depth_bias_exact
   let () = seal t
-  let structure_type = Some StructureType.physical_device_depth_bias_control_features_ext
+  let structure_type : StructureType.t option = Some StructureType.physical_device_depth_bias_control_features_ext
     let make ?next:arg_next ?depth_bias_control:(arg_depth_bias_control=false) ?least_representable_value_force_unorm_representation:(arg_least_representable_value_force_unorm_representation=false) ?float_representation:(arg_float_representation=false) ?depth_bias_exact:(arg_depth_bias_exact=false) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -369,7 +369,7 @@ module PhysicalDeviceDepthClampControlFeaturesEXT = struct
   let _depth_clamp_control = field t "depthClampControl" (Vk_base.bool32)
   let depth_clamp_control = _depth_clamp_control
   let () = seal t
-  let structure_type = Some StructureType.physical_device_depth_clamp_control_features_ext
+  let structure_type : StructureType.t option = Some StructureType.physical_device_depth_clamp_control_features_ext
     let make ?next:arg_next ?depth_clamp_control:(arg_depth_clamp_control=false) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -391,7 +391,7 @@ module PhysicalDeviceDepthClampZeroOneFeaturesKHR = struct
   let _depth_clamp_zero_one = field t "depthClampZeroOne" (Vk_base.bool32)
   let depth_clamp_zero_one = _depth_clamp_zero_one
   let () = seal t
-  let structure_type = Some StructureType.physical_device_depth_clamp_zero_one_features_khr
+  let structure_type : StructureType.t option = Some StructureType.physical_device_depth_clamp_zero_one_features_khr
     let make ?next:arg_next ?depth_clamp_zero_one:(arg_depth_clamp_zero_one=false) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -413,7 +413,7 @@ module PhysicalDeviceDepthClipControlFeaturesEXT = struct
   let _depth_clip_control = field t "depthClipControl" (Vk_base.bool32)
   let depth_clip_control = _depth_clip_control
   let () = seal t
-  let structure_type = Some StructureType.physical_device_depth_clip_control_features_ext
+  let structure_type : StructureType.t option = Some StructureType.physical_device_depth_clip_control_features_ext
     let make ?next:arg_next ?depth_clip_control:(arg_depth_clip_control=false) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -435,7 +435,7 @@ module PhysicalDeviceDepthClipEnableFeaturesEXT = struct
   let _depth_clip_enable = field t "depthClipEnable" (Vk_base.bool32)
   let depth_clip_enable = _depth_clip_enable
   let () = seal t
-  let structure_type = Some StructureType.physical_device_depth_clip_enable_features_ext
+  let structure_type : StructureType.t option = Some StructureType.physical_device_depth_clip_enable_features_ext
     let make ?next:arg_next ?depth_clip_enable:(arg_depth_clip_enable=false) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -463,7 +463,7 @@ module PhysicalDeviceDepthStencilResolveProperties = struct
   let _independent_resolve = field t "independentResolve" (Vk_base.bool32)
   let independent_resolve = _independent_resolve
   let () = seal t
-  let structure_type = Some StructureType.physical_device_depth_stencil_resolve_properties
+  let structure_type : StructureType.t option = Some StructureType.physical_device_depth_stencil_resolve_properties
     let make ?next:arg_next () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -484,7 +484,7 @@ module PhysicalDeviceDescriptorBufferDensityMapPropertiesEXT = struct
   let _combined_image_sampler_density_map_descriptor_size = field t "combinedImageSamplerDensityMapDescriptorSize" (Vk_base.size_t)
   let combined_image_sampler_density_map_descriptor_size = _combined_image_sampler_density_map_descriptor_size
   let () = seal t
-  let structure_type = Some StructureType.physical_device_descriptor_buffer_density_map_properties_ext
+  let structure_type : StructureType.t option = Some StructureType.physical_device_descriptor_buffer_density_map_properties_ext
     let make ?next:arg_next () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -511,7 +511,7 @@ module PhysicalDeviceDescriptorBufferFeaturesEXT = struct
   let _descriptor_buffer_push_descriptors = field t "descriptorBufferPushDescriptors" (Vk_base.bool32)
   let descriptor_buffer_push_descriptors = _descriptor_buffer_push_descriptors
   let () = seal t
-  let structure_type = Some StructureType.physical_device_descriptor_buffer_features_ext
+  let structure_type : StructureType.t option = Some StructureType.physical_device_descriptor_buffer_features_ext
     let make ?next:arg_next ?descriptor_buffer:(arg_descriptor_buffer=false) ?descriptor_buffer_capture_replay:(arg_descriptor_buffer_capture_replay=false) ?descriptor_buffer_image_layout_ignored:(arg_descriptor_buffer_image_layout_ignored=false) ?descriptor_buffer_push_descriptors:(arg_descriptor_buffer_push_descriptors=false) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -600,7 +600,7 @@ module PhysicalDeviceDescriptorBufferPropertiesEXT = struct
   let _descriptor_buffer_address_space_size = field t "descriptorBufferAddressSpaceSize" (Vk_base.device_size)
   let descriptor_buffer_address_space_size = _descriptor_buffer_address_space_size
   let () = seal t
-  let structure_type = Some StructureType.physical_device_descriptor_buffer_properties_ext
+  let structure_type : StructureType.t option = Some StructureType.physical_device_descriptor_buffer_properties_ext
     let make ?next:arg_next () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -621,7 +621,7 @@ module PhysicalDeviceDescriptorBufferTensorFeaturesARM = struct
   let _descriptor_buffer_tensor_descriptors = field t "descriptorBufferTensorDescriptors" (Vk_base.bool32)
   let descriptor_buffer_tensor_descriptors = _descriptor_buffer_tensor_descriptors
   let () = seal t
-  let structure_type = Some StructureType.physical_device_descriptor_buffer_tensor_features_arm
+  let structure_type : StructureType.t option = Some StructureType.physical_device_descriptor_buffer_tensor_features_arm
     let make ?next:arg_next ?descriptor_buffer_tensor_descriptors:(arg_descriptor_buffer_tensor_descriptors=false) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -647,7 +647,7 @@ module PhysicalDeviceDescriptorBufferTensorPropertiesARM = struct
   let _tensor_descriptor_size = field t "tensorDescriptorSize" (Vk_base.size_t)
   let tensor_descriptor_size = _tensor_descriptor_size
   let () = seal t
-  let structure_type = Some StructureType.physical_device_descriptor_buffer_tensor_properties_arm
+  let structure_type : StructureType.t option = Some StructureType.physical_device_descriptor_buffer_tensor_properties_arm
     let make ?next:arg_next ?tensor_capture_replay_descriptor_data_size:(arg_tensor_capture_replay_descriptor_data_size=0) ?tensor_view_capture_replay_descriptor_data_size:(arg_tensor_view_capture_replay_descriptor_data_size=0) ?tensor_descriptor_size:(arg_tensor_descriptor_size=0) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -673,7 +673,7 @@ module PhysicalDeviceDescriptorHeapFeaturesEXT = struct
   let _descriptor_heap_capture_replay = field t "descriptorHeapCaptureReplay" (Vk_base.bool32)
   let descriptor_heap_capture_replay = _descriptor_heap_capture_replay
   let () = seal t
-  let structure_type = Some StructureType.physical_device_descriptor_heap_features_ext
+  let structure_type : StructureType.t option = Some StructureType.physical_device_descriptor_heap_features_ext
     let make ?next:arg_next ?descriptor_heap:(arg_descriptor_heap=false) ?descriptor_heap_capture_replay:(arg_descriptor_heap_capture_replay=false) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -732,7 +732,7 @@ module PhysicalDeviceDescriptorHeapPropertiesEXT = struct
   let _protected_descriptor_heaps = field t "protectedDescriptorHeaps" (Vk_base.bool32)
   let protected_descriptor_heaps = _protected_descriptor_heaps
   let () = seal t
-  let structure_type = Some StructureType.physical_device_descriptor_heap_properties_ext
+  let structure_type : StructureType.t option = Some StructureType.physical_device_descriptor_heap_properties_ext
     let make ?next:arg_next () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -757,7 +757,7 @@ module PhysicalDeviceDescriptorHeapTensorPropertiesARM = struct
   let _tensor_capture_replay_opaque_data_size = field t "tensorCaptureReplayOpaqueDataSize" (Vk_base.size_t)
   let tensor_capture_replay_opaque_data_size = _tensor_capture_replay_opaque_data_size
   let () = seal t
-  let structure_type = Some StructureType.physical_device_descriptor_heap_tensor_properties_arm
+  let structure_type : StructureType.t option = Some StructureType.physical_device_descriptor_heap_tensor_properties_arm
     let make ?next:arg_next () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -816,7 +816,7 @@ module PhysicalDeviceDescriptorIndexingFeatures = struct
   let _runtime_descriptor_array = field t "runtimeDescriptorArray" (Vk_base.bool32)
   let runtime_descriptor_array = _runtime_descriptor_array
   let () = seal t
-  let structure_type = Some StructureType.physical_device_descriptor_indexing_features
+  let structure_type : StructureType.t option = Some StructureType.physical_device_descriptor_indexing_features
     let make ?next:arg_next ?shader_input_attachment_array_dynamic_indexing:(arg_shader_input_attachment_array_dynamic_indexing=false) ?shader_uniform_texel_buffer_array_dynamic_indexing:(arg_shader_uniform_texel_buffer_array_dynamic_indexing=false) ?shader_storage_texel_buffer_array_dynamic_indexing:(arg_shader_storage_texel_buffer_array_dynamic_indexing=false) ?shader_uniform_buffer_array_non_uniform_indexing:(arg_shader_uniform_buffer_array_non_uniform_indexing=false) ?shader_sampled_image_array_non_uniform_indexing:(arg_shader_sampled_image_array_non_uniform_indexing=false) ?shader_storage_buffer_array_non_uniform_indexing:(arg_shader_storage_buffer_array_non_uniform_indexing=false) ?shader_storage_image_array_non_uniform_indexing:(arg_shader_storage_image_array_non_uniform_indexing=false) ?shader_input_attachment_array_non_uniform_indexing:(arg_shader_input_attachment_array_non_uniform_indexing=false) ?shader_uniform_texel_buffer_array_non_uniform_indexing:(arg_shader_uniform_texel_buffer_array_non_uniform_indexing=false) ?shader_storage_texel_buffer_array_non_uniform_indexing:(arg_shader_storage_texel_buffer_array_non_uniform_indexing=false) ?descriptor_binding_uniform_buffer_update_after_bind:(arg_descriptor_binding_uniform_buffer_update_after_bind=false) ?descriptor_binding_sampled_image_update_after_bind:(arg_descriptor_binding_sampled_image_update_after_bind=false) ?descriptor_binding_storage_image_update_after_bind:(arg_descriptor_binding_storage_image_update_after_bind=false) ?descriptor_binding_storage_buffer_update_after_bind:(arg_descriptor_binding_storage_buffer_update_after_bind=false) ?descriptor_binding_uniform_texel_buffer_update_after_bind:(arg_descriptor_binding_uniform_texel_buffer_update_after_bind=false) ?descriptor_binding_storage_texel_buffer_update_after_bind:(arg_descriptor_binding_storage_texel_buffer_update_after_bind=false) ?descriptor_binding_update_unused_while_pending:(arg_descriptor_binding_update_unused_while_pending=false) ?descriptor_binding_partially_bound:(arg_descriptor_binding_partially_bound=false) ?descriptor_binding_variable_descriptor_count:(arg_descriptor_binding_variable_descriptor_count=false) ?runtime_descriptor_array:(arg_runtime_descriptor_array=false) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -901,7 +901,7 @@ module PhysicalDeviceDescriptorIndexingProperties = struct
   let _max_descriptor_set_update_after_bind_input_attachments = field t "maxDescriptorSetUpdateAfterBindInputAttachments" (Vk_base.uint32)
   let max_descriptor_set_update_after_bind_input_attachments = _max_descriptor_set_update_after_bind_input_attachments
   let () = seal t
-  let structure_type = Some StructureType.physical_device_descriptor_indexing_properties
+  let structure_type : StructureType.t option = Some StructureType.physical_device_descriptor_indexing_properties
     let make ?next:arg_next () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -922,7 +922,7 @@ module PhysicalDeviceDescriptorPoolOverallocationFeaturesNV = struct
   let _descriptor_pool_overallocation = field t "descriptorPoolOverallocation" (Vk_base.bool32)
   let descriptor_pool_overallocation = _descriptor_pool_overallocation
   let () = seal t
-  let structure_type = Some StructureType.physical_device_descriptor_pool_overallocation_features_nv
+  let structure_type : StructureType.t option = Some StructureType.physical_device_descriptor_pool_overallocation_features_nv
     let make ?next:arg_next ?descriptor_pool_overallocation:(arg_descriptor_pool_overallocation=false) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -944,7 +944,7 @@ module PhysicalDeviceDescriptorSetHostMappingFeaturesVALVE = struct
   let _descriptor_set_host_mapping = field t "descriptorSetHostMapping" (Vk_base.bool32)
   let descriptor_set_host_mapping = _descriptor_set_host_mapping
   let () = seal t
-  let structure_type = Some StructureType.physical_device_descriptor_set_host_mapping_features_valve
+  let structure_type : StructureType.t option = Some StructureType.physical_device_descriptor_set_host_mapping_features_valve
     let make ?next:arg_next ?descriptor_set_host_mapping:(arg_descriptor_set_host_mapping=false) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -966,7 +966,7 @@ module PhysicalDeviceDeviceAddressCommandsFeaturesKHR = struct
   let _device_address_commands = field t "deviceAddressCommands" (Vk_base.bool32)
   let device_address_commands = _device_address_commands
   let () = seal t
-  let structure_type = Some StructureType.physical_device_device_address_commands_features_khr
+  let structure_type : StructureType.t option = Some StructureType.physical_device_device_address_commands_features_khr
     let make ?next:arg_next ?device_address_commands:(arg_device_address_commands=false) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -992,7 +992,7 @@ module PhysicalDeviceDeviceGeneratedCommandsComputeFeaturesNV = struct
   let _device_generated_compute_capture_replay = field t "deviceGeneratedComputeCaptureReplay" (Vk_base.bool32)
   let device_generated_compute_capture_replay = _device_generated_compute_capture_replay
   let () = seal t
-  let structure_type = Some StructureType.physical_device_device_generated_commands_compute_features_nv
+  let structure_type : StructureType.t option = Some StructureType.physical_device_device_generated_commands_compute_features_nv
     let make ?next:arg_next ?device_generated_compute:(arg_device_generated_compute=false) ?device_generated_compute_pipelines:(arg_device_generated_compute_pipelines=false) ?device_generated_compute_capture_replay:(arg_device_generated_compute_capture_replay=false) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -1018,7 +1018,7 @@ module PhysicalDeviceDeviceGeneratedCommandsFeaturesEXT = struct
   let _dynamic_generated_pipeline_layout = field t "dynamicGeneratedPipelineLayout" (Vk_base.bool32)
   let dynamic_generated_pipeline_layout = _dynamic_generated_pipeline_layout
   let () = seal t
-  let structure_type = Some StructureType.physical_device_device_generated_commands_features_ext
+  let structure_type : StructureType.t option = Some StructureType.physical_device_device_generated_commands_features_ext
     let make ?next:arg_next ?device_generated_commands:(arg_device_generated_commands=false) ?dynamic_generated_pipeline_layout:(arg_dynamic_generated_pipeline_layout=false) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -1041,7 +1041,7 @@ module PhysicalDeviceDeviceGeneratedCommandsFeaturesNV = struct
   let _device_generated_commands = field t "deviceGeneratedCommands" (Vk_base.bool32)
   let device_generated_commands = _device_generated_commands
   let () = seal t
-  let structure_type = Some StructureType.physical_device_device_generated_commands_features_nv
+  let structure_type : StructureType.t option = Some StructureType.physical_device_device_generated_commands_features_nv
     let make ?next:arg_next ?device_generated_commands:(arg_device_generated_commands=false) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -1085,7 +1085,7 @@ module PhysicalDeviceDeviceGeneratedCommandsPropertiesEXT = struct
   let _device_generated_commands_multi_draw_indirect_count = field t "deviceGeneratedCommandsMultiDrawIndirectCount" (Vk_base.bool32)
   let device_generated_commands_multi_draw_indirect_count = _device_generated_commands_multi_draw_indirect_count
   let () = seal t
-  let structure_type = Some StructureType.physical_device_device_generated_commands_properties_ext
+  let structure_type : StructureType.t option = Some StructureType.physical_device_device_generated_commands_properties_ext
     let make ?next:arg_next () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -1122,7 +1122,7 @@ module PhysicalDeviceDeviceGeneratedCommandsPropertiesNV = struct
   let _min_indirect_commands_buffer_offset_alignment = field t "minIndirectCommandsBufferOffsetAlignment" (Vk_base.uint32)
   let min_indirect_commands_buffer_offset_alignment = _min_indirect_commands_buffer_offset_alignment
   let () = seal t
-  let structure_type = Some StructureType.physical_device_device_generated_commands_properties_nv
+  let structure_type : StructureType.t option = Some StructureType.physical_device_device_generated_commands_properties_nv
     let make ?next:arg_next () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -1143,7 +1143,7 @@ module PhysicalDeviceDeviceMemoryReportFeaturesEXT = struct
   let _device_memory_report = field t "deviceMemoryReport" (Vk_base.bool32)
   let device_memory_report = _device_memory_report
   let () = seal t
-  let structure_type = Some StructureType.physical_device_device_memory_report_features_ext
+  let structure_type : StructureType.t option = Some StructureType.physical_device_device_memory_report_features_ext
     let make ?next:arg_next ?device_memory_report:(arg_device_memory_report=false) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -1165,7 +1165,7 @@ module PhysicalDeviceDiagnosticsConfigFeaturesNV = struct
   let _diagnostics_config = field t "diagnosticsConfig" (Vk_base.bool32)
   let diagnostics_config = _diagnostics_config
   let () = seal t
-  let structure_type = Some StructureType.physical_device_diagnostics_config_features_nv
+  let structure_type : StructureType.t option = Some StructureType.physical_device_diagnostics_config_features_nv
     let make ?next:arg_next ?diagnostics_config:(arg_diagnostics_config=false) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -1187,7 +1187,7 @@ module PhysicalDeviceDiscardRectanglePropertiesEXT = struct
   let _max_discard_rectangles = field t "maxDiscardRectangles" (Vk_base.uint32)
   let max_discard_rectangles = _max_discard_rectangles
   let () = seal t
-  let structure_type = Some StructureType.physical_device_discard_rectangle_properties_ext
+  let structure_type : StructureType.t option = Some StructureType.physical_device_discard_rectangle_properties_ext
     let make ?next:arg_next () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -1208,7 +1208,7 @@ module PhysicalDeviceDisplacementMicromapFeaturesNV = struct
   let _displacement_micromap = field t "displacementMicromap" (Vk_base.bool32)
   let displacement_micromap = _displacement_micromap
   let () = seal t
-  let structure_type = None
+  let structure_type : StructureType.t option = None
     let make ?next:arg_next ?displacement_micromap:(arg_displacement_micromap=false) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -1230,7 +1230,7 @@ module PhysicalDeviceDisplacementMicromapPropertiesNV = struct
   let _max_displacement_micromap_subdivision_level = field t "maxDisplacementMicromapSubdivisionLevel" (Vk_base.uint32)
   let max_displacement_micromap_subdivision_level = _max_displacement_micromap_subdivision_level
   let () = seal t
-  let structure_type = None
+  let structure_type : StructureType.t option = None
     let make ?next:arg_next () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -1261,7 +1261,7 @@ module PhysicalDeviceDrmPropertiesEXT = struct
   let _render_minor = field t "renderMinor" (Vk_base.int64)
   let render_minor = _render_minor
   let () = seal t
-  let structure_type = Some StructureType.physical_device_drm_properties_ext
+  let structure_type : StructureType.t option = Some StructureType.physical_device_drm_properties_ext
     let make ?next:arg_next () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -1282,7 +1282,7 @@ module PhysicalDeviceDynamicRenderingFeatures = struct
   let _dynamic_rendering = field t "dynamicRendering" (Vk_base.bool32)
   let dynamic_rendering = _dynamic_rendering
   let () = seal t
-  let structure_type = Some StructureType.physical_device_dynamic_rendering_features
+  let structure_type : StructureType.t option = Some StructureType.physical_device_dynamic_rendering_features
     let make ?next:arg_next ?dynamic_rendering:(arg_dynamic_rendering=false) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -1304,7 +1304,7 @@ module PhysicalDeviceDynamicRenderingLocalReadFeatures = struct
   let _dynamic_rendering_local_read = field t "dynamicRenderingLocalRead" (Vk_base.bool32)
   let dynamic_rendering_local_read = _dynamic_rendering_local_read
   let () = seal t
-  let structure_type = Some StructureType.physical_device_dynamic_rendering_local_read_features
+  let structure_type : StructureType.t option = Some StructureType.physical_device_dynamic_rendering_local_read_features
     let make ?next:arg_next ?dynamic_rendering_local_read:(arg_dynamic_rendering_local_read=false) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -1326,7 +1326,7 @@ module PhysicalDeviceDynamicRenderingUnusedAttachmentsFeaturesEXT = struct
   let _dynamic_rendering_unused_attachments = field t "dynamicRenderingUnusedAttachments" (Vk_base.bool32)
   let dynamic_rendering_unused_attachments = _dynamic_rendering_unused_attachments
   let () = seal t
-  let structure_type = Some StructureType.physical_device_dynamic_rendering_unused_attachments_features_ext
+  let structure_type : StructureType.t option = Some StructureType.physical_device_dynamic_rendering_unused_attachments_features_ext
     let make ?next:arg_next ?dynamic_rendering_unused_attachments:(arg_dynamic_rendering_unused_attachments=false) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -1348,7 +1348,7 @@ module PhysicalDeviceElapsedTimerQueryFeaturesQCOM = struct
   let _elapsed_timer_query = field t "elapsedTimerQuery" (Vk_base.bool32)
   let elapsed_timer_query = _elapsed_timer_query
   let () = seal t
-  let structure_type = Some StructureType.physical_device_elapsed_timer_query_features_qcom
+  let structure_type : StructureType.t option = Some StructureType.physical_device_elapsed_timer_query_features_qcom
     let make ?next:arg_next ?elapsed_timer_query:(arg_elapsed_timer_query=false) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -1370,7 +1370,7 @@ module PhysicalDeviceExclusiveScissorFeaturesNV = struct
   let _exclusive_scissor = field t "exclusiveScissor" (Vk_base.bool32)
   let exclusive_scissor = _exclusive_scissor
   let () = seal t
-  let structure_type = Some StructureType.physical_device_exclusive_scissor_features_nv
+  let structure_type : StructureType.t option = Some StructureType.physical_device_exclusive_scissor_features_nv
     let make ?next:arg_next ?exclusive_scissor:(arg_exclusive_scissor=false) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -1396,7 +1396,7 @@ module PhysicalDeviceExtendedDynamicState2FeaturesEXT = struct
   let _extended_dynamic_state_2_patch_control_points = field t "extendedDynamicState2PatchControlPoints" (Vk_base.bool32)
   let extended_dynamic_state_2_patch_control_points = _extended_dynamic_state_2_patch_control_points
   let () = seal t
-  let structure_type = Some StructureType.physical_device_extended_dynamic_state_2_features_ext
+  let structure_type : StructureType.t option = Some StructureType.physical_device_extended_dynamic_state_2_features_ext
     let make ?next:arg_next ?extended_dynamic_state_2:(arg_extended_dynamic_state_2=false) ?extended_dynamic_state_2_logic_op:(arg_extended_dynamic_state_2_logic_op=false) ?extended_dynamic_state_2_patch_control_points:(arg_extended_dynamic_state_2_patch_control_points=false) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -1480,7 +1480,7 @@ module PhysicalDeviceExtendedDynamicState3FeaturesEXT = struct
   let _extended_dynamic_state_3_shading_rate_image_enable = field t "extendedDynamicState3ShadingRateImageEnable" (Vk_base.bool32)
   let extended_dynamic_state_3_shading_rate_image_enable = _extended_dynamic_state_3_shading_rate_image_enable
   let () = seal t
-  let structure_type = Some StructureType.physical_device_extended_dynamic_state_3_features_ext
+  let structure_type : StructureType.t option = Some StructureType.physical_device_extended_dynamic_state_3_features_ext
     let make ?next:arg_next ?extended_dynamic_state_3_tessellation_domain_origin:(arg_extended_dynamic_state_3_tessellation_domain_origin=false) ?extended_dynamic_state_3_depth_clamp_enable:(arg_extended_dynamic_state_3_depth_clamp_enable=false) ?extended_dynamic_state_3_polygon_mode:(arg_extended_dynamic_state_3_polygon_mode=false) ?extended_dynamic_state_3_rasterization_samples:(arg_extended_dynamic_state_3_rasterization_samples=false) ?extended_dynamic_state_3_sample_mask:(arg_extended_dynamic_state_3_sample_mask=false) ?extended_dynamic_state_3_alpha_to_coverage_enable:(arg_extended_dynamic_state_3_alpha_to_coverage_enable=false) ?extended_dynamic_state_3_alpha_to_one_enable:(arg_extended_dynamic_state_3_alpha_to_one_enable=false) ?extended_dynamic_state_3_logic_op_enable:(arg_extended_dynamic_state_3_logic_op_enable=false) ?extended_dynamic_state_3_color_blend_enable:(arg_extended_dynamic_state_3_color_blend_enable=false) ?extended_dynamic_state_3_color_blend_equation:(arg_extended_dynamic_state_3_color_blend_equation=false) ?extended_dynamic_state_3_color_write_mask:(arg_extended_dynamic_state_3_color_write_mask=false) ?extended_dynamic_state_3_rasterization_stream:(arg_extended_dynamic_state_3_rasterization_stream=false) ?extended_dynamic_state_3_conservative_rasterization_mode:(arg_extended_dynamic_state_3_conservative_rasterization_mode=false) ?extended_dynamic_state_3_extra_primitive_overestimation_size:(arg_extended_dynamic_state_3_extra_primitive_overestimation_size=false) ?extended_dynamic_state_3_depth_clip_enable:(arg_extended_dynamic_state_3_depth_clip_enable=false) ?extended_dynamic_state_3_sample_locations_enable:(arg_extended_dynamic_state_3_sample_locations_enable=false) ?extended_dynamic_state_3_color_blend_advanced:(arg_extended_dynamic_state_3_color_blend_advanced=false) ?extended_dynamic_state_3_provoking_vertex_mode:(arg_extended_dynamic_state_3_provoking_vertex_mode=false) ?extended_dynamic_state_3_line_rasterization_mode:(arg_extended_dynamic_state_3_line_rasterization_mode=false) ?extended_dynamic_state_3_line_stipple_enable:(arg_extended_dynamic_state_3_line_stipple_enable=false) ?extended_dynamic_state_3_depth_clip_negative_one_to_one:(arg_extended_dynamic_state_3_depth_clip_negative_one_to_one=false) ?extended_dynamic_state_3_viewport_w_scaling_enable:(arg_extended_dynamic_state_3_viewport_w_scaling_enable=false) ?extended_dynamic_state_3_viewport_swizzle:(arg_extended_dynamic_state_3_viewport_swizzle=false) ?extended_dynamic_state_3_coverage_to_color_enable:(arg_extended_dynamic_state_3_coverage_to_color_enable=false) ?extended_dynamic_state_3_coverage_to_color_location:(arg_extended_dynamic_state_3_coverage_to_color_location=false) ?extended_dynamic_state_3_coverage_modulation_mode:(arg_extended_dynamic_state_3_coverage_modulation_mode=false) ?extended_dynamic_state_3_coverage_modulation_table_enable:(arg_extended_dynamic_state_3_coverage_modulation_table_enable=false) ?extended_dynamic_state_3_coverage_modulation_table:(arg_extended_dynamic_state_3_coverage_modulation_table=false) ?extended_dynamic_state_3_coverage_reduction_mode:(arg_extended_dynamic_state_3_coverage_reduction_mode=false) ?extended_dynamic_state_3_representative_fragment_test_enable:(arg_extended_dynamic_state_3_representative_fragment_test_enable=false) ?extended_dynamic_state_3_shading_rate_image_enable:(arg_extended_dynamic_state_3_shading_rate_image_enable=false) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -1532,7 +1532,7 @@ module PhysicalDeviceExtendedDynamicState3PropertiesEXT = struct
   let _dynamic_primitive_topology_unrestricted = field t "dynamicPrimitiveTopologyUnrestricted" (Vk_base.bool32)
   let dynamic_primitive_topology_unrestricted = _dynamic_primitive_topology_unrestricted
   let () = seal t
-  let structure_type = Some StructureType.physical_device_extended_dynamic_state_3_properties_ext
+  let structure_type : StructureType.t option = Some StructureType.physical_device_extended_dynamic_state_3_properties_ext
     let make ?next:arg_next () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -1553,7 +1553,7 @@ module PhysicalDeviceExtendedDynamicStateFeaturesEXT = struct
   let _extended_dynamic_state = field t "extendedDynamicState" (Vk_base.bool32)
   let extended_dynamic_state = _extended_dynamic_state
   let () = seal t
-  let structure_type = Some StructureType.physical_device_extended_dynamic_state_features_ext
+  let structure_type : StructureType.t option = Some StructureType.physical_device_extended_dynamic_state_features_ext
     let make ?next:arg_next ?extended_dynamic_state:(arg_extended_dynamic_state=false) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -1575,7 +1575,7 @@ module PhysicalDeviceExtendedFlagsFeaturesKHR = struct
   let _extended_flags = field t "extendedFlags" (Vk_base.bool32)
   let extended_flags = _extended_flags
   let () = seal t
-  let structure_type = Some StructureType.physical_device_extended_flags_features_khr
+  let structure_type : StructureType.t option = Some StructureType.physical_device_extended_flags_features_khr
     let make ?next:arg_next ?extended_flags:(arg_extended_flags=false) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -1597,7 +1597,7 @@ module PhysicalDeviceExtendedSparseAddressSpaceFeaturesNV = struct
   let _extended_sparse_address_space = field t "extendedSparseAddressSpace" (Vk_base.bool32)
   let extended_sparse_address_space = _extended_sparse_address_space
   let () = seal t
-  let structure_type = Some StructureType.physical_device_extended_sparse_address_space_features_nv
+  let structure_type : StructureType.t option = Some StructureType.physical_device_extended_sparse_address_space_features_nv
     let make ?next:arg_next ?extended_sparse_address_space:(arg_extended_sparse_address_space=false) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -1623,7 +1623,7 @@ module PhysicalDeviceExtendedSparseAddressSpacePropertiesNV = struct
   let _extended_sparse_buffer_usage_flags = field t "extendedSparseBufferUsageFlags" (BufferUsageFlags.t)
   let extended_sparse_buffer_usage_flags = _extended_sparse_buffer_usage_flags
   let () = seal t
-  let structure_type = Some StructureType.physical_device_extended_sparse_address_space_properties_nv
+  let structure_type : StructureType.t option = Some StructureType.physical_device_extended_sparse_address_space_properties_nv
     let make ?next:arg_next () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -1648,7 +1648,7 @@ module PhysicalDeviceExternalBufferInfo = struct
   let _handle_type = field t "handleType" (ExternalMemoryHandleTypeFlags.t)
   let handle_type = _handle_type
   let () = seal t
-  let structure_type = Some StructureType.physical_device_external_buffer_info
+  let structure_type : StructureType.t option = Some StructureType.physical_device_external_buffer_info
     let make ?next:arg_next ?flags:(arg_flags=BufferCreateFlags.of_int 0) ?usage:(arg_usage=BufferUsageFlags.of_int 0) ?handle_type:(arg_handle_type=ExternalMemoryHandleTypeFlags.of_int 0) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -1674,7 +1674,7 @@ module PhysicalDeviceExternalComputeQueuePropertiesNV = struct
   let _max_external_queues = field t "maxExternalQueues" (Vk_base.uint32)
   let max_external_queues = _max_external_queues
   let () = seal t
-  let structure_type = Some StructureType.physical_device_external_compute_queue_properties_nv
+  let structure_type : StructureType.t option = Some StructureType.physical_device_external_compute_queue_properties_nv
     let make ?next:arg_next () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -1695,7 +1695,7 @@ module PhysicalDeviceExternalFenceInfo = struct
   let _handle_type = field t "handleType" (ExternalFenceHandleTypeFlags.t)
   let handle_type = _handle_type
   let () = seal t
-  let structure_type = Some StructureType.physical_device_external_fence_info
+  let structure_type : StructureType.t option = Some StructureType.physical_device_external_fence_info
     let make ?next:arg_next ?handle_type:(arg_handle_type=ExternalFenceHandleTypeFlags.of_int 0) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -1717,7 +1717,7 @@ module PhysicalDeviceExternalFormatResolveFeaturesANDROID = struct
   let _external_format_resolve = field t "externalFormatResolve" (Vk_base.bool32)
   let external_format_resolve = _external_format_resolve
   let () = seal t
-  let structure_type = Some StructureType.physical_device_external_format_resolve_features_android
+  let structure_type : StructureType.t option = Some StructureType.physical_device_external_format_resolve_features_android
     let make ?next:arg_next ?external_format_resolve:(arg_external_format_resolve=false) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -1743,7 +1743,7 @@ module PhysicalDeviceExternalFormatResolvePropertiesANDROID = struct
   let _external_format_resolve_chroma_offset_y = field t "externalFormatResolveChromaOffsetY" (ChromaLocation.t)
   let external_format_resolve_chroma_offset_y = _external_format_resolve_chroma_offset_y
   let () = seal t
-  let structure_type = Some StructureType.physical_device_external_format_resolve_properties_android
+  let structure_type : StructureType.t option = Some StructureType.physical_device_external_format_resolve_properties_android
     let make ?next:arg_next () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -1764,7 +1764,7 @@ module PhysicalDeviceExternalImageFormatInfo = struct
   let _handle_type = field t "handleType" (ExternalMemoryHandleTypeFlags.t)
   let handle_type = _handle_type
   let () = seal t
-  let structure_type = Some StructureType.physical_device_external_image_format_info
+  let structure_type : StructureType.t option = Some StructureType.physical_device_external_image_format_info
     let make ?next:arg_next ?handle_type:(arg_handle_type=ExternalMemoryHandleTypeFlags.of_int 0) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -1786,7 +1786,7 @@ module PhysicalDeviceExternalMemoryHostPropertiesEXT = struct
   let _min_imported_host_pointer_alignment = field t "minImportedHostPointerAlignment" (Vk_base.device_size)
   let min_imported_host_pointer_alignment = _min_imported_host_pointer_alignment
   let () = seal t
-  let structure_type = Some StructureType.physical_device_external_memory_host_properties_ext
+  let structure_type : StructureType.t option = Some StructureType.physical_device_external_memory_host_properties_ext
     let make ?next:arg_next () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -1807,7 +1807,7 @@ module PhysicalDeviceExternalMemoryRDMAFeaturesNV = struct
   let _external_memory_rdma = field t "externalMemoryRDMA" (Vk_base.bool32)
   let external_memory_rdma = _external_memory_rdma
   let () = seal t
-  let structure_type = Some StructureType.physical_device_external_memory_rdma_features_nv
+  let structure_type : StructureType.t option = Some StructureType.physical_device_external_memory_rdma_features_nv
     let make ?next:arg_next ?external_memory_rdma:(arg_external_memory_rdma=false) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -1831,7 +1831,7 @@ module PhysicalDeviceExternalMemorySciBufFeaturesNV = struct
   let _sci_buf_export = field t "sciBufExport" (Vk_base.bool32)
   let sci_buf_export = _sci_buf_export
   let () = seal t
-  let structure_type = None
+  let structure_type : StructureType.t option = None
     let make ?next:arg_next ?sci_buf_import:(arg_sci_buf_import=false) ?sci_buf_export:(arg_sci_buf_export=false) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -1854,7 +1854,7 @@ module PhysicalDeviceExternalMemoryScreenBufferFeaturesQNX = struct
   let _screen_buffer_import = field t "screenBufferImport" (Vk_base.bool32)
   let screen_buffer_import = _screen_buffer_import
   let () = seal t
-  let structure_type = Some StructureType.physical_device_external_memory_screen_buffer_features_qnx
+  let structure_type : StructureType.t option = Some StructureType.physical_device_external_memory_screen_buffer_features_qnx
     let make ?next:arg_next ?screen_buffer_import:(arg_screen_buffer_import=false) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -1882,7 +1882,7 @@ module PhysicalDeviceExternalSciSync2FeaturesNV = struct
   let _sci_sync_export = field t "sciSyncExport" (Vk_base.bool32)
   let sci_sync_export = _sci_sync_export
   let () = seal t
-  let structure_type = None
+  let structure_type : StructureType.t option = None
     let make ?next:arg_next ?sci_sync_fence:(arg_sci_sync_fence=false) ?sci_sync_semaphore_2:(arg_sci_sync_semaphore_2=false) ?sci_sync_import:(arg_sci_sync_import=false) ?sci_sync_export:(arg_sci_sync_export=false) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -1913,7 +1913,7 @@ module PhysicalDeviceExternalSciSyncFeaturesNV = struct
   let _sci_sync_export = field t "sciSyncExport" (Vk_base.bool32)
   let sci_sync_export = _sci_sync_export
   let () = seal t
-  let structure_type = None
+  let structure_type : StructureType.t option = None
     let make ?next:arg_next ?sci_sync_fence:(arg_sci_sync_fence=false) ?sci_sync_semaphore:(arg_sci_sync_semaphore=false) ?sci_sync_import:(arg_sci_sync_import=false) ?sci_sync_export:(arg_sci_sync_export=false) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -1938,7 +1938,7 @@ module PhysicalDeviceExternalSemaphoreInfo = struct
   let _handle_type = field t "handleType" (ExternalSemaphoreHandleTypeFlags.t)
   let handle_type = _handle_type
   let () = seal t
-  let structure_type = Some StructureType.physical_device_external_semaphore_info
+  let structure_type : StructureType.t option = Some StructureType.physical_device_external_semaphore_info
     let make ?next:arg_next ?handle_type:(arg_handle_type=ExternalSemaphoreHandleTypeFlags.of_int 0) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -1962,7 +1962,7 @@ module PhysicalDeviceFaultFeaturesEXT = struct
   let _device_fault_vendor_binary = field t "deviceFaultVendorBinary" (Vk_base.bool32)
   let device_fault_vendor_binary = _device_fault_vendor_binary
   let () = seal t
-  let structure_type = Some StructureType.physical_device_fault_features_ext
+  let structure_type : StructureType.t option = Some StructureType.physical_device_fault_features_ext
     let make ?next:arg_next ?device_fault:(arg_device_fault=false) ?device_fault_vendor_binary:(arg_device_fault_vendor_binary=false) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -1991,7 +1991,7 @@ module PhysicalDeviceFaultFeaturesKHR = struct
   let _device_fault_device_lost_on_masked = field t "deviceFaultDeviceLostOnMasked" (Vk_base.bool32)
   let device_fault_device_lost_on_masked = _device_fault_device_lost_on_masked
   let () = seal t
-  let structure_type = Some StructureType.physical_device_fault_features_khr
+  let structure_type : StructureType.t option = Some StructureType.physical_device_fault_features_khr
     let make ?next:arg_next ?device_fault:(arg_device_fault=false) ?device_fault_vendor_binary:(arg_device_fault_vendor_binary=false) ?device_fault_report_masked:(arg_device_fault_report_masked=false) ?device_fault_device_lost_on_masked:(arg_device_fault_device_lost_on_masked=false) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -2016,7 +2016,7 @@ module PhysicalDeviceFaultPropertiesKHR = struct
   let _max_device_fault_count = field t "maxDeviceFaultCount" (Vk_base.uint32)
   let max_device_fault_count = _max_device_fault_count
   let () = seal t
-  let structure_type = Some StructureType.physical_device_fault_properties_khr
+  let structure_type : StructureType.t option = Some StructureType.physical_device_fault_properties_khr
     let make ?next:arg_next () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -2141,7 +2141,7 @@ module PhysicalDeviceFeatures = struct
   let _inherited_queries = field t "inheritedQueries" (Vk_base.bool32)
   let inherited_queries = _inherited_queries
   let () = seal t
-  let structure_type = None
+  let structure_type : StructureType.t option = None
     let make ?robust_buffer_access:(arg_robust_buffer_access=false) ?full_draw_index_uint_32:(arg_full_draw_index_uint_32=false) ?image_cube_array:(arg_image_cube_array=false) ?independent_blend:(arg_independent_blend=false) ?geometry_shader:(arg_geometry_shader=false) ?tessellation_shader:(arg_tessellation_shader=false) ?sample_rate_shading:(arg_sample_rate_shading=false) ?dual_src_blend:(arg_dual_src_blend=false) ?logic_op:(arg_logic_op=false) ?multi_draw_indirect:(arg_multi_draw_indirect=false) ?draw_indirect_first_instance:(arg_draw_indirect_first_instance=false) ?depth_clamp:(arg_depth_clamp=false) ?depth_bias_clamp:(arg_depth_bias_clamp=false) ?fill_mode_non_solid:(arg_fill_mode_non_solid=false) ?depth_bounds:(arg_depth_bounds=false) ?wide_lines:(arg_wide_lines=false) ?large_points:(arg_large_points=false) ?alpha_to_one:(arg_alpha_to_one=false) ?multi_viewport:(arg_multi_viewport=false) ?sampler_anisotropy:(arg_sampler_anisotropy=false) ?texture_compression_etc_2:(arg_texture_compression_etc_2=false) ?texture_compression_astc_ldr:(arg_texture_compression_astc_ldr=false) ?texture_compression_bc:(arg_texture_compression_bc=false) ?occlusion_query_precise:(arg_occlusion_query_precise=false) ?pipeline_statistics_query:(arg_pipeline_statistics_query=false) ?vertex_pipeline_stores_and_atomics:(arg_vertex_pipeline_stores_and_atomics=false) ?fragment_stores_and_atomics:(arg_fragment_stores_and_atomics=false) ?shader_tessellation_and_geometry_point_size:(arg_shader_tessellation_and_geometry_point_size=false) ?shader_image_gather_extended:(arg_shader_image_gather_extended=false) ?shader_storage_image_extended_formats:(arg_shader_storage_image_extended_formats=false) ?shader_storage_image_multisample:(arg_shader_storage_image_multisample=false) ?shader_storage_image_read_without_format:(arg_shader_storage_image_read_without_format=false) ?shader_storage_image_write_without_format:(arg_shader_storage_image_write_without_format=false) ?shader_uniform_buffer_array_dynamic_indexing:(arg_shader_uniform_buffer_array_dynamic_indexing=false) ?shader_sampled_image_array_dynamic_indexing:(arg_shader_sampled_image_array_dynamic_indexing=false) ?shader_storage_buffer_array_dynamic_indexing:(arg_shader_storage_buffer_array_dynamic_indexing=false) ?shader_storage_image_array_dynamic_indexing:(arg_shader_storage_image_array_dynamic_indexing=false) ?shader_clip_distance:(arg_shader_clip_distance=false) ?shader_cull_distance:(arg_shader_cull_distance=false) ?shader_float_64:(arg_shader_float_64=false) ?shader_int_64:(arg_shader_int_64=false) ?shader_int_16:(arg_shader_int_16=false) ?shader_resource_residency:(arg_shader_resource_residency=false) ?shader_resource_min_lod:(arg_shader_resource_min_lod=false) ?sparse_binding:(arg_sparse_binding=false) ?sparse_residency_buffer:(arg_sparse_residency_buffer=false) ?sparse_residency_image_2d:(arg_sparse_residency_image_2d=false) ?sparse_residency_image_3d:(arg_sparse_residency_image_3d=false) ?sparse_residency_2_samples:(arg_sparse_residency_2_samples=false) ?sparse_residency_4_samples:(arg_sparse_residency_4_samples=false) ?sparse_residency_8_samples:(arg_sparse_residency_8_samples=false) ?sparse_residency_16_samples:(arg_sparse_residency_16_samples=false) ?sparse_residency_aliased:(arg_sparse_residency_aliased=false) ?variable_multisample_rate:(arg_variable_multisample_rate=false) ?inherited_queries:(arg_inherited_queries=false) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -2245,7 +2245,7 @@ module PhysicalDeviceFloatControlsProperties = struct
   let _shader_rounding_mode_rtz_float_64 = field t "shaderRoundingModeRTZFloat64" (Vk_base.bool32)
   let shader_rounding_mode_rtz_float_64 = _shader_rounding_mode_rtz_float_64
   let () = seal t
-  let structure_type = Some StructureType.physical_device_float_controls_properties
+  let structure_type : StructureType.t option = Some StructureType.physical_device_float_controls_properties
     let make ?next:arg_next () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -2266,7 +2266,7 @@ module PhysicalDeviceFormatPackFeaturesARM = struct
   let _format_pack = field t "formatPack" (Vk_base.bool32)
   let format_pack = _format_pack
   let () = seal t
-  let structure_type = Some StructureType.physical_device_format_pack_features_arm
+  let structure_type : StructureType.t option = Some StructureType.physical_device_format_pack_features_arm
     let make ?next:arg_next ?format_pack:(arg_format_pack=false) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -2288,7 +2288,7 @@ module PhysicalDeviceFragmentDensityMap2FeaturesEXT = struct
   let _fragment_density_map_deferred = field t "fragmentDensityMapDeferred" (Vk_base.bool32)
   let fragment_density_map_deferred = _fragment_density_map_deferred
   let () = seal t
-  let structure_type = Some StructureType.physical_device_fragment_density_map_2_features_ext
+  let structure_type : StructureType.t option = Some StructureType.physical_device_fragment_density_map_2_features_ext
     let make ?next:arg_next ?fragment_density_map_deferred:(arg_fragment_density_map_deferred=false) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -2316,7 +2316,7 @@ module PhysicalDeviceFragmentDensityMap2PropertiesEXT = struct
   let _max_descriptor_set_subsampled_samplers = field t "maxDescriptorSetSubsampledSamplers" (Vk_base.uint32)
   let max_descriptor_set_subsampled_samplers = _max_descriptor_set_subsampled_samplers
   let () = seal t
-  let structure_type = Some StructureType.physical_device_fragment_density_map_2_properties_ext
+  let structure_type : StructureType.t option = Some StructureType.physical_device_fragment_density_map_2_properties_ext
     let make ?next:arg_next () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -2341,7 +2341,7 @@ module PhysicalDeviceFragmentDensityMapFeaturesEXT = struct
   let _fragment_density_map_non_subsampled_images = field t "fragmentDensityMapNonSubsampledImages" (Vk_base.bool32)
   let fragment_density_map_non_subsampled_images = _fragment_density_map_non_subsampled_images
   let () = seal t
-  let structure_type = Some StructureType.physical_device_fragment_density_map_features_ext
+  let structure_type : StructureType.t option = Some StructureType.physical_device_fragment_density_map_features_ext
     let make ?next:arg_next ?fragment_density_map:(arg_fragment_density_map=false) ?fragment_density_map_dynamic:(arg_fragment_density_map_dynamic=false) ?fragment_density_map_non_subsampled_images:(arg_fragment_density_map_non_subsampled_images=false) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -2365,7 +2365,7 @@ module PhysicalDeviceFragmentDensityMapLayeredFeaturesVALVE = struct
   let _fragment_density_map_layered = field t "fragmentDensityMapLayered" (Vk_base.bool32)
   let fragment_density_map_layered = _fragment_density_map_layered
   let () = seal t
-  let structure_type = Some StructureType.physical_device_fragment_density_map_layered_features_valve
+  let structure_type : StructureType.t option = Some StructureType.physical_device_fragment_density_map_layered_features_valve
     let make ?next:arg_next ?fragment_density_map_layered:(arg_fragment_density_map_layered=false) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -2387,7 +2387,7 @@ module PhysicalDeviceFragmentDensityMapLayeredPropertiesVALVE = struct
   let _max_fragment_density_map_layers = field t "maxFragmentDensityMapLayers" (Vk_base.uint32)
   let max_fragment_density_map_layers = _max_fragment_density_map_layers
   let () = seal t
-  let structure_type = Some StructureType.physical_device_fragment_density_map_layered_properties_valve
+  let structure_type : StructureType.t option = Some StructureType.physical_device_fragment_density_map_layered_properties_valve
     let make ?next:arg_next () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -2408,7 +2408,7 @@ module PhysicalDeviceFragmentDensityMapOffsetFeaturesEXT = struct
   let _fragment_density_map_offset = field t "fragmentDensityMapOffset" (Vk_base.bool32)
   let fragment_density_map_offset = _fragment_density_map_offset
   let () = seal t
-  let structure_type = Some StructureType.physical_device_fragment_density_map_offset_features_ext
+  let structure_type : StructureType.t option = Some StructureType.physical_device_fragment_density_map_offset_features_ext
     let make ?next:arg_next ?fragment_density_map_offset:(arg_fragment_density_map_offset=false) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -2430,7 +2430,7 @@ module PhysicalDeviceFragmentShaderBarycentricFeaturesKHR = struct
   let _fragment_shader_barycentric = field t "fragmentShaderBarycentric" (Vk_base.bool32)
   let fragment_shader_barycentric = _fragment_shader_barycentric
   let () = seal t
-  let structure_type = Some StructureType.physical_device_fragment_shader_barycentric_features_khr
+  let structure_type : StructureType.t option = Some StructureType.physical_device_fragment_shader_barycentric_features_khr
     let make ?next:arg_next ?fragment_shader_barycentric:(arg_fragment_shader_barycentric=false) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -2452,7 +2452,7 @@ module PhysicalDeviceFragmentShaderBarycentricPropertiesKHR = struct
   let _tri_strip_vertex_order_independent_of_provoking_vertex = field t "triStripVertexOrderIndependentOfProvokingVertex" (Vk_base.bool32)
   let tri_strip_vertex_order_independent_of_provoking_vertex = _tri_strip_vertex_order_independent_of_provoking_vertex
   let () = seal t
-  let structure_type = Some StructureType.physical_device_fragment_shader_barycentric_properties_khr
+  let structure_type : StructureType.t option = Some StructureType.physical_device_fragment_shader_barycentric_properties_khr
     let make ?next:arg_next () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -2477,7 +2477,7 @@ module PhysicalDeviceFragmentShaderInterlockFeaturesEXT = struct
   let _fragment_shader_shading_rate_interlock = field t "fragmentShaderShadingRateInterlock" (Vk_base.bool32)
   let fragment_shader_shading_rate_interlock = _fragment_shader_shading_rate_interlock
   let () = seal t
-  let structure_type = Some StructureType.physical_device_fragment_shader_interlock_features_ext
+  let structure_type : StructureType.t option = Some StructureType.physical_device_fragment_shader_interlock_features_ext
     let make ?next:arg_next ?fragment_shader_sample_interlock:(arg_fragment_shader_sample_interlock=false) ?fragment_shader_pixel_interlock:(arg_fragment_shader_pixel_interlock=false) ?fragment_shader_shading_rate_interlock:(arg_fragment_shader_shading_rate_interlock=false) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -2505,7 +2505,7 @@ module PhysicalDeviceFragmentShadingRateEnumsFeaturesNV = struct
   let _no_invocation_fragment_shading_rates = field t "noInvocationFragmentShadingRates" (Vk_base.bool32)
   let no_invocation_fragment_shading_rates = _no_invocation_fragment_shading_rates
   let () = seal t
-  let structure_type = Some StructureType.physical_device_fragment_shading_rate_enums_features_nv
+  let structure_type : StructureType.t option = Some StructureType.physical_device_fragment_shading_rate_enums_features_nv
     let make ?next:arg_next ?fragment_shading_rate_enums:(arg_fragment_shading_rate_enums=false) ?supersample_fragment_shading_rates:(arg_supersample_fragment_shading_rates=false) ?no_invocation_fragment_shading_rates:(arg_no_invocation_fragment_shading_rates=false) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -2529,7 +2529,7 @@ module PhysicalDeviceFragmentShadingRateEnumsPropertiesNV = struct
   let _max_fragment_shading_rate_invocation_count = field t "maxFragmentShadingRateInvocationCount" (SampleCountFlags.t)
   let max_fragment_shading_rate_invocation_count = _max_fragment_shading_rate_invocation_count
   let () = seal t
-  let structure_type = Some StructureType.physical_device_fragment_shading_rate_enums_properties_nv
+  let structure_type : StructureType.t option = Some StructureType.physical_device_fragment_shading_rate_enums_properties_nv
     let make ?next:arg_next () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -2554,7 +2554,7 @@ module PhysicalDeviceFragmentShadingRateFeaturesKHR = struct
   let _attachment_fragment_shading_rate = field t "attachmentFragmentShadingRate" (Vk_base.bool32)
   let attachment_fragment_shading_rate = _attachment_fragment_shading_rate
   let () = seal t
-  let structure_type = Some StructureType.physical_device_fragment_shading_rate_features_khr
+  let structure_type : StructureType.t option = Some StructureType.physical_device_fragment_shading_rate_features_khr
     let make ?next:arg_next ?pipeline_fragment_shading_rate:(arg_pipeline_fragment_shading_rate=false) ?primitive_fragment_shading_rate:(arg_primitive_fragment_shading_rate=false) ?attachment_fragment_shading_rate:(arg_attachment_fragment_shading_rate=false) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -2578,7 +2578,7 @@ module PhysicalDeviceFrameBoundaryFeaturesEXT = struct
   let _frame_boundary = field t "frameBoundary" (Vk_base.bool32)
   let frame_boundary = _frame_boundary
   let () = seal t
-  let structure_type = Some StructureType.physical_device_frame_boundary_features_ext
+  let structure_type : StructureType.t option = Some StructureType.physical_device_frame_boundary_features_ext
     let make ?next:arg_next ?frame_boundary:(arg_frame_boundary=false) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -2600,7 +2600,7 @@ module PhysicalDeviceGlobalPriorityQueryFeatures = struct
   let _global_priority_query = field t "globalPriorityQuery" (Vk_base.bool32)
   let global_priority_query = _global_priority_query
   let () = seal t
-  let structure_type = Some StructureType.physical_device_global_priority_query_features
+  let structure_type : StructureType.t option = Some StructureType.physical_device_global_priority_query_features
     let make ?next:arg_next ?global_priority_query:(arg_global_priority_query=false) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -2628,7 +2628,7 @@ module PhysicalDeviceGpaFeaturesAMD = struct
   let _clock_modes = field t "clockModes" (Vk_base.bool32)
   let clock_modes = _clock_modes
   let () = seal t
-  let structure_type = Some StructureType.physical_device_gpa_features_amd
+  let structure_type : StructureType.t option = Some StructureType.physical_device_gpa_features_amd
     let make ?next:arg_next ?perf_counters:(arg_perf_counters=false) ?streaming_perf_counters:(arg_streaming_perf_counters=false) ?sq_thread_tracing:(arg_sq_thread_tracing=false) ?clock_modes:(arg_clock_modes=false) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -2653,7 +2653,7 @@ module PhysicalDeviceGpaProperties2AMD = struct
   let _revision_id = field t "revisionId" (Vk_base.uint32)
   let revision_id = _revision_id
   let () = seal t
-  let structure_type = Some StructureType.physical_device_gpa_properties_2_amd
+  let structure_type : StructureType.t option = Some StructureType.physical_device_gpa_properties_2_amd
     let make ?next:arg_next () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -2674,7 +2674,7 @@ module PhysicalDeviceGraphicsPipelineLibraryFeaturesEXT = struct
   let _graphics_pipeline_library = field t "graphicsPipelineLibrary" (Vk_base.bool32)
   let graphics_pipeline_library = _graphics_pipeline_library
   let () = seal t
-  let structure_type = Some StructureType.physical_device_graphics_pipeline_library_features_ext
+  let structure_type : StructureType.t option = Some StructureType.physical_device_graphics_pipeline_library_features_ext
     let make ?next:arg_next ?graphics_pipeline_library:(arg_graphics_pipeline_library=false) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -2698,7 +2698,7 @@ module PhysicalDeviceGraphicsPipelineLibraryPropertiesEXT = struct
   let _graphics_pipeline_library_independent_interpolation_decoration = field t "graphicsPipelineLibraryIndependentInterpolationDecoration" (Vk_base.bool32)
   let graphics_pipeline_library_independent_interpolation_decoration = _graphics_pipeline_library_independent_interpolation_decoration
   let () = seal t
-  let structure_type = Some StructureType.physical_device_graphics_pipeline_library_properties_ext
+  let structure_type : StructureType.t option = Some StructureType.physical_device_graphics_pipeline_library_properties_ext
     let make ?next:arg_next () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -2723,7 +2723,7 @@ module PhysicalDeviceGroupProperties = struct
   let _subset_allocation = field t "subsetAllocation" (Vk_base.bool32)
   let subset_allocation = _subset_allocation
   let () = seal t
-  let structure_type = Some StructureType.physical_device_group_properties
+  let structure_type : StructureType.t option = Some StructureType.physical_device_group_properties
     let make ?next:arg_next () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -2744,7 +2744,7 @@ module PhysicalDeviceHdrVividFeaturesHUAWEI = struct
   let _hdr_vivid = field t "hdrVivid" (Vk_base.bool32)
   let hdr_vivid = _hdr_vivid
   let () = seal t
-  let structure_type = Some StructureType.physical_device_hdr_vivid_features_huawei
+  let structure_type : StructureType.t option = Some StructureType.physical_device_hdr_vivid_features_huawei
     let make ?next:arg_next ?hdr_vivid:(arg_hdr_vivid=false) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -2766,7 +2766,7 @@ module PhysicalDeviceHostImageCopyFeatures = struct
   let _host_image_copy = field t "hostImageCopy" (Vk_base.bool32)
   let host_image_copy = _host_image_copy
   let () = seal t
-  let structure_type = Some StructureType.physical_device_host_image_copy_features
+  let structure_type : StructureType.t option = Some StructureType.physical_device_host_image_copy_features
     let make ?next:arg_next ?host_image_copy:(arg_host_image_copy=false) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -2798,7 +2798,7 @@ module PhysicalDeviceHostImageCopyProperties = struct
   let _identical_memory_type_requirements = field t "identicalMemoryTypeRequirements" (Vk_base.bool32)
   let identical_memory_type_requirements = _identical_memory_type_requirements
   let () = seal t
-  let structure_type = Some StructureType.physical_device_host_image_copy_properties
+  let structure_type : StructureType.t option = Some StructureType.physical_device_host_image_copy_properties
     let make ?next:arg_next ?copy_src_layout_count:(arg_copy_src_layout_count=0) ?p_copy_src_layouts:arg_p_copy_src_layouts ?copy_dst_layout_count:(arg_copy_dst_layout_count=0) ?p_copy_dst_layouts:arg_p_copy_dst_layouts ?optimal_tiling_layout_uuid:(arg_optimal_tiling_layout_uuid=[]) ?identical_memory_type_requirements:(arg_identical_memory_type_requirements=false) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -2827,7 +2827,7 @@ module PhysicalDeviceHostQueryResetFeatures = struct
   let _host_query_reset = field t "hostQueryReset" (Vk_base.bool32)
   let host_query_reset = _host_query_reset
   let () = seal t
-  let structure_type = Some StructureType.physical_device_host_query_reset_features
+  let structure_type : StructureType.t option = Some StructureType.physical_device_host_query_reset_features
     let make ?next:arg_next ?host_query_reset:(arg_host_query_reset=false) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -2857,7 +2857,7 @@ module PhysicalDeviceIDProperties = struct
   let _device_luid_valid = field t "deviceLUIDValid" (Vk_base.bool32)
   let device_luid_valid = _device_luid_valid
   let () = seal t
-  let structure_type = Some StructureType.physical_device_id_properties
+  let structure_type : StructureType.t option = Some StructureType.physical_device_id_properties
     let make ?next:arg_next () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -2880,7 +2880,7 @@ module PhysicalDeviceImage2DViewOf3DFeaturesEXT = struct
   let _sampler_2d_view_of_3d = field t "sampler2DViewOf3D" (Vk_base.bool32)
   let sampler_2d_view_of_3d = _sampler_2d_view_of_3d
   let () = seal t
-  let structure_type = Some StructureType.physical_device_image_2d_view_of_3d_features_ext
+  let structure_type : StructureType.t option = Some StructureType.physical_device_image_2d_view_of_3d_features_ext
     let make ?next:arg_next ?image_2d_view_of_3d:(arg_image_2d_view_of_3d=false) ?sampler_2d_view_of_3d:(arg_sampler_2d_view_of_3d=false) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -2903,7 +2903,7 @@ module PhysicalDeviceImageAlignmentControlFeaturesMESA = struct
   let _image_alignment_control = field t "imageAlignmentControl" (Vk_base.bool32)
   let image_alignment_control = _image_alignment_control
   let () = seal t
-  let structure_type = Some StructureType.physical_device_image_alignment_control_features_mesa
+  let structure_type : StructureType.t option = Some StructureType.physical_device_image_alignment_control_features_mesa
     let make ?next:arg_next ?image_alignment_control:(arg_image_alignment_control=false) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -2925,7 +2925,7 @@ module PhysicalDeviceImageAlignmentControlPropertiesMESA = struct
   let _supported_image_alignment_mask = field t "supportedImageAlignmentMask" (Vk_base.uint32)
   let supported_image_alignment_mask = _supported_image_alignment_mask
   let () = seal t
-  let structure_type = Some StructureType.physical_device_image_alignment_control_properties_mesa
+  let structure_type : StructureType.t option = Some StructureType.physical_device_image_alignment_control_properties_mesa
     let make ?next:arg_next () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -2946,7 +2946,7 @@ module PhysicalDeviceImageCompressionControlFeaturesEXT = struct
   let _image_compression_control = field t "imageCompressionControl" (Vk_base.bool32)
   let image_compression_control = _image_compression_control
   let () = seal t
-  let structure_type = Some StructureType.physical_device_image_compression_control_features_ext
+  let structure_type : StructureType.t option = Some StructureType.physical_device_image_compression_control_features_ext
     let make ?next:arg_next ?image_compression_control:(arg_image_compression_control=false) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -2968,7 +2968,7 @@ module PhysicalDeviceImageCompressionControlSwapchainFeaturesEXT = struct
   let _image_compression_control_swapchain = field t "imageCompressionControlSwapchain" (Vk_base.bool32)
   let image_compression_control_swapchain = _image_compression_control_swapchain
   let () = seal t
-  let structure_type = Some StructureType.physical_device_image_compression_control_swapchain_features_ext
+  let structure_type : StructureType.t option = Some StructureType.physical_device_image_compression_control_swapchain_features_ext
     let make ?next:arg_next ?image_compression_control_swapchain:(arg_image_compression_control_swapchain=false) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -2996,7 +2996,7 @@ module PhysicalDeviceImageDrmFormatModifierInfoEXT = struct
   let _p_queue_family_indices = field t "pQueueFamilyIndices" (ptr (Vk_base.uint32))
   let p_queue_family_indices = _p_queue_family_indices
   let () = seal t
-  let structure_type = Some StructureType.physical_device_image_drm_format_modifier_info_ext
+  let structure_type : StructureType.t option = Some StructureType.physical_device_image_drm_format_modifier_info_ext
     let make ?next:arg_next ?drm_format_modifier:(arg_drm_format_modifier=0) ?sharing_mode:(arg_sharing_mode=SharingMode.of_int 0) ?queue_family_indices:(arg_queue_family_indices=[]) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -3033,7 +3033,7 @@ module PhysicalDeviceImageFormatInfo2 = struct
   let _flags = field t "flags" (ImageCreateFlags.t)
   let flags = _flags
   let () = seal t
-  let structure_type = Some StructureType.physical_device_image_format_info_2
+  let structure_type : StructureType.t option = Some StructureType.physical_device_image_format_info_2
     let make ?next:arg_next ?format:(arg_format=Format.of_int 0) ?type_:(arg_type_=ImageType.of_int 0) ?tiling:(arg_tiling=ImageTiling.of_int 0) ?usage:(arg_usage=ImageUsageFlags.of_int 0) ?flags:(arg_flags=ImageCreateFlags.of_int 0) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -3059,7 +3059,7 @@ module PhysicalDeviceImageProcessing2FeaturesQCOM = struct
   let _texture_block_match_2 = field t "textureBlockMatch2" (Vk_base.bool32)
   let texture_block_match_2 = _texture_block_match_2
   let () = seal t
-  let structure_type = Some StructureType.physical_device_image_processing_2_features_qcom
+  let structure_type : StructureType.t option = Some StructureType.physical_device_image_processing_2_features_qcom
     let make ?next:arg_next ?texture_block_match_2:(arg_texture_block_match_2=false) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -3085,7 +3085,7 @@ module PhysicalDeviceImageProcessing3FeaturesQCOM = struct
   let _block_match_extended_clamp_to_edge = field t "blockMatchExtendedClampToEdge" (Vk_base.bool32)
   let block_match_extended_clamp_to_edge = _block_match_extended_clamp_to_edge
   let () = seal t
-  let structure_type = Some StructureType.physical_device_image_processing_3_features_qcom
+  let structure_type : StructureType.t option = Some StructureType.physical_device_image_processing_3_features_qcom
     let make ?next:arg_next ?image_gather_linear:(arg_image_gather_linear=false) ?image_gather_extended_modes:(arg_image_gather_extended_modes=false) ?block_match_extended_clamp_to_edge:(arg_block_match_extended_clamp_to_edge=false) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -3113,7 +3113,7 @@ module PhysicalDeviceImageProcessingFeaturesQCOM = struct
   let _texture_block_match = field t "textureBlockMatch" (Vk_base.bool32)
   let texture_block_match = _texture_block_match
   let () = seal t
-  let structure_type = Some StructureType.physical_device_image_processing_features_qcom
+  let structure_type : StructureType.t option = Some StructureType.physical_device_image_processing_features_qcom
     let make ?next:arg_next ?texture_sample_weighted:(arg_texture_sample_weighted=false) ?texture_box_filter:(arg_texture_box_filter=false) ?texture_block_match:(arg_texture_block_match=false) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -3137,7 +3137,7 @@ module PhysicalDeviceImageRobustnessFeatures = struct
   let _robust_image_access = field t "robustImageAccess" (Vk_base.bool32)
   let robust_image_access = _robust_image_access
   let () = seal t
-  let structure_type = Some StructureType.physical_device_image_robustness_features
+  let structure_type : StructureType.t option = Some StructureType.physical_device_image_robustness_features
     let make ?next:arg_next ?robust_image_access:(arg_robust_image_access=false) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -3159,7 +3159,7 @@ module PhysicalDeviceImageSlicedViewOf3DFeaturesEXT = struct
   let _image_sliced_view_of_3d = field t "imageSlicedViewOf3D" (Vk_base.bool32)
   let image_sliced_view_of_3d = _image_sliced_view_of_3d
   let () = seal t
-  let structure_type = Some StructureType.physical_device_image_sliced_view_of_3d_features_ext
+  let structure_type : StructureType.t option = Some StructureType.physical_device_image_sliced_view_of_3d_features_ext
     let make ?next:arg_next ?image_sliced_view_of_3d:(arg_image_sliced_view_of_3d=false) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -3181,7 +3181,7 @@ module PhysicalDeviceImageViewImageFormatInfoEXT = struct
   let _image_view_type = field t "imageViewType" (ImageViewType.t)
   let image_view_type = _image_view_type
   let () = seal t
-  let structure_type = Some StructureType.physical_device_image_view_image_format_info_ext
+  let structure_type : StructureType.t option = Some StructureType.physical_device_image_view_image_format_info_ext
     let make ?next:arg_next ?image_view_type:(arg_image_view_type=ImageViewType.of_int 0) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -3203,7 +3203,7 @@ module PhysicalDeviceImageViewMinLodFeaturesEXT = struct
   let _min_lod = field t "minLod" (Vk_base.bool32)
   let min_lod = _min_lod
   let () = seal t
-  let structure_type = Some StructureType.physical_device_image_view_min_lod_features_ext
+  let structure_type : StructureType.t option = Some StructureType.physical_device_image_view_min_lod_features_ext
     let make ?next:arg_next ?min_lod:(arg_min_lod=false) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -3225,7 +3225,7 @@ module PhysicalDeviceImagelessFramebufferFeatures = struct
   let _imageless_framebuffer = field t "imagelessFramebuffer" (Vk_base.bool32)
   let imageless_framebuffer = _imageless_framebuffer
   let () = seal t
-  let structure_type = Some StructureType.physical_device_imageless_framebuffer_features
+  let structure_type : StructureType.t option = Some StructureType.physical_device_imageless_framebuffer_features
     let make ?next:arg_next ?imageless_framebuffer:(arg_imageless_framebuffer=false) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -3247,7 +3247,7 @@ module PhysicalDeviceIndexTypeUint8Features = struct
   let _index_type_uint_8 = field t "indexTypeUint8" (Vk_base.bool32)
   let index_type_uint_8 = _index_type_uint_8
   let () = seal t
-  let structure_type = Some StructureType.physical_device_index_type_uint8_features
+  let structure_type : StructureType.t option = Some StructureType.physical_device_index_type_uint8_features
     let make ?next:arg_next ?index_type_uint_8:(arg_index_type_uint_8=false) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -3269,7 +3269,7 @@ module PhysicalDeviceInheritedViewportScissorFeaturesNV = struct
   let _inherited_viewport_scissor_2d = field t "inheritedViewportScissor2D" (Vk_base.bool32)
   let inherited_viewport_scissor_2d = _inherited_viewport_scissor_2d
   let () = seal t
-  let structure_type = Some StructureType.physical_device_inherited_viewport_scissor_features_nv
+  let structure_type : StructureType.t option = Some StructureType.physical_device_inherited_viewport_scissor_features_nv
     let make ?next:arg_next ?inherited_viewport_scissor_2d:(arg_inherited_viewport_scissor_2d=false) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -3293,7 +3293,7 @@ module PhysicalDeviceInlineUniformBlockFeatures = struct
   let _descriptor_binding_inline_uniform_block_update_after_bind = field t "descriptorBindingInlineUniformBlockUpdateAfterBind" (Vk_base.bool32)
   let descriptor_binding_inline_uniform_block_update_after_bind = _descriptor_binding_inline_uniform_block_update_after_bind
   let () = seal t
-  let structure_type = Some StructureType.physical_device_inline_uniform_block_features
+  let structure_type : StructureType.t option = Some StructureType.physical_device_inline_uniform_block_features
     let make ?next:arg_next ?inline_uniform_block:(arg_inline_uniform_block=false) ?descriptor_binding_inline_uniform_block_update_after_bind:(arg_descriptor_binding_inline_uniform_block_update_after_bind=false) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -3324,7 +3324,7 @@ module PhysicalDeviceInlineUniformBlockProperties = struct
   let _max_descriptor_set_update_after_bind_inline_uniform_blocks = field t "maxDescriptorSetUpdateAfterBindInlineUniformBlocks" (Vk_base.uint32)
   let max_descriptor_set_update_after_bind_inline_uniform_blocks = _max_descriptor_set_update_after_bind_inline_uniform_blocks
   let () = seal t
-  let structure_type = Some StructureType.physical_device_inline_uniform_block_properties
+  let structure_type : StructureType.t option = Some StructureType.physical_device_inline_uniform_block_properties
     let make ?next:arg_next () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -3345,7 +3345,7 @@ module PhysicalDeviceInternallySynchronizedQueuesFeaturesKHR = struct
   let _internally_synchronized_queues = field t "internallySynchronizedQueues" (Vk_base.bool32)
   let internally_synchronized_queues = _internally_synchronized_queues
   let () = seal t
-  let structure_type = Some StructureType.physical_device_internally_synchronized_queues_features_khr
+  let structure_type : StructureType.t option = Some StructureType.physical_device_internally_synchronized_queues_features_khr
     let make ?next:arg_next ?internally_synchronized_queues:(arg_internally_synchronized_queues=false) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
@@ -3367,7 +3367,7 @@ module PhysicalDeviceInvocationMaskFeaturesHUAWEI = struct
   let _invocation_mask = field t "invocationMask" (Vk_base.bool32)
   let invocation_mask = _invocation_mask
   let () = seal t
-  let structure_type = Some StructureType.physical_device_invocation_mask_features_huawei
+  let structure_type : StructureType.t option = Some StructureType.physical_device_invocation_mask_features_huawei
     let make ?next:arg_next ?invocation_mask:(arg_invocation_mask=false) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;

@@ -5,6 +5,7 @@ open Ctypes
 
 module ImageLayout = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "ImageLayout"
   let undefined = of_int (0)
   let general = of_int (1)
   let color_attachment_optimal = of_int (2)
@@ -95,6 +96,7 @@ end
 
 module AttachmentLoadOp = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "AttachmentLoadOp"
   let load = of_int (0)
   let clear = of_int (1)
   let dont_care = of_int (2)
@@ -113,6 +115,7 @@ end
 
 module AttachmentStoreOp = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "AttachmentStoreOp"
   let store = of_int (0)
   let dont_care = of_int (1)
   let none = of_int (1000301000)
@@ -131,6 +134,7 @@ end
 
 module ImageType = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "ImageType"
   let _1d = of_int (0)
   let _2d = of_int (1)
   let _3d = of_int (2)
@@ -143,6 +147,7 @@ end
 
 module ImageTiling = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "ImageTiling"
   let optimal = of_int (0)
   let linear = of_int (1)
   let drm_format_modifier_ext = of_int (1000158000)
@@ -155,6 +160,7 @@ end
 
 module ImageViewType = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "ImageViewType"
   let _1d = of_int (0)
   let _2d = of_int (1)
   let _3d = of_int (2)
@@ -175,6 +181,7 @@ end
 
 module CommandBufferLevel = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "CommandBufferLevel"
   let primary = of_int (0)
   let secondary = of_int (1)
   let () = register [
@@ -185,6 +192,7 @@ end
 
 module ComponentSwizzle = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "ComponentSwizzle"
   let identity = of_int (0)
   let zero = of_int (1)
   let one = of_int (2)
@@ -205,6 +213,7 @@ end
 
 module DescriptorType = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "DescriptorType"
   let sampler = of_int (0)
   let combined_image_sampler = of_int (1)
   let sampled_image = of_int (2)
@@ -253,6 +262,7 @@ end
 
 module QueryType = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "QueryType"
   let occlusion = of_int (0)
   let pipeline_statistics = of_int (1)
   let timestamp = of_int (2)
@@ -295,6 +305,7 @@ end
 
 module BorderColor = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "BorderColor"
   let float_transparent_black = of_int (0)
   let int_transparent_black = of_int (1)
   let float_opaque_black = of_int (2)
@@ -317,6 +328,7 @@ end
 
 module PipelineBindPoint = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "PipelineBindPoint"
   let graphics = of_int (0)
   let compute = of_int (1)
   let ray_tracing_khr = of_int (1000165000)
@@ -335,6 +347,7 @@ end
 
 module PipelineCacheHeaderVersion = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "PipelineCacheHeaderVersion"
   let one = of_int (1)
   let data_graph_qcom = of_int (1000629000)
   let () = register [
@@ -345,6 +358,7 @@ end
 
 module PrimitiveTopology = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "PrimitiveTopology"
   let point_list = of_int (0)
   let line_list = of_int (1)
   let line_strip = of_int (2)
@@ -373,6 +387,7 @@ end
 
 module SharingMode = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "SharingMode"
   let exclusive = of_int (0)
   let concurrent = of_int (1)
   let () = register [
@@ -383,6 +398,7 @@ end
 
 module IndexType = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "IndexType"
   let uint16 = of_int (0)
   let uint32 = of_int (1)
   let uint8 = of_int (1000265000)
@@ -403,6 +419,7 @@ end
 
 module Filter = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "Filter"
   let nearest = of_int (0)
   let linear = of_int (1)
   let cubic_img = of_int (1000015000)
@@ -417,6 +434,7 @@ end
 
 module SamplerMipmapMode = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "SamplerMipmapMode"
   let nearest = of_int (0)
   let linear = of_int (1)
   let () = register [
@@ -427,6 +445,7 @@ end
 
 module SamplerAddressMode = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "SamplerAddressMode"
   let repeat = of_int (0)
   let mirrored_repeat = of_int (1)
   let clamp_to_edge = of_int (2)
@@ -445,6 +464,7 @@ end
 
 module CompareOp = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "CompareOp"
   let never = of_int (0)
   let less = of_int (1)
   let equal = of_int (2)
@@ -467,6 +487,7 @@ end
 
 module PolygonMode = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "PolygonMode"
   let fill = of_int (0)
   let line = of_int (1)
   let point = of_int (2)
@@ -481,6 +502,7 @@ end
 
 module FrontFace = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "FrontFace"
   let counter_clockwise = of_int (0)
   let clockwise = of_int (1)
   let () = register [
@@ -491,6 +513,7 @@ end
 
 module BlendFactor = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "BlendFactor"
   let zero = of_int (0)
   let one = of_int (1)
   let src_color = of_int (2)
@@ -535,6 +558,7 @@ end
 
 module BlendOp = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "BlendOp"
   let add = of_int (0)
   let subtract = of_int (1)
   let reverse_subtract = of_int (2)
@@ -643,6 +667,7 @@ end
 
 module StencilOp = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "StencilOp"
   let keep = of_int (0)
   let zero = of_int (1)
   let replace = of_int (2)
@@ -665,6 +690,7 @@ end
 
 module LogicOp = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "LogicOp"
   let clear = of_int (0)
   let and_ = of_int (1)
   let and_reverse = of_int (2)
@@ -703,6 +729,7 @@ end
 
 module InternalAllocationType = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "InternalAllocationType"
   let executable = of_int (0)
   let () = register [
     (executable, "VK_INTERNAL_ALLOCATION_TYPE_EXECUTABLE");
@@ -711,6 +738,7 @@ end
 
 module SystemAllocationScope = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "SystemAllocationScope"
   let command = of_int (0)
   let object_ = of_int (1)
   let cache = of_int (2)
@@ -727,6 +755,7 @@ end
 
 module PhysicalDeviceType = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "PhysicalDeviceType"
   let other = of_int (0)
   let integrated_gpu = of_int (1)
   let discrete_gpu = of_int (2)
@@ -743,6 +772,7 @@ end
 
 module VertexInputRate = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "VertexInputRate"
   let vertex = of_int (0)
   let instance = of_int (1)
   let () = register [
@@ -753,6 +783,7 @@ end
 
 module Format = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "Format"
   let undefined = of_int (0)
   let r4g4_unorm_pack8 = of_int (1)
   let r4g4b4a4_unorm_pack16 = of_int (2)
@@ -1469,6 +1500,7 @@ end
 
 module StructureType = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "StructureType"
   let application_info = of_int (0)
   let instance_create_info = of_int (1)
   let device_queue_create_info = of_int (2)
@@ -4445,6 +4477,7 @@ end
 
 module SubpassContents = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "SubpassContents"
   let inline = of_int (0)
   let secondary_command_buffers = of_int (1)
   let inline_and_secondary_command_buffers_ext = of_int (1000451000)
@@ -4459,6 +4492,7 @@ end
 
 module Result = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "Result"
   let success = of_int (0)
   let not_ready = of_int (1)
   let timeout = of_int (2)
@@ -4587,6 +4621,7 @@ end
 
 module DynamicState = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "DynamicState"
   let viewport = of_int (0)
   let scissor = of_int (1)
   let line_width = of_int (2)
@@ -4773,6 +4808,7 @@ end
 
 module DescriptorUpdateTemplateType = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "DescriptorUpdateTemplateType"
   let descriptor_set = of_int (0)
   let push_descriptors = of_int (1)
   let push_descriptors_khr = of_int (1)
@@ -4787,6 +4823,7 @@ end
 
 module ObjectType = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "ObjectType"
   let unknown = of_int (0)
   let instance = of_int (1)
   let physical_device = of_int (2)
@@ -4915,6 +4952,7 @@ end
 
 module RayTracingInvocationReorderModeEXT = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "RayTracingInvocationReorderModeEXT"
   let none_ext = of_int (0)
   let reorder_ext = of_int (1)
   let none_nv = of_int (0)
@@ -4929,6 +4967,7 @@ end
 
 module RayTracingLssIndexingModeNV = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "RayTracingLssIndexingModeNV"
   let list_nv = of_int (0)
   let successive_nv = of_int (1)
   let () = register [
@@ -4939,6 +4978,7 @@ end
 
 module RayTracingLssPrimitiveEndCapsModeNV = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "RayTracingLssPrimitiveEndCapsModeNV"
   let none_nv = of_int (0)
   let chained_nv = of_int (1)
   let () = register [
@@ -4949,6 +4989,7 @@ end
 
 module DirectDriverLoadingModeLUNARG = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "DirectDriverLoadingModeLUNARG"
   let exclusive_lunarg = of_int (0)
   let inclusive_lunarg = of_int (1)
   let () = register [
@@ -4959,6 +5000,7 @@ end
 
 module AntiLagModeAMD = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "AntiLagModeAMD"
   let driver_control_amd = of_int (0)
   let on_amd = of_int (1)
   let off_amd = of_int (2)
@@ -4971,6 +5013,7 @@ end
 
 module AntiLagStageAMD = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "AntiLagStageAMD"
   let input_amd = of_int (0)
   let present_amd = of_int (1)
   let () = register [
@@ -4981,6 +5024,7 @@ end
 
 module SemaphoreType = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "SemaphoreType"
   let binary = of_int (0)
   let timeline = of_int (1)
   let binary_khr = of_int (0)
@@ -4995,6 +5039,7 @@ end
 
 module PresentModeKHR = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "PresentModeKHR"
   let immediate_khr = of_int (0)
   let mailbox_khr = of_int (1)
   let fifo_khr = of_int (2)
@@ -5017,6 +5062,7 @@ end
 
 module ColorSpaceKHR = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "ColorSpaceKHR"
   let srgb_nonlinear_khr = of_int (0)
   let colorspace_srgb_nonlinear_khr = of_int (0)
   let display_p3_nonlinear_ext = of_int (1000104001)
@@ -5059,6 +5105,7 @@ end
 
 module DisplaySurfaceStereoTypeNV = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "DisplaySurfaceStereoTypeNV"
   let none_nv = of_int (0)
   let onboard_din_nv = of_int (1)
   let hdmi_3d_nv = of_int (2)
@@ -5073,6 +5120,7 @@ end
 
 module TimeDomainKHR = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "TimeDomainKHR"
   let device_khr = of_int (0)
   let clock_monotonic_khr = of_int (1)
   let clock_monotonic_raw_khr = of_int (2)
@@ -5099,6 +5147,7 @@ end
 
 module DebugReportObjectTypeEXT = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "DebugReportObjectTypeEXT"
   let unknown_ext = of_int (0)
   let instance_ext = of_int (1)
   let physical_device_ext = of_int (2)
@@ -5191,6 +5240,7 @@ end
 
 module DeviceMemoryReportEventTypeEXT = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "DeviceMemoryReportEventTypeEXT"
   let allocate_ext = of_int (0)
   let free_ext = of_int (1)
   let import_ext = of_int (2)
@@ -5207,6 +5257,7 @@ end
 
 module RasterizationOrderAMD = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "RasterizationOrderAMD"
   let strict_amd = of_int (0)
   let relaxed_amd = of_int (1)
   let () = register [
@@ -5217,6 +5268,7 @@ end
 
 module ClusterAccelerationStructureTypeNV = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "ClusterAccelerationStructureTypeNV"
   let clusters_bottom_level_nv = of_int (0)
   let triangle_cluster_nv = of_int (1)
   let triangle_cluster_template_nv = of_int (2)
@@ -5229,6 +5281,7 @@ end
 
 module ClusterAccelerationStructureOpTypeNV = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "ClusterAccelerationStructureOpTypeNV"
   let move_objects_nv = of_int (0)
   let build_clusters_bottom_level_nv = of_int (1)
   let build_triangle_cluster_nv = of_int (2)
@@ -5247,6 +5300,7 @@ end
 
 module ClusterAccelerationStructureOpModeNV = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "ClusterAccelerationStructureOpModeNV"
   let implicit_destinations_nv = of_int (0)
   let explicit_destinations_nv = of_int (1)
   let compute_sizes_nv = of_int (2)
@@ -5259,6 +5313,7 @@ end
 
 module ValidationCheckEXT = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "ValidationCheckEXT"
   let all_ext = of_int (0)
   let shaders_ext = of_int (1)
   let () = register [
@@ -5269,6 +5324,7 @@ end
 
 module ValidationFeatureEnableEXT = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "ValidationFeatureEnableEXT"
   let gpu_assisted_ext = of_int (0)
   let gpu_assisted_reserve_binding_slot_ext = of_int (1)
   let best_practices_ext = of_int (2)
@@ -5285,6 +5341,7 @@ end
 
 module ValidationFeatureDisableEXT = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "ValidationFeatureDisableEXT"
   let all_ext = of_int (0)
   let shaders_ext = of_int (1)
   let thread_safety_ext = of_int (2)
@@ -5307,6 +5364,7 @@ end
 
 module LayerSettingTypeEXT = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "LayerSettingTypeEXT"
   let bool32_ext = of_int (0)
   let int32_ext = of_int (1)
   let int64_ext = of_int (2)
@@ -5329,6 +5387,7 @@ end
 
 module IndirectCommandsTokenTypeNV = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "IndirectCommandsTokenTypeNV"
   let shader_group_nv = of_int (0)
   let state_flags_nv = of_int (1)
   let index_buffer_nv = of_int (2)
@@ -5359,6 +5418,7 @@ end
 
 module DisplayPowerStateEXT = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "DisplayPowerStateEXT"
   let off_ext = of_int (0)
   let suspend_ext = of_int (1)
   let on_ext = of_int (2)
@@ -5371,6 +5431,7 @@ end
 
 module DeviceEventTypeEXT = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "DeviceEventTypeEXT"
   let display_hotplug_ext = of_int (0)
   let () = register [
     (display_hotplug_ext, "VK_DEVICE_EVENT_TYPE_DISPLAY_HOTPLUG_EXT");
@@ -5379,6 +5440,7 @@ end
 
 module DisplayEventTypeEXT = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "DisplayEventTypeEXT"
   let first_pixel_out_ext = of_int (0)
   let () = register [
     (first_pixel_out_ext, "VK_DISPLAY_EVENT_TYPE_FIRST_PIXEL_OUT_EXT");
@@ -5387,6 +5449,7 @@ end
 
 module ViewportCoordinateSwizzleNV = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "ViewportCoordinateSwizzleNV"
   let positive_x_nv = of_int (0)
   let negative_x_nv = of_int (1)
   let positive_y_nv = of_int (2)
@@ -5409,6 +5472,7 @@ end
 
 module DiscardRectangleModeEXT = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "DiscardRectangleModeEXT"
   let inclusive_ext = of_int (0)
   let exclusive_ext = of_int (1)
   let () = register [
@@ -5419,6 +5483,7 @@ end
 
 module PointClippingBehavior = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "PointClippingBehavior"
   let all_clip_planes = of_int (0)
   let user_clip_planes_only = of_int (1)
   let all_clip_planes_khr = of_int (0)
@@ -5433,6 +5498,7 @@ end
 
 module SamplerReductionMode = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "SamplerReductionMode"
   let weighted_average = of_int (0)
   let min = of_int (1)
   let max = of_int (2)
@@ -5453,6 +5519,7 @@ end
 
 module TessellationDomainOrigin = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "TessellationDomainOrigin"
   let upper_left = of_int (0)
   let lower_left = of_int (1)
   let upper_left_khr = of_int (0)
@@ -5467,6 +5534,7 @@ end
 
 module SamplerYcbcrModelConversion = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "SamplerYcbcrModelConversion"
   let rgb_identity = of_int (0)
   let ycbcr_identity = of_int (1)
   let ycbcr_709 = of_int (2)
@@ -5493,6 +5561,7 @@ end
 
 module SamplerYcbcrRange = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "SamplerYcbcrRange"
   let itu_full = of_int (0)
   let itu_narrow = of_int (1)
   let itu_full_khr = of_int (0)
@@ -5507,6 +5576,7 @@ end
 
 module ChromaLocation = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "ChromaLocation"
   let cosited_even = of_int (0)
   let midpoint = of_int (1)
   let cosited_even_khr = of_int (0)
@@ -5521,6 +5591,7 @@ end
 
 module BlendOverlapEXT = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "BlendOverlapEXT"
   let uncorrelated_ext = of_int (0)
   let disjoint_ext = of_int (1)
   let conjoint_ext = of_int (2)
@@ -5533,6 +5604,7 @@ end
 
 module CoverageModulationModeNV = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "CoverageModulationModeNV"
   let none_nv = of_int (0)
   let rgb_nv = of_int (1)
   let alpha_nv = of_int (2)
@@ -5547,6 +5619,7 @@ end
 
 module CoverageReductionModeNV = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "CoverageReductionModeNV"
   let merge_nv = of_int (0)
   let truncate_nv = of_int (1)
   let () = register [
@@ -5557,6 +5630,7 @@ end
 
 module ValidationCacheHeaderVersionEXT = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "ValidationCacheHeaderVersionEXT"
   let one_ext = of_int (1)
   let () = register [
     (one_ext, "VK_VALIDATION_CACHE_HEADER_VERSION_ONE_EXT");
@@ -5565,6 +5639,7 @@ end
 
 module ShaderInfoTypeAMD = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "ShaderInfoTypeAMD"
   let statistics_amd = of_int (0)
   let binary_amd = of_int (1)
   let disassembly_amd = of_int (2)
@@ -5577,6 +5652,7 @@ end
 
 module QueueGlobalPriority = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "QueueGlobalPriority"
   let low = of_int (128)
   let medium = of_int (256)
   let high = of_int (512)
@@ -5607,6 +5683,7 @@ end
 
 module ConservativeRasterizationModeEXT = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "ConservativeRasterizationModeEXT"
   let disabled_ext = of_int (0)
   let overestimate_ext = of_int (1)
   let underestimate_ext = of_int (2)
@@ -5619,6 +5696,7 @@ end
 
 module VendorId = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "VendorId"
   let khronos = of_int (65536)
   let viv = of_int (65537)
   let vsi = of_int (65538)
@@ -5643,6 +5721,7 @@ end
 
 module DriverId = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "DriverId"
   let amd_proprietary = of_int (1)
   let amd_open_source = of_int (2)
   let mesa_radv = of_int (3)
@@ -5733,6 +5812,7 @@ end
 
 module ShadingRatePaletteEntryNV = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "ShadingRatePaletteEntryNV"
   let no_invocations_nv = of_int (0)
   let _16_invocations_per_pixel_nv = of_int (1)
   let _8_invocations_per_pixel_nv = of_int (2)
@@ -5763,6 +5843,7 @@ end
 
 module CoarseSampleOrderTypeNV = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "CoarseSampleOrderTypeNV"
   let default_nv = of_int (0)
   let custom_nv = of_int (1)
   let pixel_major_nv = of_int (2)
@@ -5777,6 +5858,7 @@ end
 
 module CopyAccelerationStructureModeKHR = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "CopyAccelerationStructureModeKHR"
   let clone_khr = of_int (0)
   let compact_khr = of_int (1)
   let serialize_khr = of_int (2)
@@ -5795,6 +5877,7 @@ end
 
 module BuildAccelerationStructureModeKHR = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "BuildAccelerationStructureModeKHR"
   let build_khr = of_int (0)
   let update_khr = of_int (1)
   let () = register [
@@ -5805,6 +5888,7 @@ end
 
 module AccelerationStructureTypeKHR = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "AccelerationStructureTypeKHR"
   let top_level_khr = of_int (0)
   let bottom_level_khr = of_int (1)
   let generic_khr = of_int (2)
@@ -5823,6 +5907,7 @@ end
 
 module GeometryTypeKHR = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "GeometryTypeKHR"
   let triangles_khr = of_int (0)
   let aabbs_khr = of_int (1)
   let instances_khr = of_int (2)
@@ -5845,6 +5930,7 @@ end
 
 module AccelerationStructureMemoryRequirementsTypeNV = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "AccelerationStructureMemoryRequirementsTypeNV"
   let object_nv = of_int (0)
   let build_scratch_nv = of_int (1)
   let update_scratch_nv = of_int (2)
@@ -5857,6 +5943,7 @@ end
 
 module AccelerationStructureBuildTypeKHR = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "AccelerationStructureBuildTypeKHR"
   let host_khr = of_int (0)
   let device_khr = of_int (1)
   let host_or_device_khr = of_int (2)
@@ -5869,6 +5956,7 @@ end
 
 module RayTracingShaderGroupTypeKHR = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "RayTracingShaderGroupTypeKHR"
   let general_khr = of_int (0)
   let triangles_hit_group_khr = of_int (1)
   let procedural_hit_group_khr = of_int (2)
@@ -5887,6 +5975,7 @@ end
 
 module AccelerationStructureCompatibilityKHR = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "AccelerationStructureCompatibilityKHR"
   let compatible_khr = of_int (0)
   let incompatible_khr = of_int (1)
   let () = register [
@@ -5897,6 +5986,7 @@ end
 
 module ShaderGroupShaderKHR = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "ShaderGroupShaderKHR"
   let general_khr = of_int (0)
   let closest_hit_khr = of_int (1)
   let any_hit_khr = of_int (2)
@@ -5911,6 +6001,7 @@ end
 
 module MemoryOverallocationBehaviorAMD = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "MemoryOverallocationBehaviorAMD"
   let default_amd = of_int (0)
   let allowed_amd = of_int (1)
   let disallowed_amd = of_int (2)
@@ -5923,6 +6014,7 @@ end
 
 module FullScreenExclusiveEXT = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "FullScreenExclusiveEXT"
   let default_ext = of_int (0)
   let allowed_ext = of_int (1)
   let disallowed_ext = of_int (2)
@@ -5937,6 +6029,7 @@ end
 
 module PerformanceCounterScopeKHR = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "PerformanceCounterScopeKHR"
   let command_buffer_khr = of_int (0)
   let render_pass_khr = of_int (1)
   let command_khr = of_int (2)
@@ -5955,6 +6048,7 @@ end
 
 module PerformanceCounterUnitKHR = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "PerformanceCounterUnitKHR"
   let generic_khr = of_int (0)
   let percentage_khr = of_int (1)
   let nanoseconds_khr = of_int (2)
@@ -5983,6 +6077,7 @@ end
 
 module PerformanceCounterStorageKHR = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "PerformanceCounterStorageKHR"
   let int32_khr = of_int (0)
   let int64_khr = of_int (1)
   let uint32_khr = of_int (2)
@@ -6001,6 +6096,7 @@ end
 
 module PerformanceConfigurationTypeINTEL = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "PerformanceConfigurationTypeINTEL"
   let command_queue_metrics_discovery_activated_intel = of_int (0)
   let () = register [
     (command_queue_metrics_discovery_activated_intel, "VK_PERFORMANCE_CONFIGURATION_TYPE_COMMAND_QUEUE_METRICS_DISCOVERY_ACTIVATED_INTEL");
@@ -6009,6 +6105,7 @@ end
 
 module QueryPoolSamplingModeINTEL = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "QueryPoolSamplingModeINTEL"
   let manual_intel = of_int (0)
   let () = register [
     (manual_intel, "VK_QUERY_POOL_SAMPLING_MODE_MANUAL_INTEL");
@@ -6017,6 +6114,7 @@ end
 
 module PerformanceOverrideTypeINTEL = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "PerformanceOverrideTypeINTEL"
   let null_hardware_intel = of_int (0)
   let flush_gpu_caches_intel = of_int (1)
   let () = register [
@@ -6027,6 +6125,7 @@ end
 
 module PerformanceParameterTypeINTEL = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "PerformanceParameterTypeINTEL"
   let hw_counters_supported_intel = of_int (0)
   let stream_marker_valid_bits_intel = of_int (1)
   let () = register [
@@ -6037,6 +6136,7 @@ end
 
 module PerformanceValueTypeINTEL = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "PerformanceValueTypeINTEL"
   let uint32_intel = of_int (0)
   let uint64_intel = of_int (1)
   let float_intel = of_int (2)
@@ -6053,6 +6153,7 @@ end
 
 module ShaderFloatControlsIndependence = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "ShaderFloatControlsIndependence"
   let _32_only = of_int (0)
   let all = of_int (1)
   let none = of_int (2)
@@ -6071,6 +6172,7 @@ end
 
 module PipelineExecutableStatisticFormatKHR = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "PipelineExecutableStatisticFormatKHR"
   let bool32_khr = of_int (0)
   let int64_khr = of_int (1)
   let uint64_khr = of_int (2)
@@ -6085,6 +6187,7 @@ end
 
 module LineRasterizationMode = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "LineRasterizationMode"
   let default = of_int (0)
   let rectangular = of_int (1)
   let bresenham = of_int (2)
@@ -6115,6 +6218,7 @@ end
 
 module FaultLevel = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "FaultLevel"
   let unassigned = of_int (0)
   let critical = of_int (1)
   let recoverable = of_int (2)
@@ -6129,6 +6233,7 @@ end
 
 module FaultType = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "FaultType"
   let invalid = of_int (0)
   let unassigned = of_int (1)
   let implementation = of_int (2)
@@ -6149,6 +6254,7 @@ end
 
 module FaultQueryBehavior = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "FaultQueryBehavior"
   let get_and_clear_all_faults = of_int (0)
   let () = register [
     (get_and_clear_all_faults, "VK_FAULT_QUERY_BEHAVIOR_GET_AND_CLEAR_ALL_FAULTS");
@@ -6157,6 +6263,7 @@ end
 
 module PipelineMatchControl = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "PipelineMatchControl"
   let application_uuid_exact_match = of_int (0)
   let () = register [
     (application_uuid_exact_match, "VK_PIPELINE_MATCH_CONTROL_APPLICATION_UUID_EXACT_MATCH");
@@ -6165,6 +6272,7 @@ end
 
 module FragmentShadingRateCombinerOpKHR = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "FragmentShadingRateCombinerOpKHR"
   let keep_khr = of_int (0)
   let replace_khr = of_int (1)
   let min_khr = of_int (2)
@@ -6181,6 +6289,7 @@ end
 
 module FragmentShadingRateNV = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "FragmentShadingRateNV"
   let _1_invocation_per_pixel_nv = of_int (0)
   let _1_invocation_per_1x2_pixels_nv = of_int (1)
   let _1_invocation_per_2x1_pixels_nv = of_int (4)
@@ -6211,6 +6320,7 @@ end
 
 module FragmentShadingRateTypeNV = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "FragmentShadingRateTypeNV"
   let fragment_size_nv = of_int (0)
   let enums_nv = of_int (1)
   let () = register [
@@ -6221,6 +6331,7 @@ end
 
 module SubpassMergeStatusEXT = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "SubpassMergeStatusEXT"
   let merged_ext = of_int (0)
   let disallowed_ext = of_int (1)
   let not_merged_side_effects_ext = of_int (2)
@@ -6255,6 +6366,7 @@ end
 
 module SciSyncClientTypeNV = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "SciSyncClientTypeNV"
   let signaler_nv = of_int (0)
   let waiter_nv = of_int (1)
   let signaler_waiter_nv = of_int (2)
@@ -6267,6 +6379,7 @@ end
 
 module SciSyncPrimitiveTypeNV = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "SciSyncPrimitiveTypeNV"
   let fence_nv = of_int (0)
   let semaphore_nv = of_int (1)
   let () = register [
@@ -6277,6 +6390,7 @@ end
 
 module ProvokingVertexModeEXT = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "ProvokingVertexModeEXT"
   let first_vertex_ext = of_int (0)
   let last_vertex_ext = of_int (1)
   let () = register [
@@ -6287,6 +6401,7 @@ end
 
 module PipelineCacheValidationVersion = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "PipelineCacheValidationVersion"
   let safety_critical_one = of_int (1)
   let () = register [
     (safety_critical_one, "VK_PIPELINE_CACHE_VALIDATION_VERSION_SAFETY_CRITICAL_ONE");
@@ -6295,6 +6410,7 @@ end
 
 module AccelerationStructureMotionInstanceTypeNV = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "AccelerationStructureMotionInstanceTypeNV"
   let static_nv = of_int (0)
   let matrix_motion_nv = of_int (1)
   let srt_motion_nv = of_int (2)
@@ -6307,6 +6423,7 @@ end
 
 module DeviceAddressBindingTypeEXT = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "DeviceAddressBindingTypeEXT"
   let bind_ext = of_int (0)
   let unbind_ext = of_int (1)
   let () = register [
@@ -6317,6 +6434,7 @@ end
 
 module QueryResultStatusKHR = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "QueryResultStatusKHR"
   let error_khr = of_int (-1)
   let not_ready_khr = of_int (0)
   let complete_khr = of_int (1)
@@ -6331,6 +6449,7 @@ end
 
 module VideoEncodeTuningModeKHR = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "VideoEncodeTuningModeKHR"
   let default_khr = of_int (0)
   let high_quality_khr = of_int (1)
   let low_latency_khr = of_int (2)
@@ -6347,6 +6466,7 @@ end
 
 module PartitionedAccelerationStructureOpTypeNV = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "PartitionedAccelerationStructureOpTypeNV"
   let write_instance_nv = of_int (0)
   let update_instance_nv = of_int (1)
   let write_partition_translation_nv = of_int (2)
@@ -6359,6 +6479,7 @@ end
 
 module VideoEncodeAV1PredictionModeKHR = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "VideoEncodeAV1PredictionModeKHR"
   let av1_prediction_mode_intra_only_khr = of_int (0)
   let av1_prediction_mode_single_reference_khr = of_int (1)
   let av1_prediction_mode_unidirectional_compound_khr = of_int (2)
@@ -6373,6 +6494,7 @@ end
 
 module VideoEncodeAV1RateControlGroupKHR = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "VideoEncodeAV1RateControlGroupKHR"
   let av1_rate_control_group_intra_khr = of_int (0)
   let av1_rate_control_group_predictive_khr = of_int (1)
   let av1_rate_control_group_bipredictive_khr = of_int (2)
@@ -6385,6 +6507,7 @@ end
 
 module PipelineRobustnessBufferBehavior = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "PipelineRobustnessBufferBehavior"
   let device_default = of_int (0)
   let disabled = of_int (1)
   let robust_buffer_access = of_int (2)
@@ -6407,6 +6530,7 @@ end
 
 module PipelineRobustnessImageBehavior = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "PipelineRobustnessImageBehavior"
   let device_default = of_int (0)
   let disabled = of_int (1)
   let robust_image_access = of_int (2)
@@ -6429,6 +6553,7 @@ end
 
 module OpticalFlowPerformanceLevelNV = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "OpticalFlowPerformanceLevelNV"
   let unknown_nv = of_int (0)
   let slow_nv = of_int (1)
   let medium_nv = of_int (2)
@@ -6443,6 +6568,7 @@ end
 
 module OpticalFlowSessionBindingPointNV = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "OpticalFlowSessionBindingPointNV"
   let unknown_nv = of_int (0)
   let input_nv = of_int (1)
   let reference_nv = of_int (2)
@@ -6467,6 +6593,7 @@ end
 
 module MicromapTypeEXT = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "MicromapTypeEXT"
   let opacity_micromap_ext = of_int (0)
   let () = register [
     (opacity_micromap_ext, "VK_MICROMAP_TYPE_OPACITY_MICROMAP_EXT");
@@ -6475,6 +6602,7 @@ end
 
 module CopyMicromapModeEXT = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "CopyMicromapModeEXT"
   let clone_ext = of_int (0)
   let serialize_ext = of_int (1)
   let deserialize_ext = of_int (2)
@@ -6489,6 +6617,7 @@ end
 
 module BuildMicromapModeEXT = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "BuildMicromapModeEXT"
   let build_ext = of_int (0)
   let () = register [
     (build_ext, "VK_BUILD_MICROMAP_MODE_BUILD_EXT");
@@ -6497,6 +6626,7 @@ end
 
 module OpacityMicromapFormatKHR = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "OpacityMicromapFormatKHR"
   let _2_state_khr = of_int (1)
   let _4_state_khr = of_int (2)
   let _2_state_ext = of_int (1)
@@ -6511,6 +6641,7 @@ end
 
 module OpacityMicromapSpecialIndexKHR = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "OpacityMicromapSpecialIndexKHR"
   let fully_transparent_khr = of_int (-1)
   let fully_opaque_khr = of_int (-2)
   let fully_unknown_transparent_khr = of_int (-3)
@@ -6535,6 +6666,7 @@ end
 
 module AccelerationStructureSerializedBlockTypeKHR = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "AccelerationStructureSerializedBlockTypeKHR"
   let opacity_micromap_khr = of_int (0)
   let () = register [
     (opacity_micromap_khr, "VK_ACCELERATION_STRUCTURE_SERIALIZED_BLOCK_TYPE_OPACITY_MICROMAP_KHR");
@@ -6543,6 +6675,7 @@ end
 
 module DepthBiasRepresentationEXT = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "DepthBiasRepresentationEXT"
   let least_representable_value_format_ext = of_int (0)
   let least_representable_value_force_unorm_ext = of_int (1)
   let float_ext = of_int (2)
@@ -6555,6 +6688,7 @@ end
 
 module DeviceFaultAddressTypeKHR = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "DeviceFaultAddressTypeKHR"
   let none_khr = of_int (0)
   let read_invalid_khr = of_int (1)
   let write_invalid_khr = of_int (2)
@@ -6589,6 +6723,7 @@ end
 
 module DeviceFaultVendorBinaryHeaderVersionKHR = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "DeviceFaultVendorBinaryHeaderVersionKHR"
   let one_khr = of_int (1)
   let one_ext = of_int (1)
   let () = register [
@@ -6599,6 +6734,7 @@ end
 
 module IndirectExecutionSetInfoTypeEXT = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "IndirectExecutionSetInfoTypeEXT"
   let pipelines_ext = of_int (0)
   let shader_objects_ext = of_int (1)
   let () = register [
@@ -6609,6 +6745,7 @@ end
 
 module IndirectCommandsTokenTypeEXT = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "IndirectCommandsTokenTypeEXT"
   let execution_set_ext = of_int (0)
   let push_constant_ext = of_int (1)
   let sequence_index_ext = of_int (2)
@@ -6649,6 +6786,7 @@ end
 
 module DisplacementMicromapFormatNV = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "DisplacementMicromapFormatNV"
   let _64_triangles_64_bytes_nv = of_int (1)
   let _256_triangles_128_bytes_nv = of_int (2)
   let _1024_triangles_128_bytes_nv = of_int (3)
@@ -6661,6 +6799,7 @@ end
 
 module ShaderCodeTypeEXT = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "ShaderCodeTypeEXT"
   let binary_ext = of_int (0)
   let spirv_ext = of_int (1)
   let () = register [
@@ -6671,6 +6810,7 @@ end
 
 module ScopeKHR = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "ScopeKHR"
   let device_khr = of_int (1)
   let workgroup_khr = of_int (2)
   let subgroup_khr = of_int (3)
@@ -6693,6 +6833,7 @@ end
 
 module ComponentTypeKHR = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "ComponentTypeKHR"
   let float16_khr = of_int (0)
   let float32_khr = of_int (1)
   let float64_khr = of_int (2)
@@ -6767,6 +6908,7 @@ end
 
 module CubicFilterWeightsQCOM = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "CubicFilterWeightsQCOM"
   let catmull_rom_qcom = of_int (0)
   let zero_tangent_cardinal_qcom = of_int (1)
   let b_spline_qcom = of_int (2)
@@ -6781,6 +6923,7 @@ end
 
 module BlockMatchWindowCompareModeQCOM = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "BlockMatchWindowCompareModeQCOM"
   let min_qcom = of_int (0)
   let max_qcom = of_int (1)
   let () = register [
@@ -6791,6 +6934,7 @@ end
 
 module PhysicalDeviceLayeredApiKHR = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "PhysicalDeviceLayeredApiKHR"
   let vulkan_khr = of_int (0)
   let d3d12_khr = of_int (1)
   let metal_khr = of_int (2)
@@ -6807,6 +6951,7 @@ end
 
 module LayeredDriverUnderlyingApiMSFT = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "LayeredDriverUnderlyingApiMSFT"
   let none_msft = of_int (0)
   let d3d12_msft = of_int (1)
   let () = register [
@@ -6817,6 +6962,7 @@ end
 
 module LatencyMarkerNV = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "LatencyMarkerNV"
   let simulation_start_nv = of_int (0)
   let simulation_end_nv = of_int (1)
   let rendersubmit_start_nv = of_int (2)
@@ -6847,6 +6993,7 @@ end
 
 module OutOfBandQueueTypeNV = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "OutOfBandQueueTypeNV"
   let render_nv = of_int (0)
   let present_nv = of_int (1)
   let () = register [
@@ -6857,6 +7004,7 @@ end
 
 module CompressedTriangleFormatAMDX = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "CompressedTriangleFormatAMDX"
   let dgf1_amdx = of_int (0)
   let () = register [
     (dgf1_amdx, "VK_COMPRESSED_TRIANGLE_FORMAT_DGF1_AMDX");
@@ -6865,6 +7013,7 @@ end
 
 module DepthClampModeEXT = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "DepthClampModeEXT"
   let viewport_range_ext = of_int (0)
   let user_defined_range_ext = of_int (1)
   let () = register [
@@ -6875,6 +7024,7 @@ end
 
 module CooperativeVectorMatrixLayoutNV = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "CooperativeVectorMatrixLayoutNV"
   let row_major_nv = of_int (0)
   let column_major_nv = of_int (1)
   let inferencing_optimal_nv = of_int (2)
@@ -6889,6 +7039,7 @@ end
 
 module TensorTilingARM = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "TensorTilingARM"
   let optimal_arm = of_int (0)
   let linear_arm = of_int (1)
   let brick_16_wide_arm = of_int (1000565000)
@@ -6909,6 +7060,7 @@ end
 
 module DefaultVertexAttributeValueKHR = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "DefaultVertexAttributeValueKHR"
   let zero_zero_zero_zero_khr = of_int (0)
   let zero_zero_zero_one_khr = of_int (1)
   let () = register [
@@ -6919,6 +7071,7 @@ end
 
 module DataGraphPipelineSessionBindPointARM = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "DataGraphPipelineSessionBindPointARM"
   let transient_arm = of_int (0)
   let optical_flow_cache_arm = of_int (1000631001)
   let neural_accelerator_statistics_arm = of_int (1000676000)
@@ -6931,6 +7084,7 @@ end
 
 module DataGraphPipelineSessionBindPointTypeARM = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "DataGraphPipelineSessionBindPointTypeARM"
   let memory_arm = of_int (0)
   let () = register [
     (memory_arm, "VK_DATA_GRAPH_PIPELINE_SESSION_BIND_POINT_TYPE_MEMORY_ARM");
@@ -6939,6 +7093,7 @@ end
 
 module DataGraphPipelinePropertyARM = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "DataGraphPipelinePropertyARM"
   let creation_log_arm = of_int (0)
   let identifier_arm = of_int (1)
   let neural_accelerator_debug_database_arm = of_int (1000676000)
@@ -6953,6 +7108,7 @@ end
 
 module PhysicalDeviceDataGraphProcessingEngineTypeARM = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "PhysicalDeviceDataGraphProcessingEngineTypeARM"
   let default_arm = of_int (0)
   let neural_qcom = of_int (1000629000)
   let compute_qcom = of_int (1000629001)
@@ -6965,6 +7121,7 @@ end
 
 module PhysicalDeviceDataGraphOperationTypeARM = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "PhysicalDeviceDataGraphOperationTypeARM"
   let spirv_extended_instruction_set_arm = of_int (0)
   let neural_model_qcom = of_int (1000629000)
   let builtin_model_qcom = of_int (1000629001)
@@ -6979,6 +7136,7 @@ end
 
 module DataGraphModelCacheTypeQCOM = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "DataGraphModelCacheTypeQCOM"
   let generic_binary_qcom = of_int (0)
   let () = register [
     (generic_binary_qcom, "VK_DATA_GRAPH_MODEL_CACHE_TYPE_GENERIC_BINARY_QCOM");
@@ -6987,6 +7145,7 @@ end
 
 module PerfHintTypeQCOM = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "PerfHintTypeQCOM"
   let default_qcom = of_int (0)
   let frequency_min_qcom = of_int (1)
   let frequency_max_qcom = of_int (2)
@@ -7001,6 +7160,7 @@ end
 
 module ThrottleHintTypeSEC = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "ThrottleHintTypeSEC"
   let default_sec = of_int (0)
   let low_sec = of_int (1)
   let high_sec = of_int (2)
@@ -7013,6 +7173,7 @@ end
 
 module DescriptorMappingSourceEXT = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "DescriptorMappingSourceEXT"
   let heap_with_constant_offset_ext = of_int (0)
   let heap_with_push_index_ext = of_int (1)
   let heap_with_indirect_index_ext = of_int (2)
@@ -7041,6 +7202,7 @@ end
 
 module GpaPerfBlockAMD = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "GpaPerfBlockAMD"
   let cpf_amd = of_int (0)
   let ia_amd = of_int (1)
   let vgt_amd = of_int (2)
@@ -7165,6 +7327,7 @@ end
 
 module GpaSampleTypeAMD = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "GpaSampleTypeAMD"
   let cumulative_amd = of_int (0)
   let trace_amd = of_int (1)
   let timing_amd = of_int (2)
@@ -7177,6 +7340,7 @@ end
 
 module GpaDeviceClockModeAMD = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "GpaDeviceClockModeAMD"
   let default_amd = of_int (0)
   let query_amd = of_int (1)
   let profiling_amd = of_int (2)
@@ -7195,6 +7359,7 @@ end
 
 module DataGraphTOSALevelARM = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "DataGraphTOSALevelARM"
   let none_arm = of_int (0)
   let _8k_arm = of_int (1)
   let () = register [
@@ -7205,6 +7370,7 @@ end
 
 module DataGraphOpticalFlowPerformanceLevelARM = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "DataGraphOpticalFlowPerformanceLevelARM"
   let unknown_arm = of_int (0)
   let slow_arm = of_int (1)
   let medium_arm = of_int (2)
@@ -7219,6 +7385,7 @@ end
 
 module DataGraphPipelineNodeConnectionTypeARM = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "DataGraphPipelineNodeConnectionTypeARM"
   let optical_flow_input_arm = of_int (1000631000)
   let optical_flow_reference_arm = of_int (1000631001)
   let optical_flow_hint_arm = of_int (1000631002)
@@ -7235,6 +7402,7 @@ end
 
 module DataGraphPipelineNodeTypeARM = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "DataGraphPipelineNodeTypeARM"
   let optical_flow_arm = of_int (1000631000)
   let () = register [
     (optical_flow_arm, "VK_DATA_GRAPH_PIPELINE_NODE_TYPE_OPTICAL_FLOW_ARM");
@@ -7243,6 +7411,7 @@ end
 
 module NeuralAcceleratorStatisticsModeARM = struct
   include Vk_base.Enum32 ()
+  let () = set_type_name "NeuralAcceleratorStatisticsModeARM"
   let disabled_arm = of_int (0)
   let statistics0_arm = of_int (1)
   let statistics1_arm = of_int (2)
@@ -7255,6 +7424,7 @@ end
 
 module FramebufferCreateFlags = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "FramebufferCreateFlags"
   let imageless = of_int (1)
   let imageless_khr = of_int (1)
   let () = register [
@@ -7265,6 +7435,7 @@ end
 
 module QueryPoolCreateFlags = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "QueryPoolCreateFlags"
   let reset_khr = of_int (1)
   let () = register [
     (reset_khr, "VK_QUERY_POOL_CREATE_RESET_BIT_KHR");
@@ -7273,6 +7444,7 @@ end
 
 module RenderPassCreateFlags = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "RenderPassCreateFlags"
   let transform_qcom = of_int (2)
   let per_layer_fragment_density_valve = of_int (4)
   let () = register [
@@ -7283,6 +7455,7 @@ end
 
 module SamplerCreateFlags = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "SamplerCreateFlags"
   let subsampled_ext = of_int (1)
   let subsampled_coarse_reconstruction_ext = of_int (2)
   let descriptor_buffer_capture_replay_ext = of_int (8)
@@ -7299,6 +7472,7 @@ end
 
 module PipelineLayoutCreateFlags = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "PipelineLayoutCreateFlags"
   let independent_sets_ext = of_int (2)
   let no_task_shader_khr = of_int (4)
   let () = register [
@@ -7309,6 +7483,7 @@ end
 
 module PipelineCacheCreateFlags = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "PipelineCacheCreateFlags"
   let externally_synchronized = of_int (1)
   let externally_synchronized_ext = of_int (1)
   let internally_synchronized_merge_khr = of_int (8)
@@ -7321,6 +7496,7 @@ end
 
 module PipelineDepthStencilStateCreateFlags = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "PipelineDepthStencilStateCreateFlags"
   let rasterization_order_attachment_depth_access_arm = of_int (1)
   let rasterization_order_attachment_stencil_access_arm = of_int (2)
   let rasterization_order_attachment_depth_access_ext = of_int (1)
@@ -7335,12 +7511,14 @@ end
 
 module PipelineDynamicStateCreateFlags = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "PipelineDynamicStateCreateFlags"
   let () = register [
   ]
 end
 
 module PipelineColorBlendStateCreateFlags = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "PipelineColorBlendStateCreateFlags"
   let rasterization_order_attachment_access_arm = of_int (1)
   let rasterization_order_attachment_access_ext = of_int (1)
   let () = register [
@@ -7351,42 +7529,49 @@ end
 
 module PipelineMultisampleStateCreateFlags = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "PipelineMultisampleStateCreateFlags"
   let () = register [
   ]
 end
 
 module PipelineRasterizationStateCreateFlags = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "PipelineRasterizationStateCreateFlags"
   let () = register [
   ]
 end
 
 module PipelineViewportStateCreateFlags = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "PipelineViewportStateCreateFlags"
   let () = register [
   ]
 end
 
 module PipelineTessellationStateCreateFlags = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "PipelineTessellationStateCreateFlags"
   let () = register [
   ]
 end
 
 module PipelineInputAssemblyStateCreateFlags = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "PipelineInputAssemblyStateCreateFlags"
   let () = register [
   ]
 end
 
 module PipelineVertexInputStateCreateFlags = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "PipelineVertexInputStateCreateFlags"
   let () = register [
   ]
 end
 
 module PipelineShaderStageCreateFlags = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "PipelineShaderStageCreateFlags"
   let allow_varying_subgroup_size = of_int (1)
   let require_full_subgroups = of_int (2)
   let allow_varying_subgroup_size_ext = of_int (1)
@@ -7401,6 +7586,7 @@ end
 
 module DescriptorSetLayoutCreateFlags = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "DescriptorSetLayoutCreateFlags"
   let update_after_bind_pool = of_int (2)
   let push_descriptor = of_int (1)
   let push_descriptor_khr = of_int (1)
@@ -7427,12 +7613,14 @@ end
 
 module BufferViewCreateFlags = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "BufferViewCreateFlags"
   let () = register [
   ]
 end
 
 module InstanceCreateFlags = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "InstanceCreateFlags"
   let enumerate_portability_khr = of_int (1)
   let () = register [
     (enumerate_portability_khr, "VK_INSTANCE_CREATE_ENUMERATE_PORTABILITY_BIT_KHR");
@@ -7441,12 +7629,14 @@ end
 
 module DeviceCreateFlags = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "DeviceCreateFlags"
   let () = register [
   ]
 end
 
 module DeviceQueueCreateFlags = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "DeviceQueueCreateFlags"
   let protected = of_int (1)
   let internally_synchronized_khr = of_int (4)
   let () = register [
@@ -7457,6 +7647,7 @@ end
 
 module QueueFlags = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "QueueFlags"
   let graphics = of_int (1)
   let compute = of_int (2)
   let transfer = of_int (4)
@@ -7481,6 +7672,7 @@ end
 
 module MemoryPropertyFlags = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "MemoryPropertyFlags"
   let device_local = of_int (1)
   let host_visible = of_int (2)
   let host_coherent = of_int (4)
@@ -7505,6 +7697,7 @@ end
 
 module MemoryHeapFlags = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "MemoryHeapFlags"
   let device_local = of_int (1)
   let multi_instance = of_int (2)
   let multi_instance_khr = of_int (2)
@@ -7519,6 +7712,7 @@ end
 
 module AccessFlags = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "AccessFlags"
   let indirect_command_read = of_int (1)
   let index_read = of_int (2)
   let vertex_attribute_read = of_int (4)
@@ -7595,6 +7789,7 @@ end
 
 module BufferUsageFlags = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "BufferUsageFlags"
   let transfer_src = of_int (1)
   let transfer_dst = of_int (2)
   let uniform_texel_buffer = of_int (4)
@@ -7661,6 +7856,7 @@ end
 
 module BufferCreateFlags = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "BufferCreateFlags"
   let sparse_binding = of_int (1)
   let sparse_residency = of_int (2)
   let sparse_aliased = of_int (4)
@@ -7685,6 +7881,7 @@ end
 
 module ShaderStageFlags = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "ShaderStageFlags"
   let vertex = of_int (1)
   let tessellation_control = of_int (2)
   let tessellation_evaluation = of_int (4)
@@ -7743,6 +7940,7 @@ end
 
 module ImageUsageFlags = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "ImageUsageFlags"
   let transfer_src = of_int (1)
   let transfer_dst = of_int (2)
   let sampled = of_int (4)
@@ -7803,6 +8001,7 @@ end
 
 module ImageCreateFlags = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "ImageCreateFlags"
   let sparse_binding = of_int (1)
   let sparse_residency = of_int (2)
   let sparse_aliased = of_int (4)
@@ -7867,6 +8066,7 @@ end
 
 module ImageViewCreateFlags = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "ImageViewCreateFlags"
   let fragment_density_map_dynamic_ext = of_int (1)
   let descriptor_buffer_capture_replay_ext = of_int (4)
   let fragment_density_map_deferred_ext = of_int (2)
@@ -7879,6 +8079,7 @@ end
 
 module PipelineCreateFlags = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "PipelineCreateFlags"
   let disable_optimization = of_int (1)
   let allow_derivatives = of_int (2)
   let derivative = of_int (4)
@@ -7967,6 +8168,7 @@ end
 
 module ColorComponentFlags = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "ColorComponentFlags"
   let r = of_int (1)
   let g = of_int (2)
   let b = of_int (4)
@@ -7981,6 +8183,7 @@ end
 
 module FenceCreateFlags = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "FenceCreateFlags"
   let signaled = of_int (1)
   let () = register [
     (signaled, "VK_FENCE_CREATE_SIGNALED_BIT");
@@ -7989,12 +8192,14 @@ end
 
 module SemaphoreCreateFlags = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "SemaphoreCreateFlags"
   let () = register [
   ]
 end
 
 module FormatFeatureFlags = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "FormatFeatureFlags"
   let sampled_image = of_int (1)
   let storage_image = of_int (2)
   let storage_image_atomic = of_int (4)
@@ -8085,6 +8290,7 @@ end
 
 module QueryControlFlags = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "QueryControlFlags"
   let precise = of_int (1)
   let () = register [
     (precise, "VK_QUERY_CONTROL_PRECISE_BIT");
@@ -8093,6 +8299,7 @@ end
 
 module QueryResultFlags = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "QueryResultFlags"
   let _64 = of_int (1)
   let wait = of_int (2)
   let with_availability = of_int (4)
@@ -8109,12 +8316,14 @@ end
 
 module ShaderModuleCreateFlags = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "ShaderModuleCreateFlags"
   let () = register [
   ]
 end
 
 module EventCreateFlags = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "EventCreateFlags"
   let device_only = of_int (1)
   let device_only_khr = of_int (1)
   let () = register [
@@ -8125,6 +8334,7 @@ end
 
 module CommandPoolCreateFlags = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "CommandPoolCreateFlags"
   let transient = of_int (1)
   let reset_command_buffer = of_int (2)
   let protected = of_int (4)
@@ -8137,6 +8347,7 @@ end
 
 module CommandPoolResetFlags = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "CommandPoolResetFlags"
   let release_resources = of_int (1)
   let () = register [
     (release_resources, "VK_COMMAND_POOL_RESET_RELEASE_RESOURCES_BIT");
@@ -8145,6 +8356,7 @@ end
 
 module CommandBufferResetFlags = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "CommandBufferResetFlags"
   let release_resources = of_int (1)
   let () = register [
     (release_resources, "VK_COMMAND_BUFFER_RESET_RELEASE_RESOURCES_BIT");
@@ -8153,6 +8365,7 @@ end
 
 module CommandBufferUsageFlags = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "CommandBufferUsageFlags"
   let one_time_submit = of_int (1)
   let render_pass_continue = of_int (2)
   let simultaneous_use = of_int (4)
@@ -8165,6 +8378,7 @@ end
 
 module QueryPipelineStatisticFlags = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "QueryPipelineStatisticFlags"
   let input_assembly_vertices = of_int (1)
   let input_assembly_primitives = of_int (2)
   let vertex_shader_invocations = of_int (4)
@@ -8199,6 +8413,7 @@ end
 
 module MemoryMapFlags = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "MemoryMapFlags"
   let placed_ext = of_int (1)
   let () = register [
     (placed_ext, "VK_MEMORY_MAP_PLACED_BIT_EXT");
@@ -8207,6 +8422,7 @@ end
 
 module MemoryUnmapFlags = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "MemoryUnmapFlags"
   let reserve_ext = of_int (1)
   let () = register [
     (reserve_ext, "VK_MEMORY_UNMAP_RESERVE_BIT_EXT");
@@ -8215,6 +8431,7 @@ end
 
 module ImageAspectFlags = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "ImageAspectFlags"
   let color = of_int (1)
   let depth = of_int (2)
   let stencil = of_int (4)
@@ -8253,6 +8470,7 @@ end
 
 module SparseMemoryBindFlags = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "SparseMemoryBindFlags"
   let metadata = of_int (1)
   let () = register [
     (metadata, "VK_SPARSE_MEMORY_BIND_METADATA_BIT");
@@ -8261,6 +8479,7 @@ end
 
 module SparseImageFormatFlags = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "SparseImageFormatFlags"
   let single_miptail = of_int (1)
   let aligned_mip_size = of_int (2)
   let nonstandard_block_size = of_int (4)
@@ -8273,6 +8492,7 @@ end
 
 module SubpassDescriptionFlags = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "SubpassDescriptionFlags"
   let per_view_attributes_nvx = of_int (1)
   let per_view_position_x_only_nvx = of_int (2)
   let fragment_region_qcom = of_int (4)
@@ -8307,6 +8527,7 @@ end
 
 module PipelineStageFlags = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "PipelineStageFlags"
   let top_of_pipe = of_int (1)
   let draw_indirect = of_int (2)
   let vertex_input = of_int (4)
@@ -8381,6 +8602,7 @@ end
 
 module SampleCountFlags = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "SampleCountFlags"
   let _1 = of_int (1)
   let _2 = of_int (2)
   let _4 = of_int (4)
@@ -8401,6 +8623,7 @@ end
 
 module AttachmentDescriptionFlags = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "AttachmentDescriptionFlags"
   let may_alias = of_int (1)
   let resolve_skip_transfer_function_khr = of_int (2)
   let resolve_enable_transfer_function_khr = of_int (4)
@@ -8413,6 +8636,7 @@ end
 
 module StencilFaceFlags = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "StencilFaceFlags"
   let front = of_int (1)
   let back = of_int (2)
   let front_and_back = of_int (3)
@@ -8427,6 +8651,7 @@ end
 
 module CullModeFlags = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "CullModeFlags"
   let none = of_int (0)
   let front = of_int (1)
   let back = of_int (2)
@@ -8441,6 +8666,7 @@ end
 
 module DescriptorPoolCreateFlags = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "DescriptorPoolCreateFlags"
   let free_descriptor_set = of_int (1)
   let update_after_bind = of_int (2)
   let update_after_bind_ext = of_int (2)
@@ -8461,12 +8687,14 @@ end
 
 module DescriptorPoolResetFlags = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "DescriptorPoolResetFlags"
   let () = register [
   ]
 end
 
 module DependencyFlags = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "DependencyFlags"
   let by_region = of_int (1)
   let device_group = of_int (4)
   let view_local = of_int (2)
@@ -8489,6 +8717,7 @@ end
 
 module SubgroupFeatureFlags = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "SubgroupFeatureFlags"
   let basic = of_int (1)
   let vote = of_int (2)
   let arithmetic = of_int (4)
@@ -8523,6 +8752,7 @@ end
 
 module IndirectCommandsLayoutUsageFlagsNV = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "IndirectCommandsLayoutUsageFlagsNV"
   let explicit_preprocess_nv = of_int (1)
   let indexed_sequences_nv = of_int (2)
   let unordered_sequences_nv = of_int (4)
@@ -8535,6 +8765,7 @@ end
 
 module IndirectStateFlagsNV = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "IndirectStateFlagsNV"
   let flag_frontface_nv = of_int (1)
   let () = register [
     (flag_frontface_nv, "VK_INDIRECT_STATE_FLAG_FRONTFACE_BIT_NV");
@@ -8543,6 +8774,7 @@ end
 
 module GeometryFlagsKHR = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "GeometryFlagsKHR"
   let opaque_khr = of_int (1)
   let no_duplicate_any_hit_invocation_khr = of_int (2)
   let opaque_nv = of_int (1)
@@ -8557,6 +8789,7 @@ end
 
 module GeometryInstanceFlagsKHR = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "GeometryInstanceFlagsKHR"
   let triangle_facing_cull_disable_khr = of_int (1)
   let triangle_flip_facing_khr = of_int (2)
   let force_opaque_khr = of_int (4)
@@ -8593,6 +8826,7 @@ end
 
 module ClusterAccelerationStructureGeometryFlagsNV = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "ClusterAccelerationStructureGeometryFlagsNV"
   let cull_disable_nv = of_int (1)
   let no_duplicate_anyhit_invocation_nv = of_int (2)
   let opaque_nv = of_int (4)
@@ -8605,6 +8839,7 @@ end
 
 module ClusterAccelerationStructureClusterFlagsNV = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "ClusterAccelerationStructureClusterFlagsNV"
   let allow_disable_opacity_micromaps_nv = of_int (1)
   let () = register [
     (allow_disable_opacity_micromaps_nv, "VK_CLUSTER_ACCELERATION_STRUCTURE_CLUSTER_ALLOW_DISABLE_OPACITY_MICROMAPS_NV");
@@ -8613,6 +8848,7 @@ end
 
 module ClusterAccelerationStructureAddressResolutionFlagsNV = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "ClusterAccelerationStructureAddressResolutionFlagsNV"
   let none_nv = of_int (0)
   let indirected_dst_implicit_data_nv = of_int (1)
   let indirected_scratch_data_nv = of_int (2)
@@ -8633,6 +8869,7 @@ end
 
 module BuildAccelerationStructureFlagsKHR = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "BuildAccelerationStructureFlagsKHR"
   let allow_update_khr = of_int (1)
   let allow_compaction_khr = of_int (2)
   let prefer_fast_trace_khr = of_int (4)
@@ -8685,12 +8922,14 @@ end
 
 module PrivateDataSlotCreateFlags = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "PrivateDataSlotCreateFlags"
   let () = register [
   ]
 end
 
 module AccelerationStructureCreateFlagsKHR = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "AccelerationStructureCreateFlagsKHR"
   let device_address_capture_replay_khr = of_int (1)
   let descriptor_buffer_capture_replay_ext = of_int (8)
   let motion_nv = of_int (4)
@@ -8703,12 +8942,14 @@ end
 
 module DescriptorUpdateTemplateCreateFlags = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "DescriptorUpdateTemplateCreateFlags"
   let () = register [
   ]
 end
 
 module PipelineCreationFeedbackFlags = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "PipelineCreationFeedbackFlags"
   let valid = of_int (1)
   let application_pipeline_cache_hit = of_int (2)
   let base_pipeline_acceleration = of_int (4)
@@ -8727,6 +8968,7 @@ end
 
 module PerformanceCounterDescriptionFlagsKHR = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "PerformanceCounterDescriptionFlagsKHR"
   let performance_impacting_khr = of_int (1)
   let performance_impacting_khr_2 = of_int (1)
   let concurrently_impacted_khr = of_int (2)
@@ -8741,12 +8983,14 @@ end
 
 module AcquireProfilingLockFlagsKHR = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "AcquireProfilingLockFlagsKHR"
   let () = register [
   ]
 end
 
 module SemaphoreWaitFlags = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "SemaphoreWaitFlags"
   let any = of_int (1)
   let any_khr = of_int (1)
   let () = register [
@@ -8757,18 +9001,21 @@ end
 
 module PipelineCompilerControlFlagsAMD = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "PipelineCompilerControlFlagsAMD"
   let () = register [
   ]
 end
 
 module ShaderCorePropertiesFlagsAMD = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "ShaderCorePropertiesFlagsAMD"
   let () = register [
   ]
 end
 
 module DeviceDiagnosticsConfigFlagsNV = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "DeviceDiagnosticsConfigFlagsNV"
   let enable_shader_debug_info_nv = of_int (1)
   let enable_resource_tracking_nv = of_int (2)
   let enable_automatic_checkpoints_nv = of_int (4)
@@ -8783,12 +9030,14 @@ end
 
 module RefreshObjectFlagsKHR = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "RefreshObjectFlagsKHR"
   let () = register [
   ]
 end
 
 module AccessFlags2 = struct
   include Vk_base.Flags64 ()
+  let () = set_type_name "AccessFlags2"
   let none = of_int (0)
   let indirect_command_read = of_int (1)
   let index_read = of_int (2)
@@ -8949,6 +9198,7 @@ end
 
 module PipelineStageFlags2 = struct
   include Vk_base.Flags64 ()
+  let () = set_type_name "PipelineStageFlags2"
   let none = of_int (0)
   let top_of_pipe = of_int (1)
   let draw_indirect = of_int (2)
@@ -9115,18 +9365,21 @@ end
 
 module AccelerationStructureMotionInfoFlagsNV = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "AccelerationStructureMotionInfoFlagsNV"
   let () = register [
   ]
 end
 
 module AccelerationStructureMotionInstanceFlagsNV = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "AccelerationStructureMotionInstanceFlagsNV"
   let () = register [
   ]
 end
 
 module FormatFeatureFlags2 = struct
   include Vk_base.Flags64 ()
+  let () = set_type_name "FormatFeatureFlags2"
   let sampled_image = of_int (1)
   let storage_image = of_int (2)
   let storage_image_atomic = of_int (4)
@@ -9307,12 +9560,14 @@ end
 
 module FormatFeatureFlags4KHR = struct
   include Vk_base.Flags64 ()
+  let () = set_type_name "FormatFeatureFlags4KHR"
   let () = register [
   ]
 end
 
 module RenderingFlags = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "RenderingFlags"
   let contents_secondary_command_buffers = of_int (1)
   let suspending = of_int (2)
   let resuming = of_int (4)
@@ -9345,6 +9600,7 @@ end
 
 module MemoryDecompressionMethodFlagsEXT = struct
   include Vk_base.Flags64 ()
+  let () = set_type_name "MemoryDecompressionMethodFlagsEXT"
   let gdeflate_1_0_ext = of_int (1)
   let gdeflate_1_0_nv = of_int (1)
   let () = register [
@@ -9355,6 +9611,7 @@ end
 
 module DeviceFaultFlagsKHR = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "DeviceFaultFlagsKHR"
   let flag_device_lost_khr = of_int (1)
   let flag_memory_address_khr = of_int (2)
   let flag_instruction_address_khr = of_int (4)
@@ -9373,6 +9630,7 @@ end
 
 module BuildMicromapFlagsEXT = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "BuildMicromapFlagsEXT"
   let prefer_fast_trace_ext = of_int (1)
   let prefer_fast_build_ext = of_int (2)
   let allow_compaction_ext = of_int (4)
@@ -9385,6 +9643,7 @@ end
 
 module MicromapCreateFlagsEXT = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "MicromapCreateFlagsEXT"
   let device_address_capture_replay_ext = of_int (1)
   let () = register [
     (device_address_capture_replay_ext, "VK_MICROMAP_CREATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT_EXT");
@@ -9393,6 +9652,7 @@ end
 
 module IndirectCommandsLayoutUsageFlagsEXT = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "IndirectCommandsLayoutUsageFlagsEXT"
   let explicit_preprocess_ext = of_int (1)
   let unordered_sequences_ext = of_int (2)
   let () = register [
@@ -9403,6 +9663,7 @@ end
 
 module IndirectCommandsInputModeFlagsEXT = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "IndirectCommandsInputModeFlagsEXT"
   let vulkan_index_buffer_ext = of_int (1)
   let dxgi_index_buffer_ext = of_int (2)
   let () = register [
@@ -9413,12 +9674,14 @@ end
 
 module DirectDriverLoadingFlagsLUNARG = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "DirectDriverLoadingFlagsLUNARG"
   let () = register [
   ]
 end
 
 module PipelineCreateFlags2 = struct
   include Vk_base.Flags64 ()
+  let () = set_type_name "PipelineCreateFlags2"
   let disable_optimization = of_int (1)
   let allow_derivatives = of_int (2)
   let derivative = of_int (4)
@@ -9529,6 +9792,7 @@ end
 
 module BufferUsageFlags2 = struct
   include Vk_base.Flags64 ()
+  let () = set_type_name "BufferUsageFlags2"
   let transfer_src = of_int (1)
   let transfer_dst = of_int (2)
   let uniform_texel_buffer = of_int (4)
@@ -9617,6 +9881,7 @@ end
 
 module ImageUsageFlags2KHR = struct
   include Vk_base.Flags64 ()
+  let () = set_type_name "ImageUsageFlags2KHR"
   let transfer_src_khr = of_int (1)
   let transfer_dst_khr = of_int (2)
   let sampled_khr = of_int (4)
@@ -9673,6 +9938,7 @@ end
 
 module ImageCreateFlags2KHR = struct
   include Vk_base.Flags64 ()
+  let () = set_type_name "ImageCreateFlags2KHR"
   let sparse_binding_khr = of_int (1)
   let sparse_residency_khr = of_int (2)
   let sparse_aliased_khr = of_int (4)
@@ -9721,6 +9987,7 @@ end
 
 module AddressCopyFlagsKHR = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "AddressCopyFlagsKHR"
   let device_local_khr = of_int (1)
   let sparse_khr = of_int (2)
   let protected_khr = of_int (4)
@@ -9733,6 +10000,7 @@ end
 
 module TensorCreateFlagsARM = struct
   include Vk_base.Flags64 ()
+  let () = set_type_name "TensorCreateFlagsARM"
   let mutable_format_arm = of_int (1)
   let protected_arm = of_int (2)
   let descriptor_heap_capture_replay_arm = of_int (8)
@@ -9747,6 +10015,7 @@ end
 
 module TensorUsageFlagsARM = struct
   include Vk_base.Flags64 ()
+  let () = set_type_name "TensorUsageFlagsARM"
   let shader_arm = of_int (2)
   let transfer_src_arm = of_int (4)
   let transfer_dst_arm = of_int (8)
@@ -9763,6 +10032,7 @@ end
 
 module TensorViewCreateFlagsARM = struct
   include Vk_base.Flags64 ()
+  let () = set_type_name "TensorViewCreateFlagsARM"
   let descriptor_buffer_capture_replay_arm = of_int (1)
   let () = register [
     (descriptor_buffer_capture_replay_arm, "VK_TENSOR_VIEW_CREATE_DESCRIPTOR_BUFFER_CAPTURE_REPLAY_BIT_ARM");
@@ -9771,6 +10041,7 @@ end
 
 module DataGraphPipelineSessionCreateFlagsARM = struct
   include Vk_base.Flags64 ()
+  let () = set_type_name "DataGraphPipelineSessionCreateFlagsARM"
   let protected_arm = of_int (1)
   let optical_flow_cache_arm = of_int (2)
   let () = register [
@@ -9781,12 +10052,14 @@ end
 
 module DataGraphPipelineDispatchFlagsARM = struct
   include Vk_base.Flags64 ()
+  let () = set_type_name "DataGraphPipelineDispatchFlagsARM"
   let () = register [
   ]
 end
 
 module VideoEncodeRgbModelConversionFlagsVALVE = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "VideoEncodeRgbModelConversionFlagsVALVE"
   let rgb_identity_valve = of_int (1)
   let ycbcr_identity_valve = of_int (2)
   let ycbcr_709_valve = of_int (4)
@@ -9803,6 +10076,7 @@ end
 
 module VideoEncodeRgbRangeCompressionFlagsVALVE = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "VideoEncodeRgbRangeCompressionFlagsVALVE"
   let full_range_valve = of_int (1)
   let narrow_range_valve = of_int (2)
   let () = register [
@@ -9813,6 +10087,7 @@ end
 
 module VideoEncodeRgbChromaOffsetFlagsVALVE = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "VideoEncodeRgbChromaOffsetFlagsVALVE"
   let cosited_even_valve = of_int (1)
   let midpoint_valve = of_int (2)
   let () = register [
@@ -9823,6 +10098,7 @@ end
 
 module SpirvResourceTypeFlagsEXT = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "SpirvResourceTypeFlagsEXT"
   let all_ext = of_int (2147483647)
   let sampler_ext = of_int (1)
   let sampled_image_ext = of_int (2)
@@ -9851,6 +10127,7 @@ end
 
 module GpaSqShaderStageFlagsAMD = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "GpaSqShaderStageFlagsAMD"
   let ps_amd = of_int (1)
   let vs_amd = of_int (2)
   let gs_amd = of_int (4)
@@ -9871,18 +10148,21 @@ end
 
 module GpaPerfBlockPropertiesFlagsAMD = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "GpaPerfBlockPropertiesFlagsAMD"
   let () = register [
   ]
 end
 
 module PhysicalDeviceGpaPropertiesFlagsAMD = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "PhysicalDeviceGpaPropertiesFlagsAMD"
   let () = register [
   ]
 end
 
 module AddressCommandFlagsKHR = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "AddressCommandFlagsKHR"
   let protected_khr = of_int (1)
   let fully_bound_khr = of_int (2)
   let storage_buffer_usage_khr = of_int (4)
@@ -9901,6 +10181,7 @@ end
 
 module CompositeAlphaFlagsKHR = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "CompositeAlphaFlagsKHR"
   let opaque_khr = of_int (1)
   let pre_multiplied_khr = of_int (2)
   let post_multiplied_khr = of_int (4)
@@ -9915,6 +10196,7 @@ end
 
 module DisplayPlaneAlphaFlagsKHR = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "DisplayPlaneAlphaFlagsKHR"
   let opaque_khr = of_int (1)
   let global_khr = of_int (2)
   let per_pixel_khr = of_int (4)
@@ -9929,6 +10211,7 @@ end
 
 module SurfaceTransformFlagsKHR = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "SurfaceTransformFlagsKHR"
   let identity_khr = of_int (1)
   let rotate_90_khr = of_int (2)
   let rotate_180_khr = of_int (4)
@@ -9953,6 +10236,7 @@ end
 
 module SwapchainCreateFlagsKHR = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "SwapchainCreateFlagsKHR"
   let split_instance_bind_regions_khr = of_int (1)
   let protected_khr = of_int (2)
   let mutable_format_khr = of_int (4)
@@ -9977,108 +10261,126 @@ end
 
 module DisplayModeCreateFlagsKHR = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "DisplayModeCreateFlagsKHR"
   let () = register [
   ]
 end
 
 module DisplaySurfaceCreateFlagsKHR = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "DisplaySurfaceCreateFlagsKHR"
   let () = register [
   ]
 end
 
 module AndroidSurfaceCreateFlagsKHR = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "AndroidSurfaceCreateFlagsKHR"
   let () = register [
   ]
 end
 
 module ViSurfaceCreateFlagsNN = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "ViSurfaceCreateFlagsNN"
   let () = register [
   ]
 end
 
 module WaylandSurfaceCreateFlagsKHR = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "WaylandSurfaceCreateFlagsKHR"
   let () = register [
   ]
 end
 
 module UbmSurfaceCreateFlagsSEC = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "UbmSurfaceCreateFlagsSEC"
   let () = register [
   ]
 end
 
 module Win32SurfaceCreateFlagsKHR = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "Win32SurfaceCreateFlagsKHR"
   let () = register [
   ]
 end
 
 module XlibSurfaceCreateFlagsKHR = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "XlibSurfaceCreateFlagsKHR"
   let () = register [
   ]
 end
 
 module XcbSurfaceCreateFlagsKHR = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "XcbSurfaceCreateFlagsKHR"
   let () = register [
   ]
 end
 
 module DirectFBSurfaceCreateFlagsEXT = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "DirectFBSurfaceCreateFlagsEXT"
   let () = register [
   ]
 end
 
 module IOSSurfaceCreateFlagsMVK = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "IOSSurfaceCreateFlagsMVK"
   let () = register [
   ]
 end
 
 module MacOSSurfaceCreateFlagsMVK = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "MacOSSurfaceCreateFlagsMVK"
   let () = register [
   ]
 end
 
 module MetalSurfaceCreateFlagsEXT = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "MetalSurfaceCreateFlagsEXT"
   let () = register [
   ]
 end
 
 module ImagePipeSurfaceCreateFlagsFUCHSIA = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "ImagePipeSurfaceCreateFlagsFUCHSIA"
   let () = register [
   ]
 end
 
 module StreamDescriptorSurfaceCreateFlagsGGP = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "StreamDescriptorSurfaceCreateFlagsGGP"
   let () = register [
   ]
 end
 
 module HeadlessSurfaceCreateFlagsEXT = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "HeadlessSurfaceCreateFlagsEXT"
   let () = register [
   ]
 end
 
 module ScreenSurfaceCreateFlagsQNX = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "ScreenSurfaceCreateFlagsQNX"
   let () = register [
   ]
 end
 
 module PeerMemoryFeatureFlags = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "PeerMemoryFeatureFlags"
   let copy_src = of_int (1)
   let copy_dst = of_int (2)
   let generic_src = of_int (4)
@@ -10101,6 +10403,7 @@ end
 
 module MemoryAllocateFlags = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "MemoryAllocateFlags"
   let device_mask = of_int (1)
   let device_address = of_int (2)
   let device_address_capture_replay = of_int (4)
@@ -10121,6 +10424,7 @@ end
 
 module DeviceGroupPresentModeFlagsKHR = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "DeviceGroupPresentModeFlagsKHR"
   let local_khr = of_int (1)
   let remote_khr = of_int (2)
   let sum_khr = of_int (4)
@@ -10135,6 +10439,7 @@ end
 
 module DebugReportFlagsEXT = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "DebugReportFlagsEXT"
   let information_ext = of_int (1)
   let warning_ext = of_int (2)
   let performance_warning_ext = of_int (4)
@@ -10151,12 +10456,14 @@ end
 
 module CommandPoolTrimFlags = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "CommandPoolTrimFlags"
   let () = register [
   ]
 end
 
 module ExternalMemoryHandleTypeFlagsNV = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "ExternalMemoryHandleTypeFlagsNV"
   let opaque_win32_nv = of_int (1)
   let opaque_win32_kmt_nv = of_int (2)
   let d3d11_image_nv = of_int (4)
@@ -10171,6 +10478,7 @@ end
 
 module ClusterAccelerationStructureIndexFormatFlagsNV = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "ClusterAccelerationStructureIndexFormatFlagsNV"
   let _8bit_nv = of_int (1)
   let _16bit_nv = of_int (2)
   let _32bit_nv = of_int (4)
@@ -10183,6 +10491,7 @@ end
 
 module ExternalMemoryFeatureFlagsNV = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "ExternalMemoryFeatureFlagsNV"
   let dedicated_only_nv = of_int (1)
   let exportable_nv = of_int (2)
   let importable_nv = of_int (4)
@@ -10195,6 +10504,7 @@ end
 
 module ExternalMemoryHandleTypeFlags = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "ExternalMemoryHandleTypeFlags"
   let opaque_fd = of_int (1)
   let opaque_win32 = of_int (2)
   let opaque_win32_kmt = of_int (4)
@@ -10251,6 +10561,7 @@ end
 
 module ExternalMemoryFeatureFlags = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "ExternalMemoryFeatureFlags"
   let dedicated_only = of_int (1)
   let exportable = of_int (2)
   let importable = of_int (4)
@@ -10269,6 +10580,7 @@ end
 
 module ExternalSemaphoreHandleTypeFlags = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "ExternalSemaphoreHandleTypeFlags"
   let opaque_fd = of_int (1)
   let opaque_win32 = of_int (2)
   let opaque_win32_kmt = of_int (4)
@@ -10299,6 +10611,7 @@ end
 
 module ExternalSemaphoreFeatureFlags = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "ExternalSemaphoreFeatureFlags"
   let exportable = of_int (1)
   let importable = of_int (2)
   let exportable_khr = of_int (1)
@@ -10313,6 +10626,7 @@ end
 
 module SemaphoreImportFlags = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "SemaphoreImportFlags"
   let temporary = of_int (1)
   let temporary_khr = of_int (1)
   let () = register [
@@ -10323,6 +10637,7 @@ end
 
 module ExternalFenceHandleTypeFlags = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "ExternalFenceHandleTypeFlags"
   let opaque_fd = of_int (1)
   let opaque_win32 = of_int (2)
   let opaque_win32_kmt = of_int (4)
@@ -10345,6 +10660,7 @@ end
 
 module ExternalFenceFeatureFlags = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "ExternalFenceFeatureFlags"
   let exportable = of_int (1)
   let importable = of_int (2)
   let exportable_khr = of_int (1)
@@ -10359,6 +10675,7 @@ end
 
 module FenceImportFlags = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "FenceImportFlags"
   let temporary = of_int (1)
   let temporary_khr = of_int (1)
   let () = register [
@@ -10369,6 +10686,7 @@ end
 
 module SurfaceCounterFlagsEXT = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "SurfaceCounterFlagsEXT"
   let vblank_ext = of_int (1)
   let vblank_ext_2 = of_int (1)
   let () = register [
@@ -10379,42 +10697,49 @@ end
 
 module PipelineViewportSwizzleStateCreateFlagsNV = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "PipelineViewportSwizzleStateCreateFlagsNV"
   let () = register [
   ]
 end
 
 module PipelineDiscardRectangleStateCreateFlagsEXT = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "PipelineDiscardRectangleStateCreateFlagsEXT"
   let () = register [
   ]
 end
 
 module PipelineCoverageToColorStateCreateFlagsNV = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "PipelineCoverageToColorStateCreateFlagsNV"
   let () = register [
   ]
 end
 
 module PipelineCoverageModulationStateCreateFlagsNV = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "PipelineCoverageModulationStateCreateFlagsNV"
   let () = register [
   ]
 end
 
 module PipelineCoverageReductionStateCreateFlagsNV = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "PipelineCoverageReductionStateCreateFlagsNV"
   let () = register [
   ]
 end
 
 module ValidationCacheCreateFlagsEXT = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "ValidationCacheCreateFlagsEXT"
   let () = register [
   ]
 end
 
 module DebugUtilsMessageSeverityFlagsEXT = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "DebugUtilsMessageSeverityFlagsEXT"
   let verbose_ext = of_int (1)
   let info_ext = of_int (16)
   let warning_ext = of_int (256)
@@ -10429,6 +10754,7 @@ end
 
 module DebugUtilsMessageTypeFlagsEXT = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "DebugUtilsMessageTypeFlagsEXT"
   let general_ext = of_int (1)
   let validation_ext = of_int (2)
   let performance_ext = of_int (4)
@@ -10443,30 +10769,35 @@ end
 
 module DebugUtilsMessengerCreateFlagsEXT = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "DebugUtilsMessengerCreateFlagsEXT"
   let () = register [
   ]
 end
 
 module DebugUtilsMessengerCallbackDataFlagsEXT = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "DebugUtilsMessengerCallbackDataFlagsEXT"
   let () = register [
   ]
 end
 
 module DeviceMemoryReportFlagsEXT = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "DeviceMemoryReportFlagsEXT"
   let () = register [
   ]
 end
 
 module PipelineRasterizationConservativeStateCreateFlagsEXT = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "PipelineRasterizationConservativeStateCreateFlagsEXT"
   let () = register [
   ]
 end
 
 module DescriptorBindingFlags = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "DescriptorBindingFlags"
   let update_after_bind = of_int (1)
   let update_unused_while_pending = of_int (2)
   let partially_bound = of_int (4)
@@ -10489,6 +10820,7 @@ end
 
 module ConditionalRenderingFlagsEXT = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "ConditionalRenderingFlagsEXT"
   let inverted_ext = of_int (1)
   let () = register [
     (inverted_ext, "VK_CONDITIONAL_RENDERING_INVERTED_BIT_EXT");
@@ -10497,6 +10829,7 @@ end
 
 module ResolveModeFlags = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "ResolveModeFlags"
   let none = of_int (0)
   let sample_zero = of_int (1)
   let average = of_int (2)
@@ -10529,18 +10862,21 @@ end
 
 module PipelineRasterizationStateStreamCreateFlagsEXT = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "PipelineRasterizationStateStreamCreateFlagsEXT"
   let () = register [
   ]
 end
 
 module PipelineRasterizationDepthClipStateCreateFlagsEXT = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "PipelineRasterizationDepthClipStateCreateFlagsEXT"
   let () = register [
   ]
 end
 
 module SwapchainImageUsageFlagsANDROID = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "SwapchainImageUsageFlagsANDROID"
   let shared_android = of_int (1)
   let () = register [
     (shared_android, "VK_SWAPCHAIN_IMAGE_USAGE_SHARED_BIT_ANDROID");
@@ -10549,6 +10885,7 @@ end
 
 module ToolPurposeFlags = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "ToolPurposeFlags"
   let validation = of_int (1)
   let profiling = of_int (2)
   let tracing = of_int (4)
@@ -10579,6 +10916,7 @@ end
 
 module SubmitFlags = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "SubmitFlags"
   let protected = of_int (1)
   let protected_khr = of_int (1)
   let () = register [
@@ -10589,12 +10927,14 @@ end
 
 module ImageFormatConstraintsFlagsFUCHSIA = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "ImageFormatConstraintsFlagsFUCHSIA"
   let () = register [
   ]
 end
 
 module HostImageCopyFlags = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "HostImageCopyFlags"
   let memcpy = of_int (1)
   let memcpy_2 = of_int (1)
   let memcpy_ext = of_int (1)
@@ -10609,6 +10949,7 @@ end
 
 module PartitionedAccelerationStructureInstanceFlagsNV = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "PartitionedAccelerationStructureInstanceFlagsNV"
   let flag_triangle_facing_cull_disable_nv = of_int (1)
   let flag_triangle_flip_facing_nv = of_int (2)
   let flag_force_opaque_nv = of_int (4)
@@ -10625,6 +10966,7 @@ end
 
 module ImageConstraintsInfoFlagsFUCHSIA = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "ImageConstraintsInfoFlagsFUCHSIA"
   let cpu_read_rarely_fuchsia = of_int (1)
   let cpu_read_often_fuchsia = of_int (2)
   let cpu_write_rarely_fuchsia = of_int (4)
@@ -10641,6 +10983,7 @@ end
 
 module GraphicsPipelineLibraryFlagsEXT = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "GraphicsPipelineLibraryFlagsEXT"
   let vertex_input_interface_ext = of_int (1)
   let pre_rasterization_shaders_ext = of_int (2)
   let fragment_shader_ext = of_int (4)
@@ -10655,6 +10998,7 @@ end
 
 module ImageCompressionFlagsEXT = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "ImageCompressionFlagsEXT"
   let default_ext = of_int (0)
   let fixed_rate_default_ext = of_int (1)
   let fixed_rate_explicit_ext = of_int (2)
@@ -10669,6 +11013,7 @@ end
 
 module ImageCompressionFixedRateFlagsEXT = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "ImageCompressionFixedRateFlagsEXT"
   let none_ext = of_int (0)
   let _1bpc_ext = of_int (1)
   let _2bpc_ext = of_int (2)
@@ -10725,6 +11070,7 @@ end
 
 module ExportMetalObjectTypeFlagsEXT = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "ExportMetalObjectTypeFlagsEXT"
   let metal_device_ext = of_int (1)
   let metal_command_queue_ext = of_int (2)
   let metal_buffer_ext = of_int (4)
@@ -10743,6 +11089,7 @@ end
 
 module RenderingAttachmentFlagsKHR = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "RenderingAttachmentFlagsKHR"
   let input_attachment_feedback_khr = of_int (1)
   let resolve_skip_transfer_function_khr = of_int (2)
   let resolve_enable_transfer_function_khr = of_int (4)
@@ -10755,6 +11102,7 @@ end
 
 module ResolveImageFlagsKHR = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "ResolveImageFlagsKHR"
   let skip_transfer_function_khr = of_int (1)
   let enable_transfer_function_khr = of_int (2)
   let () = register [
@@ -10765,6 +11113,7 @@ end
 
 module DeviceAddressBindingFlagsEXT = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "DeviceAddressBindingFlagsEXT"
   let internal_object_ext = of_int (1)
   let () = register [
     (internal_object_ext, "VK_DEVICE_ADDRESS_BINDING_INTERNAL_OBJECT_BIT_EXT");
@@ -10773,6 +11122,7 @@ end
 
 module OpticalFlowGridSizeFlagsNV = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "OpticalFlowGridSizeFlagsNV"
   let unknown_nv = of_int (0)
   let _1x1_nv = of_int (1)
   let _2x2_nv = of_int (2)
@@ -10789,6 +11139,7 @@ end
 
 module OpticalFlowUsageFlagsNV = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "OpticalFlowUsageFlagsNV"
   let unknown_nv = of_int (0)
   let input_nv = of_int (1)
   let output_nv = of_int (2)
@@ -10807,6 +11158,7 @@ end
 
 module OpticalFlowSessionCreateFlagsNV = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "OpticalFlowSessionCreateFlagsNV"
   let enable_hint_nv = of_int (1)
   let enable_cost_nv = of_int (2)
   let enable_global_flow_nv = of_int (4)
@@ -10823,6 +11175,7 @@ end
 
 module OpticalFlowExecuteFlagsNV = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "OpticalFlowExecuteFlagsNV"
   let disable_temporal_hints_nv = of_int (1)
   let () = register [
     (disable_temporal_hints_nv, "VK_OPTICAL_FLOW_EXECUTE_DISABLE_TEMPORAL_HINTS_BIT_NV");
@@ -10831,6 +11184,7 @@ end
 
 module FrameBoundaryFlagsEXT = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "FrameBoundaryFlagsEXT"
   let frame_end_ext = of_int (1)
   let () = register [
     (frame_end_ext, "VK_FRAME_BOUNDARY_FRAME_END_BIT_EXT");
@@ -10839,6 +11193,7 @@ end
 
 module PresentScalingFlagsKHR = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "PresentScalingFlagsKHR"
   let one_to_one_khr = of_int (1)
   let one_to_one_ext = of_int (1)
   let aspect_ratio_stretch_khr = of_int (2)
@@ -10857,6 +11212,7 @@ end
 
 module PresentGravityFlagsKHR = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "PresentGravityFlagsKHR"
   let min_khr = of_int (1)
   let min_ext = of_int (1)
   let max_khr = of_int (2)
@@ -10875,6 +11231,7 @@ end
 
 module ShaderCreateFlagsEXT = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "ShaderCreateFlagsEXT"
   let link_stage_ext = of_int (1)
   let descriptor_heap_ext = of_int (1024)
   let instrument_shader_arm = of_int (2048)
@@ -10907,6 +11264,7 @@ end
 
 module TileShadingRenderPassFlagsQCOM = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "TileShadingRenderPassFlagsQCOM"
   let enable_qcom = of_int (1)
   let per_tile_execution_qcom = of_int (2)
   let () = register [
@@ -10917,6 +11275,7 @@ end
 
 module PhysicalDeviceSchedulingControlsFlagsARM = struct
   include Vk_base.Flags64 ()
+  let () = set_type_name "PhysicalDeviceSchedulingControlsFlagsARM"
   let shader_core_count_arm = of_int (1)
   let dispatch_parameters_arm = of_int (2)
   let () = register [
@@ -10927,12 +11286,14 @@ end
 
 module SurfaceCreateFlagsOHOS = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "SurfaceCreateFlagsOHOS"
   let () = register [
   ]
 end
 
 module PresentStageFlagsEXT = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "PresentStageFlagsEXT"
   let queue_operations_end_ext = of_int (1)
   let request_dequeued_ext = of_int (2)
   let image_first_pixel_out_ext = of_int (4)
@@ -10947,6 +11308,7 @@ end
 
 module PastPresentationTimingFlagsEXT = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "PastPresentationTimingFlagsEXT"
   let allow_partial_results_ext = of_int (1)
   let allow_out_of_order_results_ext = of_int (2)
   let () = register [
@@ -10957,6 +11319,7 @@ end
 
 module PresentTimingInfoFlagsEXT = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "PresentTimingInfoFlagsEXT"
   let present_at_relative_time_ext = of_int (1)
   let present_at_nearest_refresh_cycle_ext = of_int (2)
   let () = register [
@@ -10967,6 +11330,7 @@ end
 
 module SwapchainImageUsageFlagsOHOS = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "SwapchainImageUsageFlagsOHOS"
   let shared_ohos = of_int (1)
   let () = register [
     (shared_ohos, "VK_SWAPCHAIN_IMAGE_USAGE_SHARED_BIT_OHOS");
@@ -10975,18 +11339,21 @@ end
 
 module PerformanceCounterDescriptionFlagsARM = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "PerformanceCounterDescriptionFlagsARM"
   let () = register [
   ]
 end
 
 module ShaderInstrumentationValuesFlagsARM = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "ShaderInstrumentationValuesFlagsARM"
   let () = register [
   ]
 end
 
 module DataGraphTOSAQualityFlagsARM = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "DataGraphTOSAQualityFlagsARM"
   let accelerated_arm = of_int (1)
   let conformant_arm = of_int (2)
   let experimental_arm = of_int (4)
@@ -11001,6 +11368,7 @@ end
 
 module DataGraphOpticalFlowGridSizeFlagsARM = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "DataGraphOpticalFlowGridSizeFlagsARM"
   let unknown_arm = of_int (0)
   let _1x1_arm = of_int (1)
   let _2x2_arm = of_int (2)
@@ -11017,6 +11385,7 @@ end
 
 module DataGraphOpticalFlowImageUsageFlagsARM = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "DataGraphOpticalFlowImageUsageFlagsARM"
   let unknown_arm = of_int (0)
   let input_arm = of_int (1)
   let output_arm = of_int (2)
@@ -11033,6 +11402,7 @@ end
 
 module DataGraphOpticalFlowCreateFlagsARM = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "DataGraphOpticalFlowCreateFlagsARM"
   let enable_hint_arm = of_int (1)
   let enable_cost_arm = of_int (2)
   let reserved_30_arm = of_int (1073741824)
@@ -11045,6 +11415,7 @@ end
 
 module DataGraphOpticalFlowExecuteFlagsARM = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "DataGraphOpticalFlowExecuteFlagsARM"
   let disable_temporal_hints_arm = of_int (1)
   let input_unchanged_arm = of_int (2)
   let reference_unchanged_arm = of_int (4)
@@ -11061,6 +11432,7 @@ end
 
 module VideoCodecOperationFlagsKHR = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "VideoCodecOperationFlagsKHR"
   let none_khr = of_int (0)
   let encode_h264_khr = of_int (65536)
   let encode_h265_khr = of_int (131072)
@@ -11083,6 +11455,7 @@ end
 
 module VideoCapabilityFlagsKHR = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "VideoCapabilityFlagsKHR"
   let protected_content_khr = of_int (1)
   let separate_reference_images_khr = of_int (2)
   let () = register [
@@ -11093,6 +11466,7 @@ end
 
 module VideoSessionCreateFlagsKHR = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "VideoSessionCreateFlagsKHR"
   let protected_content_khr = of_int (1)
   let allow_encode_parameter_optimizations_khr = of_int (2)
   let inline_queries_khr = of_int (4)
@@ -11111,6 +11485,7 @@ end
 
 module VideoSessionParametersCreateFlagsKHR = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "VideoSessionParametersCreateFlagsKHR"
   let quantization_map_compatible_khr = of_int (1)
   let () = register [
     (quantization_map_compatible_khr, "VK_VIDEO_SESSION_PARAMETERS_CREATE_QUANTIZATION_MAP_COMPATIBLE_BIT_KHR");
@@ -11119,18 +11494,21 @@ end
 
 module VideoBeginCodingFlagsKHR = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "VideoBeginCodingFlagsKHR"
   let () = register [
   ]
 end
 
 module VideoEndCodingFlagsKHR = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "VideoEndCodingFlagsKHR"
   let () = register [
   ]
 end
 
 module VideoCodingControlFlagsKHR = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "VideoCodingControlFlagsKHR"
   let reset_khr = of_int (1)
   let encode_rate_control_khr = of_int (2)
   let encode_quality_level_khr = of_int (4)
@@ -11143,6 +11521,7 @@ end
 
 module VideoDecodeUsageFlagsKHR = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "VideoDecodeUsageFlagsKHR"
   let default_khr = of_int (0)
   let transcoding_khr = of_int (1)
   let offline_khr = of_int (2)
@@ -11157,6 +11536,7 @@ end
 
 module VideoDecodeCapabilityFlagsKHR = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "VideoDecodeCapabilityFlagsKHR"
   let dpb_and_output_coincide_khr = of_int (1)
   let dpb_and_output_distinct_khr = of_int (2)
   let () = register [
@@ -11167,12 +11547,14 @@ end
 
 module VideoDecodeFlagsKHR = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "VideoDecodeFlagsKHR"
   let () = register [
   ]
 end
 
 module VideoDecodeH264PictureLayoutFlagsKHR = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "VideoDecodeH264PictureLayoutFlagsKHR"
   let h264_picture_layout_progressive_khr = of_int (0)
   let h264_picture_layout_interlaced_interleaved_lines_khr = of_int (1)
   let h264_picture_layout_interlaced_separate_planes_khr = of_int (2)
@@ -11185,6 +11567,7 @@ end
 
 module VideoEncodeFlagsKHR = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "VideoEncodeFlagsKHR"
   let intra_refresh_khr = of_int (4)
   let with_quantization_delta_map_khr = of_int (1)
   let with_emphasis_map_khr = of_int (2)
@@ -11197,6 +11580,7 @@ end
 
 module VideoEncodeUsageFlagsKHR = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "VideoEncodeUsageFlagsKHR"
   let default_khr = of_int (0)
   let transcoding_khr = of_int (1)
   let streaming_khr = of_int (2)
@@ -11213,6 +11597,7 @@ end
 
 module VideoEncodeContentFlagsKHR = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "VideoEncodeContentFlagsKHR"
   let default_khr = of_int (0)
   let camera_khr = of_int (1)
   let desktop_khr = of_int (2)
@@ -11227,6 +11612,7 @@ end
 
 module VideoEncodeCapabilityFlagsKHR = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "VideoEncodeCapabilityFlagsKHR"
   let preceding_externally_encoded_bytes_khr = of_int (1)
   let insufficient_bitstream_buffer_range_detection_khr = of_int (2)
   let quantization_delta_map_khr = of_int (4)
@@ -11241,6 +11627,7 @@ end
 
 module VideoEncodeFeedbackFlagsKHR = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "VideoEncodeFeedbackFlagsKHR"
   let bitstream_buffer_offset_khr = of_int (1)
   let bitstream_bytes_written_khr = of_int (2)
   let bitstream_has_overrides_khr = of_int (4)
@@ -11267,6 +11654,7 @@ end
 
 module VideoEncodePerPartitionFeedbackFlagsKHR = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "VideoEncodePerPartitionFeedbackFlagsKHR"
   let status_khr = of_int (1)
   let bitstream_buffer_offset_khr = of_int (2)
   let bitstream_bytes_written_khr = of_int (4)
@@ -11279,12 +11667,14 @@ end
 
 module VideoEncodeRateControlFlagsKHR = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "VideoEncodeRateControlFlagsKHR"
   let () = register [
   ]
 end
 
 module VideoEncodeRateControlModeFlagsKHR = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "VideoEncodeRateControlModeFlagsKHR"
   let default_khr = of_int (0)
   let disabled_khr = of_int (1)
   let cbr_khr = of_int (2)
@@ -11299,6 +11689,7 @@ end
 
 module VideoEncodeIntraRefreshModeFlagsKHR = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "VideoEncodeIntraRefreshModeFlagsKHR"
   let none_khr = of_int (0)
   let per_picture_partition_khr = of_int (1)
   let block_based_khr = of_int (2)
@@ -11315,6 +11706,7 @@ end
 
 module VideoChromaSubsamplingFlagsKHR = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "VideoChromaSubsamplingFlagsKHR"
   let invalid_khr = of_int (0)
   let monochrome_khr = of_int (1)
   let _420_khr = of_int (2)
@@ -11331,6 +11723,7 @@ end
 
 module VideoComponentBitDepthFlagsKHR = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "VideoComponentBitDepthFlagsKHR"
   let invalid_khr = of_int (0)
   let _8_khr = of_int (1)
   let _10_khr = of_int (4)
@@ -11345,6 +11738,7 @@ end
 
 module VideoEncodeH264CapabilityFlagsKHR = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "VideoEncodeH264CapabilityFlagsKHR"
   let h264_capability_hrd_compliance_khr = of_int (1)
   let h264_capability_prediction_weight_table_generated_khr = of_int (2)
   let h264_capability_row_unaligned_slice_khr = of_int (4)
@@ -11373,6 +11767,7 @@ end
 
 module VideoEncodeH264StdFlagsKHR = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "VideoEncodeH264StdFlagsKHR"
   let h264_std_separate_color_plane_flag_set_khr = of_int (1)
   let h264_std_qpprime_y_zero_transform_bypass_flag_set_khr = of_int (2)
   let h264_std_scaling_matrix_present_flag_set_khr = of_int (4)
@@ -11419,6 +11814,7 @@ end
 
 module VideoEncodeH264RateControlFlagsKHR = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "VideoEncodeH264RateControlFlagsKHR"
   let h264_rate_control_attempt_hrd_compliance_khr = of_int (1)
   let h264_rate_control_regular_gop_khr = of_int (2)
   let h264_rate_control_reference_pattern_flat_khr = of_int (4)
@@ -11435,6 +11831,7 @@ end
 
 module VideoEncodeH265CapabilityFlagsKHR = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "VideoEncodeH265CapabilityFlagsKHR"
   let h265_capability_hrd_compliance_khr = of_int (1)
   let h265_capability_prediction_weight_table_generated_khr = of_int (2)
   let h265_capability_row_unaligned_slice_segment_khr = of_int (4)
@@ -11465,6 +11862,7 @@ end
 
 module VideoEncodeH265StdFlagsKHR = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "VideoEncodeH265StdFlagsKHR"
   let h265_std_separate_color_plane_flag_set_khr = of_int (1)
   let h265_std_sample_adaptive_offset_enabled_flag_set_khr = of_int (2)
   let h265_std_scaling_list_data_present_flag_set_khr = of_int (4)
@@ -11513,6 +11911,7 @@ end
 
 module VideoEncodeH265RateControlFlagsKHR = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "VideoEncodeH265RateControlFlagsKHR"
   let h265_rate_control_attempt_hrd_compliance_khr = of_int (1)
   let h265_rate_control_regular_gop_khr = of_int (2)
   let h265_rate_control_reference_pattern_flat_khr = of_int (4)
@@ -11529,6 +11928,7 @@ end
 
 module VideoEncodeH265CtbSizeFlagsKHR = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "VideoEncodeH265CtbSizeFlagsKHR"
   let h265_ctb_size_16_khr = of_int (1)
   let h265_ctb_size_32_khr = of_int (2)
   let h265_ctb_size_64_khr = of_int (4)
@@ -11541,6 +11941,7 @@ end
 
 module VideoEncodeH265TransformBlockSizeFlagsKHR = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "VideoEncodeH265TransformBlockSizeFlagsKHR"
   let h265_transform_block_size_4_khr = of_int (1)
   let h265_transform_block_size_8_khr = of_int (2)
   let h265_transform_block_size_16_khr = of_int (4)
@@ -11555,6 +11956,7 @@ end
 
 module VideoEncodeAV1CapabilityFlagsKHR = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "VideoEncodeAV1CapabilityFlagsKHR"
   let av1_capability_per_rate_control_group_min_max_q_index_khr = of_int (1)
   let av1_capability_generate_obu_extension_header_khr = of_int (2)
   let av1_capability_primary_reference_cdf_only_khr = of_int (4)
@@ -11573,6 +11975,7 @@ end
 
 module VideoEncodeAV1StdFlagsKHR = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "VideoEncodeAV1StdFlagsKHR"
   let av1_std_uniform_tile_spacing_flag_set_khr = of_int (1)
   let av1_std_skip_mode_present_unset_khr = of_int (2)
   let av1_std_primary_ref_frame_khr = of_int (4)
@@ -11587,6 +11990,7 @@ end
 
 module VideoEncodeAV1RateControlFlagsKHR = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "VideoEncodeAV1RateControlFlagsKHR"
   let av1_rate_control_regular_gop_khr = of_int (1)
   let av1_rate_control_temporal_layer_pattern_dyadic_khr = of_int (2)
   let av1_rate_control_reference_pattern_flat_khr = of_int (4)
@@ -11601,6 +12005,7 @@ end
 
 module VideoEncodeAV1SuperblockSizeFlagsKHR = struct
   include Vk_base.Flags32 ()
+  let () = set_type_name "VideoEncodeAV1SuperblockSizeFlagsKHR"
   let av1_superblock_size_64_khr = of_int (1)
   let av1_superblock_size_128_khr = of_int (2)
   let () = register [
@@ -11611,6 +12016,7 @@ end
 
 module AccessFlags3KHR = struct
   include Vk_base.Flags64 ()
+  let () = set_type_name "AccessFlags3KHR"
   let none_khr = of_int (0)
   let () = register [
     (none_khr, "VK_ACCESS_3_NONE_KHR");

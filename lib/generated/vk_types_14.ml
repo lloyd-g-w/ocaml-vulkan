@@ -18,6 +18,8 @@ open Vk_types_11
 open Vk_types_12
 open Vk_types_13
 
+module ExternalFencePropertiesKHR = ExternalFenceProperties
+
 module ExternalImageFormatPropertiesKHR = ExternalImageFormatProperties
 
 module ExternalMemoryBufferCreateInfoKHR = ExternalMemoryBufferCreateInfo
@@ -255,5 +257,3 @@ module PhysicalDeviceShaderIntegerDotProductPropertiesKHR = PhysicalDeviceShader
 module PhysicalDeviceShaderSubgroupExtendedTypesFeaturesKHR = PhysicalDeviceShaderSubgroupExtendedTypesFeatures
 
 module PhysicalDeviceShaderSubgroupRotateFeaturesKHR = PhysicalDeviceShaderSubgroupRotateFeatures
-
-module PhysicalDeviceShaderTerminateInvocationFeaturesKHR = PhysicalDeviceShaderTerminateInvocationFeatures

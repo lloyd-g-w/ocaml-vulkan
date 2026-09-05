@@ -58,6 +58,12 @@ def physical_fields(comp: Composite) -> list[PhysicalField]:
 
 def _funcpointer(ctx: Context, fp: FuncPointer) -> str:
     module = naming.module_name(fp.name)
+    if fp.name == "PFN_vkVoidFunction":
+        return f"""module {module} = struct
+  type fn = unit Ctypes.ptr
+  let t : fn typ = ptr void
+  let opt : fn option typ = view ~read:(fun p -> if is_null p then None else Some p) ~write:(function None -> null | Some p -> p) (ptr void)
+end"""
     arg_types = [ctx.value_type(p, owner=fp.name, strings=True) for p in fp.params]
     result_type = ctx.value_type(fp.result, owner=fp.name, strings=True)
     if not arg_types:
@@ -94,14 +100,14 @@ def _pair_maps(comp: Composite) -> tuple[dict[str, Member], dict[str, str], dict
     count_for_pointer: dict[str, str] = {}
     special: dict[str, str] = {}
     for member in comp.members:
-        if not member.length:
+        if not member.length and not member.altlen:
             continue
-        first = member.length.split(",")[0].strip()
+        first = (member.altlen or member.length or "").split(",")[0].strip()
         if first in by_name and by_name[first].pointer_depth == 0:
             if member.const and member.ctype != "void" and (member.pointer_depth == 1 or (member.ctype == "char" and member.pointer_depth == 2)):
                 pointer_for_count[first] = member
                 count_for_pointer[member.name] = first
-        compact = member.length.replace(" ", "")
+        compact = (member.altlen or member.length or "").replace(" ", "")
         if member.ctype == "uint32_t" and member.pointer_depth == 1 and "codeSize/4" in compact:
             special[member.name] = "codeSize"
         elif member.ctype == "void" and member.pointer_depth == 1 and first in by_name:
@@ -157,7 +163,9 @@ def _constructor_arguments(ctx: Context, comp: Composite) -> tuple[list[str], di
         if member.bitfield is not None:
             label = unique(naming.argument_name(member.name))
             binding = "arg_" + label
-            args.append(f"?{label}:({binding}=0)")
+            kind = ctx.kind(member.ctype)
+            default = f"{ctx.enum_module(member.ctype)}.of_int 0" if kind in {"enum", "flags"} else "0"
+            args.append(f"?{label}:({binding}={default})")
             bindings[member.name] = binding
             continue
         pointer_like = member.pointer_depth > 0 or ctx.kind(member.ctype) == "pointer"
@@ -231,8 +239,10 @@ def _constructor(ctx: Context, comp: Composite, fields: list[PhysicalField]) -> 
             pieces = []
             for member in field.members:
                 binding = bindings[member.name]
+                if ctx.kind(member.ctype) in {"enum", "flags"}:
+                    binding = f"{ctx.enum_module(member.ctype)}.to_int {binding}"
                 mask = (1 << (member.bitfield or 0)) - 1
-                piece = f"({binding} land {mask})"
+                piece = f"(({binding}) land {mask})"
                 if offset:
                     piece = f"({piece} lsl {offset})"
                 pieces.append(piece)
@@ -387,7 +397,7 @@ def _composite(ctx: Context, comp: Composite) -> str:
     lines.append("  let () = seal t")
     if comp.kind == "struct":
         structure_type = _structure_type(ctx, comp)
-        lines.append(f"  let structure_type = {'Some ' + structure_type if structure_type else 'None'}")
+        lines.append(f"  let structure_type : StructureType.t option = {'Some ' + structure_type if structure_type else 'None'}")
         constructor = _constructor(ctx, comp, fields)
         lines.extend("  " + line if line else line for line in constructor.splitlines())
         for field in fields:

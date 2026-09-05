@@ -39,6 +39,7 @@ let subpass_external = -1
 let true_ = 1
 let uuid_size = 16
 let whole_size = -1
+let header_version = 357
 
 module Ext = struct
   let amd_anti_lag = "VK_AMD_anti_lag"

@@ -39,7 +39,7 @@ def _resolved_values(ctx: Context, values: list[EnumValue]) -> list[tuple[EnumVa
 def _module(ctx: Context, ctype: str, module: str, values: list[EnumValue],
             *, flags: bool, bitwidth: int) -> str:
     functor = ("Flags" if flags else "Enum") + ("64" if bitwidth == 64 else "32")
-    lines = [f"module {module} = struct", f"  include Vk_base.{functor} ()"]
+    lines = [f"module {module} = struct", f"  include Vk_base.{functor} ()", f"  let () = set_type_name \"{module}\""]
     used: dict[str, int] = {}
     constants: list[tuple[str, str]] = []
     for value, number in _resolved_values(ctx, values):

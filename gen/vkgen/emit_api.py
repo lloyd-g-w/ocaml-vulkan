@@ -48,17 +48,17 @@ def _has_stype(ctx: Context, ctype: str) -> bool:
     return any(m.name == "sType" for m in target.members)
 
 
-def _input_pairs(command: Command) -> tuple[dict[str, Member], dict[str, str]]:
+def _input_pairs(command: Command) -> tuple[dict[str, list[Member]], dict[str, str]]:
     by_name = {p.name: p for p in command.params}
-    pointer_for_count: dict[str, Member] = {}
+    pointer_for_count: dict[str, list[Member]] = {}
     count_for_pointer: dict[str, str] = {}
     for p in command.params:
-        if not p.const or not p.length:
+        if not p.const or p.ctype == "void" or not p.length:
             continue
         count_name = p.length.split(",")[0].strip()
         count = by_name.get(count_name)
         if count and count.pointer_depth == 0 and (p.pointer_depth == 1 or (p.ctype == "char" and p.pointer_depth == 2)):
-            pointer_for_count[count_name] = p
+            pointer_for_count.setdefault(count_name, []).append(p)
             count_for_pointer[p.name] = count_name
     return pointer_for_count, count_for_pointer
 
@@ -80,6 +80,8 @@ def _trailing_output(ctx: Context, command: Command) -> Member | None:
         return None
     p = command.params[-1]
     if p.const or p.pointer_depth < 1 or p.length:
+        return None
+    if p.ctype == "void" and p.pointer_depth == 1:
         return None
     pointer_name = (
         p.name.startswith("p") and len(p.name) > 1 and p.name[1].isupper()
@@ -148,12 +150,20 @@ def _make_args(ctx: Context, command: Command, hidden: set[str]) -> tuple[list[A
             arg = Arg(p, label, binding, binding, binding)
         args.append(arg); by_param[p.name] = arg
 
-    # Count calls are derived from their list argument.
-    for count_name, pointer in pointer_for_count.items():
-        if pointer.name in by_param:
-            list_arg = by_param[pointer.name]
+    # Count calls are derived from their list argument.  Vulkan has a few
+    # commands (notably vkCmdBindVertexBuffers) where several arrays share one
+    # count; reject mismatched OCaml lists before entering C.
+    for count_name, pointers in pointer_for_count.items():
+        list_args = [by_param[pointer.name] for pointer in pointers if pointer.name in by_param]
+        if list_args:
+            first = list_args[0]
+            first.prep = first.prep or []
+            for other in list_args[1:]:
+                first.prep.append(
+                    f"  if List.length {other.binding} <> List.length {first.binding} then invalid_arg \"{command.name}: array lengths differ\";"
+                )
             synthetic = Arg(next(p for p in command.params if p.name == count_name), "", "", "",
-                            f"List.length {list_arg.binding}")
+                            f"List.length {first.binding}")
             by_param[count_name] = synthetic
     return args, by_param
 

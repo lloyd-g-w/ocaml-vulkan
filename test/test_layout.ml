@@ -98,6 +98,39 @@ let test_layout_matches_golden () =
       (List.length mismatches) path
       (String.concat "\n" first_20))
 
+(* P1-3 regression (gen/vkgen/registry.py's reachability filter,
+   gen/vkgen/emit_common.py's fail-loud sType check): every struct module
+   with `structure_type = Some st` must have a *real*, non-zero StructureType
+   value -- before the fix, 54 structs reachable only from vulkansc-only or
+   disabled extensions (or from a provisional extension, whose enum values
+   were altogether skipped) silently got `StructureType.of_int 0` (=
+   VK_STRUCTURE_TYPE_APPLICATION_INFO) instead. `VkApplicationInfo` is the
+   one legitimate struct whose real sType value *is* 0, so it is the sole
+   exception. `Vk.Layout.structure_types : (string * StructureType.t option)
+   list` is a small companion table alongside `Vk.Layout.all` (whose own
+   shape -- (name, sizeof, [(member, offset)]) -- is unchanged) added
+   specifically for this check. *)
+let test_no_struct_silently_defaults_its_s_type_to_zero () =
+  let mismatches = ref [] in
+  List.iter
+    (fun (name, structure_type) ->
+      match structure_type with
+      | None -> () (* VkBaseInStructure/VkBaseOutStructure: no single fixed sType by design *)
+      | Some st ->
+        if V.StructureType.to_int st = 0 && name <> "VkApplicationInfo" then
+          mismatches := name :: !mismatches)
+    V.Layout.structure_types;
+  Alcotest.(check bool) "compared at least one struct's structure_type" true
+    (V.Layout.structure_types <> []);
+  if !mismatches <> [] then
+    Alcotest.failf "%d struct(s) with structure_type = Some st but StructureType.to_int st = 0 \
+                    (silently defaulted, i.e. its real sType value did not resolve): %s"
+      (List.length !mismatches)
+      (String.concat ", " (List.sort compare !mismatches))
+
 let suite : unit Alcotest.test_case list =
   [ Alcotest.test_case "Vk.Layout.all matches the golden layout file" `Quick
-      test_layout_matches_golden ]
+      test_layout_matches_golden;
+    Alcotest.test_case
+      "no struct with a resolved structure_type silently defaults its sType to 0" `Quick
+      test_no_struct_silently_defaults_its_s_type_to_zero ]

@@ -257,11 +257,11 @@ class Registry:
         for ext in root.findall("./extensions/extension"):
             if not api_matches(ext.get("supported")) or ext.get("supported") == "disabled":
                 continue
-            # Provisional declarations remain parseable, but values and public
-            # extension constants requiring VK_ENABLE_BETA_EXTENSIONS are not
-            # part of the default Vulkan API promised by this package.
-            if ext.get("provisional") == "true":
-                continue
+            # Provisional extensions (platform="provisional", e.g.
+            # VK_KHR_portability_subset, the AMDX/NV ones) are INCLUDED fully
+            # -- both their types and their enum values (DESIGN.md §1/§13) --
+            # so every generated struct they add has a correctly resolved
+            # sType instead of silently defaulting to 0 (P1-3).
             ext_name = ext.get("name")
             if not ext_name:
                 continue
@@ -337,6 +337,28 @@ class Registry:
             )
             for name, c in commands_unclassified.items()
         }
+
+        # P1-3: composites/handles/bitmasks/enums/funcpointers/commands are
+        # only part of the "vulkan" API (DESIGN.md §1/§13) if they are
+        # actually reachable from an enabled <feature>/<extension> --
+        # vulkansc-only features/extensions and disabled extensions must not
+        # be generated at all (not just have their enum *values* skipped, as
+        # before: that left 54 structs like VkPhysicalDeviceVulkanSC10Features/
+        # VkApplicationParametersEXT/VkFaultData/VkNativeBufferANDROID fully
+        # generated with a silently-wrong sType = StructureType.of_int 0).
+        # Provisional extensions are included fully (types and values), same
+        # as any other enabled extension -- see the loop above.
+        type_roots, command_roots = _reachability_roots(root)
+        reachable = _close_reachable_types(
+            type_roots, command_roots, composites=composites, handles=handles,
+            bitmasks=bitmasks, enums=enums, funcpointers=funcpointers, commands=commands,
+        )
+        composites = {name: c for name, c in composites.items() if name in reachable}
+        handles = {name: h for name, h in handles.items() if name in reachable}
+        bitmasks = {name: b for name, b in bitmasks.items() if name in reachable}
+        enums = {name: e for name, e in enums.items() if name in reachable}
+        funcpointers = {name: f for name, f in funcpointers.items() if name in reachable}
+        commands = {name: c for name, c in commands.items() if name in command_roots}
 
         return cls(
             platforms=platforms, tags=tags, basetypes=basetypes, defines=defines,
@@ -459,6 +481,150 @@ def _add_required_enums(enums: dict[str, Enum], requires: Iterable[ET.Element],
             value = parse_enum_value(node, source=source, extension_number=extension_number)
             if value is not None:
                 enums[target].values.append(value)
+
+
+def _reachability_roots(root: ET.Element) -> tuple[set[str], set[str]]:
+    """Type/command names directly named by a <require> block belonging to a
+    <feature>/<extension> that is part of the ordinary "vulkan" API: a
+    vulkansc-only feature (api excludes "vulkan", e.g. VKSC_VERSION_1_0) or a
+    disabled/vulkansc-only extension (supported excludes "vulkan") is never a
+    root. Provisional extensions (VK_KHR_portability_subset, the AMDX/NV
+    ones) ARE roots, same as any other "vulkan" extension -- DESIGN.md §1/
+    §13 records the decision to include them fully. Mirrors the same
+    predicate `_add_required_enums`'s caller already applies for enum
+    *values*, and the one gen/layout_check.py and gen/enum_check.py apply
+    for their real-headers golden probes (both already worked this way, are
+    checked against real Vulkan-Headers by scripts/gen_layout.sh and
+    scripts/gen_enum_values.sh, and agree with this).
+
+    An individual <require> block can carry its own, more restrictive `api`
+    attribute even inside an otherwise-"vulkan" feature/extension (e.g.
+    VK_KHR_performance_query's VkPerformanceQueryReservationInfoKHR require
+    block is api="vulkansc"); that is honoured here too.
+    """
+    type_roots: set[str] = set()
+    command_roots: set[str] = set()
+
+    def collect(container: ET.Element) -> None:
+        for req in container.findall("require"):
+            if not api_matches(req.get("api")):
+                continue
+            for node in req.findall("type"):
+                name = node.get("name")
+                if name:
+                    type_roots.add(name)
+            for node in req.findall("command"):
+                name = node.get("name")
+                if name:
+                    command_roots.add(name)
+
+    for feature in root.findall("./feature"):
+        if not api_matches(feature.get("api")):
+            continue
+        collect(feature)
+    for ext in root.findall("./extensions/extension"):
+        if not api_matches(ext.get("supported")) or ext.get("supported") == "disabled":
+            continue
+        collect(ext)
+    return type_roots, command_roots
+
+
+def _close_reachable_types(
+    type_roots: set[str],
+    command_roots: set[str],
+    *,
+    composites: dict[str, Composite],
+    handles: dict[str, Handle],
+    bitmasks: dict[str, Bitmask],
+    enums: dict[str, Enum],
+    funcpointers: dict[str, FuncPointer],
+    commands: dict[str, Command],
+) -> set[str]:
+    """Expand `type_roots` transitively through struct/union members,
+    function-pointer signatures, reachable commands' params/result, handle
+    parent chains, bitmask<->FlagBits pairings and alias targets. vk.xml's
+    <require> blocks are not always self-contained the way a real compiled
+    header's #include graph is (a handful of external platform types --
+    `Display`, `HWND`, `StdVideo*`... -- are used as struct members but never
+    themselves named by any <require>), so root membership alone is not
+    enough; walking the actual type graph is. Whatever this walk still
+    fails to reach either doesn't matter (nothing generated references it)
+    or is caught loudly: `Context.validate_types` raises if any *generated*
+    declaration's member/param ctype cannot be resolved at all.
+    """
+    reachable: set[str] = set(type_roots)
+    worklist: list[str] = list(type_roots)
+
+    def add(name: str | None) -> None:
+        if name and name not in reachable:
+            reachable.add(name)
+            worklist.append(name)
+
+    # Reachable commands can mention types no <require> block lists directly
+    # (e.g. VkBaseInStructure/VkBaseOutStructure's use as a generic pNext-walk
+    # parameter type in a couple of commands is incidental to those commands
+    # being required, not separately declared).
+    for name in command_roots:
+        command = commands.get(name)
+        if command is None:
+            continue
+        if command.result is not None:
+            add(command.result.ctype)
+        for param in command.params:
+            add(param.ctype)
+
+    # A FlagBits enum pulls in every Flags typedef paired with it (usually
+    # exactly one) so a Flags typedef reached only via its own bitmask.bits
+    # attribute still resolves back to a real member type if something else
+    # only reaches the FlagBits side first.
+    bits_owners: dict[str, list[str]] = {}
+    for name, bitmask in bitmasks.items():
+        if bitmask.bits:
+            bits_owners.setdefault(bitmask.bits, []).append(name)
+
+    seen: set[str] = set()
+    while worklist:
+        name = worklist.pop()
+        if name in seen:
+            continue
+        seen.add(name)
+
+        composite = composites.get(name)
+        if composite is not None:
+            if composite.alias:
+                add(composite.alias)
+            target = composites.get(composite.alias) if composite.alias else composite
+            for member in (target or composite).members:
+                add(member.ctype)
+
+        handle = handles.get(name)
+        if handle is not None:
+            if handle.alias:
+                add(handle.alias)
+            for parent in handle.parent:
+                add(parent)
+
+        bitmask = bitmasks.get(name)
+        if bitmask is not None:
+            if bitmask.alias:
+                add(bitmask.alias)
+            if bitmask.bits:
+                add(bitmask.bits)
+
+        enum = enums.get(name)
+        if enum is not None and enum.alias:
+            add(enum.alias)
+
+        for owner in bits_owners.get(name, ()):
+            add(owner)
+
+        fp = funcpointers.get(name)
+        if fp is not None:
+            add(fp.result.ctype)
+            for param in fp.params:
+                add(param.ctype)
+
+    return reachable
 
 
 def classify_command(command: Command, handles: dict[str, Handle]) -> str:

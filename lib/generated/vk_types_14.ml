@@ -18,88 +18,6 @@ open Vk_types_11
 open Vk_types_12
 open Vk_types_13
 
-module ExternalFencePropertiesKHR = ExternalFenceProperties
-
-module ExternalImageFormatPropertiesKHR = ExternalImageFormatProperties
-
-module ExternalMemoryBufferCreateInfoKHR = ExternalMemoryBufferCreateInfo
-
-module ExternalMemoryImageCreateInfoKHR = ExternalMemoryImageCreateInfo
-
-module ExternalMemoryPropertiesKHR = ExternalMemoryProperties
-
-module ExternalSemaphorePropertiesKHR = ExternalSemaphoreProperties
-
-module FormatProperties2KHR = FormatProperties2
-
-module FormatProperties3KHR = FormatProperties3
-
-module FramebufferAttachmentImageInfoKHR = FramebufferAttachmentImageInfo
-
-module FramebufferAttachmentsCreateInfoKHR = FramebufferAttachmentsCreateInfo
-
-module HostImageCopyDevicePerformanceQueryEXT = HostImageCopyDevicePerformanceQuery
-
-module HostImageLayoutTransitionInfoEXT = HostImageLayoutTransitionInfo
-
-module ImageBlit2KHR = ImageBlit2
-
-module ImageCopy2KHR = ImageCopy2
-
-module ImageFormatListCreateInfoKHR = ImageFormatListCreateInfo
-
-module ImageFormatProperties2KHR = ImageFormatProperties2
-
-module ImageMemoryBarrier2KHR = ImageMemoryBarrier2
-
-module ImageMemoryRequirementsInfo2KHR = ImageMemoryRequirementsInfo2
-
-module ImagePlaneMemoryRequirementsInfoKHR = ImagePlaneMemoryRequirementsInfo
-
-module ImageResolve2KHR = ImageResolve2
-
-module ImageSparseMemoryRequirementsInfo2KHR = ImageSparseMemoryRequirementsInfo2
-
-module ImageStencilUsageCreateInfoEXT = ImageStencilUsageCreateInfo
-
-module ImageSubresource2EXT = ImageSubresource2
-
-module ImageSubresource2KHR = ImageSubresource2
-
-module ImageToMemoryCopyEXT = ImageToMemoryCopy
-
-module ImageViewUsageCreateInfoKHR = ImageViewUsageCreateInfo
-
-module InputAttachmentAspectReferenceKHR = InputAttachmentAspectReference
-
-module MemoryAllocateFlagsInfoKHR = MemoryAllocateFlagsInfo
-
-module MemoryBarrier2KHR = MemoryBarrier2
-
-module MemoryDedicatedAllocateInfoKHR = MemoryDedicatedAllocateInfo
-
-module MemoryDedicatedRequirementsKHR = MemoryDedicatedRequirements
-
-module MemoryMapInfoKHR = MemoryMapInfo
-
-module MemoryOpaqueCaptureAddressAllocateInfoKHR = MemoryOpaqueCaptureAddressAllocateInfo
-
-module MemoryRequirements2KHR = MemoryRequirements2
-
-module MemoryToImageCopyEXT = MemoryToImageCopy
-
-module MemoryUnmapInfoKHR = MemoryUnmapInfo
-
-module MicromapTriangleEXT = MicromapTriangleKHR
-
-module MutableDescriptorTypeCreateInfoVALVE = MutableDescriptorTypeCreateInfoEXT
-
-module MutableDescriptorTypeListVALVE = MutableDescriptorTypeListEXT
-
-module PhysicalDevice16BitStorageFeaturesKHR = PhysicalDevice16BitStorageFeatures
-
-module PhysicalDevice8BitStorageFeaturesKHR = PhysicalDevice8BitStorageFeatures
-
 module PhysicalDeviceBufferDeviceAddressFeaturesKHR = PhysicalDeviceBufferDeviceAddressFeatures
 
 module PhysicalDeviceBufferAddressFeaturesEXT = PhysicalDeviceBufferDeviceAddressFeaturesEXT
@@ -127,8 +45,6 @@ module PhysicalDeviceExternalBufferInfoKHR = PhysicalDeviceExternalBufferInfo
 module PhysicalDeviceExternalFenceInfoKHR = PhysicalDeviceExternalFenceInfo
 
 module PhysicalDeviceExternalImageFormatInfoKHR = PhysicalDeviceExternalImageFormatInfo
-
-module PhysicalDeviceExternalSciBufFeaturesNV = PhysicalDeviceExternalMemorySciBufFeaturesNV
 
 module PhysicalDeviceExternalSemaphoreInfoKHR = PhysicalDeviceExternalSemaphoreInfo
 
@@ -257,3 +173,87 @@ module PhysicalDeviceShaderIntegerDotProductPropertiesKHR = PhysicalDeviceShader
 module PhysicalDeviceShaderSubgroupExtendedTypesFeaturesKHR = PhysicalDeviceShaderSubgroupExtendedTypesFeatures
 
 module PhysicalDeviceShaderSubgroupRotateFeaturesKHR = PhysicalDeviceShaderSubgroupRotateFeatures
+
+module PhysicalDeviceShaderTerminateInvocationFeaturesKHR = PhysicalDeviceShaderTerminateInvocationFeatures
+
+module PhysicalDeviceSparseImageFormatInfo2KHR = PhysicalDeviceSparseImageFormatInfo2
+
+module PhysicalDeviceSubgroupSizeControlFeaturesEXT = PhysicalDeviceSubgroupSizeControlFeatures
+
+module PhysicalDeviceSubgroupSizeControlPropertiesEXT = PhysicalDeviceSubgroupSizeControlProperties
+
+module PhysicalDeviceSwapchainMaintenance1FeaturesEXT = PhysicalDeviceSwapchainMaintenance1FeaturesKHR
+
+module PhysicalDeviceSynchronization2FeaturesKHR = PhysicalDeviceSynchronization2Features
+
+module PhysicalDeviceTexelBufferAlignmentPropertiesEXT = PhysicalDeviceTexelBufferAlignmentProperties
+
+module PhysicalDeviceTextureCompressionASTCHDRFeaturesEXT = PhysicalDeviceTextureCompressionASTCHDRFeatures
+
+module PhysicalDeviceTimelineSemaphoreFeaturesKHR = PhysicalDeviceTimelineSemaphoreFeatures
+
+module PhysicalDeviceTimelineSemaphorePropertiesKHR = PhysicalDeviceTimelineSemaphoreProperties
+
+module PhysicalDeviceToolPropertiesEXT = PhysicalDeviceToolProperties
+
+module PhysicalDeviceUniformBufferStandardLayoutFeaturesKHR = PhysicalDeviceUniformBufferStandardLayoutFeatures
+
+module PhysicalDeviceVariablePointerFeatures = PhysicalDeviceVariablePointersFeatures
+
+module PhysicalDeviceVariablePointerFeaturesKHR = PhysicalDeviceVariablePointersFeatures
+
+module PhysicalDeviceVariablePointersFeaturesKHR = PhysicalDeviceVariablePointersFeatures
+
+module PhysicalDeviceVertexAttributeDivisorFeaturesEXT = PhysicalDeviceVertexAttributeDivisorFeatures
+
+module PhysicalDeviceVertexAttributeDivisorFeaturesKHR = PhysicalDeviceVertexAttributeDivisorFeatures
+
+module PhysicalDeviceVertexAttributeDivisorPropertiesKHR = PhysicalDeviceVertexAttributeDivisorProperties
+
+module PhysicalDeviceVulkanMemoryModelFeaturesKHR = PhysicalDeviceVulkanMemoryModelFeatures
+
+module PhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR = PhysicalDeviceZeroInitializeWorkgroupMemoryFeatures
+
+module PipelineCreateFlags2CreateInfoKHR = PipelineCreateFlags2CreateInfo
+
+module PipelineCreationFeedbackEXT = PipelineCreationFeedback
+
+module PipelineCreationFeedbackCreateInfoEXT = PipelineCreationFeedbackCreateInfo
+
+module PipelineInfoEXT = PipelineInfoKHR
+
+module PipelineRasterizationLineStateCreateInfoEXT = PipelineRasterizationLineStateCreateInfo
+
+module PipelineRasterizationLineStateCreateInfoKHR = PipelineRasterizationLineStateCreateInfo
+
+module PipelineRenderingCreateInfoKHR = PipelineRenderingCreateInfo
+
+module PipelineRobustnessCreateInfoEXT = PipelineRobustnessCreateInfo
+
+module PipelineShaderStageRequiredSubgroupSizeCreateInfoEXT = PipelineShaderStageRequiredSubgroupSizeCreateInfo
+
+module ShaderRequiredSubgroupSizeCreateInfoEXT = PipelineShaderStageRequiredSubgroupSizeCreateInfo
+
+module PipelineTessellationDomainOriginStateCreateInfoKHR = PipelineTessellationDomainOriginStateCreateInfo
+
+module PipelineVertexInputDivisorStateCreateInfoEXT = PipelineVertexInputDivisorStateCreateInfo
+
+module PipelineVertexInputDivisorStateCreateInfoKHR = PipelineVertexInputDivisorStateCreateInfo
+
+module PrivateDataSlotCreateInfoEXT = PrivateDataSlotCreateInfo
+
+module PushConstantsInfoKHR = PushConstantsInfo
+
+module PushDescriptorSetInfoKHR = PushDescriptorSetInfo
+
+module PushDescriptorSetWithTemplateInfoKHR = PushDescriptorSetWithTemplateInfo
+
+module QueryPoolCreateInfoINTEL = QueryPoolPerformanceQueryCreateInfoINTEL
+
+module QueueFamilyGlobalPriorityPropertiesEXT = QueueFamilyGlobalPriorityProperties
+
+module QueueFamilyGlobalPriorityPropertiesKHR = QueueFamilyGlobalPriorityProperties
+
+module QueueFamilyProperties2KHR = QueueFamilyProperties2
+
+module ReleaseSwapchainImagesInfoEXT = ReleaseSwapchainImagesInfoKHR

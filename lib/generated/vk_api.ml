@@ -1672,25 +1672,6 @@ let get_memory_remote_address_nv arg_device arg_memory_get_remote_address_info =
   check result;
   !@ output
 
-let get_memory_sci_buf_nv arg_device arg_get_sci_buf_info =
-  let output = allocate (ptr void) (Ctypes.null) in
-  let result = Vk_fn.get_memory_sci_buf_nv (arg_device) (addr arg_get_sci_buf_info) (output) in
-  ignore (Sys.opaque_identity (arg_device, arg_get_sci_buf_info));
-  check result;
-  !@ output
-
-let get_physical_device_external_memory_sci_buf_properties_nv arg_physical_device arg_handle_type arg_handle arg_memory_sci_buf_properties =
-  let result = Vk_fn.get_physical_device_external_memory_sci_buf_properties_nv (arg_physical_device) (arg_handle_type) (arg_handle) (addr arg_memory_sci_buf_properties) in
-  ignore (Sys.opaque_identity (arg_physical_device, arg_handle_type, arg_handle, arg_memory_sci_buf_properties));
-  check result;
-  ()
-
-let get_physical_device_sci_buf_attributes_nv arg_physical_device arg_p_attributes =
-  let result = Vk_fn.get_physical_device_sci_buf_attributes_nv (arg_physical_device) (arg_p_attributes) in
-  ignore (Sys.opaque_identity (arg_physical_device, arg_p_attributes));
-  check result;
-  ()
-
 let get_physical_device_external_semaphore_properties arg_physical_device arg_external_semaphore_info arg_external_semaphore_properties =
   Vk_fn.get_physical_device_external_semaphore_properties (arg_physical_device) (addr arg_external_semaphore_info) (addr arg_external_semaphore_properties);
   ignore (Sys.opaque_identity (arg_physical_device, arg_external_semaphore_info, arg_external_semaphore_properties));
@@ -1764,60 +1745,6 @@ let import_fence_fd_khr arg_device arg_import_fence_fd_info =
   let result = Vk_fn.import_fence_fd_khr (arg_device) (addr arg_import_fence_fd_info) in
   ignore (Sys.opaque_identity (arg_device, arg_import_fence_fd_info));
   check result;
-  ()
-
-let get_fence_sci_sync_fence_nv arg_device arg_get_sci_sync_handle_info arg_handle =
-  let result = Vk_fn.get_fence_sci_sync_fence_nv (arg_device) (addr arg_get_sci_sync_handle_info) (arg_handle) in
-  ignore (Sys.opaque_identity (arg_device, arg_get_sci_sync_handle_info, arg_handle));
-  check result;
-  ()
-
-let get_fence_sci_sync_obj_nv arg_device arg_get_sci_sync_handle_info arg_handle =
-  let result = Vk_fn.get_fence_sci_sync_obj_nv (arg_device) (addr arg_get_sci_sync_handle_info) (arg_handle) in
-  ignore (Sys.opaque_identity (arg_device, arg_get_sci_sync_handle_info, arg_handle));
-  check result;
-  ()
-
-let import_fence_sci_sync_fence_nv arg_device arg_import_fence_sci_sync_info =
-  let result = Vk_fn.import_fence_sci_sync_fence_nv (arg_device) (addr arg_import_fence_sci_sync_info) in
-  ignore (Sys.opaque_identity (arg_device, arg_import_fence_sci_sync_info));
-  check result;
-  ()
-
-let import_fence_sci_sync_obj_nv arg_device arg_import_fence_sci_sync_info =
-  let result = Vk_fn.import_fence_sci_sync_obj_nv (arg_device) (addr arg_import_fence_sci_sync_info) in
-  ignore (Sys.opaque_identity (arg_device, arg_import_fence_sci_sync_info));
-  check result;
-  ()
-
-let get_semaphore_sci_sync_obj_nv arg_device arg_get_sci_sync_info arg_handle =
-  let result = Vk_fn.get_semaphore_sci_sync_obj_nv (arg_device) (addr arg_get_sci_sync_info) (arg_handle) in
-  ignore (Sys.opaque_identity (arg_device, arg_get_sci_sync_info, arg_handle));
-  check result;
-  ()
-
-let import_semaphore_sci_sync_obj_nv arg_device arg_import_semaphore_sci_sync_info =
-  let result = Vk_fn.import_semaphore_sci_sync_obj_nv (arg_device) (addr arg_import_semaphore_sci_sync_info) in
-  ignore (Sys.opaque_identity (arg_device, arg_import_semaphore_sci_sync_info));
-  check result;
-  ()
-
-let get_physical_device_sci_sync_attributes_nv arg_physical_device arg_sci_sync_attributes_info arg_p_attributes =
-  let result = Vk_fn.get_physical_device_sci_sync_attributes_nv (arg_physical_device) (addr arg_sci_sync_attributes_info) (arg_p_attributes) in
-  ignore (Sys.opaque_identity (arg_physical_device, arg_sci_sync_attributes_info, arg_p_attributes));
-  check result;
-  ()
-
-let create_semaphore_sci_sync_pool_nv ?allocator:arg_allocator arg_device arg_create_info =
-  let output = allocate (SemaphoreSciSyncPoolNV.t) (SemaphoreSciSyncPoolNV.null) in
-  let result = Vk_fn.create_semaphore_sci_sync_pool_nv (arg_device) (addr arg_create_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
-  ignore (Sys.opaque_identity (arg_device, arg_create_info, arg_allocator));
-  check result;
-  !@ output
-
-let destroy_semaphore_sci_sync_pool_nv arg_device arg_semaphore_pool ?allocator:arg_allocator () =
-  Vk_fn.destroy_semaphore_sci_sync_pool_nv (arg_device) (arg_semaphore_pool) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x));
-  ignore (Sys.opaque_identity (arg_device, arg_semaphore_pool, arg_allocator));
   ()
 
 let release_display_ext arg_physical_device arg_display =
@@ -2271,33 +2198,6 @@ let get_descriptor_set_layout_support arg_device arg_create_info arg_support =
   Vk_fn.get_descriptor_set_layout_support (arg_device) (addr arg_create_info) (addr arg_support);
   ignore (Sys.opaque_identity (arg_device, arg_create_info, arg_support));
   ()
-
-let get_swapchain_gralloc_usage_android arg_device arg_format arg_image_usage arg_gralloc_usage =
-  let result = Vk_fn.get_swapchain_gralloc_usage_android (arg_device) (arg_format) (arg_image_usage) (arg_gralloc_usage) in
-  ignore (Sys.opaque_identity (arg_device, arg_format, arg_image_usage, arg_gralloc_usage));
-  check result;
-  ()
-
-let get_swapchain_gralloc_usage_2_android arg_device arg_format arg_image_usage arg_swapchain_image_usage arg_gralloc_consumer_usage arg_gralloc_producer_usage =
-  let result = Vk_fn.get_swapchain_gralloc_usage_2_android (arg_device) (arg_format) (arg_image_usage) (arg_swapchain_image_usage) (arg_gralloc_consumer_usage) (arg_gralloc_producer_usage) in
-  ignore (Sys.opaque_identity (arg_device, arg_format, arg_image_usage, arg_swapchain_image_usage, arg_gralloc_consumer_usage, arg_gralloc_producer_usage));
-  check result;
-  ()
-
-let acquire_image_android arg_device arg_image arg_native_fence_fd arg_semaphore arg_fence =
-  let result = Vk_fn.acquire_image_android (arg_device) (arg_image) (arg_native_fence_fd) (arg_semaphore) (arg_fence) in
-  ignore (Sys.opaque_identity (arg_device, arg_image, arg_native_fence_fd, arg_semaphore, arg_fence));
-  check result;
-  ()
-
-let queue_signal_release_image_android arg_queue arg_wait_semaphores arg_image =
-  let array_wait_semaphores = CArray.of_list (Semaphore.t) arg_wait_semaphores in
-  let pointer_wait_semaphores = if arg_wait_semaphores = [] then Vk_base.null_ptr (Semaphore.t) else CArray.start array_wait_semaphores in
-  let output = allocate (Ctypes.int) (0) in
-  let result = Vk_fn.queue_signal_release_image_android (arg_queue) (List.length arg_wait_semaphores) (pointer_wait_semaphores) (arg_image) (output) in
-  ignore (Sys.opaque_identity (arg_queue, arg_wait_semaphores, array_wait_semaphores, arg_image));
-  check result;
-  !@ output
 
 let get_shader_info_amd arg_device arg_pipeline arg_shader_stage arg_info_type arg_info_size arg_info =
   let result = Vk_fn.get_shader_info_amd (arg_device) (arg_pipeline) (arg_shader_stage) (arg_info_type) (arg_info_size) (arg_info) in
@@ -3063,24 +2963,6 @@ let cmd_set_line_stipple arg_command_buffer arg_line_stipple_factor arg_line_sti
   ignore (Sys.opaque_identity (arg_command_buffer, arg_line_stipple_factor, arg_line_stipple_pattern));
   ()
 
-let get_fault_data arg_device arg_fault_query_behavior arg_unrecorded_faults =
-  let count = allocate Vk_base.uint32 0 in
-  let rec fetch () =
-    let first = Vk_fn.get_fault_data (arg_device) (arg_fault_query_behavior) (arg_unrecorded_faults) (count) (Vk_base.null_ptr (FaultData.t)) in
-    if Result.to_int first < 0 then check first;
-    let requested = !@ count in
-    if requested = 0 then [] else
-    let storage = CArray.of_list (FaultData.t) (List.init requested (fun _ -> FaultData.make ())) in
-    let result = Vk_fn.get_fault_data (arg_device) (arg_fault_query_behavior) (arg_unrecorded_faults) (count) (CArray.start storage) in
-    if Result.equal result Result.incomplete then fetch () else begin
-      check result;
-      CArray.to_list (CArray.from_ptr (CArray.start storage) (!@ count))
-    end
-  in
-  let enumeration_result = fetch () in
-  ignore (Sys.opaque_identity (arg_device, arg_fault_query_behavior, arg_unrecorded_faults));
-  enumeration_result
-
 let get_physical_device_tool_properties arg_physical_device =
   let count = allocate Vk_base.uint32 0 in
   let rec fetch () =
@@ -3509,29 +3391,6 @@ let cmd_resolve_image_2 arg_command_buffer arg_resolve_image_info =
   ignore (Sys.opaque_identity (arg_command_buffer, arg_resolve_image_info));
   ()
 
-let cmd_refresh_objects_khr arg_command_buffer arg_refresh_objects =
-  Vk_fn.cmd_refresh_objects_khr (arg_command_buffer) (addr arg_refresh_objects);
-  ignore (Sys.opaque_identity (arg_command_buffer, arg_refresh_objects));
-  ()
-
-let get_physical_device_refreshable_object_types_khr arg_physical_device =
-  let count = allocate Vk_base.uint32 0 in
-  let rec fetch () =
-    let first = Vk_fn.get_physical_device_refreshable_object_types_khr (arg_physical_device) (count) (Vk_base.null_ptr (ObjectType.t)) in
-    if Result.to_int first < 0 then check first;
-    let requested = !@ count in
-    if requested = 0 then [] else
-    let storage = CArray.make (ObjectType.t) requested in
-    let result = Vk_fn.get_physical_device_refreshable_object_types_khr (arg_physical_device) (count) (CArray.start storage) in
-    if Result.equal result Result.incomplete then fetch () else begin
-      check result;
-      CArray.to_list (CArray.from_ptr (CArray.start storage) (!@ count))
-    end
-  in
-  let enumeration_result = fetch () in
-  ignore (Sys.opaque_identity (arg_physical_device));
-  enumeration_result
-
 let cmd_set_fragment_shading_rate_khr arg_command_buffer arg_fragment_size arg_combiner_ops =
   Vk_fn.cmd_set_fragment_shading_rate_khr (arg_command_buffer) (addr arg_fragment_size) (arg_combiner_ops);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_fragment_size, arg_combiner_ops));
@@ -3662,11 +3521,6 @@ let transition_image_layout arg_device arg_transitions =
   let result = Vk_fn.transition_image_layout (arg_device) (List.length arg_transitions) (pointer_transitions) in
   ignore (Sys.opaque_identity (arg_device, arg_transitions, array_transitions));
   check result;
-  ()
-
-let get_command_pool_memory_consumption arg_device arg_command_pool arg_command_buffer arg_consumption =
-  Vk_fn.get_command_pool_memory_consumption (arg_device) (arg_command_pool) (arg_command_buffer) (addr arg_consumption);
-  ignore (Sys.opaque_identity (arg_device, arg_command_pool, arg_command_buffer, arg_consumption));
   ()
 
 let get_physical_device_video_capabilities_khr arg_physical_device arg_video_profile arg_capabilities =
@@ -4904,27 +4758,6 @@ let get_memory_native_buffer_ohos arg_device arg_info =
   let output = allocate (ptr (void)) (Vk_base.null_ptr (void)) in
   let result = Vk_fn.get_memory_native_buffer_ohos (arg_device) (addr arg_info) (output) in
   ignore (Sys.opaque_identity (arg_device, arg_info));
-  check result;
-  !@ output
-
-let get_swapchain_gralloc_usage_ohos arg_device arg_format arg_image_usage arg_gralloc_usage =
-  let result = Vk_fn.get_swapchain_gralloc_usage_ohos (arg_device) (arg_format) (arg_image_usage) (arg_gralloc_usage) in
-  ignore (Sys.opaque_identity (arg_device, arg_format, arg_image_usage, arg_gralloc_usage));
-  check result;
-  ()
-
-let acquire_image_ohos arg_device arg_image arg_native_fence_fd arg_semaphore arg_fence =
-  let result = Vk_fn.acquire_image_ohos (arg_device) (arg_image) (arg_native_fence_fd) (arg_semaphore) (arg_fence) in
-  ignore (Sys.opaque_identity (arg_device, arg_image, arg_native_fence_fd, arg_semaphore, arg_fence));
-  check result;
-  ()
-
-let queue_signal_release_image_ohos arg_queue arg_wait_semaphores arg_image =
-  let array_wait_semaphores = CArray.of_list (Semaphore.t) arg_wait_semaphores in
-  let pointer_wait_semaphores = if arg_wait_semaphores = [] then Vk_base.null_ptr (Semaphore.t) else CArray.start array_wait_semaphores in
-  let output = allocate (Vk_base.int32) (0) in
-  let result = Vk_fn.queue_signal_release_image_ohos (arg_queue) (List.length arg_wait_semaphores) (pointer_wait_semaphores) (arg_image) (output) in
-  ignore (Sys.opaque_identity (arg_queue, arg_wait_semaphores, array_wait_semaphores, arg_image));
   check result;
   !@ output
 

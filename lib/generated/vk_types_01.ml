@@ -559,37 +559,6 @@ module ApplicationInfo = struct
     value
 end
 
-module ApplicationParametersEXT = struct
-  type t
-  let t : t structure typ = structure "VkApplicationParametersEXT"
-  let _s_type = field t "sType" (StructureType.t)
-  let s_type = _s_type
-  let _p_next = field t "pNext" (ptr (Ctypes.void))
-  let p_next = _p_next
-  let _vendor_id = field t "vendorID" (Vk_base.uint32)
-  let vendor_id = _vendor_id
-  let _device_id = field t "deviceID" (Vk_base.uint32)
-  let device_id = _device_id
-  let _key = field t "key" (Vk_base.uint32)
-  let key = _key
-  let _value = field t "value" (Vk_base.uint64)
-  let value = _value
-  let () = seal t
-  let structure_type : StructureType.t option = None
-    let make ?next:arg_next ?vendor_id:(arg_vendor_id=0) ?device_id:(arg_device_id=0) ?key:(arg_key=0) ?value:(arg_value=0) () =
-    let value, keep = Vk_base.make_kept t in
-    ignore keep;
-    setf value _s_type (StructureType.of_int 0);
-    (match arg_next with
-     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
-     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    setf value _vendor_id arg_vendor_id;
-    setf value _device_id arg_device_id;
-    setf value _key arg_key;
-    setf value _value arg_value;
-    value
-end
-
 module AttachmentDescription = struct
   type t
   let t : t structure typ = structure "VkAttachmentDescription"
@@ -2358,56 +2327,6 @@ module CommandPoolCreateInfo = struct
     value
 end
 
-module CommandPoolMemoryConsumption = struct
-  type t
-  let t : t structure typ = structure "VkCommandPoolMemoryConsumption"
-  let _s_type = field t "sType" (StructureType.t)
-  let s_type = _s_type
-  let _p_next = field t "pNext" (ptr (Ctypes.void))
-  let p_next = _p_next
-  let _command_pool_allocated = field t "commandPoolAllocated" (Vk_base.device_size)
-  let command_pool_allocated = _command_pool_allocated
-  let _command_pool_reserved_size = field t "commandPoolReservedSize" (Vk_base.device_size)
-  let command_pool_reserved_size = _command_pool_reserved_size
-  let _command_buffer_allocated = field t "commandBufferAllocated" (Vk_base.device_size)
-  let command_buffer_allocated = _command_buffer_allocated
-  let () = seal t
-  let structure_type : StructureType.t option = None
-    let make ?next:arg_next () =
-    let value, keep = Vk_base.make_kept t in
-    ignore keep;
-    setf value _s_type (StructureType.of_int 0);
-    (match arg_next with
-     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
-     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    value
-end
-
-module CommandPoolMemoryReservationCreateInfo = struct
-  type t
-  let t : t structure typ = structure "VkCommandPoolMemoryReservationCreateInfo"
-  let _s_type = field t "sType" (StructureType.t)
-  let s_type = _s_type
-  let _p_next = field t "pNext" (ptr (Ctypes.void))
-  let p_next = _p_next
-  let _command_pool_reserved_size = field t "commandPoolReservedSize" (Vk_base.device_size)
-  let command_pool_reserved_size = _command_pool_reserved_size
-  let _command_pool_max_command_buffers = field t "commandPoolMaxCommandBuffers" (Vk_base.uint32)
-  let command_pool_max_command_buffers = _command_pool_max_command_buffers
-  let () = seal t
-  let structure_type : StructureType.t option = None
-    let make ?next:arg_next ?command_pool_reserved_size:(arg_command_pool_reserved_size=0) ?command_pool_max_command_buffers:(arg_command_pool_max_command_buffers=0) () =
-    let value, keep = Vk_base.make_kept t in
-    ignore keep;
-    setf value _s_type (StructureType.of_int 0);
-    (match arg_next with
-     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
-     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    setf value _command_pool_reserved_size arg_command_pool_reserved_size;
-    setf value _command_pool_max_command_buffers arg_command_pool_max_command_buffers;
-    value
-end
-
 module ComponentMapping = struct
   type t
   let t : t structure typ = structure "VkComponentMapping"
@@ -2966,11 +2885,11 @@ module CudaFunctionCreateInfoNV = struct
   let _p_name = field t "pName" (ptr (Ctypes.char))
   let p_name = _p_name
   let () = seal t
-  let structure_type : StructureType.t option = None
+  let structure_type : StructureType.t option = Some StructureType.cuda_function_create_info_nv
     let make ?next:arg_next ?module_:(arg_module_=CudaModuleNV.null) ?name:arg_name () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
-    setf value _s_type (StructureType.of_int 0);
+    setf value _s_type StructureType.cuda_function_create_info_nv;
     (match arg_next with
      | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
      | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
@@ -3014,11 +2933,11 @@ module CudaLaunchInfoNV = struct
   let _p_extras = field t "pExtras" (ptr (ptr (Ctypes.void)))
   let p_extras = _p_extras
   let () = seal t
-  let structure_type : StructureType.t option = None
+  let structure_type : StructureType.t option = Some StructureType.cuda_launch_info_nv
     let make ?next:arg_next ?function_:(arg_function_=CudaFunctionNV.null) ?grid_dim_x:(arg_grid_dim_x=0) ?grid_dim_y:(arg_grid_dim_y=0) ?grid_dim_z:(arg_grid_dim_z=0) ?block_dim_x:(arg_block_dim_x=0) ?block_dim_y:(arg_block_dim_y=0) ?block_dim_z:(arg_block_dim_z=0) ?shared_mem_bytes:(arg_shared_mem_bytes=0) ?param_count:(arg_param_count=0) ?params:arg_params ?extra_count:(arg_extra_count=0) ?extras:arg_extras () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
-    setf value _s_type (StructureType.of_int 0);
+    setf value _s_type StructureType.cuda_launch_info_nv;
     (match arg_next with
      | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
      | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
@@ -3049,11 +2968,11 @@ module CudaModuleCreateInfoNV = struct
   let _p_data = field t "pData" (ptr (Ctypes.void))
   let p_data = _p_data
   let () = seal t
-  let structure_type : StructureType.t option = None
+  let structure_type : StructureType.t option = Some StructureType.cuda_module_create_info_nv
     let make ?next:arg_next ?data:(arg_data="") () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
-    setf value _s_type (StructureType.of_int 0);
+    setf value _s_type StructureType.cuda_module_create_info_nv;
     (match arg_next with
      | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
      | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
@@ -3167,5 +3086,76 @@ module DataGraphOpticalFlowImageFormatInfoARM = struct
      | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
      | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
     setf value _usage arg_usage;
+    value
+end
+
+module DataGraphOpticalFlowImageFormatPropertiesARM = struct
+  type t
+  let t : t structure typ = structure "VkDataGraphOpticalFlowImageFormatPropertiesARM"
+  let _s_type = field t "sType" (StructureType.t)
+  let s_type = _s_type
+  let _p_next = field t "pNext" (ptr (Ctypes.void))
+  let p_next = _p_next
+  let _format = field t "format" (Format.t)
+  let format = _format
+  let () = seal t
+  let structure_type : StructureType.t option = Some StructureType.data_graph_optical_flow_image_format_properties_arm
+    let make ?next:arg_next () =
+    let value, keep = Vk_base.make_kept t in
+    ignore keep;
+    setf value _s_type StructureType.data_graph_optical_flow_image_format_properties_arm;
+    (match arg_next with
+     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
+     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
+    value
+end
+
+module DataGraphPipelineCompilerControlCreateInfoARM = struct
+  type t
+  let t : t structure typ = structure "VkDataGraphPipelineCompilerControlCreateInfoARM"
+  let _s_type = field t "sType" (StructureType.t)
+  let s_type = _s_type
+  let _p_next = field t "pNext" (ptr (Ctypes.void))
+  let p_next = _p_next
+  let _p_vendor_options = field t "pVendorOptions" (ptr (Ctypes.char))
+  let p_vendor_options = _p_vendor_options
+  let () = seal t
+  let structure_type : StructureType.t option = Some StructureType.data_graph_pipeline_compiler_control_create_info_arm
+    let make ?next:arg_next ?vendor_options:arg_vendor_options () =
+    let value, keep = Vk_base.make_kept t in
+    ignore keep;
+    setf value _s_type StructureType.data_graph_pipeline_compiler_control_create_info_arm;
+    (match arg_next with
+     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
+     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
+    (match arg_vendor_options with
+     | None -> setf value _p_vendor_options (Vk_base.null_ptr (Ctypes.char))
+     | Some text -> let text = CArray.of_string text in
+         setf value _p_vendor_options (CArray.start text); Vk_base.retain keep text);
+    value
+end
+
+module DataGraphPipelineConstantARM = struct
+  type t
+  let t : t structure typ = structure "VkDataGraphPipelineConstantARM"
+  let _s_type = field t "sType" (StructureType.t)
+  let s_type = _s_type
+  let _p_next = field t "pNext" (ptr (Ctypes.void))
+  let p_next = _p_next
+  let _id = field t "id" (Vk_base.uint32)
+  let id = _id
+  let _p_constant_data = field t "pConstantData" (ptr (Ctypes.void))
+  let p_constant_data = _p_constant_data
+  let () = seal t
+  let structure_type : StructureType.t option = Some StructureType.data_graph_pipeline_constant_arm
+    let make ?next:arg_next ?id:(arg_id=0) ?constant_data:arg_constant_data () =
+    let value, keep = Vk_base.make_kept t in
+    ignore keep;
+    setf value _s_type StructureType.data_graph_pipeline_constant_arm;
+    (match arg_next with
+     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
+     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
+    setf value _id arg_id;
+    setf value _p_constant_data (match arg_constant_data with None -> Vk_base.null_ptr (Ctypes.void) | Some p -> p);
     value
 end

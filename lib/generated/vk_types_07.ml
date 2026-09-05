@@ -11,603 +11,6 @@ open Vk_types_04
 open Vk_types_05
 open Vk_types_06
 
-module PhysicalDeviceSamplerFilterMinmaxProperties = struct
-  type t
-  let t : t structure typ = structure "VkPhysicalDeviceSamplerFilterMinmaxProperties"
-  let _s_type = field t "sType" (StructureType.t)
-  let s_type = _s_type
-  let _p_next = field t "pNext" (ptr (Ctypes.void))
-  let p_next = _p_next
-  let _filter_minmax_single_component_formats = field t "filterMinmaxSingleComponentFormats" (Vk_base.bool32)
-  let filter_minmax_single_component_formats = _filter_minmax_single_component_formats
-  let _filter_minmax_image_component_mapping = field t "filterMinmaxImageComponentMapping" (Vk_base.bool32)
-  let filter_minmax_image_component_mapping = _filter_minmax_image_component_mapping
-  let () = seal t
-  let structure_type : StructureType.t option = Some StructureType.physical_device_sampler_filter_minmax_properties
-    let make ?next:arg_next () =
-    let value, keep = Vk_base.make_kept t in
-    ignore keep;
-    setf value _s_type StructureType.physical_device_sampler_filter_minmax_properties;
-    (match arg_next with
-     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
-     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    value
-end
-
-module PhysicalDeviceSamplerYcbcrConversionFeatures = struct
-  type t
-  let t : t structure typ = structure "VkPhysicalDeviceSamplerYcbcrConversionFeatures"
-  let _s_type = field t "sType" (StructureType.t)
-  let s_type = _s_type
-  let _p_next = field t "pNext" (ptr (Ctypes.void))
-  let p_next = _p_next
-  let _sampler_ycbcr_conversion = field t "samplerYcbcrConversion" (Vk_base.bool32)
-  let sampler_ycbcr_conversion = _sampler_ycbcr_conversion
-  let () = seal t
-  let structure_type : StructureType.t option = Some StructureType.physical_device_sampler_ycbcr_conversion_features
-    let make ?next:arg_next ?sampler_ycbcr_conversion:(arg_sampler_ycbcr_conversion=false) () =
-    let value, keep = Vk_base.make_kept t in
-    ignore keep;
-    setf value _s_type StructureType.physical_device_sampler_ycbcr_conversion_features;
-    (match arg_next with
-     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
-     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    setf value _sampler_ycbcr_conversion arg_sampler_ycbcr_conversion;
-    value
-end
-
-module PhysicalDeviceScalarBlockLayoutFeatures = struct
-  type t
-  let t : t structure typ = structure "VkPhysicalDeviceScalarBlockLayoutFeatures"
-  let _s_type = field t "sType" (StructureType.t)
-  let s_type = _s_type
-  let _p_next = field t "pNext" (ptr (Ctypes.void))
-  let p_next = _p_next
-  let _scalar_block_layout = field t "scalarBlockLayout" (Vk_base.bool32)
-  let scalar_block_layout = _scalar_block_layout
-  let () = seal t
-  let structure_type : StructureType.t option = Some StructureType.physical_device_scalar_block_layout_features
-    let make ?next:arg_next ?scalar_block_layout:(arg_scalar_block_layout=false) () =
-    let value, keep = Vk_base.make_kept t in
-    ignore keep;
-    setf value _s_type StructureType.physical_device_scalar_block_layout_features;
-    (match arg_next with
-     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
-     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    setf value _scalar_block_layout arg_scalar_block_layout;
-    value
-end
-
-module PhysicalDeviceSchedulingControlsDispatchParametersPropertiesARM = struct
-  type t
-  let t : t structure typ = structure "VkPhysicalDeviceSchedulingControlsDispatchParametersPropertiesARM"
-  let _s_type = field t "sType" (StructureType.t)
-  let s_type = _s_type
-  let _p_next = field t "pNext" (ptr (Ctypes.void))
-  let p_next = _p_next
-  let _scheduling_controls_max_warps_count = field t "schedulingControlsMaxWarpsCount" (Vk_base.uint32)
-  let scheduling_controls_max_warps_count = _scheduling_controls_max_warps_count
-  let _scheduling_controls_max_queued_batches_count = field t "schedulingControlsMaxQueuedBatchesCount" (Vk_base.uint32)
-  let scheduling_controls_max_queued_batches_count = _scheduling_controls_max_queued_batches_count
-  let _scheduling_controls_max_work_group_batch_size = field t "schedulingControlsMaxWorkGroupBatchSize" (Vk_base.uint32)
-  let scheduling_controls_max_work_group_batch_size = _scheduling_controls_max_work_group_batch_size
-  let () = seal t
-  let structure_type : StructureType.t option = Some StructureType.physical_device_scheduling_controls_dispatch_parameters_properties_arm
-    let make ?next:arg_next () =
-    let value, keep = Vk_base.make_kept t in
-    ignore keep;
-    setf value _s_type StructureType.physical_device_scheduling_controls_dispatch_parameters_properties_arm;
-    (match arg_next with
-     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
-     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    value
-end
-
-module PhysicalDeviceSchedulingControlsFeaturesARM = struct
-  type t
-  let t : t structure typ = structure "VkPhysicalDeviceSchedulingControlsFeaturesARM"
-  let _s_type = field t "sType" (StructureType.t)
-  let s_type = _s_type
-  let _p_next = field t "pNext" (ptr (Ctypes.void))
-  let p_next = _p_next
-  let _scheduling_controls = field t "schedulingControls" (Vk_base.bool32)
-  let scheduling_controls = _scheduling_controls
-  let () = seal t
-  let structure_type : StructureType.t option = Some StructureType.physical_device_scheduling_controls_features_arm
-    let make ?next:arg_next ?scheduling_controls:(arg_scheduling_controls=false) () =
-    let value, keep = Vk_base.make_kept t in
-    ignore keep;
-    setf value _s_type StructureType.physical_device_scheduling_controls_features_arm;
-    (match arg_next with
-     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
-     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    setf value _scheduling_controls arg_scheduling_controls;
-    value
-end
-
-module PhysicalDeviceSchedulingControlsPropertiesARM = struct
-  type t
-  let t : t structure typ = structure "VkPhysicalDeviceSchedulingControlsPropertiesARM"
-  let _s_type = field t "sType" (StructureType.t)
-  let s_type = _s_type
-  let _p_next = field t "pNext" (ptr (Ctypes.void))
-  let p_next = _p_next
-  let _scheduling_controls_flags = field t "schedulingControlsFlags" (PhysicalDeviceSchedulingControlsFlagsARM.t)
-  let scheduling_controls_flags = _scheduling_controls_flags
-  let () = seal t
-  let structure_type : StructureType.t option = Some StructureType.physical_device_scheduling_controls_properties_arm
-    let make ?next:arg_next () =
-    let value, keep = Vk_base.make_kept t in
-    ignore keep;
-    setf value _s_type StructureType.physical_device_scheduling_controls_properties_arm;
-    (match arg_next with
-     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
-     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    value
-end
-
-module PhysicalDeviceSeparateDepthStencilLayoutsFeatures = struct
-  type t
-  let t : t structure typ = structure "VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures"
-  let _s_type = field t "sType" (StructureType.t)
-  let s_type = _s_type
-  let _p_next = field t "pNext" (ptr (Ctypes.void))
-  let p_next = _p_next
-  let _separate_depth_stencil_layouts = field t "separateDepthStencilLayouts" (Vk_base.bool32)
-  let separate_depth_stencil_layouts = _separate_depth_stencil_layouts
-  let () = seal t
-  let structure_type : StructureType.t option = Some StructureType.physical_device_separate_depth_stencil_layouts_features
-    let make ?next:arg_next ?separate_depth_stencil_layouts:(arg_separate_depth_stencil_layouts=false) () =
-    let value, keep = Vk_base.make_kept t in
-    ignore keep;
-    setf value _s_type StructureType.physical_device_separate_depth_stencil_layouts_features;
-    (match arg_next with
-     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
-     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    setf value _separate_depth_stencil_layouts arg_separate_depth_stencil_layouts;
-    value
-end
-
-module PhysicalDeviceShader64BitIndexingFeaturesEXT = struct
-  type t
-  let t : t structure typ = structure "VkPhysicalDeviceShader64BitIndexingFeaturesEXT"
-  let _s_type = field t "sType" (StructureType.t)
-  let s_type = _s_type
-  let _p_next = field t "pNext" (ptr (Ctypes.void))
-  let p_next = _p_next
-  let _shader_64_bit_indexing = field t "shader64BitIndexing" (Vk_base.bool32)
-  let shader_64_bit_indexing = _shader_64_bit_indexing
-  let () = seal t
-  let structure_type : StructureType.t option = Some StructureType.physical_device_shader_64_indexing_features_ext
-    let make ?next:arg_next ?shader_64_bit_indexing:(arg_shader_64_bit_indexing=false) () =
-    let value, keep = Vk_base.make_kept t in
-    ignore keep;
-    setf value _s_type StructureType.physical_device_shader_64_indexing_features_ext;
-    (match arg_next with
-     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
-     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    setf value _shader_64_bit_indexing arg_shader_64_bit_indexing;
-    value
-end
-
-module PhysicalDeviceShaderAbortFeaturesKHR = struct
-  type t
-  let t : t structure typ = structure "VkPhysicalDeviceShaderAbortFeaturesKHR"
-  let _s_type = field t "sType" (StructureType.t)
-  let s_type = _s_type
-  let _p_next = field t "pNext" (ptr (Ctypes.void))
-  let p_next = _p_next
-  let _shader_abort = field t "shaderAbort" (Vk_base.bool32)
-  let shader_abort = _shader_abort
-  let () = seal t
-  let structure_type : StructureType.t option = Some StructureType.physical_device_shader_abort_features_khr
-    let make ?next:arg_next ?shader_abort:(arg_shader_abort=false) () =
-    let value, keep = Vk_base.make_kept t in
-    ignore keep;
-    setf value _s_type StructureType.physical_device_shader_abort_features_khr;
-    (match arg_next with
-     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
-     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    setf value _shader_abort arg_shader_abort;
-    value
-end
-
-module PhysicalDeviceShaderAbortPropertiesKHR = struct
-  type t
-  let t : t structure typ = structure "VkPhysicalDeviceShaderAbortPropertiesKHR"
-  let _s_type = field t "sType" (StructureType.t)
-  let s_type = _s_type
-  let _p_next = field t "pNext" (ptr (Ctypes.void))
-  let p_next = _p_next
-  let _max_shader_abort_message_size = field t "maxShaderAbortMessageSize" (Vk_base.uint64)
-  let max_shader_abort_message_size = _max_shader_abort_message_size
-  let () = seal t
-  let structure_type : StructureType.t option = Some StructureType.physical_device_shader_abort_properties_khr
-    let make ?next:arg_next ?max_shader_abort_message_size:(arg_max_shader_abort_message_size=0) () =
-    let value, keep = Vk_base.make_kept t in
-    ignore keep;
-    setf value _s_type StructureType.physical_device_shader_abort_properties_khr;
-    (match arg_next with
-     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
-     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    setf value _max_shader_abort_message_size arg_max_shader_abort_message_size;
-    value
-end
-
-module PhysicalDeviceShaderAtomicFloat16VectorFeaturesNV = struct
-  type t
-  let t : t structure typ = structure "VkPhysicalDeviceShaderAtomicFloat16VectorFeaturesNV"
-  let _s_type = field t "sType" (StructureType.t)
-  let s_type = _s_type
-  let _p_next = field t "pNext" (ptr (Ctypes.void))
-  let p_next = _p_next
-  let _shader_float_16_vector_atomics = field t "shaderFloat16VectorAtomics" (Vk_base.bool32)
-  let shader_float_16_vector_atomics = _shader_float_16_vector_atomics
-  let () = seal t
-  let structure_type : StructureType.t option = Some StructureType.physical_device_shader_atomic_float16_vector_features_nv
-    let make ?next:arg_next ?shader_float_16_vector_atomics:(arg_shader_float_16_vector_atomics=false) () =
-    let value, keep = Vk_base.make_kept t in
-    ignore keep;
-    setf value _s_type StructureType.physical_device_shader_atomic_float16_vector_features_nv;
-    (match arg_next with
-     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
-     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    setf value _shader_float_16_vector_atomics arg_shader_float_16_vector_atomics;
-    value
-end
-
-module PhysicalDeviceShaderAtomicFloat2FeaturesEXT = struct
-  type t
-  let t : t structure typ = structure "VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT"
-  let _s_type = field t "sType" (StructureType.t)
-  let s_type = _s_type
-  let _p_next = field t "pNext" (ptr (Ctypes.void))
-  let p_next = _p_next
-  let _shader_buffer_float_16_atomics = field t "shaderBufferFloat16Atomics" (Vk_base.bool32)
-  let shader_buffer_float_16_atomics = _shader_buffer_float_16_atomics
-  let _shader_buffer_float_16_atomic_add = field t "shaderBufferFloat16AtomicAdd" (Vk_base.bool32)
-  let shader_buffer_float_16_atomic_add = _shader_buffer_float_16_atomic_add
-  let _shader_buffer_float_16_atomic_min_max = field t "shaderBufferFloat16AtomicMinMax" (Vk_base.bool32)
-  let shader_buffer_float_16_atomic_min_max = _shader_buffer_float_16_atomic_min_max
-  let _shader_buffer_float_32_atomic_min_max = field t "shaderBufferFloat32AtomicMinMax" (Vk_base.bool32)
-  let shader_buffer_float_32_atomic_min_max = _shader_buffer_float_32_atomic_min_max
-  let _shader_buffer_float_64_atomic_min_max = field t "shaderBufferFloat64AtomicMinMax" (Vk_base.bool32)
-  let shader_buffer_float_64_atomic_min_max = _shader_buffer_float_64_atomic_min_max
-  let _shader_shared_float_16_atomics = field t "shaderSharedFloat16Atomics" (Vk_base.bool32)
-  let shader_shared_float_16_atomics = _shader_shared_float_16_atomics
-  let _shader_shared_float_16_atomic_add = field t "shaderSharedFloat16AtomicAdd" (Vk_base.bool32)
-  let shader_shared_float_16_atomic_add = _shader_shared_float_16_atomic_add
-  let _shader_shared_float_16_atomic_min_max = field t "shaderSharedFloat16AtomicMinMax" (Vk_base.bool32)
-  let shader_shared_float_16_atomic_min_max = _shader_shared_float_16_atomic_min_max
-  let _shader_shared_float_32_atomic_min_max = field t "shaderSharedFloat32AtomicMinMax" (Vk_base.bool32)
-  let shader_shared_float_32_atomic_min_max = _shader_shared_float_32_atomic_min_max
-  let _shader_shared_float_64_atomic_min_max = field t "shaderSharedFloat64AtomicMinMax" (Vk_base.bool32)
-  let shader_shared_float_64_atomic_min_max = _shader_shared_float_64_atomic_min_max
-  let _shader_image_float_32_atomic_min_max = field t "shaderImageFloat32AtomicMinMax" (Vk_base.bool32)
-  let shader_image_float_32_atomic_min_max = _shader_image_float_32_atomic_min_max
-  let _sparse_image_float_32_atomic_min_max = field t "sparseImageFloat32AtomicMinMax" (Vk_base.bool32)
-  let sparse_image_float_32_atomic_min_max = _sparse_image_float_32_atomic_min_max
-  let () = seal t
-  let structure_type : StructureType.t option = Some StructureType.physical_device_shader_atomic_float_2_features_ext
-    let make ?next:arg_next ?shader_buffer_float_16_atomics:(arg_shader_buffer_float_16_atomics=false) ?shader_buffer_float_16_atomic_add:(arg_shader_buffer_float_16_atomic_add=false) ?shader_buffer_float_16_atomic_min_max:(arg_shader_buffer_float_16_atomic_min_max=false) ?shader_buffer_float_32_atomic_min_max:(arg_shader_buffer_float_32_atomic_min_max=false) ?shader_buffer_float_64_atomic_min_max:(arg_shader_buffer_float_64_atomic_min_max=false) ?shader_shared_float_16_atomics:(arg_shader_shared_float_16_atomics=false) ?shader_shared_float_16_atomic_add:(arg_shader_shared_float_16_atomic_add=false) ?shader_shared_float_16_atomic_min_max:(arg_shader_shared_float_16_atomic_min_max=false) ?shader_shared_float_32_atomic_min_max:(arg_shader_shared_float_32_atomic_min_max=false) ?shader_shared_float_64_atomic_min_max:(arg_shader_shared_float_64_atomic_min_max=false) ?shader_image_float_32_atomic_min_max:(arg_shader_image_float_32_atomic_min_max=false) ?sparse_image_float_32_atomic_min_max:(arg_sparse_image_float_32_atomic_min_max=false) () =
-    let value, keep = Vk_base.make_kept t in
-    ignore keep;
-    setf value _s_type StructureType.physical_device_shader_atomic_float_2_features_ext;
-    (match arg_next with
-     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
-     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    setf value _shader_buffer_float_16_atomics arg_shader_buffer_float_16_atomics;
-    setf value _shader_buffer_float_16_atomic_add arg_shader_buffer_float_16_atomic_add;
-    setf value _shader_buffer_float_16_atomic_min_max arg_shader_buffer_float_16_atomic_min_max;
-    setf value _shader_buffer_float_32_atomic_min_max arg_shader_buffer_float_32_atomic_min_max;
-    setf value _shader_buffer_float_64_atomic_min_max arg_shader_buffer_float_64_atomic_min_max;
-    setf value _shader_shared_float_16_atomics arg_shader_shared_float_16_atomics;
-    setf value _shader_shared_float_16_atomic_add arg_shader_shared_float_16_atomic_add;
-    setf value _shader_shared_float_16_atomic_min_max arg_shader_shared_float_16_atomic_min_max;
-    setf value _shader_shared_float_32_atomic_min_max arg_shader_shared_float_32_atomic_min_max;
-    setf value _shader_shared_float_64_atomic_min_max arg_shader_shared_float_64_atomic_min_max;
-    setf value _shader_image_float_32_atomic_min_max arg_shader_image_float_32_atomic_min_max;
-    setf value _sparse_image_float_32_atomic_min_max arg_sparse_image_float_32_atomic_min_max;
-    value
-end
-
-module PhysicalDeviceShaderAtomicFloatFeaturesEXT = struct
-  type t
-  let t : t structure typ = structure "VkPhysicalDeviceShaderAtomicFloatFeaturesEXT"
-  let _s_type = field t "sType" (StructureType.t)
-  let s_type = _s_type
-  let _p_next = field t "pNext" (ptr (Ctypes.void))
-  let p_next = _p_next
-  let _shader_buffer_float_32_atomics = field t "shaderBufferFloat32Atomics" (Vk_base.bool32)
-  let shader_buffer_float_32_atomics = _shader_buffer_float_32_atomics
-  let _shader_buffer_float_32_atomic_add = field t "shaderBufferFloat32AtomicAdd" (Vk_base.bool32)
-  let shader_buffer_float_32_atomic_add = _shader_buffer_float_32_atomic_add
-  let _shader_buffer_float_64_atomics = field t "shaderBufferFloat64Atomics" (Vk_base.bool32)
-  let shader_buffer_float_64_atomics = _shader_buffer_float_64_atomics
-  let _shader_buffer_float_64_atomic_add = field t "shaderBufferFloat64AtomicAdd" (Vk_base.bool32)
-  let shader_buffer_float_64_atomic_add = _shader_buffer_float_64_atomic_add
-  let _shader_shared_float_32_atomics = field t "shaderSharedFloat32Atomics" (Vk_base.bool32)
-  let shader_shared_float_32_atomics = _shader_shared_float_32_atomics
-  let _shader_shared_float_32_atomic_add = field t "shaderSharedFloat32AtomicAdd" (Vk_base.bool32)
-  let shader_shared_float_32_atomic_add = _shader_shared_float_32_atomic_add
-  let _shader_shared_float_64_atomics = field t "shaderSharedFloat64Atomics" (Vk_base.bool32)
-  let shader_shared_float_64_atomics = _shader_shared_float_64_atomics
-  let _shader_shared_float_64_atomic_add = field t "shaderSharedFloat64AtomicAdd" (Vk_base.bool32)
-  let shader_shared_float_64_atomic_add = _shader_shared_float_64_atomic_add
-  let _shader_image_float_32_atomics = field t "shaderImageFloat32Atomics" (Vk_base.bool32)
-  let shader_image_float_32_atomics = _shader_image_float_32_atomics
-  let _shader_image_float_32_atomic_add = field t "shaderImageFloat32AtomicAdd" (Vk_base.bool32)
-  let shader_image_float_32_atomic_add = _shader_image_float_32_atomic_add
-  let _sparse_image_float_32_atomics = field t "sparseImageFloat32Atomics" (Vk_base.bool32)
-  let sparse_image_float_32_atomics = _sparse_image_float_32_atomics
-  let _sparse_image_float_32_atomic_add = field t "sparseImageFloat32AtomicAdd" (Vk_base.bool32)
-  let sparse_image_float_32_atomic_add = _sparse_image_float_32_atomic_add
-  let () = seal t
-  let structure_type : StructureType.t option = Some StructureType.physical_device_shader_atomic_float_features_ext
-    let make ?next:arg_next ?shader_buffer_float_32_atomics:(arg_shader_buffer_float_32_atomics=false) ?shader_buffer_float_32_atomic_add:(arg_shader_buffer_float_32_atomic_add=false) ?shader_buffer_float_64_atomics:(arg_shader_buffer_float_64_atomics=false) ?shader_buffer_float_64_atomic_add:(arg_shader_buffer_float_64_atomic_add=false) ?shader_shared_float_32_atomics:(arg_shader_shared_float_32_atomics=false) ?shader_shared_float_32_atomic_add:(arg_shader_shared_float_32_atomic_add=false) ?shader_shared_float_64_atomics:(arg_shader_shared_float_64_atomics=false) ?shader_shared_float_64_atomic_add:(arg_shader_shared_float_64_atomic_add=false) ?shader_image_float_32_atomics:(arg_shader_image_float_32_atomics=false) ?shader_image_float_32_atomic_add:(arg_shader_image_float_32_atomic_add=false) ?sparse_image_float_32_atomics:(arg_sparse_image_float_32_atomics=false) ?sparse_image_float_32_atomic_add:(arg_sparse_image_float_32_atomic_add=false) () =
-    let value, keep = Vk_base.make_kept t in
-    ignore keep;
-    setf value _s_type StructureType.physical_device_shader_atomic_float_features_ext;
-    (match arg_next with
-     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
-     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    setf value _shader_buffer_float_32_atomics arg_shader_buffer_float_32_atomics;
-    setf value _shader_buffer_float_32_atomic_add arg_shader_buffer_float_32_atomic_add;
-    setf value _shader_buffer_float_64_atomics arg_shader_buffer_float_64_atomics;
-    setf value _shader_buffer_float_64_atomic_add arg_shader_buffer_float_64_atomic_add;
-    setf value _shader_shared_float_32_atomics arg_shader_shared_float_32_atomics;
-    setf value _shader_shared_float_32_atomic_add arg_shader_shared_float_32_atomic_add;
-    setf value _shader_shared_float_64_atomics arg_shader_shared_float_64_atomics;
-    setf value _shader_shared_float_64_atomic_add arg_shader_shared_float_64_atomic_add;
-    setf value _shader_image_float_32_atomics arg_shader_image_float_32_atomics;
-    setf value _shader_image_float_32_atomic_add arg_shader_image_float_32_atomic_add;
-    setf value _sparse_image_float_32_atomics arg_sparse_image_float_32_atomics;
-    setf value _sparse_image_float_32_atomic_add arg_sparse_image_float_32_atomic_add;
-    value
-end
-
-module PhysicalDeviceShaderAtomicInt64Features = struct
-  type t
-  let t : t structure typ = structure "VkPhysicalDeviceShaderAtomicInt64Features"
-  let _s_type = field t "sType" (StructureType.t)
-  let s_type = _s_type
-  let _p_next = field t "pNext" (ptr (Ctypes.void))
-  let p_next = _p_next
-  let _shader_buffer_int_64_atomics = field t "shaderBufferInt64Atomics" (Vk_base.bool32)
-  let shader_buffer_int_64_atomics = _shader_buffer_int_64_atomics
-  let _shader_shared_int_64_atomics = field t "shaderSharedInt64Atomics" (Vk_base.bool32)
-  let shader_shared_int_64_atomics = _shader_shared_int_64_atomics
-  let () = seal t
-  let structure_type : StructureType.t option = Some StructureType.physical_device_shader_atomic_int64_features
-    let make ?next:arg_next ?shader_buffer_int_64_atomics:(arg_shader_buffer_int_64_atomics=false) ?shader_shared_int_64_atomics:(arg_shader_shared_int_64_atomics=false) () =
-    let value, keep = Vk_base.make_kept t in
-    ignore keep;
-    setf value _s_type StructureType.physical_device_shader_atomic_int64_features;
-    (match arg_next with
-     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
-     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    setf value _shader_buffer_int_64_atomics arg_shader_buffer_int_64_atomics;
-    setf value _shader_shared_int_64_atomics arg_shader_shared_int_64_atomics;
-    value
-end
-
-module PhysicalDeviceShaderBfloat16FeaturesKHR = struct
-  type t
-  let t : t structure typ = structure "VkPhysicalDeviceShaderBfloat16FeaturesKHR"
-  let _s_type = field t "sType" (StructureType.t)
-  let s_type = _s_type
-  let _p_next = field t "pNext" (ptr (Ctypes.void))
-  let p_next = _p_next
-  let _shader_b_float_16_type = field t "shaderBFloat16Type" (Vk_base.bool32)
-  let shader_b_float_16_type = _shader_b_float_16_type
-  let _shader_b_float_16_dot_product = field t "shaderBFloat16DotProduct" (Vk_base.bool32)
-  let shader_b_float_16_dot_product = _shader_b_float_16_dot_product
-  let _shader_b_float_16_cooperative_matrix = field t "shaderBFloat16CooperativeMatrix" (Vk_base.bool32)
-  let shader_b_float_16_cooperative_matrix = _shader_b_float_16_cooperative_matrix
-  let () = seal t
-  let structure_type : StructureType.t option = Some StructureType.physical_device_shader_bfloat16_features_khr
-    let make ?next:arg_next ?shader_b_float_16_type:(arg_shader_b_float_16_type=false) ?shader_b_float_16_dot_product:(arg_shader_b_float_16_dot_product=false) ?shader_b_float_16_cooperative_matrix:(arg_shader_b_float_16_cooperative_matrix=false) () =
-    let value, keep = Vk_base.make_kept t in
-    ignore keep;
-    setf value _s_type StructureType.physical_device_shader_bfloat16_features_khr;
-    (match arg_next with
-     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
-     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    setf value _shader_b_float_16_type arg_shader_b_float_16_type;
-    setf value _shader_b_float_16_dot_product arg_shader_b_float_16_dot_product;
-    setf value _shader_b_float_16_cooperative_matrix arg_shader_b_float_16_cooperative_matrix;
-    value
-end
-
-module PhysicalDeviceShaderClockFeaturesKHR = struct
-  type t
-  let t : t structure typ = structure "VkPhysicalDeviceShaderClockFeaturesKHR"
-  let _s_type = field t "sType" (StructureType.t)
-  let s_type = _s_type
-  let _p_next = field t "pNext" (ptr (Ctypes.void))
-  let p_next = _p_next
-  let _shader_subgroup_clock = field t "shaderSubgroupClock" (Vk_base.bool32)
-  let shader_subgroup_clock = _shader_subgroup_clock
-  let _shader_device_clock = field t "shaderDeviceClock" (Vk_base.bool32)
-  let shader_device_clock = _shader_device_clock
-  let () = seal t
-  let structure_type : StructureType.t option = Some StructureType.physical_device_shader_clock_features_khr
-    let make ?next:arg_next ?shader_subgroup_clock:(arg_shader_subgroup_clock=false) ?shader_device_clock:(arg_shader_device_clock=false) () =
-    let value, keep = Vk_base.make_kept t in
-    ignore keep;
-    setf value _s_type StructureType.physical_device_shader_clock_features_khr;
-    (match arg_next with
-     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
-     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    setf value _shader_subgroup_clock arg_shader_subgroup_clock;
-    setf value _shader_device_clock arg_shader_device_clock;
-    value
-end
-
-module PhysicalDeviceShaderConstantDataFeaturesKHR = struct
-  type t
-  let t : t structure typ = structure "VkPhysicalDeviceShaderConstantDataFeaturesKHR"
-  let _s_type = field t "sType" (StructureType.t)
-  let s_type = _s_type
-  let _p_next = field t "pNext" (ptr (Ctypes.void))
-  let p_next = _p_next
-  let _shader_constant_data = field t "shaderConstantData" (Vk_base.bool32)
-  let shader_constant_data = _shader_constant_data
-  let () = seal t
-  let structure_type : StructureType.t option = Some StructureType.physical_device_shader_constant_data_features_khr
-    let make ?next:arg_next ?shader_constant_data:(arg_shader_constant_data=false) () =
-    let value, keep = Vk_base.make_kept t in
-    ignore keep;
-    setf value _s_type StructureType.physical_device_shader_constant_data_features_khr;
-    (match arg_next with
-     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
-     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    setf value _shader_constant_data arg_shader_constant_data;
-    value
-end
-
-module PhysicalDeviceShaderCoreBuiltinsFeaturesARM = struct
-  type t
-  let t : t structure typ = structure "VkPhysicalDeviceShaderCoreBuiltinsFeaturesARM"
-  let _s_type = field t "sType" (StructureType.t)
-  let s_type = _s_type
-  let _p_next = field t "pNext" (ptr (Ctypes.void))
-  let p_next = _p_next
-  let _shader_core_builtins = field t "shaderCoreBuiltins" (Vk_base.bool32)
-  let shader_core_builtins = _shader_core_builtins
-  let () = seal t
-  let structure_type : StructureType.t option = Some StructureType.physical_device_shader_core_builtins_features_arm
-    let make ?next:arg_next ?shader_core_builtins:(arg_shader_core_builtins=false) () =
-    let value, keep = Vk_base.make_kept t in
-    ignore keep;
-    setf value _s_type StructureType.physical_device_shader_core_builtins_features_arm;
-    (match arg_next with
-     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
-     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    setf value _shader_core_builtins arg_shader_core_builtins;
-    value
-end
-
-module PhysicalDeviceShaderCoreBuiltinsPropertiesARM = struct
-  type t
-  let t : t structure typ = structure "VkPhysicalDeviceShaderCoreBuiltinsPropertiesARM"
-  let _s_type = field t "sType" (StructureType.t)
-  let s_type = _s_type
-  let _p_next = field t "pNext" (ptr (Ctypes.void))
-  let p_next = _p_next
-  let _shader_core_mask = field t "shaderCoreMask" (Vk_base.uint64)
-  let shader_core_mask = _shader_core_mask
-  let _shader_core_count = field t "shaderCoreCount" (Vk_base.uint32)
-  let shader_core_count = _shader_core_count
-  let _shader_warps_per_core = field t "shaderWarpsPerCore" (Vk_base.uint32)
-  let shader_warps_per_core = _shader_warps_per_core
-  let () = seal t
-  let structure_type : StructureType.t option = Some StructureType.physical_device_shader_core_builtins_properties_arm
-    let make ?next:arg_next () =
-    let value, keep = Vk_base.make_kept t in
-    ignore keep;
-    setf value _s_type StructureType.physical_device_shader_core_builtins_properties_arm;
-    (match arg_next with
-     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
-     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    value
-end
-
-module PhysicalDeviceShaderCoreProperties2AMD = struct
-  type t
-  let t : t structure typ = structure "VkPhysicalDeviceShaderCoreProperties2AMD"
-  let _s_type = field t "sType" (StructureType.t)
-  let s_type = _s_type
-  let _p_next = field t "pNext" (ptr (Ctypes.void))
-  let p_next = _p_next
-  let _shader_core_features = field t "shaderCoreFeatures" (ShaderCorePropertiesFlagsAMD.t)
-  let shader_core_features = _shader_core_features
-  let _active_compute_unit_count = field t "activeComputeUnitCount" (Vk_base.uint32)
-  let active_compute_unit_count = _active_compute_unit_count
-  let () = seal t
-  let structure_type : StructureType.t option = Some StructureType.physical_device_shader_core_properties_2_amd
-    let make ?next:arg_next () =
-    let value, keep = Vk_base.make_kept t in
-    ignore keep;
-    setf value _s_type StructureType.physical_device_shader_core_properties_2_amd;
-    (match arg_next with
-     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
-     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    value
-end
-
-module PhysicalDeviceShaderCorePropertiesAMD = struct
-  type t
-  let t : t structure typ = structure "VkPhysicalDeviceShaderCorePropertiesAMD"
-  let _s_type = field t "sType" (StructureType.t)
-  let s_type = _s_type
-  let _p_next = field t "pNext" (ptr (Ctypes.void))
-  let p_next = _p_next
-  let _shader_engine_count = field t "shaderEngineCount" (Vk_base.uint32)
-  let shader_engine_count = _shader_engine_count
-  let _shader_arrays_per_engine_count = field t "shaderArraysPerEngineCount" (Vk_base.uint32)
-  let shader_arrays_per_engine_count = _shader_arrays_per_engine_count
-  let _compute_units_per_shader_array = field t "computeUnitsPerShaderArray" (Vk_base.uint32)
-  let compute_units_per_shader_array = _compute_units_per_shader_array
-  let _simd_per_compute_unit = field t "simdPerComputeUnit" (Vk_base.uint32)
-  let simd_per_compute_unit = _simd_per_compute_unit
-  let _wavefronts_per_simd = field t "wavefrontsPerSimd" (Vk_base.uint32)
-  let wavefronts_per_simd = _wavefronts_per_simd
-  let _wavefront_size = field t "wavefrontSize" (Vk_base.uint32)
-  let wavefront_size = _wavefront_size
-  let _sgprs_per_simd = field t "sgprsPerSimd" (Vk_base.uint32)
-  let sgprs_per_simd = _sgprs_per_simd
-  let _min_sgpr_allocation = field t "minSgprAllocation" (Vk_base.uint32)
-  let min_sgpr_allocation = _min_sgpr_allocation
-  let _max_sgpr_allocation = field t "maxSgprAllocation" (Vk_base.uint32)
-  let max_sgpr_allocation = _max_sgpr_allocation
-  let _sgpr_allocation_granularity = field t "sgprAllocationGranularity" (Vk_base.uint32)
-  let sgpr_allocation_granularity = _sgpr_allocation_granularity
-  let _vgprs_per_simd = field t "vgprsPerSimd" (Vk_base.uint32)
-  let vgprs_per_simd = _vgprs_per_simd
-  let _min_vgpr_allocation = field t "minVgprAllocation" (Vk_base.uint32)
-  let min_vgpr_allocation = _min_vgpr_allocation
-  let _max_vgpr_allocation = field t "maxVgprAllocation" (Vk_base.uint32)
-  let max_vgpr_allocation = _max_vgpr_allocation
-  let _vgpr_allocation_granularity = field t "vgprAllocationGranularity" (Vk_base.uint32)
-  let vgpr_allocation_granularity = _vgpr_allocation_granularity
-  let () = seal t
-  let structure_type : StructureType.t option = Some StructureType.physical_device_shader_core_properties_amd
-    let make ?next:arg_next () =
-    let value, keep = Vk_base.make_kept t in
-    ignore keep;
-    setf value _s_type StructureType.physical_device_shader_core_properties_amd;
-    (match arg_next with
-     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
-     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    value
-end
-
-module PhysicalDeviceShaderCorePropertiesARM = struct
-  type t
-  let t : t structure typ = structure "VkPhysicalDeviceShaderCorePropertiesARM"
-  let _s_type = field t "sType" (StructureType.t)
-  let s_type = _s_type
-  let _p_next = field t "pNext" (ptr (Ctypes.void))
-  let p_next = _p_next
-  let _pixel_rate = field t "pixelRate" (Vk_base.uint32)
-  let pixel_rate = _pixel_rate
-  let _texel_rate = field t "texelRate" (Vk_base.uint32)
-  let texel_rate = _texel_rate
-  let _fma_rate = field t "fmaRate" (Vk_base.uint32)
-  let fma_rate = _fma_rate
-  let () = seal t
-  let structure_type : StructureType.t option = Some StructureType.physical_device_shader_core_properties_arm
-    let make ?next:arg_next () =
-    let value, keep = Vk_base.make_kept t in
-    ignore keep;
-    setf value _s_type StructureType.physical_device_shader_core_properties_arm;
-    (match arg_next with
-     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
-     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    value
-end
-
 module PhysicalDeviceShaderDemoteToHelperInvocationFeatures = struct
   type t
   let t : t structure typ = structure "VkPhysicalDeviceShaderDemoteToHelperInvocationFeatures"
@@ -686,11 +89,11 @@ module PhysicalDeviceShaderEnqueueFeaturesAMDX = struct
   let _shader_mesh_enqueue = field t "shaderMeshEnqueue" (Vk_base.bool32)
   let shader_mesh_enqueue = _shader_mesh_enqueue
   let () = seal t
-  let structure_type : StructureType.t option = None
+  let structure_type : StructureType.t option = Some StructureType.physical_device_shader_enqueue_features_amdx
     let make ?next:arg_next ?shader_enqueue:(arg_shader_enqueue=false) ?shader_mesh_enqueue:(arg_shader_mesh_enqueue=false) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
-    setf value _s_type (StructureType.of_int 0);
+    setf value _s_type StructureType.physical_device_shader_enqueue_features_amdx;
     (match arg_next with
      | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
      | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
@@ -721,11 +124,11 @@ module PhysicalDeviceShaderEnqueuePropertiesAMDX = struct
   let _max_execution_graph_workgroups = field t "maxExecutionGraphWorkgroups" (Vk_base.uint32)
   let max_execution_graph_workgroups = _max_execution_graph_workgroups
   let () = seal t
-  let structure_type : StructureType.t option = None
+  let structure_type : StructureType.t option = Some StructureType.physical_device_shader_enqueue_properties_amdx
     let make ?next:arg_next () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
-    setf value _s_type (StructureType.of_int 0);
+    setf value _s_type StructureType.physical_device_shader_enqueue_properties_amdx;
     (match arg_next with
      | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
      | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
@@ -3447,24 +2850,605 @@ module PhysicalDeviceVulkanMemoryModelFeatures = struct
     value
 end
 
-module PhysicalDeviceVulkanSC10Features = struct
+module PhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR = struct
   type t
-  let t : t structure typ = structure "VkPhysicalDeviceVulkanSC10Features"
+  let t : t structure typ = structure "VkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR"
   let _s_type = field t "sType" (StructureType.t)
   let s_type = _s_type
   let _p_next = field t "pNext" (ptr (Ctypes.void))
   let p_next = _p_next
-  let _shader_atomic_instructions = field t "shaderAtomicInstructions" (Vk_base.bool32)
-  let shader_atomic_instructions = _shader_atomic_instructions
+  let _workgroup_memory_explicit_layout = field t "workgroupMemoryExplicitLayout" (Vk_base.bool32)
+  let workgroup_memory_explicit_layout = _workgroup_memory_explicit_layout
+  let _workgroup_memory_explicit_layout_scalar_block_layout = field t "workgroupMemoryExplicitLayoutScalarBlockLayout" (Vk_base.bool32)
+  let workgroup_memory_explicit_layout_scalar_block_layout = _workgroup_memory_explicit_layout_scalar_block_layout
+  let _workgroup_memory_explicit_layout_8_bit_access = field t "workgroupMemoryExplicitLayout8BitAccess" (Vk_base.bool32)
+  let workgroup_memory_explicit_layout_8_bit_access = _workgroup_memory_explicit_layout_8_bit_access
+  let _workgroup_memory_explicit_layout_16_bit_access = field t "workgroupMemoryExplicitLayout16BitAccess" (Vk_base.bool32)
+  let workgroup_memory_explicit_layout_16_bit_access = _workgroup_memory_explicit_layout_16_bit_access
   let () = seal t
-  let structure_type : StructureType.t option = None
-    let make ?next:arg_next ?shader_atomic_instructions:(arg_shader_atomic_instructions=false) () =
+  let structure_type : StructureType.t option = Some StructureType.physical_device_workgroup_memory_explicit_layout_features_khr
+    let make ?next:arg_next ?workgroup_memory_explicit_layout:(arg_workgroup_memory_explicit_layout=false) ?workgroup_memory_explicit_layout_scalar_block_layout:(arg_workgroup_memory_explicit_layout_scalar_block_layout=false) ?workgroup_memory_explicit_layout_8_bit_access:(arg_workgroup_memory_explicit_layout_8_bit_access=false) ?workgroup_memory_explicit_layout_16_bit_access:(arg_workgroup_memory_explicit_layout_16_bit_access=false) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
-    setf value _s_type (StructureType.of_int 0);
+    setf value _s_type StructureType.physical_device_workgroup_memory_explicit_layout_features_khr;
     (match arg_next with
      | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
      | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    setf value _shader_atomic_instructions arg_shader_atomic_instructions;
+    setf value _workgroup_memory_explicit_layout arg_workgroup_memory_explicit_layout;
+    setf value _workgroup_memory_explicit_layout_scalar_block_layout arg_workgroup_memory_explicit_layout_scalar_block_layout;
+    setf value _workgroup_memory_explicit_layout_8_bit_access arg_workgroup_memory_explicit_layout_8_bit_access;
+    setf value _workgroup_memory_explicit_layout_16_bit_access arg_workgroup_memory_explicit_layout_16_bit_access;
+    value
+end
+
+module PhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT = struct
+  type t
+  let t : t structure typ = structure "VkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT"
+  let _s_type = field t "sType" (StructureType.t)
+  let s_type = _s_type
+  let _p_next = field t "pNext" (ptr (Ctypes.void))
+  let p_next = _p_next
+  let _ycbcr_2_plane_444_formats = field t "ycbcr2plane444Formats" (Vk_base.bool32)
+  let ycbcr_2_plane_444_formats = _ycbcr_2_plane_444_formats
+  let () = seal t
+  let structure_type : StructureType.t option = Some StructureType.physical_device_ycbcr_2_plane_444_formats_features_ext
+    let make ?next:arg_next ?ycbcr_2_plane_444_formats:(arg_ycbcr_2_plane_444_formats=false) () =
+    let value, keep = Vk_base.make_kept t in
+    ignore keep;
+    setf value _s_type StructureType.physical_device_ycbcr_2_plane_444_formats_features_ext;
+    (match arg_next with
+     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
+     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
+    setf value _ycbcr_2_plane_444_formats arg_ycbcr_2_plane_444_formats;
+    value
+end
+
+module PhysicalDeviceYcbcrDegammaFeaturesQCOM = struct
+  type t
+  let t : t structure typ = structure "VkPhysicalDeviceYcbcrDegammaFeaturesQCOM"
+  let _s_type = field t "sType" (StructureType.t)
+  let s_type = _s_type
+  let _p_next = field t "pNext" (ptr (Ctypes.void))
+  let p_next = _p_next
+  let _ycbcr_degamma = field t "ycbcrDegamma" (Vk_base.bool32)
+  let ycbcr_degamma = _ycbcr_degamma
+  let () = seal t
+  let structure_type : StructureType.t option = Some StructureType.physical_device_ycbcr_degamma_features_qcom
+    let make ?next:arg_next ?ycbcr_degamma:(arg_ycbcr_degamma=false) () =
+    let value, keep = Vk_base.make_kept t in
+    ignore keep;
+    setf value _s_type StructureType.physical_device_ycbcr_degamma_features_qcom;
+    (match arg_next with
+     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
+     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
+    setf value _ycbcr_degamma arg_ycbcr_degamma;
+    value
+end
+
+module PhysicalDeviceYcbcrImageArraysFeaturesEXT = struct
+  type t
+  let t : t structure typ = structure "VkPhysicalDeviceYcbcrImageArraysFeaturesEXT"
+  let _s_type = field t "sType" (StructureType.t)
+  let s_type = _s_type
+  let _p_next = field t "pNext" (ptr (Ctypes.void))
+  let p_next = _p_next
+  let _ycbcr_image_arrays = field t "ycbcrImageArrays" (Vk_base.bool32)
+  let ycbcr_image_arrays = _ycbcr_image_arrays
+  let () = seal t
+  let structure_type : StructureType.t option = Some StructureType.physical_device_ycbcr_image_arrays_features_ext
+    let make ?next:arg_next ?ycbcr_image_arrays:(arg_ycbcr_image_arrays=false) () =
+    let value, keep = Vk_base.make_kept t in
+    ignore keep;
+    setf value _s_type StructureType.physical_device_ycbcr_image_arrays_features_ext;
+    (match arg_next with
+     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
+     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
+    setf value _ycbcr_image_arrays arg_ycbcr_image_arrays;
+    value
+end
+
+module PhysicalDeviceZeroInitializeDeviceMemoryFeaturesEXT = struct
+  type t
+  let t : t structure typ = structure "VkPhysicalDeviceZeroInitializeDeviceMemoryFeaturesEXT"
+  let _s_type = field t "sType" (StructureType.t)
+  let s_type = _s_type
+  let _p_next = field t "pNext" (ptr (Ctypes.void))
+  let p_next = _p_next
+  let _zero_initialize_device_memory = field t "zeroInitializeDeviceMemory" (Vk_base.bool32)
+  let zero_initialize_device_memory = _zero_initialize_device_memory
+  let () = seal t
+  let structure_type : StructureType.t option = Some StructureType.physical_device_zero_initialize_device_memory_features_ext
+    let make ?next:arg_next ?zero_initialize_device_memory:(arg_zero_initialize_device_memory=false) () =
+    let value, keep = Vk_base.make_kept t in
+    ignore keep;
+    setf value _s_type StructureType.physical_device_zero_initialize_device_memory_features_ext;
+    (match arg_next with
+     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
+     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
+    setf value _zero_initialize_device_memory arg_zero_initialize_device_memory;
+    value
+end
+
+module PhysicalDeviceZeroInitializeWorkgroupMemoryFeatures = struct
+  type t
+  let t : t structure typ = structure "VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeatures"
+  let _s_type = field t "sType" (StructureType.t)
+  let s_type = _s_type
+  let _p_next = field t "pNext" (ptr (Ctypes.void))
+  let p_next = _p_next
+  let _shader_zero_initialize_workgroup_memory = field t "shaderZeroInitializeWorkgroupMemory" (Vk_base.bool32)
+  let shader_zero_initialize_workgroup_memory = _shader_zero_initialize_workgroup_memory
+  let () = seal t
+  let structure_type : StructureType.t option = Some StructureType.physical_device_zero_initialize_workgroup_memory_features
+    let make ?next:arg_next ?shader_zero_initialize_workgroup_memory:(arg_shader_zero_initialize_workgroup_memory=false) () =
+    let value, keep = Vk_base.make_kept t in
+    ignore keep;
+    setf value _s_type StructureType.physical_device_zero_initialize_workgroup_memory_features;
+    (match arg_next with
+     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
+     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
+    setf value _shader_zero_initialize_workgroup_memory arg_shader_zero_initialize_workgroup_memory;
+    value
+end
+
+module PipelineBinaryDataInfoKHR = struct
+  type t
+  let t : t structure typ = structure "VkPipelineBinaryDataInfoKHR"
+  let _s_type = field t "sType" (StructureType.t)
+  let s_type = _s_type
+  let _p_next = field t "pNext" (ptr (Ctypes.void))
+  let p_next = _p_next
+  let _pipeline_binary = field t "pipelineBinary" (PipelineBinaryKHR.t)
+  let pipeline_binary = _pipeline_binary
+  let () = seal t
+  let structure_type : StructureType.t option = Some StructureType.pipeline_binary_data_info_khr
+    let make ?next:arg_next ?pipeline_binary:(arg_pipeline_binary=PipelineBinaryKHR.null) () =
+    let value, keep = Vk_base.make_kept t in
+    ignore keep;
+    setf value _s_type StructureType.pipeline_binary_data_info_khr;
+    (match arg_next with
+     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
+     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
+    setf value _pipeline_binary arg_pipeline_binary;
+    value
+end
+
+module PipelineBinaryDataKHR = struct
+  type t
+  let t : t structure typ = structure "VkPipelineBinaryDataKHR"
+  let _data_size = field t "dataSize" (Vk_base.size_t)
+  let data_size = _data_size
+  let _p_data = field t "pData" (ptr (Ctypes.void))
+  let p_data = _p_data
+  let () = seal t
+  let structure_type : StructureType.t option = None
+    let make ?data:(arg_data="") () =
+    let value, keep = Vk_base.make_kept t in
+    ignore keep;
+    setf value _data_size (String.length arg_data);
+    if arg_data = "" then setf value _p_data (Vk_base.null_ptr (Ctypes.void)) else begin
+      let bytes = CArray.of_string arg_data in
+      setf value _p_data (to_voidp (CArray.start bytes)); Vk_base.retain keep bytes
+    end;
+    value
+end
+
+module PipelineBinaryHandlesInfoKHR = struct
+  type t
+  let t : t structure typ = structure "VkPipelineBinaryHandlesInfoKHR"
+  let _s_type = field t "sType" (StructureType.t)
+  let s_type = _s_type
+  let _p_next = field t "pNext" (ptr (Ctypes.void))
+  let p_next = _p_next
+  let _pipeline_binary_count = field t "pipelineBinaryCount" (Vk_base.uint32)
+  let pipeline_binary_count = _pipeline_binary_count
+  let _p_pipeline_binaries = field t "pPipelineBinaries" (ptr (PipelineBinaryKHR.t))
+  let p_pipeline_binaries = _p_pipeline_binaries
+  let () = seal t
+  let structure_type : StructureType.t option = Some StructureType.pipeline_binary_handles_info_khr
+    let make ?next:arg_next ?pipeline_binary_count:(arg_pipeline_binary_count=0) ?p_pipeline_binaries:arg_p_pipeline_binaries () =
+    let value, keep = Vk_base.make_kept t in
+    ignore keep;
+    setf value _s_type StructureType.pipeline_binary_handles_info_khr;
+    (match arg_next with
+     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
+     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
+    setf value _pipeline_binary_count arg_pipeline_binary_count;
+    setf value _p_pipeline_binaries (match arg_p_pipeline_binaries with None -> Vk_base.null_ptr (PipelineBinaryKHR.t) | Some p -> p);
+    value
+end
+
+module PipelineBinaryInfoKHR = struct
+  type t
+  let t : t structure typ = structure "VkPipelineBinaryInfoKHR"
+  let _s_type = field t "sType" (StructureType.t)
+  let s_type = _s_type
+  let _p_next = field t "pNext" (ptr (Ctypes.void))
+  let p_next = _p_next
+  let _binary_count = field t "binaryCount" (Vk_base.uint32)
+  let binary_count = _binary_count
+  let _p_pipeline_binaries = field t "pPipelineBinaries" (ptr (PipelineBinaryKHR.t))
+  let p_pipeline_binaries = _p_pipeline_binaries
+  let () = seal t
+  let structure_type : StructureType.t option = Some StructureType.pipeline_binary_info_khr
+    let make ?next:arg_next ?pipeline_binaries:(arg_pipeline_binaries=[]) () =
+    let value, keep = Vk_base.make_kept t in
+    ignore keep;
+    setf value _s_type StructureType.pipeline_binary_info_khr;
+    (match arg_next with
+     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
+     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
+    let binary_count_n = List.length arg_pipeline_binaries in
+    if arg_pipeline_binaries <> [] && List.length arg_pipeline_binaries <> binary_count_n then invalid_arg "VkPipelineBinaryInfoKHR.pPipelineBinaries: length does not match binaryCount";
+    setf value _binary_count binary_count_n;
+    if arg_pipeline_binaries = [] then setf value _p_pipeline_binaries (Vk_base.null_ptr (PipelineBinaryKHR.t)) else begin
+      let items = CArray.of_list (PipelineBinaryKHR.t) arg_pipeline_binaries in
+      setf value _p_pipeline_binaries (CArray.start items);
+      Vk_base.retain keep items; Vk_base.retain keep arg_pipeline_binaries
+    end;
+    value
+end
+
+module PipelineBinaryKeyKHR = struct
+  type t
+  let t : t structure typ = structure "VkPipelineBinaryKeyKHR"
+  let _s_type = field t "sType" (StructureType.t)
+  let s_type = _s_type
+  let _p_next = field t "pNext" (ptr (Ctypes.void))
+  let p_next = _p_next
+  let _key_size = field t "keySize" (Vk_base.uint32)
+  let key_size = _key_size
+  let _key = field t "key" (array 32 (Vk_base.uint8))
+  let key = _key
+  let () = seal t
+  let structure_type : StructureType.t option = Some StructureType.pipeline_binary_key_khr
+    let make ?next:arg_next ?key_size:(arg_key_size=0) ?key:(arg_key=[]) () =
+    let value, keep = Vk_base.make_kept t in
+    ignore keep;
+    setf value _s_type StructureType.pipeline_binary_key_khr;
+    (match arg_next with
+     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
+     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
+    setf value _key_size arg_key_size;
+    if List.length arg_key > 32 then invalid_arg "key: too many elements";
+    let destination = getf value _key in
+    List.iteri (fun i x -> CArray.set (destination) (i mod 32) x) arg_key;
+    value
+end
+
+module PipelineCacheCreateInfo = struct
+  type t
+  let t : t structure typ = structure "VkPipelineCacheCreateInfo"
+  let _s_type = field t "sType" (StructureType.t)
+  let s_type = _s_type
+  let _p_next = field t "pNext" (ptr (Ctypes.void))
+  let p_next = _p_next
+  let _flags = field t "flags" (PipelineCacheCreateFlags.t)
+  let flags = _flags
+  let _initial_data_size = field t "initialDataSize" (Vk_base.size_t)
+  let initial_data_size = _initial_data_size
+  let _p_initial_data = field t "pInitialData" (ptr (Ctypes.void))
+  let p_initial_data = _p_initial_data
+  let () = seal t
+  let structure_type : StructureType.t option = Some StructureType.pipeline_cache_create_info
+    let make ?next:arg_next ?flags:(arg_flags=PipelineCacheCreateFlags.of_int 0) ?initial_data:(arg_initial_data="") () =
+    let value, keep = Vk_base.make_kept t in
+    ignore keep;
+    setf value _s_type StructureType.pipeline_cache_create_info;
+    (match arg_next with
+     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
+     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
+    setf value _flags arg_flags;
+    setf value _initial_data_size (String.length arg_initial_data);
+    if arg_initial_data = "" then setf value _p_initial_data (Vk_base.null_ptr (Ctypes.void)) else begin
+      let bytes = CArray.of_string arg_initial_data in
+      setf value _p_initial_data (to_voidp (CArray.start bytes)); Vk_base.retain keep bytes
+    end;
+    value
+end
+
+module PipelineCacheHeaderVersionDataGraphQCOM = struct
+  type t
+  let t : t structure typ = structure "VkPipelineCacheHeaderVersionDataGraphQCOM"
+  let _header_size = field t "headerSize" (Vk_base.uint32)
+  let header_size = _header_size
+  let _header_version = field t "headerVersion" (PipelineCacheHeaderVersion.t)
+  let header_version = _header_version
+  let _cache_type = field t "cacheType" (DataGraphModelCacheTypeQCOM.t)
+  let cache_type = _cache_type
+  let _cache_version = field t "cacheVersion" (Vk_base.uint32)
+  let cache_version = _cache_version
+  let _toolchain_version = field t "toolchainVersion" (array 3 (Vk_base.uint32))
+  let toolchain_version = _toolchain_version
+  let () = seal t
+  let structure_type : StructureType.t option = None
+    let make ?header_size:(arg_header_size=0) ?header_version:(arg_header_version=PipelineCacheHeaderVersion.of_int 0) ?cache_type:(arg_cache_type=DataGraphModelCacheTypeQCOM.of_int 0) ?cache_version:(arg_cache_version=0) ?toolchain_version:(arg_toolchain_version=[]) () =
+    let value, keep = Vk_base.make_kept t in
+    ignore keep;
+    setf value _header_size arg_header_size;
+    setf value _header_version arg_header_version;
+    setf value _cache_type arg_cache_type;
+    setf value _cache_version arg_cache_version;
+    if List.length arg_toolchain_version > 3 then invalid_arg "toolchainVersion: too many elements";
+    let destination = getf value _toolchain_version in
+    List.iteri (fun i x -> CArray.set (destination) (i mod 3) x) arg_toolchain_version;
+    value
+end
+
+module PipelineCacheHeaderVersionOne = struct
+  type t
+  let t : t structure typ = structure "VkPipelineCacheHeaderVersionOne"
+  let _header_size = field t "headerSize" (Vk_base.uint32)
+  let header_size = _header_size
+  let _header_version = field t "headerVersion" (PipelineCacheHeaderVersion.t)
+  let header_version = _header_version
+  let _vendor_id = field t "vendorID" (Vk_base.uint32)
+  let vendor_id = _vendor_id
+  let _device_id = field t "deviceID" (Vk_base.uint32)
+  let device_id = _device_id
+  let _pipeline_cache_uuid = field t "pipelineCacheUUID" (array 16 (Vk_base.uint8))
+  let pipeline_cache_uuid = _pipeline_cache_uuid
+  let () = seal t
+  let structure_type : StructureType.t option = None
+    let make ?header_size:(arg_header_size=0) ?header_version:(arg_header_version=PipelineCacheHeaderVersion.of_int 0) ?vendor_id:(arg_vendor_id=0) ?device_id:(arg_device_id=0) ?pipeline_cache_uuid:(arg_pipeline_cache_uuid=[]) () =
+    let value, keep = Vk_base.make_kept t in
+    ignore keep;
+    setf value _header_size arg_header_size;
+    setf value _header_version arg_header_version;
+    setf value _vendor_id arg_vendor_id;
+    setf value _device_id arg_device_id;
+    if List.length arg_pipeline_cache_uuid > 16 then invalid_arg "pipelineCacheUUID: too many elements";
+    let destination = getf value _pipeline_cache_uuid in
+    List.iteri (fun i x -> CArray.set (destination) (i mod 16) x) arg_pipeline_cache_uuid;
+    value
+end
+
+module PipelineColorBlendAdvancedStateCreateInfoEXT = struct
+  type t
+  let t : t structure typ = structure "VkPipelineColorBlendAdvancedStateCreateInfoEXT"
+  let _s_type = field t "sType" (StructureType.t)
+  let s_type = _s_type
+  let _p_next = field t "pNext" (ptr (Ctypes.void))
+  let p_next = _p_next
+  let _src_premultiplied = field t "srcPremultiplied" (Vk_base.bool32)
+  let src_premultiplied = _src_premultiplied
+  let _dst_premultiplied = field t "dstPremultiplied" (Vk_base.bool32)
+  let dst_premultiplied = _dst_premultiplied
+  let _blend_overlap = field t "blendOverlap" (BlendOverlapEXT.t)
+  let blend_overlap = _blend_overlap
+  let () = seal t
+  let structure_type : StructureType.t option = Some StructureType.pipeline_color_blend_advanced_state_create_info_ext
+    let make ?next:arg_next ?src_premultiplied:(arg_src_premultiplied=false) ?dst_premultiplied:(arg_dst_premultiplied=false) ?blend_overlap:(arg_blend_overlap=BlendOverlapEXT.of_int 0) () =
+    let value, keep = Vk_base.make_kept t in
+    ignore keep;
+    setf value _s_type StructureType.pipeline_color_blend_advanced_state_create_info_ext;
+    (match arg_next with
+     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
+     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
+    setf value _src_premultiplied arg_src_premultiplied;
+    setf value _dst_premultiplied arg_dst_premultiplied;
+    setf value _blend_overlap arg_blend_overlap;
+    value
+end
+
+module PipelineColorBlendAttachmentState = struct
+  type t
+  let t : t structure typ = structure "VkPipelineColorBlendAttachmentState"
+  let _blend_enable = field t "blendEnable" (Vk_base.bool32)
+  let blend_enable = _blend_enable
+  let _src_color_blend_factor = field t "srcColorBlendFactor" (BlendFactor.t)
+  let src_color_blend_factor = _src_color_blend_factor
+  let _dst_color_blend_factor = field t "dstColorBlendFactor" (BlendFactor.t)
+  let dst_color_blend_factor = _dst_color_blend_factor
+  let _color_blend_op = field t "colorBlendOp" (BlendOp.t)
+  let color_blend_op = _color_blend_op
+  let _src_alpha_blend_factor = field t "srcAlphaBlendFactor" (BlendFactor.t)
+  let src_alpha_blend_factor = _src_alpha_blend_factor
+  let _dst_alpha_blend_factor = field t "dstAlphaBlendFactor" (BlendFactor.t)
+  let dst_alpha_blend_factor = _dst_alpha_blend_factor
+  let _alpha_blend_op = field t "alphaBlendOp" (BlendOp.t)
+  let alpha_blend_op = _alpha_blend_op
+  let _color_write_mask = field t "colorWriteMask" (ColorComponentFlags.t)
+  let color_write_mask = _color_write_mask
+  let () = seal t
+  let structure_type : StructureType.t option = None
+    let make ?blend_enable:(arg_blend_enable=false) ?src_color_blend_factor:(arg_src_color_blend_factor=BlendFactor.of_int 0) ?dst_color_blend_factor:(arg_dst_color_blend_factor=BlendFactor.of_int 0) ?color_blend_op:(arg_color_blend_op=BlendOp.of_int 0) ?src_alpha_blend_factor:(arg_src_alpha_blend_factor=BlendFactor.of_int 0) ?dst_alpha_blend_factor:(arg_dst_alpha_blend_factor=BlendFactor.of_int 0) ?alpha_blend_op:(arg_alpha_blend_op=BlendOp.of_int 0) ?color_write_mask:(arg_color_write_mask=ColorComponentFlags.of_int 0) () =
+    let value, keep = Vk_base.make_kept t in
+    ignore keep;
+    setf value _blend_enable arg_blend_enable;
+    setf value _src_color_blend_factor arg_src_color_blend_factor;
+    setf value _dst_color_blend_factor arg_dst_color_blend_factor;
+    setf value _color_blend_op arg_color_blend_op;
+    setf value _src_alpha_blend_factor arg_src_alpha_blend_factor;
+    setf value _dst_alpha_blend_factor arg_dst_alpha_blend_factor;
+    setf value _alpha_blend_op arg_alpha_blend_op;
+    setf value _color_write_mask arg_color_write_mask;
+    value
+end
+
+module PipelineColorWriteCreateInfoEXT = struct
+  type t
+  let t : t structure typ = structure "VkPipelineColorWriteCreateInfoEXT"
+  let _s_type = field t "sType" (StructureType.t)
+  let s_type = _s_type
+  let _p_next = field t "pNext" (ptr (Ctypes.void))
+  let p_next = _p_next
+  let _attachment_count = field t "attachmentCount" (Vk_base.uint32)
+  let attachment_count = _attachment_count
+  let _p_color_write_enables = field t "pColorWriteEnables" (ptr (Vk_base.bool32))
+  let p_color_write_enables = _p_color_write_enables
+  let () = seal t
+  let structure_type : StructureType.t option = Some StructureType.pipeline_color_write_create_info_ext
+    let make ?next:arg_next ?color_write_enables:(arg_color_write_enables=[]) () =
+    let value, keep = Vk_base.make_kept t in
+    ignore keep;
+    setf value _s_type StructureType.pipeline_color_write_create_info_ext;
+    (match arg_next with
+     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
+     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
+    let attachment_count_n = List.length arg_color_write_enables in
+    if arg_color_write_enables <> [] && List.length arg_color_write_enables <> attachment_count_n then invalid_arg "VkPipelineColorWriteCreateInfoEXT.pColorWriteEnables: length does not match attachmentCount";
+    setf value _attachment_count attachment_count_n;
+    if arg_color_write_enables = [] then setf value _p_color_write_enables (Vk_base.null_ptr (Vk_base.bool32)) else begin
+      let items = CArray.of_list (Vk_base.bool32) arg_color_write_enables in
+      setf value _p_color_write_enables (CArray.start items);
+      Vk_base.retain keep items; Vk_base.retain keep arg_color_write_enables
+    end;
+    value
+end
+
+module PipelineCompilerControlCreateInfoAMD = struct
+  type t
+  let t : t structure typ = structure "VkPipelineCompilerControlCreateInfoAMD"
+  let _s_type = field t "sType" (StructureType.t)
+  let s_type = _s_type
+  let _p_next = field t "pNext" (ptr (Ctypes.void))
+  let p_next = _p_next
+  let _compiler_control_flags = field t "compilerControlFlags" (PipelineCompilerControlFlagsAMD.t)
+  let compiler_control_flags = _compiler_control_flags
+  let () = seal t
+  let structure_type : StructureType.t option = Some StructureType.pipeline_compiler_control_create_info_amd
+    let make ?next:arg_next ?compiler_control_flags:(arg_compiler_control_flags=PipelineCompilerControlFlagsAMD.of_int 0) () =
+    let value, keep = Vk_base.make_kept t in
+    ignore keep;
+    setf value _s_type StructureType.pipeline_compiler_control_create_info_amd;
+    (match arg_next with
+     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
+     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
+    setf value _compiler_control_flags arg_compiler_control_flags;
+    value
+end
+
+module PipelineCoverageModulationStateCreateInfoNV = struct
+  type t
+  let t : t structure typ = structure "VkPipelineCoverageModulationStateCreateInfoNV"
+  let _s_type = field t "sType" (StructureType.t)
+  let s_type = _s_type
+  let _p_next = field t "pNext" (ptr (Ctypes.void))
+  let p_next = _p_next
+  let _flags = field t "flags" (PipelineCoverageModulationStateCreateFlagsNV.t)
+  let flags = _flags
+  let _coverage_modulation_mode = field t "coverageModulationMode" (CoverageModulationModeNV.t)
+  let coverage_modulation_mode = _coverage_modulation_mode
+  let _coverage_modulation_table_enable = field t "coverageModulationTableEnable" (Vk_base.bool32)
+  let coverage_modulation_table_enable = _coverage_modulation_table_enable
+  let _coverage_modulation_table_count = field t "coverageModulationTableCount" (Vk_base.uint32)
+  let coverage_modulation_table_count = _coverage_modulation_table_count
+  let _p_coverage_modulation_table = field t "pCoverageModulationTable" (ptr (Ctypes.float))
+  let p_coverage_modulation_table = _p_coverage_modulation_table
+  let () = seal t
+  let structure_type : StructureType.t option = Some StructureType.pipeline_coverage_modulation_state_create_info_nv
+    let make ?next:arg_next ?flags:(arg_flags=PipelineCoverageModulationStateCreateFlagsNV.of_int 0) ?coverage_modulation_mode:(arg_coverage_modulation_mode=CoverageModulationModeNV.of_int 0) ?coverage_modulation_table_enable:(arg_coverage_modulation_table_enable=false) ?coverage_modulation_table_count:arg_coverage_modulation_table_count ?coverage_modulation_table:(arg_coverage_modulation_table=[]) () =
+    let value, keep = Vk_base.make_kept t in
+    ignore keep;
+    setf value _s_type StructureType.pipeline_coverage_modulation_state_create_info_nv;
+    (match arg_next with
+     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
+     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
+    setf value _flags arg_flags;
+    setf value _coverage_modulation_mode arg_coverage_modulation_mode;
+    setf value _coverage_modulation_table_enable arg_coverage_modulation_table_enable;
+    let coverage_modulation_table_count_n = (match arg_coverage_modulation_table_count with Some n -> n | None -> List.length arg_coverage_modulation_table) in
+    if arg_coverage_modulation_table <> [] && List.length arg_coverage_modulation_table <> coverage_modulation_table_count_n then invalid_arg "VkPipelineCoverageModulationStateCreateInfoNV.pCoverageModulationTable: length does not match coverageModulationTableCount";
+    setf value _coverage_modulation_table_count coverage_modulation_table_count_n;
+    if arg_coverage_modulation_table = [] then setf value _p_coverage_modulation_table (Vk_base.null_ptr (Ctypes.float)) else begin
+      let items = CArray.of_list (Ctypes.float) arg_coverage_modulation_table in
+      setf value _p_coverage_modulation_table (CArray.start items);
+      Vk_base.retain keep items; Vk_base.retain keep arg_coverage_modulation_table
+    end;
+    value
+end
+
+module PipelineCoverageReductionStateCreateInfoNV = struct
+  type t
+  let t : t structure typ = structure "VkPipelineCoverageReductionStateCreateInfoNV"
+  let _s_type = field t "sType" (StructureType.t)
+  let s_type = _s_type
+  let _p_next = field t "pNext" (ptr (Ctypes.void))
+  let p_next = _p_next
+  let _flags = field t "flags" (PipelineCoverageReductionStateCreateFlagsNV.t)
+  let flags = _flags
+  let _coverage_reduction_mode = field t "coverageReductionMode" (CoverageReductionModeNV.t)
+  let coverage_reduction_mode = _coverage_reduction_mode
+  let () = seal t
+  let structure_type : StructureType.t option = Some StructureType.pipeline_coverage_reduction_state_create_info_nv
+    let make ?next:arg_next ?flags:(arg_flags=PipelineCoverageReductionStateCreateFlagsNV.of_int 0) ?coverage_reduction_mode:(arg_coverage_reduction_mode=CoverageReductionModeNV.of_int 0) () =
+    let value, keep = Vk_base.make_kept t in
+    ignore keep;
+    setf value _s_type StructureType.pipeline_coverage_reduction_state_create_info_nv;
+    (match arg_next with
+     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
+     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
+    setf value _flags arg_flags;
+    setf value _coverage_reduction_mode arg_coverage_reduction_mode;
+    value
+end
+
+module PipelineCoverageToColorStateCreateInfoNV = struct
+  type t
+  let t : t structure typ = structure "VkPipelineCoverageToColorStateCreateInfoNV"
+  let _s_type = field t "sType" (StructureType.t)
+  let s_type = _s_type
+  let _p_next = field t "pNext" (ptr (Ctypes.void))
+  let p_next = _p_next
+  let _flags = field t "flags" (PipelineCoverageToColorStateCreateFlagsNV.t)
+  let flags = _flags
+  let _coverage_to_color_enable = field t "coverageToColorEnable" (Vk_base.bool32)
+  let coverage_to_color_enable = _coverage_to_color_enable
+  let _coverage_to_color_location = field t "coverageToColorLocation" (Vk_base.uint32)
+  let coverage_to_color_location = _coverage_to_color_location
+  let () = seal t
+  let structure_type : StructureType.t option = Some StructureType.pipeline_coverage_to_color_state_create_info_nv
+    let make ?next:arg_next ?flags:(arg_flags=PipelineCoverageToColorStateCreateFlagsNV.of_int 0) ?coverage_to_color_enable:(arg_coverage_to_color_enable=false) ?coverage_to_color_location:(arg_coverage_to_color_location=0) () =
+    let value, keep = Vk_base.make_kept t in
+    ignore keep;
+    setf value _s_type StructureType.pipeline_coverage_to_color_state_create_info_nv;
+    (match arg_next with
+     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
+     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
+    setf value _flags arg_flags;
+    setf value _coverage_to_color_enable arg_coverage_to_color_enable;
+    setf value _coverage_to_color_location arg_coverage_to_color_location;
+    value
+end
+
+module PipelineCreateFlags2CreateInfo = struct
+  type t
+  let t : t structure typ = structure "VkPipelineCreateFlags2CreateInfo"
+  let _s_type = field t "sType" (StructureType.t)
+  let s_type = _s_type
+  let _p_next = field t "pNext" (ptr (Ctypes.void))
+  let p_next = _p_next
+  let _flags = field t "flags" (PipelineCreateFlags2.t)
+  let flags = _flags
+  let () = seal t
+  let structure_type : StructureType.t option = Some StructureType.pipeline_create_flags_2_create_info
+    let make ?next:arg_next ?flags:(arg_flags=PipelineCreateFlags2.of_int 0) () =
+    let value, keep = Vk_base.make_kept t in
+    ignore keep;
+    setf value _s_type StructureType.pipeline_create_flags_2_create_info;
+    (match arg_next with
+     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
+     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
+    setf value _flags arg_flags;
+    value
+end
+
+module PipelineCreateInfoKHR = struct
+  type t
+  let t : t structure typ = structure "VkPipelineCreateInfoKHR"
+  let _s_type = field t "sType" (StructureType.t)
+  let s_type = _s_type
+  let _p_next = field t "pNext" (ptr (Ctypes.void))
+  let p_next = _p_next
+  let () = seal t
+  let structure_type : StructureType.t option = Some StructureType.pipeline_create_info_khr
+    let make ?next:arg_next () =
+    let value, keep = Vk_base.make_kept t in
+    ignore keep;
+    setf value _s_type StructureType.pipeline_create_info_khr;
+    (match arg_next with
+     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
+     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
     value
 end

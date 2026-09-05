@@ -1701,27 +1701,6 @@ let get_memory_remote_address_nv arg0 arg1 arg2 =
   | Some f -> f arg0 arg1 arg2
   | None -> Vk_base.not_loaded "vkGetMemoryRemoteAddressNV"
 
-let get_memory_sci_buf_nv_typ = Device.t @-> ptr (MemoryGetSciBufInfoNV.t) @-> ptr (ptr void) @-> returning (Result.t)
-let get_memory_sci_buf_nv_ref = ref (bind get_memory_sci_buf_nv_typ Ctypes.null)
-let get_memory_sci_buf_nv arg0 arg1 arg2 =
-  match !get_memory_sci_buf_nv_ref with
-  | Some f -> f arg0 arg1 arg2
-  | None -> Vk_base.not_loaded "vkGetMemorySciBufNV"
-
-let get_physical_device_external_memory_sci_buf_properties_nv_typ = PhysicalDevice.t @-> ExternalMemoryHandleTypeFlags.t @-> ptr void @-> ptr (MemorySciBufPropertiesNV.t) @-> returning (Result.t)
-let get_physical_device_external_memory_sci_buf_properties_nv_ref = ref (bind get_physical_device_external_memory_sci_buf_properties_nv_typ Ctypes.null)
-let get_physical_device_external_memory_sci_buf_properties_nv arg0 arg1 arg2 arg3 =
-  match !get_physical_device_external_memory_sci_buf_properties_nv_ref with
-  | Some f -> f arg0 arg1 arg2 arg3
-  | None -> Vk_base.not_loaded "vkGetPhysicalDeviceExternalMemorySciBufPropertiesNV"
-
-let get_physical_device_sci_buf_attributes_nv_typ = PhysicalDevice.t @-> ptr void @-> returning (Result.t)
-let get_physical_device_sci_buf_attributes_nv_ref = ref (bind get_physical_device_sci_buf_attributes_nv_typ Ctypes.null)
-let get_physical_device_sci_buf_attributes_nv arg0 arg1 =
-  match !get_physical_device_sci_buf_attributes_nv_ref with
-  | Some f -> f arg0 arg1
-  | None -> Vk_base.not_loaded "vkGetPhysicalDeviceSciBufAttributesNV"
-
 let get_physical_device_external_semaphore_properties_typ = PhysicalDevice.t @-> ptr (PhysicalDeviceExternalSemaphoreInfo.t) @-> ptr (ExternalSemaphoreProperties.t) @-> returning (Ctypes.void)
 let get_physical_device_external_semaphore_properties_ref = ref (bind get_physical_device_external_semaphore_properties_typ Ctypes.null)
 let get_physical_device_external_semaphore_properties arg0 arg1 arg2 =
@@ -1805,69 +1784,6 @@ let import_fence_fd_khr arg0 arg1 =
   match !import_fence_fd_khr_ref with
   | Some f -> f arg0 arg1
   | None -> Vk_base.not_loaded "vkImportFenceFdKHR"
-
-let get_fence_sci_sync_fence_nv_typ = Device.t @-> ptr (FenceGetSciSyncInfoNV.t) @-> ptr (Ctypes.void) @-> returning (Result.t)
-let get_fence_sci_sync_fence_nv_ref = ref (bind get_fence_sci_sync_fence_nv_typ Ctypes.null)
-let get_fence_sci_sync_fence_nv arg0 arg1 arg2 =
-  match !get_fence_sci_sync_fence_nv_ref with
-  | Some f -> f arg0 arg1 arg2
-  | None -> Vk_base.not_loaded "vkGetFenceSciSyncFenceNV"
-
-let get_fence_sci_sync_obj_nv_typ = Device.t @-> ptr (FenceGetSciSyncInfoNV.t) @-> ptr (Ctypes.void) @-> returning (Result.t)
-let get_fence_sci_sync_obj_nv_ref = ref (bind get_fence_sci_sync_obj_nv_typ Ctypes.null)
-let get_fence_sci_sync_obj_nv arg0 arg1 arg2 =
-  match !get_fence_sci_sync_obj_nv_ref with
-  | Some f -> f arg0 arg1 arg2
-  | None -> Vk_base.not_loaded "vkGetFenceSciSyncObjNV"
-
-let import_fence_sci_sync_fence_nv_typ = Device.t @-> ptr (ImportFenceSciSyncInfoNV.t) @-> returning (Result.t)
-let import_fence_sci_sync_fence_nv_ref = ref (bind import_fence_sci_sync_fence_nv_typ Ctypes.null)
-let import_fence_sci_sync_fence_nv arg0 arg1 =
-  match !import_fence_sci_sync_fence_nv_ref with
-  | Some f -> f arg0 arg1
-  | None -> Vk_base.not_loaded "vkImportFenceSciSyncFenceNV"
-
-let import_fence_sci_sync_obj_nv_typ = Device.t @-> ptr (ImportFenceSciSyncInfoNV.t) @-> returning (Result.t)
-let import_fence_sci_sync_obj_nv_ref = ref (bind import_fence_sci_sync_obj_nv_typ Ctypes.null)
-let import_fence_sci_sync_obj_nv arg0 arg1 =
-  match !import_fence_sci_sync_obj_nv_ref with
-  | Some f -> f arg0 arg1
-  | None -> Vk_base.not_loaded "vkImportFenceSciSyncObjNV"
-
-let get_semaphore_sci_sync_obj_nv_typ = Device.t @-> ptr (SemaphoreGetSciSyncInfoNV.t) @-> ptr (Ctypes.void) @-> returning (Result.t)
-let get_semaphore_sci_sync_obj_nv_ref = ref (bind get_semaphore_sci_sync_obj_nv_typ Ctypes.null)
-let get_semaphore_sci_sync_obj_nv arg0 arg1 arg2 =
-  match !get_semaphore_sci_sync_obj_nv_ref with
-  | Some f -> f arg0 arg1 arg2
-  | None -> Vk_base.not_loaded "vkGetSemaphoreSciSyncObjNV"
-
-let import_semaphore_sci_sync_obj_nv_typ = Device.t @-> ptr (ImportSemaphoreSciSyncInfoNV.t) @-> returning (Result.t)
-let import_semaphore_sci_sync_obj_nv_ref = ref (bind import_semaphore_sci_sync_obj_nv_typ Ctypes.null)
-let import_semaphore_sci_sync_obj_nv arg0 arg1 =
-  match !import_semaphore_sci_sync_obj_nv_ref with
-  | Some f -> f arg0 arg1
-  | None -> Vk_base.not_loaded "vkImportSemaphoreSciSyncObjNV"
-
-let get_physical_device_sci_sync_attributes_nv_typ = PhysicalDevice.t @-> ptr (SciSyncAttributesInfoNV.t) @-> ptr void @-> returning (Result.t)
-let get_physical_device_sci_sync_attributes_nv_ref = ref (bind get_physical_device_sci_sync_attributes_nv_typ Ctypes.null)
-let get_physical_device_sci_sync_attributes_nv arg0 arg1 arg2 =
-  match !get_physical_device_sci_sync_attributes_nv_ref with
-  | Some f -> f arg0 arg1 arg2
-  | None -> Vk_base.not_loaded "vkGetPhysicalDeviceSciSyncAttributesNV"
-
-let create_semaphore_sci_sync_pool_nv_typ = Device.t @-> ptr (SemaphoreSciSyncPoolCreateInfoNV.t) @-> ptr (AllocationCallbacks.t) @-> ptr (SemaphoreSciSyncPoolNV.t) @-> returning (Result.t)
-let create_semaphore_sci_sync_pool_nv_ref = ref (bind create_semaphore_sci_sync_pool_nv_typ Ctypes.null)
-let create_semaphore_sci_sync_pool_nv arg0 arg1 arg2 arg3 =
-  match !create_semaphore_sci_sync_pool_nv_ref with
-  | Some f -> f arg0 arg1 arg2 arg3
-  | None -> Vk_base.not_loaded "vkCreateSemaphoreSciSyncPoolNV"
-
-let destroy_semaphore_sci_sync_pool_nv_typ = Device.t @-> SemaphoreSciSyncPoolNV.t @-> ptr (AllocationCallbacks.t) @-> returning (Ctypes.void)
-let destroy_semaphore_sci_sync_pool_nv_ref = ref (bind destroy_semaphore_sci_sync_pool_nv_typ Ctypes.null)
-let destroy_semaphore_sci_sync_pool_nv arg0 arg1 arg2 =
-  match !destroy_semaphore_sci_sync_pool_nv_ref with
-  | Some f -> f arg0 arg1 arg2
-  | None -> Vk_base.not_loaded "vkDestroySemaphoreSciSyncPoolNV"
 
 let release_display_ext_typ = PhysicalDevice.t @-> DisplayKHR.t @-> returning (Result.t)
 let release_display_ext_ref = ref (bind release_display_ext_typ Ctypes.null)
@@ -2267,34 +2183,6 @@ let get_descriptor_set_layout_support arg0 arg1 arg2 =
   match !get_descriptor_set_layout_support_ref with
   | Some f -> f arg0 arg1 arg2
   | None -> Vk_base.not_loaded "vkGetDescriptorSetLayoutSupport"
-
-let get_swapchain_gralloc_usage_android_typ = Device.t @-> Format.t @-> ImageUsageFlags.t @-> ptr (Ctypes.int) @-> returning (Result.t)
-let get_swapchain_gralloc_usage_android_ref = ref (bind get_swapchain_gralloc_usage_android_typ Ctypes.null)
-let get_swapchain_gralloc_usage_android arg0 arg1 arg2 arg3 =
-  match !get_swapchain_gralloc_usage_android_ref with
-  | Some f -> f arg0 arg1 arg2 arg3
-  | None -> Vk_base.not_loaded "vkGetSwapchainGrallocUsageANDROID"
-
-let get_swapchain_gralloc_usage_2_android_typ = Device.t @-> Format.t @-> ImageUsageFlags.t @-> SwapchainImageUsageFlagsANDROID.t @-> ptr (Vk_base.uint64) @-> ptr (Vk_base.uint64) @-> returning (Result.t)
-let get_swapchain_gralloc_usage_2_android_ref = ref (bind get_swapchain_gralloc_usage_2_android_typ Ctypes.null)
-let get_swapchain_gralloc_usage_2_android arg0 arg1 arg2 arg3 arg4 arg5 =
-  match !get_swapchain_gralloc_usage_2_android_ref with
-  | Some f -> f arg0 arg1 arg2 arg3 arg4 arg5
-  | None -> Vk_base.not_loaded "vkGetSwapchainGrallocUsage2ANDROID"
-
-let acquire_image_android_typ = Device.t @-> Image.t @-> Ctypes.int @-> Semaphore.t @-> Fence.t @-> returning (Result.t)
-let acquire_image_android_ref = ref (bind acquire_image_android_typ Ctypes.null)
-let acquire_image_android arg0 arg1 arg2 arg3 arg4 =
-  match !acquire_image_android_ref with
-  | Some f -> f arg0 arg1 arg2 arg3 arg4
-  | None -> Vk_base.not_loaded "vkAcquireImageANDROID"
-
-let queue_signal_release_image_android_typ = Queue.t @-> Vk_base.uint32 @-> ptr (Semaphore.t) @-> Image.t @-> ptr (Ctypes.int) @-> returning (Result.t)
-let queue_signal_release_image_android_ref = ref (bind queue_signal_release_image_android_typ Ctypes.null)
-let queue_signal_release_image_android arg0 arg1 arg2 arg3 arg4 =
-  match !queue_signal_release_image_android_ref with
-  | Some f -> f arg0 arg1 arg2 arg3 arg4
-  | None -> Vk_base.not_loaded "vkQueueSignalReleaseImageANDROID"
 
 let get_shader_info_amd_typ = Device.t @-> Pipeline.t @-> ShaderStageFlags.t @-> ShaderInfoTypeAMD.t @-> ptr (Vk_base.size_t) @-> ptr (Ctypes.void) @-> returning (Result.t)
 let get_shader_info_amd_ref = ref (bind get_shader_info_amd_typ Ctypes.null)
@@ -3073,13 +2961,6 @@ let cmd_set_line_stipple arg0 arg1 arg2 =
   | Some f -> f arg0 arg1 arg2
   | None -> Vk_base.not_loaded "vkCmdSetLineStipple"
 
-let get_fault_data_typ = Device.t @-> FaultQueryBehavior.t @-> ptr (Vk_base.bool32) @-> ptr (Vk_base.uint32) @-> ptr (FaultData.t) @-> returning (Result.t)
-let get_fault_data_ref = ref (bind get_fault_data_typ Ctypes.null)
-let get_fault_data arg0 arg1 arg2 arg3 arg4 =
-  match !get_fault_data_ref with
-  | Some f -> f arg0 arg1 arg2 arg3 arg4
-  | None -> Vk_base.not_loaded "vkGetFaultData"
-
 let get_physical_device_tool_properties_typ = PhysicalDevice.t @-> ptr (Vk_base.uint32) @-> ptr (PhysicalDeviceToolProperties.t) @-> returning (Result.t)
 let get_physical_device_tool_properties_ref = ref (bind get_physical_device_tool_properties_typ Ctypes.null)
 let get_physical_device_tool_properties arg0 arg1 arg2 =
@@ -3591,20 +3472,6 @@ let cmd_resolve_image_2 arg0 arg1 =
   | Some f -> f arg0 arg1
   | None -> Vk_base.not_loaded "vkCmdResolveImage2"
 
-let cmd_refresh_objects_khr_typ = CommandBuffer.t @-> ptr (RefreshObjectListKHR.t) @-> returning (Ctypes.void)
-let cmd_refresh_objects_khr_ref = ref (bind cmd_refresh_objects_khr_typ Ctypes.null)
-let cmd_refresh_objects_khr arg0 arg1 =
-  match !cmd_refresh_objects_khr_ref with
-  | Some f -> f arg0 arg1
-  | None -> Vk_base.not_loaded "vkCmdRefreshObjectsKHR"
-
-let get_physical_device_refreshable_object_types_khr_typ = PhysicalDevice.t @-> ptr (Vk_base.uint32) @-> ptr (ObjectType.t) @-> returning (Result.t)
-let get_physical_device_refreshable_object_types_khr_ref = ref (bind get_physical_device_refreshable_object_types_khr_typ Ctypes.null)
-let get_physical_device_refreshable_object_types_khr arg0 arg1 arg2 =
-  match !get_physical_device_refreshable_object_types_khr_ref with
-  | Some f -> f arg0 arg1 arg2
-  | None -> Vk_base.not_loaded "vkGetPhysicalDeviceRefreshableObjectTypesKHR"
-
 let cmd_set_fragment_shading_rate_khr_typ = CommandBuffer.t @-> ptr (Extent2D.t) @-> ptr (FragmentShadingRateCombinerOpKHR.t) @-> returning (Ctypes.void)
 let cmd_set_fragment_shading_rate_khr_ref = ref (bind cmd_set_fragment_shading_rate_khr_typ Ctypes.null)
 let cmd_set_fragment_shading_rate_khr arg0 arg1 arg2 =
@@ -3730,13 +3597,6 @@ let transition_image_layout arg0 arg1 arg2 =
   match !transition_image_layout_ref with
   | Some f -> f arg0 arg1 arg2
   | None -> Vk_base.not_loaded "vkTransitionImageLayout"
-
-let get_command_pool_memory_consumption_typ = Device.t @-> CommandPool.t @-> CommandBuffer.t @-> ptr (CommandPoolMemoryConsumption.t) @-> returning (Ctypes.void)
-let get_command_pool_memory_consumption_ref = ref (bind get_command_pool_memory_consumption_typ Ctypes.null)
-let get_command_pool_memory_consumption arg0 arg1 arg2 arg3 =
-  match !get_command_pool_memory_consumption_ref with
-  | Some f -> f arg0 arg1 arg2 arg3
-  | None -> Vk_base.not_loaded "vkGetCommandPoolMemoryConsumption"
 
 let get_physical_device_video_capabilities_khr_typ = PhysicalDevice.t @-> ptr (VideoProfileInfoKHR.t) @-> ptr (VideoCapabilitiesKHR.t) @-> returning (Result.t)
 let get_physical_device_video_capabilities_khr_ref = ref (bind get_physical_device_video_capabilities_khr_typ Ctypes.null)
@@ -5047,27 +4907,6 @@ let get_memory_native_buffer_ohos arg0 arg1 arg2 =
   | Some f -> f arg0 arg1 arg2
   | None -> Vk_base.not_loaded "vkGetMemoryNativeBufferOHOS"
 
-let get_swapchain_gralloc_usage_ohos_typ = Device.t @-> Format.t @-> ImageUsageFlags.t @-> ptr (Vk_base.uint64) @-> returning (Result.t)
-let get_swapchain_gralloc_usage_ohos_ref = ref (bind get_swapchain_gralloc_usage_ohos_typ Ctypes.null)
-let get_swapchain_gralloc_usage_ohos arg0 arg1 arg2 arg3 =
-  match !get_swapchain_gralloc_usage_ohos_ref with
-  | Some f -> f arg0 arg1 arg2 arg3
-  | None -> Vk_base.not_loaded "vkGetSwapchainGrallocUsageOHOS"
-
-let acquire_image_ohos_typ = Device.t @-> Image.t @-> Vk_base.int32 @-> Semaphore.t @-> Fence.t @-> returning (Result.t)
-let acquire_image_ohos_ref = ref (bind acquire_image_ohos_typ Ctypes.null)
-let acquire_image_ohos arg0 arg1 arg2 arg3 arg4 =
-  match !acquire_image_ohos_ref with
-  | Some f -> f arg0 arg1 arg2 arg3 arg4
-  | None -> Vk_base.not_loaded "vkAcquireImageOHOS"
-
-let queue_signal_release_image_ohos_typ = Queue.t @-> Vk_base.uint32 @-> ptr (Semaphore.t) @-> Image.t @-> ptr (Vk_base.int32) @-> returning (Result.t)
-let queue_signal_release_image_ohos_ref = ref (bind queue_signal_release_image_ohos_typ Ctypes.null)
-let queue_signal_release_image_ohos arg0 arg1 arg2 arg3 arg4 =
-  match !queue_signal_release_image_ohos_ref with
-  | Some f -> f arg0 arg1 arg2 arg3 arg4
-  | None -> Vk_base.not_loaded "vkQueueSignalReleaseImageOHOS"
-
 let queue_set_perf_hint_qcom_typ = Queue.t @-> ptr (PerfHintInfoQCOM.t) @-> returning (Result.t)
 let queue_set_perf_hint_qcom_ref = ref (bind queue_set_perf_hint_qcom_typ Ctypes.null)
 let queue_set_perf_hint_qcom arg0 arg1 =
@@ -6317,9 +6156,6 @@ let load_instance instance =
   get_memory_zircon_handle_fuchsia_ref := bind get_memory_zircon_handle_fuchsia_typ (get "vkGetMemoryZirconHandleFUCHSIA");
   get_memory_zircon_handle_properties_fuchsia_ref := bind get_memory_zircon_handle_properties_fuchsia_typ (get "vkGetMemoryZirconHandlePropertiesFUCHSIA");
   get_memory_remote_address_nv_ref := bind get_memory_remote_address_nv_typ (get "vkGetMemoryRemoteAddressNV");
-  get_memory_sci_buf_nv_ref := bind get_memory_sci_buf_nv_typ (get "vkGetMemorySciBufNV");
-  get_physical_device_external_memory_sci_buf_properties_nv_ref := bind get_physical_device_external_memory_sci_buf_properties_nv_typ (get "vkGetPhysicalDeviceExternalMemorySciBufPropertiesNV");
-  get_physical_device_sci_buf_attributes_nv_ref := bind get_physical_device_sci_buf_attributes_nv_typ (get "vkGetPhysicalDeviceSciBufAttributesNV");
   get_physical_device_external_semaphore_properties_ref := bind get_physical_device_external_semaphore_properties_typ (get "vkGetPhysicalDeviceExternalSemaphoreProperties");
   get_semaphore_win_32_handle_khr_ref := bind get_semaphore_win_32_handle_khr_typ (get "vkGetSemaphoreWin32HandleKHR");
   import_semaphore_win_32_handle_khr_ref := bind import_semaphore_win_32_handle_khr_typ (get "vkImportSemaphoreWin32HandleKHR");
@@ -6332,15 +6168,6 @@ let load_instance instance =
   import_fence_win_32_handle_khr_ref := bind import_fence_win_32_handle_khr_typ (get "vkImportFenceWin32HandleKHR");
   get_fence_fd_khr_ref := bind get_fence_fd_khr_typ (get "vkGetFenceFdKHR");
   import_fence_fd_khr_ref := bind import_fence_fd_khr_typ (get "vkImportFenceFdKHR");
-  get_fence_sci_sync_fence_nv_ref := bind get_fence_sci_sync_fence_nv_typ (get "vkGetFenceSciSyncFenceNV");
-  get_fence_sci_sync_obj_nv_ref := bind get_fence_sci_sync_obj_nv_typ (get "vkGetFenceSciSyncObjNV");
-  import_fence_sci_sync_fence_nv_ref := bind import_fence_sci_sync_fence_nv_typ (get "vkImportFenceSciSyncFenceNV");
-  import_fence_sci_sync_obj_nv_ref := bind import_fence_sci_sync_obj_nv_typ (get "vkImportFenceSciSyncObjNV");
-  get_semaphore_sci_sync_obj_nv_ref := bind get_semaphore_sci_sync_obj_nv_typ (get "vkGetSemaphoreSciSyncObjNV");
-  import_semaphore_sci_sync_obj_nv_ref := bind import_semaphore_sci_sync_obj_nv_typ (get "vkImportSemaphoreSciSyncObjNV");
-  get_physical_device_sci_sync_attributes_nv_ref := bind get_physical_device_sci_sync_attributes_nv_typ (get "vkGetPhysicalDeviceSciSyncAttributesNV");
-  create_semaphore_sci_sync_pool_nv_ref := bind create_semaphore_sci_sync_pool_nv_typ (get "vkCreateSemaphoreSciSyncPoolNV");
-  destroy_semaphore_sci_sync_pool_nv_ref := bind destroy_semaphore_sci_sync_pool_nv_typ (get "vkDestroySemaphoreSciSyncPoolNV");
   release_display_ext_ref := bind release_display_ext_typ (get "vkReleaseDisplayEXT");
   acquire_xlib_display_ext_ref := bind acquire_xlib_display_ext_typ (get "vkAcquireXlibDisplayEXT");
   get_rand_r_output_display_ext_ref := bind get_rand_r_output_display_ext_typ (get "vkGetRandROutputDisplayEXT");
@@ -6398,10 +6225,6 @@ let load_instance instance =
   get_validation_cache_data_ext_ref := bind get_validation_cache_data_ext_typ (get "vkGetValidationCacheDataEXT");
   merge_validation_caches_ext_ref := bind merge_validation_caches_ext_typ (get "vkMergeValidationCachesEXT");
   get_descriptor_set_layout_support_ref := bind get_descriptor_set_layout_support_typ (get "vkGetDescriptorSetLayoutSupport");
-  get_swapchain_gralloc_usage_android_ref := bind get_swapchain_gralloc_usage_android_typ (get "vkGetSwapchainGrallocUsageANDROID");
-  get_swapchain_gralloc_usage_2_android_ref := bind get_swapchain_gralloc_usage_2_android_typ (get "vkGetSwapchainGrallocUsage2ANDROID");
-  acquire_image_android_ref := bind acquire_image_android_typ (get "vkAcquireImageANDROID");
-  queue_signal_release_image_android_ref := bind queue_signal_release_image_android_typ (get "vkQueueSignalReleaseImageANDROID");
   get_shader_info_amd_ref := bind get_shader_info_amd_typ (get "vkGetShaderInfoAMD");
   set_local_dimming_amd_ref := bind set_local_dimming_amd_typ (get "vkSetLocalDimmingAMD");
   get_physical_device_calibrateable_time_domains_khr_ref := bind get_physical_device_calibrateable_time_domains_khr_typ (get "vkGetPhysicalDeviceCalibrateableTimeDomainsKHR");
@@ -6513,7 +6336,6 @@ let load_instance instance =
   get_pipeline_executable_statistics_khr_ref := bind get_pipeline_executable_statistics_khr_typ (get "vkGetPipelineExecutableStatisticsKHR");
   get_pipeline_executable_internal_representations_khr_ref := bind get_pipeline_executable_internal_representations_khr_typ (get "vkGetPipelineExecutableInternalRepresentationsKHR");
   cmd_set_line_stipple_ref := bind cmd_set_line_stipple_typ (get "vkCmdSetLineStipple");
-  get_fault_data_ref := bind get_fault_data_typ (get "vkGetFaultData");
   get_physical_device_tool_properties_ref := bind get_physical_device_tool_properties_typ (get "vkGetPhysicalDeviceToolProperties");
   create_acceleration_structure_khr_ref := bind create_acceleration_structure_khr_typ (get "vkCreateAccelerationStructureKHR");
   cmd_build_acceleration_structures_khr_ref := bind cmd_build_acceleration_structures_khr_typ (get "vkCmdBuildAccelerationStructuresKHR");
@@ -6587,8 +6409,6 @@ let load_instance instance =
   cmd_copy_buffer_to_image_2_ref := bind cmd_copy_buffer_to_image_2_typ (get "vkCmdCopyBufferToImage2");
   cmd_copy_image_to_buffer_2_ref := bind cmd_copy_image_to_buffer_2_typ (get "vkCmdCopyImageToBuffer2");
   cmd_resolve_image_2_ref := bind cmd_resolve_image_2_typ (get "vkCmdResolveImage2");
-  cmd_refresh_objects_khr_ref := bind cmd_refresh_objects_khr_typ (get "vkCmdRefreshObjectsKHR");
-  get_physical_device_refreshable_object_types_khr_ref := bind get_physical_device_refreshable_object_types_khr_typ (get "vkGetPhysicalDeviceRefreshableObjectTypesKHR");
   cmd_set_fragment_shading_rate_khr_ref := bind cmd_set_fragment_shading_rate_khr_typ (get "vkCmdSetFragmentShadingRateKHR");
   get_physical_device_fragment_shading_rates_khr_ref := bind get_physical_device_fragment_shading_rates_khr_typ (get "vkGetPhysicalDeviceFragmentShadingRatesKHR");
   cmd_set_fragment_shading_rate_enum_nv_ref := bind cmd_set_fragment_shading_rate_enum_nv_typ (get "vkCmdSetFragmentShadingRateEnumNV");
@@ -6607,7 +6427,6 @@ let load_instance instance =
   copy_image_to_memory_ref := bind copy_image_to_memory_typ (get "vkCopyImageToMemory");
   copy_image_to_image_ref := bind copy_image_to_image_typ (get "vkCopyImageToImage");
   transition_image_layout_ref := bind transition_image_layout_typ (get "vkTransitionImageLayout");
-  get_command_pool_memory_consumption_ref := bind get_command_pool_memory_consumption_typ (get "vkGetCommandPoolMemoryConsumption");
   get_physical_device_video_capabilities_khr_ref := bind get_physical_device_video_capabilities_khr_typ (get "vkGetPhysicalDeviceVideoCapabilitiesKHR");
   get_physical_device_video_format_properties_khr_ref := bind get_physical_device_video_format_properties_khr_typ (get "vkGetPhysicalDeviceVideoFormatPropertiesKHR");
   get_physical_device_video_encode_quality_level_properties_khr_ref := bind get_physical_device_video_encode_quality_level_properties_khr_typ (get "vkGetPhysicalDeviceVideoEncodeQualityLevelPropertiesKHR");
@@ -6795,9 +6614,6 @@ let load_instance instance =
   get_physical_device_queue_family_data_graph_processing_engine_properties_arm_ref := bind get_physical_device_queue_family_data_graph_processing_engine_properties_arm_typ (get "vkGetPhysicalDeviceQueueFamilyDataGraphProcessingEnginePropertiesARM");
   get_native_buffer_properties_ohos_ref := bind get_native_buffer_properties_ohos_typ (get "vkGetNativeBufferPropertiesOHOS");
   get_memory_native_buffer_ohos_ref := bind get_memory_native_buffer_ohos_typ (get "vkGetMemoryNativeBufferOHOS");
-  get_swapchain_gralloc_usage_ohos_ref := bind get_swapchain_gralloc_usage_ohos_typ (get "vkGetSwapchainGrallocUsageOHOS");
-  acquire_image_ohos_ref := bind acquire_image_ohos_typ (get "vkAcquireImageOHOS");
-  queue_signal_release_image_ohos_ref := bind queue_signal_release_image_ohos_typ (get "vkQueueSignalReleaseImageOHOS");
   queue_set_perf_hint_qcom_ref := bind queue_set_perf_hint_qcom_typ (get "vkQueueSetPerfHintQCOM");
   enumerate_physical_device_queue_family_performance_counters_by_region_arm_ref := bind enumerate_physical_device_queue_family_performance_counters_by_region_arm_typ (get "vkEnumeratePhysicalDeviceQueueFamilyPerformanceCountersByRegionARM");
   cmd_set_compute_occupancy_priority_nv_ref := bind cmd_set_compute_occupancy_priority_nv_typ (get "vkCmdSetComputeOccupancyPriorityNV");
@@ -7126,7 +6942,6 @@ let load_device device =
   get_memory_zircon_handle_fuchsia_ref := bind get_memory_zircon_handle_fuchsia_typ (get "vkGetMemoryZirconHandleFUCHSIA");
   get_memory_zircon_handle_properties_fuchsia_ref := bind get_memory_zircon_handle_properties_fuchsia_typ (get "vkGetMemoryZirconHandlePropertiesFUCHSIA");
   get_memory_remote_address_nv_ref := bind get_memory_remote_address_nv_typ (get "vkGetMemoryRemoteAddressNV");
-  get_memory_sci_buf_nv_ref := bind get_memory_sci_buf_nv_typ (get "vkGetMemorySciBufNV");
   get_semaphore_win_32_handle_khr_ref := bind get_semaphore_win_32_handle_khr_typ (get "vkGetSemaphoreWin32HandleKHR");
   import_semaphore_win_32_handle_khr_ref := bind import_semaphore_win_32_handle_khr_typ (get "vkImportSemaphoreWin32HandleKHR");
   get_semaphore_fd_khr_ref := bind get_semaphore_fd_khr_typ (get "vkGetSemaphoreFdKHR");
@@ -7137,14 +6952,6 @@ let load_device device =
   import_fence_win_32_handle_khr_ref := bind import_fence_win_32_handle_khr_typ (get "vkImportFenceWin32HandleKHR");
   get_fence_fd_khr_ref := bind get_fence_fd_khr_typ (get "vkGetFenceFdKHR");
   import_fence_fd_khr_ref := bind import_fence_fd_khr_typ (get "vkImportFenceFdKHR");
-  get_fence_sci_sync_fence_nv_ref := bind get_fence_sci_sync_fence_nv_typ (get "vkGetFenceSciSyncFenceNV");
-  get_fence_sci_sync_obj_nv_ref := bind get_fence_sci_sync_obj_nv_typ (get "vkGetFenceSciSyncObjNV");
-  import_fence_sci_sync_fence_nv_ref := bind import_fence_sci_sync_fence_nv_typ (get "vkImportFenceSciSyncFenceNV");
-  import_fence_sci_sync_obj_nv_ref := bind import_fence_sci_sync_obj_nv_typ (get "vkImportFenceSciSyncObjNV");
-  get_semaphore_sci_sync_obj_nv_ref := bind get_semaphore_sci_sync_obj_nv_typ (get "vkGetSemaphoreSciSyncObjNV");
-  import_semaphore_sci_sync_obj_nv_ref := bind import_semaphore_sci_sync_obj_nv_typ (get "vkImportSemaphoreSciSyncObjNV");
-  create_semaphore_sci_sync_pool_nv_ref := bind create_semaphore_sci_sync_pool_nv_typ (get "vkCreateSemaphoreSciSyncPoolNV");
-  destroy_semaphore_sci_sync_pool_nv_ref := bind destroy_semaphore_sci_sync_pool_nv_typ (get "vkDestroySemaphoreSciSyncPoolNV");
   display_power_control_ext_ref := bind display_power_control_ext_typ (get "vkDisplayPowerControlEXT");
   register_device_event_ext_ref := bind register_device_event_ext_typ (get "vkRegisterDeviceEventEXT");
   register_display_event_ext_ref := bind register_display_event_ext_typ (get "vkRegisterDisplayEventEXT");
@@ -7184,10 +6991,6 @@ let load_device device =
   get_validation_cache_data_ext_ref := bind get_validation_cache_data_ext_typ (get "vkGetValidationCacheDataEXT");
   merge_validation_caches_ext_ref := bind merge_validation_caches_ext_typ (get "vkMergeValidationCachesEXT");
   get_descriptor_set_layout_support_ref := bind get_descriptor_set_layout_support_typ (get "vkGetDescriptorSetLayoutSupport");
-  get_swapchain_gralloc_usage_android_ref := bind get_swapchain_gralloc_usage_android_typ (get "vkGetSwapchainGrallocUsageANDROID");
-  get_swapchain_gralloc_usage_2_android_ref := bind get_swapchain_gralloc_usage_2_android_typ (get "vkGetSwapchainGrallocUsage2ANDROID");
-  acquire_image_android_ref := bind acquire_image_android_typ (get "vkAcquireImageANDROID");
-  queue_signal_release_image_android_ref := bind queue_signal_release_image_android_typ (get "vkQueueSignalReleaseImageANDROID");
   get_shader_info_amd_ref := bind get_shader_info_amd_typ (get "vkGetShaderInfoAMD");
   set_local_dimming_amd_ref := bind set_local_dimming_amd_typ (get "vkSetLocalDimmingAMD");
   get_calibrated_timestamps_khr_ref := bind get_calibrated_timestamps_khr_typ (get "vkGetCalibratedTimestampsKHR");
@@ -7289,7 +7092,6 @@ let load_device device =
   get_pipeline_executable_statistics_khr_ref := bind get_pipeline_executable_statistics_khr_typ (get "vkGetPipelineExecutableStatisticsKHR");
   get_pipeline_executable_internal_representations_khr_ref := bind get_pipeline_executable_internal_representations_khr_typ (get "vkGetPipelineExecutableInternalRepresentationsKHR");
   cmd_set_line_stipple_ref := bind cmd_set_line_stipple_typ (get "vkCmdSetLineStipple");
-  get_fault_data_ref := bind get_fault_data_typ (get "vkGetFaultData");
   create_acceleration_structure_khr_ref := bind create_acceleration_structure_khr_typ (get "vkCreateAccelerationStructureKHR");
   cmd_build_acceleration_structures_khr_ref := bind cmd_build_acceleration_structures_khr_typ (get "vkCmdBuildAccelerationStructuresKHR");
   cmd_build_acceleration_structures_indirect_khr_ref := bind cmd_build_acceleration_structures_indirect_khr_typ (get "vkCmdBuildAccelerationStructuresIndirectKHR");
@@ -7362,7 +7164,6 @@ let load_device device =
   cmd_copy_buffer_to_image_2_ref := bind cmd_copy_buffer_to_image_2_typ (get "vkCmdCopyBufferToImage2");
   cmd_copy_image_to_buffer_2_ref := bind cmd_copy_image_to_buffer_2_typ (get "vkCmdCopyImageToBuffer2");
   cmd_resolve_image_2_ref := bind cmd_resolve_image_2_typ (get "vkCmdResolveImage2");
-  cmd_refresh_objects_khr_ref := bind cmd_refresh_objects_khr_typ (get "vkCmdRefreshObjectsKHR");
   cmd_set_fragment_shading_rate_khr_ref := bind cmd_set_fragment_shading_rate_khr_typ (get "vkCmdSetFragmentShadingRateKHR");
   cmd_set_fragment_shading_rate_enum_nv_ref := bind cmd_set_fragment_shading_rate_enum_nv_typ (get "vkCmdSetFragmentShadingRateEnumNV");
   get_acceleration_structure_build_sizes_khr_ref := bind get_acceleration_structure_build_sizes_khr_typ (get "vkGetAccelerationStructureBuildSizesKHR");
@@ -7380,7 +7181,6 @@ let load_device device =
   copy_image_to_memory_ref := bind copy_image_to_memory_typ (get "vkCopyImageToMemory");
   copy_image_to_image_ref := bind copy_image_to_image_typ (get "vkCopyImageToImage");
   transition_image_layout_ref := bind transition_image_layout_typ (get "vkTransitionImageLayout");
-  get_command_pool_memory_consumption_ref := bind get_command_pool_memory_consumption_typ (get "vkGetCommandPoolMemoryConsumption");
   create_video_session_khr_ref := bind create_video_session_khr_typ (get "vkCreateVideoSessionKHR");
   destroy_video_session_khr_ref := bind destroy_video_session_khr_typ (get "vkDestroyVideoSessionKHR");
   create_video_session_parameters_khr_ref := bind create_video_session_parameters_khr_typ (get "vkCreateVideoSessionParametersKHR");
@@ -7555,9 +7355,6 @@ let load_device device =
   get_data_graph_pipeline_properties_arm_ref := bind get_data_graph_pipeline_properties_arm_typ (get "vkGetDataGraphPipelinePropertiesARM");
   get_native_buffer_properties_ohos_ref := bind get_native_buffer_properties_ohos_typ (get "vkGetNativeBufferPropertiesOHOS");
   get_memory_native_buffer_ohos_ref := bind get_memory_native_buffer_ohos_typ (get "vkGetMemoryNativeBufferOHOS");
-  get_swapchain_gralloc_usage_ohos_ref := bind get_swapchain_gralloc_usage_ohos_typ (get "vkGetSwapchainGrallocUsageOHOS");
-  acquire_image_ohos_ref := bind acquire_image_ohos_typ (get "vkAcquireImageOHOS");
-  queue_signal_release_image_ohos_ref := bind queue_signal_release_image_ohos_typ (get "vkQueueSignalReleaseImageOHOS");
   queue_set_perf_hint_qcom_ref := bind queue_set_perf_hint_qcom_typ (get "vkQueueSetPerfHintQCOM");
   cmd_set_compute_occupancy_priority_nv_ref := bind cmd_set_compute_occupancy_priority_nv_typ (get "vkCmdSetComputeOccupancyPriorityNV");
   write_sampler_descriptors_ext_ref := bind write_sampler_descriptors_ext_typ (get "vkWriteSamplerDescriptorsEXT");

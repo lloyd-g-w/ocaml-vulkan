@@ -270,6 +270,34 @@ class Context:
             details = "; ".join(f"{name}: {', '.join(wheres[:4])}" for name, wheres in sorted(unknown.items()))
             raise ValueError(f"unknown C types in registry: {details}")
 
+        # P1-3 (DESIGN.md §7/§13): every generated struct that declares an
+        # expected sType constant (`values="VK_STRUCTURE_TYPE_..."` in the
+        # registry) must resolve it to a real VkStructureType value -- if it
+        # doesn't, `make` would silently fall back to StructureType.of_int 0
+        # (= VK_STRUCTURE_TYPE_APPLICATION_INFO) with no error, exactly the
+        # P1-3 bug (vulkansc-only/disabled types reachable but their sType
+        # *value* skipped). Structs whose sType member has no `values=` at
+        # all (VkBaseInStructure/VkBaseOutStructure -- generic pNext-chain
+        # link types with no single fixed sType) are not an error: there is
+        # no declared value to fail to resolve.
+        structure_type_enum = self.registry.enums.get("VkStructureType")
+        structure_values = {v.name for v in structure_type_enum.values} if structure_type_enum else set()
+        unresolved_stype: list[str] = []
+        for name, comp in self.registry.composites.items():
+            if comp.alias or comp.kind != "struct":
+                continue
+            for member in comp.members:
+                if member.name == "sType" and member.values:
+                    wanted = member.values.split(",")[0]
+                    if wanted not in structure_values:
+                        unresolved_stype.append(f"{name} (wants {wanted})")
+        if unresolved_stype:
+            details = "; ".join(sorted(unresolved_stype))
+            raise ValueError(
+                "generated structs with an sType member but no resolvable "
+                f"StructureType value (reachability/enum-value bug): {details}"
+            )
+
 
 def _dependency_edges(ctx: Context) -> tuple[dict[str, set[str]], dict[tuple[str, str], bool]]:
     registry = ctx.registry

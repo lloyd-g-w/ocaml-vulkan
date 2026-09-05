@@ -6,77 +6,6 @@ open Vk_enums
 open Vk_handles
 open Vk_types_01
 
-module DataGraphOpticalFlowImageFormatPropertiesARM = struct
-  type t
-  let t : t structure typ = structure "VkDataGraphOpticalFlowImageFormatPropertiesARM"
-  let _s_type = field t "sType" (StructureType.t)
-  let s_type = _s_type
-  let _p_next = field t "pNext" (ptr (Ctypes.void))
-  let p_next = _p_next
-  let _format = field t "format" (Format.t)
-  let format = _format
-  let () = seal t
-  let structure_type : StructureType.t option = Some StructureType.data_graph_optical_flow_image_format_properties_arm
-    let make ?next:arg_next () =
-    let value, keep = Vk_base.make_kept t in
-    ignore keep;
-    setf value _s_type StructureType.data_graph_optical_flow_image_format_properties_arm;
-    (match arg_next with
-     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
-     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    value
-end
-
-module DataGraphPipelineCompilerControlCreateInfoARM = struct
-  type t
-  let t : t structure typ = structure "VkDataGraphPipelineCompilerControlCreateInfoARM"
-  let _s_type = field t "sType" (StructureType.t)
-  let s_type = _s_type
-  let _p_next = field t "pNext" (ptr (Ctypes.void))
-  let p_next = _p_next
-  let _p_vendor_options = field t "pVendorOptions" (ptr (Ctypes.char))
-  let p_vendor_options = _p_vendor_options
-  let () = seal t
-  let structure_type : StructureType.t option = Some StructureType.data_graph_pipeline_compiler_control_create_info_arm
-    let make ?next:arg_next ?vendor_options:arg_vendor_options () =
-    let value, keep = Vk_base.make_kept t in
-    ignore keep;
-    setf value _s_type StructureType.data_graph_pipeline_compiler_control_create_info_arm;
-    (match arg_next with
-     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
-     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    (match arg_vendor_options with
-     | None -> setf value _p_vendor_options (Vk_base.null_ptr (Ctypes.char))
-     | Some text -> let text = CArray.of_string text in
-         setf value _p_vendor_options (CArray.start text); Vk_base.retain keep text);
-    value
-end
-
-module DataGraphPipelineConstantARM = struct
-  type t
-  let t : t structure typ = structure "VkDataGraphPipelineConstantARM"
-  let _s_type = field t "sType" (StructureType.t)
-  let s_type = _s_type
-  let _p_next = field t "pNext" (ptr (Ctypes.void))
-  let p_next = _p_next
-  let _id = field t "id" (Vk_base.uint32)
-  let id = _id
-  let _p_constant_data = field t "pConstantData" (ptr (Ctypes.void))
-  let p_constant_data = _p_constant_data
-  let () = seal t
-  let structure_type : StructureType.t option = Some StructureType.data_graph_pipeline_constant_arm
-    let make ?next:arg_next ?id:(arg_id=0) ?constant_data:arg_constant_data () =
-    let value, keep = Vk_base.make_kept t in
-    ignore keep;
-    setf value _s_type StructureType.data_graph_pipeline_constant_arm;
-    (match arg_next with
-     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
-     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    setf value _id arg_id;
-    setf value _p_constant_data (match arg_constant_data with None -> Vk_base.null_ptr (Ctypes.void) | Some p -> p);
-    value
-end
-
 module DataGraphPipelineConstantTensorSemiStructuredSparsityInfoARM = struct
   type t
   let t : t structure typ = structure "VkDataGraphPipelineConstantTensorSemiStructuredSparsityInfoARM"
@@ -2091,28 +2020,6 @@ module DeviceQueueShaderCoreControlCreateInfoARM = struct
     value
 end
 
-module DeviceSemaphoreSciSyncPoolReservationCreateInfoNV = struct
-  type t
-  let t : t structure typ = structure "VkDeviceSemaphoreSciSyncPoolReservationCreateInfoNV"
-  let _s_type = field t "sType" (StructureType.t)
-  let s_type = _s_type
-  let _p_next = field t "pNext" (ptr (Ctypes.void))
-  let p_next = _p_next
-  let _semaphore_sci_sync_pool_request_count = field t "semaphoreSciSyncPoolRequestCount" (Vk_base.uint32)
-  let semaphore_sci_sync_pool_request_count = _semaphore_sci_sync_pool_request_count
-  let () = seal t
-  let structure_type : StructureType.t option = None
-    let make ?next:arg_next ?semaphore_sci_sync_pool_request_count:(arg_semaphore_sci_sync_pool_request_count=0) () =
-    let value, keep = Vk_base.make_kept t in
-    ignore keep;
-    setf value _s_type (StructureType.of_int 0);
-    (match arg_next with
-     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
-     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    setf value _semaphore_sci_sync_pool_request_count arg_semaphore_sci_sync_pool_request_count;
-    value
-end
-
 module DirectFBSurfaceCreateInfoEXT = struct
   type t
   let t : t structure typ = structure "VkDirectFBSurfaceCreateInfoEXT"
@@ -2532,11 +2439,11 @@ module ExecutionGraphPipelineScratchSizeAMDX = struct
   let _size_granularity = field t "sizeGranularity" (Vk_base.device_size)
   let size_granularity = _size_granularity
   let () = seal t
-  let structure_type : StructureType.t option = None
+  let structure_type : StructureType.t option = Some StructureType.execution_graph_pipeline_scratch_size_amdx
     let make ?next:arg_next ?min_size:(arg_min_size=0) ?max_size:(arg_max_size=0) ?size_granularity:(arg_size_granularity=0) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
-    setf value _s_type (StructureType.of_int 0);
+    setf value _s_type StructureType.execution_graph_pipeline_scratch_size_amdx;
     (match arg_next with
      | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
      | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
@@ -2565,28 +2472,6 @@ module ExportFenceCreateInfo = struct
      | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
      | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
     setf value _handle_types arg_handle_types;
-    value
-end
-
-module ExportFenceSciSyncInfoNV = struct
-  type t
-  let t : t structure typ = structure "VkExportFenceSciSyncInfoNV"
-  let _s_type = field t "sType" (StructureType.t)
-  let s_type = _s_type
-  let _p_next = field t "pNext" (ptr (Ctypes.void))
-  let p_next = _p_next
-  let _p_attributes = field t "pAttributes" (ptr void)
-  let p_attributes = _p_attributes
-  let () = seal t
-  let structure_type : StructureType.t option = None
-    let make ?next:arg_next ?p_attributes:arg_p_attributes () =
-    let value, keep = Vk_base.make_kept t in
-    ignore keep;
-    setf value _s_type (StructureType.of_int 0);
-    (match arg_next with
-     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
-     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    setf value _p_attributes (match arg_p_attributes with None -> Ctypes.null | Some p -> p);
     value
 end
 
@@ -2659,28 +2544,6 @@ module ExportMemoryAllocateInfoNV = struct
      | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
      | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
     setf value _handle_types arg_handle_types;
-    value
-end
-
-module ExportMemorySciBufInfoNV = struct
-  type t
-  let t : t structure typ = structure "VkExportMemorySciBufInfoNV"
-  let _s_type = field t "sType" (StructureType.t)
-  let s_type = _s_type
-  let _p_next = field t "pNext" (ptr (Ctypes.void))
-  let p_next = _p_next
-  let _p_attributes = field t "pAttributes" (ptr void)
-  let p_attributes = _p_attributes
-  let () = seal t
-  let structure_type : StructureType.t option = None
-    let make ?next:arg_next ?p_attributes:arg_p_attributes () =
-    let value, keep = Vk_base.make_kept t in
-    ignore keep;
-    setf value _s_type (StructureType.of_int 0);
-    (match arg_next with
-     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
-     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    setf value _p_attributes (match arg_p_attributes with None -> Ctypes.null | Some p -> p);
     value
 end
 
@@ -2956,5 +2819,130 @@ module ExportSemaphoreCreateInfo = struct
      | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
      | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
     setf value _handle_types arg_handle_types;
+    value
+end
+
+module ExportSemaphoreWin32HandleInfoKHR = struct
+  type t
+  let t : t structure typ = structure "VkExportSemaphoreWin32HandleInfoKHR"
+  let _s_type = field t "sType" (StructureType.t)
+  let s_type = _s_type
+  let _p_next = field t "pNext" (ptr (Ctypes.void))
+  let p_next = _p_next
+  let _p_attributes = field t "pAttributes" (ptr (void))
+  let p_attributes = _p_attributes
+  let _dw_access = field t "dwAccess" (Vk_base.uint32)
+  let dw_access = _dw_access
+  let _name = field t "name" (ptr void)
+  let name = _name
+  let () = seal t
+  let structure_type : StructureType.t option = Some StructureType.export_semaphore_win32_handle_info_khr
+    let make ?next:arg_next ?attributes:arg_attributes ?dw_access:(arg_dw_access=0) ?name:arg_name () =
+    let value, keep = Vk_base.make_kept t in
+    ignore keep;
+    setf value _s_type StructureType.export_semaphore_win32_handle_info_khr;
+    (match arg_next with
+     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
+     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
+    setf value _p_attributes (match arg_attributes with None -> Vk_base.null_ptr (void) | Some p -> p);
+    setf value _dw_access arg_dw_access;
+    setf value _name (match arg_name with None -> Ctypes.null | Some p -> p);
+    value
+end
+
+module ExtensionProperties = struct
+  type t
+  let t : t structure typ = structure "VkExtensionProperties"
+  let _extension_name = field t "extensionName" (array 256 (Ctypes.char))
+  let extension_name = _extension_name
+  let _spec_version = field t "specVersion" (Vk_base.uint32)
+  let spec_version = _spec_version
+  let () = seal t
+  let structure_type : StructureType.t option = None
+    let make () =
+    let value, keep = Vk_base.make_kept t in
+    ignore keep;
+    value
+  let get_extension_name value = Vk_base.string_of_char_array (getf value extension_name)
+end
+
+module Extent2D = struct
+  type t
+  let t : t structure typ = structure "VkExtent2D"
+  let _width = field t "width" (Vk_base.uint32)
+  let width = _width
+  let _height = field t "height" (Vk_base.uint32)
+  let height = _height
+  let () = seal t
+  let structure_type : StructureType.t option = None
+    let make ?width:(arg_width=0) ?height:(arg_height=0) () =
+    let value, keep = Vk_base.make_kept t in
+    ignore keep;
+    setf value _width arg_width;
+    setf value _height arg_height;
+    value
+end
+
+module Extent3D = struct
+  type t
+  let t : t structure typ = structure "VkExtent3D"
+  let _width = field t "width" (Vk_base.uint32)
+  let width = _width
+  let _height = field t "height" (Vk_base.uint32)
+  let height = _height
+  let _depth = field t "depth" (Vk_base.uint32)
+  let depth = _depth
+  let () = seal t
+  let structure_type : StructureType.t option = None
+    let make ?width:(arg_width=0) ?height:(arg_height=0) ?depth:(arg_depth=0) () =
+    let value, keep = Vk_base.make_kept t in
+    ignore keep;
+    setf value _width arg_width;
+    setf value _height arg_height;
+    setf value _depth arg_depth;
+    value
+end
+
+module ExternalComputeQueueCreateInfoNV = struct
+  type t
+  let t : t structure typ = structure "VkExternalComputeQueueCreateInfoNV"
+  let _s_type = field t "sType" (StructureType.t)
+  let s_type = _s_type
+  let _p_next = field t "pNext" (ptr (Ctypes.void))
+  let p_next = _p_next
+  let _preferred_queue = field t "preferredQueue" (Queue.t)
+  let preferred_queue = _preferred_queue
+  let () = seal t
+  let structure_type : StructureType.t option = Some StructureType.external_compute_queue_create_info_nv
+    let make ?next:arg_next ?preferred_queue:(arg_preferred_queue=Queue.null) () =
+    let value, keep = Vk_base.make_kept t in
+    ignore keep;
+    setf value _s_type StructureType.external_compute_queue_create_info_nv;
+    (match arg_next with
+     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
+     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
+    setf value _preferred_queue arg_preferred_queue;
+    value
+end
+
+module ExternalComputeQueueDataParamsNV = struct
+  type t
+  let t : t structure typ = structure "VkExternalComputeQueueDataParamsNV"
+  let _s_type = field t "sType" (StructureType.t)
+  let s_type = _s_type
+  let _p_next = field t "pNext" (ptr (Ctypes.void))
+  let p_next = _p_next
+  let _device_index = field t "deviceIndex" (Vk_base.uint32)
+  let device_index = _device_index
+  let () = seal t
+  let structure_type : StructureType.t option = Some StructureType.external_compute_queue_data_params_nv
+    let make ?next:arg_next ?device_index:(arg_device_index=0) () =
+    let value, keep = Vk_base.make_kept t in
+    ignore keep;
+    setf value _s_type StructureType.external_compute_queue_data_params_nv;
+    (match arg_next with
+     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
+     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
+    setf value _device_index arg_device_index;
     value
 end

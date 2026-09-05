@@ -506,4 +506,21 @@ def _emit_layout(ctx: Context, out: Path, chunks: list[str]) -> None:
                 lines.append(f"    (\"{member.name}\", {offset});")
         lines.append("  ]);")
     lines.append("]")
+    lines.append("")
+    lines.append("(* (C struct name, structure_type) for every non-alias struct module --")
+    lines.append("   DESIGN.md §7/§12/§13's regression check that a generated struct with")
+    lines.append("   an sType member never silently falls back to StructureType.of_int 0")
+    lines.append("   (e.g. because its enum value was only reachable from a vulkansc-only")
+    lines.append("   or disabled extension); VkApplicationInfo is the one legitimate")
+    lines.append("   structure whose real value is 0. VkBaseInStructure/VkBaseOutStructure")
+    lines.append("   are the only structs with an sType member and `structure_type = None`:")
+    lines.append("   the registry deliberately gives them no fixed sType (generic pNext-chain")
+    lines.append("   link types), so they are absent from this list by construction. *)")
+    lines.append("let structure_types = [")
+    for name, comp in sorted(ctx.registry.composites.items()):
+        if comp.alias or comp.kind != "struct":
+            continue
+        module = naming.module_name(name)
+        lines.append(f"  (\"{name}\", {module}.structure_type);")
+    lines.append("]")
     write_generated(out / "vk_layout.ml", "\n".join(lines) + "\n")

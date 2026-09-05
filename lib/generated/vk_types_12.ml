@@ -16,1275 +16,6 @@ open Vk_types_09
 open Vk_types_10
 open Vk_types_11
 
-module PresentTimingsInfoEXT = struct
-  type t
-  let t : t structure typ = structure "VkPresentTimingsInfoEXT"
-  let _s_type = field t "sType" (StructureType.t)
-  let s_type = _s_type
-  let _p_next = field t "pNext" (ptr (Ctypes.void))
-  let p_next = _p_next
-  let _swapchain_count = field t "swapchainCount" (Vk_base.uint32)
-  let swapchain_count = _swapchain_count
-  let _p_timing_infos = field t "pTimingInfos" (ptr (PresentTimingInfoEXT.t))
-  let p_timing_infos = _p_timing_infos
-  let () = seal t
-  let structure_type : StructureType.t option = Some StructureType.present_timings_info_ext
-    let make ?next:arg_next ?swapchain_count:arg_swapchain_count ?timing_infos:(arg_timing_infos=[]) () =
-    let value, keep = Vk_base.make_kept t in
-    ignore keep;
-    setf value _s_type StructureType.present_timings_info_ext;
-    (match arg_next with
-     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
-     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    let swapchain_count_n = (match arg_swapchain_count with Some n -> n | None -> List.length arg_timing_infos) in
-    if arg_timing_infos <> [] && List.length arg_timing_infos <> swapchain_count_n then invalid_arg "VkPresentTimingsInfoEXT.pTimingInfos: length does not match swapchainCount";
-    setf value _swapchain_count swapchain_count_n;
-    if arg_timing_infos = [] then setf value _p_timing_infos (Vk_base.null_ptr (PresentTimingInfoEXT.t)) else begin
-      let items = CArray.of_list (PresentTimingInfoEXT.t) arg_timing_infos in
-      setf value _p_timing_infos (CArray.start items);
-      Vk_base.retain keep items; Vk_base.retain keep arg_timing_infos
-    end;
-    value
-end
-
-module PushDataInfoEXT = struct
-  type t
-  let t : t structure typ = structure "VkPushDataInfoEXT"
-  let _s_type = field t "sType" (StructureType.t)
-  let s_type = _s_type
-  let _p_next = field t "pNext" (ptr (Ctypes.void))
-  let p_next = _p_next
-  let _offset = field t "offset" (Vk_base.uint32)
-  let offset = _offset
-  let _data = field t "data" (HostAddressRangeConstEXT.t)
-  let data = _data
-  let () = seal t
-  let structure_type : StructureType.t option = Some StructureType.push_data_info_ext
-    let make ?next:arg_next ?offset:(arg_offset=0) ?data:arg_data () =
-    let value, keep = Vk_base.make_kept t in
-    ignore keep;
-    setf value _s_type StructureType.push_data_info_ext;
-    (match arg_next with
-     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
-     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    setf value _offset arg_offset;
-    (match arg_data with None -> () | Some x -> setf value _data x; Vk_base.retain keep x);
-    value
-end
-
-module QueueFamilyDataGraphPropertiesARM = struct
-  type t
-  let t : t structure typ = structure "VkQueueFamilyDataGraphPropertiesARM"
-  let _s_type = field t "sType" (StructureType.t)
-  let s_type = _s_type
-  let _p_next = field t "pNext" (ptr (Ctypes.void))
-  let p_next = _p_next
-  let _engine = field t "engine" (PhysicalDeviceDataGraphProcessingEngineARM.t)
-  let engine = _engine
-  let _operation = field t "operation" (PhysicalDeviceDataGraphOperationSupportARM.t)
-  let operation = _operation
-  let () = seal t
-  let structure_type : StructureType.t option = Some StructureType.queue_family_data_graph_properties_arm
-    let make ?next:arg_next () =
-    let value, keep = Vk_base.make_kept t in
-    ignore keep;
-    setf value _s_type StructureType.queue_family_data_graph_properties_arm;
-    (match arg_next with
-     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
-     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    value
-end
-
-module QueueFamilyDataGraphTOSAPropertiesARM = struct
-  type t
-  let t : t structure typ = structure "VkQueueFamilyDataGraphTOSAPropertiesARM"
-  let _s_type = field t "sType" (StructureType.t)
-  let s_type = _s_type
-  let _p_next = field t "pNext" (ptr (Ctypes.void))
-  let p_next = _p_next
-  let _profile_count = field t "profileCount" (Vk_base.uint32)
-  let profile_count = _profile_count
-  let _p_profiles = field t "pProfiles" (ptr (DataGraphTOSANameQualityARM.t))
-  let p_profiles = _p_profiles
-  let _extension_count = field t "extensionCount" (Vk_base.uint32)
-  let extension_count = _extension_count
-  let _p_extensions = field t "pExtensions" (ptr (DataGraphTOSANameQualityARM.t))
-  let p_extensions = _p_extensions
-  let _level = field t "level" (DataGraphTOSALevelARM.t)
-  let level = _level
-  let () = seal t
-  let structure_type : StructureType.t option = Some StructureType.queue_family_data_graph_tosa_properties_arm
-    let make ?next:arg_next () =
-    let value, keep = Vk_base.make_kept t in
-    ignore keep;
-    setf value _s_type StructureType.queue_family_data_graph_tosa_properties_arm;
-    (match arg_next with
-     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
-     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    value
-end
-
-module QueueFamilyOptimalImageTransferGranularityPropertiesKHR = struct
-  type t
-  let t : t structure typ = structure "VkQueueFamilyOptimalImageTransferGranularityPropertiesKHR"
-  let _s_type = field t "sType" (StructureType.t)
-  let s_type = _s_type
-  let _p_next = field t "pNext" (ptr (Ctypes.void))
-  let p_next = _p_next
-  let _optimal_image_transfer_granularity = field t "optimalImageTransferGranularity" (Extent3D.t)
-  let optimal_image_transfer_granularity = _optimal_image_transfer_granularity
-  let () = seal t
-  let structure_type : StructureType.t option = Some StructureType.queue_family_optimal_image_transfer_granularity_properties_khr
-    let make ?next:arg_next () =
-    let value, keep = Vk_base.make_kept t in
-    ignore keep;
-    setf value _s_type StructureType.queue_family_optimal_image_transfer_granularity_properties_khr;
-    (match arg_next with
-     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
-     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    value
-end
-
-module QueueFamilyProperties = struct
-  type t
-  let t : t structure typ = structure "VkQueueFamilyProperties"
-  let _queue_flags = field t "queueFlags" (QueueFlags.t)
-  let queue_flags = _queue_flags
-  let _queue_count = field t "queueCount" (Vk_base.uint32)
-  let queue_count = _queue_count
-  let _timestamp_valid_bits = field t "timestampValidBits" (Vk_base.uint32)
-  let timestamp_valid_bits = _timestamp_valid_bits
-  let _min_image_transfer_granularity = field t "minImageTransferGranularity" (Extent3D.t)
-  let min_image_transfer_granularity = _min_image_transfer_granularity
-  let () = seal t
-  let structure_type : StructureType.t option = None
-    let make () =
-    let value, keep = Vk_base.make_kept t in
-    ignore keep;
-    value
-end
-
-module Rect2D = struct
-  type t
-  let t : t structure typ = structure "VkRect2D"
-  let _offset = field t "offset" (Offset2D.t)
-  let offset = _offset
-  let _extent = field t "extent" (Extent2D.t)
-  let extent = _extent
-  let () = seal t
-  let structure_type : StructureType.t option = None
-    let make ?offset:arg_offset ?extent:arg_extent () =
-    let value, keep = Vk_base.make_kept t in
-    ignore keep;
-    (match arg_offset with None -> () | Some x -> setf value _offset x; Vk_base.retain keep x);
-    (match arg_extent with None -> () | Some x -> setf value _extent x; Vk_base.retain keep x);
-    value
-end
-
-module RectLayerKHR = struct
-  type t
-  let t : t structure typ = structure "VkRectLayerKHR"
-  let _offset = field t "offset" (Offset2D.t)
-  let offset = _offset
-  let _extent = field t "extent" (Extent2D.t)
-  let extent = _extent
-  let _layer = field t "layer" (Vk_base.uint32)
-  let layer = _layer
-  let () = seal t
-  let structure_type : StructureType.t option = None
-    let make ?offset:arg_offset ?extent:arg_extent ?layer:(arg_layer=0) () =
-    let value, keep = Vk_base.make_kept t in
-    ignore keep;
-    (match arg_offset with None -> () | Some x -> setf value _offset x; Vk_base.retain keep x);
-    (match arg_extent with None -> () | Some x -> setf value _extent x; Vk_base.retain keep x);
-    setf value _layer arg_layer;
-    value
-end
-
-module RefreshObjectListKHR = struct
-  type t
-  let t : t structure typ = structure "VkRefreshObjectListKHR"
-  let _s_type = field t "sType" (StructureType.t)
-  let s_type = _s_type
-  let _p_next = field t "pNext" (ptr (Ctypes.void))
-  let p_next = _p_next
-  let _object_count = field t "objectCount" (Vk_base.uint32)
-  let object_count = _object_count
-  let _p_objects = field t "pObjects" (ptr (RefreshObjectKHR.t))
-  let p_objects = _p_objects
-  let () = seal t
-  let structure_type : StructureType.t option = None
-    let make ?next:arg_next ?objects:(arg_objects=[]) () =
-    let value, keep = Vk_base.make_kept t in
-    ignore keep;
-    setf value _s_type (StructureType.of_int 0);
-    (match arg_next with
-     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
-     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    let object_count_n = List.length arg_objects in
-    if arg_objects <> [] && List.length arg_objects <> object_count_n then invalid_arg "VkRefreshObjectListKHR.pObjects: length does not match objectCount";
-    setf value _object_count object_count_n;
-    if arg_objects = [] then setf value _p_objects (Vk_base.null_ptr (RefreshObjectKHR.t)) else begin
-      let items = CArray.of_list (RefreshObjectKHR.t) arg_objects in
-      setf value _p_objects (CArray.start items);
-      Vk_base.retain keep items; Vk_base.retain keep arg_objects
-    end;
-    value
-end
-
-module RenderPassCreationFeedbackCreateInfoEXT = struct
-  type t
-  let t : t structure typ = structure "VkRenderPassCreationFeedbackCreateInfoEXT"
-  let _s_type = field t "sType" (StructureType.t)
-  let s_type = _s_type
-  let _p_next = field t "pNext" (ptr (Ctypes.void))
-  let p_next = _p_next
-  let _p_render_pass_feedback = field t "pRenderPassFeedback" (ptr (RenderPassCreationFeedbackInfoEXT.t))
-  let p_render_pass_feedback = _p_render_pass_feedback
-  let () = seal t
-  let structure_type : StructureType.t option = Some StructureType.render_pass_creation_feedback_create_info_ext
-    let make ?next:arg_next ?p_render_pass_feedback:arg_p_render_pass_feedback () =
-    let value, keep = Vk_base.make_kept t in
-    ignore keep;
-    setf value _s_type StructureType.render_pass_creation_feedback_create_info_ext;
-    (match arg_next with
-     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
-     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    setf value _p_render_pass_feedback (match arg_p_render_pass_feedback with None -> Vk_base.null_ptr (RenderPassCreationFeedbackInfoEXT.t) | Some p -> p);
-    value
-end
-
-module RenderPassFragmentDensityMapCreateInfoEXT = struct
-  type t
-  let t : t structure typ = structure "VkRenderPassFragmentDensityMapCreateInfoEXT"
-  let _s_type = field t "sType" (StructureType.t)
-  let s_type = _s_type
-  let _p_next = field t "pNext" (ptr (Ctypes.void))
-  let p_next = _p_next
-  let _fragment_density_map_attachment = field t "fragmentDensityMapAttachment" (AttachmentReference.t)
-  let fragment_density_map_attachment = _fragment_density_map_attachment
-  let () = seal t
-  let structure_type : StructureType.t option = Some StructureType.render_pass_fragment_density_map_create_info_ext
-    let make ?next:arg_next ?fragment_density_map_attachment:arg_fragment_density_map_attachment () =
-    let value, keep = Vk_base.make_kept t in
-    ignore keep;
-    setf value _s_type StructureType.render_pass_fragment_density_map_create_info_ext;
-    (match arg_next with
-     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
-     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    (match arg_fragment_density_map_attachment with None -> () | Some x -> setf value _fragment_density_map_attachment x; Vk_base.retain keep x);
-    value
-end
-
-module RenderPassFragmentDensityMapOffsetEndInfoEXT = struct
-  type t
-  let t : t structure typ = structure "VkRenderPassFragmentDensityMapOffsetEndInfoEXT"
-  let _s_type = field t "sType" (StructureType.t)
-  let s_type = _s_type
-  let _p_next = field t "pNext" (ptr (Ctypes.void))
-  let p_next = _p_next
-  let _fragment_density_offset_count = field t "fragmentDensityOffsetCount" (Vk_base.uint32)
-  let fragment_density_offset_count = _fragment_density_offset_count
-  let _p_fragment_density_offsets = field t "pFragmentDensityOffsets" (ptr (Offset2D.t))
-  let p_fragment_density_offsets = _p_fragment_density_offsets
-  let () = seal t
-  let structure_type : StructureType.t option = Some StructureType.render_pass_fragment_density_map_offset_end_info_ext
-    let make ?next:arg_next ?fragment_density_offsets:(arg_fragment_density_offsets=[]) () =
-    let value, keep = Vk_base.make_kept t in
-    ignore keep;
-    setf value _s_type StructureType.render_pass_fragment_density_map_offset_end_info_ext;
-    (match arg_next with
-     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
-     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    let fragment_density_offset_count_n = List.length arg_fragment_density_offsets in
-    if arg_fragment_density_offsets <> [] && List.length arg_fragment_density_offsets <> fragment_density_offset_count_n then invalid_arg "VkRenderPassFragmentDensityMapOffsetEndInfoEXT.pFragmentDensityOffsets: length does not match fragmentDensityOffsetCount";
-    setf value _fragment_density_offset_count fragment_density_offset_count_n;
-    if arg_fragment_density_offsets = [] then setf value _p_fragment_density_offsets (Vk_base.null_ptr (Offset2D.t)) else begin
-      let items = CArray.of_list (Offset2D.t) arg_fragment_density_offsets in
-      setf value _p_fragment_density_offsets (CArray.start items);
-      Vk_base.retain keep items; Vk_base.retain keep arg_fragment_density_offsets
-    end;
-    value
-end
-
-module RenderPassInputAttachmentAspectCreateInfo = struct
-  type t
-  let t : t structure typ = structure "VkRenderPassInputAttachmentAspectCreateInfo"
-  let _s_type = field t "sType" (StructureType.t)
-  let s_type = _s_type
-  let _p_next = field t "pNext" (ptr (Ctypes.void))
-  let p_next = _p_next
-  let _aspect_reference_count = field t "aspectReferenceCount" (Vk_base.uint32)
-  let aspect_reference_count = _aspect_reference_count
-  let _p_aspect_references = field t "pAspectReferences" (ptr (InputAttachmentAspectReference.t))
-  let p_aspect_references = _p_aspect_references
-  let () = seal t
-  let structure_type : StructureType.t option = Some StructureType.render_pass_input_attachment_aspect_create_info
-    let make ?next:arg_next ?aspect_references:(arg_aspect_references=[]) () =
-    let value, keep = Vk_base.make_kept t in
-    ignore keep;
-    setf value _s_type StructureType.render_pass_input_attachment_aspect_create_info;
-    (match arg_next with
-     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
-     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    let aspect_reference_count_n = List.length arg_aspect_references in
-    if arg_aspect_references <> [] && List.length arg_aspect_references <> aspect_reference_count_n then invalid_arg "VkRenderPassInputAttachmentAspectCreateInfo.pAspectReferences: length does not match aspectReferenceCount";
-    setf value _aspect_reference_count aspect_reference_count_n;
-    if arg_aspect_references = [] then setf value _p_aspect_references (Vk_base.null_ptr (InputAttachmentAspectReference.t)) else begin
-      let items = CArray.of_list (InputAttachmentAspectReference.t) arg_aspect_references in
-      setf value _p_aspect_references (CArray.start items);
-      Vk_base.retain keep items; Vk_base.retain keep arg_aspect_references
-    end;
-    value
-end
-
-module RenderPassStripeSubmitInfoARM = struct
-  type t
-  let t : t structure typ = structure "VkRenderPassStripeSubmitInfoARM"
-  let _s_type = field t "sType" (StructureType.t)
-  let s_type = _s_type
-  let _p_next = field t "pNext" (ptr (Ctypes.void))
-  let p_next = _p_next
-  let _stripe_semaphore_info_count = field t "stripeSemaphoreInfoCount" (Vk_base.uint32)
-  let stripe_semaphore_info_count = _stripe_semaphore_info_count
-  let _p_stripe_semaphore_infos = field t "pStripeSemaphoreInfos" (ptr (SemaphoreSubmitInfo.t))
-  let p_stripe_semaphore_infos = _p_stripe_semaphore_infos
-  let () = seal t
-  let structure_type : StructureType.t option = Some StructureType.render_pass_stripe_submit_info_arm
-    let make ?next:arg_next ?stripe_semaphore_infos:(arg_stripe_semaphore_infos=[]) () =
-    let value, keep = Vk_base.make_kept t in
-    ignore keep;
-    setf value _s_type StructureType.render_pass_stripe_submit_info_arm;
-    (match arg_next with
-     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
-     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    let stripe_semaphore_info_count_n = List.length arg_stripe_semaphore_infos in
-    if arg_stripe_semaphore_infos <> [] && List.length arg_stripe_semaphore_infos <> stripe_semaphore_info_count_n then invalid_arg "VkRenderPassStripeSubmitInfoARM.pStripeSemaphoreInfos: length does not match stripeSemaphoreInfoCount";
-    setf value _stripe_semaphore_info_count stripe_semaphore_info_count_n;
-    if arg_stripe_semaphore_infos = [] then setf value _p_stripe_semaphore_infos (Vk_base.null_ptr (SemaphoreSubmitInfo.t)) else begin
-      let items = CArray.of_list (SemaphoreSubmitInfo.t) arg_stripe_semaphore_infos in
-      setf value _p_stripe_semaphore_infos (CArray.start items);
-      Vk_base.retain keep items; Vk_base.retain keep arg_stripe_semaphore_infos
-    end;
-    value
-end
-
-module RenderPassSubpassFeedbackCreateInfoEXT = struct
-  type t
-  let t : t structure typ = structure "VkRenderPassSubpassFeedbackCreateInfoEXT"
-  let _s_type = field t "sType" (StructureType.t)
-  let s_type = _s_type
-  let _p_next = field t "pNext" (ptr (Ctypes.void))
-  let p_next = _p_next
-  let _p_subpass_feedback = field t "pSubpassFeedback" (ptr (RenderPassSubpassFeedbackInfoEXT.t))
-  let p_subpass_feedback = _p_subpass_feedback
-  let () = seal t
-  let structure_type : StructureType.t option = Some StructureType.render_pass_subpass_feedback_create_info_ext
-    let make ?next:arg_next ?p_subpass_feedback:arg_p_subpass_feedback () =
-    let value, keep = Vk_base.make_kept t in
-    ignore keep;
-    setf value _s_type StructureType.render_pass_subpass_feedback_create_info_ext;
-    (match arg_next with
-     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
-     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    setf value _p_subpass_feedback (match arg_p_subpass_feedback with None -> Vk_base.null_ptr (RenderPassSubpassFeedbackInfoEXT.t) | Some p -> p);
-    value
-end
-
-module RenderPassTileShadingCreateInfoQCOM = struct
-  type t
-  let t : t structure typ = structure "VkRenderPassTileShadingCreateInfoQCOM"
-  let _s_type = field t "sType" (StructureType.t)
-  let s_type = _s_type
-  let _p_next = field t "pNext" (ptr (Ctypes.void))
-  let p_next = _p_next
-  let _flags = field t "flags" (TileShadingRenderPassFlagsQCOM.t)
-  let flags = _flags
-  let _tile_apron_size = field t "tileApronSize" (Extent2D.t)
-  let tile_apron_size = _tile_apron_size
-  let () = seal t
-  let structure_type : StructureType.t option = Some StructureType.render_pass_tile_shading_create_info_qcom
-    let make ?next:arg_next ?flags:(arg_flags=TileShadingRenderPassFlagsQCOM.of_int 0) ?tile_apron_size:arg_tile_apron_size () =
-    let value, keep = Vk_base.make_kept t in
-    ignore keep;
-    setf value _s_type StructureType.render_pass_tile_shading_create_info_qcom;
-    (match arg_next with
-     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
-     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    setf value _flags arg_flags;
-    (match arg_tile_apron_size with None -> () | Some x -> setf value _tile_apron_size x; Vk_base.retain keep x);
-    value
-end
-
-module RenderingFragmentShadingRateAttachmentInfoKHR = struct
-  type t
-  let t : t structure typ = structure "VkRenderingFragmentShadingRateAttachmentInfoKHR"
-  let _s_type = field t "sType" (StructureType.t)
-  let s_type = _s_type
-  let _p_next = field t "pNext" (ptr (Ctypes.void))
-  let p_next = _p_next
-  let _image_view = field t "imageView" (ImageView.t)
-  let image_view = _image_view
-  let _image_layout = field t "imageLayout" (ImageLayout.t)
-  let image_layout = _image_layout
-  let _shading_rate_attachment_texel_size = field t "shadingRateAttachmentTexelSize" (Extent2D.t)
-  let shading_rate_attachment_texel_size = _shading_rate_attachment_texel_size
-  let () = seal t
-  let structure_type : StructureType.t option = Some StructureType.rendering_fragment_shading_rate_attachment_info_khr
-    let make ?next:arg_next ?image_view:(arg_image_view=ImageView.null) ?image_layout:(arg_image_layout=ImageLayout.of_int 0) ?shading_rate_attachment_texel_size:arg_shading_rate_attachment_texel_size () =
-    let value, keep = Vk_base.make_kept t in
-    ignore keep;
-    setf value _s_type StructureType.rendering_fragment_shading_rate_attachment_info_khr;
-    (match arg_next with
-     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
-     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    setf value _image_view arg_image_view;
-    setf value _image_layout arg_image_layout;
-    (match arg_shading_rate_attachment_texel_size with None -> () | Some x -> setf value _shading_rate_attachment_texel_size x; Vk_base.retain keep x);
-    value
-end
-
-module SampleLocationsInfoEXT = struct
-  type t
-  let t : t structure typ = structure "VkSampleLocationsInfoEXT"
-  let _s_type = field t "sType" (StructureType.t)
-  let s_type = _s_type
-  let _p_next = field t "pNext" (ptr (Ctypes.void))
-  let p_next = _p_next
-  let _sample_locations_per_pixel = field t "sampleLocationsPerPixel" (SampleCountFlags.t)
-  let sample_locations_per_pixel = _sample_locations_per_pixel
-  let _sample_location_grid_size = field t "sampleLocationGridSize" (Extent2D.t)
-  let sample_location_grid_size = _sample_location_grid_size
-  let _sample_locations_count = field t "sampleLocationsCount" (Vk_base.uint32)
-  let sample_locations_count = _sample_locations_count
-  let _p_sample_locations = field t "pSampleLocations" (ptr (SampleLocationEXT.t))
-  let p_sample_locations = _p_sample_locations
-  let () = seal t
-  let structure_type : StructureType.t option = Some StructureType.sample_locations_info_ext
-    let make ?next:arg_next ?sample_locations_per_pixel:(arg_sample_locations_per_pixel=SampleCountFlags.of_int 0) ?sample_location_grid_size:arg_sample_location_grid_size ?sample_locations:(arg_sample_locations=[]) () =
-    let value, keep = Vk_base.make_kept t in
-    ignore keep;
-    setf value _s_type StructureType.sample_locations_info_ext;
-    (match arg_next with
-     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
-     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    setf value _sample_locations_per_pixel arg_sample_locations_per_pixel;
-    (match arg_sample_location_grid_size with None -> () | Some x -> setf value _sample_location_grid_size x; Vk_base.retain keep x);
-    let sample_locations_count_n = List.length arg_sample_locations in
-    if arg_sample_locations <> [] && List.length arg_sample_locations <> sample_locations_count_n then invalid_arg "VkSampleLocationsInfoEXT.pSampleLocations: length does not match sampleLocationsCount";
-    setf value _sample_locations_count sample_locations_count_n;
-    if arg_sample_locations = [] then setf value _p_sample_locations (Vk_base.null_ptr (SampleLocationEXT.t)) else begin
-      let items = CArray.of_list (SampleLocationEXT.t) arg_sample_locations in
-      setf value _p_sample_locations (CArray.start items);
-      Vk_base.retain keep items; Vk_base.retain keep arg_sample_locations
-    end;
-    value
-end
-
-module SamplerBlockMatchWindowCreateInfoQCOM = struct
-  type t
-  let t : t structure typ = structure "VkSamplerBlockMatchWindowCreateInfoQCOM"
-  let _s_type = field t "sType" (StructureType.t)
-  let s_type = _s_type
-  let _p_next = field t "pNext" (ptr (Ctypes.void))
-  let p_next = _p_next
-  let _window_extent = field t "windowExtent" (Extent2D.t)
-  let window_extent = _window_extent
-  let _window_compare_mode = field t "windowCompareMode" (BlockMatchWindowCompareModeQCOM.t)
-  let window_compare_mode = _window_compare_mode
-  let () = seal t
-  let structure_type : StructureType.t option = Some StructureType.sampler_block_match_window_create_info_qcom
-    let make ?next:arg_next ?window_extent:arg_window_extent ?window_compare_mode:(arg_window_compare_mode=BlockMatchWindowCompareModeQCOM.of_int 0) () =
-    let value, keep = Vk_base.make_kept t in
-    ignore keep;
-    setf value _s_type StructureType.sampler_block_match_window_create_info_qcom;
-    (match arg_next with
-     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
-     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    (match arg_window_extent with None -> () | Some x -> setf value _window_extent x; Vk_base.retain keep x);
-    setf value _window_compare_mode arg_window_compare_mode;
-    value
-end
-
-module SamplerBorderColorComponentMappingCreateInfoEXT = struct
-  type t
-  let t : t structure typ = structure "VkSamplerBorderColorComponentMappingCreateInfoEXT"
-  let _s_type = field t "sType" (StructureType.t)
-  let s_type = _s_type
-  let _p_next = field t "pNext" (ptr (Ctypes.void))
-  let p_next = _p_next
-  let _components = field t "components" (ComponentMapping.t)
-  let components = _components
-  let _srgb = field t "srgb" (Vk_base.bool32)
-  let srgb = _srgb
-  let () = seal t
-  let structure_type : StructureType.t option = Some StructureType.sampler_border_color_component_mapping_create_info_ext
-    let make ?next:arg_next ?components:arg_components ?srgb:(arg_srgb=false) () =
-    let value, keep = Vk_base.make_kept t in
-    ignore keep;
-    setf value _s_type StructureType.sampler_border_color_component_mapping_create_info_ext;
-    (match arg_next with
-     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
-     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    (match arg_components with None -> () | Some x -> setf value _components x; Vk_base.retain keep x);
-    setf value _srgb arg_srgb;
-    value
-end
-
-module SamplerCustomBorderColorCreateInfoEXT = struct
-  type t
-  let t : t structure typ = structure "VkSamplerCustomBorderColorCreateInfoEXT"
-  let _s_type = field t "sType" (StructureType.t)
-  let s_type = _s_type
-  let _p_next = field t "pNext" (ptr (Ctypes.void))
-  let p_next = _p_next
-  let _custom_border_color = field t "customBorderColor" (ClearColorValue.t)
-  let custom_border_color = _custom_border_color
-  let _format = field t "format" (Format.t)
-  let format = _format
-  let () = seal t
-  let structure_type : StructureType.t option = Some StructureType.sampler_custom_border_color_create_info_ext
-    let make ?next:arg_next ?custom_border_color:arg_custom_border_color ?format:(arg_format=Format.of_int 0) () =
-    let value, keep = Vk_base.make_kept t in
-    ignore keep;
-    setf value _s_type StructureType.sampler_custom_border_color_create_info_ext;
-    (match arg_next with
-     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
-     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    (match arg_custom_border_color with None -> () | Some x -> setf value _custom_border_color x; Vk_base.retain keep x);
-    setf value _format arg_format;
-    value
-end
-
-module SamplerYcbcrConversionCreateInfo = struct
-  type t
-  let t : t structure typ = structure "VkSamplerYcbcrConversionCreateInfo"
-  let _s_type = field t "sType" (StructureType.t)
-  let s_type = _s_type
-  let _p_next = field t "pNext" (ptr (Ctypes.void))
-  let p_next = _p_next
-  let _format = field t "format" (Format.t)
-  let format = _format
-  let _ycbcr_model = field t "ycbcrModel" (SamplerYcbcrModelConversion.t)
-  let ycbcr_model = _ycbcr_model
-  let _ycbcr_range = field t "ycbcrRange" (SamplerYcbcrRange.t)
-  let ycbcr_range = _ycbcr_range
-  let _components = field t "components" (ComponentMapping.t)
-  let components = _components
-  let _x_chroma_offset = field t "xChromaOffset" (ChromaLocation.t)
-  let x_chroma_offset = _x_chroma_offset
-  let _y_chroma_offset = field t "yChromaOffset" (ChromaLocation.t)
-  let y_chroma_offset = _y_chroma_offset
-  let _chroma_filter = field t "chromaFilter" (Filter.t)
-  let chroma_filter = _chroma_filter
-  let _force_explicit_reconstruction = field t "forceExplicitReconstruction" (Vk_base.bool32)
-  let force_explicit_reconstruction = _force_explicit_reconstruction
-  let () = seal t
-  let structure_type : StructureType.t option = Some StructureType.sampler_ycbcr_conversion_create_info
-    let make ?next:arg_next ?format:(arg_format=Format.of_int 0) ?ycbcr_model:(arg_ycbcr_model=SamplerYcbcrModelConversion.of_int 0) ?ycbcr_range:(arg_ycbcr_range=SamplerYcbcrRange.of_int 0) ?components:arg_components ?x_chroma_offset:(arg_x_chroma_offset=ChromaLocation.of_int 0) ?y_chroma_offset:(arg_y_chroma_offset=ChromaLocation.of_int 0) ?chroma_filter:(arg_chroma_filter=Filter.of_int 0) ?force_explicit_reconstruction:(arg_force_explicit_reconstruction=false) () =
-    let value, keep = Vk_base.make_kept t in
-    ignore keep;
-    setf value _s_type StructureType.sampler_ycbcr_conversion_create_info;
-    (match arg_next with
-     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
-     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    setf value _format arg_format;
-    setf value _ycbcr_model arg_ycbcr_model;
-    setf value _ycbcr_range arg_ycbcr_range;
-    (match arg_components with None -> () | Some x -> setf value _components x; Vk_base.retain keep x);
-    setf value _x_chroma_offset arg_x_chroma_offset;
-    setf value _y_chroma_offset arg_y_chroma_offset;
-    setf value _chroma_filter arg_chroma_filter;
-    setf value _force_explicit_reconstruction arg_force_explicit_reconstruction;
-    value
-end
-
-module ScreenBufferFormatPropertiesQNX = struct
-  type t
-  let t : t structure typ = structure "VkScreenBufferFormatPropertiesQNX"
-  let _s_type = field t "sType" (StructureType.t)
-  let s_type = _s_type
-  let _p_next = field t "pNext" (ptr (Ctypes.void))
-  let p_next = _p_next
-  let _format = field t "format" (Format.t)
-  let format = _format
-  let _external_format = field t "externalFormat" (Vk_base.uint64)
-  let external_format = _external_format
-  let _screen_usage = field t "screenUsage" (Vk_base.uint64)
-  let screen_usage = _screen_usage
-  let _format_features = field t "formatFeatures" (FormatFeatureFlags.t)
-  let format_features = _format_features
-  let _sampler_ycbcr_conversion_components = field t "samplerYcbcrConversionComponents" (ComponentMapping.t)
-  let sampler_ycbcr_conversion_components = _sampler_ycbcr_conversion_components
-  let _suggested_ycbcr_model = field t "suggestedYcbcrModel" (SamplerYcbcrModelConversion.t)
-  let suggested_ycbcr_model = _suggested_ycbcr_model
-  let _suggested_ycbcr_range = field t "suggestedYcbcrRange" (SamplerYcbcrRange.t)
-  let suggested_ycbcr_range = _suggested_ycbcr_range
-  let _suggested_x_chroma_offset = field t "suggestedXChromaOffset" (ChromaLocation.t)
-  let suggested_x_chroma_offset = _suggested_x_chroma_offset
-  let _suggested_y_chroma_offset = field t "suggestedYChromaOffset" (ChromaLocation.t)
-  let suggested_y_chroma_offset = _suggested_y_chroma_offset
-  let () = seal t
-  let structure_type : StructureType.t option = Some StructureType.screen_buffer_format_properties_qnx
-    let make ?next:arg_next () =
-    let value, keep = Vk_base.make_kept t in
-    ignore keep;
-    setf value _s_type StructureType.screen_buffer_format_properties_qnx;
-    (match arg_next with
-     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
-     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    value
-end
-
-module ShaderStatisticsInfoAMD = struct
-  type t
-  let t : t structure typ = structure "VkShaderStatisticsInfoAMD"
-  let _shader_stage_mask = field t "shaderStageMask" (ShaderStageFlags.t)
-  let shader_stage_mask = _shader_stage_mask
-  let _resource_usage = field t "resourceUsage" (ShaderResourceUsageAMD.t)
-  let resource_usage = _resource_usage
-  let _num_physical_vgprs = field t "numPhysicalVgprs" (Vk_base.uint32)
-  let num_physical_vgprs = _num_physical_vgprs
-  let _num_physical_sgprs = field t "numPhysicalSgprs" (Vk_base.uint32)
-  let num_physical_sgprs = _num_physical_sgprs
-  let _num_available_vgprs = field t "numAvailableVgprs" (Vk_base.uint32)
-  let num_available_vgprs = _num_available_vgprs
-  let _num_available_sgprs = field t "numAvailableSgprs" (Vk_base.uint32)
-  let num_available_sgprs = _num_available_sgprs
-  let _compute_work_group_size = field t "computeWorkGroupSize" (array 3 (Vk_base.uint32))
-  let compute_work_group_size = _compute_work_group_size
-  let () = seal t
-  let structure_type : StructureType.t option = None
-    let make () =
-    let value, keep = Vk_base.make_kept t in
-    ignore keep;
-    value
-end
-
-module SparseBufferMemoryBindInfo = struct
-  type t
-  let t : t structure typ = structure "VkSparseBufferMemoryBindInfo"
-  let _buffer = field t "buffer" (Buffer.t)
-  let buffer = _buffer
-  let _bind_count = field t "bindCount" (Vk_base.uint32)
-  let bind_count = _bind_count
-  let _p_binds = field t "pBinds" (ptr (SparseMemoryBind.t))
-  let p_binds = _p_binds
-  let () = seal t
-  let structure_type : StructureType.t option = None
-    let make ?buffer:(arg_buffer=Buffer.null) ?binds:(arg_binds=[]) () =
-    let value, keep = Vk_base.make_kept t in
-    ignore keep;
-    setf value _buffer arg_buffer;
-    let bind_count_n = List.length arg_binds in
-    if arg_binds <> [] && List.length arg_binds <> bind_count_n then invalid_arg "VkSparseBufferMemoryBindInfo.pBinds: length does not match bindCount";
-    setf value _bind_count bind_count_n;
-    if arg_binds = [] then setf value _p_binds (Vk_base.null_ptr (SparseMemoryBind.t)) else begin
-      let items = CArray.of_list (SparseMemoryBind.t) arg_binds in
-      setf value _p_binds (CArray.start items);
-      Vk_base.retain keep items; Vk_base.retain keep arg_binds
-    end;
-    value
-end
-
-module SparseImageFormatProperties = struct
-  type t
-  let t : t structure typ = structure "VkSparseImageFormatProperties"
-  let _aspect_mask = field t "aspectMask" (ImageAspectFlags.t)
-  let aspect_mask = _aspect_mask
-  let _image_granularity = field t "imageGranularity" (Extent3D.t)
-  let image_granularity = _image_granularity
-  let _flags = field t "flags" (SparseImageFormatFlags.t)
-  let flags = _flags
-  let () = seal t
-  let structure_type : StructureType.t option = None
-    let make () =
-    let value, keep = Vk_base.make_kept t in
-    ignore keep;
-    value
-end
-
-module SparseImageMemoryBind = struct
-  type t
-  let t : t structure typ = structure "VkSparseImageMemoryBind"
-  let _subresource = field t "subresource" (ImageSubresource.t)
-  let subresource = _subresource
-  let _offset = field t "offset" (Offset3D.t)
-  let offset = _offset
-  let _extent = field t "extent" (Extent3D.t)
-  let extent = _extent
-  let _memory = field t "memory" (DeviceMemory.t)
-  let memory = _memory
-  let _memory_offset = field t "memoryOffset" (Vk_base.device_size)
-  let memory_offset = _memory_offset
-  let _flags = field t "flags" (SparseMemoryBindFlags.t)
-  let flags = _flags
-  let () = seal t
-  let structure_type : StructureType.t option = None
-    let make ?subresource:arg_subresource ?offset:arg_offset ?extent:arg_extent ?memory:(arg_memory=DeviceMemory.null) ?memory_offset:(arg_memory_offset=0) ?flags:(arg_flags=SparseMemoryBindFlags.of_int 0) () =
-    let value, keep = Vk_base.make_kept t in
-    ignore keep;
-    (match arg_subresource with None -> () | Some x -> setf value _subresource x; Vk_base.retain keep x);
-    (match arg_offset with None -> () | Some x -> setf value _offset x; Vk_base.retain keep x);
-    (match arg_extent with None -> () | Some x -> setf value _extent x; Vk_base.retain keep x);
-    setf value _memory arg_memory;
-    setf value _memory_offset arg_memory_offset;
-    setf value _flags arg_flags;
-    value
-end
-
-module SparseImageOpaqueMemoryBindInfo = struct
-  type t
-  let t : t structure typ = structure "VkSparseImageOpaqueMemoryBindInfo"
-  let _image = field t "image" (Image.t)
-  let image = _image
-  let _bind_count = field t "bindCount" (Vk_base.uint32)
-  let bind_count = _bind_count
-  let _p_binds = field t "pBinds" (ptr (SparseMemoryBind.t))
-  let p_binds = _p_binds
-  let () = seal t
-  let structure_type : StructureType.t option = None
-    let make ?image:(arg_image=Image.null) ?binds:(arg_binds=[]) () =
-    let value, keep = Vk_base.make_kept t in
-    ignore keep;
-    setf value _image arg_image;
-    let bind_count_n = List.length arg_binds in
-    if arg_binds <> [] && List.length arg_binds <> bind_count_n then invalid_arg "VkSparseImageOpaqueMemoryBindInfo.pBinds: length does not match bindCount";
-    setf value _bind_count bind_count_n;
-    if arg_binds = [] then setf value _p_binds (Vk_base.null_ptr (SparseMemoryBind.t)) else begin
-      let items = CArray.of_list (SparseMemoryBind.t) arg_binds in
-      setf value _p_binds (CArray.start items);
-      Vk_base.retain keep items; Vk_base.retain keep arg_binds
-    end;
-    value
-end
-
-module SpecializationInfo = struct
-  type t
-  let t : t structure typ = structure "VkSpecializationInfo"
-  let _map_entry_count = field t "mapEntryCount" (Vk_base.uint32)
-  let map_entry_count = _map_entry_count
-  let _p_map_entries = field t "pMapEntries" (ptr (SpecializationMapEntry.t))
-  let p_map_entries = _p_map_entries
-  let _data_size = field t "dataSize" (Vk_base.size_t)
-  let data_size = _data_size
-  let _p_data = field t "pData" (ptr (Ctypes.void))
-  let p_data = _p_data
-  let () = seal t
-  let structure_type : StructureType.t option = None
-    let make ?map_entries:(arg_map_entries=[]) ?data:(arg_data="") () =
-    let value, keep = Vk_base.make_kept t in
-    ignore keep;
-    let map_entry_count_n = List.length arg_map_entries in
-    if arg_map_entries <> [] && List.length arg_map_entries <> map_entry_count_n then invalid_arg "VkSpecializationInfo.pMapEntries: length does not match mapEntryCount";
-    setf value _map_entry_count map_entry_count_n;
-    if arg_map_entries = [] then setf value _p_map_entries (Vk_base.null_ptr (SpecializationMapEntry.t)) else begin
-      let items = CArray.of_list (SpecializationMapEntry.t) arg_map_entries in
-      setf value _p_map_entries (CArray.start items);
-      Vk_base.retain keep items; Vk_base.retain keep arg_map_entries
-    end;
-    setf value _data_size (String.length arg_data);
-    if arg_data = "" then setf value _p_data (Vk_base.null_ptr (Ctypes.void)) else begin
-      let bytes = CArray.of_string arg_data in
-      setf value _p_data (to_voidp (CArray.start bytes)); Vk_base.retain keep bytes
-    end;
-    value
-end
-
-module SubmitInfo2 = struct
-  type t
-  let t : t structure typ = structure "VkSubmitInfo2"
-  let _s_type = field t "sType" (StructureType.t)
-  let s_type = _s_type
-  let _p_next = field t "pNext" (ptr (Ctypes.void))
-  let p_next = _p_next
-  let _flags = field t "flags" (SubmitFlags.t)
-  let flags = _flags
-  let _wait_semaphore_info_count = field t "waitSemaphoreInfoCount" (Vk_base.uint32)
-  let wait_semaphore_info_count = _wait_semaphore_info_count
-  let _p_wait_semaphore_infos = field t "pWaitSemaphoreInfos" (ptr (SemaphoreSubmitInfo.t))
-  let p_wait_semaphore_infos = _p_wait_semaphore_infos
-  let _command_buffer_info_count = field t "commandBufferInfoCount" (Vk_base.uint32)
-  let command_buffer_info_count = _command_buffer_info_count
-  let _p_command_buffer_infos = field t "pCommandBufferInfos" (ptr (CommandBufferSubmitInfo.t))
-  let p_command_buffer_infos = _p_command_buffer_infos
-  let _signal_semaphore_info_count = field t "signalSemaphoreInfoCount" (Vk_base.uint32)
-  let signal_semaphore_info_count = _signal_semaphore_info_count
-  let _p_signal_semaphore_infos = field t "pSignalSemaphoreInfos" (ptr (SemaphoreSubmitInfo.t))
-  let p_signal_semaphore_infos = _p_signal_semaphore_infos
-  let () = seal t
-  let structure_type : StructureType.t option = Some StructureType.submit_info_2
-    let make ?next:arg_next ?flags:(arg_flags=SubmitFlags.of_int 0) ?wait_semaphore_infos:(arg_wait_semaphore_infos=[]) ?command_buffer_infos:(arg_command_buffer_infos=[]) ?signal_semaphore_infos:(arg_signal_semaphore_infos=[]) () =
-    let value, keep = Vk_base.make_kept t in
-    ignore keep;
-    setf value _s_type StructureType.submit_info_2;
-    (match arg_next with
-     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
-     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    setf value _flags arg_flags;
-    let wait_semaphore_info_count_n = List.length arg_wait_semaphore_infos in
-    if arg_wait_semaphore_infos <> [] && List.length arg_wait_semaphore_infos <> wait_semaphore_info_count_n then invalid_arg "VkSubmitInfo2.pWaitSemaphoreInfos: length does not match waitSemaphoreInfoCount";
-    setf value _wait_semaphore_info_count wait_semaphore_info_count_n;
-    if arg_wait_semaphore_infos = [] then setf value _p_wait_semaphore_infos (Vk_base.null_ptr (SemaphoreSubmitInfo.t)) else begin
-      let items = CArray.of_list (SemaphoreSubmitInfo.t) arg_wait_semaphore_infos in
-      setf value _p_wait_semaphore_infos (CArray.start items);
-      Vk_base.retain keep items; Vk_base.retain keep arg_wait_semaphore_infos
-    end;
-    let command_buffer_info_count_n = List.length arg_command_buffer_infos in
-    if arg_command_buffer_infos <> [] && List.length arg_command_buffer_infos <> command_buffer_info_count_n then invalid_arg "VkSubmitInfo2.pCommandBufferInfos: length does not match commandBufferInfoCount";
-    setf value _command_buffer_info_count command_buffer_info_count_n;
-    if arg_command_buffer_infos = [] then setf value _p_command_buffer_infos (Vk_base.null_ptr (CommandBufferSubmitInfo.t)) else begin
-      let items = CArray.of_list (CommandBufferSubmitInfo.t) arg_command_buffer_infos in
-      setf value _p_command_buffer_infos (CArray.start items);
-      Vk_base.retain keep items; Vk_base.retain keep arg_command_buffer_infos
-    end;
-    let signal_semaphore_info_count_n = List.length arg_signal_semaphore_infos in
-    if arg_signal_semaphore_infos <> [] && List.length arg_signal_semaphore_infos <> signal_semaphore_info_count_n then invalid_arg "VkSubmitInfo2.pSignalSemaphoreInfos: length does not match signalSemaphoreInfoCount";
-    setf value _signal_semaphore_info_count signal_semaphore_info_count_n;
-    if arg_signal_semaphore_infos = [] then setf value _p_signal_semaphore_infos (Vk_base.null_ptr (SemaphoreSubmitInfo.t)) else begin
-      let items = CArray.of_list (SemaphoreSubmitInfo.t) arg_signal_semaphore_infos in
-      setf value _p_signal_semaphore_infos (CArray.start items);
-      Vk_base.retain keep items; Vk_base.retain keep arg_signal_semaphore_infos
-    end;
-    value
-end
-
-module SubpassDescription = struct
-  type t
-  let t : t structure typ = structure "VkSubpassDescription"
-  let _flags = field t "flags" (SubpassDescriptionFlags.t)
-  let flags = _flags
-  let _pipeline_bind_point = field t "pipelineBindPoint" (PipelineBindPoint.t)
-  let pipeline_bind_point = _pipeline_bind_point
-  let _input_attachment_count = field t "inputAttachmentCount" (Vk_base.uint32)
-  let input_attachment_count = _input_attachment_count
-  let _p_input_attachments = field t "pInputAttachments" (ptr (AttachmentReference.t))
-  let p_input_attachments = _p_input_attachments
-  let _color_attachment_count = field t "colorAttachmentCount" (Vk_base.uint32)
-  let color_attachment_count = _color_attachment_count
-  let _p_color_attachments = field t "pColorAttachments" (ptr (AttachmentReference.t))
-  let p_color_attachments = _p_color_attachments
-  let _p_resolve_attachments = field t "pResolveAttachments" (ptr (AttachmentReference.t))
-  let p_resolve_attachments = _p_resolve_attachments
-  let _p_depth_stencil_attachment = field t "pDepthStencilAttachment" (ptr (AttachmentReference.t))
-  let p_depth_stencil_attachment = _p_depth_stencil_attachment
-  let _preserve_attachment_count = field t "preserveAttachmentCount" (Vk_base.uint32)
-  let preserve_attachment_count = _preserve_attachment_count
-  let _p_preserve_attachments = field t "pPreserveAttachments" (ptr (Vk_base.uint32))
-  let p_preserve_attachments = _p_preserve_attachments
-  let () = seal t
-  let structure_type : StructureType.t option = None
-    let make ?flags:(arg_flags=SubpassDescriptionFlags.of_int 0) ?pipeline_bind_point:(arg_pipeline_bind_point=PipelineBindPoint.of_int 0) ?input_attachments:(arg_input_attachments=[]) ?color_attachments:(arg_color_attachments=[]) ?resolve_attachments:(arg_resolve_attachments=[]) ?depth_stencil_attachment:arg_depth_stencil_attachment ?preserve_attachments:(arg_preserve_attachments=[]) () =
-    let value, keep = Vk_base.make_kept t in
-    ignore keep;
-    setf value _flags arg_flags;
-    setf value _pipeline_bind_point arg_pipeline_bind_point;
-    let input_attachment_count_n = List.length arg_input_attachments in
-    if arg_input_attachments <> [] && List.length arg_input_attachments <> input_attachment_count_n then invalid_arg "VkSubpassDescription.pInputAttachments: length does not match inputAttachmentCount";
-    setf value _input_attachment_count input_attachment_count_n;
-    if arg_input_attachments = [] then setf value _p_input_attachments (Vk_base.null_ptr (AttachmentReference.t)) else begin
-      let items = CArray.of_list (AttachmentReference.t) arg_input_attachments in
-      setf value _p_input_attachments (CArray.start items);
-      Vk_base.retain keep items; Vk_base.retain keep arg_input_attachments
-    end;
-    let color_attachment_count_n = List.fold_left max 0 [List.length arg_color_attachments; List.length arg_resolve_attachments] in
-    if arg_color_attachments <> [] && List.length arg_color_attachments <> color_attachment_count_n then invalid_arg "VkSubpassDescription.pColorAttachments: length does not match colorAttachmentCount";
-    if arg_resolve_attachments <> [] && List.length arg_resolve_attachments <> color_attachment_count_n then invalid_arg "VkSubpassDescription.pResolveAttachments: length does not match colorAttachmentCount";
-    setf value _color_attachment_count color_attachment_count_n;
-    if arg_color_attachments = [] then setf value _p_color_attachments (Vk_base.null_ptr (AttachmentReference.t)) else begin
-      let items = CArray.of_list (AttachmentReference.t) arg_color_attachments in
-      setf value _p_color_attachments (CArray.start items);
-      Vk_base.retain keep items; Vk_base.retain keep arg_color_attachments
-    end;
-    if arg_resolve_attachments = [] then setf value _p_resolve_attachments (Vk_base.null_ptr (AttachmentReference.t)) else begin
-      let items = CArray.of_list (AttachmentReference.t) arg_resolve_attachments in
-      setf value _p_resolve_attachments (CArray.start items);
-      Vk_base.retain keep items; Vk_base.retain keep arg_resolve_attachments
-    end;
-    (match arg_depth_stencil_attachment with
-     | None -> setf value _p_depth_stencil_attachment (Vk_base.null_ptr (AttachmentReference.t))
-     | Some pointed -> setf value _p_depth_stencil_attachment (addr pointed); Vk_base.retain keep pointed);
-    let preserve_attachment_count_n = List.length arg_preserve_attachments in
-    if arg_preserve_attachments <> [] && List.length arg_preserve_attachments <> preserve_attachment_count_n then invalid_arg "VkSubpassDescription.pPreserveAttachments: length does not match preserveAttachmentCount";
-    setf value _preserve_attachment_count preserve_attachment_count_n;
-    if arg_preserve_attachments = [] then setf value _p_preserve_attachments (Vk_base.null_ptr (Vk_base.uint32)) else begin
-      let items = CArray.of_list (Vk_base.uint32) arg_preserve_attachments in
-      setf value _p_preserve_attachments (CArray.start items);
-      Vk_base.retain keep items; Vk_base.retain keep arg_preserve_attachments
-    end;
-    value
-end
-
-module SubpassDescription2 = struct
-  type t
-  let t : t structure typ = structure "VkSubpassDescription2"
-  let _s_type = field t "sType" (StructureType.t)
-  let s_type = _s_type
-  let _p_next = field t "pNext" (ptr (Ctypes.void))
-  let p_next = _p_next
-  let _flags = field t "flags" (SubpassDescriptionFlags.t)
-  let flags = _flags
-  let _pipeline_bind_point = field t "pipelineBindPoint" (PipelineBindPoint.t)
-  let pipeline_bind_point = _pipeline_bind_point
-  let _view_mask = field t "viewMask" (Vk_base.uint32)
-  let view_mask = _view_mask
-  let _input_attachment_count = field t "inputAttachmentCount" (Vk_base.uint32)
-  let input_attachment_count = _input_attachment_count
-  let _p_input_attachments = field t "pInputAttachments" (ptr (AttachmentReference2.t))
-  let p_input_attachments = _p_input_attachments
-  let _color_attachment_count = field t "colorAttachmentCount" (Vk_base.uint32)
-  let color_attachment_count = _color_attachment_count
-  let _p_color_attachments = field t "pColorAttachments" (ptr (AttachmentReference2.t))
-  let p_color_attachments = _p_color_attachments
-  let _p_resolve_attachments = field t "pResolveAttachments" (ptr (AttachmentReference2.t))
-  let p_resolve_attachments = _p_resolve_attachments
-  let _p_depth_stencil_attachment = field t "pDepthStencilAttachment" (ptr (AttachmentReference2.t))
-  let p_depth_stencil_attachment = _p_depth_stencil_attachment
-  let _preserve_attachment_count = field t "preserveAttachmentCount" (Vk_base.uint32)
-  let preserve_attachment_count = _preserve_attachment_count
-  let _p_preserve_attachments = field t "pPreserveAttachments" (ptr (Vk_base.uint32))
-  let p_preserve_attachments = _p_preserve_attachments
-  let () = seal t
-  let structure_type : StructureType.t option = Some StructureType.subpass_description_2
-    let make ?next:arg_next ?flags:(arg_flags=SubpassDescriptionFlags.of_int 0) ?pipeline_bind_point:(arg_pipeline_bind_point=PipelineBindPoint.of_int 0) ?view_mask:(arg_view_mask=0) ?input_attachments:(arg_input_attachments=[]) ?color_attachments:(arg_color_attachments=[]) ?resolve_attachments:(arg_resolve_attachments=[]) ?depth_stencil_attachment:arg_depth_stencil_attachment ?preserve_attachments:(arg_preserve_attachments=[]) () =
-    let value, keep = Vk_base.make_kept t in
-    ignore keep;
-    setf value _s_type StructureType.subpass_description_2;
-    (match arg_next with
-     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
-     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    setf value _flags arg_flags;
-    setf value _pipeline_bind_point arg_pipeline_bind_point;
-    setf value _view_mask arg_view_mask;
-    let input_attachment_count_n = List.length arg_input_attachments in
-    if arg_input_attachments <> [] && List.length arg_input_attachments <> input_attachment_count_n then invalid_arg "VkSubpassDescription2.pInputAttachments: length does not match inputAttachmentCount";
-    setf value _input_attachment_count input_attachment_count_n;
-    if arg_input_attachments = [] then setf value _p_input_attachments (Vk_base.null_ptr (AttachmentReference2.t)) else begin
-      let items = CArray.of_list (AttachmentReference2.t) arg_input_attachments in
-      setf value _p_input_attachments (CArray.start items);
-      Vk_base.retain keep items; Vk_base.retain keep arg_input_attachments
-    end;
-    let color_attachment_count_n = List.fold_left max 0 [List.length arg_color_attachments; List.length arg_resolve_attachments] in
-    if arg_color_attachments <> [] && List.length arg_color_attachments <> color_attachment_count_n then invalid_arg "VkSubpassDescription2.pColorAttachments: length does not match colorAttachmentCount";
-    if arg_resolve_attachments <> [] && List.length arg_resolve_attachments <> color_attachment_count_n then invalid_arg "VkSubpassDescription2.pResolveAttachments: length does not match colorAttachmentCount";
-    setf value _color_attachment_count color_attachment_count_n;
-    if arg_color_attachments = [] then setf value _p_color_attachments (Vk_base.null_ptr (AttachmentReference2.t)) else begin
-      let items = CArray.of_list (AttachmentReference2.t) arg_color_attachments in
-      setf value _p_color_attachments (CArray.start items);
-      Vk_base.retain keep items; Vk_base.retain keep arg_color_attachments
-    end;
-    if arg_resolve_attachments = [] then setf value _p_resolve_attachments (Vk_base.null_ptr (AttachmentReference2.t)) else begin
-      let items = CArray.of_list (AttachmentReference2.t) arg_resolve_attachments in
-      setf value _p_resolve_attachments (CArray.start items);
-      Vk_base.retain keep items; Vk_base.retain keep arg_resolve_attachments
-    end;
-    (match arg_depth_stencil_attachment with
-     | None -> setf value _p_depth_stencil_attachment (Vk_base.null_ptr (AttachmentReference2.t))
-     | Some pointed -> setf value _p_depth_stencil_attachment (addr pointed); Vk_base.retain keep pointed);
-    let preserve_attachment_count_n = List.length arg_preserve_attachments in
-    if arg_preserve_attachments <> [] && List.length arg_preserve_attachments <> preserve_attachment_count_n then invalid_arg "VkSubpassDescription2.pPreserveAttachments: length does not match preserveAttachmentCount";
-    setf value _preserve_attachment_count preserve_attachment_count_n;
-    if arg_preserve_attachments = [] then setf value _p_preserve_attachments (Vk_base.null_ptr (Vk_base.uint32)) else begin
-      let items = CArray.of_list (Vk_base.uint32) arg_preserve_attachments in
-      setf value _p_preserve_attachments (CArray.start items);
-      Vk_base.retain keep items; Vk_base.retain keep arg_preserve_attachments
-    end;
-    value
-end
-
-module SubpassDescriptionDepthStencilResolve = struct
-  type t
-  let t : t structure typ = structure "VkSubpassDescriptionDepthStencilResolve"
-  let _s_type = field t "sType" (StructureType.t)
-  let s_type = _s_type
-  let _p_next = field t "pNext" (ptr (Ctypes.void))
-  let p_next = _p_next
-  let _depth_resolve_mode = field t "depthResolveMode" (ResolveModeFlags.t)
-  let depth_resolve_mode = _depth_resolve_mode
-  let _stencil_resolve_mode = field t "stencilResolveMode" (ResolveModeFlags.t)
-  let stencil_resolve_mode = _stencil_resolve_mode
-  let _p_depth_stencil_resolve_attachment = field t "pDepthStencilResolveAttachment" (ptr (AttachmentReference2.t))
-  let p_depth_stencil_resolve_attachment = _p_depth_stencil_resolve_attachment
-  let () = seal t
-  let structure_type : StructureType.t option = Some StructureType.subpass_description_depth_stencil_resolve
-    let make ?next:arg_next ?depth_resolve_mode:(arg_depth_resolve_mode=ResolveModeFlags.of_int 0) ?stencil_resolve_mode:(arg_stencil_resolve_mode=ResolveModeFlags.of_int 0) ?depth_stencil_resolve_attachment:arg_depth_stencil_resolve_attachment () =
-    let value, keep = Vk_base.make_kept t in
-    ignore keep;
-    setf value _s_type StructureType.subpass_description_depth_stencil_resolve;
-    (match arg_next with
-     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
-     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    setf value _depth_resolve_mode arg_depth_resolve_mode;
-    setf value _stencil_resolve_mode arg_stencil_resolve_mode;
-    (match arg_depth_stencil_resolve_attachment with
-     | None -> setf value _p_depth_stencil_resolve_attachment (Vk_base.null_ptr (AttachmentReference2.t))
-     | Some pointed -> setf value _p_depth_stencil_resolve_attachment (addr pointed); Vk_base.retain keep pointed);
-    value
-end
-
-module SubresourceLayout2 = struct
-  type t
-  let t : t structure typ = structure "VkSubresourceLayout2"
-  let _s_type = field t "sType" (StructureType.t)
-  let s_type = _s_type
-  let _p_next = field t "pNext" (ptr (Ctypes.void))
-  let p_next = _p_next
-  let _subresource_layout = field t "subresourceLayout" (SubresourceLayout.t)
-  let subresource_layout = _subresource_layout
-  let () = seal t
-  let structure_type : StructureType.t option = Some StructureType.subresource_layout_2
-    let make ?next:arg_next () =
-    let value, keep = Vk_base.make_kept t in
-    ignore keep;
-    setf value _s_type StructureType.subresource_layout_2;
-    (match arg_next with
-     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
-     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    value
-end
-
-module SurfaceCapabilities2EXT = struct
-  type t
-  let t : t structure typ = structure "VkSurfaceCapabilities2EXT"
-  let _s_type = field t "sType" (StructureType.t)
-  let s_type = _s_type
-  let _p_next = field t "pNext" (ptr (Ctypes.void))
-  let p_next = _p_next
-  let _min_image_count = field t "minImageCount" (Vk_base.uint32)
-  let min_image_count = _min_image_count
-  let _max_image_count = field t "maxImageCount" (Vk_base.uint32)
-  let max_image_count = _max_image_count
-  let _current_extent = field t "currentExtent" (Extent2D.t)
-  let current_extent = _current_extent
-  let _min_image_extent = field t "minImageExtent" (Extent2D.t)
-  let min_image_extent = _min_image_extent
-  let _max_image_extent = field t "maxImageExtent" (Extent2D.t)
-  let max_image_extent = _max_image_extent
-  let _max_image_array_layers = field t "maxImageArrayLayers" (Vk_base.uint32)
-  let max_image_array_layers = _max_image_array_layers
-  let _supported_transforms = field t "supportedTransforms" (SurfaceTransformFlagsKHR.t)
-  let supported_transforms = _supported_transforms
-  let _current_transform = field t "currentTransform" (SurfaceTransformFlagsKHR.t)
-  let current_transform = _current_transform
-  let _supported_composite_alpha = field t "supportedCompositeAlpha" (CompositeAlphaFlagsKHR.t)
-  let supported_composite_alpha = _supported_composite_alpha
-  let _supported_usage_flags = field t "supportedUsageFlags" (ImageUsageFlags.t)
-  let supported_usage_flags = _supported_usage_flags
-  let _supported_surface_counters = field t "supportedSurfaceCounters" (SurfaceCounterFlagsEXT.t)
-  let supported_surface_counters = _supported_surface_counters
-  let () = seal t
-  let structure_type : StructureType.t option = Some StructureType.surface_capabilities_2_ext
-    let make ?next:arg_next () =
-    let value, keep = Vk_base.make_kept t in
-    ignore keep;
-    setf value _s_type StructureType.surface_capabilities_2_ext;
-    (match arg_next with
-     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
-     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    value
-end
-
-module SurfaceCapabilitiesKHR = struct
-  type t
-  let t : t structure typ = structure "VkSurfaceCapabilitiesKHR"
-  let _min_image_count = field t "minImageCount" (Vk_base.uint32)
-  let min_image_count = _min_image_count
-  let _max_image_count = field t "maxImageCount" (Vk_base.uint32)
-  let max_image_count = _max_image_count
-  let _current_extent = field t "currentExtent" (Extent2D.t)
-  let current_extent = _current_extent
-  let _min_image_extent = field t "minImageExtent" (Extent2D.t)
-  let min_image_extent = _min_image_extent
-  let _max_image_extent = field t "maxImageExtent" (Extent2D.t)
-  let max_image_extent = _max_image_extent
-  let _max_image_array_layers = field t "maxImageArrayLayers" (Vk_base.uint32)
-  let max_image_array_layers = _max_image_array_layers
-  let _supported_transforms = field t "supportedTransforms" (SurfaceTransformFlagsKHR.t)
-  let supported_transforms = _supported_transforms
-  let _current_transform = field t "currentTransform" (SurfaceTransformFlagsKHR.t)
-  let current_transform = _current_transform
-  let _supported_composite_alpha = field t "supportedCompositeAlpha" (CompositeAlphaFlagsKHR.t)
-  let supported_composite_alpha = _supported_composite_alpha
-  let _supported_usage_flags = field t "supportedUsageFlags" (ImageUsageFlags.t)
-  let supported_usage_flags = _supported_usage_flags
-  let () = seal t
-  let structure_type : StructureType.t option = None
-    let make () =
-    let value, keep = Vk_base.make_kept t in
-    ignore keep;
-    value
-end
-
-module SurfaceFormat2KHR = struct
-  type t
-  let t : t structure typ = structure "VkSurfaceFormat2KHR"
-  let _s_type = field t "sType" (StructureType.t)
-  let s_type = _s_type
-  let _p_next = field t "pNext" (ptr (Ctypes.void))
-  let p_next = _p_next
-  let _surface_format = field t "surfaceFormat" (SurfaceFormatKHR.t)
-  let surface_format = _surface_format
-  let () = seal t
-  let structure_type : StructureType.t option = Some StructureType.surface_format_2_khr
-    let make ?next:arg_next () =
-    let value, keep = Vk_base.make_kept t in
-    ignore keep;
-    setf value _s_type StructureType.surface_format_2_khr;
-    (match arg_next with
-     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
-     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    value
-end
-
-module SurfacePresentScalingCapabilitiesKHR = struct
-  type t
-  let t : t structure typ = structure "VkSurfacePresentScalingCapabilitiesKHR"
-  let _s_type = field t "sType" (StructureType.t)
-  let s_type = _s_type
-  let _p_next = field t "pNext" (ptr (Ctypes.void))
-  let p_next = _p_next
-  let _supported_present_scaling = field t "supportedPresentScaling" (PresentScalingFlagsKHR.t)
-  let supported_present_scaling = _supported_present_scaling
-  let _supported_present_gravity_x = field t "supportedPresentGravityX" (PresentGravityFlagsKHR.t)
-  let supported_present_gravity_x = _supported_present_gravity_x
-  let _supported_present_gravity_y = field t "supportedPresentGravityY" (PresentGravityFlagsKHR.t)
-  let supported_present_gravity_y = _supported_present_gravity_y
-  let _min_scaled_image_extent = field t "minScaledImageExtent" (Extent2D.t)
-  let min_scaled_image_extent = _min_scaled_image_extent
-  let _max_scaled_image_extent = field t "maxScaledImageExtent" (Extent2D.t)
-  let max_scaled_image_extent = _max_scaled_image_extent
-  let () = seal t
-  let structure_type : StructureType.t option = Some StructureType.surface_present_scaling_capabilities_khr
-    let make ?next:arg_next ?supported_present_scaling:(arg_supported_present_scaling=PresentScalingFlagsKHR.of_int 0) ?supported_present_gravity_x:(arg_supported_present_gravity_x=PresentGravityFlagsKHR.of_int 0) ?supported_present_gravity_y:(arg_supported_present_gravity_y=PresentGravityFlagsKHR.of_int 0) ?min_scaled_image_extent:arg_min_scaled_image_extent ?max_scaled_image_extent:arg_max_scaled_image_extent () =
-    let value, keep = Vk_base.make_kept t in
-    ignore keep;
-    setf value _s_type StructureType.surface_present_scaling_capabilities_khr;
-    (match arg_next with
-     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
-     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    setf value _supported_present_scaling arg_supported_present_scaling;
-    setf value _supported_present_gravity_x arg_supported_present_gravity_x;
-    setf value _supported_present_gravity_y arg_supported_present_gravity_y;
-    (match arg_min_scaled_image_extent with None -> () | Some x -> setf value _min_scaled_image_extent x; Vk_base.retain keep x);
-    (match arg_max_scaled_image_extent with None -> () | Some x -> setf value _max_scaled_image_extent x; Vk_base.retain keep x);
-    value
-end
-
-module SwapchainCreateInfoKHR = struct
-  type t
-  let t : t structure typ = structure "VkSwapchainCreateInfoKHR"
-  let _s_type = field t "sType" (StructureType.t)
-  let s_type = _s_type
-  let _p_next = field t "pNext" (ptr (Ctypes.void))
-  let p_next = _p_next
-  let _flags = field t "flags" (SwapchainCreateFlagsKHR.t)
-  let flags = _flags
-  let _surface = field t "surface" (SurfaceKHR.t)
-  let surface = _surface
-  let _min_image_count = field t "minImageCount" (Vk_base.uint32)
-  let min_image_count = _min_image_count
-  let _image_format = field t "imageFormat" (Format.t)
-  let image_format = _image_format
-  let _image_color_space = field t "imageColorSpace" (ColorSpaceKHR.t)
-  let image_color_space = _image_color_space
-  let _image_extent = field t "imageExtent" (Extent2D.t)
-  let image_extent = _image_extent
-  let _image_array_layers = field t "imageArrayLayers" (Vk_base.uint32)
-  let image_array_layers = _image_array_layers
-  let _image_usage = field t "imageUsage" (ImageUsageFlags.t)
-  let image_usage = _image_usage
-  let _image_sharing_mode = field t "imageSharingMode" (SharingMode.t)
-  let image_sharing_mode = _image_sharing_mode
-  let _queue_family_index_count = field t "queueFamilyIndexCount" (Vk_base.uint32)
-  let queue_family_index_count = _queue_family_index_count
-  let _p_queue_family_indices = field t "pQueueFamilyIndices" (ptr (Vk_base.uint32))
-  let p_queue_family_indices = _p_queue_family_indices
-  let _pre_transform = field t "preTransform" (SurfaceTransformFlagsKHR.t)
-  let pre_transform = _pre_transform
-  let _composite_alpha = field t "compositeAlpha" (CompositeAlphaFlagsKHR.t)
-  let composite_alpha = _composite_alpha
-  let _present_mode = field t "presentMode" (PresentModeKHR.t)
-  let present_mode = _present_mode
-  let _clipped = field t "clipped" (Vk_base.bool32)
-  let clipped = _clipped
-  let _old_swapchain = field t "oldSwapchain" (SwapchainKHR.t)
-  let old_swapchain = _old_swapchain
-  let () = seal t
-  let structure_type : StructureType.t option = Some StructureType.swapchain_create_info_khr
-    let make ?next:arg_next ?flags:(arg_flags=SwapchainCreateFlagsKHR.of_int 0) ?surface:(arg_surface=SurfaceKHR.null) ?min_image_count:(arg_min_image_count=0) ?image_format:(arg_image_format=Format.of_int 0) ?image_color_space:(arg_image_color_space=ColorSpaceKHR.of_int 0) ?image_extent:arg_image_extent ?image_array_layers:(arg_image_array_layers=0) ?image_usage:(arg_image_usage=ImageUsageFlags.of_int 0) ?image_sharing_mode:(arg_image_sharing_mode=SharingMode.of_int 0) ?queue_family_indices:(arg_queue_family_indices=[]) ?pre_transform:(arg_pre_transform=SurfaceTransformFlagsKHR.of_int 0) ?composite_alpha:(arg_composite_alpha=CompositeAlphaFlagsKHR.of_int 0) ?present_mode:(arg_present_mode=PresentModeKHR.of_int 0) ?clipped:(arg_clipped=false) ?old_swapchain:(arg_old_swapchain=SwapchainKHR.null) () =
-    let value, keep = Vk_base.make_kept t in
-    ignore keep;
-    setf value _s_type StructureType.swapchain_create_info_khr;
-    (match arg_next with
-     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
-     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    setf value _flags arg_flags;
-    setf value _surface arg_surface;
-    setf value _min_image_count arg_min_image_count;
-    setf value _image_format arg_image_format;
-    setf value _image_color_space arg_image_color_space;
-    (match arg_image_extent with None -> () | Some x -> setf value _image_extent x; Vk_base.retain keep x);
-    setf value _image_array_layers arg_image_array_layers;
-    setf value _image_usage arg_image_usage;
-    setf value _image_sharing_mode arg_image_sharing_mode;
-    let queue_family_index_count_n = List.length arg_queue_family_indices in
-    if arg_queue_family_indices <> [] && List.length arg_queue_family_indices <> queue_family_index_count_n then invalid_arg "VkSwapchainCreateInfoKHR.pQueueFamilyIndices: length does not match queueFamilyIndexCount";
-    setf value _queue_family_index_count queue_family_index_count_n;
-    if arg_queue_family_indices = [] then setf value _p_queue_family_indices (Vk_base.null_ptr (Vk_base.uint32)) else begin
-      let items = CArray.of_list (Vk_base.uint32) arg_queue_family_indices in
-      setf value _p_queue_family_indices (CArray.start items);
-      Vk_base.retain keep items; Vk_base.retain keep arg_queue_family_indices
-    end;
-    setf value _pre_transform arg_pre_transform;
-    setf value _composite_alpha arg_composite_alpha;
-    setf value _present_mode arg_present_mode;
-    setf value _clipped arg_clipped;
-    setf value _old_swapchain arg_old_swapchain;
-    value
-end
-
-module TensorCreateInfoARM = struct
-  type t
-  let t : t structure typ = structure "VkTensorCreateInfoARM"
-  let _s_type = field t "sType" (StructureType.t)
-  let s_type = _s_type
-  let _p_next = field t "pNext" (ptr (Ctypes.void))
-  let p_next = _p_next
-  let _flags = field t "flags" (TensorCreateFlagsARM.t)
-  let flags = _flags
-  let _p_description = field t "pDescription" (ptr (TensorDescriptionARM.t))
-  let p_description = _p_description
-  let _sharing_mode = field t "sharingMode" (SharingMode.t)
-  let sharing_mode = _sharing_mode
-  let _queue_family_index_count = field t "queueFamilyIndexCount" (Vk_base.uint32)
-  let queue_family_index_count = _queue_family_index_count
-  let _p_queue_family_indices = field t "pQueueFamilyIndices" (ptr (Vk_base.uint32))
-  let p_queue_family_indices = _p_queue_family_indices
-  let () = seal t
-  let structure_type : StructureType.t option = Some StructureType.tensor_create_info_arm
-    let make ?next:arg_next ?flags:(arg_flags=TensorCreateFlagsARM.of_int 0) ?description:arg_description ?sharing_mode:(arg_sharing_mode=SharingMode.of_int 0) ?queue_family_indices:(arg_queue_family_indices=[]) () =
-    let value, keep = Vk_base.make_kept t in
-    ignore keep;
-    setf value _s_type StructureType.tensor_create_info_arm;
-    (match arg_next with
-     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
-     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    setf value _flags arg_flags;
-    (match arg_description with
-     | None -> setf value _p_description (Vk_base.null_ptr (TensorDescriptionARM.t))
-     | Some pointed -> setf value _p_description (addr pointed); Vk_base.retain keep pointed);
-    setf value _sharing_mode arg_sharing_mode;
-    let queue_family_index_count_n = List.length arg_queue_family_indices in
-    if arg_queue_family_indices <> [] && List.length arg_queue_family_indices <> queue_family_index_count_n then invalid_arg "VkTensorCreateInfoARM.pQueueFamilyIndices: length does not match queueFamilyIndexCount";
-    setf value _queue_family_index_count queue_family_index_count_n;
-    if arg_queue_family_indices = [] then setf value _p_queue_family_indices (Vk_base.null_ptr (Vk_base.uint32)) else begin
-      let items = CArray.of_list (Vk_base.uint32) arg_queue_family_indices in
-      setf value _p_queue_family_indices (CArray.start items);
-      Vk_base.retain keep items; Vk_base.retain keep arg_queue_family_indices
-    end;
-    value
-end
-
 module TensorDependencyInfoARM = struct
   type t
   let t : t structure typ = structure "VkTensorDependencyInfoARM"
@@ -3418,36 +2149,6 @@ module ExternalImageFormatPropertiesNV = struct
     value
 end
 
-module FaultCallbackInfo = struct
-  type t
-  let t : t structure typ = structure "VkFaultCallbackInfo"
-  let _s_type = field t "sType" (StructureType.t)
-  let s_type = _s_type
-  let _p_next = field t "pNext" (ptr (Ctypes.void))
-  let p_next = _p_next
-  let _fault_count = field t "faultCount" (Vk_base.uint32)
-  let fault_count = _fault_count
-  let _p_faults = field t "pFaults" (ptr (FaultData.t))
-  let p_faults = _p_faults
-  let _pfn_fault_callback = field t "pfnFaultCallback" (PfnFaultCallbackFunction.opt)
-  let pfn_fault_callback = _pfn_fault_callback
-  let () = seal t
-  let structure_type : StructureType.t option = None
-    let make ?next:arg_next ?fault_count:(arg_fault_count=0) ?p_faults:arg_p_faults ?pfn_fault_callback:arg_pfn_fault_callback () =
-    let value, keep = Vk_base.make_kept t in
-    ignore keep;
-    setf value _s_type (StructureType.of_int 0);
-    (match arg_next with
-     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
-     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    setf value _fault_count arg_fault_count;
-    setf value _p_faults (match arg_p_faults with None -> Vk_base.null_ptr (FaultData.t) | Some p -> p);
-    (match arg_pfn_fault_callback with
-     | None -> setf value _pfn_fault_callback None
-     | Some callback -> setf value _pfn_fault_callback (Some callback); Vk_base.retain keep callback);
-    value
-end
-
 module GeometryNV = struct
   type t
   let t : t structure typ = structure "VkGeometryNV"
@@ -3791,5 +2492,1555 @@ module PipelineBinaryCreateInfoKHR = struct
     (match arg_pipeline_create_info with
      | None -> setf value _p_pipeline_create_info (Vk_base.null_ptr (PipelineCreateInfoKHR.t))
      | Some pointed -> setf value _p_pipeline_create_info (addr pointed); Vk_base.retain keep pointed);
+    value
+end
+
+module PipelineDiscardRectangleStateCreateInfoEXT = struct
+  type t
+  let t : t structure typ = structure "VkPipelineDiscardRectangleStateCreateInfoEXT"
+  let _s_type = field t "sType" (StructureType.t)
+  let s_type = _s_type
+  let _p_next = field t "pNext" (ptr (Ctypes.void))
+  let p_next = _p_next
+  let _flags = field t "flags" (PipelineDiscardRectangleStateCreateFlagsEXT.t)
+  let flags = _flags
+  let _discard_rectangle_mode = field t "discardRectangleMode" (DiscardRectangleModeEXT.t)
+  let discard_rectangle_mode = _discard_rectangle_mode
+  let _discard_rectangle_count = field t "discardRectangleCount" (Vk_base.uint32)
+  let discard_rectangle_count = _discard_rectangle_count
+  let _p_discard_rectangles = field t "pDiscardRectangles" (ptr (Rect2D.t))
+  let p_discard_rectangles = _p_discard_rectangles
+  let () = seal t
+  let structure_type : StructureType.t option = Some StructureType.pipeline_discard_rectangle_state_create_info_ext
+    let make ?next:arg_next ?flags:(arg_flags=PipelineDiscardRectangleStateCreateFlagsEXT.of_int 0) ?discard_rectangle_mode:(arg_discard_rectangle_mode=DiscardRectangleModeEXT.of_int 0) ?discard_rectangles:(arg_discard_rectangles=[]) () =
+    let value, keep = Vk_base.make_kept t in
+    ignore keep;
+    setf value _s_type StructureType.pipeline_discard_rectangle_state_create_info_ext;
+    (match arg_next with
+     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
+     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
+    setf value _flags arg_flags;
+    setf value _discard_rectangle_mode arg_discard_rectangle_mode;
+    let discard_rectangle_count_n = List.length arg_discard_rectangles in
+    if arg_discard_rectangles <> [] && List.length arg_discard_rectangles <> discard_rectangle_count_n then invalid_arg "VkPipelineDiscardRectangleStateCreateInfoEXT.pDiscardRectangles: length does not match discardRectangleCount";
+    setf value _discard_rectangle_count discard_rectangle_count_n;
+    if arg_discard_rectangles = [] then setf value _p_discard_rectangles (Vk_base.null_ptr (Rect2D.t)) else begin
+      let items = CArray.of_list (Rect2D.t) arg_discard_rectangles in
+      setf value _p_discard_rectangles (CArray.start items);
+      Vk_base.retain keep items; Vk_base.retain keep arg_discard_rectangles
+    end;
+    value
+end
+
+module PipelineSampleLocationsStateCreateInfoEXT = struct
+  type t
+  let t : t structure typ = structure "VkPipelineSampleLocationsStateCreateInfoEXT"
+  let _s_type = field t "sType" (StructureType.t)
+  let s_type = _s_type
+  let _p_next = field t "pNext" (ptr (Ctypes.void))
+  let p_next = _p_next
+  let _sample_locations_enable = field t "sampleLocationsEnable" (Vk_base.bool32)
+  let sample_locations_enable = _sample_locations_enable
+  let _sample_locations_info = field t "sampleLocationsInfo" (SampleLocationsInfoEXT.t)
+  let sample_locations_info = _sample_locations_info
+  let () = seal t
+  let structure_type : StructureType.t option = Some StructureType.pipeline_sample_locations_state_create_info_ext
+    let make ?next:arg_next ?sample_locations_enable:(arg_sample_locations_enable=false) ?sample_locations_info:arg_sample_locations_info () =
+    let value, keep = Vk_base.make_kept t in
+    ignore keep;
+    setf value _s_type StructureType.pipeline_sample_locations_state_create_info_ext;
+    (match arg_next with
+     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
+     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
+    setf value _sample_locations_enable arg_sample_locations_enable;
+    (match arg_sample_locations_info with None -> () | Some x -> setf value _sample_locations_info x; Vk_base.retain keep x);
+    value
+end
+
+module PipelineShaderStageCreateInfo = struct
+  type t
+  let t : t structure typ = structure "VkPipelineShaderStageCreateInfo"
+  let _s_type = field t "sType" (StructureType.t)
+  let s_type = _s_type
+  let _p_next = field t "pNext" (ptr (Ctypes.void))
+  let p_next = _p_next
+  let _flags = field t "flags" (PipelineShaderStageCreateFlags.t)
+  let flags = _flags
+  let _stage = field t "stage" (ShaderStageFlags.t)
+  let stage = _stage
+  let _module_ = field t "module" (ShaderModule.t)
+  let module_ = _module_
+  let _p_name = field t "pName" (ptr (Ctypes.char))
+  let p_name = _p_name
+  let _p_specialization_info = field t "pSpecializationInfo" (ptr (SpecializationInfo.t))
+  let p_specialization_info = _p_specialization_info
+  let () = seal t
+  let structure_type : StructureType.t option = Some StructureType.pipeline_shader_stage_create_info
+    let make ?next:arg_next ?flags:(arg_flags=PipelineShaderStageCreateFlags.of_int 0) ?stage:(arg_stage=ShaderStageFlags.of_int 0) ?module_:(arg_module_=ShaderModule.null) ?name:arg_name ?specialization_info:arg_specialization_info () =
+    let value, keep = Vk_base.make_kept t in
+    ignore keep;
+    setf value _s_type StructureType.pipeline_shader_stage_create_info;
+    (match arg_next with
+     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
+     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
+    setf value _flags arg_flags;
+    setf value _stage arg_stage;
+    setf value _module_ arg_module_;
+    (match arg_name with
+     | None -> setf value _p_name (Vk_base.null_ptr (Ctypes.char))
+     | Some text -> let text = CArray.of_string text in
+         setf value _p_name (CArray.start text); Vk_base.retain keep text);
+    (match arg_specialization_info with
+     | None -> setf value _p_specialization_info (Vk_base.null_ptr (SpecializationInfo.t))
+     | Some pointed -> setf value _p_specialization_info (addr pointed); Vk_base.retain keep pointed);
+    value
+end
+
+module PipelineViewportCoarseSampleOrderStateCreateInfoNV = struct
+  type t
+  let t : t structure typ = structure "VkPipelineViewportCoarseSampleOrderStateCreateInfoNV"
+  let _s_type = field t "sType" (StructureType.t)
+  let s_type = _s_type
+  let _p_next = field t "pNext" (ptr (Ctypes.void))
+  let p_next = _p_next
+  let _sample_order_type = field t "sampleOrderType" (CoarseSampleOrderTypeNV.t)
+  let sample_order_type = _sample_order_type
+  let _custom_sample_order_count = field t "customSampleOrderCount" (Vk_base.uint32)
+  let custom_sample_order_count = _custom_sample_order_count
+  let _p_custom_sample_orders = field t "pCustomSampleOrders" (ptr (CoarseSampleOrderCustomNV.t))
+  let p_custom_sample_orders = _p_custom_sample_orders
+  let () = seal t
+  let structure_type : StructureType.t option = Some StructureType.pipeline_viewport_coarse_sample_order_state_create_info_nv
+    let make ?next:arg_next ?sample_order_type:(arg_sample_order_type=CoarseSampleOrderTypeNV.of_int 0) ?custom_sample_orders:(arg_custom_sample_orders=[]) () =
+    let value, keep = Vk_base.make_kept t in
+    ignore keep;
+    setf value _s_type StructureType.pipeline_viewport_coarse_sample_order_state_create_info_nv;
+    (match arg_next with
+     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
+     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
+    setf value _sample_order_type arg_sample_order_type;
+    let custom_sample_order_count_n = List.length arg_custom_sample_orders in
+    if arg_custom_sample_orders <> [] && List.length arg_custom_sample_orders <> custom_sample_order_count_n then invalid_arg "VkPipelineViewportCoarseSampleOrderStateCreateInfoNV.pCustomSampleOrders: length does not match customSampleOrderCount";
+    setf value _custom_sample_order_count custom_sample_order_count_n;
+    if arg_custom_sample_orders = [] then setf value _p_custom_sample_orders (Vk_base.null_ptr (CoarseSampleOrderCustomNV.t)) else begin
+      let items = CArray.of_list (CoarseSampleOrderCustomNV.t) arg_custom_sample_orders in
+      setf value _p_custom_sample_orders (CArray.start items);
+      Vk_base.retain keep items; Vk_base.retain keep arg_custom_sample_orders
+    end;
+    value
+end
+
+module PipelineViewportExclusiveScissorStateCreateInfoNV = struct
+  type t
+  let t : t structure typ = structure "VkPipelineViewportExclusiveScissorStateCreateInfoNV"
+  let _s_type = field t "sType" (StructureType.t)
+  let s_type = _s_type
+  let _p_next = field t "pNext" (ptr (Ctypes.void))
+  let p_next = _p_next
+  let _exclusive_scissor_count = field t "exclusiveScissorCount" (Vk_base.uint32)
+  let exclusive_scissor_count = _exclusive_scissor_count
+  let _p_exclusive_scissors = field t "pExclusiveScissors" (ptr (Rect2D.t))
+  let p_exclusive_scissors = _p_exclusive_scissors
+  let () = seal t
+  let structure_type : StructureType.t option = Some StructureType.pipeline_viewport_exclusive_scissor_state_create_info_nv
+    let make ?next:arg_next ?exclusive_scissors:(arg_exclusive_scissors=[]) () =
+    let value, keep = Vk_base.make_kept t in
+    ignore keep;
+    setf value _s_type StructureType.pipeline_viewport_exclusive_scissor_state_create_info_nv;
+    (match arg_next with
+     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
+     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
+    let exclusive_scissor_count_n = List.length arg_exclusive_scissors in
+    if arg_exclusive_scissors <> [] && List.length arg_exclusive_scissors <> exclusive_scissor_count_n then invalid_arg "VkPipelineViewportExclusiveScissorStateCreateInfoNV.pExclusiveScissors: length does not match exclusiveScissorCount";
+    setf value _exclusive_scissor_count exclusive_scissor_count_n;
+    if arg_exclusive_scissors = [] then setf value _p_exclusive_scissors (Vk_base.null_ptr (Rect2D.t)) else begin
+      let items = CArray.of_list (Rect2D.t) arg_exclusive_scissors in
+      setf value _p_exclusive_scissors (CArray.start items);
+      Vk_base.retain keep items; Vk_base.retain keep arg_exclusive_scissors
+    end;
+    value
+end
+
+module PipelineViewportStateCreateInfo = struct
+  type t
+  let t : t structure typ = structure "VkPipelineViewportStateCreateInfo"
+  let _s_type = field t "sType" (StructureType.t)
+  let s_type = _s_type
+  let _p_next = field t "pNext" (ptr (Ctypes.void))
+  let p_next = _p_next
+  let _flags = field t "flags" (PipelineViewportStateCreateFlags.t)
+  let flags = _flags
+  let _viewport_count = field t "viewportCount" (Vk_base.uint32)
+  let viewport_count = _viewport_count
+  let _p_viewports = field t "pViewports" (ptr (Viewport.t))
+  let p_viewports = _p_viewports
+  let _scissor_count = field t "scissorCount" (Vk_base.uint32)
+  let scissor_count = _scissor_count
+  let _p_scissors = field t "pScissors" (ptr (Rect2D.t))
+  let p_scissors = _p_scissors
+  let () = seal t
+  let structure_type : StructureType.t option = Some StructureType.pipeline_viewport_state_create_info
+    let make ?next:arg_next ?flags:(arg_flags=PipelineViewportStateCreateFlags.of_int 0) ?viewport_count:arg_viewport_count ?viewports:(arg_viewports=[]) ?scissor_count:arg_scissor_count ?scissors:(arg_scissors=[]) () =
+    let value, keep = Vk_base.make_kept t in
+    ignore keep;
+    setf value _s_type StructureType.pipeline_viewport_state_create_info;
+    (match arg_next with
+     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
+     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
+    setf value _flags arg_flags;
+    let viewport_count_n = (match arg_viewport_count with Some n -> n | None -> List.length arg_viewports) in
+    if arg_viewports <> [] && List.length arg_viewports <> viewport_count_n then invalid_arg "VkPipelineViewportStateCreateInfo.pViewports: length does not match viewportCount";
+    setf value _viewport_count viewport_count_n;
+    if arg_viewports = [] then setf value _p_viewports (Vk_base.null_ptr (Viewport.t)) else begin
+      let items = CArray.of_list (Viewport.t) arg_viewports in
+      setf value _p_viewports (CArray.start items);
+      Vk_base.retain keep items; Vk_base.retain keep arg_viewports
+    end;
+    let scissor_count_n = (match arg_scissor_count with Some n -> n | None -> List.length arg_scissors) in
+    if arg_scissors <> [] && List.length arg_scissors <> scissor_count_n then invalid_arg "VkPipelineViewportStateCreateInfo.pScissors: length does not match scissorCount";
+    setf value _scissor_count scissor_count_n;
+    if arg_scissors = [] then setf value _p_scissors (Vk_base.null_ptr (Rect2D.t)) else begin
+      let items = CArray.of_list (Rect2D.t) arg_scissors in
+      setf value _p_scissors (CArray.start items);
+      Vk_base.retain keep items; Vk_base.retain keep arg_scissors
+    end;
+    value
+end
+
+module PresentRegionKHR = struct
+  type t
+  let t : t structure typ = structure "VkPresentRegionKHR"
+  let _rectangle_count = field t "rectangleCount" (Vk_base.uint32)
+  let rectangle_count = _rectangle_count
+  let _p_rectangles = field t "pRectangles" (ptr (RectLayerKHR.t))
+  let p_rectangles = _p_rectangles
+  let () = seal t
+  let structure_type : StructureType.t option = None
+    let make ?rectangle_count:arg_rectangle_count ?rectangles:(arg_rectangles=[]) () =
+    let value, keep = Vk_base.make_kept t in
+    ignore keep;
+    let rectangle_count_n = (match arg_rectangle_count with Some n -> n | None -> List.length arg_rectangles) in
+    if arg_rectangles <> [] && List.length arg_rectangles <> rectangle_count_n then invalid_arg "VkPresentRegionKHR.pRectangles: length does not match rectangleCount";
+    setf value _rectangle_count rectangle_count_n;
+    if arg_rectangles = [] then setf value _p_rectangles (Vk_base.null_ptr (RectLayerKHR.t)) else begin
+      let items = CArray.of_list (RectLayerKHR.t) arg_rectangles in
+      setf value _p_rectangles (CArray.start items);
+      Vk_base.retain keep items; Vk_base.retain keep arg_rectangles
+    end;
+    value
+end
+
+module PushDescriptorSetInfo = struct
+  type t
+  let t : t structure typ = structure "VkPushDescriptorSetInfo"
+  let _s_type = field t "sType" (StructureType.t)
+  let s_type = _s_type
+  let _p_next = field t "pNext" (ptr (Ctypes.void))
+  let p_next = _p_next
+  let _stage_flags = field t "stageFlags" (ShaderStageFlags.t)
+  let stage_flags = _stage_flags
+  let _layout = field t "layout" (PipelineLayout.t)
+  let layout = _layout
+  let _set = field t "set" (Vk_base.uint32)
+  let set = _set
+  let _descriptor_write_count = field t "descriptorWriteCount" (Vk_base.uint32)
+  let descriptor_write_count = _descriptor_write_count
+  let _p_descriptor_writes = field t "pDescriptorWrites" (ptr (WriteDescriptorSet.t))
+  let p_descriptor_writes = _p_descriptor_writes
+  let () = seal t
+  let structure_type : StructureType.t option = Some StructureType.push_descriptor_set_info
+    let make ?next:arg_next ?stage_flags:(arg_stage_flags=ShaderStageFlags.of_int 0) ?layout:(arg_layout=PipelineLayout.null) ?set:(arg_set=0) ?descriptor_writes:(arg_descriptor_writes=[]) () =
+    let value, keep = Vk_base.make_kept t in
+    ignore keep;
+    setf value _s_type StructureType.push_descriptor_set_info;
+    (match arg_next with
+     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
+     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
+    setf value _stage_flags arg_stage_flags;
+    setf value _layout arg_layout;
+    setf value _set arg_set;
+    let descriptor_write_count_n = List.length arg_descriptor_writes in
+    if arg_descriptor_writes <> [] && List.length arg_descriptor_writes <> descriptor_write_count_n then invalid_arg "VkPushDescriptorSetInfo.pDescriptorWrites: length does not match descriptorWriteCount";
+    setf value _descriptor_write_count descriptor_write_count_n;
+    if arg_descriptor_writes = [] then setf value _p_descriptor_writes (Vk_base.null_ptr (WriteDescriptorSet.t)) else begin
+      let items = CArray.of_list (WriteDescriptorSet.t) arg_descriptor_writes in
+      setf value _p_descriptor_writes (CArray.start items);
+      Vk_base.retain keep items; Vk_base.retain keep arg_descriptor_writes
+    end;
+    value
+end
+
+module QueueFamilyProperties2 = struct
+  type t
+  let t : t structure typ = structure "VkQueueFamilyProperties2"
+  let _s_type = field t "sType" (StructureType.t)
+  let s_type = _s_type
+  let _p_next = field t "pNext" (ptr (Ctypes.void))
+  let p_next = _p_next
+  let _queue_family_properties = field t "queueFamilyProperties" (QueueFamilyProperties.t)
+  let queue_family_properties = _queue_family_properties
+  let () = seal t
+  let structure_type : StructureType.t option = Some StructureType.queue_family_properties_2
+    let make ?next:arg_next () =
+    let value, keep = Vk_base.make_kept t in
+    ignore keep;
+    setf value _s_type StructureType.queue_family_properties_2;
+    (match arg_next with
+     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
+     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
+    value
+end
+
+module RenderPassBeginInfo = struct
+  type t
+  let t : t structure typ = structure "VkRenderPassBeginInfo"
+  let _s_type = field t "sType" (StructureType.t)
+  let s_type = _s_type
+  let _p_next = field t "pNext" (ptr (Ctypes.void))
+  let p_next = _p_next
+  let _render_pass = field t "renderPass" (RenderPass.t)
+  let render_pass = _render_pass
+  let _framebuffer = field t "framebuffer" (Framebuffer.t)
+  let framebuffer = _framebuffer
+  let _render_area = field t "renderArea" (Rect2D.t)
+  let render_area = _render_area
+  let _clear_value_count = field t "clearValueCount" (Vk_base.uint32)
+  let clear_value_count = _clear_value_count
+  let _p_clear_values = field t "pClearValues" (ptr (ClearValue.t))
+  let p_clear_values = _p_clear_values
+  let () = seal t
+  let structure_type : StructureType.t option = Some StructureType.render_pass_begin_info
+    let make ?next:arg_next ?render_pass:(arg_render_pass=RenderPass.null) ?framebuffer:(arg_framebuffer=Framebuffer.null) ?render_area:arg_render_area ?clear_values:(arg_clear_values=[]) () =
+    let value, keep = Vk_base.make_kept t in
+    ignore keep;
+    setf value _s_type StructureType.render_pass_begin_info;
+    (match arg_next with
+     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
+     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
+    setf value _render_pass arg_render_pass;
+    setf value _framebuffer arg_framebuffer;
+    (match arg_render_area with None -> () | Some x -> setf value _render_area x; Vk_base.retain keep x);
+    let clear_value_count_n = List.length arg_clear_values in
+    if arg_clear_values <> [] && List.length arg_clear_values <> clear_value_count_n then invalid_arg "VkRenderPassBeginInfo.pClearValues: length does not match clearValueCount";
+    setf value _clear_value_count clear_value_count_n;
+    if arg_clear_values = [] then setf value _p_clear_values (Vk_base.null_ptr (ClearValue.t)) else begin
+      let items = CArray.of_list (ClearValue.t) arg_clear_values in
+      setf value _p_clear_values (CArray.start items);
+      Vk_base.retain keep items; Vk_base.retain keep arg_clear_values
+    end;
+    value
+end
+
+module RenderPassCreateInfo = struct
+  type t
+  let t : t structure typ = structure "VkRenderPassCreateInfo"
+  let _s_type = field t "sType" (StructureType.t)
+  let s_type = _s_type
+  let _p_next = field t "pNext" (ptr (Ctypes.void))
+  let p_next = _p_next
+  let _flags = field t "flags" (RenderPassCreateFlags.t)
+  let flags = _flags
+  let _attachment_count = field t "attachmentCount" (Vk_base.uint32)
+  let attachment_count = _attachment_count
+  let _p_attachments = field t "pAttachments" (ptr (AttachmentDescription.t))
+  let p_attachments = _p_attachments
+  let _subpass_count = field t "subpassCount" (Vk_base.uint32)
+  let subpass_count = _subpass_count
+  let _p_subpasses = field t "pSubpasses" (ptr (SubpassDescription.t))
+  let p_subpasses = _p_subpasses
+  let _dependency_count = field t "dependencyCount" (Vk_base.uint32)
+  let dependency_count = _dependency_count
+  let _p_dependencies = field t "pDependencies" (ptr (SubpassDependency.t))
+  let p_dependencies = _p_dependencies
+  let () = seal t
+  let structure_type : StructureType.t option = Some StructureType.render_pass_create_info
+    let make ?next:arg_next ?flags:(arg_flags=RenderPassCreateFlags.of_int 0) ?attachments:(arg_attachments=[]) ?subpasses:(arg_subpasses=[]) ?dependencies:(arg_dependencies=[]) () =
+    let value, keep = Vk_base.make_kept t in
+    ignore keep;
+    setf value _s_type StructureType.render_pass_create_info;
+    (match arg_next with
+     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
+     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
+    setf value _flags arg_flags;
+    let attachment_count_n = List.length arg_attachments in
+    if arg_attachments <> [] && List.length arg_attachments <> attachment_count_n then invalid_arg "VkRenderPassCreateInfo.pAttachments: length does not match attachmentCount";
+    setf value _attachment_count attachment_count_n;
+    if arg_attachments = [] then setf value _p_attachments (Vk_base.null_ptr (AttachmentDescription.t)) else begin
+      let items = CArray.of_list (AttachmentDescription.t) arg_attachments in
+      setf value _p_attachments (CArray.start items);
+      Vk_base.retain keep items; Vk_base.retain keep arg_attachments
+    end;
+    let subpass_count_n = List.length arg_subpasses in
+    if arg_subpasses <> [] && List.length arg_subpasses <> subpass_count_n then invalid_arg "VkRenderPassCreateInfo.pSubpasses: length does not match subpassCount";
+    setf value _subpass_count subpass_count_n;
+    if arg_subpasses = [] then setf value _p_subpasses (Vk_base.null_ptr (SubpassDescription.t)) else begin
+      let items = CArray.of_list (SubpassDescription.t) arg_subpasses in
+      setf value _p_subpasses (CArray.start items);
+      Vk_base.retain keep items; Vk_base.retain keep arg_subpasses
+    end;
+    let dependency_count_n = List.length arg_dependencies in
+    if arg_dependencies <> [] && List.length arg_dependencies <> dependency_count_n then invalid_arg "VkRenderPassCreateInfo.pDependencies: length does not match dependencyCount";
+    setf value _dependency_count dependency_count_n;
+    if arg_dependencies = [] then setf value _p_dependencies (Vk_base.null_ptr (SubpassDependency.t)) else begin
+      let items = CArray.of_list (SubpassDependency.t) arg_dependencies in
+      setf value _p_dependencies (CArray.start items);
+      Vk_base.retain keep items; Vk_base.retain keep arg_dependencies
+    end;
+    value
+end
+
+module RenderPassCreateInfo2 = struct
+  type t
+  let t : t structure typ = structure "VkRenderPassCreateInfo2"
+  let _s_type = field t "sType" (StructureType.t)
+  let s_type = _s_type
+  let _p_next = field t "pNext" (ptr (Ctypes.void))
+  let p_next = _p_next
+  let _flags = field t "flags" (RenderPassCreateFlags.t)
+  let flags = _flags
+  let _attachment_count = field t "attachmentCount" (Vk_base.uint32)
+  let attachment_count = _attachment_count
+  let _p_attachments = field t "pAttachments" (ptr (AttachmentDescription2.t))
+  let p_attachments = _p_attachments
+  let _subpass_count = field t "subpassCount" (Vk_base.uint32)
+  let subpass_count = _subpass_count
+  let _p_subpasses = field t "pSubpasses" (ptr (SubpassDescription2.t))
+  let p_subpasses = _p_subpasses
+  let _dependency_count = field t "dependencyCount" (Vk_base.uint32)
+  let dependency_count = _dependency_count
+  let _p_dependencies = field t "pDependencies" (ptr (SubpassDependency2.t))
+  let p_dependencies = _p_dependencies
+  let _correlated_view_mask_count = field t "correlatedViewMaskCount" (Vk_base.uint32)
+  let correlated_view_mask_count = _correlated_view_mask_count
+  let _p_correlated_view_masks = field t "pCorrelatedViewMasks" (ptr (Vk_base.uint32))
+  let p_correlated_view_masks = _p_correlated_view_masks
+  let () = seal t
+  let structure_type : StructureType.t option = Some StructureType.render_pass_create_info_2
+    let make ?next:arg_next ?flags:(arg_flags=RenderPassCreateFlags.of_int 0) ?attachments:(arg_attachments=[]) ?subpasses:(arg_subpasses=[]) ?dependencies:(arg_dependencies=[]) ?correlated_view_masks:(arg_correlated_view_masks=[]) () =
+    let value, keep = Vk_base.make_kept t in
+    ignore keep;
+    setf value _s_type StructureType.render_pass_create_info_2;
+    (match arg_next with
+     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
+     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
+    setf value _flags arg_flags;
+    let attachment_count_n = List.length arg_attachments in
+    if arg_attachments <> [] && List.length arg_attachments <> attachment_count_n then invalid_arg "VkRenderPassCreateInfo2.pAttachments: length does not match attachmentCount";
+    setf value _attachment_count attachment_count_n;
+    if arg_attachments = [] then setf value _p_attachments (Vk_base.null_ptr (AttachmentDescription2.t)) else begin
+      let items = CArray.of_list (AttachmentDescription2.t) arg_attachments in
+      setf value _p_attachments (CArray.start items);
+      Vk_base.retain keep items; Vk_base.retain keep arg_attachments
+    end;
+    let subpass_count_n = List.length arg_subpasses in
+    if arg_subpasses <> [] && List.length arg_subpasses <> subpass_count_n then invalid_arg "VkRenderPassCreateInfo2.pSubpasses: length does not match subpassCount";
+    setf value _subpass_count subpass_count_n;
+    if arg_subpasses = [] then setf value _p_subpasses (Vk_base.null_ptr (SubpassDescription2.t)) else begin
+      let items = CArray.of_list (SubpassDescription2.t) arg_subpasses in
+      setf value _p_subpasses (CArray.start items);
+      Vk_base.retain keep items; Vk_base.retain keep arg_subpasses
+    end;
+    let dependency_count_n = List.length arg_dependencies in
+    if arg_dependencies <> [] && List.length arg_dependencies <> dependency_count_n then invalid_arg "VkRenderPassCreateInfo2.pDependencies: length does not match dependencyCount";
+    setf value _dependency_count dependency_count_n;
+    if arg_dependencies = [] then setf value _p_dependencies (Vk_base.null_ptr (SubpassDependency2.t)) else begin
+      let items = CArray.of_list (SubpassDependency2.t) arg_dependencies in
+      setf value _p_dependencies (CArray.start items);
+      Vk_base.retain keep items; Vk_base.retain keep arg_dependencies
+    end;
+    let correlated_view_mask_count_n = List.length arg_correlated_view_masks in
+    if arg_correlated_view_masks <> [] && List.length arg_correlated_view_masks <> correlated_view_mask_count_n then invalid_arg "VkRenderPassCreateInfo2.pCorrelatedViewMasks: length does not match correlatedViewMaskCount";
+    setf value _correlated_view_mask_count correlated_view_mask_count_n;
+    if arg_correlated_view_masks = [] then setf value _p_correlated_view_masks (Vk_base.null_ptr (Vk_base.uint32)) else begin
+      let items = CArray.of_list (Vk_base.uint32) arg_correlated_view_masks in
+      setf value _p_correlated_view_masks (CArray.start items);
+      Vk_base.retain keep items; Vk_base.retain keep arg_correlated_view_masks
+    end;
+    value
+end
+
+module RenderPassStripeInfoARM = struct
+  type t
+  let t : t structure typ = structure "VkRenderPassStripeInfoARM"
+  let _s_type = field t "sType" (StructureType.t)
+  let s_type = _s_type
+  let _p_next = field t "pNext" (ptr (Ctypes.void))
+  let p_next = _p_next
+  let _stripe_area = field t "stripeArea" (Rect2D.t)
+  let stripe_area = _stripe_area
+  let () = seal t
+  let structure_type : StructureType.t option = Some StructureType.render_pass_stripe_info_arm
+    let make ?next:arg_next ?stripe_area:arg_stripe_area () =
+    let value, keep = Vk_base.make_kept t in
+    ignore keep;
+    setf value _s_type StructureType.render_pass_stripe_info_arm;
+    (match arg_next with
+     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
+     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
+    (match arg_stripe_area with None -> () | Some x -> setf value _stripe_area x; Vk_base.retain keep x);
+    value
+end
+
+module RenderingAttachmentInfo = struct
+  type t
+  let t : t structure typ = structure "VkRenderingAttachmentInfo"
+  let _s_type = field t "sType" (StructureType.t)
+  let s_type = _s_type
+  let _p_next = field t "pNext" (ptr (Ctypes.void))
+  let p_next = _p_next
+  let _image_view = field t "imageView" (ImageView.t)
+  let image_view = _image_view
+  let _image_layout = field t "imageLayout" (ImageLayout.t)
+  let image_layout = _image_layout
+  let _resolve_mode = field t "resolveMode" (ResolveModeFlags.t)
+  let resolve_mode = _resolve_mode
+  let _resolve_image_view = field t "resolveImageView" (ImageView.t)
+  let resolve_image_view = _resolve_image_view
+  let _resolve_image_layout = field t "resolveImageLayout" (ImageLayout.t)
+  let resolve_image_layout = _resolve_image_layout
+  let _load_op = field t "loadOp" (AttachmentLoadOp.t)
+  let load_op = _load_op
+  let _store_op = field t "storeOp" (AttachmentStoreOp.t)
+  let store_op = _store_op
+  let _clear_value = field t "clearValue" (ClearValue.t)
+  let clear_value = _clear_value
+  let () = seal t
+  let structure_type : StructureType.t option = Some StructureType.rendering_attachment_info
+    let make ?next:arg_next ?image_view:(arg_image_view=ImageView.null) ?image_layout:(arg_image_layout=ImageLayout.of_int 0) ?resolve_mode:(arg_resolve_mode=ResolveModeFlags.of_int 0) ?resolve_image_view:(arg_resolve_image_view=ImageView.null) ?resolve_image_layout:(arg_resolve_image_layout=ImageLayout.of_int 0) ?load_op:(arg_load_op=AttachmentLoadOp.of_int 0) ?store_op:(arg_store_op=AttachmentStoreOp.of_int 0) ?clear_value:arg_clear_value () =
+    let value, keep = Vk_base.make_kept t in
+    ignore keep;
+    setf value _s_type StructureType.rendering_attachment_info;
+    (match arg_next with
+     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
+     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
+    setf value _image_view arg_image_view;
+    setf value _image_layout arg_image_layout;
+    setf value _resolve_mode arg_resolve_mode;
+    setf value _resolve_image_view arg_resolve_image_view;
+    setf value _resolve_image_layout arg_resolve_image_layout;
+    setf value _load_op arg_load_op;
+    setf value _store_op arg_store_op;
+    (match arg_clear_value with None -> () | Some x -> setf value _clear_value x; Vk_base.retain keep x);
+    value
+end
+
+module ResolveImageInfo2 = struct
+  type t
+  let t : t structure typ = structure "VkResolveImageInfo2"
+  let _s_type = field t "sType" (StructureType.t)
+  let s_type = _s_type
+  let _p_next = field t "pNext" (ptr (Ctypes.void))
+  let p_next = _p_next
+  let _src_image = field t "srcImage" (Image.t)
+  let src_image = _src_image
+  let _src_image_layout = field t "srcImageLayout" (ImageLayout.t)
+  let src_image_layout = _src_image_layout
+  let _dst_image = field t "dstImage" (Image.t)
+  let dst_image = _dst_image
+  let _dst_image_layout = field t "dstImageLayout" (ImageLayout.t)
+  let dst_image_layout = _dst_image_layout
+  let _region_count = field t "regionCount" (Vk_base.uint32)
+  let region_count = _region_count
+  let _p_regions = field t "pRegions" (ptr (ImageResolve2.t))
+  let p_regions = _p_regions
+  let () = seal t
+  let structure_type : StructureType.t option = Some StructureType.resolve_image_info_2
+    let make ?next:arg_next ?src_image:(arg_src_image=Image.null) ?src_image_layout:(arg_src_image_layout=ImageLayout.of_int 0) ?dst_image:(arg_dst_image=Image.null) ?dst_image_layout:(arg_dst_image_layout=ImageLayout.of_int 0) ?regions:(arg_regions=[]) () =
+    let value, keep = Vk_base.make_kept t in
+    ignore keep;
+    setf value _s_type StructureType.resolve_image_info_2;
+    (match arg_next with
+     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
+     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
+    setf value _src_image arg_src_image;
+    setf value _src_image_layout arg_src_image_layout;
+    setf value _dst_image arg_dst_image;
+    setf value _dst_image_layout arg_dst_image_layout;
+    let region_count_n = List.length arg_regions in
+    if arg_regions <> [] && List.length arg_regions <> region_count_n then invalid_arg "VkResolveImageInfo2.pRegions: length does not match regionCount";
+    setf value _region_count region_count_n;
+    if arg_regions = [] then setf value _p_regions (Vk_base.null_ptr (ImageResolve2.t)) else begin
+      let items = CArray.of_list (ImageResolve2.t) arg_regions in
+      setf value _p_regions (CArray.start items);
+      Vk_base.retain keep items; Vk_base.retain keep arg_regions
+    end;
+    value
+end
+
+module ShaderCreateInfoEXT = struct
+  type t
+  let t : t structure typ = structure "VkShaderCreateInfoEXT"
+  let _s_type = field t "sType" (StructureType.t)
+  let s_type = _s_type
+  let _p_next = field t "pNext" (ptr (Ctypes.void))
+  let p_next = _p_next
+  let _flags = field t "flags" (ShaderCreateFlagsEXT.t)
+  let flags = _flags
+  let _stage = field t "stage" (ShaderStageFlags.t)
+  let stage = _stage
+  let _next_stage = field t "nextStage" (ShaderStageFlags.t)
+  let next_stage = _next_stage
+  let _code_type = field t "codeType" (ShaderCodeTypeEXT.t)
+  let code_type = _code_type
+  let _code_size = field t "codeSize" (Vk_base.size_t)
+  let code_size = _code_size
+  let _p_code = field t "pCode" (ptr (Ctypes.void))
+  let p_code = _p_code
+  let _p_name = field t "pName" (ptr (Ctypes.char))
+  let p_name = _p_name
+  let _set_layout_count = field t "setLayoutCount" (Vk_base.uint32)
+  let set_layout_count = _set_layout_count
+  let _p_set_layouts = field t "pSetLayouts" (ptr (DescriptorSetLayout.t))
+  let p_set_layouts = _p_set_layouts
+  let _push_constant_range_count = field t "pushConstantRangeCount" (Vk_base.uint32)
+  let push_constant_range_count = _push_constant_range_count
+  let _p_push_constant_ranges = field t "pPushConstantRanges" (ptr (PushConstantRange.t))
+  let p_push_constant_ranges = _p_push_constant_ranges
+  let _p_specialization_info = field t "pSpecializationInfo" (ptr (SpecializationInfo.t))
+  let p_specialization_info = _p_specialization_info
+  let () = seal t
+  let structure_type : StructureType.t option = Some StructureType.shader_create_info_ext
+    let make ?next:arg_next ?flags:(arg_flags=ShaderCreateFlagsEXT.of_int 0) ?stage:(arg_stage=ShaderStageFlags.of_int 0) ?next_stage:(arg_next_stage=ShaderStageFlags.of_int 0) ?code_type:(arg_code_type=ShaderCodeTypeEXT.of_int 0) ?code:(arg_code="") ?name:arg_name ?set_layout_count:arg_set_layout_count ?set_layouts:(arg_set_layouts=[]) ?push_constant_range_count:arg_push_constant_range_count ?push_constant_ranges:(arg_push_constant_ranges=[]) ?specialization_info:arg_specialization_info () =
+    let value, keep = Vk_base.make_kept t in
+    ignore keep;
+    setf value _s_type StructureType.shader_create_info_ext;
+    (match arg_next with
+     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
+     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
+    setf value _flags arg_flags;
+    setf value _stage arg_stage;
+    setf value _next_stage arg_next_stage;
+    setf value _code_type arg_code_type;
+    setf value _code_size (String.length arg_code);
+    if arg_code = "" then setf value _p_code (Vk_base.null_ptr (Ctypes.void)) else begin
+      let bytes = CArray.of_string arg_code in
+      setf value _p_code (to_voidp (CArray.start bytes)); Vk_base.retain keep bytes
+    end;
+    (match arg_name with
+     | None -> setf value _p_name (Vk_base.null_ptr (Ctypes.char))
+     | Some text -> let text = CArray.of_string text in
+         setf value _p_name (CArray.start text); Vk_base.retain keep text);
+    let set_layout_count_n = (match arg_set_layout_count with Some n -> n | None -> List.length arg_set_layouts) in
+    if arg_set_layouts <> [] && List.length arg_set_layouts <> set_layout_count_n then invalid_arg "VkShaderCreateInfoEXT.pSetLayouts: length does not match setLayoutCount";
+    setf value _set_layout_count set_layout_count_n;
+    if arg_set_layouts = [] then setf value _p_set_layouts (Vk_base.null_ptr (DescriptorSetLayout.t)) else begin
+      let items = CArray.of_list (DescriptorSetLayout.t) arg_set_layouts in
+      setf value _p_set_layouts (CArray.start items);
+      Vk_base.retain keep items; Vk_base.retain keep arg_set_layouts
+    end;
+    let push_constant_range_count_n = (match arg_push_constant_range_count with Some n -> n | None -> List.length arg_push_constant_ranges) in
+    if arg_push_constant_ranges <> [] && List.length arg_push_constant_ranges <> push_constant_range_count_n then invalid_arg "VkShaderCreateInfoEXT.pPushConstantRanges: length does not match pushConstantRangeCount";
+    setf value _push_constant_range_count push_constant_range_count_n;
+    if arg_push_constant_ranges = [] then setf value _p_push_constant_ranges (Vk_base.null_ptr (PushConstantRange.t)) else begin
+      let items = CArray.of_list (PushConstantRange.t) arg_push_constant_ranges in
+      setf value _p_push_constant_ranges (CArray.start items);
+      Vk_base.retain keep items; Vk_base.retain keep arg_push_constant_ranges
+    end;
+    (match arg_specialization_info with
+     | None -> setf value _p_specialization_info (Vk_base.null_ptr (SpecializationInfo.t))
+     | Some pointed -> setf value _p_specialization_info (addr pointed); Vk_base.retain keep pointed);
+    value
+end
+
+module SparseImageFormatProperties2 = struct
+  type t
+  let t : t structure typ = structure "VkSparseImageFormatProperties2"
+  let _s_type = field t "sType" (StructureType.t)
+  let s_type = _s_type
+  let _p_next = field t "pNext" (ptr (Ctypes.void))
+  let p_next = _p_next
+  let _properties = field t "properties" (SparseImageFormatProperties.t)
+  let properties = _properties
+  let () = seal t
+  let structure_type : StructureType.t option = Some StructureType.sparse_image_format_properties_2
+    let make ?next:arg_next () =
+    let value, keep = Vk_base.make_kept t in
+    ignore keep;
+    setf value _s_type StructureType.sparse_image_format_properties_2;
+    (match arg_next with
+     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
+     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
+    value
+end
+
+module SparseImageMemoryBindInfo = struct
+  type t
+  let t : t structure typ = structure "VkSparseImageMemoryBindInfo"
+  let _image = field t "image" (Image.t)
+  let image = _image
+  let _bind_count = field t "bindCount" (Vk_base.uint32)
+  let bind_count = _bind_count
+  let _p_binds = field t "pBinds" (ptr (SparseImageMemoryBind.t))
+  let p_binds = _p_binds
+  let () = seal t
+  let structure_type : StructureType.t option = None
+    let make ?image:(arg_image=Image.null) ?binds:(arg_binds=[]) () =
+    let value, keep = Vk_base.make_kept t in
+    ignore keep;
+    setf value _image arg_image;
+    let bind_count_n = List.length arg_binds in
+    if arg_binds <> [] && List.length arg_binds <> bind_count_n then invalid_arg "VkSparseImageMemoryBindInfo.pBinds: length does not match bindCount";
+    setf value _bind_count bind_count_n;
+    if arg_binds = [] then setf value _p_binds (Vk_base.null_ptr (SparseImageMemoryBind.t)) else begin
+      let items = CArray.of_list (SparseImageMemoryBind.t) arg_binds in
+      setf value _p_binds (CArray.start items);
+      Vk_base.retain keep items; Vk_base.retain keep arg_binds
+    end;
+    value
+end
+
+module SparseImageMemoryRequirements = struct
+  type t
+  let t : t structure typ = structure "VkSparseImageMemoryRequirements"
+  let _format_properties = field t "formatProperties" (SparseImageFormatProperties.t)
+  let format_properties = _format_properties
+  let _image_mip_tail_first_lod = field t "imageMipTailFirstLod" (Vk_base.uint32)
+  let image_mip_tail_first_lod = _image_mip_tail_first_lod
+  let _image_mip_tail_size = field t "imageMipTailSize" (Vk_base.device_size)
+  let image_mip_tail_size = _image_mip_tail_size
+  let _image_mip_tail_offset = field t "imageMipTailOffset" (Vk_base.device_size)
+  let image_mip_tail_offset = _image_mip_tail_offset
+  let _image_mip_tail_stride = field t "imageMipTailStride" (Vk_base.device_size)
+  let image_mip_tail_stride = _image_mip_tail_stride
+  let () = seal t
+  let structure_type : StructureType.t option = None
+    let make () =
+    let value, keep = Vk_base.make_kept t in
+    ignore keep;
+    value
+end
+
+module SubpassSampleLocationsEXT = struct
+  type t
+  let t : t structure typ = structure "VkSubpassSampleLocationsEXT"
+  let _subpass_index = field t "subpassIndex" (Vk_base.uint32)
+  let subpass_index = _subpass_index
+  let _sample_locations_info = field t "sampleLocationsInfo" (SampleLocationsInfoEXT.t)
+  let sample_locations_info = _sample_locations_info
+  let () = seal t
+  let structure_type : StructureType.t option = None
+    let make ?subpass_index:(arg_subpass_index=0) ?sample_locations_info:arg_sample_locations_info () =
+    let value, keep = Vk_base.make_kept t in
+    ignore keep;
+    setf value _subpass_index arg_subpass_index;
+    (match arg_sample_locations_info with None -> () | Some x -> setf value _sample_locations_info x; Vk_base.retain keep x);
+    value
+end
+
+module SurfaceCapabilities2KHR = struct
+  type t
+  let t : t structure typ = structure "VkSurfaceCapabilities2KHR"
+  let _s_type = field t "sType" (StructureType.t)
+  let s_type = _s_type
+  let _p_next = field t "pNext" (ptr (Ctypes.void))
+  let p_next = _p_next
+  let _surface_capabilities = field t "surfaceCapabilities" (SurfaceCapabilitiesKHR.t)
+  let surface_capabilities = _surface_capabilities
+  let () = seal t
+  let structure_type : StructureType.t option = Some StructureType.surface_capabilities_2_khr
+    let make ?next:arg_next () =
+    let value, keep = Vk_base.make_kept t in
+    ignore keep;
+    setf value _s_type StructureType.surface_capabilities_2_khr;
+    (match arg_next with
+     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
+     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
+    value
+end
+
+module VideoReferenceSlotInfoKHR = struct
+  type t
+  let t : t structure typ = structure "VkVideoReferenceSlotInfoKHR"
+  let _s_type = field t "sType" (StructureType.t)
+  let s_type = _s_type
+  let _p_next = field t "pNext" (ptr (Ctypes.void))
+  let p_next = _p_next
+  let _slot_index = field t "slotIndex" (Vk_base.int32)
+  let slot_index = _slot_index
+  let _p_picture_resource = field t "pPictureResource" (ptr (VideoPictureResourceInfoKHR.t))
+  let p_picture_resource = _p_picture_resource
+  let () = seal t
+  let structure_type : StructureType.t option = Some StructureType.video_reference_slot_info_khr
+    let make ?next:arg_next ?slot_index:(arg_slot_index=0) ?picture_resource:arg_picture_resource () =
+    let value, keep = Vk_base.make_kept t in
+    ignore keep;
+    setf value _s_type StructureType.video_reference_slot_info_khr;
+    (match arg_next with
+     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
+     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
+    setf value _slot_index arg_slot_index;
+    (match arg_picture_resource with
+     | None -> setf value _p_picture_resource (Vk_base.null_ptr (VideoPictureResourceInfoKHR.t))
+     | Some pointed -> setf value _p_picture_resource (addr pointed); Vk_base.retain keep pointed);
+    value
+end
+
+module AccelerationStructureGeometryKHR = struct
+  type t
+  let t : t structure typ = structure "VkAccelerationStructureGeometryKHR"
+  let _s_type = field t "sType" (StructureType.t)
+  let s_type = _s_type
+  let _p_next = field t "pNext" (ptr (Ctypes.void))
+  let p_next = _p_next
+  let _geometry_type = field t "geometryType" (GeometryTypeKHR.t)
+  let geometry_type = _geometry_type
+  let _geometry = field t "geometry" (AccelerationStructureGeometryDataKHR.t)
+  let geometry = _geometry
+  let _flags = field t "flags" (GeometryFlagsKHR.t)
+  let flags = _flags
+  let () = seal t
+  let structure_type : StructureType.t option = Some StructureType.acceleration_structure_geometry_khr
+    let make ?next:arg_next ?geometry_type:(arg_geometry_type=GeometryTypeKHR.of_int 0) ?geometry:arg_geometry ?flags:(arg_flags=GeometryFlagsKHR.of_int 0) () =
+    let value, keep = Vk_base.make_kept t in
+    ignore keep;
+    setf value _s_type StructureType.acceleration_structure_geometry_khr;
+    (match arg_next with
+     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
+     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
+    setf value _geometry_type arg_geometry_type;
+    (match arg_geometry with None -> () | Some x -> setf value _geometry x; Vk_base.retain keep x);
+    setf value _flags arg_flags;
+    value
+end
+
+module AccelerationStructureInfoNV = struct
+  type t
+  let t : t structure typ = structure "VkAccelerationStructureInfoNV"
+  let _s_type = field t "sType" (StructureType.t)
+  let s_type = _s_type
+  let _p_next = field t "pNext" (ptr (Ctypes.void))
+  let p_next = _p_next
+  let _type_ = field t "type" (AccelerationStructureTypeKHR.t)
+  let type_ = _type_
+  let _flags = field t "flags" (BuildAccelerationStructureFlagsKHR.t)
+  let flags = _flags
+  let _instance_count = field t "instanceCount" (Vk_base.uint32)
+  let instance_count = _instance_count
+  let _geometry_count = field t "geometryCount" (Vk_base.uint32)
+  let geometry_count = _geometry_count
+  let _p_geometries = field t "pGeometries" (ptr (GeometryNV.t))
+  let p_geometries = _p_geometries
+  let () = seal t
+  let structure_type : StructureType.t option = Some StructureType.acceleration_structure_info_nv
+    let make ?next:arg_next ?type_:(arg_type_=AccelerationStructureTypeKHR.of_int 0) ?flags:(arg_flags=BuildAccelerationStructureFlagsKHR.of_int 0) ?instance_count:(arg_instance_count=0) ?geometries:(arg_geometries=[]) () =
+    let value, keep = Vk_base.make_kept t in
+    ignore keep;
+    setf value _s_type StructureType.acceleration_structure_info_nv;
+    (match arg_next with
+     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
+     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
+    setf value _type_ arg_type_;
+    setf value _flags arg_flags;
+    setf value _instance_count arg_instance_count;
+    let geometry_count_n = List.length arg_geometries in
+    if arg_geometries <> [] && List.length arg_geometries <> geometry_count_n then invalid_arg "VkAccelerationStructureInfoNV.pGeometries: length does not match geometryCount";
+    setf value _geometry_count geometry_count_n;
+    if arg_geometries = [] then setf value _p_geometries (Vk_base.null_ptr (GeometryNV.t)) else begin
+      let items = CArray.of_list (GeometryNV.t) arg_geometries in
+      setf value _p_geometries (CArray.start items);
+      Vk_base.retain keep items; Vk_base.retain keep arg_geometries
+    end;
+    value
+end
+
+module AccelerationStructureMotionInstanceNV = struct
+  type t
+  let t : t structure typ = structure "VkAccelerationStructureMotionInstanceNV"
+  let _type_ = field t "type" (AccelerationStructureMotionInstanceTypeNV.t)
+  let type_ = _type_
+  let _flags = field t "flags" (AccelerationStructureMotionInstanceFlagsNV.t)
+  let flags = _flags
+  let _data = field t "data" (AccelerationStructureMotionInstanceDataNV.t)
+  let data = _data
+  let () = seal t
+  let structure_type : StructureType.t option = None
+    let make ?type_:(arg_type_=AccelerationStructureMotionInstanceTypeNV.of_int 0) ?flags:(arg_flags=AccelerationStructureMotionInstanceFlagsNV.of_int 0) ?data:arg_data () =
+    let value, keep = Vk_base.make_kept t in
+    ignore keep;
+    setf value _type_ arg_type_;
+    setf value _flags arg_flags;
+    (match arg_data with None -> () | Some x -> setf value _data x; Vk_base.retain keep x);
+    value
+end
+
+module BindSparseInfo = struct
+  type t
+  let t : t structure typ = structure "VkBindSparseInfo"
+  let _s_type = field t "sType" (StructureType.t)
+  let s_type = _s_type
+  let _p_next = field t "pNext" (ptr (Ctypes.void))
+  let p_next = _p_next
+  let _wait_semaphore_count = field t "waitSemaphoreCount" (Vk_base.uint32)
+  let wait_semaphore_count = _wait_semaphore_count
+  let _p_wait_semaphores = field t "pWaitSemaphores" (ptr (Semaphore.t))
+  let p_wait_semaphores = _p_wait_semaphores
+  let _buffer_bind_count = field t "bufferBindCount" (Vk_base.uint32)
+  let buffer_bind_count = _buffer_bind_count
+  let _p_buffer_binds = field t "pBufferBinds" (ptr (SparseBufferMemoryBindInfo.t))
+  let p_buffer_binds = _p_buffer_binds
+  let _image_opaque_bind_count = field t "imageOpaqueBindCount" (Vk_base.uint32)
+  let image_opaque_bind_count = _image_opaque_bind_count
+  let _p_image_opaque_binds = field t "pImageOpaqueBinds" (ptr (SparseImageOpaqueMemoryBindInfo.t))
+  let p_image_opaque_binds = _p_image_opaque_binds
+  let _image_bind_count = field t "imageBindCount" (Vk_base.uint32)
+  let image_bind_count = _image_bind_count
+  let _p_image_binds = field t "pImageBinds" (ptr (SparseImageMemoryBindInfo.t))
+  let p_image_binds = _p_image_binds
+  let _signal_semaphore_count = field t "signalSemaphoreCount" (Vk_base.uint32)
+  let signal_semaphore_count = _signal_semaphore_count
+  let _p_signal_semaphores = field t "pSignalSemaphores" (ptr (Semaphore.t))
+  let p_signal_semaphores = _p_signal_semaphores
+  let () = seal t
+  let structure_type : StructureType.t option = Some StructureType.bind_sparse_info
+    let make ?next:arg_next ?wait_semaphores:(arg_wait_semaphores=[]) ?buffer_binds:(arg_buffer_binds=[]) ?image_opaque_binds:(arg_image_opaque_binds=[]) ?image_binds:(arg_image_binds=[]) ?signal_semaphores:(arg_signal_semaphores=[]) () =
+    let value, keep = Vk_base.make_kept t in
+    ignore keep;
+    setf value _s_type StructureType.bind_sparse_info;
+    (match arg_next with
+     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
+     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
+    let wait_semaphore_count_n = List.length arg_wait_semaphores in
+    if arg_wait_semaphores <> [] && List.length arg_wait_semaphores <> wait_semaphore_count_n then invalid_arg "VkBindSparseInfo.pWaitSemaphores: length does not match waitSemaphoreCount";
+    setf value _wait_semaphore_count wait_semaphore_count_n;
+    if arg_wait_semaphores = [] then setf value _p_wait_semaphores (Vk_base.null_ptr (Semaphore.t)) else begin
+      let items = CArray.of_list (Semaphore.t) arg_wait_semaphores in
+      setf value _p_wait_semaphores (CArray.start items);
+      Vk_base.retain keep items; Vk_base.retain keep arg_wait_semaphores
+    end;
+    let buffer_bind_count_n = List.length arg_buffer_binds in
+    if arg_buffer_binds <> [] && List.length arg_buffer_binds <> buffer_bind_count_n then invalid_arg "VkBindSparseInfo.pBufferBinds: length does not match bufferBindCount";
+    setf value _buffer_bind_count buffer_bind_count_n;
+    if arg_buffer_binds = [] then setf value _p_buffer_binds (Vk_base.null_ptr (SparseBufferMemoryBindInfo.t)) else begin
+      let items = CArray.of_list (SparseBufferMemoryBindInfo.t) arg_buffer_binds in
+      setf value _p_buffer_binds (CArray.start items);
+      Vk_base.retain keep items; Vk_base.retain keep arg_buffer_binds
+    end;
+    let image_opaque_bind_count_n = List.length arg_image_opaque_binds in
+    if arg_image_opaque_binds <> [] && List.length arg_image_opaque_binds <> image_opaque_bind_count_n then invalid_arg "VkBindSparseInfo.pImageOpaqueBinds: length does not match imageOpaqueBindCount";
+    setf value _image_opaque_bind_count image_opaque_bind_count_n;
+    if arg_image_opaque_binds = [] then setf value _p_image_opaque_binds (Vk_base.null_ptr (SparseImageOpaqueMemoryBindInfo.t)) else begin
+      let items = CArray.of_list (SparseImageOpaqueMemoryBindInfo.t) arg_image_opaque_binds in
+      setf value _p_image_opaque_binds (CArray.start items);
+      Vk_base.retain keep items; Vk_base.retain keep arg_image_opaque_binds
+    end;
+    let image_bind_count_n = List.length arg_image_binds in
+    if arg_image_binds <> [] && List.length arg_image_binds <> image_bind_count_n then invalid_arg "VkBindSparseInfo.pImageBinds: length does not match imageBindCount";
+    setf value _image_bind_count image_bind_count_n;
+    if arg_image_binds = [] then setf value _p_image_binds (Vk_base.null_ptr (SparseImageMemoryBindInfo.t)) else begin
+      let items = CArray.of_list (SparseImageMemoryBindInfo.t) arg_image_binds in
+      setf value _p_image_binds (CArray.start items);
+      Vk_base.retain keep items; Vk_base.retain keep arg_image_binds
+    end;
+    let signal_semaphore_count_n = List.length arg_signal_semaphores in
+    if arg_signal_semaphores <> [] && List.length arg_signal_semaphores <> signal_semaphore_count_n then invalid_arg "VkBindSparseInfo.pSignalSemaphores: length does not match signalSemaphoreCount";
+    setf value _signal_semaphore_count signal_semaphore_count_n;
+    if arg_signal_semaphores = [] then setf value _p_signal_semaphores (Vk_base.null_ptr (Semaphore.t)) else begin
+      let items = CArray.of_list (Semaphore.t) arg_signal_semaphores in
+      setf value _p_signal_semaphores (CArray.start items);
+      Vk_base.retain keep items; Vk_base.retain keep arg_signal_semaphores
+    end;
+    value
+end
+
+module ClusterAccelerationStructureCommandsInfoNV = struct
+  type t
+  let t : t structure typ = structure "VkClusterAccelerationStructureCommandsInfoNV"
+  let _s_type = field t "sType" (StructureType.t)
+  let s_type = _s_type
+  let _p_next = field t "pNext" (ptr (Ctypes.void))
+  let p_next = _p_next
+  let _input = field t "input" (ClusterAccelerationStructureInputInfoNV.t)
+  let input = _input
+  let _dst_implicit_data = field t "dstImplicitData" (Vk_base.device_address)
+  let dst_implicit_data = _dst_implicit_data
+  let _scratch_data = field t "scratchData" (Vk_base.device_address)
+  let scratch_data = _scratch_data
+  let _dst_addresses_array = field t "dstAddressesArray" (StridedDeviceAddressRegionKHR.t)
+  let dst_addresses_array = _dst_addresses_array
+  let _dst_sizes_array = field t "dstSizesArray" (StridedDeviceAddressRegionKHR.t)
+  let dst_sizes_array = _dst_sizes_array
+  let _src_infos_array = field t "srcInfosArray" (StridedDeviceAddressRegionKHR.t)
+  let src_infos_array = _src_infos_array
+  let _src_infos_count = field t "srcInfosCount" (Vk_base.device_address)
+  let src_infos_count = _src_infos_count
+  let _address_resolution_flags = field t "addressResolutionFlags" (ClusterAccelerationStructureAddressResolutionFlagsNV.t)
+  let address_resolution_flags = _address_resolution_flags
+  let () = seal t
+  let structure_type : StructureType.t option = Some StructureType.cluster_acceleration_structure_commands_info_nv
+    let make ?next:arg_next ?input:arg_input ?dst_implicit_data:(arg_dst_implicit_data=0) ?scratch_data:(arg_scratch_data=0) ?dst_addresses_array:arg_dst_addresses_array ?dst_sizes_array:arg_dst_sizes_array ?src_infos_array:arg_src_infos_array ?src_infos_count:(arg_src_infos_count=0) ?address_resolution_flags:(arg_address_resolution_flags=ClusterAccelerationStructureAddressResolutionFlagsNV.of_int 0) () =
+    let value, keep = Vk_base.make_kept t in
+    ignore keep;
+    setf value _s_type StructureType.cluster_acceleration_structure_commands_info_nv;
+    (match arg_next with
+     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
+     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
+    (match arg_input with None -> () | Some x -> setf value _input x; Vk_base.retain keep x);
+    setf value _dst_implicit_data arg_dst_implicit_data;
+    setf value _scratch_data arg_scratch_data;
+    (match arg_dst_addresses_array with None -> () | Some x -> setf value _dst_addresses_array x; Vk_base.retain keep x);
+    (match arg_dst_sizes_array with None -> () | Some x -> setf value _dst_sizes_array x; Vk_base.retain keep x);
+    (match arg_src_infos_array with None -> () | Some x -> setf value _src_infos_array x; Vk_base.retain keep x);
+    setf value _src_infos_count arg_src_infos_count;
+    setf value _address_resolution_flags arg_address_resolution_flags;
+    value
+end
+
+module ComputePipelineCreateInfo = struct
+  type t
+  let t : t structure typ = structure "VkComputePipelineCreateInfo"
+  let _s_type = field t "sType" (StructureType.t)
+  let s_type = _s_type
+  let _p_next = field t "pNext" (ptr (Ctypes.void))
+  let p_next = _p_next
+  let _flags = field t "flags" (PipelineCreateFlags.t)
+  let flags = _flags
+  let _stage = field t "stage" (PipelineShaderStageCreateInfo.t)
+  let stage = _stage
+  let _layout = field t "layout" (PipelineLayout.t)
+  let layout = _layout
+  let _base_pipeline_handle = field t "basePipelineHandle" (Pipeline.t)
+  let base_pipeline_handle = _base_pipeline_handle
+  let _base_pipeline_index = field t "basePipelineIndex" (Vk_base.int32)
+  let base_pipeline_index = _base_pipeline_index
+  let () = seal t
+  let structure_type : StructureType.t option = Some StructureType.compute_pipeline_create_info
+    let make ?next:arg_next ?flags:(arg_flags=PipelineCreateFlags.of_int 0) ?stage:arg_stage ?layout:(arg_layout=PipelineLayout.null) ?base_pipeline_handle:(arg_base_pipeline_handle=Pipeline.null) ?base_pipeline_index:(arg_base_pipeline_index=0) () =
+    let value, keep = Vk_base.make_kept t in
+    ignore keep;
+    setf value _s_type StructureType.compute_pipeline_create_info;
+    (match arg_next with
+     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
+     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
+    setf value _flags arg_flags;
+    (match arg_stage with None -> () | Some x -> setf value _stage x; Vk_base.retain keep x);
+    setf value _layout arg_layout;
+    setf value _base_pipeline_handle arg_base_pipeline_handle;
+    setf value _base_pipeline_index arg_base_pipeline_index;
+    value
+end
+
+module DebugUtilsMessengerCreateInfoEXT = struct
+  type t
+  let t : t structure typ = structure "VkDebugUtilsMessengerCreateInfoEXT"
+  let _s_type = field t "sType" (StructureType.t)
+  let s_type = _s_type
+  let _p_next = field t "pNext" (ptr (Ctypes.void))
+  let p_next = _p_next
+  let _flags = field t "flags" (DebugUtilsMessengerCreateFlagsEXT.t)
+  let flags = _flags
+  let _message_severity = field t "messageSeverity" (DebugUtilsMessageSeverityFlagsEXT.t)
+  let message_severity = _message_severity
+  let _message_type = field t "messageType" (DebugUtilsMessageTypeFlagsEXT.t)
+  let message_type = _message_type
+  let _pfn_user_callback = field t "pfnUserCallback" (PfnDebugUtilsMessengerCallbackEXT.opt)
+  let pfn_user_callback = _pfn_user_callback
+  let _p_user_data = field t "pUserData" (ptr (Ctypes.void))
+  let p_user_data = _p_user_data
+  let () = seal t
+  let structure_type : StructureType.t option = Some StructureType.debug_utils_messenger_create_info_ext
+    let make ?next:arg_next ?flags:(arg_flags=DebugUtilsMessengerCreateFlagsEXT.of_int 0) ?message_severity:(arg_message_severity=DebugUtilsMessageSeverityFlagsEXT.of_int 0) ?message_type:(arg_message_type=DebugUtilsMessageTypeFlagsEXT.of_int 0) ?pfn_user_callback:arg_pfn_user_callback ?p_user_data:arg_p_user_data () =
+    let value, keep = Vk_base.make_kept t in
+    ignore keep;
+    setf value _s_type StructureType.debug_utils_messenger_create_info_ext;
+    (match arg_next with
+     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
+     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
+    setf value _flags arg_flags;
+    setf value _message_severity arg_message_severity;
+    setf value _message_type arg_message_type;
+    (match arg_pfn_user_callback with
+     | None -> setf value _pfn_user_callback None
+     | Some callback -> setf value _pfn_user_callback (Some callback); Vk_base.retain keep callback);
+    setf value _p_user_data (match arg_p_user_data with None -> Vk_base.null_ptr (Ctypes.void) | Some p -> p);
+    value
+end
+
+module DescriptorSetAndBindingMappingEXT = struct
+  type t
+  let t : t structure typ = structure "VkDescriptorSetAndBindingMappingEXT"
+  let _s_type = field t "sType" (StructureType.t)
+  let s_type = _s_type
+  let _p_next = field t "pNext" (ptr (Ctypes.void))
+  let p_next = _p_next
+  let _descriptor_set = field t "descriptorSet" (Vk_base.uint32)
+  let descriptor_set = _descriptor_set
+  let _first_binding = field t "firstBinding" (Vk_base.uint32)
+  let first_binding = _first_binding
+  let _binding_count = field t "bindingCount" (Vk_base.uint32)
+  let binding_count = _binding_count
+  let _resource_mask = field t "resourceMask" (SpirvResourceTypeFlagsEXT.t)
+  let resource_mask = _resource_mask
+  let _source = field t "source" (DescriptorMappingSourceEXT.t)
+  let source = _source
+  let _source_data = field t "sourceData" (DescriptorMappingSourceDataEXT.t)
+  let source_data = _source_data
+  let () = seal t
+  let structure_type : StructureType.t option = Some StructureType.descriptor_set_and_binding_mapping_ext
+    let make ?next:arg_next ?descriptor_set:(arg_descriptor_set=0) ?first_binding:(arg_first_binding=0) ?binding_count:(arg_binding_count=0) ?resource_mask:(arg_resource_mask=SpirvResourceTypeFlagsEXT.of_int 0) ?source:(arg_source=DescriptorMappingSourceEXT.of_int 0) ?source_data:arg_source_data () =
+    let value, keep = Vk_base.make_kept t in
+    ignore keep;
+    setf value _s_type StructureType.descriptor_set_and_binding_mapping_ext;
+    (match arg_next with
+     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
+     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
+    setf value _descriptor_set arg_descriptor_set;
+    setf value _first_binding arg_first_binding;
+    setf value _binding_count arg_binding_count;
+    setf value _resource_mask arg_resource_mask;
+    setf value _source arg_source;
+    (match arg_source_data with None -> () | Some x -> setf value _source_data x; Vk_base.retain keep x);
+    value
+end
+
+module DirectDriverLoadingListLUNARG = struct
+  type t
+  let t : t structure typ = structure "VkDirectDriverLoadingListLUNARG"
+  let _s_type = field t "sType" (StructureType.t)
+  let s_type = _s_type
+  let _p_next = field t "pNext" (ptr (Ctypes.void))
+  let p_next = _p_next
+  let _mode = field t "mode" (DirectDriverLoadingModeLUNARG.t)
+  let mode = _mode
+  let _driver_count = field t "driverCount" (Vk_base.uint32)
+  let driver_count = _driver_count
+  let _p_drivers = field t "pDrivers" (ptr (DirectDriverLoadingInfoLUNARG.t))
+  let p_drivers = _p_drivers
+  let () = seal t
+  let structure_type : StructureType.t option = Some StructureType.direct_driver_loading_list_lunarg
+    let make ?next:arg_next ?mode:(arg_mode=DirectDriverLoadingModeLUNARG.of_int 0) ?drivers:(arg_drivers=[]) () =
+    let value, keep = Vk_base.make_kept t in
+    ignore keep;
+    setf value _s_type StructureType.direct_driver_loading_list_lunarg;
+    (match arg_next with
+     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
+     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
+    setf value _mode arg_mode;
+    let driver_count_n = List.length arg_drivers in
+    if arg_drivers <> [] && List.length arg_drivers <> driver_count_n then invalid_arg "VkDirectDriverLoadingListLUNARG.pDrivers: length does not match driverCount";
+    setf value _driver_count driver_count_n;
+    if arg_drivers = [] then setf value _p_drivers (Vk_base.null_ptr (DirectDriverLoadingInfoLUNARG.t)) else begin
+      let items = CArray.of_list (DirectDriverLoadingInfoLUNARG.t) arg_drivers in
+      setf value _p_drivers (CArray.start items);
+      Vk_base.retain keep items; Vk_base.retain keep arg_drivers
+    end;
+    value
+end
+
+module DisplayModeProperties2KHR = struct
+  type t
+  let t : t structure typ = structure "VkDisplayModeProperties2KHR"
+  let _s_type = field t "sType" (StructureType.t)
+  let s_type = _s_type
+  let _p_next = field t "pNext" (ptr (Ctypes.void))
+  let p_next = _p_next
+  let _display_mode_properties = field t "displayModeProperties" (DisplayModePropertiesKHR.t)
+  let display_mode_properties = _display_mode_properties
+  let () = seal t
+  let structure_type : StructureType.t option = Some StructureType.display_mode_properties_2_khr
+    let make ?next:arg_next () =
+    let value, keep = Vk_base.make_kept t in
+    ignore keep;
+    setf value _s_type StructureType.display_mode_properties_2_khr;
+    (match arg_next with
+     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
+     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
+    value
+end
+
+module ExecutionGraphPipelineCreateInfoAMDX = struct
+  type t
+  let t : t structure typ = structure "VkExecutionGraphPipelineCreateInfoAMDX"
+  let _s_type = field t "sType" (StructureType.t)
+  let s_type = _s_type
+  let _p_next = field t "pNext" (ptr (Ctypes.void))
+  let p_next = _p_next
+  let _flags = field t "flags" (PipelineCreateFlags.t)
+  let flags = _flags
+  let _stage_count = field t "stageCount" (Vk_base.uint32)
+  let stage_count = _stage_count
+  let _p_stages = field t "pStages" (ptr (PipelineShaderStageCreateInfo.t))
+  let p_stages = _p_stages
+  let _p_library_info = field t "pLibraryInfo" (ptr (PipelineLibraryCreateInfoKHR.t))
+  let p_library_info = _p_library_info
+  let _layout = field t "layout" (PipelineLayout.t)
+  let layout = _layout
+  let _base_pipeline_handle = field t "basePipelineHandle" (Pipeline.t)
+  let base_pipeline_handle = _base_pipeline_handle
+  let _base_pipeline_index = field t "basePipelineIndex" (Vk_base.int32)
+  let base_pipeline_index = _base_pipeline_index
+  let () = seal t
+  let structure_type : StructureType.t option = Some StructureType.execution_graph_pipeline_create_info_amdx
+    let make ?next:arg_next ?flags:(arg_flags=PipelineCreateFlags.of_int 0) ?stage_count:arg_stage_count ?stages:(arg_stages=[]) ?library_info:arg_library_info ?layout:(arg_layout=PipelineLayout.null) ?base_pipeline_handle:(arg_base_pipeline_handle=Pipeline.null) ?base_pipeline_index:(arg_base_pipeline_index=0) () =
+    let value, keep = Vk_base.make_kept t in
+    ignore keep;
+    setf value _s_type StructureType.execution_graph_pipeline_create_info_amdx;
+    (match arg_next with
+     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
+     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
+    setf value _flags arg_flags;
+    let stage_count_n = (match arg_stage_count with Some n -> n | None -> List.length arg_stages) in
+    if arg_stages <> [] && List.length arg_stages <> stage_count_n then invalid_arg "VkExecutionGraphPipelineCreateInfoAMDX.pStages: length does not match stageCount";
+    setf value _stage_count stage_count_n;
+    if arg_stages = [] then setf value _p_stages (Vk_base.null_ptr (PipelineShaderStageCreateInfo.t)) else begin
+      let items = CArray.of_list (PipelineShaderStageCreateInfo.t) arg_stages in
+      setf value _p_stages (CArray.start items);
+      Vk_base.retain keep items; Vk_base.retain keep arg_stages
+    end;
+    (match arg_library_info with
+     | None -> setf value _p_library_info (Vk_base.null_ptr (PipelineLibraryCreateInfoKHR.t))
+     | Some pointed -> setf value _p_library_info (addr pointed); Vk_base.retain keep pointed);
+    setf value _layout arg_layout;
+    setf value _base_pipeline_handle arg_base_pipeline_handle;
+    setf value _base_pipeline_index arg_base_pipeline_index;
+    value
+end
+
+module GraphicsPipelineCreateInfo = struct
+  type t
+  let t : t structure typ = structure "VkGraphicsPipelineCreateInfo"
+  let _s_type = field t "sType" (StructureType.t)
+  let s_type = _s_type
+  let _p_next = field t "pNext" (ptr (Ctypes.void))
+  let p_next = _p_next
+  let _flags = field t "flags" (PipelineCreateFlags.t)
+  let flags = _flags
+  let _stage_count = field t "stageCount" (Vk_base.uint32)
+  let stage_count = _stage_count
+  let _p_stages = field t "pStages" (ptr (PipelineShaderStageCreateInfo.t))
+  let p_stages = _p_stages
+  let _p_vertex_input_state = field t "pVertexInputState" (ptr (PipelineVertexInputStateCreateInfo.t))
+  let p_vertex_input_state = _p_vertex_input_state
+  let _p_input_assembly_state = field t "pInputAssemblyState" (ptr (PipelineInputAssemblyStateCreateInfo.t))
+  let p_input_assembly_state = _p_input_assembly_state
+  let _p_tessellation_state = field t "pTessellationState" (ptr (PipelineTessellationStateCreateInfo.t))
+  let p_tessellation_state = _p_tessellation_state
+  let _p_viewport_state = field t "pViewportState" (ptr (PipelineViewportStateCreateInfo.t))
+  let p_viewport_state = _p_viewport_state
+  let _p_rasterization_state = field t "pRasterizationState" (ptr (PipelineRasterizationStateCreateInfo.t))
+  let p_rasterization_state = _p_rasterization_state
+  let _p_multisample_state = field t "pMultisampleState" (ptr (PipelineMultisampleStateCreateInfo.t))
+  let p_multisample_state = _p_multisample_state
+  let _p_depth_stencil_state = field t "pDepthStencilState" (ptr (PipelineDepthStencilStateCreateInfo.t))
+  let p_depth_stencil_state = _p_depth_stencil_state
+  let _p_color_blend_state = field t "pColorBlendState" (ptr (PipelineColorBlendStateCreateInfo.t))
+  let p_color_blend_state = _p_color_blend_state
+  let _p_dynamic_state = field t "pDynamicState" (ptr (PipelineDynamicStateCreateInfo.t))
+  let p_dynamic_state = _p_dynamic_state
+  let _layout = field t "layout" (PipelineLayout.t)
+  let layout = _layout
+  let _render_pass = field t "renderPass" (RenderPass.t)
+  let render_pass = _render_pass
+  let _subpass = field t "subpass" (Vk_base.uint32)
+  let subpass = _subpass
+  let _base_pipeline_handle = field t "basePipelineHandle" (Pipeline.t)
+  let base_pipeline_handle = _base_pipeline_handle
+  let _base_pipeline_index = field t "basePipelineIndex" (Vk_base.int32)
+  let base_pipeline_index = _base_pipeline_index
+  let () = seal t
+  let structure_type : StructureType.t option = Some StructureType.graphics_pipeline_create_info
+    let make ?next:arg_next ?flags:(arg_flags=PipelineCreateFlags.of_int 0) ?stage_count:arg_stage_count ?stages:(arg_stages=[]) ?vertex_input_state:arg_vertex_input_state ?input_assembly_state:arg_input_assembly_state ?tessellation_state:arg_tessellation_state ?viewport_state:arg_viewport_state ?rasterization_state:arg_rasterization_state ?multisample_state:arg_multisample_state ?depth_stencil_state:arg_depth_stencil_state ?color_blend_state:arg_color_blend_state ?dynamic_state:arg_dynamic_state ?layout:(arg_layout=PipelineLayout.null) ?render_pass:(arg_render_pass=RenderPass.null) ?subpass:(arg_subpass=0) ?base_pipeline_handle:(arg_base_pipeline_handle=Pipeline.null) ?base_pipeline_index:(arg_base_pipeline_index=0) () =
+    let value, keep = Vk_base.make_kept t in
+    ignore keep;
+    setf value _s_type StructureType.graphics_pipeline_create_info;
+    (match arg_next with
+     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
+     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
+    setf value _flags arg_flags;
+    let stage_count_n = (match arg_stage_count with Some n -> n | None -> List.length arg_stages) in
+    if arg_stages <> [] && List.length arg_stages <> stage_count_n then invalid_arg "VkGraphicsPipelineCreateInfo.pStages: length does not match stageCount";
+    setf value _stage_count stage_count_n;
+    if arg_stages = [] then setf value _p_stages (Vk_base.null_ptr (PipelineShaderStageCreateInfo.t)) else begin
+      let items = CArray.of_list (PipelineShaderStageCreateInfo.t) arg_stages in
+      setf value _p_stages (CArray.start items);
+      Vk_base.retain keep items; Vk_base.retain keep arg_stages
+    end;
+    (match arg_vertex_input_state with
+     | None -> setf value _p_vertex_input_state (Vk_base.null_ptr (PipelineVertexInputStateCreateInfo.t))
+     | Some pointed -> setf value _p_vertex_input_state (addr pointed); Vk_base.retain keep pointed);
+    (match arg_input_assembly_state with
+     | None -> setf value _p_input_assembly_state (Vk_base.null_ptr (PipelineInputAssemblyStateCreateInfo.t))
+     | Some pointed -> setf value _p_input_assembly_state (addr pointed); Vk_base.retain keep pointed);
+    (match arg_tessellation_state with
+     | None -> setf value _p_tessellation_state (Vk_base.null_ptr (PipelineTessellationStateCreateInfo.t))
+     | Some pointed -> setf value _p_tessellation_state (addr pointed); Vk_base.retain keep pointed);
+    (match arg_viewport_state with
+     | None -> setf value _p_viewport_state (Vk_base.null_ptr (PipelineViewportStateCreateInfo.t))
+     | Some pointed -> setf value _p_viewport_state (addr pointed); Vk_base.retain keep pointed);
+    (match arg_rasterization_state with
+     | None -> setf value _p_rasterization_state (Vk_base.null_ptr (PipelineRasterizationStateCreateInfo.t))
+     | Some pointed -> setf value _p_rasterization_state (addr pointed); Vk_base.retain keep pointed);
+    (match arg_multisample_state with
+     | None -> setf value _p_multisample_state (Vk_base.null_ptr (PipelineMultisampleStateCreateInfo.t))
+     | Some pointed -> setf value _p_multisample_state (addr pointed); Vk_base.retain keep pointed);
+    (match arg_depth_stencil_state with
+     | None -> setf value _p_depth_stencil_state (Vk_base.null_ptr (PipelineDepthStencilStateCreateInfo.t))
+     | Some pointed -> setf value _p_depth_stencil_state (addr pointed); Vk_base.retain keep pointed);
+    (match arg_color_blend_state with
+     | None -> setf value _p_color_blend_state (Vk_base.null_ptr (PipelineColorBlendStateCreateInfo.t))
+     | Some pointed -> setf value _p_color_blend_state (addr pointed); Vk_base.retain keep pointed);
+    (match arg_dynamic_state with
+     | None -> setf value _p_dynamic_state (Vk_base.null_ptr (PipelineDynamicStateCreateInfo.t))
+     | Some pointed -> setf value _p_dynamic_state (addr pointed); Vk_base.retain keep pointed);
+    setf value _layout arg_layout;
+    setf value _render_pass arg_render_pass;
+    setf value _subpass arg_subpass;
+    setf value _base_pipeline_handle arg_base_pipeline_handle;
+    setf value _base_pipeline_index arg_base_pipeline_index;
+    value
+end
+
+module GraphicsShaderGroupCreateInfoNV = struct
+  type t
+  let t : t structure typ = structure "VkGraphicsShaderGroupCreateInfoNV"
+  let _s_type = field t "sType" (StructureType.t)
+  let s_type = _s_type
+  let _p_next = field t "pNext" (ptr (Ctypes.void))
+  let p_next = _p_next
+  let _stage_count = field t "stageCount" (Vk_base.uint32)
+  let stage_count = _stage_count
+  let _p_stages = field t "pStages" (ptr (PipelineShaderStageCreateInfo.t))
+  let p_stages = _p_stages
+  let _p_vertex_input_state = field t "pVertexInputState" (ptr (PipelineVertexInputStateCreateInfo.t))
+  let p_vertex_input_state = _p_vertex_input_state
+  let _p_tessellation_state = field t "pTessellationState" (ptr (PipelineTessellationStateCreateInfo.t))
+  let p_tessellation_state = _p_tessellation_state
+  let () = seal t
+  let structure_type : StructureType.t option = Some StructureType.graphics_shader_group_create_info_nv
+    let make ?next:arg_next ?stages:(arg_stages=[]) ?vertex_input_state:arg_vertex_input_state ?tessellation_state:arg_tessellation_state () =
+    let value, keep = Vk_base.make_kept t in
+    ignore keep;
+    setf value _s_type StructureType.graphics_shader_group_create_info_nv;
+    (match arg_next with
+     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
+     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
+    let stage_count_n = List.length arg_stages in
+    if arg_stages <> [] && List.length arg_stages <> stage_count_n then invalid_arg "VkGraphicsShaderGroupCreateInfoNV.pStages: length does not match stageCount";
+    setf value _stage_count stage_count_n;
+    if arg_stages = [] then setf value _p_stages (Vk_base.null_ptr (PipelineShaderStageCreateInfo.t)) else begin
+      let items = CArray.of_list (PipelineShaderStageCreateInfo.t) arg_stages in
+      setf value _p_stages (CArray.start items);
+      Vk_base.retain keep items; Vk_base.retain keep arg_stages
+    end;
+    (match arg_vertex_input_state with
+     | None -> setf value _p_vertex_input_state (Vk_base.null_ptr (PipelineVertexInputStateCreateInfo.t))
+     | Some pointed -> setf value _p_vertex_input_state (addr pointed); Vk_base.retain keep pointed);
+    (match arg_tessellation_state with
+     | None -> setf value _p_tessellation_state (Vk_base.null_ptr (PipelineTessellationStateCreateInfo.t))
+     | Some pointed -> setf value _p_tessellation_state (addr pointed); Vk_base.retain keep pointed);
+    value
+end
+
+module ImageConstraintsInfoFUCHSIA = struct
+  type t
+  let t : t structure typ = structure "VkImageConstraintsInfoFUCHSIA"
+  let _s_type = field t "sType" (StructureType.t)
+  let s_type = _s_type
+  let _p_next = field t "pNext" (ptr (Ctypes.void))
+  let p_next = _p_next
+  let _format_constraints_count = field t "formatConstraintsCount" (Vk_base.uint32)
+  let format_constraints_count = _format_constraints_count
+  let _p_format_constraints = field t "pFormatConstraints" (ptr (ImageFormatConstraintsInfoFUCHSIA.t))
+  let p_format_constraints = _p_format_constraints
+  let _buffer_collection_constraints = field t "bufferCollectionConstraints" (BufferCollectionConstraintsInfoFUCHSIA.t)
+  let buffer_collection_constraints = _buffer_collection_constraints
+  let _flags = field t "flags" (ImageConstraintsInfoFlagsFUCHSIA.t)
+  let flags = _flags
+  let () = seal t
+  let structure_type : StructureType.t option = Some StructureType.image_constraints_info_fuchsia
+    let make ?next:arg_next ?format_constraints:(arg_format_constraints=[]) ?buffer_collection_constraints:arg_buffer_collection_constraints ?flags:(arg_flags=ImageConstraintsInfoFlagsFUCHSIA.of_int 0) () =
+    let value, keep = Vk_base.make_kept t in
+    ignore keep;
+    setf value _s_type StructureType.image_constraints_info_fuchsia;
+    (match arg_next with
+     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
+     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
+    let format_constraints_count_n = List.length arg_format_constraints in
+    if arg_format_constraints <> [] && List.length arg_format_constraints <> format_constraints_count_n then invalid_arg "VkImageConstraintsInfoFUCHSIA.pFormatConstraints: length does not match formatConstraintsCount";
+    setf value _format_constraints_count format_constraints_count_n;
+    if arg_format_constraints = [] then setf value _p_format_constraints (Vk_base.null_ptr (ImageFormatConstraintsInfoFUCHSIA.t)) else begin
+      let items = CArray.of_list (ImageFormatConstraintsInfoFUCHSIA.t) arg_format_constraints in
+      setf value _p_format_constraints (CArray.start items);
+      Vk_base.retain keep items; Vk_base.retain keep arg_format_constraints
+    end;
+    (match arg_buffer_collection_constraints with None -> () | Some x -> setf value _buffer_collection_constraints x; Vk_base.retain keep x);
+    setf value _flags arg_flags;
+    value
+end
+
+module IndirectCommandsLayoutTokenEXT = struct
+  type t
+  let t : t structure typ = structure "VkIndirectCommandsLayoutTokenEXT"
+  let _s_type = field t "sType" (StructureType.t)
+  let s_type = _s_type
+  let _p_next = field t "pNext" (ptr (Ctypes.void))
+  let p_next = _p_next
+  let _type_ = field t "type" (IndirectCommandsTokenTypeEXT.t)
+  let type_ = _type_
+  let _data = field t "data" (IndirectCommandsTokenDataEXT.t)
+  let data = _data
+  let _offset = field t "offset" (Vk_base.uint32)
+  let offset = _offset
+  let () = seal t
+  let structure_type : StructureType.t option = Some StructureType.indirect_commands_layout_token_ext
+    let make ?next:arg_next ?type_:(arg_type_=IndirectCommandsTokenTypeEXT.of_int 0) ?data:arg_data ?offset:(arg_offset=0) () =
+    let value, keep = Vk_base.make_kept t in
+    ignore keep;
+    setf value _s_type StructureType.indirect_commands_layout_token_ext;
+    (match arg_next with
+     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
+     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
+    setf value _type_ arg_type_;
+    (match arg_data with None -> () | Some x -> setf value _data x; Vk_base.retain keep x);
+    setf value _offset arg_offset;
+    value
+end
+
+module IndirectExecutionSetCreateInfoEXT = struct
+  type t
+  let t : t structure typ = structure "VkIndirectExecutionSetCreateInfoEXT"
+  let _s_type = field t "sType" (StructureType.t)
+  let s_type = _s_type
+  let _p_next = field t "pNext" (ptr (Ctypes.void))
+  let p_next = _p_next
+  let _type_ = field t "type" (IndirectExecutionSetInfoTypeEXT.t)
+  let type_ = _type_
+  let _info = field t "info" (IndirectExecutionSetInfoEXT.t)
+  let info = _info
+  let () = seal t
+  let structure_type : StructureType.t option = Some StructureType.indirect_execution_set_create_info_ext
+    let make ?next:arg_next ?type_:(arg_type_=IndirectExecutionSetInfoTypeEXT.of_int 0) ?info:arg_info () =
+    let value, keep = Vk_base.make_kept t in
+    ignore keep;
+    setf value _s_type StructureType.indirect_execution_set_create_info_ext;
+    (match arg_next with
+     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
+     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
+    setf value _type_ arg_type_;
+    (match arg_info with None -> () | Some x -> setf value _info x; Vk_base.retain keep x);
+    value
+end
+
+module PhysicalDeviceLayeredApiVulkanPropertiesKHR = struct
+  type t
+  let t : t structure typ = structure "VkPhysicalDeviceLayeredApiVulkanPropertiesKHR"
+  let _s_type = field t "sType" (StructureType.t)
+  let s_type = _s_type
+  let _p_next = field t "pNext" (ptr (Ctypes.void))
+  let p_next = _p_next
+  let _properties = field t "properties" (PhysicalDeviceProperties2.t)
+  let properties = _properties
+  let () = seal t
+  let structure_type : StructureType.t option = Some StructureType.physical_device_layered_api_vulkan_properties_khr
+    let make ?next:arg_next () =
+    let value, keep = Vk_base.make_kept t in
+    ignore keep;
+    setf value _s_type StructureType.physical_device_layered_api_vulkan_properties_khr;
+    (match arg_next with
+     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
+     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
+    value
+end
+
+module PresentRegionsKHR = struct
+  type t
+  let t : t structure typ = structure "VkPresentRegionsKHR"
+  let _s_type = field t "sType" (StructureType.t)
+  let s_type = _s_type
+  let _p_next = field t "pNext" (ptr (Ctypes.void))
+  let p_next = _p_next
+  let _swapchain_count = field t "swapchainCount" (Vk_base.uint32)
+  let swapchain_count = _swapchain_count
+  let _p_regions = field t "pRegions" (ptr (PresentRegionKHR.t))
+  let p_regions = _p_regions
+  let () = seal t
+  let structure_type : StructureType.t option = Some StructureType.present_regions_khr
+    let make ?next:arg_next ?swapchain_count:arg_swapchain_count ?regions:(arg_regions=[]) () =
+    let value, keep = Vk_base.make_kept t in
+    ignore keep;
+    setf value _s_type StructureType.present_regions_khr;
+    (match arg_next with
+     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
+     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
+    let swapchain_count_n = (match arg_swapchain_count with Some n -> n | None -> List.length arg_regions) in
+    if arg_regions <> [] && List.length arg_regions <> swapchain_count_n then invalid_arg "VkPresentRegionsKHR.pRegions: length does not match swapchainCount";
+    setf value _swapchain_count swapchain_count_n;
+    if arg_regions = [] then setf value _p_regions (Vk_base.null_ptr (PresentRegionKHR.t)) else begin
+      let items = CArray.of_list (PresentRegionKHR.t) arg_regions in
+      setf value _p_regions (CArray.start items);
+      Vk_base.retain keep items; Vk_base.retain keep arg_regions
+    end;
+    value
+end
+
+module RayTracingPipelineCreateInfoKHR = struct
+  type t
+  let t : t structure typ = structure "VkRayTracingPipelineCreateInfoKHR"
+  let _s_type = field t "sType" (StructureType.t)
+  let s_type = _s_type
+  let _p_next = field t "pNext" (ptr (Ctypes.void))
+  let p_next = _p_next
+  let _flags = field t "flags" (PipelineCreateFlags.t)
+  let flags = _flags
+  let _stage_count = field t "stageCount" (Vk_base.uint32)
+  let stage_count = _stage_count
+  let _p_stages = field t "pStages" (ptr (PipelineShaderStageCreateInfo.t))
+  let p_stages = _p_stages
+  let _group_count = field t "groupCount" (Vk_base.uint32)
+  let group_count = _group_count
+  let _p_groups = field t "pGroups" (ptr (RayTracingShaderGroupCreateInfoKHR.t))
+  let p_groups = _p_groups
+  let _max_pipeline_ray_recursion_depth = field t "maxPipelineRayRecursionDepth" (Vk_base.uint32)
+  let max_pipeline_ray_recursion_depth = _max_pipeline_ray_recursion_depth
+  let _p_library_info = field t "pLibraryInfo" (ptr (PipelineLibraryCreateInfoKHR.t))
+  let p_library_info = _p_library_info
+  let _p_library_interface = field t "pLibraryInterface" (ptr (RayTracingPipelineInterfaceCreateInfoKHR.t))
+  let p_library_interface = _p_library_interface
+  let _p_dynamic_state = field t "pDynamicState" (ptr (PipelineDynamicStateCreateInfo.t))
+  let p_dynamic_state = _p_dynamic_state
+  let _layout = field t "layout" (PipelineLayout.t)
+  let layout = _layout
+  let _base_pipeline_handle = field t "basePipelineHandle" (Pipeline.t)
+  let base_pipeline_handle = _base_pipeline_handle
+  let _base_pipeline_index = field t "basePipelineIndex" (Vk_base.int32)
+  let base_pipeline_index = _base_pipeline_index
+  let () = seal t
+  let structure_type : StructureType.t option = Some StructureType.ray_tracing_pipeline_create_info_khr
+    let make ?next:arg_next ?flags:(arg_flags=PipelineCreateFlags.of_int 0) ?stages:(arg_stages=[]) ?groups:(arg_groups=[]) ?max_pipeline_ray_recursion_depth:(arg_max_pipeline_ray_recursion_depth=0) ?library_info:arg_library_info ?library_interface:arg_library_interface ?dynamic_state:arg_dynamic_state ?layout:(arg_layout=PipelineLayout.null) ?base_pipeline_handle:(arg_base_pipeline_handle=Pipeline.null) ?base_pipeline_index:(arg_base_pipeline_index=0) () =
+    let value, keep = Vk_base.make_kept t in
+    ignore keep;
+    setf value _s_type StructureType.ray_tracing_pipeline_create_info_khr;
+    (match arg_next with
+     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
+     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
+    setf value _flags arg_flags;
+    let stage_count_n = List.length arg_stages in
+    if arg_stages <> [] && List.length arg_stages <> stage_count_n then invalid_arg "VkRayTracingPipelineCreateInfoKHR.pStages: length does not match stageCount";
+    setf value _stage_count stage_count_n;
+    if arg_stages = [] then setf value _p_stages (Vk_base.null_ptr (PipelineShaderStageCreateInfo.t)) else begin
+      let items = CArray.of_list (PipelineShaderStageCreateInfo.t) arg_stages in
+      setf value _p_stages (CArray.start items);
+      Vk_base.retain keep items; Vk_base.retain keep arg_stages
+    end;
+    let group_count_n = List.length arg_groups in
+    if arg_groups <> [] && List.length arg_groups <> group_count_n then invalid_arg "VkRayTracingPipelineCreateInfoKHR.pGroups: length does not match groupCount";
+    setf value _group_count group_count_n;
+    if arg_groups = [] then setf value _p_groups (Vk_base.null_ptr (RayTracingShaderGroupCreateInfoKHR.t)) else begin
+      let items = CArray.of_list (RayTracingShaderGroupCreateInfoKHR.t) arg_groups in
+      setf value _p_groups (CArray.start items);
+      Vk_base.retain keep items; Vk_base.retain keep arg_groups
+    end;
+    setf value _max_pipeline_ray_recursion_depth arg_max_pipeline_ray_recursion_depth;
+    (match arg_library_info with
+     | None -> setf value _p_library_info (Vk_base.null_ptr (PipelineLibraryCreateInfoKHR.t))
+     | Some pointed -> setf value _p_library_info (addr pointed); Vk_base.retain keep pointed);
+    (match arg_library_interface with
+     | None -> setf value _p_library_interface (Vk_base.null_ptr (RayTracingPipelineInterfaceCreateInfoKHR.t))
+     | Some pointed -> setf value _p_library_interface (addr pointed); Vk_base.retain keep pointed);
+    (match arg_dynamic_state with
+     | None -> setf value _p_dynamic_state (Vk_base.null_ptr (PipelineDynamicStateCreateInfo.t))
+     | Some pointed -> setf value _p_dynamic_state (addr pointed); Vk_base.retain keep pointed);
+    setf value _layout arg_layout;
+    setf value _base_pipeline_handle arg_base_pipeline_handle;
+    setf value _base_pipeline_index arg_base_pipeline_index;
     value
 end

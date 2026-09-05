@@ -331,6 +331,7 @@ module PipelineBindPoint = struct
   let () = set_type_name "PipelineBindPoint"
   let graphics = of_int (0)
   let compute = of_int (1)
+  let execution_graph_amdx = of_int (1000134000)
   let ray_tracing_khr = of_int (1000165000)
   let ray_tracing_nv = of_int (1000165000)
   let subpass_shading_huawei = of_int (1000369003)
@@ -338,6 +339,7 @@ module PipelineBindPoint = struct
   let () = register [
     (graphics, "VK_PIPELINE_BIND_POINT_GRAPHICS");
     (compute, "VK_PIPELINE_BIND_POINT_COMPUTE");
+    (execution_graph_amdx, "VK_PIPELINE_BIND_POINT_EXECUTION_GRAPH_AMDX");
     (ray_tracing_khr, "VK_PIPELINE_BIND_POINT_RAY_TRACING_KHR");
     (ray_tracing_nv, "VK_PIPELINE_BIND_POINT_RAY_TRACING_NV");
     (subpass_shading_huawei, "VK_PIPELINE_BIND_POINT_SUBPASS_SHADING_HUAWEI");
@@ -2018,6 +2020,11 @@ module StructureType = struct
   let gpa_device_clock_mode_info_amd = of_int (1000133004)
   let physical_device_gpa_properties_2_amd = of_int (1000133005)
   let gpa_device_get_clock_info_amd = of_int (1000133006)
+  let physical_device_shader_enqueue_features_amdx = of_int (1000134000)
+  let physical_device_shader_enqueue_properties_amdx = of_int (1000134001)
+  let execution_graph_pipeline_scratch_size_amdx = of_int (1000134002)
+  let execution_graph_pipeline_create_info_amdx = of_int (1000134003)
+  let pipeline_shader_stage_node_create_info_amdx = of_int (1000134004)
   let texel_buffer_descriptor_info_ext = of_int (1000135000)
   let image_descriptor_info_ext = of_int (1000135001)
   let resource_descriptor_info_ext = of_int (1000135002)
@@ -2100,6 +2107,8 @@ module StructureType = struct
   let physical_device_descriptor_indexing_properties_ext = of_int (1000161002)
   let descriptor_set_variable_descriptor_count_allocate_info_ext = of_int (1000161003)
   let descriptor_set_variable_descriptor_count_layout_support_ext = of_int (1000161004)
+  let physical_device_portability_subset_features_khr = of_int (1000163000)
+  let physical_device_portability_subset_properties_khr = of_int (1000163001)
   let pipeline_viewport_shading_rate_image_state_create_info_nv = of_int (1000164000)
   let physical_device_shading_rate_image_features_nv = of_int (1000164001)
   let physical_device_shading_rate_image_properties_nv = of_int (1000164002)
@@ -2355,6 +2364,11 @@ module StructureType = struct
   let physical_device_shader_multiple_wait_queues_properties_qcom = of_int (1000304001)
   let physical_device_shader_split_barrier_features_ext = of_int (1000305000)
   let physical_device_shader_split_barrier_properties_ext = of_int (1000305001)
+  let cuda_module_create_info_nv = of_int (1000307000)
+  let cuda_function_create_info_nv = of_int (1000307001)
+  let cuda_launch_info_nv = of_int (1000307002)
+  let physical_device_cuda_kernel_launch_features_nv = of_int (1000307003)
+  let physical_device_cuda_kernel_launch_properties_nv = of_int (1000307004)
   let physical_device_tile_shading_features_qcom = of_int (1000309000)
   let physical_device_tile_shading_properties_qcom = of_int (1000309001)
   let render_pass_tile_shading_create_info_qcom = of_int (1000309002)
@@ -2529,6 +2543,9 @@ module StructureType = struct
   let micromap_create_info_ext = of_int (1000396007)
   let micromap_build_sizes_info_ext = of_int (1000396008)
   let acceleration_structure_triangles_opacity_micromap_ext = of_int (1000396009)
+  let physical_device_displacement_micromap_features_nv = of_int (1000397000)
+  let physical_device_displacement_micromap_properties_nv = of_int (1000397001)
+  let acceleration_structure_triangles_displacement_micromap_nv = of_int (1000397002)
   let physical_device_cluster_culling_shader_features_huawei = of_int (1000404000)
   let physical_device_cluster_culling_shader_properties_huawei = of_int (1000404001)
   let physical_device_cluster_culling_shader_vrs_features_huawei = of_int (1000404002)
@@ -2646,6 +2663,8 @@ module StructureType = struct
   let physical_device_anti_lag_features_amd = of_int (1000476000)
   let anti_lag_data_amd = of_int (1000476001)
   let anti_lag_presentation_info_amd = of_int (1000476002)
+  let physical_device_dense_geometry_format_features_amdx = of_int (1000478000)
+  let acceleration_structure_dense_geometry_format_triangles_data_amdx = of_int (1000478001)
   let surface_capabilities_present_id_2_khr = of_int (1000479000)
   let present_id_2_khr = of_int (1000479001)
   let physical_device_present_id_2_features_khr = of_int (1000479002)
@@ -3504,6 +3523,11 @@ module StructureType = struct
     (gpa_device_clock_mode_info_amd, "VK_STRUCTURE_TYPE_GPA_DEVICE_CLOCK_MODE_INFO_AMD");
     (physical_device_gpa_properties_2_amd, "VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_GPA_PROPERTIES_2_AMD");
     (gpa_device_get_clock_info_amd, "VK_STRUCTURE_TYPE_GPA_DEVICE_GET_CLOCK_INFO_AMD");
+    (physical_device_shader_enqueue_features_amdx, "VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_ENQUEUE_FEATURES_AMDX");
+    (physical_device_shader_enqueue_properties_amdx, "VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_ENQUEUE_PROPERTIES_AMDX");
+    (execution_graph_pipeline_scratch_size_amdx, "VK_STRUCTURE_TYPE_EXECUTION_GRAPH_PIPELINE_SCRATCH_SIZE_AMDX");
+    (execution_graph_pipeline_create_info_amdx, "VK_STRUCTURE_TYPE_EXECUTION_GRAPH_PIPELINE_CREATE_INFO_AMDX");
+    (pipeline_shader_stage_node_create_info_amdx, "VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_NODE_CREATE_INFO_AMDX");
     (texel_buffer_descriptor_info_ext, "VK_STRUCTURE_TYPE_TEXEL_BUFFER_DESCRIPTOR_INFO_EXT");
     (image_descriptor_info_ext, "VK_STRUCTURE_TYPE_IMAGE_DESCRIPTOR_INFO_EXT");
     (resource_descriptor_info_ext, "VK_STRUCTURE_TYPE_RESOURCE_DESCRIPTOR_INFO_EXT");
@@ -3586,6 +3610,8 @@ module StructureType = struct
     (physical_device_descriptor_indexing_properties_ext, "VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_INDEXING_PROPERTIES_EXT");
     (descriptor_set_variable_descriptor_count_allocate_info_ext, "VK_STRUCTURE_TYPE_DESCRIPTOR_SET_VARIABLE_DESCRIPTOR_COUNT_ALLOCATE_INFO_EXT");
     (descriptor_set_variable_descriptor_count_layout_support_ext, "VK_STRUCTURE_TYPE_DESCRIPTOR_SET_VARIABLE_DESCRIPTOR_COUNT_LAYOUT_SUPPORT_EXT");
+    (physical_device_portability_subset_features_khr, "VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PORTABILITY_SUBSET_FEATURES_KHR");
+    (physical_device_portability_subset_properties_khr, "VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PORTABILITY_SUBSET_PROPERTIES_KHR");
     (pipeline_viewport_shading_rate_image_state_create_info_nv, "VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_SHADING_RATE_IMAGE_STATE_CREATE_INFO_NV");
     (physical_device_shading_rate_image_features_nv, "VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADING_RATE_IMAGE_FEATURES_NV");
     (physical_device_shading_rate_image_properties_nv, "VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADING_RATE_IMAGE_PROPERTIES_NV");
@@ -3841,6 +3867,11 @@ module StructureType = struct
     (physical_device_shader_multiple_wait_queues_properties_qcom, "VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_MULTIPLE_WAIT_QUEUES_PROPERTIES_QCOM");
     (physical_device_shader_split_barrier_features_ext, "VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_SPLIT_BARRIER_FEATURES_EXT");
     (physical_device_shader_split_barrier_properties_ext, "VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_SPLIT_BARRIER_PROPERTIES_EXT");
+    (cuda_module_create_info_nv, "VK_STRUCTURE_TYPE_CUDA_MODULE_CREATE_INFO_NV");
+    (cuda_function_create_info_nv, "VK_STRUCTURE_TYPE_CUDA_FUNCTION_CREATE_INFO_NV");
+    (cuda_launch_info_nv, "VK_STRUCTURE_TYPE_CUDA_LAUNCH_INFO_NV");
+    (physical_device_cuda_kernel_launch_features_nv, "VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_CUDA_KERNEL_LAUNCH_FEATURES_NV");
+    (physical_device_cuda_kernel_launch_properties_nv, "VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_CUDA_KERNEL_LAUNCH_PROPERTIES_NV");
     (physical_device_tile_shading_features_qcom, "VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TILE_SHADING_FEATURES_QCOM");
     (physical_device_tile_shading_properties_qcom, "VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TILE_SHADING_PROPERTIES_QCOM");
     (render_pass_tile_shading_create_info_qcom, "VK_STRUCTURE_TYPE_RENDER_PASS_TILE_SHADING_CREATE_INFO_QCOM");
@@ -4015,6 +4046,9 @@ module StructureType = struct
     (micromap_create_info_ext, "VK_STRUCTURE_TYPE_MICROMAP_CREATE_INFO_EXT");
     (micromap_build_sizes_info_ext, "VK_STRUCTURE_TYPE_MICROMAP_BUILD_SIZES_INFO_EXT");
     (acceleration_structure_triangles_opacity_micromap_ext, "VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_TRIANGLES_OPACITY_MICROMAP_EXT");
+    (physical_device_displacement_micromap_features_nv, "VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DISPLACEMENT_MICROMAP_FEATURES_NV");
+    (physical_device_displacement_micromap_properties_nv, "VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DISPLACEMENT_MICROMAP_PROPERTIES_NV");
+    (acceleration_structure_triangles_displacement_micromap_nv, "VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_TRIANGLES_DISPLACEMENT_MICROMAP_NV");
     (physical_device_cluster_culling_shader_features_huawei, "VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_CLUSTER_CULLING_SHADER_FEATURES_HUAWEI");
     (physical_device_cluster_culling_shader_properties_huawei, "VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_CLUSTER_CULLING_SHADER_PROPERTIES_HUAWEI");
     (physical_device_cluster_culling_shader_vrs_features_huawei, "VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_CLUSTER_CULLING_SHADER_VRS_FEATURES_HUAWEI");
@@ -4132,6 +4166,8 @@ module StructureType = struct
     (physical_device_anti_lag_features_amd, "VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ANTI_LAG_FEATURES_AMD");
     (anti_lag_data_amd, "VK_STRUCTURE_TYPE_ANTI_LAG_DATA_AMD");
     (anti_lag_presentation_info_amd, "VK_STRUCTURE_TYPE_ANTI_LAG_PRESENTATION_INFO_AMD");
+    (physical_device_dense_geometry_format_features_amdx, "VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DENSE_GEOMETRY_FORMAT_FEATURES_AMDX");
+    (acceleration_structure_dense_geometry_format_triangles_data_amdx, "VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_DENSE_GEOMETRY_FORMAT_TRIANGLES_DATA_AMDX");
     (surface_capabilities_present_id_2_khr, "VK_STRUCTURE_TYPE_SURFACE_CAPABILITIES_PRESENT_ID_2_KHR");
     (present_id_2_khr, "VK_STRUCTURE_TYPE_PRESENT_ID_2_KHR");
     (physical_device_present_id_2_features_khr, "VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PRESENT_ID_2_FEATURES_KHR");
@@ -4873,6 +4909,8 @@ module ObjectType = struct
   let deferred_operation_khr = of_int (1000268000)
   let indirect_commands_layout_nv = of_int (1000277000)
   let private_data_slot_ext = of_int (1000295000)
+  let cuda_module_nv = of_int (1000307000)
+  let cuda_function_nv = of_int (1000307001)
   let buffer_collection_fuchsia = of_int (1000366000)
   let micromap_ext = of_int (1000396000)
   let tensor_arm = of_int (1000460000)
@@ -4935,6 +4973,8 @@ module ObjectType = struct
     (deferred_operation_khr, "VK_OBJECT_TYPE_DEFERRED_OPERATION_KHR");
     (indirect_commands_layout_nv, "VK_OBJECT_TYPE_INDIRECT_COMMANDS_LAYOUT_NV");
     (private_data_slot_ext, "VK_OBJECT_TYPE_PRIVATE_DATA_SLOT_EXT");
+    (cuda_module_nv, "VK_OBJECT_TYPE_CUDA_MODULE_NV");
+    (cuda_function_nv, "VK_OBJECT_TYPE_CUDA_FUNCTION_NV");
     (buffer_collection_fuchsia, "VK_OBJECT_TYPE_BUFFER_COLLECTION_FUCHSIA");
     (micromap_ext, "VK_OBJECT_TYPE_MICROMAP_EXT");
     (tensor_arm, "VK_OBJECT_TYPE_TENSOR_ARM");
@@ -5190,6 +5230,8 @@ module DebugReportObjectTypeEXT = struct
   let acceleration_structure_khr_ext = of_int (1000150000)
   let sampler_ycbcr_conversion_khr_ext = of_int (1000156000)
   let acceleration_structure_nv_ext = of_int (1000165000)
+  let cuda_module_nv_ext = of_int (1000307000)
+  let cuda_function_nv_ext = of_int (1000307001)
   let buffer_collection_fuchsia_ext = of_int (1000366000)
   let () = register [
     (unknown_ext, "VK_DEBUG_REPORT_OBJECT_TYPE_UNKNOWN_EXT");
@@ -5234,6 +5276,8 @@ module DebugReportObjectTypeEXT = struct
     (acceleration_structure_khr_ext, "VK_DEBUG_REPORT_OBJECT_TYPE_ACCELERATION_STRUCTURE_KHR_EXT");
     (sampler_ycbcr_conversion_khr_ext, "VK_DEBUG_REPORT_OBJECT_TYPE_SAMPLER_YCBCR_CONVERSION_KHR_EXT");
     (acceleration_structure_nv_ext, "VK_DEBUG_REPORT_OBJECT_TYPE_ACCELERATION_STRUCTURE_NV_EXT");
+    (cuda_module_nv_ext, "VK_DEBUG_REPORT_OBJECT_TYPE_CUDA_MODULE_NV_EXT");
+    (cuda_function_nv_ext, "VK_DEBUG_REPORT_OBJECT_TYPE_CUDA_FUNCTION_NV_EXT");
     (buffer_collection_fuchsia_ext, "VK_DEBUG_REPORT_OBJECT_TYPE_BUFFER_COLLECTION_FUCHSIA_EXT");
   ]
 end
@@ -5915,6 +5959,7 @@ module GeometryTypeKHR = struct
   let aabbs_nv = of_int (1)
   let spheres_nv = of_int (1000429004)
   let linear_swept_spheres_nv = of_int (1000429005)
+  let dense_geometry_format_triangles_amdx = of_int (1000478000)
   let micromap_khr = of_int (1000623000)
   let () = register [
     (triangles_khr, "VK_GEOMETRY_TYPE_TRIANGLES_KHR");
@@ -5924,6 +5969,7 @@ module GeometryTypeKHR = struct
     (aabbs_nv, "VK_GEOMETRY_TYPE_AABBS_NV");
     (spheres_nv, "VK_GEOMETRY_TYPE_SPHERES_NV");
     (linear_swept_spheres_nv, "VK_GEOMETRY_TYPE_LINEAR_SWEPT_SPHERES_NV");
+    (dense_geometry_format_triangles_amdx, "VK_GEOMETRY_TYPE_DENSE_GEOMETRY_FORMAT_TRIANGLES_AMDX");
     (micromap_khr, "VK_GEOMETRY_TYPE_MICROMAP_KHR");
   ]
 end
@@ -6216,60 +6262,6 @@ module LineRasterizationMode = struct
   ]
 end
 
-module FaultLevel = struct
-  include Vk_base.Enum32 ()
-  let () = set_type_name "FaultLevel"
-  let unassigned = of_int (0)
-  let critical = of_int (1)
-  let recoverable = of_int (2)
-  let warning = of_int (3)
-  let () = register [
-    (unassigned, "VK_FAULT_LEVEL_UNASSIGNED");
-    (critical, "VK_FAULT_LEVEL_CRITICAL");
-    (recoverable, "VK_FAULT_LEVEL_RECOVERABLE");
-    (warning, "VK_FAULT_LEVEL_WARNING");
-  ]
-end
-
-module FaultType = struct
-  include Vk_base.Enum32 ()
-  let () = set_type_name "FaultType"
-  let invalid = of_int (0)
-  let unassigned = of_int (1)
-  let implementation = of_int (2)
-  let system = of_int (3)
-  let physical_device = of_int (4)
-  let command_buffer_full = of_int (5)
-  let invalid_api_usage = of_int (6)
-  let () = register [
-    (invalid, "VK_FAULT_TYPE_INVALID");
-    (unassigned, "VK_FAULT_TYPE_UNASSIGNED");
-    (implementation, "VK_FAULT_TYPE_IMPLEMENTATION");
-    (system, "VK_FAULT_TYPE_SYSTEM");
-    (physical_device, "VK_FAULT_TYPE_PHYSICAL_DEVICE");
-    (command_buffer_full, "VK_FAULT_TYPE_COMMAND_BUFFER_FULL");
-    (invalid_api_usage, "VK_FAULT_TYPE_INVALID_API_USAGE");
-  ]
-end
-
-module FaultQueryBehavior = struct
-  include Vk_base.Enum32 ()
-  let () = set_type_name "FaultQueryBehavior"
-  let get_and_clear_all_faults = of_int (0)
-  let () = register [
-    (get_and_clear_all_faults, "VK_FAULT_QUERY_BEHAVIOR_GET_AND_CLEAR_ALL_FAULTS");
-  ]
-end
-
-module PipelineMatchControl = struct
-  include Vk_base.Enum32 ()
-  let () = set_type_name "PipelineMatchControl"
-  let application_uuid_exact_match = of_int (0)
-  let () = register [
-    (application_uuid_exact_match, "VK_PIPELINE_MATCH_CONTROL_APPLICATION_UUID_EXACT_MATCH");
-  ]
-end
-
 module FragmentShadingRateCombinerOpKHR = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "FragmentShadingRateCombinerOpKHR"
@@ -6364,30 +6356,6 @@ module SubpassMergeStatusEXT = struct
   ]
 end
 
-module SciSyncClientTypeNV = struct
-  include Vk_base.Enum32 ()
-  let () = set_type_name "SciSyncClientTypeNV"
-  let signaler_nv = of_int (0)
-  let waiter_nv = of_int (1)
-  let signaler_waiter_nv = of_int (2)
-  let () = register [
-    (signaler_nv, "VK_SCI_SYNC_CLIENT_TYPE_SIGNALER_NV");
-    (waiter_nv, "VK_SCI_SYNC_CLIENT_TYPE_WAITER_NV");
-    (signaler_waiter_nv, "VK_SCI_SYNC_CLIENT_TYPE_SIGNALER_WAITER_NV");
-  ]
-end
-
-module SciSyncPrimitiveTypeNV = struct
-  include Vk_base.Enum32 ()
-  let () = set_type_name "SciSyncPrimitiveTypeNV"
-  let fence_nv = of_int (0)
-  let semaphore_nv = of_int (1)
-  let () = register [
-    (fence_nv, "VK_SCI_SYNC_PRIMITIVE_TYPE_FENCE_NV");
-    (semaphore_nv, "VK_SCI_SYNC_PRIMITIVE_TYPE_SEMAPHORE_NV");
-  ]
-end
-
 module ProvokingVertexModeEXT = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "ProvokingVertexModeEXT"
@@ -6396,15 +6364,6 @@ module ProvokingVertexModeEXT = struct
   let () = register [
     (first_vertex_ext, "VK_PROVOKING_VERTEX_MODE_FIRST_VERTEX_EXT");
     (last_vertex_ext, "VK_PROVOKING_VERTEX_MODE_LAST_VERTEX_EXT");
-  ]
-end
-
-module PipelineCacheValidationVersion = struct
-  include Vk_base.Enum32 ()
-  let () = set_type_name "PipelineCacheValidationVersion"
-  let safety_critical_one = of_int (1)
-  let () = register [
-    (safety_critical_one, "VK_PIPELINE_CACHE_VALIDATION_VERSION_SAFETY_CRITICAL_ONE");
   ]
 end
 
@@ -6595,8 +6554,10 @@ module MicromapTypeEXT = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "MicromapTypeEXT"
   let opacity_micromap_ext = of_int (0)
+  let displacement_micromap_nv = of_int (1000397000)
   let () = register [
     (opacity_micromap_ext, "VK_MICROMAP_TYPE_OPACITY_MICROMAP_EXT");
+    (displacement_micromap_nv, "VK_MICROMAP_TYPE_DISPLACEMENT_MICROMAP_NV");
   ]
 end
 
@@ -7805,6 +7766,7 @@ module BufferUsageFlags = struct
   let transform_feedback_buffer_ext = of_int (2048)
   let transform_feedback_counter_buffer_ext = of_int (4096)
   let conditional_rendering_ext = of_int (512)
+  let execution_graph_scratch_amdx = of_int (33554432)
   let descriptor_heap_ext = of_int (268435456)
   let acceleration_structure_build_input_read_only_khr = of_int (524288)
   let acceleration_structure_storage_khr = of_int (1048576)
@@ -7836,6 +7798,7 @@ module BufferUsageFlags = struct
     (transform_feedback_buffer_ext, "VK_BUFFER_USAGE_TRANSFORM_FEEDBACK_BUFFER_BIT_EXT");
     (transform_feedback_counter_buffer_ext, "VK_BUFFER_USAGE_TRANSFORM_FEEDBACK_COUNTER_BUFFER_BIT_EXT");
     (conditional_rendering_ext, "VK_BUFFER_USAGE_CONDITIONAL_RENDERING_BIT_EXT");
+    (execution_graph_scratch_amdx, "VK_BUFFER_USAGE_EXECUTION_GRAPH_SCRATCH_BIT_AMDX");
     (descriptor_heap_ext, "VK_BUFFER_USAGE_DESCRIPTOR_HEAP_BIT_EXT");
     (acceleration_structure_build_input_read_only_khr, "VK_BUFFER_USAGE_ACCELERATION_STRUCTURE_BUILD_INPUT_READ_ONLY_BIT_KHR");
     (acceleration_structure_storage_khr, "VK_BUFFER_USAGE_ACCELERATION_STRUCTURE_STORAGE_BIT_KHR");
@@ -8118,6 +8081,7 @@ module PipelineCreateFlags = struct
   let color_attachment_feedback_loop_ext = of_int (33554432)
   let depth_stencil_attachment_feedback_loop_ext = of_int (67108864)
   let ray_tracing_opacity_micromap_ext = of_int (16777216)
+  let ray_tracing_displacement_micromap_nv = of_int (268435456)
   let no_protected_access_ext = of_int (134217728)
   let protected_access_only_ext = of_int (1073741824)
   let ray_tracing_opacity_micromap_khr = of_int (16777216)
@@ -8160,6 +8124,7 @@ module PipelineCreateFlags = struct
     (color_attachment_feedback_loop_ext, "VK_PIPELINE_CREATE_COLOR_ATTACHMENT_FEEDBACK_LOOP_BIT_EXT");
     (depth_stencil_attachment_feedback_loop_ext, "VK_PIPELINE_CREATE_DEPTH_STENCIL_ATTACHMENT_FEEDBACK_LOOP_BIT_EXT");
     (ray_tracing_opacity_micromap_ext, "VK_PIPELINE_CREATE_RAY_TRACING_OPACITY_MICROMAP_BIT_EXT");
+    (ray_tracing_displacement_micromap_nv, "VK_PIPELINE_CREATE_RAY_TRACING_DISPLACEMENT_MICROMAP_BIT_NV");
     (no_protected_access_ext, "VK_PIPELINE_CREATE_NO_PROTECTED_ACCESS_BIT_EXT");
     (protected_access_only_ext, "VK_PIPELINE_CREATE_PROTECTED_ACCESS_ONLY_BIT_EXT");
     (ray_tracing_opacity_micromap_khr, "VK_PIPELINE_CREATE_RAY_TRACING_OPACITY_MICROMAP_BIT_KHR");
@@ -8887,6 +8852,8 @@ module BuildAccelerationStructureFlagsKHR = struct
   let allow_disable_opacity_micromaps_ext_2 = of_int (128)
   let allow_opacity_micromap_data_update_ext = of_int (256)
   let allow_opacity_micromap_data_update_ext_2 = of_int (256)
+  let allow_displacement_micromap_update_nv = of_int (512)
+  let allow_displacement_micromap_update_nv_2 = of_int (512)
   let allow_data_access_khr = of_int (2048)
   let allow_data_access_khr_2 = of_int (2048)
   let allow_cluster_opacity_micromaps_nv = of_int (4096)
@@ -8911,6 +8878,8 @@ module BuildAccelerationStructureFlagsKHR = struct
     (allow_disable_opacity_micromaps_ext_2, "VK_BUILD_ACCELERATION_STRUCTURE_ALLOW_DISABLE_OPACITY_MICROMAPS_EXT");
     (allow_opacity_micromap_data_update_ext, "VK_BUILD_ACCELERATION_STRUCTURE_ALLOW_OPACITY_MICROMAP_DATA_UPDATE_BIT_EXT");
     (allow_opacity_micromap_data_update_ext_2, "VK_BUILD_ACCELERATION_STRUCTURE_ALLOW_OPACITY_MICROMAP_DATA_UPDATE_EXT");
+    (allow_displacement_micromap_update_nv, "VK_BUILD_ACCELERATION_STRUCTURE_ALLOW_DISPLACEMENT_MICROMAP_UPDATE_BIT_NV");
+    (allow_displacement_micromap_update_nv_2, "VK_BUILD_ACCELERATION_STRUCTURE_ALLOW_DISPLACEMENT_MICROMAP_UPDATE_NV");
     (allow_data_access_khr, "VK_BUILD_ACCELERATION_STRUCTURE_ALLOW_DATA_ACCESS_BIT_KHR");
     (allow_data_access_khr_2, "VK_BUILD_ACCELERATION_STRUCTURE_ALLOW_DATA_ACCESS_KHR");
     (allow_cluster_opacity_micromaps_nv, "VK_BUILD_ACCELERATION_STRUCTURE_ALLOW_CLUSTER_OPACITY_MICROMAPS_BIT_NV");
@@ -9025,13 +8994,6 @@ module DeviceDiagnosticsConfigFlagsNV = struct
     (enable_resource_tracking_nv, "VK_DEVICE_DIAGNOSTICS_CONFIG_ENABLE_RESOURCE_TRACKING_BIT_NV");
     (enable_automatic_checkpoints_nv, "VK_DEVICE_DIAGNOSTICS_CONFIG_ENABLE_AUTOMATIC_CHECKPOINTS_BIT_NV");
     (enable_shader_error_reporting_nv, "VK_DEVICE_DIAGNOSTICS_CONFIG_ENABLE_SHADER_ERROR_REPORTING_BIT_NV");
-  ]
-end
-
-module RefreshObjectFlagsKHR = struct
-  include Vk_base.Flags32 ()
-  let () = set_type_name "RefreshObjectFlagsKHR"
-  let () = register [
   ]
 end
 
@@ -9691,6 +9653,7 @@ module PipelineCreateFlags2 = struct
   let early_return_on_failure = of_int (512)
   let no_protected_access = of_int (134217728)
   let protected_access_only = of_int (1073741824)
+  let execution_graph_amdx = of_int (4294967296)
   let descriptor_heap_ext = of_int (68719476736)
   let ray_tracing_skip_built_in_primitives_khr = of_int (4096)
   let ray_tracing_opacity_micromap_ext = of_int (16777216)
@@ -9744,6 +9707,7 @@ module PipelineCreateFlags2 = struct
     (early_return_on_failure, "VK_PIPELINE_CREATE_2_EARLY_RETURN_ON_FAILURE_BIT");
     (no_protected_access, "VK_PIPELINE_CREATE_2_NO_PROTECTED_ACCESS_BIT");
     (protected_access_only, "VK_PIPELINE_CREATE_2_PROTECTED_ACCESS_ONLY_BIT");
+    (execution_graph_amdx, "VK_PIPELINE_CREATE_2_EXECUTION_GRAPH_BIT_AMDX");
     (descriptor_heap_ext, "VK_PIPELINE_CREATE_2_DESCRIPTOR_HEAP_BIT_EXT");
     (ray_tracing_skip_built_in_primitives_khr, "VK_PIPELINE_CREATE_2_RAY_TRACING_SKIP_BUILT_IN_PRIMITIVES_BIT_KHR");
     (ray_tracing_opacity_micromap_ext, "VK_PIPELINE_CREATE_2_RAY_TRACING_OPACITY_MICROMAP_BIT_EXT");
@@ -9803,6 +9767,7 @@ module BufferUsageFlags2 = struct
   let vertex_buffer = of_int (128)
   let indirect_buffer = of_int (256)
   let shader_device_address = of_int (131072)
+  let execution_graph_scratch_amdx = of_int (33554432)
   let descriptor_heap_ext = of_int (268435456)
   let micromap_build_input_read_only_ext = of_int (8388608)
   let micromap_storage_ext = of_int (16777216)
@@ -9830,6 +9795,7 @@ module BufferUsageFlags2 = struct
   let sampler_descriptor_buffer_ext = of_int (2097152)
   let resource_descriptor_buffer_ext = of_int (4194304)
   let push_descriptors_descriptor_buffer_ext = of_int (67108864)
+  let compressed_data_dgf1_amdx = of_int (8589934592)
   let data_graph_foreign_descriptor_arm = of_int (536870912)
   let tile_memory_qcom = of_int (134217728)
   let memory_decompression_ext = of_int (4294967296)
@@ -9845,6 +9811,7 @@ module BufferUsageFlags2 = struct
     (vertex_buffer, "VK_BUFFER_USAGE_2_VERTEX_BUFFER_BIT");
     (indirect_buffer, "VK_BUFFER_USAGE_2_INDIRECT_BUFFER_BIT");
     (shader_device_address, "VK_BUFFER_USAGE_2_SHADER_DEVICE_ADDRESS_BIT");
+    (execution_graph_scratch_amdx, "VK_BUFFER_USAGE_2_EXECUTION_GRAPH_SCRATCH_BIT_AMDX");
     (descriptor_heap_ext, "VK_BUFFER_USAGE_2_DESCRIPTOR_HEAP_BIT_EXT");
     (micromap_build_input_read_only_ext, "VK_BUFFER_USAGE_2_MICROMAP_BUILD_INPUT_READ_ONLY_BIT_EXT");
     (micromap_storage_ext, "VK_BUFFER_USAGE_2_MICROMAP_STORAGE_BIT_EXT");
@@ -9872,6 +9839,7 @@ module BufferUsageFlags2 = struct
     (sampler_descriptor_buffer_ext, "VK_BUFFER_USAGE_2_SAMPLER_DESCRIPTOR_BUFFER_BIT_EXT");
     (resource_descriptor_buffer_ext, "VK_BUFFER_USAGE_2_RESOURCE_DESCRIPTOR_BUFFER_BIT_EXT");
     (push_descriptors_descriptor_buffer_ext, "VK_BUFFER_USAGE_2_PUSH_DESCRIPTORS_DESCRIPTOR_BUFFER_BIT_EXT");
+    (compressed_data_dgf1_amdx, "VK_BUFFER_USAGE_2_COMPRESSED_DATA_DGF1_BIT_AMDX");
     (data_graph_foreign_descriptor_arm, "VK_BUFFER_USAGE_2_DATA_GRAPH_FOREIGN_DESCRIPTOR_BIT_ARM");
     (tile_memory_qcom, "VK_BUFFER_USAGE_2_TILE_MEMORY_BIT_QCOM");
     (memory_decompression_ext, "VK_BUFFER_USAGE_2_MEMORY_DECOMPRESSION_BIT_EXT");
@@ -10874,15 +10842,6 @@ module PipelineRasterizationDepthClipStateCreateFlagsEXT = struct
   ]
 end
 
-module SwapchainImageUsageFlagsANDROID = struct
-  include Vk_base.Flags32 ()
-  let () = set_type_name "SwapchainImageUsageFlagsANDROID"
-  let shared_android = of_int (1)
-  let () = register [
-    (shared_android, "VK_SWAPCHAIN_IMAGE_USAGE_SHARED_BIT_ANDROID");
-  ]
-end
-
 module ToolPurposeFlags = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "ToolPurposeFlags"
@@ -11325,15 +11284,6 @@ module PresentTimingInfoFlagsEXT = struct
   let () = register [
     (present_at_relative_time_ext, "VK_PRESENT_TIMING_INFO_PRESENT_AT_RELATIVE_TIME_BIT_EXT");
     (present_at_nearest_refresh_cycle_ext, "VK_PRESENT_TIMING_INFO_PRESENT_AT_NEAREST_REFRESH_CYCLE_BIT_EXT");
-  ]
-end
-
-module SwapchainImageUsageFlagsOHOS = struct
-  include Vk_base.Flags32 ()
-  let () = set_type_name "SwapchainImageUsageFlagsOHOS"
-  let shared_ohos = of_int (1)
-  let () = register [
-    (shared_ohos, "VK_SWAPCHAIN_IMAGE_USAGE_SHARED_BIT_OHOS");
   ]
 end
 
@@ -12024,8 +11974,6 @@ module AccessFlags3KHR = struct
 end
 
 module RayTracingInvocationReorderModeNV = RayTracingInvocationReorderModeEXT
-
-module PrivateDataSlotCreateFlagBitsEXT = PrivateDataSlotCreateFlags
 
 module DescriptorUpdateTemplateTypeKHR = DescriptorUpdateTemplateType
 

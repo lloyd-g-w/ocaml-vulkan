@@ -13,836 +13,6 @@ open Vk_types_06
 open Vk_types_07
 open Vk_types_08
 
-module ScreenBufferPropertiesQNX = struct
-  type t
-  let t : t structure typ = structure "VkScreenBufferPropertiesQNX"
-  let _s_type = field t "sType" (StructureType.t)
-  let s_type = _s_type
-  let _p_next = field t "pNext" (ptr (Ctypes.void))
-  let p_next = _p_next
-  let _allocation_size = field t "allocationSize" (Vk_base.device_size)
-  let allocation_size = _allocation_size
-  let _memory_type_bits = field t "memoryTypeBits" (Vk_base.uint32)
-  let memory_type_bits = _memory_type_bits
-  let () = seal t
-  let structure_type : StructureType.t option = Some StructureType.screen_buffer_properties_qnx
-    let make ?next:arg_next () =
-    let value, keep = Vk_base.make_kept t in
-    ignore keep;
-    setf value _s_type StructureType.screen_buffer_properties_qnx;
-    (match arg_next with
-     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
-     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    value
-end
-
-module ScreenSurfaceCreateInfoQNX = struct
-  type t
-  let t : t structure typ = structure "VkScreenSurfaceCreateInfoQNX"
-  let _s_type = field t "sType" (StructureType.t)
-  let s_type = _s_type
-  let _p_next = field t "pNext" (ptr (Ctypes.void))
-  let p_next = _p_next
-  let _flags = field t "flags" (ScreenSurfaceCreateFlagsQNX.t)
-  let flags = _flags
-  let _context = field t "context" (ptr (void))
-  let context = _context
-  let _window = field t "window" (ptr (void))
-  let window = _window
-  let () = seal t
-  let structure_type : StructureType.t option = Some StructureType.screen_surface_create_info_qnx
-    let make ?next:arg_next ?flags:(arg_flags=ScreenSurfaceCreateFlagsQNX.of_int 0) ?context:arg_context ?window:arg_window () =
-    let value, keep = Vk_base.make_kept t in
-    ignore keep;
-    setf value _s_type StructureType.screen_surface_create_info_qnx;
-    (match arg_next with
-     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
-     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    setf value _flags arg_flags;
-    setf value _context (match arg_context with None -> Vk_base.null_ptr (void) | Some p -> p);
-    setf value _window (match arg_window with None -> Vk_base.null_ptr (void) | Some p -> p);
-    value
-end
-
-module SemaphoreCreateInfo = struct
-  type t
-  let t : t structure typ = structure "VkSemaphoreCreateInfo"
-  let _s_type = field t "sType" (StructureType.t)
-  let s_type = _s_type
-  let _p_next = field t "pNext" (ptr (Ctypes.void))
-  let p_next = _p_next
-  let _flags = field t "flags" (SemaphoreCreateFlags.t)
-  let flags = _flags
-  let () = seal t
-  let structure_type : StructureType.t option = Some StructureType.semaphore_create_info
-    let make ?next:arg_next ?flags:(arg_flags=SemaphoreCreateFlags.of_int 0) () =
-    let value, keep = Vk_base.make_kept t in
-    ignore keep;
-    setf value _s_type StructureType.semaphore_create_info;
-    (match arg_next with
-     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
-     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    setf value _flags arg_flags;
-    value
-end
-
-module SemaphoreGetFdInfoKHR = struct
-  type t
-  let t : t structure typ = structure "VkSemaphoreGetFdInfoKHR"
-  let _s_type = field t "sType" (StructureType.t)
-  let s_type = _s_type
-  let _p_next = field t "pNext" (ptr (Ctypes.void))
-  let p_next = _p_next
-  let _semaphore = field t "semaphore" (Semaphore.t)
-  let semaphore = _semaphore
-  let _handle_type = field t "handleType" (ExternalSemaphoreHandleTypeFlags.t)
-  let handle_type = _handle_type
-  let () = seal t
-  let structure_type : StructureType.t option = Some StructureType.semaphore_get_fd_info_khr
-    let make ?next:arg_next ?semaphore:(arg_semaphore=Semaphore.null) ?handle_type:(arg_handle_type=ExternalSemaphoreHandleTypeFlags.of_int 0) () =
-    let value, keep = Vk_base.make_kept t in
-    ignore keep;
-    setf value _s_type StructureType.semaphore_get_fd_info_khr;
-    (match arg_next with
-     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
-     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    setf value _semaphore arg_semaphore;
-    setf value _handle_type arg_handle_type;
-    value
-end
-
-module SemaphoreGetSciSyncInfoNV = struct
-  type t
-  let t : t structure typ = structure "VkSemaphoreGetSciSyncInfoNV"
-  let _s_type = field t "sType" (StructureType.t)
-  let s_type = _s_type
-  let _p_next = field t "pNext" (ptr (Ctypes.void))
-  let p_next = _p_next
-  let _semaphore = field t "semaphore" (Semaphore.t)
-  let semaphore = _semaphore
-  let _handle_type = field t "handleType" (ExternalSemaphoreHandleTypeFlags.t)
-  let handle_type = _handle_type
-  let () = seal t
-  let structure_type : StructureType.t option = None
-    let make ?next:arg_next ?semaphore:(arg_semaphore=Semaphore.null) ?handle_type:(arg_handle_type=ExternalSemaphoreHandleTypeFlags.of_int 0) () =
-    let value, keep = Vk_base.make_kept t in
-    ignore keep;
-    setf value _s_type (StructureType.of_int 0);
-    (match arg_next with
-     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
-     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    setf value _semaphore arg_semaphore;
-    setf value _handle_type arg_handle_type;
-    value
-end
-
-module SemaphoreGetWin32HandleInfoKHR = struct
-  type t
-  let t : t structure typ = structure "VkSemaphoreGetWin32HandleInfoKHR"
-  let _s_type = field t "sType" (StructureType.t)
-  let s_type = _s_type
-  let _p_next = field t "pNext" (ptr (Ctypes.void))
-  let p_next = _p_next
-  let _semaphore = field t "semaphore" (Semaphore.t)
-  let semaphore = _semaphore
-  let _handle_type = field t "handleType" (ExternalSemaphoreHandleTypeFlags.t)
-  let handle_type = _handle_type
-  let () = seal t
-  let structure_type : StructureType.t option = Some StructureType.semaphore_get_win32_handle_info_khr
-    let make ?next:arg_next ?semaphore:(arg_semaphore=Semaphore.null) ?handle_type:(arg_handle_type=ExternalSemaphoreHandleTypeFlags.of_int 0) () =
-    let value, keep = Vk_base.make_kept t in
-    ignore keep;
-    setf value _s_type StructureType.semaphore_get_win32_handle_info_khr;
-    (match arg_next with
-     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
-     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    setf value _semaphore arg_semaphore;
-    setf value _handle_type arg_handle_type;
-    value
-end
-
-module SemaphoreGetZirconHandleInfoFUCHSIA = struct
-  type t
-  let t : t structure typ = structure "VkSemaphoreGetZirconHandleInfoFUCHSIA"
-  let _s_type = field t "sType" (StructureType.t)
-  let s_type = _s_type
-  let _p_next = field t "pNext" (ptr (Ctypes.void))
-  let p_next = _p_next
-  let _semaphore = field t "semaphore" (Semaphore.t)
-  let semaphore = _semaphore
-  let _handle_type = field t "handleType" (ExternalSemaphoreHandleTypeFlags.t)
-  let handle_type = _handle_type
-  let () = seal t
-  let structure_type : StructureType.t option = Some StructureType.semaphore_get_zircon_handle_info_fuchsia
-    let make ?next:arg_next ?semaphore:(arg_semaphore=Semaphore.null) ?handle_type:(arg_handle_type=ExternalSemaphoreHandleTypeFlags.of_int 0) () =
-    let value, keep = Vk_base.make_kept t in
-    ignore keep;
-    setf value _s_type StructureType.semaphore_get_zircon_handle_info_fuchsia;
-    (match arg_next with
-     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
-     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    setf value _semaphore arg_semaphore;
-    setf value _handle_type arg_handle_type;
-    value
-end
-
-module SemaphoreSciSyncCreateInfoNV = struct
-  type t
-  let t : t structure typ = structure "VkSemaphoreSciSyncCreateInfoNV"
-  let _s_type = field t "sType" (StructureType.t)
-  let s_type = _s_type
-  let _p_next = field t "pNext" (ptr (Ctypes.void))
-  let p_next = _p_next
-  let _semaphore_pool = field t "semaphorePool" (SemaphoreSciSyncPoolNV.t)
-  let semaphore_pool = _semaphore_pool
-  let _p_fence = field t "pFence" (ptr (void))
-  let p_fence = _p_fence
-  let () = seal t
-  let structure_type : StructureType.t option = None
-    let make ?next:arg_next ?semaphore_pool:(arg_semaphore_pool=SemaphoreSciSyncPoolNV.null) ?fence:arg_fence () =
-    let value, keep = Vk_base.make_kept t in
-    ignore keep;
-    setf value _s_type (StructureType.of_int 0);
-    (match arg_next with
-     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
-     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    setf value _semaphore_pool arg_semaphore_pool;
-    setf value _p_fence (match arg_fence with None -> Vk_base.null_ptr (void) | Some p -> p);
-    value
-end
-
-module SemaphoreSciSyncPoolCreateInfoNV = struct
-  type t
-  let t : t structure typ = structure "VkSemaphoreSciSyncPoolCreateInfoNV"
-  let _s_type = field t "sType" (StructureType.t)
-  let s_type = _s_type
-  let _p_next = field t "pNext" (ptr (Ctypes.void))
-  let p_next = _p_next
-  let _handle = field t "handle" (ptr void)
-  let handle = _handle
-  let () = seal t
-  let structure_type : StructureType.t option = None
-    let make ?next:arg_next ?handle:arg_handle () =
-    let value, keep = Vk_base.make_kept t in
-    ignore keep;
-    setf value _s_type (StructureType.of_int 0);
-    (match arg_next with
-     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
-     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    setf value _handle (match arg_handle with None -> Ctypes.null | Some p -> p);
-    value
-end
-
-module SemaphoreSignalInfo = struct
-  type t
-  let t : t structure typ = structure "VkSemaphoreSignalInfo"
-  let _s_type = field t "sType" (StructureType.t)
-  let s_type = _s_type
-  let _p_next = field t "pNext" (ptr (Ctypes.void))
-  let p_next = _p_next
-  let _semaphore = field t "semaphore" (Semaphore.t)
-  let semaphore = _semaphore
-  let _value = field t "value" (Vk_base.uint64)
-  let value = _value
-  let () = seal t
-  let structure_type : StructureType.t option = Some StructureType.semaphore_signal_info
-    let make ?next:arg_next ?semaphore:(arg_semaphore=Semaphore.null) ?value:(arg_value=0) () =
-    let value, keep = Vk_base.make_kept t in
-    ignore keep;
-    setf value _s_type StructureType.semaphore_signal_info;
-    (match arg_next with
-     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
-     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    setf value _semaphore arg_semaphore;
-    setf value _value arg_value;
-    value
-end
-
-module SemaphoreSubmitInfo = struct
-  type t
-  let t : t structure typ = structure "VkSemaphoreSubmitInfo"
-  let _s_type = field t "sType" (StructureType.t)
-  let s_type = _s_type
-  let _p_next = field t "pNext" (ptr (Ctypes.void))
-  let p_next = _p_next
-  let _semaphore = field t "semaphore" (Semaphore.t)
-  let semaphore = _semaphore
-  let _value = field t "value" (Vk_base.uint64)
-  let value = _value
-  let _stage_mask = field t "stageMask" (PipelineStageFlags2.t)
-  let stage_mask = _stage_mask
-  let _device_index = field t "deviceIndex" (Vk_base.uint32)
-  let device_index = _device_index
-  let () = seal t
-  let structure_type : StructureType.t option = Some StructureType.semaphore_submit_info
-    let make ?next:arg_next ?semaphore:(arg_semaphore=Semaphore.null) ?value:(arg_value=0) ?stage_mask:(arg_stage_mask=PipelineStageFlags2.of_int 0) ?device_index:(arg_device_index=0) () =
-    let value, keep = Vk_base.make_kept t in
-    ignore keep;
-    setf value _s_type StructureType.semaphore_submit_info;
-    (match arg_next with
-     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
-     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    setf value _semaphore arg_semaphore;
-    setf value _value arg_value;
-    setf value _stage_mask arg_stage_mask;
-    setf value _device_index arg_device_index;
-    value
-end
-
-module SemaphoreTypeCreateInfo = struct
-  type t
-  let t : t structure typ = structure "VkSemaphoreTypeCreateInfo"
-  let _s_type = field t "sType" (StructureType.t)
-  let s_type = _s_type
-  let _p_next = field t "pNext" (ptr (Ctypes.void))
-  let p_next = _p_next
-  let _semaphore_type = field t "semaphoreType" (SemaphoreType.t)
-  let semaphore_type = _semaphore_type
-  let _initial_value = field t "initialValue" (Vk_base.uint64)
-  let initial_value = _initial_value
-  let () = seal t
-  let structure_type : StructureType.t option = Some StructureType.semaphore_type_create_info
-    let make ?next:arg_next ?semaphore_type:(arg_semaphore_type=SemaphoreType.of_int 0) ?initial_value:(arg_initial_value=0) () =
-    let value, keep = Vk_base.make_kept t in
-    ignore keep;
-    setf value _s_type StructureType.semaphore_type_create_info;
-    (match arg_next with
-     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
-     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    setf value _semaphore_type arg_semaphore_type;
-    setf value _initial_value arg_initial_value;
-    value
-end
-
-module SemaphoreWaitInfo = struct
-  type t
-  let t : t structure typ = structure "VkSemaphoreWaitInfo"
-  let _s_type = field t "sType" (StructureType.t)
-  let s_type = _s_type
-  let _p_next = field t "pNext" (ptr (Ctypes.void))
-  let p_next = _p_next
-  let _flags = field t "flags" (SemaphoreWaitFlags.t)
-  let flags = _flags
-  let _semaphore_count = field t "semaphoreCount" (Vk_base.uint32)
-  let semaphore_count = _semaphore_count
-  let _p_semaphores = field t "pSemaphores" (ptr (Semaphore.t))
-  let p_semaphores = _p_semaphores
-  let _p_values = field t "pValues" (ptr (Vk_base.uint64))
-  let p_values = _p_values
-  let () = seal t
-  let structure_type : StructureType.t option = Some StructureType.semaphore_wait_info
-    let make ?next:arg_next ?flags:(arg_flags=SemaphoreWaitFlags.of_int 0) ?semaphores:(arg_semaphores=[]) ?values:(arg_values=[]) () =
-    let value, keep = Vk_base.make_kept t in
-    ignore keep;
-    setf value _s_type StructureType.semaphore_wait_info;
-    (match arg_next with
-     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
-     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    setf value _flags arg_flags;
-    let semaphore_count_n = List.fold_left max 0 [List.length arg_semaphores; List.length arg_values] in
-    if arg_semaphores <> [] && List.length arg_semaphores <> semaphore_count_n then invalid_arg "VkSemaphoreWaitInfo.pSemaphores: length does not match semaphoreCount";
-    if arg_values <> [] && List.length arg_values <> semaphore_count_n then invalid_arg "VkSemaphoreWaitInfo.pValues: length does not match semaphoreCount";
-    setf value _semaphore_count semaphore_count_n;
-    if arg_semaphores = [] then setf value _p_semaphores (Vk_base.null_ptr (Semaphore.t)) else begin
-      let items = CArray.of_list (Semaphore.t) arg_semaphores in
-      setf value _p_semaphores (CArray.start items);
-      Vk_base.retain keep items; Vk_base.retain keep arg_semaphores
-    end;
-    if arg_values = [] then setf value _p_values (Vk_base.null_ptr (Vk_base.uint64)) else begin
-      let items = CArray.of_list (Vk_base.uint64) arg_values in
-      setf value _p_values (CArray.start items);
-      Vk_base.retain keep items; Vk_base.retain keep arg_values
-    end;
-    value
-end
-
-module SetDescriptorBufferOffsetsInfoEXT = struct
-  type t
-  let t : t structure typ = structure "VkSetDescriptorBufferOffsetsInfoEXT"
-  let _s_type = field t "sType" (StructureType.t)
-  let s_type = _s_type
-  let _p_next = field t "pNext" (ptr (Ctypes.void))
-  let p_next = _p_next
-  let _stage_flags = field t "stageFlags" (ShaderStageFlags.t)
-  let stage_flags = _stage_flags
-  let _layout = field t "layout" (PipelineLayout.t)
-  let layout = _layout
-  let _first_set = field t "firstSet" (Vk_base.uint32)
-  let first_set = _first_set
-  let _set_count = field t "setCount" (Vk_base.uint32)
-  let set_count = _set_count
-  let _p_buffer_indices = field t "pBufferIndices" (ptr (Vk_base.uint32))
-  let p_buffer_indices = _p_buffer_indices
-  let _p_offsets = field t "pOffsets" (ptr (Vk_base.device_size))
-  let p_offsets = _p_offsets
-  let () = seal t
-  let structure_type : StructureType.t option = Some StructureType.set_descriptor_buffer_offsets_info_ext
-    let make ?next:arg_next ?stage_flags:(arg_stage_flags=ShaderStageFlags.of_int 0) ?layout:(arg_layout=PipelineLayout.null) ?first_set:(arg_first_set=0) ?buffer_indices:(arg_buffer_indices=[]) ?offsets:(arg_offsets=[]) () =
-    let value, keep = Vk_base.make_kept t in
-    ignore keep;
-    setf value _s_type StructureType.set_descriptor_buffer_offsets_info_ext;
-    (match arg_next with
-     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
-     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    setf value _stage_flags arg_stage_flags;
-    setf value _layout arg_layout;
-    setf value _first_set arg_first_set;
-    let set_count_n = List.fold_left max 0 [List.length arg_buffer_indices; List.length arg_offsets] in
-    if arg_buffer_indices <> [] && List.length arg_buffer_indices <> set_count_n then invalid_arg "VkSetDescriptorBufferOffsetsInfoEXT.pBufferIndices: length does not match setCount";
-    if arg_offsets <> [] && List.length arg_offsets <> set_count_n then invalid_arg "VkSetDescriptorBufferOffsetsInfoEXT.pOffsets: length does not match setCount";
-    setf value _set_count set_count_n;
-    if arg_buffer_indices = [] then setf value _p_buffer_indices (Vk_base.null_ptr (Vk_base.uint32)) else begin
-      let items = CArray.of_list (Vk_base.uint32) arg_buffer_indices in
-      setf value _p_buffer_indices (CArray.start items);
-      Vk_base.retain keep items; Vk_base.retain keep arg_buffer_indices
-    end;
-    if arg_offsets = [] then setf value _p_offsets (Vk_base.null_ptr (Vk_base.device_size)) else begin
-      let items = CArray.of_list (Vk_base.device_size) arg_offsets in
-      setf value _p_offsets (CArray.start items);
-      Vk_base.retain keep items; Vk_base.retain keep arg_offsets
-    end;
-    value
-end
-
-module SetLatencyMarkerInfoNV = struct
-  type t
-  let t : t structure typ = structure "VkSetLatencyMarkerInfoNV"
-  let _s_type = field t "sType" (StructureType.t)
-  let s_type = _s_type
-  let _p_next = field t "pNext" (ptr (Ctypes.void))
-  let p_next = _p_next
-  let _present_id = field t "presentID" (Vk_base.uint64)
-  let present_id = _present_id
-  let _marker = field t "marker" (LatencyMarkerNV.t)
-  let marker = _marker
-  let () = seal t
-  let structure_type : StructureType.t option = Some StructureType.set_latency_marker_info_nv
-    let make ?next:arg_next ?present_id:(arg_present_id=0) ?marker:(arg_marker=LatencyMarkerNV.of_int 0) () =
-    let value, keep = Vk_base.make_kept t in
-    ignore keep;
-    setf value _s_type StructureType.set_latency_marker_info_nv;
-    (match arg_next with
-     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
-     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    setf value _present_id arg_present_id;
-    setf value _marker arg_marker;
-    value
-end
-
-module SetPresentConfigNV = struct
-  type t
-  let t : t structure typ = structure "VkSetPresentConfigNV"
-  let _s_type = field t "sType" (StructureType.t)
-  let s_type = _s_type
-  let _p_next = field t "pNext" (ptr (Ctypes.void))
-  let p_next = _p_next
-  let _num_frames_per_batch = field t "numFramesPerBatch" (Vk_base.uint32)
-  let num_frames_per_batch = _num_frames_per_batch
-  let _present_config_feedback = field t "presentConfigFeedback" (Vk_base.uint32)
-  let present_config_feedback = _present_config_feedback
-  let () = seal t
-  let structure_type : StructureType.t option = Some StructureType.set_present_config_nv
-    let make ?next:arg_next ?num_frames_per_batch:(arg_num_frames_per_batch=0) ?present_config_feedback:(arg_present_config_feedback=0) () =
-    let value, keep = Vk_base.make_kept t in
-    ignore keep;
-    setf value _s_type StructureType.set_present_config_nv;
-    (match arg_next with
-     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
-     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    setf value _num_frames_per_batch arg_num_frames_per_batch;
-    setf value _present_config_feedback arg_present_config_feedback;
-    value
-end
-
-module SetStateFlagsIndirectCommandNV = struct
-  type t
-  let t : t structure typ = structure "VkSetStateFlagsIndirectCommandNV"
-  let _data = field t "data" (Vk_base.uint32)
-  let data = _data
-  let () = seal t
-  let structure_type : StructureType.t option = None
-    let make ?data:(arg_data=0) () =
-    let value, keep = Vk_base.make_kept t in
-    ignore keep;
-    setf value _data arg_data;
-    value
-end
-
-module ShaderInstrumentationCreateInfoARM = struct
-  type t
-  let t : t structure typ = structure "VkShaderInstrumentationCreateInfoARM"
-  let _s_type = field t "sType" (StructureType.t)
-  let s_type = _s_type
-  let _p_next = field t "pNext" (ptr (Ctypes.void))
-  let p_next = _p_next
-  let () = seal t
-  let structure_type : StructureType.t option = Some StructureType.shader_instrumentation_create_info_arm
-    let make ?next:arg_next () =
-    let value, keep = Vk_base.make_kept t in
-    ignore keep;
-    setf value _s_type StructureType.shader_instrumentation_create_info_arm;
-    (match arg_next with
-     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
-     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    value
-end
-
-module ShaderInstrumentationMetricDataHeaderARM = struct
-  type t
-  let t : t structure typ = structure "VkShaderInstrumentationMetricDataHeaderARM"
-  let _result_index = field t "resultIndex" (Vk_base.uint32)
-  let result_index = _result_index
-  let _result_sub_index = field t "resultSubIndex" (Vk_base.uint32)
-  let result_sub_index = _result_sub_index
-  let _stages = field t "stages" (ShaderStageFlags.t)
-  let stages = _stages
-  let _basic_block_index = field t "basicBlockIndex" (Vk_base.uint32)
-  let basic_block_index = _basic_block_index
-  let () = seal t
-  let structure_type : StructureType.t option = None
-    let make ?result_index:(arg_result_index=0) ?result_sub_index:(arg_result_sub_index=0) ?stages:(arg_stages=ShaderStageFlags.of_int 0) ?basic_block_index:(arg_basic_block_index=0) () =
-    let value, keep = Vk_base.make_kept t in
-    ignore keep;
-    setf value _result_index arg_result_index;
-    setf value _result_sub_index arg_result_sub_index;
-    setf value _stages arg_stages;
-    setf value _basic_block_index arg_basic_block_index;
-    value
-end
-
-module ShaderInstrumentationMetricDescriptionARM = struct
-  type t
-  let t : t structure typ = structure "VkShaderInstrumentationMetricDescriptionARM"
-  let _s_type = field t "sType" (StructureType.t)
-  let s_type = _s_type
-  let _p_next = field t "pNext" (ptr (Ctypes.void))
-  let p_next = _p_next
-  let _name = field t "name" (array 256 (Ctypes.char))
-  let name = _name
-  let _description = field t "description" (array 256 (Ctypes.char))
-  let description = _description
-  let () = seal t
-  let structure_type : StructureType.t option = Some StructureType.shader_instrumentation_metric_description_arm
-    let make ?next:arg_next ?name:(arg_name="") ?description:(arg_description="") () =
-    let value, keep = Vk_base.make_kept t in
-    ignore keep;
-    setf value _s_type StructureType.shader_instrumentation_metric_description_arm;
-    (match arg_next with
-     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
-     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    if String.length arg_name >= 256 then invalid_arg "name: string too long";
-    let destination = getf value _name in
-    String.iteri (fun i c -> CArray.set destination i c) arg_name;
-    if String.length arg_description >= 256 then invalid_arg "description: string too long";
-    let destination = getf value _description in
-    String.iteri (fun i c -> CArray.set destination i c) arg_description;
-    value
-  let get_name value = Vk_base.string_of_char_array (getf value name)
-  let get_description value = Vk_base.string_of_char_array (getf value description)
-end
-
-module ShaderModuleCreateInfo = struct
-  type t
-  let t : t structure typ = structure "VkShaderModuleCreateInfo"
-  let _s_type = field t "sType" (StructureType.t)
-  let s_type = _s_type
-  let _p_next = field t "pNext" (ptr (Ctypes.void))
-  let p_next = _p_next
-  let _flags = field t "flags" (ShaderModuleCreateFlags.t)
-  let flags = _flags
-  let _code_size = field t "codeSize" (Vk_base.size_t)
-  let code_size = _code_size
-  let _p_code = field t "pCode" (ptr (Vk_base.uint32))
-  let p_code = _p_code
-  let () = seal t
-  let structure_type : StructureType.t option = Some StructureType.shader_module_create_info
-    let make ?next:arg_next ?flags:(arg_flags=ShaderModuleCreateFlags.of_int 0) ?code:(arg_code="") () =
-    let value, keep = Vk_base.make_kept t in
-    ignore keep;
-    setf value _s_type StructureType.shader_module_create_info;
-    (match arg_next with
-     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
-     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    setf value _flags arg_flags;
-    setf value _code_size (String.length arg_code);
-    if arg_code = "" then setf value _p_code (Vk_base.null_ptr (Vk_base.uint32)) else begin
-      let words = Vk_base.uint32_carray_of_bytes arg_code in
-      setf value _p_code (CArray.start words); Vk_base.retain keep words
-    end;
-    value
-end
-
-module ShaderModuleIdentifierEXT = struct
-  type t
-  let t : t structure typ = structure "VkShaderModuleIdentifierEXT"
-  let _s_type = field t "sType" (StructureType.t)
-  let s_type = _s_type
-  let _p_next = field t "pNext" (ptr (Ctypes.void))
-  let p_next = _p_next
-  let _identifier_size = field t "identifierSize" (Vk_base.uint32)
-  let identifier_size = _identifier_size
-  let _identifier = field t "identifier" (array 32 (Vk_base.uint8))
-  let identifier = _identifier
-  let () = seal t
-  let structure_type : StructureType.t option = Some StructureType.shader_module_identifier_ext
-    let make ?next:arg_next () =
-    let value, keep = Vk_base.make_kept t in
-    ignore keep;
-    setf value _s_type StructureType.shader_module_identifier_ext;
-    (match arg_next with
-     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
-     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    value
-end
-
-module ShaderModuleValidationCacheCreateInfoEXT = struct
-  type t
-  let t : t structure typ = structure "VkShaderModuleValidationCacheCreateInfoEXT"
-  let _s_type = field t "sType" (StructureType.t)
-  let s_type = _s_type
-  let _p_next = field t "pNext" (ptr (Ctypes.void))
-  let p_next = _p_next
-  let _validation_cache = field t "validationCache" (ValidationCacheEXT.t)
-  let validation_cache = _validation_cache
-  let () = seal t
-  let structure_type : StructureType.t option = Some StructureType.shader_module_validation_cache_create_info_ext
-    let make ?next:arg_next ?validation_cache:(arg_validation_cache=ValidationCacheEXT.null) () =
-    let value, keep = Vk_base.make_kept t in
-    ignore keep;
-    setf value _s_type StructureType.shader_module_validation_cache_create_info_ext;
-    (match arg_next with
-     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
-     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    setf value _validation_cache arg_validation_cache;
-    value
-end
-
-module ShaderResourceUsageAMD = struct
-  type t
-  let t : t structure typ = structure "VkShaderResourceUsageAMD"
-  let _num_used_vgprs = field t "numUsedVgprs" (Vk_base.uint32)
-  let num_used_vgprs = _num_used_vgprs
-  let _num_used_sgprs = field t "numUsedSgprs" (Vk_base.uint32)
-  let num_used_sgprs = _num_used_sgprs
-  let _lds_size_per_local_work_group = field t "ldsSizePerLocalWorkGroup" (Vk_base.uint32)
-  let lds_size_per_local_work_group = _lds_size_per_local_work_group
-  let _lds_usage_size_in_bytes = field t "ldsUsageSizeInBytes" (Vk_base.size_t)
-  let lds_usage_size_in_bytes = _lds_usage_size_in_bytes
-  let _scratch_mem_usage_in_bytes = field t "scratchMemUsageInBytes" (Vk_base.size_t)
-  let scratch_mem_usage_in_bytes = _scratch_mem_usage_in_bytes
-  let () = seal t
-  let structure_type : StructureType.t option = None
-    let make () =
-    let value, keep = Vk_base.make_kept t in
-    ignore keep;
-    value
-end
-
-module ShadingRatePaletteNV = struct
-  type t
-  let t : t structure typ = structure "VkShadingRatePaletteNV"
-  let _shading_rate_palette_entry_count = field t "shadingRatePaletteEntryCount" (Vk_base.uint32)
-  let shading_rate_palette_entry_count = _shading_rate_palette_entry_count
-  let _p_shading_rate_palette_entries = field t "pShadingRatePaletteEntries" (ptr (ShadingRatePaletteEntryNV.t))
-  let p_shading_rate_palette_entries = _p_shading_rate_palette_entries
-  let () = seal t
-  let structure_type : StructureType.t option = None
-    let make ?shading_rate_palette_entries:(arg_shading_rate_palette_entries=[]) () =
-    let value, keep = Vk_base.make_kept t in
-    ignore keep;
-    let shading_rate_palette_entry_count_n = List.length arg_shading_rate_palette_entries in
-    if arg_shading_rate_palette_entries <> [] && List.length arg_shading_rate_palette_entries <> shading_rate_palette_entry_count_n then invalid_arg "VkShadingRatePaletteNV.pShadingRatePaletteEntries: length does not match shadingRatePaletteEntryCount";
-    setf value _shading_rate_palette_entry_count shading_rate_palette_entry_count_n;
-    if arg_shading_rate_palette_entries = [] then setf value _p_shading_rate_palette_entries (Vk_base.null_ptr (ShadingRatePaletteEntryNV.t)) else begin
-      let items = CArray.of_list (ShadingRatePaletteEntryNV.t) arg_shading_rate_palette_entries in
-      setf value _p_shading_rate_palette_entries (CArray.start items);
-      Vk_base.retain keep items; Vk_base.retain keep arg_shading_rate_palette_entries
-    end;
-    value
-end
-
-module SharedPresentSurfaceCapabilities2KHR = struct
-  type t
-  let t : t structure typ = structure "VkSharedPresentSurfaceCapabilities2KHR"
-  let _s_type = field t "sType" (StructureType.t)
-  let s_type = _s_type
-  let _p_next = field t "pNext" (ptr (Ctypes.void))
-  let p_next = _p_next
-  let _shared_present_supported_usage_flags = field t "sharedPresentSupportedUsageFlags" (ImageUsageFlags2KHR.t)
-  let shared_present_supported_usage_flags = _shared_present_supported_usage_flags
-  let () = seal t
-  let structure_type : StructureType.t option = Some StructureType.shared_present_surface_capabilities_2_khr
-    let make ?next:arg_next () =
-    let value, keep = Vk_base.make_kept t in
-    ignore keep;
-    setf value _s_type StructureType.shared_present_surface_capabilities_2_khr;
-    (match arg_next with
-     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
-     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    value
-end
-
-module SharedPresentSurfaceCapabilitiesKHR = struct
-  type t
-  let t : t structure typ = structure "VkSharedPresentSurfaceCapabilitiesKHR"
-  let _s_type = field t "sType" (StructureType.t)
-  let s_type = _s_type
-  let _p_next = field t "pNext" (ptr (Ctypes.void))
-  let p_next = _p_next
-  let _shared_present_supported_usage_flags = field t "sharedPresentSupportedUsageFlags" (ImageUsageFlags.t)
-  let shared_present_supported_usage_flags = _shared_present_supported_usage_flags
-  let () = seal t
-  let structure_type : StructureType.t option = Some StructureType.shared_present_surface_capabilities_khr
-    let make ?next:arg_next () =
-    let value, keep = Vk_base.make_kept t in
-    ignore keep;
-    setf value _s_type StructureType.shared_present_surface_capabilities_khr;
-    (match arg_next with
-     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
-     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    value
-end
-
-module SparseMemoryBind = struct
-  type t
-  let t : t structure typ = structure "VkSparseMemoryBind"
-  let _resource_offset = field t "resourceOffset" (Vk_base.device_size)
-  let resource_offset = _resource_offset
-  let _size = field t "size" (Vk_base.device_size)
-  let size = _size
-  let _memory = field t "memory" (DeviceMemory.t)
-  let memory = _memory
-  let _memory_offset = field t "memoryOffset" (Vk_base.device_size)
-  let memory_offset = _memory_offset
-  let _flags = field t "flags" (SparseMemoryBindFlags.t)
-  let flags = _flags
-  let () = seal t
-  let structure_type : StructureType.t option = None
-    let make ?resource_offset:(arg_resource_offset=0) ?size:(arg_size=0) ?memory:(arg_memory=DeviceMemory.null) ?memory_offset:(arg_memory_offset=0) ?flags:(arg_flags=SparseMemoryBindFlags.of_int 0) () =
-    let value, keep = Vk_base.make_kept t in
-    ignore keep;
-    setf value _resource_offset arg_resource_offset;
-    setf value _size arg_size;
-    setf value _memory arg_memory;
-    setf value _memory_offset arg_memory_offset;
-    setf value _flags arg_flags;
-    value
-end
-
-module SpecializationMapEntry = struct
-  type t
-  let t : t structure typ = structure "VkSpecializationMapEntry"
-  let _constant_id = field t "constantID" (Vk_base.uint32)
-  let constant_id = _constant_id
-  let _offset = field t "offset" (Vk_base.uint32)
-  let offset = _offset
-  let _size = field t "size" (Vk_base.size_t)
-  let size = _size
-  let () = seal t
-  let structure_type : StructureType.t option = None
-    let make ?constant_id:(arg_constant_id=0) ?offset:(arg_offset=0) ?size:(arg_size=0) () =
-    let value, keep = Vk_base.make_kept t in
-    ignore keep;
-    setf value _constant_id arg_constant_id;
-    setf value _offset arg_offset;
-    setf value _size arg_size;
-    value
-end
-
-module StencilOpState = struct
-  type t
-  let t : t structure typ = structure "VkStencilOpState"
-  let _fail_op = field t "failOp" (StencilOp.t)
-  let fail_op = _fail_op
-  let _pass_op = field t "passOp" (StencilOp.t)
-  let pass_op = _pass_op
-  let _depth_fail_op = field t "depthFailOp" (StencilOp.t)
-  let depth_fail_op = _depth_fail_op
-  let _compare_op = field t "compareOp" (CompareOp.t)
-  let compare_op = _compare_op
-  let _compare_mask = field t "compareMask" (Vk_base.uint32)
-  let compare_mask = _compare_mask
-  let _write_mask = field t "writeMask" (Vk_base.uint32)
-  let write_mask = _write_mask
-  let _reference = field t "reference" (Vk_base.uint32)
-  let reference = _reference
-  let () = seal t
-  let structure_type : StructureType.t option = None
-    let make ?fail_op:(arg_fail_op=StencilOp.of_int 0) ?pass_op:(arg_pass_op=StencilOp.of_int 0) ?depth_fail_op:(arg_depth_fail_op=StencilOp.of_int 0) ?compare_op:(arg_compare_op=CompareOp.of_int 0) ?compare_mask:(arg_compare_mask=0) ?write_mask:(arg_write_mask=0) ?reference:(arg_reference=0) () =
-    let value, keep = Vk_base.make_kept t in
-    ignore keep;
-    setf value _fail_op arg_fail_op;
-    setf value _pass_op arg_pass_op;
-    setf value _depth_fail_op arg_depth_fail_op;
-    setf value _compare_op arg_compare_op;
-    setf value _compare_mask arg_compare_mask;
-    setf value _write_mask arg_write_mask;
-    setf value _reference arg_reference;
-    value
-end
-
-module StreamDescriptorSurfaceCreateInfoGGP = struct
-  type t
-  let t : t structure typ = structure "VkStreamDescriptorSurfaceCreateInfoGGP"
-  let _s_type = field t "sType" (StructureType.t)
-  let s_type = _s_type
-  let _p_next = field t "pNext" (ptr (Ctypes.void))
-  let p_next = _p_next
-  let _flags = field t "flags" (StreamDescriptorSurfaceCreateFlagsGGP.t)
-  let flags = _flags
-  let _stream_descriptor = field t "streamDescriptor" (Vk_base.int32)
-  let stream_descriptor = _stream_descriptor
-  let () = seal t
-  let structure_type : StructureType.t option = Some StructureType.stream_descriptor_surface_create_info_ggp
-    let make ?next:arg_next ?flags:(arg_flags=StreamDescriptorSurfaceCreateFlagsGGP.of_int 0) ?stream_descriptor:(arg_stream_descriptor=0) () =
-    let value, keep = Vk_base.make_kept t in
-    ignore keep;
-    setf value _s_type StructureType.stream_descriptor_surface_create_info_ggp;
-    (match arg_next with
-     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
-     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    setf value _flags arg_flags;
-    setf value _stream_descriptor arg_stream_descriptor;
-    value
-end
-
-module StridedDeviceAddressNV = struct
-  type t
-  let t : t structure typ = structure "VkStridedDeviceAddressNV"
-  let _start_address = field t "startAddress" (Vk_base.device_address)
-  let start_address = _start_address
-  let _stride_in_bytes = field t "strideInBytes" (Vk_base.device_size)
-  let stride_in_bytes = _stride_in_bytes
-  let () = seal t
-  let structure_type : StructureType.t option = None
-    let make ?start_address:(arg_start_address=0) ?stride_in_bytes:(arg_stride_in_bytes=0) () =
-    let value, keep = Vk_base.make_kept t in
-    ignore keep;
-    setf value _start_address arg_start_address;
-    setf value _stride_in_bytes arg_stride_in_bytes;
-    value
-end
-
-module StridedDeviceAddressRangeKHR = struct
-  type t
-  let t : t structure typ = structure "VkStridedDeviceAddressRangeKHR"
-  let _address = field t "address" (Vk_base.device_address)
-  let address = _address
-  let _size = field t "size" (Vk_base.device_size)
-  let size = _size
-  let _stride = field t "stride" (Vk_base.device_size)
-  let stride = _stride
-  let () = seal t
-  let structure_type : StructureType.t option = None
-    let make ?address:(arg_address=0) ?size:(arg_size=0) ?stride:(arg_stride=0) () =
-    let value, keep = Vk_base.make_kept t in
-    ignore keep;
-    setf value _address arg_address;
-    setf value _size arg_size;
-    setf value _stride arg_stride;
-    value
-end
-
 module StridedDeviceAddressRegionKHR = struct
   type t
   let t : t structure typ = structure "VkStridedDeviceAddressRegionKHR"
@@ -1485,50 +655,6 @@ module SwapchainFlagsSurfaceCapabilitiesEXT = struct
     (match arg_next with
      | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
      | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    value
-end
-
-module SwapchainImageCreateInfoANDROID = struct
-  type t
-  let t : t structure typ = structure "VkSwapchainImageCreateInfoANDROID"
-  let _s_type = field t "sType" (StructureType.t)
-  let s_type = _s_type
-  let _p_next = field t "pNext" (ptr (Ctypes.void))
-  let p_next = _p_next
-  let _usage = field t "usage" (SwapchainImageUsageFlagsANDROID.t)
-  let usage = _usage
-  let () = seal t
-  let structure_type : StructureType.t option = None
-    let make ?next:arg_next ?usage:(arg_usage=SwapchainImageUsageFlagsANDROID.of_int 0) () =
-    let value, keep = Vk_base.make_kept t in
-    ignore keep;
-    setf value _s_type (StructureType.of_int 0);
-    (match arg_next with
-     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
-     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    setf value _usage arg_usage;
-    value
-end
-
-module SwapchainImageCreateInfoOHOS = struct
-  type t
-  let t : t structure typ = structure "VkSwapchainImageCreateInfoOHOS"
-  let _s_type = field t "sType" (StructureType.t)
-  let s_type = _s_type
-  let _p_next = field t "pNext" (ptr (Ctypes.void))
-  let p_next = _p_next
-  let _usage = field t "usage" (SwapchainImageUsageFlagsOHOS.t)
-  let usage = _usage
-  let () = seal t
-  let structure_type : StructureType.t option = None
-    let make ?next:arg_next ?usage:(arg_usage=SwapchainImageUsageFlagsOHOS.of_int 0) () =
-    let value, keep = Vk_base.make_kept t in
-    ignore keep;
-    setf value _s_type (StructureType.of_int 0);
-    (match arg_next with
-     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
-     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    setf value _usage arg_usage;
     value
 end
 
@@ -3172,5 +2298,950 @@ module VideoDecodeVP9CapabilitiesKHR = struct
     (match arg_next with
      | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
      | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
+    value
+end
+
+module VideoDecodeVP9PictureInfoKHR = struct
+  type t
+  let t : t structure typ = structure "VkVideoDecodeVP9PictureInfoKHR"
+  let _s_type = field t "sType" (StructureType.t)
+  let s_type = _s_type
+  let _p_next = field t "pNext" (ptr (Ctypes.void))
+  let p_next = _p_next
+  let _p_std_picture_info = field t "pStdPictureInfo" (ptr (void))
+  let p_std_picture_info = _p_std_picture_info
+  let _reference_name_slot_indices = field t "referenceNameSlotIndices" (array 3 (Vk_base.int32))
+  let reference_name_slot_indices = _reference_name_slot_indices
+  let _uncompressed_header_offset = field t "uncompressedHeaderOffset" (Vk_base.uint32)
+  let uncompressed_header_offset = _uncompressed_header_offset
+  let _compressed_header_offset = field t "compressedHeaderOffset" (Vk_base.uint32)
+  let compressed_header_offset = _compressed_header_offset
+  let _tiles_offset = field t "tilesOffset" (Vk_base.uint32)
+  let tiles_offset = _tiles_offset
+  let () = seal t
+  let structure_type : StructureType.t option = Some StructureType.video_decode_vp9_picture_info_khr
+    let make ?next:arg_next ?std_picture_info:arg_std_picture_info ?reference_name_slot_indices:(arg_reference_name_slot_indices=[]) ?uncompressed_header_offset:(arg_uncompressed_header_offset=0) ?compressed_header_offset:(arg_compressed_header_offset=0) ?tiles_offset:(arg_tiles_offset=0) () =
+    let value, keep = Vk_base.make_kept t in
+    ignore keep;
+    setf value _s_type StructureType.video_decode_vp9_picture_info_khr;
+    (match arg_next with
+     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
+     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
+    setf value _p_std_picture_info (match arg_std_picture_info with None -> Vk_base.null_ptr (void) | Some p -> p);
+    if List.length arg_reference_name_slot_indices > 3 then invalid_arg "referenceNameSlotIndices: too many elements";
+    let destination = getf value _reference_name_slot_indices in
+    List.iteri (fun i x -> CArray.set (destination) (i mod 3) x) arg_reference_name_slot_indices;
+    setf value _uncompressed_header_offset arg_uncompressed_header_offset;
+    setf value _compressed_header_offset arg_compressed_header_offset;
+    setf value _tiles_offset arg_tiles_offset;
+    value
+end
+
+module VideoDecodeVP9ProfileInfoKHR = struct
+  type t
+  let t : t structure typ = structure "VkVideoDecodeVP9ProfileInfoKHR"
+  let _s_type = field t "sType" (StructureType.t)
+  let s_type = _s_type
+  let _p_next = field t "pNext" (ptr (Ctypes.void))
+  let p_next = _p_next
+  let _std_profile = field t "stdProfile" (Vk_base.int32)
+  let std_profile = _std_profile
+  let () = seal t
+  let structure_type : StructureType.t option = Some StructureType.video_decode_vp9_profile_info_khr
+    let make ?next:arg_next ?std_profile:(arg_std_profile=0) () =
+    let value, keep = Vk_base.make_kept t in
+    ignore keep;
+    setf value _s_type StructureType.video_decode_vp9_profile_info_khr;
+    (match arg_next with
+     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
+     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
+    setf value _std_profile arg_std_profile;
+    value
+end
+
+module VideoEncodeAV1DpbSlotInfoKHR = struct
+  type t
+  let t : t structure typ = structure "VkVideoEncodeAV1DpbSlotInfoKHR"
+  let _s_type = field t "sType" (StructureType.t)
+  let s_type = _s_type
+  let _p_next = field t "pNext" (ptr (Ctypes.void))
+  let p_next = _p_next
+  let _p_std_reference_info = field t "pStdReferenceInfo" (ptr (void))
+  let p_std_reference_info = _p_std_reference_info
+  let () = seal t
+  let structure_type : StructureType.t option = Some StructureType.video_encode_av1_dpb_slot_info_khr
+    let make ?next:arg_next ?std_reference_info:arg_std_reference_info () =
+    let value, keep = Vk_base.make_kept t in
+    ignore keep;
+    setf value _s_type StructureType.video_encode_av1_dpb_slot_info_khr;
+    (match arg_next with
+     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
+     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
+    setf value _p_std_reference_info (match arg_std_reference_info with None -> Vk_base.null_ptr (void) | Some p -> p);
+    value
+end
+
+module VideoEncodeAV1FrameSizeKHR = struct
+  type t
+  let t : t structure typ = structure "VkVideoEncodeAV1FrameSizeKHR"
+  let _intra_frame_size = field t "intraFrameSize" (Vk_base.uint32)
+  let intra_frame_size = _intra_frame_size
+  let _predictive_frame_size = field t "predictiveFrameSize" (Vk_base.uint32)
+  let predictive_frame_size = _predictive_frame_size
+  let _bipredictive_frame_size = field t "bipredictiveFrameSize" (Vk_base.uint32)
+  let bipredictive_frame_size = _bipredictive_frame_size
+  let () = seal t
+  let structure_type : StructureType.t option = None
+    let make ?intra_frame_size:(arg_intra_frame_size=0) ?predictive_frame_size:(arg_predictive_frame_size=0) ?bipredictive_frame_size:(arg_bipredictive_frame_size=0) () =
+    let value, keep = Vk_base.make_kept t in
+    ignore keep;
+    setf value _intra_frame_size arg_intra_frame_size;
+    setf value _predictive_frame_size arg_predictive_frame_size;
+    setf value _bipredictive_frame_size arg_bipredictive_frame_size;
+    value
+end
+
+module VideoEncodeAV1GopRemainingFrameInfoKHR = struct
+  type t
+  let t : t structure typ = structure "VkVideoEncodeAV1GopRemainingFrameInfoKHR"
+  let _s_type = field t "sType" (StructureType.t)
+  let s_type = _s_type
+  let _p_next = field t "pNext" (ptr (Ctypes.void))
+  let p_next = _p_next
+  let _use_gop_remaining_frames = field t "useGopRemainingFrames" (Vk_base.bool32)
+  let use_gop_remaining_frames = _use_gop_remaining_frames
+  let _gop_remaining_intra = field t "gopRemainingIntra" (Vk_base.uint32)
+  let gop_remaining_intra = _gop_remaining_intra
+  let _gop_remaining_predictive = field t "gopRemainingPredictive" (Vk_base.uint32)
+  let gop_remaining_predictive = _gop_remaining_predictive
+  let _gop_remaining_bipredictive = field t "gopRemainingBipredictive" (Vk_base.uint32)
+  let gop_remaining_bipredictive = _gop_remaining_bipredictive
+  let () = seal t
+  let structure_type : StructureType.t option = Some StructureType.video_encode_av1_gop_remaining_frame_info_khr
+    let make ?next:arg_next ?use_gop_remaining_frames:(arg_use_gop_remaining_frames=false) ?gop_remaining_intra:(arg_gop_remaining_intra=0) ?gop_remaining_predictive:(arg_gop_remaining_predictive=0) ?gop_remaining_bipredictive:(arg_gop_remaining_bipredictive=0) () =
+    let value, keep = Vk_base.make_kept t in
+    ignore keep;
+    setf value _s_type StructureType.video_encode_av1_gop_remaining_frame_info_khr;
+    (match arg_next with
+     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
+     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
+    setf value _use_gop_remaining_frames arg_use_gop_remaining_frames;
+    setf value _gop_remaining_intra arg_gop_remaining_intra;
+    setf value _gop_remaining_predictive arg_gop_remaining_predictive;
+    setf value _gop_remaining_bipredictive arg_gop_remaining_bipredictive;
+    value
+end
+
+module VideoEncodeAV1PictureInfoKHR = struct
+  type t
+  let t : t structure typ = structure "VkVideoEncodeAV1PictureInfoKHR"
+  let _s_type = field t "sType" (StructureType.t)
+  let s_type = _s_type
+  let _p_next = field t "pNext" (ptr (Ctypes.void))
+  let p_next = _p_next
+  let _prediction_mode = field t "predictionMode" (VideoEncodeAV1PredictionModeKHR.t)
+  let prediction_mode = _prediction_mode
+  let _rate_control_group = field t "rateControlGroup" (VideoEncodeAV1RateControlGroupKHR.t)
+  let rate_control_group = _rate_control_group
+  let _constant_q_index = field t "constantQIndex" (Vk_base.uint32)
+  let constant_q_index = _constant_q_index
+  let _p_std_picture_info = field t "pStdPictureInfo" (ptr (void))
+  let p_std_picture_info = _p_std_picture_info
+  let _reference_name_slot_indices = field t "referenceNameSlotIndices" (array 7 (Vk_base.int32))
+  let reference_name_slot_indices = _reference_name_slot_indices
+  let _primary_reference_cdf_only = field t "primaryReferenceCdfOnly" (Vk_base.bool32)
+  let primary_reference_cdf_only = _primary_reference_cdf_only
+  let _generate_obu_extension_header = field t "generateObuExtensionHeader" (Vk_base.bool32)
+  let generate_obu_extension_header = _generate_obu_extension_header
+  let () = seal t
+  let structure_type : StructureType.t option = Some StructureType.video_encode_av1_picture_info_khr
+    let make ?next:arg_next ?prediction_mode:(arg_prediction_mode=VideoEncodeAV1PredictionModeKHR.of_int 0) ?rate_control_group:(arg_rate_control_group=VideoEncodeAV1RateControlGroupKHR.of_int 0) ?constant_q_index:(arg_constant_q_index=0) ?std_picture_info:arg_std_picture_info ?reference_name_slot_indices:(arg_reference_name_slot_indices=[]) ?primary_reference_cdf_only:(arg_primary_reference_cdf_only=false) ?generate_obu_extension_header:(arg_generate_obu_extension_header=false) () =
+    let value, keep = Vk_base.make_kept t in
+    ignore keep;
+    setf value _s_type StructureType.video_encode_av1_picture_info_khr;
+    (match arg_next with
+     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
+     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
+    setf value _prediction_mode arg_prediction_mode;
+    setf value _rate_control_group arg_rate_control_group;
+    setf value _constant_q_index arg_constant_q_index;
+    setf value _p_std_picture_info (match arg_std_picture_info with None -> Vk_base.null_ptr (void) | Some p -> p);
+    if List.length arg_reference_name_slot_indices > 7 then invalid_arg "referenceNameSlotIndices: too many elements";
+    let destination = getf value _reference_name_slot_indices in
+    List.iteri (fun i x -> CArray.set (destination) (i mod 7) x) arg_reference_name_slot_indices;
+    setf value _primary_reference_cdf_only arg_primary_reference_cdf_only;
+    setf value _generate_obu_extension_header arg_generate_obu_extension_header;
+    value
+end
+
+module VideoEncodeAV1ProfileInfoKHR = struct
+  type t
+  let t : t structure typ = structure "VkVideoEncodeAV1ProfileInfoKHR"
+  let _s_type = field t "sType" (StructureType.t)
+  let s_type = _s_type
+  let _p_next = field t "pNext" (ptr (Ctypes.void))
+  let p_next = _p_next
+  let _std_profile = field t "stdProfile" (Vk_base.int32)
+  let std_profile = _std_profile
+  let () = seal t
+  let structure_type : StructureType.t option = Some StructureType.video_encode_av1_profile_info_khr
+    let make ?next:arg_next ?std_profile:(arg_std_profile=0) () =
+    let value, keep = Vk_base.make_kept t in
+    ignore keep;
+    setf value _s_type StructureType.video_encode_av1_profile_info_khr;
+    (match arg_next with
+     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
+     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
+    setf value _std_profile arg_std_profile;
+    value
+end
+
+module VideoEncodeAV1QIndexKHR = struct
+  type t
+  let t : t structure typ = structure "VkVideoEncodeAV1QIndexKHR"
+  let _intra_q_index = field t "intraQIndex" (Vk_base.uint32)
+  let intra_q_index = _intra_q_index
+  let _predictive_q_index = field t "predictiveQIndex" (Vk_base.uint32)
+  let predictive_q_index = _predictive_q_index
+  let _bipredictive_q_index = field t "bipredictiveQIndex" (Vk_base.uint32)
+  let bipredictive_q_index = _bipredictive_q_index
+  let () = seal t
+  let structure_type : StructureType.t option = None
+    let make ?intra_q_index:(arg_intra_q_index=0) ?predictive_q_index:(arg_predictive_q_index=0) ?bipredictive_q_index:(arg_bipredictive_q_index=0) () =
+    let value, keep = Vk_base.make_kept t in
+    ignore keep;
+    setf value _intra_q_index arg_intra_q_index;
+    setf value _predictive_q_index arg_predictive_q_index;
+    setf value _bipredictive_q_index arg_bipredictive_q_index;
+    value
+end
+
+module VideoEncodeAV1QuantizationMapCapabilitiesKHR = struct
+  type t
+  let t : t structure typ = structure "VkVideoEncodeAV1QuantizationMapCapabilitiesKHR"
+  let _s_type = field t "sType" (StructureType.t)
+  let s_type = _s_type
+  let _p_next = field t "pNext" (ptr (Ctypes.void))
+  let p_next = _p_next
+  let _min_q_index_delta = field t "minQIndexDelta" (Vk_base.int32)
+  let min_q_index_delta = _min_q_index_delta
+  let _max_q_index_delta = field t "maxQIndexDelta" (Vk_base.int32)
+  let max_q_index_delta = _max_q_index_delta
+  let () = seal t
+  let structure_type : StructureType.t option = Some StructureType.video_encode_av1_quantization_map_capabilities_khr
+    let make ?next:arg_next () =
+    let value, keep = Vk_base.make_kept t in
+    ignore keep;
+    setf value _s_type StructureType.video_encode_av1_quantization_map_capabilities_khr;
+    (match arg_next with
+     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
+     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
+    value
+end
+
+module VideoEncodeAV1RateControlInfoKHR = struct
+  type t
+  let t : t structure typ = structure "VkVideoEncodeAV1RateControlInfoKHR"
+  let _s_type = field t "sType" (StructureType.t)
+  let s_type = _s_type
+  let _p_next = field t "pNext" (ptr (Ctypes.void))
+  let p_next = _p_next
+  let _flags = field t "flags" (VideoEncodeAV1RateControlFlagsKHR.t)
+  let flags = _flags
+  let _gop_frame_count = field t "gopFrameCount" (Vk_base.uint32)
+  let gop_frame_count = _gop_frame_count
+  let _key_frame_period = field t "keyFramePeriod" (Vk_base.uint32)
+  let key_frame_period = _key_frame_period
+  let _consecutive_bipredictive_frame_count = field t "consecutiveBipredictiveFrameCount" (Vk_base.uint32)
+  let consecutive_bipredictive_frame_count = _consecutive_bipredictive_frame_count
+  let _temporal_layer_count = field t "temporalLayerCount" (Vk_base.uint32)
+  let temporal_layer_count = _temporal_layer_count
+  let () = seal t
+  let structure_type : StructureType.t option = Some StructureType.video_encode_av1_rate_control_info_khr
+    let make ?next:arg_next ?flags:(arg_flags=VideoEncodeAV1RateControlFlagsKHR.of_int 0) ?gop_frame_count:(arg_gop_frame_count=0) ?key_frame_period:(arg_key_frame_period=0) ?consecutive_bipredictive_frame_count:(arg_consecutive_bipredictive_frame_count=0) ?temporal_layer_count:(arg_temporal_layer_count=0) () =
+    let value, keep = Vk_base.make_kept t in
+    ignore keep;
+    setf value _s_type StructureType.video_encode_av1_rate_control_info_khr;
+    (match arg_next with
+     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
+     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
+    setf value _flags arg_flags;
+    setf value _gop_frame_count arg_gop_frame_count;
+    setf value _key_frame_period arg_key_frame_period;
+    setf value _consecutive_bipredictive_frame_count arg_consecutive_bipredictive_frame_count;
+    setf value _temporal_layer_count arg_temporal_layer_count;
+    value
+end
+
+module VideoEncodeAV1SessionCreateInfoKHR = struct
+  type t
+  let t : t structure typ = structure "VkVideoEncodeAV1SessionCreateInfoKHR"
+  let _s_type = field t "sType" (StructureType.t)
+  let s_type = _s_type
+  let _p_next = field t "pNext" (ptr (Ctypes.void))
+  let p_next = _p_next
+  let _use_max_level = field t "useMaxLevel" (Vk_base.bool32)
+  let use_max_level = _use_max_level
+  let _max_level = field t "maxLevel" (Vk_base.int32)
+  let max_level = _max_level
+  let () = seal t
+  let structure_type : StructureType.t option = Some StructureType.video_encode_av1_session_create_info_khr
+    let make ?next:arg_next ?use_max_level:(arg_use_max_level=false) ?max_level:(arg_max_level=0) () =
+    let value, keep = Vk_base.make_kept t in
+    ignore keep;
+    setf value _s_type StructureType.video_encode_av1_session_create_info_khr;
+    (match arg_next with
+     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
+     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
+    setf value _use_max_level arg_use_max_level;
+    setf value _max_level arg_max_level;
+    value
+end
+
+module VideoEncodeAV1SessionParametersCreateInfoKHR = struct
+  type t
+  let t : t structure typ = structure "VkVideoEncodeAV1SessionParametersCreateInfoKHR"
+  let _s_type = field t "sType" (StructureType.t)
+  let s_type = _s_type
+  let _p_next = field t "pNext" (ptr (Ctypes.void))
+  let p_next = _p_next
+  let _p_std_sequence_header = field t "pStdSequenceHeader" (ptr (void))
+  let p_std_sequence_header = _p_std_sequence_header
+  let _p_std_decoder_model_info = field t "pStdDecoderModelInfo" (ptr (void))
+  let p_std_decoder_model_info = _p_std_decoder_model_info
+  let _std_operating_point_count = field t "stdOperatingPointCount" (Vk_base.uint32)
+  let std_operating_point_count = _std_operating_point_count
+  let _p_std_operating_points = field t "pStdOperatingPoints" (ptr (void))
+  let p_std_operating_points = _p_std_operating_points
+  let () = seal t
+  let structure_type : StructureType.t option = Some StructureType.video_encode_av1_session_parameters_create_info_khr
+    let make ?next:arg_next ?std_sequence_header:arg_std_sequence_header ?std_decoder_model_info:arg_std_decoder_model_info ?std_operating_point_count:arg_std_operating_point_count ?std_operating_points:(arg_std_operating_points=[]) () =
+    let value, keep = Vk_base.make_kept t in
+    ignore keep;
+    setf value _s_type StructureType.video_encode_av1_session_parameters_create_info_khr;
+    (match arg_next with
+     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
+     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
+    setf value _p_std_sequence_header (match arg_std_sequence_header with None -> Vk_base.null_ptr (void) | Some p -> p);
+    setf value _p_std_decoder_model_info (match arg_std_decoder_model_info with None -> Vk_base.null_ptr (void) | Some p -> p);
+    let std_operating_point_count_n = (match arg_std_operating_point_count with Some n -> n | None -> List.length arg_std_operating_points) in
+    if arg_std_operating_points <> [] && List.length arg_std_operating_points <> std_operating_point_count_n then invalid_arg "VkVideoEncodeAV1SessionParametersCreateInfoKHR.pStdOperatingPoints: length does not match stdOperatingPointCount";
+    setf value _std_operating_point_count std_operating_point_count_n;
+    if arg_std_operating_points = [] then setf value _p_std_operating_points (Vk_base.null_ptr (void)) else begin
+      let items = CArray.of_list (void) arg_std_operating_points in
+      setf value _p_std_operating_points (CArray.start items);
+      Vk_base.retain keep items; Vk_base.retain keep arg_std_operating_points
+    end;
+    value
+end
+
+module VideoEncodeFeedback2CapabilitiesKHR = struct
+  type t
+  let t : t structure typ = structure "VkVideoEncodeFeedback2CapabilitiesKHR"
+  let _s_type = field t "sType" (StructureType.t)
+  let s_type = _s_type
+  let _p_next = field t "pNext" (ptr (Ctypes.void))
+  let p_next = _p_next
+  let _max_per_partition_feedback_entries = field t "maxPerPartitionFeedbackEntries" (Vk_base.uint32)
+  let max_per_partition_feedback_entries = _max_per_partition_feedback_entries
+  let _supported_per_partition_encode_feedback_flags = field t "supportedPerPartitionEncodeFeedbackFlags" (VideoEncodePerPartitionFeedbackFlagsKHR.t)
+  let supported_per_partition_encode_feedback_flags = _supported_per_partition_encode_feedback_flags
+  let () = seal t
+  let structure_type : StructureType.t option = Some StructureType.video_encode_feedback_2_capabilities_khr
+    let make ?next:arg_next ?max_per_partition_feedback_entries:(arg_max_per_partition_feedback_entries=0) ?supported_per_partition_encode_feedback_flags:(arg_supported_per_partition_encode_feedback_flags=VideoEncodePerPartitionFeedbackFlagsKHR.of_int 0) () =
+    let value, keep = Vk_base.make_kept t in
+    ignore keep;
+    setf value _s_type StructureType.video_encode_feedback_2_capabilities_khr;
+    (match arg_next with
+     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
+     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
+    setf value _max_per_partition_feedback_entries arg_max_per_partition_feedback_entries;
+    setf value _supported_per_partition_encode_feedback_flags arg_supported_per_partition_encode_feedback_flags;
+    value
+end
+
+module VideoEncodeH264CapabilitiesKHR = struct
+  type t
+  let t : t structure typ = structure "VkVideoEncodeH264CapabilitiesKHR"
+  let _s_type = field t "sType" (StructureType.t)
+  let s_type = _s_type
+  let _p_next = field t "pNext" (ptr (Ctypes.void))
+  let p_next = _p_next
+  let _flags = field t "flags" (VideoEncodeH264CapabilityFlagsKHR.t)
+  let flags = _flags
+  let _max_level_idc = field t "maxLevelIdc" (Vk_base.int32)
+  let max_level_idc = _max_level_idc
+  let _max_slice_count = field t "maxSliceCount" (Vk_base.uint32)
+  let max_slice_count = _max_slice_count
+  let _max_p_picture_l_0_reference_count = field t "maxPPictureL0ReferenceCount" (Vk_base.uint32)
+  let max_p_picture_l_0_reference_count = _max_p_picture_l_0_reference_count
+  let _max_b_picture_l_0_reference_count = field t "maxBPictureL0ReferenceCount" (Vk_base.uint32)
+  let max_b_picture_l_0_reference_count = _max_b_picture_l_0_reference_count
+  let _max_l_1_reference_count = field t "maxL1ReferenceCount" (Vk_base.uint32)
+  let max_l_1_reference_count = _max_l_1_reference_count
+  let _max_temporal_layer_count = field t "maxTemporalLayerCount" (Vk_base.uint32)
+  let max_temporal_layer_count = _max_temporal_layer_count
+  let _expect_dyadic_temporal_layer_pattern = field t "expectDyadicTemporalLayerPattern" (Vk_base.bool32)
+  let expect_dyadic_temporal_layer_pattern = _expect_dyadic_temporal_layer_pattern
+  let _min_qp = field t "minQp" (Vk_base.int32)
+  let min_qp = _min_qp
+  let _max_qp = field t "maxQp" (Vk_base.int32)
+  let max_qp = _max_qp
+  let _prefers_gop_remaining_frames = field t "prefersGopRemainingFrames" (Vk_base.bool32)
+  let prefers_gop_remaining_frames = _prefers_gop_remaining_frames
+  let _requires_gop_remaining_frames = field t "requiresGopRemainingFrames" (Vk_base.bool32)
+  let requires_gop_remaining_frames = _requires_gop_remaining_frames
+  let _std_syntax_flags = field t "stdSyntaxFlags" (VideoEncodeH264StdFlagsKHR.t)
+  let std_syntax_flags = _std_syntax_flags
+  let () = seal t
+  let structure_type : StructureType.t option = Some StructureType.video_encode_h264_capabilities_khr
+    let make ?next:arg_next () =
+    let value, keep = Vk_base.make_kept t in
+    ignore keep;
+    setf value _s_type StructureType.video_encode_h264_capabilities_khr;
+    (match arg_next with
+     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
+     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
+    value
+end
+
+module VideoEncodeH264DpbSlotInfoKHR = struct
+  type t
+  let t : t structure typ = structure "VkVideoEncodeH264DpbSlotInfoKHR"
+  let _s_type = field t "sType" (StructureType.t)
+  let s_type = _s_type
+  let _p_next = field t "pNext" (ptr (Ctypes.void))
+  let p_next = _p_next
+  let _p_std_reference_info = field t "pStdReferenceInfo" (ptr (void))
+  let p_std_reference_info = _p_std_reference_info
+  let () = seal t
+  let structure_type : StructureType.t option = Some StructureType.video_encode_h264_dpb_slot_info_khr
+    let make ?next:arg_next ?std_reference_info:arg_std_reference_info () =
+    let value, keep = Vk_base.make_kept t in
+    ignore keep;
+    setf value _s_type StructureType.video_encode_h264_dpb_slot_info_khr;
+    (match arg_next with
+     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
+     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
+    setf value _p_std_reference_info (match arg_std_reference_info with None -> Vk_base.null_ptr (void) | Some p -> p);
+    value
+end
+
+module VideoEncodeH264FrameSizeKHR = struct
+  type t
+  let t : t structure typ = structure "VkVideoEncodeH264FrameSizeKHR"
+  let _frame_i_size = field t "frameISize" (Vk_base.uint32)
+  let frame_i_size = _frame_i_size
+  let _frame_p_size = field t "framePSize" (Vk_base.uint32)
+  let frame_p_size = _frame_p_size
+  let _frame_b_size = field t "frameBSize" (Vk_base.uint32)
+  let frame_b_size = _frame_b_size
+  let () = seal t
+  let structure_type : StructureType.t option = None
+    let make ?frame_i_size:(arg_frame_i_size=0) ?frame_p_size:(arg_frame_p_size=0) ?frame_b_size:(arg_frame_b_size=0) () =
+    let value, keep = Vk_base.make_kept t in
+    ignore keep;
+    setf value _frame_i_size arg_frame_i_size;
+    setf value _frame_p_size arg_frame_p_size;
+    setf value _frame_b_size arg_frame_b_size;
+    value
+end
+
+module VideoEncodeH264GopRemainingFrameInfoKHR = struct
+  type t
+  let t : t structure typ = structure "VkVideoEncodeH264GopRemainingFrameInfoKHR"
+  let _s_type = field t "sType" (StructureType.t)
+  let s_type = _s_type
+  let _p_next = field t "pNext" (ptr (Ctypes.void))
+  let p_next = _p_next
+  let _use_gop_remaining_frames = field t "useGopRemainingFrames" (Vk_base.bool32)
+  let use_gop_remaining_frames = _use_gop_remaining_frames
+  let _gop_remaining_i = field t "gopRemainingI" (Vk_base.uint32)
+  let gop_remaining_i = _gop_remaining_i
+  let _gop_remaining_p = field t "gopRemainingP" (Vk_base.uint32)
+  let gop_remaining_p = _gop_remaining_p
+  let _gop_remaining_b = field t "gopRemainingB" (Vk_base.uint32)
+  let gop_remaining_b = _gop_remaining_b
+  let () = seal t
+  let structure_type : StructureType.t option = Some StructureType.video_encode_h264_gop_remaining_frame_info_khr
+    let make ?next:arg_next ?use_gop_remaining_frames:(arg_use_gop_remaining_frames=false) ?gop_remaining_i:(arg_gop_remaining_i=0) ?gop_remaining_p:(arg_gop_remaining_p=0) ?gop_remaining_b:(arg_gop_remaining_b=0) () =
+    let value, keep = Vk_base.make_kept t in
+    ignore keep;
+    setf value _s_type StructureType.video_encode_h264_gop_remaining_frame_info_khr;
+    (match arg_next with
+     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
+     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
+    setf value _use_gop_remaining_frames arg_use_gop_remaining_frames;
+    setf value _gop_remaining_i arg_gop_remaining_i;
+    setf value _gop_remaining_p arg_gop_remaining_p;
+    setf value _gop_remaining_b arg_gop_remaining_b;
+    value
+end
+
+module VideoEncodeH264NaluSliceInfoKHR = struct
+  type t
+  let t : t structure typ = structure "VkVideoEncodeH264NaluSliceInfoKHR"
+  let _s_type = field t "sType" (StructureType.t)
+  let s_type = _s_type
+  let _p_next = field t "pNext" (ptr (Ctypes.void))
+  let p_next = _p_next
+  let _constant_qp = field t "constantQp" (Vk_base.int32)
+  let constant_qp = _constant_qp
+  let _p_std_slice_header = field t "pStdSliceHeader" (ptr (void))
+  let p_std_slice_header = _p_std_slice_header
+  let () = seal t
+  let structure_type : StructureType.t option = Some StructureType.video_encode_h264_nalu_slice_info_khr
+    let make ?next:arg_next ?constant_qp:(arg_constant_qp=0) ?std_slice_header:arg_std_slice_header () =
+    let value, keep = Vk_base.make_kept t in
+    ignore keep;
+    setf value _s_type StructureType.video_encode_h264_nalu_slice_info_khr;
+    (match arg_next with
+     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
+     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
+    setf value _constant_qp arg_constant_qp;
+    setf value _p_std_slice_header (match arg_std_slice_header with None -> Vk_base.null_ptr (void) | Some p -> p);
+    value
+end
+
+module VideoEncodeH264ProfileInfoKHR = struct
+  type t
+  let t : t structure typ = structure "VkVideoEncodeH264ProfileInfoKHR"
+  let _s_type = field t "sType" (StructureType.t)
+  let s_type = _s_type
+  let _p_next = field t "pNext" (ptr (Ctypes.void))
+  let p_next = _p_next
+  let _std_profile_idc = field t "stdProfileIdc" (Vk_base.int32)
+  let std_profile_idc = _std_profile_idc
+  let () = seal t
+  let structure_type : StructureType.t option = Some StructureType.video_encode_h264_profile_info_khr
+    let make ?next:arg_next ?std_profile_idc:(arg_std_profile_idc=0) () =
+    let value, keep = Vk_base.make_kept t in
+    ignore keep;
+    setf value _s_type StructureType.video_encode_h264_profile_info_khr;
+    (match arg_next with
+     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
+     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
+    setf value _std_profile_idc arg_std_profile_idc;
+    value
+end
+
+module VideoEncodeH264QpKHR = struct
+  type t
+  let t : t structure typ = structure "VkVideoEncodeH264QpKHR"
+  let _qp_i = field t "qpI" (Vk_base.int32)
+  let qp_i = _qp_i
+  let _qp_p = field t "qpP" (Vk_base.int32)
+  let qp_p = _qp_p
+  let _qp_b = field t "qpB" (Vk_base.int32)
+  let qp_b = _qp_b
+  let () = seal t
+  let structure_type : StructureType.t option = None
+    let make ?qp_i:(arg_qp_i=0) ?qp_p:(arg_qp_p=0) ?qp_b:(arg_qp_b=0) () =
+    let value, keep = Vk_base.make_kept t in
+    ignore keep;
+    setf value _qp_i arg_qp_i;
+    setf value _qp_p arg_qp_p;
+    setf value _qp_b arg_qp_b;
+    value
+end
+
+module VideoEncodeH264QuantizationMapCapabilitiesKHR = struct
+  type t
+  let t : t structure typ = structure "VkVideoEncodeH264QuantizationMapCapabilitiesKHR"
+  let _s_type = field t "sType" (StructureType.t)
+  let s_type = _s_type
+  let _p_next = field t "pNext" (ptr (Ctypes.void))
+  let p_next = _p_next
+  let _min_qp_delta = field t "minQpDelta" (Vk_base.int32)
+  let min_qp_delta = _min_qp_delta
+  let _max_qp_delta = field t "maxQpDelta" (Vk_base.int32)
+  let max_qp_delta = _max_qp_delta
+  let () = seal t
+  let structure_type : StructureType.t option = Some StructureType.video_encode_h264_quantization_map_capabilities_khr
+    let make ?next:arg_next () =
+    let value, keep = Vk_base.make_kept t in
+    ignore keep;
+    setf value _s_type StructureType.video_encode_h264_quantization_map_capabilities_khr;
+    (match arg_next with
+     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
+     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
+    value
+end
+
+module VideoEncodeH264RateControlInfoKHR = struct
+  type t
+  let t : t structure typ = structure "VkVideoEncodeH264RateControlInfoKHR"
+  let _s_type = field t "sType" (StructureType.t)
+  let s_type = _s_type
+  let _p_next = field t "pNext" (ptr (Ctypes.void))
+  let p_next = _p_next
+  let _flags = field t "flags" (VideoEncodeH264RateControlFlagsKHR.t)
+  let flags = _flags
+  let _gop_frame_count = field t "gopFrameCount" (Vk_base.uint32)
+  let gop_frame_count = _gop_frame_count
+  let _idr_period = field t "idrPeriod" (Vk_base.uint32)
+  let idr_period = _idr_period
+  let _consecutive_b_frame_count = field t "consecutiveBFrameCount" (Vk_base.uint32)
+  let consecutive_b_frame_count = _consecutive_b_frame_count
+  let _temporal_layer_count = field t "temporalLayerCount" (Vk_base.uint32)
+  let temporal_layer_count = _temporal_layer_count
+  let () = seal t
+  let structure_type : StructureType.t option = Some StructureType.video_encode_h264_rate_control_info_khr
+    let make ?next:arg_next ?flags:(arg_flags=VideoEncodeH264RateControlFlagsKHR.of_int 0) ?gop_frame_count:(arg_gop_frame_count=0) ?idr_period:(arg_idr_period=0) ?consecutive_b_frame_count:(arg_consecutive_b_frame_count=0) ?temporal_layer_count:(arg_temporal_layer_count=0) () =
+    let value, keep = Vk_base.make_kept t in
+    ignore keep;
+    setf value _s_type StructureType.video_encode_h264_rate_control_info_khr;
+    (match arg_next with
+     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
+     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
+    setf value _flags arg_flags;
+    setf value _gop_frame_count arg_gop_frame_count;
+    setf value _idr_period arg_idr_period;
+    setf value _consecutive_b_frame_count arg_consecutive_b_frame_count;
+    setf value _temporal_layer_count arg_temporal_layer_count;
+    value
+end
+
+module VideoEncodeH264SessionCreateInfoKHR = struct
+  type t
+  let t : t structure typ = structure "VkVideoEncodeH264SessionCreateInfoKHR"
+  let _s_type = field t "sType" (StructureType.t)
+  let s_type = _s_type
+  let _p_next = field t "pNext" (ptr (Ctypes.void))
+  let p_next = _p_next
+  let _use_max_level_idc = field t "useMaxLevelIdc" (Vk_base.bool32)
+  let use_max_level_idc = _use_max_level_idc
+  let _max_level_idc = field t "maxLevelIdc" (Vk_base.int32)
+  let max_level_idc = _max_level_idc
+  let () = seal t
+  let structure_type : StructureType.t option = Some StructureType.video_encode_h264_session_create_info_khr
+    let make ?next:arg_next ?use_max_level_idc:(arg_use_max_level_idc=false) ?max_level_idc:(arg_max_level_idc=0) () =
+    let value, keep = Vk_base.make_kept t in
+    ignore keep;
+    setf value _s_type StructureType.video_encode_h264_session_create_info_khr;
+    (match arg_next with
+     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
+     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
+    setf value _use_max_level_idc arg_use_max_level_idc;
+    setf value _max_level_idc arg_max_level_idc;
+    value
+end
+
+module VideoEncodeH264SessionParametersAddInfoKHR = struct
+  type t
+  let t : t structure typ = structure "VkVideoEncodeH264SessionParametersAddInfoKHR"
+  let _s_type = field t "sType" (StructureType.t)
+  let s_type = _s_type
+  let _p_next = field t "pNext" (ptr (Ctypes.void))
+  let p_next = _p_next
+  let _std_sps_count = field t "stdSPSCount" (Vk_base.uint32)
+  let std_sps_count = _std_sps_count
+  let _p_std_sp_ss = field t "pStdSPSs" (ptr (void))
+  let p_std_sp_ss = _p_std_sp_ss
+  let _std_pps_count = field t "stdPPSCount" (Vk_base.uint32)
+  let std_pps_count = _std_pps_count
+  let _p_std_pp_ss = field t "pStdPPSs" (ptr (void))
+  let p_std_pp_ss = _p_std_pp_ss
+  let () = seal t
+  let structure_type : StructureType.t option = Some StructureType.video_encode_h264_session_parameters_add_info_khr
+    let make ?next:arg_next ?std_sps_count:arg_std_sps_count ?std_sp_ss:(arg_std_sp_ss=[]) ?std_pps_count:arg_std_pps_count ?std_pp_ss:(arg_std_pp_ss=[]) () =
+    let value, keep = Vk_base.make_kept t in
+    ignore keep;
+    setf value _s_type StructureType.video_encode_h264_session_parameters_add_info_khr;
+    (match arg_next with
+     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
+     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
+    let std_sps_count_n = (match arg_std_sps_count with Some n -> n | None -> List.length arg_std_sp_ss) in
+    if arg_std_sp_ss <> [] && List.length arg_std_sp_ss <> std_sps_count_n then invalid_arg "VkVideoEncodeH264SessionParametersAddInfoKHR.pStdSPSs: length does not match stdSPSCount";
+    setf value _std_sps_count std_sps_count_n;
+    if arg_std_sp_ss = [] then setf value _p_std_sp_ss (Vk_base.null_ptr (void)) else begin
+      let items = CArray.of_list (void) arg_std_sp_ss in
+      setf value _p_std_sp_ss (CArray.start items);
+      Vk_base.retain keep items; Vk_base.retain keep arg_std_sp_ss
+    end;
+    let std_pps_count_n = (match arg_std_pps_count with Some n -> n | None -> List.length arg_std_pp_ss) in
+    if arg_std_pp_ss <> [] && List.length arg_std_pp_ss <> std_pps_count_n then invalid_arg "VkVideoEncodeH264SessionParametersAddInfoKHR.pStdPPSs: length does not match stdPPSCount";
+    setf value _std_pps_count std_pps_count_n;
+    if arg_std_pp_ss = [] then setf value _p_std_pp_ss (Vk_base.null_ptr (void)) else begin
+      let items = CArray.of_list (void) arg_std_pp_ss in
+      setf value _p_std_pp_ss (CArray.start items);
+      Vk_base.retain keep items; Vk_base.retain keep arg_std_pp_ss
+    end;
+    value
+end
+
+module VideoEncodeH264SessionParametersFeedbackInfoKHR = struct
+  type t
+  let t : t structure typ = structure "VkVideoEncodeH264SessionParametersFeedbackInfoKHR"
+  let _s_type = field t "sType" (StructureType.t)
+  let s_type = _s_type
+  let _p_next = field t "pNext" (ptr (Ctypes.void))
+  let p_next = _p_next
+  let _has_std_sps_overrides = field t "hasStdSPSOverrides" (Vk_base.bool32)
+  let has_std_sps_overrides = _has_std_sps_overrides
+  let _has_std_pps_overrides = field t "hasStdPPSOverrides" (Vk_base.bool32)
+  let has_std_pps_overrides = _has_std_pps_overrides
+  let () = seal t
+  let structure_type : StructureType.t option = Some StructureType.video_encode_h264_session_parameters_feedback_info_khr
+    let make ?next:arg_next () =
+    let value, keep = Vk_base.make_kept t in
+    ignore keep;
+    setf value _s_type StructureType.video_encode_h264_session_parameters_feedback_info_khr;
+    (match arg_next with
+     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
+     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
+    value
+end
+
+module VideoEncodeH264SessionParametersGetInfoKHR = struct
+  type t
+  let t : t structure typ = structure "VkVideoEncodeH264SessionParametersGetInfoKHR"
+  let _s_type = field t "sType" (StructureType.t)
+  let s_type = _s_type
+  let _p_next = field t "pNext" (ptr (Ctypes.void))
+  let p_next = _p_next
+  let _write_std_sps = field t "writeStdSPS" (Vk_base.bool32)
+  let write_std_sps = _write_std_sps
+  let _write_std_pps = field t "writeStdPPS" (Vk_base.bool32)
+  let write_std_pps = _write_std_pps
+  let _std_sps_id = field t "stdSPSId" (Vk_base.uint32)
+  let std_sps_id = _std_sps_id
+  let _std_pps_id = field t "stdPPSId" (Vk_base.uint32)
+  let std_pps_id = _std_pps_id
+  let () = seal t
+  let structure_type : StructureType.t option = Some StructureType.video_encode_h264_session_parameters_get_info_khr
+    let make ?next:arg_next ?write_std_sps:(arg_write_std_sps=false) ?write_std_pps:(arg_write_std_pps=false) ?std_sps_id:(arg_std_sps_id=0) ?std_pps_id:(arg_std_pps_id=0) () =
+    let value, keep = Vk_base.make_kept t in
+    ignore keep;
+    setf value _s_type StructureType.video_encode_h264_session_parameters_get_info_khr;
+    (match arg_next with
+     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
+     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
+    setf value _write_std_sps arg_write_std_sps;
+    setf value _write_std_pps arg_write_std_pps;
+    setf value _std_sps_id arg_std_sps_id;
+    setf value _std_pps_id arg_std_pps_id;
+    value
+end
+
+module VideoEncodeH265DpbSlotInfoKHR = struct
+  type t
+  let t : t structure typ = structure "VkVideoEncodeH265DpbSlotInfoKHR"
+  let _s_type = field t "sType" (StructureType.t)
+  let s_type = _s_type
+  let _p_next = field t "pNext" (ptr (Ctypes.void))
+  let p_next = _p_next
+  let _p_std_reference_info = field t "pStdReferenceInfo" (ptr (void))
+  let p_std_reference_info = _p_std_reference_info
+  let () = seal t
+  let structure_type : StructureType.t option = Some StructureType.video_encode_h265_dpb_slot_info_khr
+    let make ?next:arg_next ?std_reference_info:arg_std_reference_info () =
+    let value, keep = Vk_base.make_kept t in
+    ignore keep;
+    setf value _s_type StructureType.video_encode_h265_dpb_slot_info_khr;
+    (match arg_next with
+     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
+     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
+    setf value _p_std_reference_info (match arg_std_reference_info with None -> Vk_base.null_ptr (void) | Some p -> p);
+    value
+end
+
+module VideoEncodeH265FrameSizeKHR = struct
+  type t
+  let t : t structure typ = structure "VkVideoEncodeH265FrameSizeKHR"
+  let _frame_i_size = field t "frameISize" (Vk_base.uint32)
+  let frame_i_size = _frame_i_size
+  let _frame_p_size = field t "framePSize" (Vk_base.uint32)
+  let frame_p_size = _frame_p_size
+  let _frame_b_size = field t "frameBSize" (Vk_base.uint32)
+  let frame_b_size = _frame_b_size
+  let () = seal t
+  let structure_type : StructureType.t option = None
+    let make ?frame_i_size:(arg_frame_i_size=0) ?frame_p_size:(arg_frame_p_size=0) ?frame_b_size:(arg_frame_b_size=0) () =
+    let value, keep = Vk_base.make_kept t in
+    ignore keep;
+    setf value _frame_i_size arg_frame_i_size;
+    setf value _frame_p_size arg_frame_p_size;
+    setf value _frame_b_size arg_frame_b_size;
+    value
+end
+
+module VideoEncodeH265GopRemainingFrameInfoKHR = struct
+  type t
+  let t : t structure typ = structure "VkVideoEncodeH265GopRemainingFrameInfoKHR"
+  let _s_type = field t "sType" (StructureType.t)
+  let s_type = _s_type
+  let _p_next = field t "pNext" (ptr (Ctypes.void))
+  let p_next = _p_next
+  let _use_gop_remaining_frames = field t "useGopRemainingFrames" (Vk_base.bool32)
+  let use_gop_remaining_frames = _use_gop_remaining_frames
+  let _gop_remaining_i = field t "gopRemainingI" (Vk_base.uint32)
+  let gop_remaining_i = _gop_remaining_i
+  let _gop_remaining_p = field t "gopRemainingP" (Vk_base.uint32)
+  let gop_remaining_p = _gop_remaining_p
+  let _gop_remaining_b = field t "gopRemainingB" (Vk_base.uint32)
+  let gop_remaining_b = _gop_remaining_b
+  let () = seal t
+  let structure_type : StructureType.t option = Some StructureType.video_encode_h265_gop_remaining_frame_info_khr
+    let make ?next:arg_next ?use_gop_remaining_frames:(arg_use_gop_remaining_frames=false) ?gop_remaining_i:(arg_gop_remaining_i=0) ?gop_remaining_p:(arg_gop_remaining_p=0) ?gop_remaining_b:(arg_gop_remaining_b=0) () =
+    let value, keep = Vk_base.make_kept t in
+    ignore keep;
+    setf value _s_type StructureType.video_encode_h265_gop_remaining_frame_info_khr;
+    (match arg_next with
+     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
+     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
+    setf value _use_gop_remaining_frames arg_use_gop_remaining_frames;
+    setf value _gop_remaining_i arg_gop_remaining_i;
+    setf value _gop_remaining_p arg_gop_remaining_p;
+    setf value _gop_remaining_b arg_gop_remaining_b;
+    value
+end
+
+module VideoEncodeH265NaluSliceSegmentInfoKHR = struct
+  type t
+  let t : t structure typ = structure "VkVideoEncodeH265NaluSliceSegmentInfoKHR"
+  let _s_type = field t "sType" (StructureType.t)
+  let s_type = _s_type
+  let _p_next = field t "pNext" (ptr (Ctypes.void))
+  let p_next = _p_next
+  let _constant_qp = field t "constantQp" (Vk_base.int32)
+  let constant_qp = _constant_qp
+  let _p_std_slice_segment_header = field t "pStdSliceSegmentHeader" (ptr (void))
+  let p_std_slice_segment_header = _p_std_slice_segment_header
+  let () = seal t
+  let structure_type : StructureType.t option = Some StructureType.video_encode_h265_nalu_slice_segment_info_khr
+    let make ?next:arg_next ?constant_qp:(arg_constant_qp=0) ?std_slice_segment_header:arg_std_slice_segment_header () =
+    let value, keep = Vk_base.make_kept t in
+    ignore keep;
+    setf value _s_type StructureType.video_encode_h265_nalu_slice_segment_info_khr;
+    (match arg_next with
+     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
+     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
+    setf value _constant_qp arg_constant_qp;
+    setf value _p_std_slice_segment_header (match arg_std_slice_segment_header with None -> Vk_base.null_ptr (void) | Some p -> p);
+    value
+end
+
+module VideoEncodeH265ProfileInfoKHR = struct
+  type t
+  let t : t structure typ = structure "VkVideoEncodeH265ProfileInfoKHR"
+  let _s_type = field t "sType" (StructureType.t)
+  let s_type = _s_type
+  let _p_next = field t "pNext" (ptr (Ctypes.void))
+  let p_next = _p_next
+  let _std_profile_idc = field t "stdProfileIdc" (Vk_base.int32)
+  let std_profile_idc = _std_profile_idc
+  let () = seal t
+  let structure_type : StructureType.t option = Some StructureType.video_encode_h265_profile_info_khr
+    let make ?next:arg_next ?std_profile_idc:(arg_std_profile_idc=0) () =
+    let value, keep = Vk_base.make_kept t in
+    ignore keep;
+    setf value _s_type StructureType.video_encode_h265_profile_info_khr;
+    (match arg_next with
+     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
+     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
+    setf value _std_profile_idc arg_std_profile_idc;
+    value
+end
+
+module VideoEncodeH265QpKHR = struct
+  type t
+  let t : t structure typ = structure "VkVideoEncodeH265QpKHR"
+  let _qp_i = field t "qpI" (Vk_base.int32)
+  let qp_i = _qp_i
+  let _qp_p = field t "qpP" (Vk_base.int32)
+  let qp_p = _qp_p
+  let _qp_b = field t "qpB" (Vk_base.int32)
+  let qp_b = _qp_b
+  let () = seal t
+  let structure_type : StructureType.t option = None
+    let make ?qp_i:(arg_qp_i=0) ?qp_p:(arg_qp_p=0) ?qp_b:(arg_qp_b=0) () =
+    let value, keep = Vk_base.make_kept t in
+    ignore keep;
+    setf value _qp_i arg_qp_i;
+    setf value _qp_p arg_qp_p;
+    setf value _qp_b arg_qp_b;
+    value
+end
+
+module VideoEncodeH265QuantizationMapCapabilitiesKHR = struct
+  type t
+  let t : t structure typ = structure "VkVideoEncodeH265QuantizationMapCapabilitiesKHR"
+  let _s_type = field t "sType" (StructureType.t)
+  let s_type = _s_type
+  let _p_next = field t "pNext" (ptr (Ctypes.void))
+  let p_next = _p_next
+  let _min_qp_delta = field t "minQpDelta" (Vk_base.int32)
+  let min_qp_delta = _min_qp_delta
+  let _max_qp_delta = field t "maxQpDelta" (Vk_base.int32)
+  let max_qp_delta = _max_qp_delta
+  let () = seal t
+  let structure_type : StructureType.t option = Some StructureType.video_encode_h265_quantization_map_capabilities_khr
+    let make ?next:arg_next () =
+    let value, keep = Vk_base.make_kept t in
+    ignore keep;
+    setf value _s_type StructureType.video_encode_h265_quantization_map_capabilities_khr;
+    (match arg_next with
+     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
+     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
+    value
+end
+
+module VideoEncodeH265RateControlInfoKHR = struct
+  type t
+  let t : t structure typ = structure "VkVideoEncodeH265RateControlInfoKHR"
+  let _s_type = field t "sType" (StructureType.t)
+  let s_type = _s_type
+  let _p_next = field t "pNext" (ptr (Ctypes.void))
+  let p_next = _p_next
+  let _flags = field t "flags" (VideoEncodeH265RateControlFlagsKHR.t)
+  let flags = _flags
+  let _gop_frame_count = field t "gopFrameCount" (Vk_base.uint32)
+  let gop_frame_count = _gop_frame_count
+  let _idr_period = field t "idrPeriod" (Vk_base.uint32)
+  let idr_period = _idr_period
+  let _consecutive_b_frame_count = field t "consecutiveBFrameCount" (Vk_base.uint32)
+  let consecutive_b_frame_count = _consecutive_b_frame_count
+  let _sub_layer_count = field t "subLayerCount" (Vk_base.uint32)
+  let sub_layer_count = _sub_layer_count
+  let () = seal t
+  let structure_type : StructureType.t option = Some StructureType.video_encode_h265_rate_control_info_khr
+    let make ?next:arg_next ?flags:(arg_flags=VideoEncodeH265RateControlFlagsKHR.of_int 0) ?gop_frame_count:(arg_gop_frame_count=0) ?idr_period:(arg_idr_period=0) ?consecutive_b_frame_count:(arg_consecutive_b_frame_count=0) ?sub_layer_count:(arg_sub_layer_count=0) () =
+    let value, keep = Vk_base.make_kept t in
+    ignore keep;
+    setf value _s_type StructureType.video_encode_h265_rate_control_info_khr;
+    (match arg_next with
+     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
+     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
+    setf value _flags arg_flags;
+    setf value _gop_frame_count arg_gop_frame_count;
+    setf value _idr_period arg_idr_period;
+    setf value _consecutive_b_frame_count arg_consecutive_b_frame_count;
+    setf value _sub_layer_count arg_sub_layer_count;
+    value
+end
+
+module VideoEncodeH265SessionCreateInfoKHR = struct
+  type t
+  let t : t structure typ = structure "VkVideoEncodeH265SessionCreateInfoKHR"
+  let _s_type = field t "sType" (StructureType.t)
+  let s_type = _s_type
+  let _p_next = field t "pNext" (ptr (Ctypes.void))
+  let p_next = _p_next
+  let _use_max_level_idc = field t "useMaxLevelIdc" (Vk_base.bool32)
+  let use_max_level_idc = _use_max_level_idc
+  let _max_level_idc = field t "maxLevelIdc" (Vk_base.int32)
+  let max_level_idc = _max_level_idc
+  let () = seal t
+  let structure_type : StructureType.t option = Some StructureType.video_encode_h265_session_create_info_khr
+    let make ?next:arg_next ?use_max_level_idc:(arg_use_max_level_idc=false) ?max_level_idc:(arg_max_level_idc=0) () =
+    let value, keep = Vk_base.make_kept t in
+    ignore keep;
+    setf value _s_type StructureType.video_encode_h265_session_create_info_khr;
+    (match arg_next with
+     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
+     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
+    setf value _use_max_level_idc arg_use_max_level_idc;
+    setf value _max_level_idc arg_max_level_idc;
     value
 end

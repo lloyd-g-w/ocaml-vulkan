@@ -8,300 +8,6 @@ open Vk_types_01
 open Vk_types_02
 open Vk_types_03
 
-module MemoryAllocateFlagsInfo = struct
-  type t
-  let t : t structure typ = structure "VkMemoryAllocateFlagsInfo"
-  let _s_type = field t "sType" (StructureType.t)
-  let s_type = _s_type
-  let _p_next = field t "pNext" (ptr (Ctypes.void))
-  let p_next = _p_next
-  let _flags = field t "flags" (MemoryAllocateFlags.t)
-  let flags = _flags
-  let _device_mask = field t "deviceMask" (Vk_base.uint32)
-  let device_mask = _device_mask
-  let () = seal t
-  let structure_type : StructureType.t option = Some StructureType.memory_allocate_flags_info
-    let make ?next:arg_next ?flags:(arg_flags=MemoryAllocateFlags.of_int 0) ?device_mask:(arg_device_mask=0) () =
-    let value, keep = Vk_base.make_kept t in
-    ignore keep;
-    setf value _s_type StructureType.memory_allocate_flags_info;
-    (match arg_next with
-     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
-     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    setf value _flags arg_flags;
-    setf value _device_mask arg_device_mask;
-    value
-end
-
-module MemoryAllocateInfo = struct
-  type t
-  let t : t structure typ = structure "VkMemoryAllocateInfo"
-  let _s_type = field t "sType" (StructureType.t)
-  let s_type = _s_type
-  let _p_next = field t "pNext" (ptr (Ctypes.void))
-  let p_next = _p_next
-  let _allocation_size = field t "allocationSize" (Vk_base.device_size)
-  let allocation_size = _allocation_size
-  let _memory_type_index = field t "memoryTypeIndex" (Vk_base.uint32)
-  let memory_type_index = _memory_type_index
-  let () = seal t
-  let structure_type : StructureType.t option = Some StructureType.memory_allocate_info
-    let make ?next:arg_next ?allocation_size:(arg_allocation_size=0) ?memory_type_index:(arg_memory_type_index=0) () =
-    let value, keep = Vk_base.make_kept t in
-    ignore keep;
-    setf value _s_type StructureType.memory_allocate_info;
-    (match arg_next with
-     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
-     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    setf value _allocation_size arg_allocation_size;
-    setf value _memory_type_index arg_memory_type_index;
-    value
-end
-
-module MemoryBarrier = struct
-  type t
-  let t : t structure typ = structure "VkMemoryBarrier"
-  let _s_type = field t "sType" (StructureType.t)
-  let s_type = _s_type
-  let _p_next = field t "pNext" (ptr (Ctypes.void))
-  let p_next = _p_next
-  let _src_access_mask = field t "srcAccessMask" (AccessFlags.t)
-  let src_access_mask = _src_access_mask
-  let _dst_access_mask = field t "dstAccessMask" (AccessFlags.t)
-  let dst_access_mask = _dst_access_mask
-  let () = seal t
-  let structure_type : StructureType.t option = Some StructureType.memory_barrier
-    let make ?next:arg_next ?src_access_mask:(arg_src_access_mask=AccessFlags.of_int 0) ?dst_access_mask:(arg_dst_access_mask=AccessFlags.of_int 0) () =
-    let value, keep = Vk_base.make_kept t in
-    ignore keep;
-    setf value _s_type StructureType.memory_barrier;
-    (match arg_next with
-     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
-     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    setf value _src_access_mask arg_src_access_mask;
-    setf value _dst_access_mask arg_dst_access_mask;
-    value
-end
-
-module MemoryBarrier2 = struct
-  type t
-  let t : t structure typ = structure "VkMemoryBarrier2"
-  let _s_type = field t "sType" (StructureType.t)
-  let s_type = _s_type
-  let _p_next = field t "pNext" (ptr (Ctypes.void))
-  let p_next = _p_next
-  let _src_stage_mask = field t "srcStageMask" (PipelineStageFlags2.t)
-  let src_stage_mask = _src_stage_mask
-  let _src_access_mask = field t "srcAccessMask" (AccessFlags2.t)
-  let src_access_mask = _src_access_mask
-  let _dst_stage_mask = field t "dstStageMask" (PipelineStageFlags2.t)
-  let dst_stage_mask = _dst_stage_mask
-  let _dst_access_mask = field t "dstAccessMask" (AccessFlags2.t)
-  let dst_access_mask = _dst_access_mask
-  let () = seal t
-  let structure_type : StructureType.t option = Some StructureType.memory_barrier_2
-    let make ?next:arg_next ?src_stage_mask:(arg_src_stage_mask=PipelineStageFlags2.of_int 0) ?src_access_mask:(arg_src_access_mask=AccessFlags2.of_int 0) ?dst_stage_mask:(arg_dst_stage_mask=PipelineStageFlags2.of_int 0) ?dst_access_mask:(arg_dst_access_mask=AccessFlags2.of_int 0) () =
-    let value, keep = Vk_base.make_kept t in
-    ignore keep;
-    setf value _s_type StructureType.memory_barrier_2;
-    (match arg_next with
-     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
-     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    setf value _src_stage_mask arg_src_stage_mask;
-    setf value _src_access_mask arg_src_access_mask;
-    setf value _dst_stage_mask arg_dst_stage_mask;
-    setf value _dst_access_mask arg_dst_access_mask;
-    value
-end
-
-module MemoryBarrierAccessFlags3KHR = struct
-  type t
-  let t : t structure typ = structure "VkMemoryBarrierAccessFlags3KHR"
-  let _s_type = field t "sType" (StructureType.t)
-  let s_type = _s_type
-  let _p_next = field t "pNext" (ptr (Ctypes.void))
-  let p_next = _p_next
-  let _src_access_mask_3 = field t "srcAccessMask3" (AccessFlags3KHR.t)
-  let src_access_mask_3 = _src_access_mask_3
-  let _dst_access_mask_3 = field t "dstAccessMask3" (AccessFlags3KHR.t)
-  let dst_access_mask_3 = _dst_access_mask_3
-  let () = seal t
-  let structure_type : StructureType.t option = Some StructureType.memory_barrier_access_flags_3_khr
-    let make ?next:arg_next ?src_access_mask_3:(arg_src_access_mask_3=AccessFlags3KHR.of_int 0) ?dst_access_mask_3:(arg_dst_access_mask_3=AccessFlags3KHR.of_int 0) () =
-    let value, keep = Vk_base.make_kept t in
-    ignore keep;
-    setf value _s_type StructureType.memory_barrier_access_flags_3_khr;
-    (match arg_next with
-     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
-     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    setf value _src_access_mask_3 arg_src_access_mask_3;
-    setf value _dst_access_mask_3 arg_dst_access_mask_3;
-    value
-end
-
-module MemoryDedicatedAllocateInfo = struct
-  type t
-  let t : t structure typ = structure "VkMemoryDedicatedAllocateInfo"
-  let _s_type = field t "sType" (StructureType.t)
-  let s_type = _s_type
-  let _p_next = field t "pNext" (ptr (Ctypes.void))
-  let p_next = _p_next
-  let _image = field t "image" (Image.t)
-  let image = _image
-  let _buffer = field t "buffer" (Buffer.t)
-  let buffer = _buffer
-  let () = seal t
-  let structure_type : StructureType.t option = Some StructureType.memory_dedicated_allocate_info
-    let make ?next:arg_next ?image:(arg_image=Image.null) ?buffer:(arg_buffer=Buffer.null) () =
-    let value, keep = Vk_base.make_kept t in
-    ignore keep;
-    setf value _s_type StructureType.memory_dedicated_allocate_info;
-    (match arg_next with
-     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
-     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    setf value _image arg_image;
-    setf value _buffer arg_buffer;
-    value
-end
-
-module MemoryDedicatedAllocateInfoTensorARM = struct
-  type t
-  let t : t structure typ = structure "VkMemoryDedicatedAllocateInfoTensorARM"
-  let _s_type = field t "sType" (StructureType.t)
-  let s_type = _s_type
-  let _p_next = field t "pNext" (ptr (Ctypes.void))
-  let p_next = _p_next
-  let _tensor = field t "tensor" (TensorARM.t)
-  let tensor = _tensor
-  let () = seal t
-  let structure_type : StructureType.t option = Some StructureType.memory_dedicated_allocate_info_tensor_arm
-    let make ?next:arg_next ?tensor:(arg_tensor=TensorARM.null) () =
-    let value, keep = Vk_base.make_kept t in
-    ignore keep;
-    setf value _s_type StructureType.memory_dedicated_allocate_info_tensor_arm;
-    (match arg_next with
-     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
-     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    setf value _tensor arg_tensor;
-    value
-end
-
-module MemoryDedicatedRequirements = struct
-  type t
-  let t : t structure typ = structure "VkMemoryDedicatedRequirements"
-  let _s_type = field t "sType" (StructureType.t)
-  let s_type = _s_type
-  let _p_next = field t "pNext" (ptr (Ctypes.void))
-  let p_next = _p_next
-  let _prefers_dedicated_allocation = field t "prefersDedicatedAllocation" (Vk_base.bool32)
-  let prefers_dedicated_allocation = _prefers_dedicated_allocation
-  let _requires_dedicated_allocation = field t "requiresDedicatedAllocation" (Vk_base.bool32)
-  let requires_dedicated_allocation = _requires_dedicated_allocation
-  let () = seal t
-  let structure_type : StructureType.t option = Some StructureType.memory_dedicated_requirements
-    let make ?next:arg_next () =
-    let value, keep = Vk_base.make_kept t in
-    ignore keep;
-    setf value _s_type StructureType.memory_dedicated_requirements;
-    (match arg_next with
-     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
-     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    value
-end
-
-module MemoryFdPropertiesKHR = struct
-  type t
-  let t : t structure typ = structure "VkMemoryFdPropertiesKHR"
-  let _s_type = field t "sType" (StructureType.t)
-  let s_type = _s_type
-  let _p_next = field t "pNext" (ptr (Ctypes.void))
-  let p_next = _p_next
-  let _memory_type_bits = field t "memoryTypeBits" (Vk_base.uint32)
-  let memory_type_bits = _memory_type_bits
-  let () = seal t
-  let structure_type : StructureType.t option = Some StructureType.memory_fd_properties_khr
-    let make ?next:arg_next () =
-    let value, keep = Vk_base.make_kept t in
-    ignore keep;
-    setf value _s_type StructureType.memory_fd_properties_khr;
-    (match arg_next with
-     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
-     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    value
-end
-
-module MemoryGetAndroidHardwareBufferInfoANDROID = struct
-  type t
-  let t : t structure typ = structure "VkMemoryGetAndroidHardwareBufferInfoANDROID"
-  let _s_type = field t "sType" (StructureType.t)
-  let s_type = _s_type
-  let _p_next = field t "pNext" (ptr (Ctypes.void))
-  let p_next = _p_next
-  let _memory = field t "memory" (DeviceMemory.t)
-  let memory = _memory
-  let () = seal t
-  let structure_type : StructureType.t option = Some StructureType.memory_get_android_hardware_buffer_info_android
-    let make ?next:arg_next ?memory:(arg_memory=DeviceMemory.null) () =
-    let value, keep = Vk_base.make_kept t in
-    ignore keep;
-    setf value _s_type StructureType.memory_get_android_hardware_buffer_info_android;
-    (match arg_next with
-     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
-     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    setf value _memory arg_memory;
-    value
-end
-
-module MemoryGetFdInfoKHR = struct
-  type t
-  let t : t structure typ = structure "VkMemoryGetFdInfoKHR"
-  let _s_type = field t "sType" (StructureType.t)
-  let s_type = _s_type
-  let _p_next = field t "pNext" (ptr (Ctypes.void))
-  let p_next = _p_next
-  let _memory = field t "memory" (DeviceMemory.t)
-  let memory = _memory
-  let _handle_type = field t "handleType" (ExternalMemoryHandleTypeFlags.t)
-  let handle_type = _handle_type
-  let () = seal t
-  let structure_type : StructureType.t option = Some StructureType.memory_get_fd_info_khr
-    let make ?next:arg_next ?memory:(arg_memory=DeviceMemory.null) ?handle_type:(arg_handle_type=ExternalMemoryHandleTypeFlags.of_int 0) () =
-    let value, keep = Vk_base.make_kept t in
-    ignore keep;
-    setf value _s_type StructureType.memory_get_fd_info_khr;
-    (match arg_next with
-     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
-     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    setf value _memory arg_memory;
-    setf value _handle_type arg_handle_type;
-    value
-end
-
-module MemoryGetMetalHandleInfoEXT = struct
-  type t
-  let t : t structure typ = structure "VkMemoryGetMetalHandleInfoEXT"
-  let _s_type = field t "sType" (StructureType.t)
-  let s_type = _s_type
-  let _p_next = field t "pNext" (ptr (Ctypes.void))
-  let p_next = _p_next
-  let _memory = field t "memory" (DeviceMemory.t)
-  let memory = _memory
-  let _handle_type = field t "handleType" (ExternalMemoryHandleTypeFlags.t)
-  let handle_type = _handle_type
-  let () = seal t
-  let structure_type : StructureType.t option = Some StructureType.memory_get_metal_handle_info_ext
-    let make ?next:arg_next ?memory:(arg_memory=DeviceMemory.null) ?handle_type:(arg_handle_type=ExternalMemoryHandleTypeFlags.of_int 0) () =
-    let value, keep = Vk_base.make_kept t in
-    ignore keep;
-    setf value _s_type StructureType.memory_get_metal_handle_info_ext;
-    (match arg_next with
-     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
-     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    setf value _memory arg_memory;
-    setf value _handle_type arg_handle_type;
-    value
-end
-
 module MemoryGetNativeBufferInfoOHOS = struct
   type t
   let t : t structure typ = structure "VkMemoryGetNativeBufferInfoOHOS"
@@ -341,31 +47,6 @@ module MemoryGetRemoteAddressInfoNV = struct
     let value, keep = Vk_base.make_kept t in
     ignore keep;
     setf value _s_type StructureType.memory_get_remote_address_info_nv;
-    (match arg_next with
-     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
-     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    setf value _memory arg_memory;
-    setf value _handle_type arg_handle_type;
-    value
-end
-
-module MemoryGetSciBufInfoNV = struct
-  type t
-  let t : t structure typ = structure "VkMemoryGetSciBufInfoNV"
-  let _s_type = field t "sType" (StructureType.t)
-  let s_type = _s_type
-  let _p_next = field t "pNext" (ptr (Ctypes.void))
-  let p_next = _p_next
-  let _memory = field t "memory" (DeviceMemory.t)
-  let memory = _memory
-  let _handle_type = field t "handleType" (ExternalMemoryHandleTypeFlags.t)
-  let handle_type = _handle_type
-  let () = seal t
-  let structure_type : StructureType.t option = None
-    let make ?next:arg_next ?memory:(arg_memory=DeviceMemory.null) ?handle_type:(arg_handle_type=ExternalMemoryHandleTypeFlags.of_int 0) () =
-    let value, keep = Vk_base.make_kept t in
-    ignore keep;
-    setf value _s_type (StructureType.of_int 0);
     (match arg_next with
      | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
      | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
@@ -592,28 +273,6 @@ module MemoryRequirements = struct
     let make () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
-    value
-end
-
-module MemorySciBufPropertiesNV = struct
-  type t
-  let t : t structure typ = structure "VkMemorySciBufPropertiesNV"
-  let _s_type = field t "sType" (StructureType.t)
-  let s_type = _s_type
-  let _p_next = field t "pNext" (ptr (Ctypes.void))
-  let p_next = _p_next
-  let _memory_type_bits = field t "memoryTypeBits" (Vk_base.uint32)
-  let memory_type_bits = _memory_type_bits
-  let () = seal t
-  let structure_type : StructureType.t option = None
-    let make ?next:arg_next ?memory_type_bits:(arg_memory_type_bits=0) () =
-    let value, keep = Vk_base.make_kept t in
-    ignore keep;
-    setf value _s_type (StructureType.of_int 0);
-    (match arg_next with
-     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
-     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    setf value _memory_type_bits arg_memory_type_bits;
     value
 end
 
@@ -981,28 +640,6 @@ module MutableDescriptorTypeListEXT = struct
     value
 end
 
-module NativeBufferOHOS = struct
-  type t
-  let t : t structure typ = structure "VkNativeBufferOHOS"
-  let _s_type = field t "sType" (StructureType.t)
-  let s_type = _s_type
-  let _p_next = field t "pNext" (ptr (Ctypes.void))
-  let p_next = _p_next
-  let _handle = field t "handle" (ptr (void))
-  let handle = _handle
-  let () = seal t
-  let structure_type : StructureType.t option = None
-    let make ?next:arg_next ?handle:arg_handle () =
-    let value, keep = Vk_base.make_kept t in
-    ignore keep;
-    setf value _s_type (StructureType.of_int 0);
-    (match arg_next with
-     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
-     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    setf value _handle (match arg_handle with None -> Vk_base.null_ptr (void) | Some p -> p);
-    value
-end
-
 module NativeBufferPropertiesOHOS = struct
   type t
   let t : t structure typ = structure "VkNativeBufferPropertiesOHOS"
@@ -1023,23 +660,6 @@ module NativeBufferPropertiesOHOS = struct
     (match arg_next with
      | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
      | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    value
-end
-
-module NativeBufferUsage2ANDROID = struct
-  type t
-  let t : t structure typ = structure "VkNativeBufferUsage2ANDROID"
-  let _consumer = field t "consumer" (Vk_base.uint64)
-  let consumer = _consumer
-  let _producer = field t "producer" (Vk_base.uint64)
-  let producer = _producer
-  let () = seal t
-  let structure_type : StructureType.t option = None
-    let make ?consumer:(arg_consumer=0) ?producer:(arg_producer=0) () =
-    let value, keep = Vk_base.make_kept t in
-    ignore keep;
-    setf value _consumer arg_consumer;
-    setf value _producer arg_producer;
     value
 end
 
@@ -1661,28 +1281,6 @@ module PerformanceOverrideInfoINTEL = struct
     setf value _type_ arg_type_;
     setf value _enable arg_enable;
     setf value _parameter arg_parameter;
-    value
-end
-
-module PerformanceQueryReservationInfoKHR = struct
-  type t
-  let t : t structure typ = structure "VkPerformanceQueryReservationInfoKHR"
-  let _s_type = field t "sType" (StructureType.t)
-  let s_type = _s_type
-  let _p_next = field t "pNext" (ptr (Ctypes.void))
-  let p_next = _p_next
-  let _max_performance_queries_per_pool = field t "maxPerformanceQueriesPerPool" (Vk_base.uint32)
-  let max_performance_queries_per_pool = _max_performance_queries_per_pool
-  let () = seal t
-  let structure_type : StructureType.t option = None
-    let make ?next:arg_next ?max_performance_queries_per_pool:(arg_max_performance_queries_per_pool=0) () =
-    let value, keep = Vk_base.make_kept t in
-    ignore keep;
-    setf value _s_type (StructureType.of_int 0);
-    (match arg_next with
-     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
-     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    setf value _max_performance_queries_per_pool arg_max_performance_queries_per_pool;
     value
 end
 
@@ -2881,5 +2479,399 @@ module PhysicalDeviceCubicClampFeaturesQCOM = struct
      | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
      | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
     setf value _cubic_range_clamp arg_cubic_range_clamp;
+    value
+end
+
+module PhysicalDeviceCubicWeightsFeaturesQCOM = struct
+  type t
+  let t : t structure typ = structure "VkPhysicalDeviceCubicWeightsFeaturesQCOM"
+  let _s_type = field t "sType" (StructureType.t)
+  let s_type = _s_type
+  let _p_next = field t "pNext" (ptr (Ctypes.void))
+  let p_next = _p_next
+  let _selectable_cubic_weights = field t "selectableCubicWeights" (Vk_base.bool32)
+  let selectable_cubic_weights = _selectable_cubic_weights
+  let () = seal t
+  let structure_type : StructureType.t option = Some StructureType.physical_device_cubic_weights_features_qcom
+    let make ?next:arg_next ?selectable_cubic_weights:(arg_selectable_cubic_weights=false) () =
+    let value, keep = Vk_base.make_kept t in
+    ignore keep;
+    setf value _s_type StructureType.physical_device_cubic_weights_features_qcom;
+    (match arg_next with
+     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
+     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
+    setf value _selectable_cubic_weights arg_selectable_cubic_weights;
+    value
+end
+
+module PhysicalDeviceCudaKernelLaunchFeaturesNV = struct
+  type t
+  let t : t structure typ = structure "VkPhysicalDeviceCudaKernelLaunchFeaturesNV"
+  let _s_type = field t "sType" (StructureType.t)
+  let s_type = _s_type
+  let _p_next = field t "pNext" (ptr (Ctypes.void))
+  let p_next = _p_next
+  let _cuda_kernel_launch_features = field t "cudaKernelLaunchFeatures" (Vk_base.bool32)
+  let cuda_kernel_launch_features = _cuda_kernel_launch_features
+  let () = seal t
+  let structure_type : StructureType.t option = Some StructureType.physical_device_cuda_kernel_launch_features_nv
+    let make ?next:arg_next ?cuda_kernel_launch_features:(arg_cuda_kernel_launch_features=false) () =
+    let value, keep = Vk_base.make_kept t in
+    ignore keep;
+    setf value _s_type StructureType.physical_device_cuda_kernel_launch_features_nv;
+    (match arg_next with
+     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
+     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
+    setf value _cuda_kernel_launch_features arg_cuda_kernel_launch_features;
+    value
+end
+
+module PhysicalDeviceCudaKernelLaunchPropertiesNV = struct
+  type t
+  let t : t structure typ = structure "VkPhysicalDeviceCudaKernelLaunchPropertiesNV"
+  let _s_type = field t "sType" (StructureType.t)
+  let s_type = _s_type
+  let _p_next = field t "pNext" (ptr (Ctypes.void))
+  let p_next = _p_next
+  let _compute_capability_minor = field t "computeCapabilityMinor" (Vk_base.uint32)
+  let compute_capability_minor = _compute_capability_minor
+  let _compute_capability_major = field t "computeCapabilityMajor" (Vk_base.uint32)
+  let compute_capability_major = _compute_capability_major
+  let () = seal t
+  let structure_type : StructureType.t option = Some StructureType.physical_device_cuda_kernel_launch_properties_nv
+    let make ?next:arg_next () =
+    let value, keep = Vk_base.make_kept t in
+    ignore keep;
+    setf value _s_type StructureType.physical_device_cuda_kernel_launch_properties_nv;
+    (match arg_next with
+     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
+     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
+    value
+end
+
+module PhysicalDeviceCustomBorderColorFeaturesEXT = struct
+  type t
+  let t : t structure typ = structure "VkPhysicalDeviceCustomBorderColorFeaturesEXT"
+  let _s_type = field t "sType" (StructureType.t)
+  let s_type = _s_type
+  let _p_next = field t "pNext" (ptr (Ctypes.void))
+  let p_next = _p_next
+  let _custom_border_colors = field t "customBorderColors" (Vk_base.bool32)
+  let custom_border_colors = _custom_border_colors
+  let _custom_border_color_without_format = field t "customBorderColorWithoutFormat" (Vk_base.bool32)
+  let custom_border_color_without_format = _custom_border_color_without_format
+  let () = seal t
+  let structure_type : StructureType.t option = Some StructureType.physical_device_custom_border_color_features_ext
+    let make ?next:arg_next ?custom_border_colors:(arg_custom_border_colors=false) ?custom_border_color_without_format:(arg_custom_border_color_without_format=false) () =
+    let value, keep = Vk_base.make_kept t in
+    ignore keep;
+    setf value _s_type StructureType.physical_device_custom_border_color_features_ext;
+    (match arg_next with
+     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
+     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
+    setf value _custom_border_colors arg_custom_border_colors;
+    setf value _custom_border_color_without_format arg_custom_border_color_without_format;
+    value
+end
+
+module PhysicalDeviceCustomBorderColorPropertiesEXT = struct
+  type t
+  let t : t structure typ = structure "VkPhysicalDeviceCustomBorderColorPropertiesEXT"
+  let _s_type = field t "sType" (StructureType.t)
+  let s_type = _s_type
+  let _p_next = field t "pNext" (ptr (Ctypes.void))
+  let p_next = _p_next
+  let _max_custom_border_color_samplers = field t "maxCustomBorderColorSamplers" (Vk_base.uint32)
+  let max_custom_border_color_samplers = _max_custom_border_color_samplers
+  let () = seal t
+  let structure_type : StructureType.t option = Some StructureType.physical_device_custom_border_color_properties_ext
+    let make ?next:arg_next () =
+    let value, keep = Vk_base.make_kept t in
+    ignore keep;
+    setf value _s_type StructureType.physical_device_custom_border_color_properties_ext;
+    (match arg_next with
+     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
+     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
+    value
+end
+
+module PhysicalDeviceCustomResolveFeaturesEXT = struct
+  type t
+  let t : t structure typ = structure "VkPhysicalDeviceCustomResolveFeaturesEXT"
+  let _s_type = field t "sType" (StructureType.t)
+  let s_type = _s_type
+  let _p_next = field t "pNext" (ptr (Ctypes.void))
+  let p_next = _p_next
+  let _custom_resolve = field t "customResolve" (Vk_base.bool32)
+  let custom_resolve = _custom_resolve
+  let () = seal t
+  let structure_type : StructureType.t option = Some StructureType.physical_device_custom_resolve_features_ext
+    let make ?next:arg_next ?custom_resolve:(arg_custom_resolve=false) () =
+    let value, keep = Vk_base.make_kept t in
+    ignore keep;
+    setf value _s_type StructureType.physical_device_custom_resolve_features_ext;
+    (match arg_next with
+     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
+     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
+    setf value _custom_resolve arg_custom_resolve;
+    value
+end
+
+module PhysicalDeviceDataGraphFeaturesARM = struct
+  type t
+  let t : t structure typ = structure "VkPhysicalDeviceDataGraphFeaturesARM"
+  let _s_type = field t "sType" (StructureType.t)
+  let s_type = _s_type
+  let _p_next = field t "pNext" (ptr (Ctypes.void))
+  let p_next = _p_next
+  let _data_graph = field t "dataGraph" (Vk_base.bool32)
+  let data_graph = _data_graph
+  let _data_graph_update_after_bind = field t "dataGraphUpdateAfterBind" (Vk_base.bool32)
+  let data_graph_update_after_bind = _data_graph_update_after_bind
+  let _data_graph_specialization_constants = field t "dataGraphSpecializationConstants" (Vk_base.bool32)
+  let data_graph_specialization_constants = _data_graph_specialization_constants
+  let _data_graph_descriptor_buffer = field t "dataGraphDescriptorBuffer" (Vk_base.bool32)
+  let data_graph_descriptor_buffer = _data_graph_descriptor_buffer
+  let _data_graph_shader_module = field t "dataGraphShaderModule" (Vk_base.bool32)
+  let data_graph_shader_module = _data_graph_shader_module
+  let () = seal t
+  let structure_type : StructureType.t option = Some StructureType.physical_device_data_graph_features_arm
+    let make ?next:arg_next ?data_graph:(arg_data_graph=false) ?data_graph_update_after_bind:(arg_data_graph_update_after_bind=false) ?data_graph_specialization_constants:(arg_data_graph_specialization_constants=false) ?data_graph_descriptor_buffer:(arg_data_graph_descriptor_buffer=false) ?data_graph_shader_module:(arg_data_graph_shader_module=false) () =
+    let value, keep = Vk_base.make_kept t in
+    ignore keep;
+    setf value _s_type StructureType.physical_device_data_graph_features_arm;
+    (match arg_next with
+     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
+     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
+    setf value _data_graph arg_data_graph;
+    setf value _data_graph_update_after_bind arg_data_graph_update_after_bind;
+    setf value _data_graph_specialization_constants arg_data_graph_specialization_constants;
+    setf value _data_graph_descriptor_buffer arg_data_graph_descriptor_buffer;
+    setf value _data_graph_shader_module arg_data_graph_shader_module;
+    value
+end
+
+module PhysicalDeviceDataGraphModelFeaturesQCOM = struct
+  type t
+  let t : t structure typ = structure "VkPhysicalDeviceDataGraphModelFeaturesQCOM"
+  let _s_type = field t "sType" (StructureType.t)
+  let s_type = _s_type
+  let _p_next = field t "pNext" (ptr (Ctypes.void))
+  let p_next = _p_next
+  let _data_graph_model = field t "dataGraphModel" (Vk_base.bool32)
+  let data_graph_model = _data_graph_model
+  let () = seal t
+  let structure_type : StructureType.t option = Some StructureType.physical_device_data_graph_model_features_qcom
+    let make ?next:arg_next ?data_graph_model:(arg_data_graph_model=false) () =
+    let value, keep = Vk_base.make_kept t in
+    ignore keep;
+    setf value _s_type StructureType.physical_device_data_graph_model_features_qcom;
+    (match arg_next with
+     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
+     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
+    setf value _data_graph_model arg_data_graph_model;
+    value
+end
+
+module PhysicalDeviceDataGraphNeuralAcceleratorStatisticsFeaturesARM = struct
+  type t
+  let t : t structure typ = structure "VkPhysicalDeviceDataGraphNeuralAcceleratorStatisticsFeaturesARM"
+  let _s_type = field t "sType" (StructureType.t)
+  let s_type = _s_type
+  let _p_next = field t "pNext" (ptr (Ctypes.void))
+  let p_next = _p_next
+  let _data_graph_neural_accelerator_statistics = field t "dataGraphNeuralAcceleratorStatistics" (Vk_base.bool32)
+  let data_graph_neural_accelerator_statistics = _data_graph_neural_accelerator_statistics
+  let () = seal t
+  let structure_type : StructureType.t option = Some StructureType.physical_device_data_graph_neural_accelerator_statistics_features_arm
+    let make ?next:arg_next ?data_graph_neural_accelerator_statistics:(arg_data_graph_neural_accelerator_statistics=false) () =
+    let value, keep = Vk_base.make_kept t in
+    ignore keep;
+    setf value _s_type StructureType.physical_device_data_graph_neural_accelerator_statistics_features_arm;
+    (match arg_next with
+     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
+     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
+    setf value _data_graph_neural_accelerator_statistics arg_data_graph_neural_accelerator_statistics;
+    value
+end
+
+module PhysicalDeviceDataGraphOperationSupportARM = struct
+  type t
+  let t : t structure typ = structure "VkPhysicalDeviceDataGraphOperationSupportARM"
+  let _operation_type = field t "operationType" (PhysicalDeviceDataGraphOperationTypeARM.t)
+  let operation_type = _operation_type
+  let _name = field t "name" (array 128 (Ctypes.char))
+  let name = _name
+  let _version = field t "version" (Vk_base.uint32)
+  let version = _version
+  let () = seal t
+  let structure_type : StructureType.t option = None
+    let make ?operation_type:(arg_operation_type=PhysicalDeviceDataGraphOperationTypeARM.of_int 0) ?name:(arg_name="") ?version:(arg_version=0) () =
+    let value, keep = Vk_base.make_kept t in
+    ignore keep;
+    setf value _operation_type arg_operation_type;
+    if String.length arg_name >= 128 then invalid_arg "name: string too long";
+    let destination = getf value _name in
+    String.iteri (fun i c -> CArray.set destination i c) arg_name;
+    setf value _version arg_version;
+    value
+  let get_name value = Vk_base.string_of_char_array (getf value name)
+end
+
+module PhysicalDeviceDataGraphOpticalFlowFeaturesARM = struct
+  type t
+  let t : t structure typ = structure "VkPhysicalDeviceDataGraphOpticalFlowFeaturesARM"
+  let _s_type = field t "sType" (StructureType.t)
+  let s_type = _s_type
+  let _p_next = field t "pNext" (ptr (Ctypes.void))
+  let p_next = _p_next
+  let _data_graph_optical_flow = field t "dataGraphOpticalFlow" (Vk_base.bool32)
+  let data_graph_optical_flow = _data_graph_optical_flow
+  let () = seal t
+  let structure_type : StructureType.t option = Some StructureType.physical_device_data_graph_optical_flow_features_arm
+    let make ?next:arg_next ?data_graph_optical_flow:(arg_data_graph_optical_flow=false) () =
+    let value, keep = Vk_base.make_kept t in
+    ignore keep;
+    setf value _s_type StructureType.physical_device_data_graph_optical_flow_features_arm;
+    (match arg_next with
+     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
+     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
+    setf value _data_graph_optical_flow arg_data_graph_optical_flow;
+    value
+end
+
+module PhysicalDeviceDataGraphProcessingEngineARM = struct
+  type t
+  let t : t structure typ = structure "VkPhysicalDeviceDataGraphProcessingEngineARM"
+  let _type_ = field t "type" (PhysicalDeviceDataGraphProcessingEngineTypeARM.t)
+  let type_ = _type_
+  let _is_foreign = field t "isForeign" (Vk_base.bool32)
+  let is_foreign = _is_foreign
+  let () = seal t
+  let structure_type : StructureType.t option = None
+    let make ?type_:(arg_type_=PhysicalDeviceDataGraphProcessingEngineTypeARM.of_int 0) ?is_foreign:(arg_is_foreign=false) () =
+    let value, keep = Vk_base.make_kept t in
+    ignore keep;
+    setf value _type_ arg_type_;
+    setf value _is_foreign arg_is_foreign;
+    value
+end
+
+module PhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV = struct
+  type t
+  let t : t structure typ = structure "VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV"
+  let _s_type = field t "sType" (StructureType.t)
+  let s_type = _s_type
+  let _p_next = field t "pNext" (ptr (Ctypes.void))
+  let p_next = _p_next
+  let _dedicated_allocation_image_aliasing = field t "dedicatedAllocationImageAliasing" (Vk_base.bool32)
+  let dedicated_allocation_image_aliasing = _dedicated_allocation_image_aliasing
+  let () = seal t
+  let structure_type : StructureType.t option = Some StructureType.physical_device_dedicated_allocation_image_aliasing_features_nv
+    let make ?next:arg_next ?dedicated_allocation_image_aliasing:(arg_dedicated_allocation_image_aliasing=false) () =
+    let value, keep = Vk_base.make_kept t in
+    ignore keep;
+    setf value _s_type StructureType.physical_device_dedicated_allocation_image_aliasing_features_nv;
+    (match arg_next with
+     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
+     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
+    setf value _dedicated_allocation_image_aliasing arg_dedicated_allocation_image_aliasing;
+    value
+end
+
+module PhysicalDeviceDenseGeometryFormatFeaturesAMDX = struct
+  type t
+  let t : t structure typ = structure "VkPhysicalDeviceDenseGeometryFormatFeaturesAMDX"
+  let _s_type = field t "sType" (StructureType.t)
+  let s_type = _s_type
+  let _p_next = field t "pNext" (ptr (Ctypes.void))
+  let p_next = _p_next
+  let _dense_geometry_format = field t "denseGeometryFormat" (Vk_base.bool32)
+  let dense_geometry_format = _dense_geometry_format
+  let () = seal t
+  let structure_type : StructureType.t option = Some StructureType.physical_device_dense_geometry_format_features_amdx
+    let make ?next:arg_next ?dense_geometry_format:(arg_dense_geometry_format=false) () =
+    let value, keep = Vk_base.make_kept t in
+    ignore keep;
+    setf value _s_type StructureType.physical_device_dense_geometry_format_features_amdx;
+    (match arg_next with
+     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
+     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
+    setf value _dense_geometry_format arg_dense_geometry_format;
+    value
+end
+
+module PhysicalDeviceDepthBiasControlFeaturesEXT = struct
+  type t
+  let t : t structure typ = structure "VkPhysicalDeviceDepthBiasControlFeaturesEXT"
+  let _s_type = field t "sType" (StructureType.t)
+  let s_type = _s_type
+  let _p_next = field t "pNext" (ptr (Ctypes.void))
+  let p_next = _p_next
+  let _depth_bias_control = field t "depthBiasControl" (Vk_base.bool32)
+  let depth_bias_control = _depth_bias_control
+  let _least_representable_value_force_unorm_representation = field t "leastRepresentableValueForceUnormRepresentation" (Vk_base.bool32)
+  let least_representable_value_force_unorm_representation = _least_representable_value_force_unorm_representation
+  let _float_representation = field t "floatRepresentation" (Vk_base.bool32)
+  let float_representation = _float_representation
+  let _depth_bias_exact = field t "depthBiasExact" (Vk_base.bool32)
+  let depth_bias_exact = _depth_bias_exact
+  let () = seal t
+  let structure_type : StructureType.t option = Some StructureType.physical_device_depth_bias_control_features_ext
+    let make ?next:arg_next ?depth_bias_control:(arg_depth_bias_control=false) ?least_representable_value_force_unorm_representation:(arg_least_representable_value_force_unorm_representation=false) ?float_representation:(arg_float_representation=false) ?depth_bias_exact:(arg_depth_bias_exact=false) () =
+    let value, keep = Vk_base.make_kept t in
+    ignore keep;
+    setf value _s_type StructureType.physical_device_depth_bias_control_features_ext;
+    (match arg_next with
+     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
+     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
+    setf value _depth_bias_control arg_depth_bias_control;
+    setf value _least_representable_value_force_unorm_representation arg_least_representable_value_force_unorm_representation;
+    setf value _float_representation arg_float_representation;
+    setf value _depth_bias_exact arg_depth_bias_exact;
+    value
+end
+
+module PhysicalDeviceDepthClampControlFeaturesEXT = struct
+  type t
+  let t : t structure typ = structure "VkPhysicalDeviceDepthClampControlFeaturesEXT"
+  let _s_type = field t "sType" (StructureType.t)
+  let s_type = _s_type
+  let _p_next = field t "pNext" (ptr (Ctypes.void))
+  let p_next = _p_next
+  let _depth_clamp_control = field t "depthClampControl" (Vk_base.bool32)
+  let depth_clamp_control = _depth_clamp_control
+  let () = seal t
+  let structure_type : StructureType.t option = Some StructureType.physical_device_depth_clamp_control_features_ext
+    let make ?next:arg_next ?depth_clamp_control:(arg_depth_clamp_control=false) () =
+    let value, keep = Vk_base.make_kept t in
+    ignore keep;
+    setf value _s_type StructureType.physical_device_depth_clamp_control_features_ext;
+    (match arg_next with
+     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
+     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
+    setf value _depth_clamp_control arg_depth_clamp_control;
+    value
+end
+
+module PhysicalDeviceDepthClampZeroOneFeaturesKHR = struct
+  type t
+  let t : t structure typ = structure "VkPhysicalDeviceDepthClampZeroOneFeaturesKHR"
+  let _s_type = field t "sType" (StructureType.t)
+  let s_type = _s_type
+  let _p_next = field t "pNext" (ptr (Ctypes.void))
+  let p_next = _p_next
+  let _depth_clamp_zero_one = field t "depthClampZeroOne" (Vk_base.bool32)
+  let depth_clamp_zero_one = _depth_clamp_zero_one
+  let () = seal t
+  let structure_type : StructureType.t option = Some StructureType.physical_device_depth_clamp_zero_one_features_khr
+    let make ?next:arg_next ?depth_clamp_zero_one:(arg_depth_clamp_zero_one=false) () =
+    let value, keep = Vk_base.make_kept t in
+    ignore keep;
+    setf value _s_type StructureType.physical_device_depth_clamp_zero_one_features_khr;
+    (match arg_next with
+     | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
+     | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
+    setf value _depth_clamp_zero_one arg_depth_clamp_zero_one;
     value
 end

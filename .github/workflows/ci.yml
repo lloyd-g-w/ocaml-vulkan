@@ -1,0 +1,84 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions: read-all
+
+jobs:
+  build-and-test:
+    name: build + test (lavapipe, headless)
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # Vulkan loader + headers, Mesa's lavapipe (llvmpipe) software ICD,
+      # vulkaninfo (diagnostics only), and libffi/pkg-config for
+      # ctypes-foreign. No C stubs / Vulkan headers are needed to *build*
+      # this project (DESIGN.md §1); libvulkan is only dlopen()ed at runtime.
+      - name: Install system packages
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            libvulkan-dev mesa-vulkan-drivers vulkan-tools libffi-dev pkg-config
+
+      - name: Set up OCaml 5.2
+        uses: ocaml/setup-ocaml@v3
+        with:
+          ocaml-compiler: "5.2"
+
+      # `opam install .` needs a committed *.opam file to resolve "."  as a
+      # package, but vulkan.opam is dune-generated (dune-project has
+      # `(generate_opam_files true)`) and is intentionally not committed --
+      # materialise it here instead of maintaining a second copy by hand.
+      - name: Generate vulkan.opam from dune-project
+        run: opam exec -- dune build vulkan.opam
+
+      - name: Install opam dependencies
+        run: opam install . --deps-only --with-test
+
+      - name: Build
+        run: opam exec -- dune build -j 2
+
+      - name: Locate the lavapipe ICD manifest
+        id: lvp
+        run: |
+          icd=$(find /usr/share/vulkan/icd.d -iname 'lvp_icd*.json' -print -quit)
+          if [ -z "$icd" ]; then
+            echo "::error::lvp_icd*.json not found under /usr/share/vulkan/icd.d (mesa-vulkan-drivers layout changed?)"
+            find /usr/share/vulkan -maxdepth 2 || true
+            exit 1
+          fi
+          echo "Found lavapipe ICD manifest: $icd"
+          echo "VK_ICD_FILENAMES=$icd" >> "$GITHUB_ENV"
+
+      - name: Vulkan diagnostics (informational, lavapipe should report here)
+        continue-on-error: true
+        run: vulkaninfo --summary
+
+      - name: Test (dune runtest, VK_ICD_FILENAMES=lavapipe)
+        run: opam exec -- dune build -j 2 @runtest
+
+  regen-clean:
+    name: scripts/regen.sh leaves the tree clean
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # Pure `python3 gen/gen.py` (stdlib only, DESIGN.md §1/§13): no OCaml
+      # toolchain needed to regenerate lib/generated from registry/vk.xml.
+      - name: Regenerate lib/generated from registry/vk.xml
+        run: ./scripts/regen.sh
+
+      - name: Fail if regeneration changed anything not already committed
+        run: git diff --exit-code

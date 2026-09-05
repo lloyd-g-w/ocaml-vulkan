@@ -970,7 +970,9 @@ module MutableDescriptorTypeListEXT = struct
     let make ?descriptor_types:(arg_descriptor_types=[]) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
-    setf value _descriptor_type_count (List.length arg_descriptor_types);
+    let descriptor_type_count_n = List.length arg_descriptor_types in
+    if arg_descriptor_types <> [] && List.length arg_descriptor_types <> descriptor_type_count_n then invalid_arg "VkMutableDescriptorTypeListEXT.pDescriptorTypes: length does not match descriptorTypeCount";
+    setf value _descriptor_type_count descriptor_type_count_n;
     if arg_descriptor_types = [] then setf value _p_descriptor_types (Vk_base.null_ptr (DescriptorType.t)) else begin
       let items = CArray.of_list (DescriptorType.t) arg_descriptor_types in
       setf value _p_descriptor_types (CArray.start items);

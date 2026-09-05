@@ -225,7 +225,7 @@ Rules for `make` (all arguments optional, every field written explicitly,
 | union by value | `X.t Ctypes.union` |
 | `const T* p` (single, no `len`) for struct/union T | `?x:T.t Ctypes.structure` → stores `addr`, kept alive |
 | `const char* p` (`len="null-terminated"`) | `?x:string` |
-| `T* p` + `uint32_t xCount` (`len="xCount"`) | `?xs:elem list` → allocates a `CArray`, sets count = length, keeps array **and** original structures alive |
+| `T* p` + `uint32_t xCount` (`len="xCount"`) | `?xs:elem list` → allocates a `CArray`, sets count = length (or the longest of several lists sharing one count, or an explicit `?x_count:int` override when every array sharing the count is independently optional — see §10's expansion of this row), keeps array **and** original structures alive |
 | `const char* const* pp` + count | `?xs:string list` |
 | `const void* pData` + `size_t dataSize` (`len="dataSize"`) | `?data:string` (raw bytes) — sets size |
 | `const uint32_t* pCode` + `size_t codeSize` (`len="codeSize / 4"`) | `?code:string` (SPIR-V bytes; copied into a 4-byte aligned buffer, sets code_size) |
@@ -345,9 +345,47 @@ alias of the raw function when a shape is not recognised — never omit a comman
   wrapper returns `T list` (structs: `T.t structure list`, with `sType` filled
   when applicable; handles/ints/enums: their OCaml type). Handles
   `VK_INCOMPLETE` by retrying.
+* An output array whose `len` is **not** an in/out `pCount` (so not the
+  two-call idiom above) but derives from another input instead becomes a
+  returned OCaml list, allocated and filled by the wrapper:
+  * `len` equal to a plain (by value) input count that also sizes an input
+    array — `vkCreateGraphicsPipelines`/`vkCreateComputePipelines`/
+    `vkCreateRayTracingPipelinesKHR`/`vkCreateRayTracingPipelinesNV`/
+    `vkCreateShadersEXT`/`vkCreateSharedSwapchainsKHR`/... (`pPipelines` len
+    = `createInfoCount`, the same count that sizes `pCreateInfos`): the
+    output list is exactly as long as the input list sharing its count, e.g.
+    `create_graphics_pipelines device cache infos : Result.t * Pipeline.t
+    list` (the result is kept because `VK_PIPELINE_COMPILE_REQUIRED_EXT` is a
+    success code — per the `VkResult` rule below).
+  * `len` of the form `param->field` — `vkAllocateCommandBuffers`
+    (`pCommandBuffers` len = `pAllocateInfo->commandBufferCount`) and
+    `vkAllocateDescriptorSets` (`pDescriptorSets` len =
+    `pAllocateInfo->descriptorSetCount`): the count is read from the input
+    struct (`Ctypes.getf info X.command_buffer_count`), e.g.
+    `allocate_command_buffers device info : CommandBuffer.t list` (no extra
+    success codes here, so no `Result.t`).
+  * Anything else with a `len` that isn't recognised by one of the shapes
+    above (`vkGetQueryPoolResults`'s byte-sized `pData`, the two-call
+    `vkGetImageSparseMemoryRequirements`, ...) is unaffected and keeps its
+    existing wrapper shape; `Vk.Fn` always keeps the raw pointer-based
+    signature regardless.
 * Input `count + const T*` pairs become `elem list` arguments (temporary
   CArrays live for the duration of the call). Structs → `T.t structure list`,
   handles/enums/ints/floats → their OCaml types, `const char* const*` → `string list`.
+  The same rule applies one level down, inside `X.make` (§7): when a count
+  member is shared by more than one array member (e.g.
+  `VkSubpassDescription.colorAttachmentCount` sizes both `pColorAttachments`
+  and the optional, parallel `pResolveAttachments`; `VkWriteDescriptorSet.
+  descriptorCount` sizes whichever one of `pImageInfo`/`pBufferInfo`/
+  `pTexelBufferView` applies to `descriptorType`), the count is derived from
+  the **longest** list actually supplied (not an arbitrary single member),
+  and supplying two of those lists with different non-zero lengths is an
+  `Invalid_argument`. When *every* array sharing a count is independently
+  optional (registry `optional="true"` on the pointer, e.g.
+  `VkDescriptorSetLayoutBinding.descriptorCount`/`pImmutableSamplers`, where
+  a binding can declare any `descriptorCount` with no immutable samplers at
+  all), `make` also accepts the count as a plain, independent
+  `?xxx_count:int` argument that overrides the derived length.
 * Single `const T* pInfo` input struct → `T.t structure` (passed by `addr`).
 * `const void*` + size pairs stay raw (`unit ptr` + `int`).
 * `Vk.create_instance` additionally calls `Loader.load_instance` on success.

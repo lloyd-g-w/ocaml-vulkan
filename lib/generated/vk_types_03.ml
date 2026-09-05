@@ -656,7 +656,7 @@ module FrameBoundaryEXT = struct
   let p_tag = _p_tag
   let () = seal t
   let structure_type : StructureType.t option = Some StructureType.frame_boundary_ext
-    let make ?next:arg_next ?flags:(arg_flags=FrameBoundaryFlagsEXT.of_int 0) ?frame_id:(arg_frame_id=0) ?images:(arg_images=[]) ?buffers:(arg_buffers=[]) ?tag_name:(arg_tag_name=0) ?tag:(arg_tag="") () =
+    let make ?next:arg_next ?flags:(arg_flags=FrameBoundaryFlagsEXT.of_int 0) ?frame_id:(arg_frame_id=0) ?image_count:arg_image_count ?images:(arg_images=[]) ?buffer_count:arg_buffer_count ?buffers:(arg_buffers=[]) ?tag_name:(arg_tag_name=0) ?tag:(arg_tag="") () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
     setf value _s_type StructureType.frame_boundary_ext;
@@ -665,13 +665,17 @@ module FrameBoundaryEXT = struct
      | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
     setf value _flags arg_flags;
     setf value _frame_id arg_frame_id;
-    setf value _image_count (List.length arg_images);
+    let image_count_n = (match arg_image_count with Some n -> n | None -> List.length arg_images) in
+    if arg_images <> [] && List.length arg_images <> image_count_n then invalid_arg "VkFrameBoundaryEXT.pImages: length does not match imageCount";
+    setf value _image_count image_count_n;
     if arg_images = [] then setf value _p_images (Vk_base.null_ptr (Image.t)) else begin
       let items = CArray.of_list (Image.t) arg_images in
       setf value _p_images (CArray.start items);
       Vk_base.retain keep items; Vk_base.retain keep arg_images
     end;
-    setf value _buffer_count (List.length arg_buffers);
+    let buffer_count_n = (match arg_buffer_count with Some n -> n | None -> List.length arg_buffers) in
+    if arg_buffers <> [] && List.length arg_buffers <> buffer_count_n then invalid_arg "VkFrameBoundaryEXT.pBuffers: length does not match bufferCount";
+    setf value _buffer_count buffer_count_n;
     if arg_buffers = [] then setf value _p_buffers (Vk_base.null_ptr (Buffer.t)) else begin
       let items = CArray.of_list (Buffer.t) arg_buffers in
       setf value _p_buffers (CArray.start items);
@@ -706,7 +710,9 @@ module FrameBoundaryTensorsARM = struct
     (match arg_next with
      | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
      | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    setf value _tensor_count (List.length arg_tensors);
+    let tensor_count_n = List.length arg_tensors in
+    if arg_tensors <> [] && List.length arg_tensors <> tensor_count_n then invalid_arg "VkFrameBoundaryTensorsARM.pTensors: length does not match tensorCount";
+    setf value _tensor_count tensor_count_n;
     if arg_tensors = [] then setf value _p_tensors (Vk_base.null_ptr (TensorARM.t)) else begin
       let items = CArray.of_list (TensorARM.t) arg_tensors in
       setf value _p_tensors (CArray.start items);
@@ -750,7 +756,9 @@ module FramebufferAttachmentImageInfo = struct
     setf value _width arg_width;
     setf value _height arg_height;
     setf value _layer_count arg_layer_count;
-    setf value _view_format_count (List.length arg_view_formats);
+    let view_format_count_n = List.length arg_view_formats in
+    if arg_view_formats <> [] && List.length arg_view_formats <> view_format_count_n then invalid_arg "VkFramebufferAttachmentImageInfo.pViewFormats: length does not match viewFormatCount";
+    setf value _view_format_count view_format_count_n;
     if arg_view_formats = [] then setf value _p_view_formats (Vk_base.null_ptr (Format.t)) else begin
       let items = CArray.of_list (Format.t) arg_view_formats in
       setf value _p_view_formats (CArray.start items);
@@ -791,7 +799,9 @@ module FramebufferCreateInfo = struct
      | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
     setf value _flags arg_flags;
     setf value _render_pass arg_render_pass;
-    setf value _attachment_count (List.length arg_attachments);
+    let attachment_count_n = List.length arg_attachments in
+    if arg_attachments <> [] && List.length arg_attachments <> attachment_count_n then invalid_arg "VkFramebufferCreateInfo.pAttachments: length does not match attachmentCount";
+    setf value _attachment_count attachment_count_n;
     if arg_attachments = [] then setf value _p_attachments (Vk_base.null_ptr (ImageView.t)) else begin
       let items = CArray.of_list (ImageView.t) arg_attachments in
       setf value _p_attachments (CArray.start items);
@@ -983,7 +993,9 @@ module GeneratedCommandsShaderInfoEXT = struct
     (match arg_next with
      | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
      | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    setf value _shader_count (List.length arg_shaders);
+    let shader_count_n = List.length arg_shaders in
+    if arg_shaders <> [] && List.length arg_shaders <> shader_count_n then invalid_arg "VkGeneratedCommandsShaderInfoEXT.pShaders: length does not match shaderCount";
+    setf value _shader_count shader_count_n;
     if arg_shaders = [] then setf value _p_shaders (Vk_base.null_ptr (ShaderEXT.t)) else begin
       let items = CArray.of_list (ShaderEXT.t) arg_shaders in
       setf value _p_shaders (CArray.start items);
@@ -1505,7 +1517,9 @@ module ImageDrmFormatModifierListCreateInfoEXT = struct
     (match arg_next with
      | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
      | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    setf value _drm_format_modifier_count (List.length arg_drm_format_modifiers);
+    let drm_format_modifier_count_n = List.length arg_drm_format_modifiers in
+    if arg_drm_format_modifiers <> [] && List.length arg_drm_format_modifiers <> drm_format_modifier_count_n then invalid_arg "VkImageDrmFormatModifierListCreateInfoEXT.pDrmFormatModifiers: length does not match drmFormatModifierCount";
+    setf value _drm_format_modifier_count drm_format_modifier_count_n;
     if arg_drm_format_modifiers = [] then setf value _p_drm_format_modifiers (Vk_base.null_ptr (Vk_base.uint64)) else begin
       let items = CArray.of_list (Vk_base.uint64) arg_drm_format_modifiers in
       setf value _p_drm_format_modifiers (CArray.start items);
@@ -1555,7 +1569,9 @@ module ImageFormatListCreateInfo = struct
     (match arg_next with
      | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
      | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    setf value _view_format_count (List.length arg_view_formats);
+    let view_format_count_n = List.length arg_view_formats in
+    if arg_view_formats <> [] && List.length arg_view_formats <> view_format_count_n then invalid_arg "VkImageFormatListCreateInfo.pViewFormats: length does not match viewFormatCount";
+    setf value _view_format_count view_format_count_n;
     if arg_view_formats = [] then setf value _p_view_formats (Vk_base.null_ptr (Format.t)) else begin
       let items = CArray.of_list (Format.t) arg_view_formats in
       setf value _p_view_formats (CArray.start items);
@@ -2683,7 +2699,10 @@ module IndirectCommandsLayoutTokenNV = struct
     setf value _pushconstant_offset arg_pushconstant_offset;
     setf value _pushconstant_size arg_pushconstant_size;
     setf value _indirect_state_flags arg_indirect_state_flags;
-    setf value _index_type_count (List.length arg_index_type_values);
+    let index_type_count_n = List.fold_left max 0 [List.length arg_index_types; List.length arg_index_type_values] in
+    if arg_index_types <> [] && List.length arg_index_types <> index_type_count_n then invalid_arg "VkIndirectCommandsLayoutTokenNV.pIndexTypes: length does not match indexTypeCount";
+    if arg_index_type_values <> [] && List.length arg_index_type_values <> index_type_count_n then invalid_arg "VkIndirectCommandsLayoutTokenNV.pIndexTypeValues: length does not match indexTypeCount";
+    setf value _index_type_count index_type_count_n;
     if arg_index_types = [] then setf value _p_index_types (Vk_base.null_ptr (IndexType.t)) else begin
       let items = CArray.of_list (IndexType.t) arg_index_types in
       setf value _p_index_types (CArray.start items);
@@ -2773,7 +2792,9 @@ module IndirectExecutionSetShaderLayoutInfoEXT = struct
     (match arg_next with
      | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
      | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    setf value _set_layout_count (List.length arg_set_layouts);
+    let set_layout_count_n = List.length arg_set_layouts in
+    if arg_set_layouts <> [] && List.length arg_set_layouts <> set_layout_count_n then invalid_arg "VkIndirectExecutionSetShaderLayoutInfoEXT.pSetLayouts: length does not match setLayoutCount";
+    setf value _set_layout_count set_layout_count_n;
     if arg_set_layouts = [] then setf value _p_set_layouts (Vk_base.null_ptr (DescriptorSetLayout.t)) else begin
       let items = CArray.of_list (DescriptorSetLayout.t) arg_set_layouts in
       setf value _p_set_layouts (CArray.start items);

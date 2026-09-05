@@ -94,9 +94,18 @@ def _structure_type(ctx: Context, comp: Composite) -> str | None:
     return f"StructureType.{naming.enum_value_name('VkStructureType', value, ctx.registry.tags)}"
 
 
-def _pair_maps(comp: Composite) -> tuple[dict[str, Member], dict[str, str], dict[str, str]]:
+def _pair_maps(comp: Composite) -> tuple[dict[str, list[Member]], dict[str, str], dict[str, str]]:
+    # `pointer_for_count` maps a count member's C name to *every* array member
+    # sized by it, in declaration order.  Several members can legitimately
+    # share one count (VkSubpassDescription.colorAttachmentCount sizes both
+    # pColorAttachments and the optional, parallel pResolveAttachments;
+    # VkWriteDescriptorSet.descriptorCount sizes whichever one of
+    # pImageInfo/pBufferInfo/pTexelBufferView applies to descriptorType) --
+    # `_constructor` derives the count from the longest list supplied rather
+    # than an arbitrary single member (see its docstring for the bug this
+    # fixes).
     by_name = {m.name: m for m in comp.members}
-    pointer_for_count: dict[str, Member] = {}
+    pointer_for_count: dict[str, list[Member]] = {}
     count_for_pointer: dict[str, str] = {}
     special: dict[str, str] = {}
     for member in comp.members:
@@ -105,7 +114,7 @@ def _pair_maps(comp: Composite) -> tuple[dict[str, Member], dict[str, str], dict
         first = (member.altlen or member.length or "").split(",")[0].strip()
         if first in by_name and by_name[first].pointer_depth == 0:
             if member.const and member.ctype != "void" and (member.pointer_depth == 1 or (member.ctype == "char" and member.pointer_depth == 2)):
-                pointer_for_count[first] = member
+                pointer_for_count.setdefault(first, []).append(member)
                 count_for_pointer[member.name] = first
         compact = (member.altlen or member.length or "").replace(" ", "")
         if member.ctype == "uint32_t" and member.pointer_depth == 1 and "codeSize/4" in compact:
@@ -158,7 +167,21 @@ def _constructor_arguments(ctx: Context, comp: Composite) -> tuple[list[str], di
     for member in comp.members:
         if member.name in {"sType", "pNext"}:
             continue
-        if member.name in pointer_for_count or member.name in special.values():
+        if member.name in pointer_for_count:
+            # Normally the count is fully derived from the array argument(s)
+            # below (see `_constructor`). But when *every* array sharing this
+            # count is independently optional, the count can carry meaning
+            # even when none of them are supplied (e.g. descriptorCount on a
+            # VkDescriptorSetLayoutBinding with no immutable samplers) -- in
+            # that case also accept an explicit override.
+            group = pointer_for_count[member.name]
+            if all(any(p.optional[:1]) for p in group):
+                label = unique(naming.argument_name(member.name))
+                binding = "arg_" + label
+                args.append(f"?{label}:{binding}")
+                bindings[member.name] = binding
+            continue
+        if member.name in special.values():
             continue
         if member.bitfield is not None:
             label = unique(naming.argument_name(member.name))
@@ -270,9 +293,32 @@ def _constructor(ctx: Context, comp: Composite, fields: list[PhysicalField]) -> 
         if comp.returnedonly:
             continue
         if member.name in pointer_for_count:
-            pointer = pointer_for_count[member.name]
-            binding = bindings[pointer.name]
-            lines.append(f"  setf value {f} (List.length {binding});")
+            # Bug fix: a naive `List.length <the one pointer we happened to
+            # keep>` silently produced 0 whenever *that* pointer's list was
+            # left at its default `[]` even though a sibling array sharing
+            # the same count (e.g. pColorAttachments when pResolveAttachments
+            # is omitted, or pBufferInfo when descriptorType doesn't use
+            # pImageInfo/pTexelBufferView) was non-empty -- silently emitting
+            # a struct that claims 0 elements while its data pointer is
+            # non-NULL. Derive the count from the longest list actually
+            # supplied, and reject inconsistent lengths instead of
+            # (previously) ignoring them.
+            group = pointer_for_count[member.name]
+            group_bindings = [bindings[pointer.name] for pointer in group]
+            if len(group_bindings) == 1:
+                derived = f"List.length {group_bindings[0]}"
+            else:
+                lengths = "; ".join(f"List.length {binding}" for binding in group_bindings)
+                derived = f"List.fold_left max 0 [{lengths}]"
+            override = bindings.get(member.name)
+            value_expr = f"(match {override} with Some n -> n | None -> {derived})" if override else derived
+            lines.append(f"  let {field.binding}_n = {value_expr} in")
+            for pointer, binding in zip(group, group_bindings):
+                lines.append(
+                    f"  if {binding} <> [] && List.length {binding} <> {field.binding}_n then "
+                    f"invalid_arg \"{comp.name}.{pointer.name}: length does not match {member.name}\";"
+                )
+            lines.append(f"  setf value {f} {field.binding}_n;")
             continue
         if member.name in special.values():
             pointer_name = next(name for name, count in special.items() if count == member.name)

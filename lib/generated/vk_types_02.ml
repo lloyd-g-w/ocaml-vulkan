@@ -147,7 +147,9 @@ module DataGraphPipelineIdentifierCreateInfoARM = struct
     (match arg_next with
      | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
      | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    setf value _identifier_size (List.length arg_identifier);
+    let identifier_size_n = List.length arg_identifier in
+    if arg_identifier <> [] && List.length arg_identifier <> identifier_size_n then invalid_arg "VkDataGraphPipelineIdentifierCreateInfoARM.pIdentifier: length does not match identifierSize";
+    setf value _identifier_size identifier_size_n;
     if arg_identifier = [] then setf value _p_identifier (Vk_base.null_ptr (Vk_base.uint8)) else begin
       let items = CArray.of_list (Vk_base.uint8) arg_identifier in
       setf value _p_identifier (CArray.start items);
@@ -1138,7 +1140,9 @@ module DescriptorSetAllocateInfo = struct
      | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
      | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
     setf value _descriptor_pool arg_descriptor_pool;
-    setf value _descriptor_set_count (List.length arg_set_layouts);
+    let descriptor_set_count_n = List.length arg_set_layouts in
+    if arg_set_layouts <> [] && List.length arg_set_layouts <> descriptor_set_count_n then invalid_arg "VkDescriptorSetAllocateInfo.pSetLayouts: length does not match descriptorSetCount";
+    setf value _descriptor_set_count descriptor_set_count_n;
     if arg_set_layouts = [] then setf value _p_set_layouts (Vk_base.null_ptr (DescriptorSetLayout.t)) else begin
       let items = CArray.of_list (DescriptorSetLayout.t) arg_set_layouts in
       setf value _p_set_layouts (CArray.start items);
@@ -1187,12 +1191,14 @@ module DescriptorSetLayoutBinding = struct
   let p_immutable_samplers = _p_immutable_samplers
   let () = seal t
   let structure_type : StructureType.t option = None
-    let make ?binding:(arg_binding=0) ?descriptor_type:(arg_descriptor_type=DescriptorType.of_int 0) ?stage_flags:(arg_stage_flags=ShaderStageFlags.of_int 0) ?immutable_samplers:(arg_immutable_samplers=[]) () =
+    let make ?binding:(arg_binding=0) ?descriptor_type:(arg_descriptor_type=DescriptorType.of_int 0) ?descriptor_count:arg_descriptor_count ?stage_flags:(arg_stage_flags=ShaderStageFlags.of_int 0) ?immutable_samplers:(arg_immutable_samplers=[]) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
     setf value _binding arg_binding;
     setf value _descriptor_type arg_descriptor_type;
-    setf value _descriptor_count (List.length arg_immutable_samplers);
+    let descriptor_count_n = (match arg_descriptor_count with Some n -> n | None -> List.length arg_immutable_samplers) in
+    if arg_immutable_samplers <> [] && List.length arg_immutable_samplers <> descriptor_count_n then invalid_arg "VkDescriptorSetLayoutBinding.pImmutableSamplers: length does not match descriptorCount";
+    setf value _descriptor_count descriptor_count_n;
     setf value _stage_flags arg_stage_flags;
     if arg_immutable_samplers = [] then setf value _p_immutable_samplers (Vk_base.null_ptr (Sampler.t)) else begin
       let items = CArray.of_list (Sampler.t) arg_immutable_samplers in
@@ -1222,7 +1228,9 @@ module DescriptorSetLayoutBindingFlagsCreateInfo = struct
     (match arg_next with
      | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
      | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    setf value _binding_count (List.length arg_binding_flags);
+    let binding_count_n = List.length arg_binding_flags in
+    if arg_binding_flags <> [] && List.length arg_binding_flags <> binding_count_n then invalid_arg "VkDescriptorSetLayoutBindingFlagsCreateInfo.pBindingFlags: length does not match bindingCount";
+    setf value _binding_count binding_count_n;
     if arg_binding_flags = [] then setf value _p_binding_flags (Vk_base.null_ptr (DescriptorBindingFlags.t)) else begin
       let items = CArray.of_list (DescriptorBindingFlags.t) arg_binding_flags in
       setf value _p_binding_flags (CArray.start items);
@@ -1297,7 +1305,9 @@ module DescriptorSetVariableDescriptorCountAllocateInfo = struct
     (match arg_next with
      | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
      | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    setf value _descriptor_set_count (List.length arg_descriptor_counts);
+    let descriptor_set_count_n = List.length arg_descriptor_counts in
+    if arg_descriptor_counts <> [] && List.length arg_descriptor_counts <> descriptor_set_count_n then invalid_arg "VkDescriptorSetVariableDescriptorCountAllocateInfo.pDescriptorCounts: length does not match descriptorSetCount";
+    setf value _descriptor_set_count descriptor_set_count_n;
     if arg_descriptor_counts = [] then setf value _p_descriptor_counts (Vk_base.null_ptr (Vk_base.uint32)) else begin
       let items = CArray.of_list (Vk_base.uint32) arg_descriptor_counts in
       setf value _p_descriptor_counts (CArray.start items);
@@ -1670,7 +1680,9 @@ module DeviceGroupDeviceCreateInfo = struct
     (match arg_next with
      | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
      | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    setf value _physical_device_count (List.length arg_physical_devices);
+    let physical_device_count_n = List.length arg_physical_devices in
+    if arg_physical_devices <> [] && List.length arg_physical_devices <> physical_device_count_n then invalid_arg "VkDeviceGroupDeviceCreateInfo.pPhysicalDevices: length does not match physicalDeviceCount";
+    setf value _physical_device_count physical_device_count_n;
     if arg_physical_devices = [] then setf value _p_physical_devices (Vk_base.null_ptr (PhysicalDevice.t)) else begin
       let items = CArray.of_list (PhysicalDevice.t) arg_physical_devices in
       setf value _p_physical_devices (CArray.start items);
@@ -1724,7 +1736,9 @@ module DeviceGroupPresentInfoKHR = struct
     (match arg_next with
      | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
      | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    setf value _swapchain_count (List.length arg_device_masks);
+    let swapchain_count_n = List.length arg_device_masks in
+    if arg_device_masks <> [] && List.length arg_device_masks <> swapchain_count_n then invalid_arg "VkDeviceGroupPresentInfoKHR.pDeviceMasks: length does not match swapchainCount";
+    setf value _swapchain_count swapchain_count_n;
     if arg_device_masks = [] then setf value _p_device_masks (Vk_base.null_ptr (Vk_base.uint32)) else begin
       let items = CArray.of_list (Vk_base.uint32) arg_device_masks in
       setf value _p_device_masks (CArray.start items);
@@ -1762,19 +1776,25 @@ module DeviceGroupSubmitInfo = struct
     (match arg_next with
      | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
      | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    setf value _wait_semaphore_count (List.length arg_wait_semaphore_device_indices);
+    let wait_semaphore_count_n = List.length arg_wait_semaphore_device_indices in
+    if arg_wait_semaphore_device_indices <> [] && List.length arg_wait_semaphore_device_indices <> wait_semaphore_count_n then invalid_arg "VkDeviceGroupSubmitInfo.pWaitSemaphoreDeviceIndices: length does not match waitSemaphoreCount";
+    setf value _wait_semaphore_count wait_semaphore_count_n;
     if arg_wait_semaphore_device_indices = [] then setf value _p_wait_semaphore_device_indices (Vk_base.null_ptr (Vk_base.uint32)) else begin
       let items = CArray.of_list (Vk_base.uint32) arg_wait_semaphore_device_indices in
       setf value _p_wait_semaphore_device_indices (CArray.start items);
       Vk_base.retain keep items; Vk_base.retain keep arg_wait_semaphore_device_indices
     end;
-    setf value _command_buffer_count (List.length arg_command_buffer_device_masks);
+    let command_buffer_count_n = List.length arg_command_buffer_device_masks in
+    if arg_command_buffer_device_masks <> [] && List.length arg_command_buffer_device_masks <> command_buffer_count_n then invalid_arg "VkDeviceGroupSubmitInfo.pCommandBufferDeviceMasks: length does not match commandBufferCount";
+    setf value _command_buffer_count command_buffer_count_n;
     if arg_command_buffer_device_masks = [] then setf value _p_command_buffer_device_masks (Vk_base.null_ptr (Vk_base.uint32)) else begin
       let items = CArray.of_list (Vk_base.uint32) arg_command_buffer_device_masks in
       setf value _p_command_buffer_device_masks (CArray.start items);
       Vk_base.retain keep items; Vk_base.retain keep arg_command_buffer_device_masks
     end;
-    setf value _signal_semaphore_count (List.length arg_signal_semaphore_device_indices);
+    let signal_semaphore_count_n = List.length arg_signal_semaphore_device_indices in
+    if arg_signal_semaphore_device_indices <> [] && List.length arg_signal_semaphore_device_indices <> signal_semaphore_count_n then invalid_arg "VkDeviceGroupSubmitInfo.pSignalSemaphoreDeviceIndices: length does not match signalSemaphoreCount";
+    setf value _signal_semaphore_count signal_semaphore_count_n;
     if arg_signal_semaphore_device_indices = [] then setf value _p_signal_semaphore_device_indices (Vk_base.null_ptr (Vk_base.uint32)) else begin
       let items = CArray.of_list (Vk_base.uint32) arg_signal_semaphore_device_indices in
       setf value _p_signal_semaphore_device_indices (CArray.start items);
@@ -1988,7 +2008,9 @@ module DeviceQueueCreateInfo = struct
      | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
     setf value _flags arg_flags;
     setf value _queue_family_index arg_queue_family_index;
-    setf value _queue_count (List.length arg_queue_priorities);
+    let queue_count_n = List.length arg_queue_priorities in
+    if arg_queue_priorities <> [] && List.length arg_queue_priorities <> queue_count_n then invalid_arg "VkDeviceQueueCreateInfo.pQueuePriorities: length does not match queueCount";
+    setf value _queue_count queue_count_n;
     if arg_queue_priorities = [] then setf value _p_queue_priorities (Vk_base.null_ptr (Ctypes.float)) else begin
       let items = CArray.of_list (Ctypes.float) arg_queue_priorities in
       setf value _p_queue_priorities (CArray.start items);

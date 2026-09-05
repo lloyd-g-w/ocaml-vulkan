@@ -75,6 +75,49 @@ def _enumeration(command: Command) -> tuple[Member, Member] | None:
     return None
 
 
+def _output_list_by_count(command: Command) -> tuple[Member, Member] | None:
+    """An output array whose `len` is a plain (by value) input count that also
+    sizes an input array -- vkCreateGraphicsPipelines/vkCreateComputePipelines/
+    vkCreateRayTracingPipelines{KHR,NV} (`pPipelines` len=`createInfoCount`,
+    the same count that sizes `pCreateInfos`) and similar batch-create
+    commands. Unlike `_enumeration` the count is not an in/out pointer, so
+    there is no query call: the output array is exactly as long as the input
+    array(s) sharing its count."""
+    by_name = {p.name: p for p in command.params}
+    input_pointer_for_count, _ = _input_pairs(command)
+    for p in command.params:
+        if p.const or p.pointer_depth != 1 or not p.length:
+            continue
+        count_name = p.length.split(",")[0].strip()
+        count = by_name.get(count_name)
+        if (
+            count and count.pointer_depth == 0 and not count.const and count.ctype == "uint32_t"
+            and count_name in input_pointer_for_count
+        ):
+            return count, p
+    return None
+
+
+def _output_list_by_struct_field(ctx: Context, command: Command) -> tuple[Member, Member, str] | None:
+    """An output array whose `len` is `<param>-><field>`: vkAllocateCommandBuffers
+    (`pCommandBuffers` len=`pAllocateInfo->commandBufferCount`) and
+    vkAllocateDescriptorSets (`pDescriptorSets` len=`pAllocateInfo->descriptorSetCount`).
+    The count lives inside a single const input struct rather than being its
+    own parameter."""
+    by_name = {p.name: p for p in command.params}
+    for p in command.params:
+        if p.const or p.pointer_depth != 1 or not p.length:
+            continue
+        length = p.length.split(",")[0].strip()
+        if "->" not in length:
+            continue
+        struct_name, field_name = length.split("->", 1)
+        info = by_name.get(struct_name)
+        if info and info.const and info.pointer_depth == 1 and ctx.kind(info.ctype) == "struct":
+            return info, p, field_name
+    return None
+
+
 def _trailing_output(ctx: Context, command: Command) -> Member | None:
     if not command.params:
         return None
@@ -279,6 +322,44 @@ def _emit_enumeration(ctx: Context, command: Command, pair: tuple[Member, Member
     return "\n".join(lines)
 
 
+def _emit_output_list(ctx: Context, command: Command, output: Member, count_expr_of) -> str:
+    """Shared body for `_output_list_by_count`/`_output_list_by_struct_field`
+    matches: allocate a `CArray` sized by `count_expr_of by_param`, call the
+    raw command with it in place of the hidden output pointer, and return the
+    handles as a list (DESIGN.md §10). `check` still runs first so a negative
+    VkResult raises `Error`; when the command has extra success codes (e.g.
+    VK_PIPELINE_COMPILE_REQUIRED_EXT) the result is kept alongside the list."""
+    hidden = {output.name}
+    args, by_param = _make_args(ctx, command, hidden)
+    name = naming.command_name(command.name)
+    lines = [_function_head(command, args, name)]
+    for arg in args:
+        lines.extend(arg.prep or [])
+    elem_typ = ctx.base_typ(output.ctype)
+    lines.append(f"  let output_count = {count_expr_of(by_param)} in")
+    lines.append(f"  let storage = CArray.make ({elem_typ}) output_count in")
+    call = _call(command, by_param, {output.name: "CArray.start storage"})
+    lines.append(f"  let result = {call} in")
+    lines.extend(_result_tail(command, "(CArray.to_list storage)"))
+    return "\n".join(lines)
+
+
+def _emit_output_list_count(ctx: Context, command: Command, count: Member, output: Member) -> str:
+    return _emit_output_list(ctx, command, output, lambda by_param: by_param[count.name].call)
+
+
+def _emit_output_list_struct_field(
+    ctx: Context, command: Command, info: Member, output: Member, field_name: str
+) -> str:
+    info_module = naming.module_name(ctx.canonical_composite(info.ctype))
+    field_ocaml = naming.member_name(field_name)
+
+    def count_expr(by_param: dict[str, Arg]) -> str:
+        return f"Ctypes.getf {by_param[info.name].binding} {info_module}.{field_ocaml}"
+
+    return _emit_output_list(ctx, command, output, count_expr)
+
+
 def _emit_regular(ctx: Context, command: Command) -> str:
     output = _trailing_output(ctx, command)
     hidden = {output.name} if output else set()
@@ -315,5 +396,21 @@ def emit(ctx: Context, out: Path, chunks: list[str]) -> None:
     sections = ["\n".join(opens)]
     for command in ctx.registry.commands.values():
         pair = _enumeration(command)
-        sections.append(_emit_enumeration(ctx, command, pair) if pair else _emit_regular(ctx, command))
+        if pair:
+            sections.append(_emit_enumeration(ctx, command, pair))
+            continue
+        # The two output-array shapes below only make sense for the ordinary
+        # "returns a VkResult" idiom (every known instance in the registry is
+        # one); anything else safely falls through to `_emit_regular`, which
+        # never omits a command (DESIGN.md §10).
+        if _is_result(command):
+            count_pair = _output_list_by_count(command)
+            if count_pair:
+                sections.append(_emit_output_list_count(ctx, command, *count_pair))
+                continue
+            struct_field = _output_list_by_struct_field(ctx, command)
+            if struct_field:
+                sections.append(_emit_output_list_struct_field(ctx, command, *struct_field))
+                continue
+        sections.append(_emit_regular(ctx, command))
     write_generated(out / "vk_api.ml", "\n\n".join(sections) + "\n")

@@ -39,3 +39,6 @@ _opam/
 _opam/
 .envrc.local
 *.swp
+
+# local pi agent profiles
+.pi/

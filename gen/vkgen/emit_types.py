@@ -5,7 +5,7 @@ from dataclasses import dataclass, replace
 from pathlib import Path
 from typing import Iterable
 
-from .emit_common import Context, write_generated
+from .emit_common import Context, write_generated, spec_doc
 from . import naming
 from .registry import Composite, FuncPointer, Member
 
@@ -59,7 +59,8 @@ def physical_fields(comp: Composite) -> list[PhysicalField]:
 def _funcpointer(ctx: Context, fp: FuncPointer) -> str:
     module = naming.module_name(fp.name)
     if fp.name == "PFN_vkVoidFunction":
-        return f"""module {module} = struct
+        return spec_doc(fp.name, "Function pointer ") + f"""
+module {module} = struct
   type fn = unit Ctypes.ptr
   let t : fn typ = ptr void
   let opt : fn option typ = view ~read:(fun p -> if is_null p then None else Some p) ~write:(function None -> null | Some p -> p) (ptr void)
@@ -75,7 +76,8 @@ end"""
             [ctx.foreign_typ(p, owner=fp.name, strings=True) for p in fp.params]
             + [f"returning ({ctx.foreign_typ(fp.result, owner=fp.name, strings=True)})"]
         )
-    return f"""module {module} = struct
+    return spec_doc(fp.name, "Function pointer ") + f"""
+module {module} = struct
   type fn = {fn_type}
   let signature = {signature}
   let t : fn typ = Foreign.funptr signature
@@ -450,11 +452,13 @@ def _union_constructor(ctx: Context, comp: Composite, field: PhysicalField) -> s
 
 def _composite(ctx: Context, comp: Composite) -> str:
     if comp.alias:
-        return f"module {naming.module_name(comp.name)} = {naming.module_name(ctx.canonical_composite(comp.name))}"
+        return (spec_doc(comp.name, "Alias of ") + "\n"
+                f"module {naming.module_name(comp.name)} = {naming.module_name(ctx.canonical_composite(comp.name))}")
     module = naming.module_name(comp.name)
     ctor = "structure" if comp.kind == "struct" else "union"
     fields = physical_fields(comp)
-    lines = [f"module {module} = struct", "  type t", f"  let t : t {ctor} typ = {ctor} \"{comp.name}\""]
+    lines = [spec_doc(comp.name, f"{comp.kind.capitalize()} "),
+             f"module {module} = struct", "  type t", f"  let t : t {ctor} typ = {ctor} \"{comp.name}\""]
     for field in fields:
         member = field.members[0]
         if field.bitfield:

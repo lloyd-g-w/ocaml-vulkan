@@ -17,6 +17,7 @@ open Vk_types_10
 open Vk_types_11
 open Vk_types_12
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkRayTracingPipelineCreateInfoNV.html}[VkRayTracingPipelineCreateInfoNV]} *)
 module RayTracingPipelineCreateInfoNV = struct
   type t
   let t : t structure typ = structure "VkRayTracingPipelineCreateInfoNV"
@@ -75,6 +76,7 @@ module RayTracingPipelineCreateInfoNV = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkRenderPassSampleLocationsBeginInfoEXT.html}[VkRenderPassSampleLocationsBeginInfoEXT]} *)
 module RenderPassSampleLocationsBeginInfoEXT = struct
   type t
   let t : t structure typ = structure "VkRenderPassSampleLocationsBeginInfoEXT"
@@ -118,6 +120,7 @@ module RenderPassSampleLocationsBeginInfoEXT = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkRenderPassStripeBeginInfoARM.html}[VkRenderPassStripeBeginInfoARM]} *)
 module RenderPassStripeBeginInfoARM = struct
   type t
   let t : t structure typ = structure "VkRenderPassStripeBeginInfoARM"
@@ -149,6 +152,7 @@ module RenderPassStripeBeginInfoARM = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkRenderingInfo.html}[VkRenderingInfo]} *)
 module RenderingInfo = struct
   type t
   let t : t structure typ = structure "VkRenderingInfo"
@@ -202,6 +206,7 @@ module RenderingInfo = struct
     value
 end
 
+(** Union {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkResourceDescriptorDataEXT.html}[VkResourceDescriptorDataEXT]} *)
 module ResourceDescriptorDataEXT = struct
   type t
   let t : t union typ = union "VkResourceDescriptorDataEXT"
@@ -220,6 +225,7 @@ module ResourceDescriptorDataEXT = struct
   let p_tensor_arm x = let value = make t in setf value _p_tensor_arm x; value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkSparseImageMemoryRequirements2.html}[VkSparseImageMemoryRequirements2]} *)
 module SparseImageMemoryRequirements2 = struct
   type t
   let t : t structure typ = structure "VkSparseImageMemoryRequirements2"
@@ -241,6 +247,7 @@ module SparseImageMemoryRequirements2 = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkVideoBeginCodingInfoKHR.html}[VkVideoBeginCodingInfoKHR]} *)
 module VideoBeginCodingInfoKHR = struct
   type t
   let t : t structure typ = structure "VkVideoBeginCodingInfoKHR"
@@ -281,6 +288,7 @@ module VideoBeginCodingInfoKHR = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkVideoDecodeInfoKHR.html}[VkVideoDecodeInfoKHR]} *)
 module VideoDecodeInfoKHR = struct
   type t
   let t : t structure typ = structure "VkVideoDecodeInfoKHR"
@@ -332,6 +340,7 @@ module VideoDecodeInfoKHR = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkVideoEncodeInfoKHR.html}[VkVideoEncodeInfoKHR]} *)
 module VideoEncodeInfoKHR = struct
   type t
   let t : t structure typ = structure "VkVideoEncodeInfoKHR"
@@ -386,6 +395,7 @@ module VideoEncodeInfoKHR = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkAccelerationStructureBuildGeometryInfoKHR.html}[VkAccelerationStructureBuildGeometryInfoKHR]} *)
 module AccelerationStructureBuildGeometryInfoKHR = struct
   type t
   let t : t structure typ = structure "VkAccelerationStructureBuildGeometryInfoKHR"
@@ -438,6 +448,7 @@ module AccelerationStructureBuildGeometryInfoKHR = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkAccelerationStructureCreateInfoNV.html}[VkAccelerationStructureCreateInfoNV]} *)
 module AccelerationStructureCreateInfoNV = struct
   type t
   let t : t structure typ = structure "VkAccelerationStructureCreateInfoNV"
@@ -463,6 +474,7 @@ module AccelerationStructureCreateInfoNV = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkGraphicsPipelineShaderGroupsCreateInfoNV.html}[VkGraphicsPipelineShaderGroupsCreateInfoNV]} *)
 module GraphicsPipelineShaderGroupsCreateInfoNV = struct
   type t
   let t : t structure typ = structure "VkGraphicsPipelineShaderGroupsCreateInfoNV"
@@ -506,6 +518,7 @@ module GraphicsPipelineShaderGroupsCreateInfoNV = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkIndirectCommandsLayoutCreateInfoEXT.html}[VkIndirectCommandsLayoutCreateInfoEXT]} *)
 module IndirectCommandsLayoutCreateInfoEXT = struct
   type t
   let t : t structure typ = structure "VkIndirectCommandsLayoutCreateInfoEXT"
@@ -549,6 +562,7 @@ module IndirectCommandsLayoutCreateInfoEXT = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkResourceDescriptorInfoEXT.html}[VkResourceDescriptorInfoEXT]} *)
 module ResourceDescriptorInfoEXT = struct
   type t
   let t : t structure typ = structure "VkResourceDescriptorInfoEXT"
@@ -574,6 +588,7 @@ module ResourceDescriptorInfoEXT = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkShaderDescriptorSetAndBindingMappingInfoEXT.html}[VkShaderDescriptorSetAndBindingMappingInfoEXT]} *)
 module ShaderDescriptorSetAndBindingMappingInfoEXT = struct
   type t
   let t : t structure typ = structure "VkShaderDescriptorSetAndBindingMappingInfoEXT"
@@ -605,212 +620,317 @@ module ShaderDescriptorSetAndBindingMappingInfoEXT = struct
     value
 end
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkAabbPositionsNV.html}[VkAabbPositionsNV]} *)
 module AabbPositionsNV = AabbPositionsKHR
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkAccelerationStructureInstanceNV.html}[VkAccelerationStructureInstanceNV]} *)
 module AccelerationStructureInstanceNV = AccelerationStructureInstanceKHR
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkAttachmentDescription2KHR.html}[VkAttachmentDescription2KHR]} *)
 module AttachmentDescription2KHR = AttachmentDescription2
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkAttachmentDescriptionStencilLayoutKHR.html}[VkAttachmentDescriptionStencilLayoutKHR]} *)
 module AttachmentDescriptionStencilLayoutKHR = AttachmentDescriptionStencilLayout
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkAttachmentReference2KHR.html}[VkAttachmentReference2KHR]} *)
 module AttachmentReference2KHR = AttachmentReference2
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkAttachmentReferenceStencilLayoutKHR.html}[VkAttachmentReferenceStencilLayoutKHR]} *)
 module AttachmentReferenceStencilLayoutKHR = AttachmentReferenceStencilLayout
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkAttachmentSampleCountInfoNV.html}[VkAttachmentSampleCountInfoNV]} *)
 module AttachmentSampleCountInfoNV = AttachmentSampleCountInfoAMD
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkBindBufferMemoryDeviceGroupInfoKHR.html}[VkBindBufferMemoryDeviceGroupInfoKHR]} *)
 module BindBufferMemoryDeviceGroupInfoKHR = BindBufferMemoryDeviceGroupInfo
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkBindBufferMemoryInfoKHR.html}[VkBindBufferMemoryInfoKHR]} *)
 module BindBufferMemoryInfoKHR = BindBufferMemoryInfo
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkBindDescriptorSetsInfoKHR.html}[VkBindDescriptorSetsInfoKHR]} *)
 module BindDescriptorSetsInfoKHR = BindDescriptorSetsInfo
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkBindImageMemoryDeviceGroupInfoKHR.html}[VkBindImageMemoryDeviceGroupInfoKHR]} *)
 module BindImageMemoryDeviceGroupInfoKHR = BindImageMemoryDeviceGroupInfo
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkBindImageMemoryInfoKHR.html}[VkBindImageMemoryInfoKHR]} *)
 module BindImageMemoryInfoKHR = BindImageMemoryInfo
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkBindImagePlaneMemoryInfoKHR.html}[VkBindImagePlaneMemoryInfoKHR]} *)
 module BindImagePlaneMemoryInfoKHR = BindImagePlaneMemoryInfo
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkBindMemoryStatusKHR.html}[VkBindMemoryStatusKHR]} *)
 module BindMemoryStatusKHR = BindMemoryStatus
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkBlitImageInfo2KHR.html}[VkBlitImageInfo2KHR]} *)
 module BlitImageInfo2KHR = BlitImageInfo2
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkBufferCopy2KHR.html}[VkBufferCopy2KHR]} *)
 module BufferCopy2KHR = BufferCopy2
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkBufferDeviceAddressInfoEXT.html}[VkBufferDeviceAddressInfoEXT]} *)
 module BufferDeviceAddressInfoEXT = BufferDeviceAddressInfo
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkBufferDeviceAddressInfoKHR.html}[VkBufferDeviceAddressInfoKHR]} *)
 module BufferDeviceAddressInfoKHR = BufferDeviceAddressInfo
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkBufferImageCopy2KHR.html}[VkBufferImageCopy2KHR]} *)
 module BufferImageCopy2KHR = BufferImageCopy2
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkBufferMemoryBarrier2KHR.html}[VkBufferMemoryBarrier2KHR]} *)
 module BufferMemoryBarrier2KHR = BufferMemoryBarrier2
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkBufferMemoryRequirementsInfo2KHR.html}[VkBufferMemoryRequirementsInfo2KHR]} *)
 module BufferMemoryRequirementsInfo2KHR = BufferMemoryRequirementsInfo2
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkBufferOpaqueCaptureAddressCreateInfoKHR.html}[VkBufferOpaqueCaptureAddressCreateInfoKHR]} *)
 module BufferOpaqueCaptureAddressCreateInfoKHR = BufferOpaqueCaptureAddressCreateInfo
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkBufferUsageFlags2CreateInfoKHR.html}[VkBufferUsageFlags2CreateInfoKHR]} *)
 module BufferUsageFlags2CreateInfoKHR = BufferUsageFlags2CreateInfo
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkCalibratedTimestampInfoEXT.html}[VkCalibratedTimestampInfoEXT]} *)
 module CalibratedTimestampInfoEXT = CalibratedTimestampInfoKHR
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkCommandBufferInheritanceRenderingInfoKHR.html}[VkCommandBufferInheritanceRenderingInfoKHR]} *)
 module CommandBufferInheritanceRenderingInfoKHR = CommandBufferInheritanceRenderingInfo
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkCommandBufferSubmitInfoKHR.html}[VkCommandBufferSubmitInfoKHR]} *)
 module CommandBufferSubmitInfoKHR = CommandBufferSubmitInfo
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkConformanceVersionKHR.html}[VkConformanceVersionKHR]} *)
 module ConformanceVersionKHR = ConformanceVersion
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkCopyBufferInfo2KHR.html}[VkCopyBufferInfo2KHR]} *)
 module CopyBufferInfo2KHR = CopyBufferInfo2
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkCopyBufferToImageInfo2KHR.html}[VkCopyBufferToImageInfo2KHR]} *)
 module CopyBufferToImageInfo2KHR = CopyBufferToImageInfo2
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkCopyImageInfo2KHR.html}[VkCopyImageInfo2KHR]} *)
 module CopyImageInfo2KHR = CopyImageInfo2
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkCopyImageToBufferInfo2KHR.html}[VkCopyImageToBufferInfo2KHR]} *)
 module CopyImageToBufferInfo2KHR = CopyImageToBufferInfo2
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkCopyImageToImageInfoEXT.html}[VkCopyImageToImageInfoEXT]} *)
 module CopyImageToImageInfoEXT = CopyImageToImageInfo
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkCopyImageToMemoryInfoEXT.html}[VkCopyImageToMemoryInfoEXT]} *)
 module CopyImageToMemoryInfoEXT = CopyImageToMemoryInfo
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkCopyMemoryIndirectCommandNV.html}[VkCopyMemoryIndirectCommandNV]} *)
 module CopyMemoryIndirectCommandNV = CopyMemoryIndirectCommandKHR
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkCopyMemoryToImageIndirectCommandNV.html}[VkCopyMemoryToImageIndirectCommandNV]} *)
 module CopyMemoryToImageIndirectCommandNV = CopyMemoryToImageIndirectCommandKHR
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkCopyMemoryToImageInfoEXT.html}[VkCopyMemoryToImageInfoEXT]} *)
 module CopyMemoryToImageInfoEXT = CopyMemoryToImageInfo
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkDependencyInfoKHR.html}[VkDependencyInfoKHR]} *)
 module DependencyInfoKHR = DependencyInfo
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkDescriptorPoolInlineUniformBlockCreateInfoEXT.html}[VkDescriptorPoolInlineUniformBlockCreateInfoEXT]} *)
 module DescriptorPoolInlineUniformBlockCreateInfoEXT = DescriptorPoolInlineUniformBlockCreateInfo
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkDescriptorSetLayoutBindingFlagsCreateInfoEXT.html}[VkDescriptorSetLayoutBindingFlagsCreateInfoEXT]} *)
 module DescriptorSetLayoutBindingFlagsCreateInfoEXT = DescriptorSetLayoutBindingFlagsCreateInfo
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkDescriptorSetLayoutSupportKHR.html}[VkDescriptorSetLayoutSupportKHR]} *)
 module DescriptorSetLayoutSupportKHR = DescriptorSetLayoutSupport
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkDescriptorSetVariableDescriptorCountAllocateInfoEXT.html}[VkDescriptorSetVariableDescriptorCountAllocateInfoEXT]} *)
 module DescriptorSetVariableDescriptorCountAllocateInfoEXT = DescriptorSetVariableDescriptorCountAllocateInfo
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkDescriptorSetVariableDescriptorCountLayoutSupportEXT.html}[VkDescriptorSetVariableDescriptorCountLayoutSupportEXT]} *)
 module DescriptorSetVariableDescriptorCountLayoutSupportEXT = DescriptorSetVariableDescriptorCountLayoutSupport
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkDescriptorUpdateTemplateCreateInfoKHR.html}[VkDescriptorUpdateTemplateCreateInfoKHR]} *)
 module DescriptorUpdateTemplateCreateInfoKHR = DescriptorUpdateTemplateCreateInfo
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkDescriptorUpdateTemplateEntryKHR.html}[VkDescriptorUpdateTemplateEntryKHR]} *)
 module DescriptorUpdateTemplateEntryKHR = DescriptorUpdateTemplateEntry
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkDeviceAddressRangeEXT.html}[VkDeviceAddressRangeEXT]} *)
 module DeviceAddressRangeEXT = DeviceAddressRangeKHR
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkDeviceBufferMemoryRequirementsKHR.html}[VkDeviceBufferMemoryRequirementsKHR]} *)
 module DeviceBufferMemoryRequirementsKHR = DeviceBufferMemoryRequirements
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkDeviceFaultAddressInfoEXT.html}[VkDeviceFaultAddressInfoEXT]} *)
 module DeviceFaultAddressInfoEXT = DeviceFaultAddressInfoKHR
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkDeviceFaultVendorBinaryHeaderVersionOneEXT.html}[VkDeviceFaultVendorBinaryHeaderVersionOneEXT]} *)
 module DeviceFaultVendorBinaryHeaderVersionOneEXT = DeviceFaultVendorBinaryHeaderVersionOneKHR
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkDeviceFaultVendorInfoEXT.html}[VkDeviceFaultVendorInfoEXT]} *)
 module DeviceFaultVendorInfoEXT = DeviceFaultVendorInfoKHR
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkDeviceGroupBindSparseInfoKHR.html}[VkDeviceGroupBindSparseInfoKHR]} *)
 module DeviceGroupBindSparseInfoKHR = DeviceGroupBindSparseInfo
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkDeviceGroupCommandBufferBeginInfoKHR.html}[VkDeviceGroupCommandBufferBeginInfoKHR]} *)
 module DeviceGroupCommandBufferBeginInfoKHR = DeviceGroupCommandBufferBeginInfo
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkDeviceGroupDeviceCreateInfoKHR.html}[VkDeviceGroupDeviceCreateInfoKHR]} *)
 module DeviceGroupDeviceCreateInfoKHR = DeviceGroupDeviceCreateInfo
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkDeviceGroupRenderPassBeginInfoKHR.html}[VkDeviceGroupRenderPassBeginInfoKHR]} *)
 module DeviceGroupRenderPassBeginInfoKHR = DeviceGroupRenderPassBeginInfo
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkDeviceGroupSubmitInfoKHR.html}[VkDeviceGroupSubmitInfoKHR]} *)
 module DeviceGroupSubmitInfoKHR = DeviceGroupSubmitInfo
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkDeviceImageMemoryRequirementsKHR.html}[VkDeviceImageMemoryRequirementsKHR]} *)
 module DeviceImageMemoryRequirementsKHR = DeviceImageMemoryRequirements
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkDeviceImageSubresourceInfoKHR.html}[VkDeviceImageSubresourceInfoKHR]} *)
 module DeviceImageSubresourceInfoKHR = DeviceImageSubresourceInfo
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkDeviceMemoryOpaqueCaptureAddressInfoKHR.html}[VkDeviceMemoryOpaqueCaptureAddressInfoKHR]} *)
 module DeviceMemoryOpaqueCaptureAddressInfoKHR = DeviceMemoryOpaqueCaptureAddressInfo
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkDevicePrivateDataCreateInfoEXT.html}[VkDevicePrivateDataCreateInfoEXT]} *)
 module DevicePrivateDataCreateInfoEXT = DevicePrivateDataCreateInfo
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkDeviceQueueGlobalPriorityCreateInfoEXT.html}[VkDeviceQueueGlobalPriorityCreateInfoEXT]} *)
 module DeviceQueueGlobalPriorityCreateInfoEXT = DeviceQueueGlobalPriorityCreateInfo
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkDeviceQueueGlobalPriorityCreateInfoKHR.html}[VkDeviceQueueGlobalPriorityCreateInfoKHR]} *)
 module DeviceQueueGlobalPriorityCreateInfoKHR = DeviceQueueGlobalPriorityCreateInfo
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkExportFenceCreateInfoKHR.html}[VkExportFenceCreateInfoKHR]} *)
 module ExportFenceCreateInfoKHR = ExportFenceCreateInfo
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkExportMemoryAllocateInfoKHR.html}[VkExportMemoryAllocateInfoKHR]} *)
 module ExportMemoryAllocateInfoKHR = ExportMemoryAllocateInfo
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkExportSemaphoreCreateInfoKHR.html}[VkExportSemaphoreCreateInfoKHR]} *)
 module ExportSemaphoreCreateInfoKHR = ExportSemaphoreCreateInfo
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkExternalBufferPropertiesKHR.html}[VkExternalBufferPropertiesKHR]} *)
 module ExternalBufferPropertiesKHR = ExternalBufferProperties
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkExternalFencePropertiesKHR.html}[VkExternalFencePropertiesKHR]} *)
 module ExternalFencePropertiesKHR = ExternalFenceProperties
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkExternalImageFormatPropertiesKHR.html}[VkExternalImageFormatPropertiesKHR]} *)
 module ExternalImageFormatPropertiesKHR = ExternalImageFormatProperties
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkExternalMemoryBufferCreateInfoKHR.html}[VkExternalMemoryBufferCreateInfoKHR]} *)
 module ExternalMemoryBufferCreateInfoKHR = ExternalMemoryBufferCreateInfo
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkExternalMemoryImageCreateInfoKHR.html}[VkExternalMemoryImageCreateInfoKHR]} *)
 module ExternalMemoryImageCreateInfoKHR = ExternalMemoryImageCreateInfo
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkExternalMemoryPropertiesKHR.html}[VkExternalMemoryPropertiesKHR]} *)
 module ExternalMemoryPropertiesKHR = ExternalMemoryProperties
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkExternalSemaphorePropertiesKHR.html}[VkExternalSemaphorePropertiesKHR]} *)
 module ExternalSemaphorePropertiesKHR = ExternalSemaphoreProperties
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkFormatProperties2KHR.html}[VkFormatProperties2KHR]} *)
 module FormatProperties2KHR = FormatProperties2
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkFormatProperties3KHR.html}[VkFormatProperties3KHR]} *)
 module FormatProperties3KHR = FormatProperties3
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkFramebufferAttachmentImageInfoKHR.html}[VkFramebufferAttachmentImageInfoKHR]} *)
 module FramebufferAttachmentImageInfoKHR = FramebufferAttachmentImageInfo
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkFramebufferAttachmentsCreateInfoKHR.html}[VkFramebufferAttachmentsCreateInfoKHR]} *)
 module FramebufferAttachmentsCreateInfoKHR = FramebufferAttachmentsCreateInfo
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkHostImageCopyDevicePerformanceQueryEXT.html}[VkHostImageCopyDevicePerformanceQueryEXT]} *)
 module HostImageCopyDevicePerformanceQueryEXT = HostImageCopyDevicePerformanceQuery
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkHostImageLayoutTransitionInfoEXT.html}[VkHostImageLayoutTransitionInfoEXT]} *)
 module HostImageLayoutTransitionInfoEXT = HostImageLayoutTransitionInfo
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkImageBlit2KHR.html}[VkImageBlit2KHR]} *)
 module ImageBlit2KHR = ImageBlit2
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkImageCopy2KHR.html}[VkImageCopy2KHR]} *)
 module ImageCopy2KHR = ImageCopy2
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkImageFormatListCreateInfoKHR.html}[VkImageFormatListCreateInfoKHR]} *)
 module ImageFormatListCreateInfoKHR = ImageFormatListCreateInfo
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkImageFormatProperties2KHR.html}[VkImageFormatProperties2KHR]} *)
 module ImageFormatProperties2KHR = ImageFormatProperties2
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkImageMemoryBarrier2KHR.html}[VkImageMemoryBarrier2KHR]} *)
 module ImageMemoryBarrier2KHR = ImageMemoryBarrier2
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkImageMemoryRequirementsInfo2KHR.html}[VkImageMemoryRequirementsInfo2KHR]} *)
 module ImageMemoryRequirementsInfo2KHR = ImageMemoryRequirementsInfo2
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkImagePlaneMemoryRequirementsInfoKHR.html}[VkImagePlaneMemoryRequirementsInfoKHR]} *)
 module ImagePlaneMemoryRequirementsInfoKHR = ImagePlaneMemoryRequirementsInfo
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkImageResolve2KHR.html}[VkImageResolve2KHR]} *)
 module ImageResolve2KHR = ImageResolve2
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkImageSparseMemoryRequirementsInfo2KHR.html}[VkImageSparseMemoryRequirementsInfo2KHR]} *)
 module ImageSparseMemoryRequirementsInfo2KHR = ImageSparseMemoryRequirementsInfo2
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkImageStencilUsageCreateInfoEXT.html}[VkImageStencilUsageCreateInfoEXT]} *)
 module ImageStencilUsageCreateInfoEXT = ImageStencilUsageCreateInfo
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkImageSubresource2EXT.html}[VkImageSubresource2EXT]} *)
 module ImageSubresource2EXT = ImageSubresource2
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkImageSubresource2KHR.html}[VkImageSubresource2KHR]} *)
 module ImageSubresource2KHR = ImageSubresource2
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkImageToMemoryCopyEXT.html}[VkImageToMemoryCopyEXT]} *)
 module ImageToMemoryCopyEXT = ImageToMemoryCopy
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkImageViewUsageCreateInfoKHR.html}[VkImageViewUsageCreateInfoKHR]} *)
 module ImageViewUsageCreateInfoKHR = ImageViewUsageCreateInfo
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkInputAttachmentAspectReferenceKHR.html}[VkInputAttachmentAspectReferenceKHR]} *)
 module InputAttachmentAspectReferenceKHR = InputAttachmentAspectReference
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkMemoryAllocateFlagsInfoKHR.html}[VkMemoryAllocateFlagsInfoKHR]} *)
 module MemoryAllocateFlagsInfoKHR = MemoryAllocateFlagsInfo
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkMemoryBarrier2KHR.html}[VkMemoryBarrier2KHR]} *)
 module MemoryBarrier2KHR = MemoryBarrier2
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkMemoryDedicatedAllocateInfoKHR.html}[VkMemoryDedicatedAllocateInfoKHR]} *)
 module MemoryDedicatedAllocateInfoKHR = MemoryDedicatedAllocateInfo
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkMemoryDedicatedRequirementsKHR.html}[VkMemoryDedicatedRequirementsKHR]} *)
 module MemoryDedicatedRequirementsKHR = MemoryDedicatedRequirements
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkMemoryMapInfoKHR.html}[VkMemoryMapInfoKHR]} *)
 module MemoryMapInfoKHR = MemoryMapInfo
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkMemoryOpaqueCaptureAddressAllocateInfoKHR.html}[VkMemoryOpaqueCaptureAddressAllocateInfoKHR]} *)
 module MemoryOpaqueCaptureAddressAllocateInfoKHR = MemoryOpaqueCaptureAddressAllocateInfo
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkMemoryRequirements2KHR.html}[VkMemoryRequirements2KHR]} *)
 module MemoryRequirements2KHR = MemoryRequirements2
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkMemoryToImageCopyEXT.html}[VkMemoryToImageCopyEXT]} *)
 module MemoryToImageCopyEXT = MemoryToImageCopy
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkMemoryUnmapInfoKHR.html}[VkMemoryUnmapInfoKHR]} *)
 module MemoryUnmapInfoKHR = MemoryUnmapInfo
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkMicromapTriangleEXT.html}[VkMicromapTriangleEXT]} *)
 module MicromapTriangleEXT = MicromapTriangleKHR
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkMutableDescriptorTypeCreateInfoVALVE.html}[VkMutableDescriptorTypeCreateInfoVALVE]} *)
 module MutableDescriptorTypeCreateInfoVALVE = MutableDescriptorTypeCreateInfoEXT
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkMutableDescriptorTypeListVALVE.html}[VkMutableDescriptorTypeListVALVE]} *)
 module MutableDescriptorTypeListVALVE = MutableDescriptorTypeListEXT
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDevice16BitStorageFeaturesKHR.html}[VkPhysicalDevice16BitStorageFeaturesKHR]} *)
 module PhysicalDevice16BitStorageFeaturesKHR = PhysicalDevice16BitStorageFeatures
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDevice8BitStorageFeaturesKHR.html}[VkPhysicalDevice8BitStorageFeaturesKHR]} *)
 module PhysicalDevice8BitStorageFeaturesKHR = PhysicalDevice8BitStorageFeatures

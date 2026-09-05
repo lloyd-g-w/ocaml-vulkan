@@ -3,7 +3,7 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from .emit_common import Context, write_generated
+from .emit_common import Context, spec_doc, write_generated
 from . import naming
 from .registry import Command
 
@@ -25,6 +25,8 @@ def _declaration(ctx: Context, command: Command) -> str:
     call = "f " + " ".join(args)
     return f'''let {name}_typ = {_signature(ctx, command)}
 let {name}_ref = ref (bind {name}_typ Ctypes.null)
+
+{spec_doc(command.name, "Raw ")}
 let {name} {' '.join(args)} =
   {ensure}match !{name}_ref with
   | Some f -> {call}

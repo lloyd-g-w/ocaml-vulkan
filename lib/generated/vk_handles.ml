@@ -2,65 +2,189 @@
 [@@@warning "-32-33-34-37-39-60"]
 module type HANDLE = Vk_base.HANDLE
 
+
+(** Dispatchable handle {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkInstance.html}[VkInstance]} *)
 module Instance : HANDLE = Vk_base.Dispatchable ()
+
+(** Dispatchable handle {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDevice.html}[VkPhysicalDevice]} *)
 module PhysicalDevice : HANDLE = Vk_base.Dispatchable ()
+
+(** Dispatchable handle {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkDevice.html}[VkDevice]} *)
 module Device : HANDLE = Vk_base.Dispatchable ()
+
+(** Dispatchable handle {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkQueue.html}[VkQueue]} *)
 module Queue : HANDLE = Vk_base.Dispatchable ()
+
+(** Dispatchable handle {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkCommandBuffer.html}[VkCommandBuffer]} *)
 module CommandBuffer : HANDLE = Vk_base.Dispatchable ()
+
+(** Non-dispatchable handle {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkDeviceMemory.html}[VkDeviceMemory]} *)
 module DeviceMemory : HANDLE = Vk_base.Non_dispatchable ()
+
+(** Non-dispatchable handle {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkCommandPool.html}[VkCommandPool]} *)
 module CommandPool : HANDLE = Vk_base.Non_dispatchable ()
+
+(** Non-dispatchable handle {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkBuffer.html}[VkBuffer]} *)
 module Buffer : HANDLE = Vk_base.Non_dispatchable ()
+
+(** Non-dispatchable handle {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkBufferView.html}[VkBufferView]} *)
 module BufferView : HANDLE = Vk_base.Non_dispatchable ()
+
+(** Non-dispatchable handle {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkImage.html}[VkImage]} *)
 module Image : HANDLE = Vk_base.Non_dispatchable ()
+
+(** Non-dispatchable handle {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkImageView.html}[VkImageView]} *)
 module ImageView : HANDLE = Vk_base.Non_dispatchable ()
+
+(** Non-dispatchable handle {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkShaderModule.html}[VkShaderModule]} *)
 module ShaderModule : HANDLE = Vk_base.Non_dispatchable ()
+
+(** Non-dispatchable handle {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPipeline.html}[VkPipeline]} *)
 module Pipeline : HANDLE = Vk_base.Non_dispatchable ()
+
+(** Non-dispatchable handle {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPipelineLayout.html}[VkPipelineLayout]} *)
 module PipelineLayout : HANDLE = Vk_base.Non_dispatchable ()
+
+(** Non-dispatchable handle {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkSampler.html}[VkSampler]} *)
 module Sampler : HANDLE = Vk_base.Non_dispatchable ()
+
+(** Non-dispatchable handle {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkDescriptorSet.html}[VkDescriptorSet]} *)
 module DescriptorSet : HANDLE = Vk_base.Non_dispatchable ()
+
+(** Non-dispatchable handle {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkDescriptorSetLayout.html}[VkDescriptorSetLayout]} *)
 module DescriptorSetLayout : HANDLE = Vk_base.Non_dispatchable ()
+
+(** Non-dispatchable handle {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkDescriptorPool.html}[VkDescriptorPool]} *)
 module DescriptorPool : HANDLE = Vk_base.Non_dispatchable ()
+
+(** Non-dispatchable handle {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkFence.html}[VkFence]} *)
 module Fence : HANDLE = Vk_base.Non_dispatchable ()
+
+(** Non-dispatchable handle {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkSemaphore.html}[VkSemaphore]} *)
 module Semaphore : HANDLE = Vk_base.Non_dispatchable ()
+
+(** Non-dispatchable handle {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkEvent.html}[VkEvent]} *)
 module Event : HANDLE = Vk_base.Non_dispatchable ()
+
+(** Non-dispatchable handle {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkQueryPool.html}[VkQueryPool]} *)
 module QueryPool : HANDLE = Vk_base.Non_dispatchable ()
+
+(** Non-dispatchable handle {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkFramebuffer.html}[VkFramebuffer]} *)
 module Framebuffer : HANDLE = Vk_base.Non_dispatchable ()
+
+(** Non-dispatchable handle {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkRenderPass.html}[VkRenderPass]} *)
 module RenderPass : HANDLE = Vk_base.Non_dispatchable ()
+
+(** Non-dispatchable handle {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPipelineCache.html}[VkPipelineCache]} *)
 module PipelineCache : HANDLE = Vk_base.Non_dispatchable ()
+
+(** Non-dispatchable handle {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPipelineBinaryKHR.html}[VkPipelineBinaryKHR]} *)
 module PipelineBinaryKHR : HANDLE = Vk_base.Non_dispatchable ()
+
+(** Non-dispatchable handle {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkIndirectCommandsLayoutNV.html}[VkIndirectCommandsLayoutNV]} *)
 module IndirectCommandsLayoutNV : HANDLE = Vk_base.Non_dispatchable ()
+
+(** Non-dispatchable handle {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkIndirectCommandsLayoutEXT.html}[VkIndirectCommandsLayoutEXT]} *)
 module IndirectCommandsLayoutEXT : HANDLE = Vk_base.Non_dispatchable ()
+
+(** Non-dispatchable handle {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkIndirectExecutionSetEXT.html}[VkIndirectExecutionSetEXT]} *)
 module IndirectExecutionSetEXT : HANDLE = Vk_base.Non_dispatchable ()
+
+(** Non-dispatchable handle {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkDescriptorUpdateTemplate.html}[VkDescriptorUpdateTemplate]} *)
 module DescriptorUpdateTemplate : HANDLE = Vk_base.Non_dispatchable ()
+
+(** Non-dispatchable handle {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkSamplerYcbcrConversion.html}[VkSamplerYcbcrConversion]} *)
 module SamplerYcbcrConversion : HANDLE = Vk_base.Non_dispatchable ()
+
+(** Non-dispatchable handle {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkValidationCacheEXT.html}[VkValidationCacheEXT]} *)
 module ValidationCacheEXT : HANDLE = Vk_base.Non_dispatchable ()
+
+(** Non-dispatchable handle {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkAccelerationStructureKHR.html}[VkAccelerationStructureKHR]} *)
 module AccelerationStructureKHR : HANDLE = Vk_base.Non_dispatchable ()
+
+(** Non-dispatchable handle {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkAccelerationStructureNV.html}[VkAccelerationStructureNV]} *)
 module AccelerationStructureNV : HANDLE = Vk_base.Non_dispatchable ()
+
+(** Non-dispatchable handle {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPerformanceConfigurationINTEL.html}[VkPerformanceConfigurationINTEL]} *)
 module PerformanceConfigurationINTEL : HANDLE = Vk_base.Non_dispatchable ()
+
+(** Non-dispatchable handle {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkBufferCollectionFUCHSIA.html}[VkBufferCollectionFUCHSIA]} *)
 module BufferCollectionFUCHSIA : HANDLE = Vk_base.Non_dispatchable ()
+
+(** Non-dispatchable handle {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkDeferredOperationKHR.html}[VkDeferredOperationKHR]} *)
 module DeferredOperationKHR : HANDLE = Vk_base.Non_dispatchable ()
+
+(** Non-dispatchable handle {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPrivateDataSlot.html}[VkPrivateDataSlot]} *)
 module PrivateDataSlot : HANDLE = Vk_base.Non_dispatchable ()
+
+(** Non-dispatchable handle {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkCuModuleNVX.html}[VkCuModuleNVX]} *)
 module CuModuleNVX : HANDLE = Vk_base.Non_dispatchable ()
+
+(** Non-dispatchable handle {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkCuFunctionNVX.html}[VkCuFunctionNVX]} *)
 module CuFunctionNVX : HANDLE = Vk_base.Non_dispatchable ()
+
+(** Non-dispatchable handle {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkOpticalFlowSessionNV.html}[VkOpticalFlowSessionNV]} *)
 module OpticalFlowSessionNV : HANDLE = Vk_base.Non_dispatchable ()
+
+(** Non-dispatchable handle {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkMicromapEXT.html}[VkMicromapEXT]} *)
 module MicromapEXT : HANDLE = Vk_base.Non_dispatchable ()
+
+(** Non-dispatchable handle {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkShaderEXT.html}[VkShaderEXT]} *)
 module ShaderEXT : HANDLE = Vk_base.Non_dispatchable ()
+
+(** Non-dispatchable handle {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkTensorARM.html}[VkTensorARM]} *)
 module TensorARM : HANDLE = Vk_base.Non_dispatchable ()
+
+(** Non-dispatchable handle {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkTensorViewARM.html}[VkTensorViewARM]} *)
 module TensorViewARM : HANDLE = Vk_base.Non_dispatchable ()
+
+(** Non-dispatchable handle {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkDataGraphPipelineSessionARM.html}[VkDataGraphPipelineSessionARM]} *)
 module DataGraphPipelineSessionARM : HANDLE = Vk_base.Non_dispatchable ()
+
+(** Non-dispatchable handle {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkShaderInstrumentationARM.html}[VkShaderInstrumentationARM]} *)
 module ShaderInstrumentationARM : HANDLE = Vk_base.Non_dispatchable ()
+
+(** Non-dispatchable handle {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkGpaSessionAMD.html}[VkGpaSessionAMD]} *)
 module GpaSessionAMD : HANDLE = Vk_base.Non_dispatchable ()
+
+(** Non-dispatchable handle {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkDisplayKHR.html}[VkDisplayKHR]} *)
 module DisplayKHR : HANDLE = Vk_base.Non_dispatchable ()
+
+(** Non-dispatchable handle {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkDisplayModeKHR.html}[VkDisplayModeKHR]} *)
 module DisplayModeKHR : HANDLE = Vk_base.Non_dispatchable ()
+
+(** Non-dispatchable handle {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkSurfaceKHR.html}[VkSurfaceKHR]} *)
 module SurfaceKHR : HANDLE = Vk_base.Non_dispatchable ()
+
+(** Non-dispatchable handle {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkSwapchainKHR.html}[VkSwapchainKHR]} *)
 module SwapchainKHR : HANDLE = Vk_base.Non_dispatchable ()
+
+(** Non-dispatchable handle {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkDebugReportCallbackEXT.html}[VkDebugReportCallbackEXT]} *)
 module DebugReportCallbackEXT : HANDLE = Vk_base.Non_dispatchable ()
+
+(** Non-dispatchable handle {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkDebugUtilsMessengerEXT.html}[VkDebugUtilsMessengerEXT]} *)
 module DebugUtilsMessengerEXT : HANDLE = Vk_base.Non_dispatchable ()
+
+(** Non-dispatchable handle {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkVideoSessionKHR.html}[VkVideoSessionKHR]} *)
 module VideoSessionKHR : HANDLE = Vk_base.Non_dispatchable ()
+
+(** Non-dispatchable handle {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkVideoSessionParametersKHR.html}[VkVideoSessionParametersKHR]} *)
 module VideoSessionParametersKHR : HANDLE = Vk_base.Non_dispatchable ()
+
+(** Non-dispatchable handle {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkCudaModuleNV.html}[VkCudaModuleNV]} *)
 module CudaModuleNV : HANDLE = Vk_base.Non_dispatchable ()
+
+(** Non-dispatchable handle {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkCudaFunctionNV.html}[VkCudaFunctionNV]} *)
 module CudaFunctionNV : HANDLE = Vk_base.Non_dispatchable ()
+
+(** Dispatchable handle {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkExternalComputeQueueNV.html}[VkExternalComputeQueueNV]} *)
 module ExternalComputeQueueNV : HANDLE = Vk_base.Dispatchable ()
+
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkDescriptorUpdateTemplateKHR.html}[VkDescriptorUpdateTemplateKHR]} *)
 module DescriptorUpdateTemplateKHR = DescriptorUpdateTemplate
+
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkSamplerYcbcrConversionKHR.html}[VkSamplerYcbcrConversionKHR]} *)
 module SamplerYcbcrConversionKHR = SamplerYcbcrConversion
+
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPrivateDataSlotEXT.html}[VkPrivateDataSlotEXT]} *)
 module PrivateDataSlotEXT = PrivateDataSlot

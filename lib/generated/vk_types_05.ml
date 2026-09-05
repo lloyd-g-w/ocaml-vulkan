@@ -9,6 +9,7 @@ open Vk_types_02
 open Vk_types_03
 open Vk_types_04
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceDepthClipControlFeaturesEXT.html}[VkPhysicalDeviceDepthClipControlFeaturesEXT]} *)
 module PhysicalDeviceDepthClipControlFeaturesEXT = struct
   type t
   let t : t structure typ = structure "VkPhysicalDeviceDepthClipControlFeaturesEXT"
@@ -31,6 +32,7 @@ module PhysicalDeviceDepthClipControlFeaturesEXT = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceDepthClipEnableFeaturesEXT.html}[VkPhysicalDeviceDepthClipEnableFeaturesEXT]} *)
 module PhysicalDeviceDepthClipEnableFeaturesEXT = struct
   type t
   let t : t structure typ = structure "VkPhysicalDeviceDepthClipEnableFeaturesEXT"
@@ -53,6 +55,7 @@ module PhysicalDeviceDepthClipEnableFeaturesEXT = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceDepthStencilResolveProperties.html}[VkPhysicalDeviceDepthStencilResolveProperties]} *)
 module PhysicalDeviceDepthStencilResolveProperties = struct
   type t
   let t : t structure typ = structure "VkPhysicalDeviceDepthStencilResolveProperties"
@@ -80,6 +83,7 @@ module PhysicalDeviceDepthStencilResolveProperties = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceDescriptorBufferDensityMapPropertiesEXT.html}[VkPhysicalDeviceDescriptorBufferDensityMapPropertiesEXT]} *)
 module PhysicalDeviceDescriptorBufferDensityMapPropertiesEXT = struct
   type t
   let t : t structure typ = structure "VkPhysicalDeviceDescriptorBufferDensityMapPropertiesEXT"
@@ -101,6 +105,7 @@ module PhysicalDeviceDescriptorBufferDensityMapPropertiesEXT = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceDescriptorBufferFeaturesEXT.html}[VkPhysicalDeviceDescriptorBufferFeaturesEXT]} *)
 module PhysicalDeviceDescriptorBufferFeaturesEXT = struct
   type t
   let t : t structure typ = structure "VkPhysicalDeviceDescriptorBufferFeaturesEXT"
@@ -132,6 +137,7 @@ module PhysicalDeviceDescriptorBufferFeaturesEXT = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceDescriptorBufferPropertiesEXT.html}[VkPhysicalDeviceDescriptorBufferPropertiesEXT]} *)
 module PhysicalDeviceDescriptorBufferPropertiesEXT = struct
   type t
   let t : t structure typ = structure "VkPhysicalDeviceDescriptorBufferPropertiesEXT"
@@ -217,6 +223,7 @@ module PhysicalDeviceDescriptorBufferPropertiesEXT = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceDescriptorBufferTensorFeaturesARM.html}[VkPhysicalDeviceDescriptorBufferTensorFeaturesARM]} *)
 module PhysicalDeviceDescriptorBufferTensorFeaturesARM = struct
   type t
   let t : t structure typ = structure "VkPhysicalDeviceDescriptorBufferTensorFeaturesARM"
@@ -239,6 +246,7 @@ module PhysicalDeviceDescriptorBufferTensorFeaturesARM = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceDescriptorBufferTensorPropertiesARM.html}[VkPhysicalDeviceDescriptorBufferTensorPropertiesARM]} *)
 module PhysicalDeviceDescriptorBufferTensorPropertiesARM = struct
   type t
   let t : t structure typ = structure "VkPhysicalDeviceDescriptorBufferTensorPropertiesARM"
@@ -267,6 +275,7 @@ module PhysicalDeviceDescriptorBufferTensorPropertiesARM = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceDescriptorHeapFeaturesEXT.html}[VkPhysicalDeviceDescriptorHeapFeaturesEXT]} *)
 module PhysicalDeviceDescriptorHeapFeaturesEXT = struct
   type t
   let t : t structure typ = structure "VkPhysicalDeviceDescriptorHeapFeaturesEXT"
@@ -292,6 +301,7 @@ module PhysicalDeviceDescriptorHeapFeaturesEXT = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceDescriptorHeapPropertiesEXT.html}[VkPhysicalDeviceDescriptorHeapPropertiesEXT]} *)
 module PhysicalDeviceDescriptorHeapPropertiesEXT = struct
   type t
   let t : t structure typ = structure "VkPhysicalDeviceDescriptorHeapPropertiesEXT"
@@ -349,6 +359,7 @@ module PhysicalDeviceDescriptorHeapPropertiesEXT = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceDescriptorHeapTensorPropertiesARM.html}[VkPhysicalDeviceDescriptorHeapTensorPropertiesARM]} *)
 module PhysicalDeviceDescriptorHeapTensorPropertiesARM = struct
   type t
   let t : t structure typ = structure "VkPhysicalDeviceDescriptorHeapTensorPropertiesARM"
@@ -374,6 +385,7 @@ module PhysicalDeviceDescriptorHeapTensorPropertiesARM = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceDescriptorIndexingFeatures.html}[VkPhysicalDeviceDescriptorIndexingFeatures]} *)
 module PhysicalDeviceDescriptorIndexingFeatures = struct
   type t
   let t : t structure typ = structure "VkPhysicalDeviceDescriptorIndexingFeatures"
@@ -453,6 +465,7 @@ module PhysicalDeviceDescriptorIndexingFeatures = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceDescriptorIndexingProperties.html}[VkPhysicalDeviceDescriptorIndexingProperties]} *)
 module PhysicalDeviceDescriptorIndexingProperties = struct
   type t
   let t : t structure typ = structure "VkPhysicalDeviceDescriptorIndexingProperties"
@@ -518,6 +531,7 @@ module PhysicalDeviceDescriptorIndexingProperties = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceDescriptorPoolOverallocationFeaturesNV.html}[VkPhysicalDeviceDescriptorPoolOverallocationFeaturesNV]} *)
 module PhysicalDeviceDescriptorPoolOverallocationFeaturesNV = struct
   type t
   let t : t structure typ = structure "VkPhysicalDeviceDescriptorPoolOverallocationFeaturesNV"
@@ -540,6 +554,7 @@ module PhysicalDeviceDescriptorPoolOverallocationFeaturesNV = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceDescriptorSetHostMappingFeaturesVALVE.html}[VkPhysicalDeviceDescriptorSetHostMappingFeaturesVALVE]} *)
 module PhysicalDeviceDescriptorSetHostMappingFeaturesVALVE = struct
   type t
   let t : t structure typ = structure "VkPhysicalDeviceDescriptorSetHostMappingFeaturesVALVE"
@@ -562,6 +577,7 @@ module PhysicalDeviceDescriptorSetHostMappingFeaturesVALVE = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceDeviceAddressCommandsFeaturesKHR.html}[VkPhysicalDeviceDeviceAddressCommandsFeaturesKHR]} *)
 module PhysicalDeviceDeviceAddressCommandsFeaturesKHR = struct
   type t
   let t : t structure typ = structure "VkPhysicalDeviceDeviceAddressCommandsFeaturesKHR"
@@ -584,6 +600,7 @@ module PhysicalDeviceDeviceAddressCommandsFeaturesKHR = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceDeviceGeneratedCommandsComputeFeaturesNV.html}[VkPhysicalDeviceDeviceGeneratedCommandsComputeFeaturesNV]} *)
 module PhysicalDeviceDeviceGeneratedCommandsComputeFeaturesNV = struct
   type t
   let t : t structure typ = structure "VkPhysicalDeviceDeviceGeneratedCommandsComputeFeaturesNV"
@@ -612,6 +629,7 @@ module PhysicalDeviceDeviceGeneratedCommandsComputeFeaturesNV = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceDeviceGeneratedCommandsFeaturesEXT.html}[VkPhysicalDeviceDeviceGeneratedCommandsFeaturesEXT]} *)
 module PhysicalDeviceDeviceGeneratedCommandsFeaturesEXT = struct
   type t
   let t : t structure typ = structure "VkPhysicalDeviceDeviceGeneratedCommandsFeaturesEXT"
@@ -637,6 +655,7 @@ module PhysicalDeviceDeviceGeneratedCommandsFeaturesEXT = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceDeviceGeneratedCommandsFeaturesNV.html}[VkPhysicalDeviceDeviceGeneratedCommandsFeaturesNV]} *)
 module PhysicalDeviceDeviceGeneratedCommandsFeaturesNV = struct
   type t
   let t : t structure typ = structure "VkPhysicalDeviceDeviceGeneratedCommandsFeaturesNV"
@@ -659,6 +678,7 @@ module PhysicalDeviceDeviceGeneratedCommandsFeaturesNV = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT.html}[VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT]} *)
 module PhysicalDeviceDeviceGeneratedCommandsPropertiesEXT = struct
   type t
   let t : t structure typ = structure "VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT"
@@ -702,6 +722,7 @@ module PhysicalDeviceDeviceGeneratedCommandsPropertiesEXT = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceDeviceGeneratedCommandsPropertiesNV.html}[VkPhysicalDeviceDeviceGeneratedCommandsPropertiesNV]} *)
 module PhysicalDeviceDeviceGeneratedCommandsPropertiesNV = struct
   type t
   let t : t structure typ = structure "VkPhysicalDeviceDeviceGeneratedCommandsPropertiesNV"
@@ -739,6 +760,7 @@ module PhysicalDeviceDeviceGeneratedCommandsPropertiesNV = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceDeviceMemoryReportFeaturesEXT.html}[VkPhysicalDeviceDeviceMemoryReportFeaturesEXT]} *)
 module PhysicalDeviceDeviceMemoryReportFeaturesEXT = struct
   type t
   let t : t structure typ = structure "VkPhysicalDeviceDeviceMemoryReportFeaturesEXT"
@@ -761,6 +783,7 @@ module PhysicalDeviceDeviceMemoryReportFeaturesEXT = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceDiagnosticsConfigFeaturesNV.html}[VkPhysicalDeviceDiagnosticsConfigFeaturesNV]} *)
 module PhysicalDeviceDiagnosticsConfigFeaturesNV = struct
   type t
   let t : t structure typ = structure "VkPhysicalDeviceDiagnosticsConfigFeaturesNV"
@@ -783,6 +806,7 @@ module PhysicalDeviceDiagnosticsConfigFeaturesNV = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceDiscardRectanglePropertiesEXT.html}[VkPhysicalDeviceDiscardRectanglePropertiesEXT]} *)
 module PhysicalDeviceDiscardRectanglePropertiesEXT = struct
   type t
   let t : t structure typ = structure "VkPhysicalDeviceDiscardRectanglePropertiesEXT"
@@ -804,6 +828,7 @@ module PhysicalDeviceDiscardRectanglePropertiesEXT = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceDisplacementMicromapFeaturesNV.html}[VkPhysicalDeviceDisplacementMicromapFeaturesNV]} *)
 module PhysicalDeviceDisplacementMicromapFeaturesNV = struct
   type t
   let t : t structure typ = structure "VkPhysicalDeviceDisplacementMicromapFeaturesNV"
@@ -826,6 +851,7 @@ module PhysicalDeviceDisplacementMicromapFeaturesNV = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceDisplacementMicromapPropertiesNV.html}[VkPhysicalDeviceDisplacementMicromapPropertiesNV]} *)
 module PhysicalDeviceDisplacementMicromapPropertiesNV = struct
   type t
   let t : t structure typ = structure "VkPhysicalDeviceDisplacementMicromapPropertiesNV"
@@ -847,6 +873,7 @@ module PhysicalDeviceDisplacementMicromapPropertiesNV = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceDrmPropertiesEXT.html}[VkPhysicalDeviceDrmPropertiesEXT]} *)
 module PhysicalDeviceDrmPropertiesEXT = struct
   type t
   let t : t structure typ = structure "VkPhysicalDeviceDrmPropertiesEXT"
@@ -878,6 +905,7 @@ module PhysicalDeviceDrmPropertiesEXT = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceDynamicRenderingFeatures.html}[VkPhysicalDeviceDynamicRenderingFeatures]} *)
 module PhysicalDeviceDynamicRenderingFeatures = struct
   type t
   let t : t structure typ = structure "VkPhysicalDeviceDynamicRenderingFeatures"
@@ -900,6 +928,7 @@ module PhysicalDeviceDynamicRenderingFeatures = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceDynamicRenderingLocalReadFeatures.html}[VkPhysicalDeviceDynamicRenderingLocalReadFeatures]} *)
 module PhysicalDeviceDynamicRenderingLocalReadFeatures = struct
   type t
   let t : t structure typ = structure "VkPhysicalDeviceDynamicRenderingLocalReadFeatures"
@@ -922,6 +951,7 @@ module PhysicalDeviceDynamicRenderingLocalReadFeatures = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceDynamicRenderingUnusedAttachmentsFeaturesEXT.html}[VkPhysicalDeviceDynamicRenderingUnusedAttachmentsFeaturesEXT]} *)
 module PhysicalDeviceDynamicRenderingUnusedAttachmentsFeaturesEXT = struct
   type t
   let t : t structure typ = structure "VkPhysicalDeviceDynamicRenderingUnusedAttachmentsFeaturesEXT"
@@ -944,6 +974,7 @@ module PhysicalDeviceDynamicRenderingUnusedAttachmentsFeaturesEXT = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceElapsedTimerQueryFeaturesQCOM.html}[VkPhysicalDeviceElapsedTimerQueryFeaturesQCOM]} *)
 module PhysicalDeviceElapsedTimerQueryFeaturesQCOM = struct
   type t
   let t : t structure typ = structure "VkPhysicalDeviceElapsedTimerQueryFeaturesQCOM"
@@ -966,6 +997,7 @@ module PhysicalDeviceElapsedTimerQueryFeaturesQCOM = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceExclusiveScissorFeaturesNV.html}[VkPhysicalDeviceExclusiveScissorFeaturesNV]} *)
 module PhysicalDeviceExclusiveScissorFeaturesNV = struct
   type t
   let t : t structure typ = structure "VkPhysicalDeviceExclusiveScissorFeaturesNV"
@@ -988,6 +1020,7 @@ module PhysicalDeviceExclusiveScissorFeaturesNV = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceExtendedDynamicState2FeaturesEXT.html}[VkPhysicalDeviceExtendedDynamicState2FeaturesEXT]} *)
 module PhysicalDeviceExtendedDynamicState2FeaturesEXT = struct
   type t
   let t : t structure typ = structure "VkPhysicalDeviceExtendedDynamicState2FeaturesEXT"
@@ -1016,6 +1049,7 @@ module PhysicalDeviceExtendedDynamicState2FeaturesEXT = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceExtendedDynamicState3FeaturesEXT.html}[VkPhysicalDeviceExtendedDynamicState3FeaturesEXT]} *)
 module PhysicalDeviceExtendedDynamicState3FeaturesEXT = struct
   type t
   let t : t structure typ = structure "VkPhysicalDeviceExtendedDynamicState3FeaturesEXT"
@@ -1128,6 +1162,7 @@ module PhysicalDeviceExtendedDynamicState3FeaturesEXT = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceExtendedDynamicState3PropertiesEXT.html}[VkPhysicalDeviceExtendedDynamicState3PropertiesEXT]} *)
 module PhysicalDeviceExtendedDynamicState3PropertiesEXT = struct
   type t
   let t : t structure typ = structure "VkPhysicalDeviceExtendedDynamicState3PropertiesEXT"
@@ -1149,6 +1184,7 @@ module PhysicalDeviceExtendedDynamicState3PropertiesEXT = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceExtendedDynamicStateFeaturesEXT.html}[VkPhysicalDeviceExtendedDynamicStateFeaturesEXT]} *)
 module PhysicalDeviceExtendedDynamicStateFeaturesEXT = struct
   type t
   let t : t structure typ = structure "VkPhysicalDeviceExtendedDynamicStateFeaturesEXT"
@@ -1171,6 +1207,7 @@ module PhysicalDeviceExtendedDynamicStateFeaturesEXT = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceExtendedFlagsFeaturesKHR.html}[VkPhysicalDeviceExtendedFlagsFeaturesKHR]} *)
 module PhysicalDeviceExtendedFlagsFeaturesKHR = struct
   type t
   let t : t structure typ = structure "VkPhysicalDeviceExtendedFlagsFeaturesKHR"
@@ -1193,6 +1230,7 @@ module PhysicalDeviceExtendedFlagsFeaturesKHR = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceExtendedSparseAddressSpaceFeaturesNV.html}[VkPhysicalDeviceExtendedSparseAddressSpaceFeaturesNV]} *)
 module PhysicalDeviceExtendedSparseAddressSpaceFeaturesNV = struct
   type t
   let t : t structure typ = structure "VkPhysicalDeviceExtendedSparseAddressSpaceFeaturesNV"
@@ -1215,6 +1253,7 @@ module PhysicalDeviceExtendedSparseAddressSpaceFeaturesNV = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceExtendedSparseAddressSpacePropertiesNV.html}[VkPhysicalDeviceExtendedSparseAddressSpacePropertiesNV]} *)
 module PhysicalDeviceExtendedSparseAddressSpacePropertiesNV = struct
   type t
   let t : t structure typ = structure "VkPhysicalDeviceExtendedSparseAddressSpacePropertiesNV"
@@ -1240,6 +1279,7 @@ module PhysicalDeviceExtendedSparseAddressSpacePropertiesNV = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceExternalBufferInfo.html}[VkPhysicalDeviceExternalBufferInfo]} *)
 module PhysicalDeviceExternalBufferInfo = struct
   type t
   let t : t structure typ = structure "VkPhysicalDeviceExternalBufferInfo"
@@ -1268,6 +1308,7 @@ module PhysicalDeviceExternalBufferInfo = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceExternalComputeQueuePropertiesNV.html}[VkPhysicalDeviceExternalComputeQueuePropertiesNV]} *)
 module PhysicalDeviceExternalComputeQueuePropertiesNV = struct
   type t
   let t : t structure typ = structure "VkPhysicalDeviceExternalComputeQueuePropertiesNV"
@@ -1291,6 +1332,7 @@ module PhysicalDeviceExternalComputeQueuePropertiesNV = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceExternalFenceInfo.html}[VkPhysicalDeviceExternalFenceInfo]} *)
 module PhysicalDeviceExternalFenceInfo = struct
   type t
   let t : t structure typ = structure "VkPhysicalDeviceExternalFenceInfo"
@@ -1313,6 +1355,7 @@ module PhysicalDeviceExternalFenceInfo = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceExternalFormatResolveFeaturesANDROID.html}[VkPhysicalDeviceExternalFormatResolveFeaturesANDROID]} *)
 module PhysicalDeviceExternalFormatResolveFeaturesANDROID = struct
   type t
   let t : t structure typ = structure "VkPhysicalDeviceExternalFormatResolveFeaturesANDROID"
@@ -1335,6 +1378,7 @@ module PhysicalDeviceExternalFormatResolveFeaturesANDROID = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceExternalFormatResolvePropertiesANDROID.html}[VkPhysicalDeviceExternalFormatResolvePropertiesANDROID]} *)
 module PhysicalDeviceExternalFormatResolvePropertiesANDROID = struct
   type t
   let t : t structure typ = structure "VkPhysicalDeviceExternalFormatResolvePropertiesANDROID"
@@ -1360,6 +1404,7 @@ module PhysicalDeviceExternalFormatResolvePropertiesANDROID = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceExternalImageFormatInfo.html}[VkPhysicalDeviceExternalImageFormatInfo]} *)
 module PhysicalDeviceExternalImageFormatInfo = struct
   type t
   let t : t structure typ = structure "VkPhysicalDeviceExternalImageFormatInfo"
@@ -1382,6 +1427,7 @@ module PhysicalDeviceExternalImageFormatInfo = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceExternalMemoryHostPropertiesEXT.html}[VkPhysicalDeviceExternalMemoryHostPropertiesEXT]} *)
 module PhysicalDeviceExternalMemoryHostPropertiesEXT = struct
   type t
   let t : t structure typ = structure "VkPhysicalDeviceExternalMemoryHostPropertiesEXT"
@@ -1403,6 +1449,7 @@ module PhysicalDeviceExternalMemoryHostPropertiesEXT = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceExternalMemoryRDMAFeaturesNV.html}[VkPhysicalDeviceExternalMemoryRDMAFeaturesNV]} *)
 module PhysicalDeviceExternalMemoryRDMAFeaturesNV = struct
   type t
   let t : t structure typ = structure "VkPhysicalDeviceExternalMemoryRDMAFeaturesNV"
@@ -1425,6 +1472,7 @@ module PhysicalDeviceExternalMemoryRDMAFeaturesNV = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceExternalMemoryScreenBufferFeaturesQNX.html}[VkPhysicalDeviceExternalMemoryScreenBufferFeaturesQNX]} *)
 module PhysicalDeviceExternalMemoryScreenBufferFeaturesQNX = struct
   type t
   let t : t structure typ = structure "VkPhysicalDeviceExternalMemoryScreenBufferFeaturesQNX"
@@ -1447,6 +1495,7 @@ module PhysicalDeviceExternalMemoryScreenBufferFeaturesQNX = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceExternalSemaphoreInfo.html}[VkPhysicalDeviceExternalSemaphoreInfo]} *)
 module PhysicalDeviceExternalSemaphoreInfo = struct
   type t
   let t : t structure typ = structure "VkPhysicalDeviceExternalSemaphoreInfo"
@@ -1469,6 +1518,7 @@ module PhysicalDeviceExternalSemaphoreInfo = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceFaultFeaturesEXT.html}[VkPhysicalDeviceFaultFeaturesEXT]} *)
 module PhysicalDeviceFaultFeaturesEXT = struct
   type t
   let t : t structure typ = structure "VkPhysicalDeviceFaultFeaturesEXT"
@@ -1494,6 +1544,7 @@ module PhysicalDeviceFaultFeaturesEXT = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceFaultFeaturesKHR.html}[VkPhysicalDeviceFaultFeaturesKHR]} *)
 module PhysicalDeviceFaultFeaturesKHR = struct
   type t
   let t : t structure typ = structure "VkPhysicalDeviceFaultFeaturesKHR"
@@ -1525,6 +1576,7 @@ module PhysicalDeviceFaultFeaturesKHR = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceFaultPropertiesKHR.html}[VkPhysicalDeviceFaultPropertiesKHR]} *)
 module PhysicalDeviceFaultPropertiesKHR = struct
   type t
   let t : t structure typ = structure "VkPhysicalDeviceFaultPropertiesKHR"
@@ -1546,6 +1598,7 @@ module PhysicalDeviceFaultPropertiesKHR = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceFeatures.html}[VkPhysicalDeviceFeatures]} *)
 module PhysicalDeviceFeatures = struct
   type t
   let t : t structure typ = structure "VkPhysicalDeviceFeatures"
@@ -1722,6 +1775,7 @@ module PhysicalDeviceFeatures = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceFloatControlsProperties.html}[VkPhysicalDeviceFloatControlsProperties]} *)
 module PhysicalDeviceFloatControlsProperties = struct
   type t
   let t : t structure typ = structure "VkPhysicalDeviceFloatControlsProperties"
@@ -1775,6 +1829,7 @@ module PhysicalDeviceFloatControlsProperties = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceFormatPackFeaturesARM.html}[VkPhysicalDeviceFormatPackFeaturesARM]} *)
 module PhysicalDeviceFormatPackFeaturesARM = struct
   type t
   let t : t structure typ = structure "VkPhysicalDeviceFormatPackFeaturesARM"
@@ -1797,6 +1852,7 @@ module PhysicalDeviceFormatPackFeaturesARM = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceFragmentDensityMap2FeaturesEXT.html}[VkPhysicalDeviceFragmentDensityMap2FeaturesEXT]} *)
 module PhysicalDeviceFragmentDensityMap2FeaturesEXT = struct
   type t
   let t : t structure typ = structure "VkPhysicalDeviceFragmentDensityMap2FeaturesEXT"
@@ -1819,6 +1875,7 @@ module PhysicalDeviceFragmentDensityMap2FeaturesEXT = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceFragmentDensityMap2PropertiesEXT.html}[VkPhysicalDeviceFragmentDensityMap2PropertiesEXT]} *)
 module PhysicalDeviceFragmentDensityMap2PropertiesEXT = struct
   type t
   let t : t structure typ = structure "VkPhysicalDeviceFragmentDensityMap2PropertiesEXT"
@@ -1846,6 +1903,7 @@ module PhysicalDeviceFragmentDensityMap2PropertiesEXT = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceFragmentDensityMapFeaturesEXT.html}[VkPhysicalDeviceFragmentDensityMapFeaturesEXT]} *)
 module PhysicalDeviceFragmentDensityMapFeaturesEXT = struct
   type t
   let t : t structure typ = structure "VkPhysicalDeviceFragmentDensityMapFeaturesEXT"
@@ -1874,6 +1932,7 @@ module PhysicalDeviceFragmentDensityMapFeaturesEXT = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceFragmentDensityMapLayeredFeaturesVALVE.html}[VkPhysicalDeviceFragmentDensityMapLayeredFeaturesVALVE]} *)
 module PhysicalDeviceFragmentDensityMapLayeredFeaturesVALVE = struct
   type t
   let t : t structure typ = structure "VkPhysicalDeviceFragmentDensityMapLayeredFeaturesVALVE"
@@ -1896,6 +1955,7 @@ module PhysicalDeviceFragmentDensityMapLayeredFeaturesVALVE = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceFragmentDensityMapLayeredPropertiesVALVE.html}[VkPhysicalDeviceFragmentDensityMapLayeredPropertiesVALVE]} *)
 module PhysicalDeviceFragmentDensityMapLayeredPropertiesVALVE = struct
   type t
   let t : t structure typ = structure "VkPhysicalDeviceFragmentDensityMapLayeredPropertiesVALVE"
@@ -1917,6 +1977,7 @@ module PhysicalDeviceFragmentDensityMapLayeredPropertiesVALVE = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceFragmentDensityMapOffsetFeaturesEXT.html}[VkPhysicalDeviceFragmentDensityMapOffsetFeaturesEXT]} *)
 module PhysicalDeviceFragmentDensityMapOffsetFeaturesEXT = struct
   type t
   let t : t structure typ = structure "VkPhysicalDeviceFragmentDensityMapOffsetFeaturesEXT"
@@ -1939,6 +2000,7 @@ module PhysicalDeviceFragmentDensityMapOffsetFeaturesEXT = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceFragmentShaderBarycentricFeaturesKHR.html}[VkPhysicalDeviceFragmentShaderBarycentricFeaturesKHR]} *)
 module PhysicalDeviceFragmentShaderBarycentricFeaturesKHR = struct
   type t
   let t : t structure typ = structure "VkPhysicalDeviceFragmentShaderBarycentricFeaturesKHR"
@@ -1961,6 +2023,7 @@ module PhysicalDeviceFragmentShaderBarycentricFeaturesKHR = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceFragmentShaderBarycentricPropertiesKHR.html}[VkPhysicalDeviceFragmentShaderBarycentricPropertiesKHR]} *)
 module PhysicalDeviceFragmentShaderBarycentricPropertiesKHR = struct
   type t
   let t : t structure typ = structure "VkPhysicalDeviceFragmentShaderBarycentricPropertiesKHR"
@@ -1982,6 +2045,7 @@ module PhysicalDeviceFragmentShaderBarycentricPropertiesKHR = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceFragmentShaderInterlockFeaturesEXT.html}[VkPhysicalDeviceFragmentShaderInterlockFeaturesEXT]} *)
 module PhysicalDeviceFragmentShaderInterlockFeaturesEXT = struct
   type t
   let t : t structure typ = structure "VkPhysicalDeviceFragmentShaderInterlockFeaturesEXT"
@@ -2010,6 +2074,7 @@ module PhysicalDeviceFragmentShaderInterlockFeaturesEXT = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceFragmentShadingRateEnumsFeaturesNV.html}[VkPhysicalDeviceFragmentShadingRateEnumsFeaturesNV]} *)
 module PhysicalDeviceFragmentShadingRateEnumsFeaturesNV = struct
   type t
   let t : t structure typ = structure "VkPhysicalDeviceFragmentShadingRateEnumsFeaturesNV"
@@ -2038,6 +2103,7 @@ module PhysicalDeviceFragmentShadingRateEnumsFeaturesNV = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceFragmentShadingRateEnumsPropertiesNV.html}[VkPhysicalDeviceFragmentShadingRateEnumsPropertiesNV]} *)
 module PhysicalDeviceFragmentShadingRateEnumsPropertiesNV = struct
   type t
   let t : t structure typ = structure "VkPhysicalDeviceFragmentShadingRateEnumsPropertiesNV"
@@ -2059,6 +2125,7 @@ module PhysicalDeviceFragmentShadingRateEnumsPropertiesNV = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceFragmentShadingRateFeaturesKHR.html}[VkPhysicalDeviceFragmentShadingRateFeaturesKHR]} *)
 module PhysicalDeviceFragmentShadingRateFeaturesKHR = struct
   type t
   let t : t structure typ = structure "VkPhysicalDeviceFragmentShadingRateFeaturesKHR"
@@ -2087,6 +2154,7 @@ module PhysicalDeviceFragmentShadingRateFeaturesKHR = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceFrameBoundaryFeaturesEXT.html}[VkPhysicalDeviceFrameBoundaryFeaturesEXT]} *)
 module PhysicalDeviceFrameBoundaryFeaturesEXT = struct
   type t
   let t : t structure typ = structure "VkPhysicalDeviceFrameBoundaryFeaturesEXT"
@@ -2109,6 +2177,7 @@ module PhysicalDeviceFrameBoundaryFeaturesEXT = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceGlobalPriorityQueryFeatures.html}[VkPhysicalDeviceGlobalPriorityQueryFeatures]} *)
 module PhysicalDeviceGlobalPriorityQueryFeatures = struct
   type t
   let t : t structure typ = structure "VkPhysicalDeviceGlobalPriorityQueryFeatures"
@@ -2131,6 +2200,7 @@ module PhysicalDeviceGlobalPriorityQueryFeatures = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceGpaFeaturesAMD.html}[VkPhysicalDeviceGpaFeaturesAMD]} *)
 module PhysicalDeviceGpaFeaturesAMD = struct
   type t
   let t : t structure typ = structure "VkPhysicalDeviceGpaFeaturesAMD"
@@ -2162,6 +2232,7 @@ module PhysicalDeviceGpaFeaturesAMD = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceGpaProperties2AMD.html}[VkPhysicalDeviceGpaProperties2AMD]} *)
 module PhysicalDeviceGpaProperties2AMD = struct
   type t
   let t : t structure typ = structure "VkPhysicalDeviceGpaProperties2AMD"
@@ -2183,6 +2254,7 @@ module PhysicalDeviceGpaProperties2AMD = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceGraphicsPipelineLibraryFeaturesEXT.html}[VkPhysicalDeviceGraphicsPipelineLibraryFeaturesEXT]} *)
 module PhysicalDeviceGraphicsPipelineLibraryFeaturesEXT = struct
   type t
   let t : t structure typ = structure "VkPhysicalDeviceGraphicsPipelineLibraryFeaturesEXT"
@@ -2205,6 +2277,7 @@ module PhysicalDeviceGraphicsPipelineLibraryFeaturesEXT = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceGraphicsPipelineLibraryPropertiesEXT.html}[VkPhysicalDeviceGraphicsPipelineLibraryPropertiesEXT]} *)
 module PhysicalDeviceGraphicsPipelineLibraryPropertiesEXT = struct
   type t
   let t : t structure typ = structure "VkPhysicalDeviceGraphicsPipelineLibraryPropertiesEXT"
@@ -2228,6 +2301,7 @@ module PhysicalDeviceGraphicsPipelineLibraryPropertiesEXT = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceGroupProperties.html}[VkPhysicalDeviceGroupProperties]} *)
 module PhysicalDeviceGroupProperties = struct
   type t
   let t : t structure typ = structure "VkPhysicalDeviceGroupProperties"
@@ -2253,6 +2327,7 @@ module PhysicalDeviceGroupProperties = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceHdrVividFeaturesHUAWEI.html}[VkPhysicalDeviceHdrVividFeaturesHUAWEI]} *)
 module PhysicalDeviceHdrVividFeaturesHUAWEI = struct
   type t
   let t : t structure typ = structure "VkPhysicalDeviceHdrVividFeaturesHUAWEI"
@@ -2275,6 +2350,7 @@ module PhysicalDeviceHdrVividFeaturesHUAWEI = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceHostImageCopyFeatures.html}[VkPhysicalDeviceHostImageCopyFeatures]} *)
 module PhysicalDeviceHostImageCopyFeatures = struct
   type t
   let t : t structure typ = structure "VkPhysicalDeviceHostImageCopyFeatures"
@@ -2297,6 +2373,7 @@ module PhysicalDeviceHostImageCopyFeatures = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceHostImageCopyProperties.html}[VkPhysicalDeviceHostImageCopyProperties]} *)
 module PhysicalDeviceHostImageCopyProperties = struct
   type t
   let t : t structure typ = structure "VkPhysicalDeviceHostImageCopyProperties"
@@ -2336,6 +2413,7 @@ module PhysicalDeviceHostImageCopyProperties = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceHostQueryResetFeatures.html}[VkPhysicalDeviceHostQueryResetFeatures]} *)
 module PhysicalDeviceHostQueryResetFeatures = struct
   type t
   let t : t structure typ = structure "VkPhysicalDeviceHostQueryResetFeatures"
@@ -2358,6 +2436,7 @@ module PhysicalDeviceHostQueryResetFeatures = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceIDProperties.html}[VkPhysicalDeviceIDProperties]} *)
 module PhysicalDeviceIDProperties = struct
   type t
   let t : t structure typ = structure "VkPhysicalDeviceIDProperties"
@@ -2387,6 +2466,7 @@ module PhysicalDeviceIDProperties = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceImage2DViewOf3DFeaturesEXT.html}[VkPhysicalDeviceImage2DViewOf3DFeaturesEXT]} *)
 module PhysicalDeviceImage2DViewOf3DFeaturesEXT = struct
   type t
   let t : t structure typ = structure "VkPhysicalDeviceImage2DViewOf3DFeaturesEXT"
@@ -2412,6 +2492,7 @@ module PhysicalDeviceImage2DViewOf3DFeaturesEXT = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceImageAlignmentControlFeaturesMESA.html}[VkPhysicalDeviceImageAlignmentControlFeaturesMESA]} *)
 module PhysicalDeviceImageAlignmentControlFeaturesMESA = struct
   type t
   let t : t structure typ = structure "VkPhysicalDeviceImageAlignmentControlFeaturesMESA"
@@ -2434,6 +2515,7 @@ module PhysicalDeviceImageAlignmentControlFeaturesMESA = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceImageAlignmentControlPropertiesMESA.html}[VkPhysicalDeviceImageAlignmentControlPropertiesMESA]} *)
 module PhysicalDeviceImageAlignmentControlPropertiesMESA = struct
   type t
   let t : t structure typ = structure "VkPhysicalDeviceImageAlignmentControlPropertiesMESA"
@@ -2455,6 +2537,7 @@ module PhysicalDeviceImageAlignmentControlPropertiesMESA = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceImageCompressionControlFeaturesEXT.html}[VkPhysicalDeviceImageCompressionControlFeaturesEXT]} *)
 module PhysicalDeviceImageCompressionControlFeaturesEXT = struct
   type t
   let t : t structure typ = structure "VkPhysicalDeviceImageCompressionControlFeaturesEXT"
@@ -2477,6 +2560,7 @@ module PhysicalDeviceImageCompressionControlFeaturesEXT = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceImageCompressionControlSwapchainFeaturesEXT.html}[VkPhysicalDeviceImageCompressionControlSwapchainFeaturesEXT]} *)
 module PhysicalDeviceImageCompressionControlSwapchainFeaturesEXT = struct
   type t
   let t : t structure typ = structure "VkPhysicalDeviceImageCompressionControlSwapchainFeaturesEXT"
@@ -2499,6 +2583,7 @@ module PhysicalDeviceImageCompressionControlSwapchainFeaturesEXT = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceImageDrmFormatModifierInfoEXT.html}[VkPhysicalDeviceImageDrmFormatModifierInfoEXT]} *)
 module PhysicalDeviceImageDrmFormatModifierInfoEXT = struct
   type t
   let t : t structure typ = structure "VkPhysicalDeviceImageDrmFormatModifierInfoEXT"
@@ -2536,6 +2621,7 @@ module PhysicalDeviceImageDrmFormatModifierInfoEXT = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceImageFormatInfo2.html}[VkPhysicalDeviceImageFormatInfo2]} *)
 module PhysicalDeviceImageFormatInfo2 = struct
   type t
   let t : t structure typ = structure "VkPhysicalDeviceImageFormatInfo2"
@@ -2570,6 +2656,7 @@ module PhysicalDeviceImageFormatInfo2 = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceImageProcessing2FeaturesQCOM.html}[VkPhysicalDeviceImageProcessing2FeaturesQCOM]} *)
 module PhysicalDeviceImageProcessing2FeaturesQCOM = struct
   type t
   let t : t structure typ = structure "VkPhysicalDeviceImageProcessing2FeaturesQCOM"
@@ -2592,6 +2679,7 @@ module PhysicalDeviceImageProcessing2FeaturesQCOM = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceImageProcessing3FeaturesQCOM.html}[VkPhysicalDeviceImageProcessing3FeaturesQCOM]} *)
 module PhysicalDeviceImageProcessing3FeaturesQCOM = struct
   type t
   let t : t structure typ = structure "VkPhysicalDeviceImageProcessing3FeaturesQCOM"
@@ -2620,6 +2708,7 @@ module PhysicalDeviceImageProcessing3FeaturesQCOM = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceImageProcessingFeaturesQCOM.html}[VkPhysicalDeviceImageProcessingFeaturesQCOM]} *)
 module PhysicalDeviceImageProcessingFeaturesQCOM = struct
   type t
   let t : t structure typ = structure "VkPhysicalDeviceImageProcessingFeaturesQCOM"
@@ -2648,6 +2737,7 @@ module PhysicalDeviceImageProcessingFeaturesQCOM = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceImageRobustnessFeatures.html}[VkPhysicalDeviceImageRobustnessFeatures]} *)
 module PhysicalDeviceImageRobustnessFeatures = struct
   type t
   let t : t structure typ = structure "VkPhysicalDeviceImageRobustnessFeatures"
@@ -2670,6 +2760,7 @@ module PhysicalDeviceImageRobustnessFeatures = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceImageSlicedViewOf3DFeaturesEXT.html}[VkPhysicalDeviceImageSlicedViewOf3DFeaturesEXT]} *)
 module PhysicalDeviceImageSlicedViewOf3DFeaturesEXT = struct
   type t
   let t : t structure typ = structure "VkPhysicalDeviceImageSlicedViewOf3DFeaturesEXT"
@@ -2692,6 +2783,7 @@ module PhysicalDeviceImageSlicedViewOf3DFeaturesEXT = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceImageViewImageFormatInfoEXT.html}[VkPhysicalDeviceImageViewImageFormatInfoEXT]} *)
 module PhysicalDeviceImageViewImageFormatInfoEXT = struct
   type t
   let t : t structure typ = structure "VkPhysicalDeviceImageViewImageFormatInfoEXT"
@@ -2714,6 +2806,7 @@ module PhysicalDeviceImageViewImageFormatInfoEXT = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceImageViewMinLodFeaturesEXT.html}[VkPhysicalDeviceImageViewMinLodFeaturesEXT]} *)
 module PhysicalDeviceImageViewMinLodFeaturesEXT = struct
   type t
   let t : t structure typ = structure "VkPhysicalDeviceImageViewMinLodFeaturesEXT"
@@ -2736,6 +2829,7 @@ module PhysicalDeviceImageViewMinLodFeaturesEXT = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceImagelessFramebufferFeatures.html}[VkPhysicalDeviceImagelessFramebufferFeatures]} *)
 module PhysicalDeviceImagelessFramebufferFeatures = struct
   type t
   let t : t structure typ = structure "VkPhysicalDeviceImagelessFramebufferFeatures"
@@ -2758,6 +2852,7 @@ module PhysicalDeviceImagelessFramebufferFeatures = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceIndexTypeUint8Features.html}[VkPhysicalDeviceIndexTypeUint8Features]} *)
 module PhysicalDeviceIndexTypeUint8Features = struct
   type t
   let t : t structure typ = structure "VkPhysicalDeviceIndexTypeUint8Features"
@@ -2780,6 +2875,7 @@ module PhysicalDeviceIndexTypeUint8Features = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceInheritedViewportScissorFeaturesNV.html}[VkPhysicalDeviceInheritedViewportScissorFeaturesNV]} *)
 module PhysicalDeviceInheritedViewportScissorFeaturesNV = struct
   type t
   let t : t structure typ = structure "VkPhysicalDeviceInheritedViewportScissorFeaturesNV"
@@ -2802,6 +2898,7 @@ module PhysicalDeviceInheritedViewportScissorFeaturesNV = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceInlineUniformBlockFeatures.html}[VkPhysicalDeviceInlineUniformBlockFeatures]} *)
 module PhysicalDeviceInlineUniformBlockFeatures = struct
   type t
   let t : t structure typ = structure "VkPhysicalDeviceInlineUniformBlockFeatures"
@@ -2827,6 +2924,7 @@ module PhysicalDeviceInlineUniformBlockFeatures = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceInlineUniformBlockProperties.html}[VkPhysicalDeviceInlineUniformBlockProperties]} *)
 module PhysicalDeviceInlineUniformBlockProperties = struct
   type t
   let t : t structure typ = structure "VkPhysicalDeviceInlineUniformBlockProperties"
@@ -2856,6 +2954,7 @@ module PhysicalDeviceInlineUniformBlockProperties = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceInternallySynchronizedQueuesFeaturesKHR.html}[VkPhysicalDeviceInternallySynchronizedQueuesFeaturesKHR]} *)
 module PhysicalDeviceInternallySynchronizedQueuesFeaturesKHR = struct
   type t
   let t : t structure typ = structure "VkPhysicalDeviceInternallySynchronizedQueuesFeaturesKHR"
@@ -2878,6 +2977,7 @@ module PhysicalDeviceInternallySynchronizedQueuesFeaturesKHR = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceInvocationMaskFeaturesHUAWEI.html}[VkPhysicalDeviceInvocationMaskFeaturesHUAWEI]} *)
 module PhysicalDeviceInvocationMaskFeaturesHUAWEI = struct
   type t
   let t : t structure typ = structure "VkPhysicalDeviceInvocationMaskFeaturesHUAWEI"
@@ -2900,6 +3000,7 @@ module PhysicalDeviceInvocationMaskFeaturesHUAWEI = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceLayeredApiPropertiesKHR.html}[VkPhysicalDeviceLayeredApiPropertiesKHR]} *)
 module PhysicalDeviceLayeredApiPropertiesKHR = struct
   type t
   let t : t structure typ = structure "VkPhysicalDeviceLayeredApiPropertiesKHR"
@@ -2928,6 +3029,7 @@ module PhysicalDeviceLayeredApiPropertiesKHR = struct
   let get_device_name value = Vk_base.string_of_char_array (getf value device_name)
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceLayeredDriverPropertiesMSFT.html}[VkPhysicalDeviceLayeredDriverPropertiesMSFT]} *)
 module PhysicalDeviceLayeredDriverPropertiesMSFT = struct
   type t
   let t : t structure typ = structure "VkPhysicalDeviceLayeredDriverPropertiesMSFT"
@@ -2949,6 +3051,7 @@ module PhysicalDeviceLayeredDriverPropertiesMSFT = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceLegacyDitheringFeaturesEXT.html}[VkPhysicalDeviceLegacyDitheringFeaturesEXT]} *)
 module PhysicalDeviceLegacyDitheringFeaturesEXT = struct
   type t
   let t : t structure typ = structure "VkPhysicalDeviceLegacyDitheringFeaturesEXT"
@@ -2971,6 +3074,7 @@ module PhysicalDeviceLegacyDitheringFeaturesEXT = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceLegacyVertexAttributesFeaturesEXT.html}[VkPhysicalDeviceLegacyVertexAttributesFeaturesEXT]} *)
 module PhysicalDeviceLegacyVertexAttributesFeaturesEXT = struct
   type t
   let t : t structure typ = structure "VkPhysicalDeviceLegacyVertexAttributesFeaturesEXT"
@@ -2993,6 +3097,7 @@ module PhysicalDeviceLegacyVertexAttributesFeaturesEXT = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceLegacyVertexAttributesPropertiesEXT.html}[VkPhysicalDeviceLegacyVertexAttributesPropertiesEXT]} *)
 module PhysicalDeviceLegacyVertexAttributesPropertiesEXT = struct
   type t
   let t : t structure typ = structure "VkPhysicalDeviceLegacyVertexAttributesPropertiesEXT"
@@ -3014,6 +3119,7 @@ module PhysicalDeviceLegacyVertexAttributesPropertiesEXT = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceLimits.html}[VkPhysicalDeviceLimits]} *)
 module PhysicalDeviceLimits = struct
   type t
   let t : t structure typ = structure "VkPhysicalDeviceLimits"
@@ -3237,6 +3343,7 @@ module PhysicalDeviceLimits = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceLineRasterizationFeatures.html}[VkPhysicalDeviceLineRasterizationFeatures]} *)
 module PhysicalDeviceLineRasterizationFeatures = struct
   type t
   let t : t structure typ = structure "VkPhysicalDeviceLineRasterizationFeatures"
@@ -3274,6 +3381,7 @@ module PhysicalDeviceLineRasterizationFeatures = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceLineRasterizationProperties.html}[VkPhysicalDeviceLineRasterizationProperties]} *)
 module PhysicalDeviceLineRasterizationProperties = struct
   type t
   let t : t structure typ = structure "VkPhysicalDeviceLineRasterizationProperties"
@@ -3295,6 +3403,7 @@ module PhysicalDeviceLineRasterizationProperties = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceLinearColorAttachmentFeaturesNV.html}[VkPhysicalDeviceLinearColorAttachmentFeaturesNV]} *)
 module PhysicalDeviceLinearColorAttachmentFeaturesNV = struct
   type t
   let t : t structure typ = structure "VkPhysicalDeviceLinearColorAttachmentFeaturesNV"
@@ -3317,6 +3426,7 @@ module PhysicalDeviceLinearColorAttachmentFeaturesNV = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceMaintenance10FeaturesKHR.html}[VkPhysicalDeviceMaintenance10FeaturesKHR]} *)
 module PhysicalDeviceMaintenance10FeaturesKHR = struct
   type t
   let t : t structure typ = structure "VkPhysicalDeviceMaintenance10FeaturesKHR"
@@ -3339,6 +3449,7 @@ module PhysicalDeviceMaintenance10FeaturesKHR = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceMaintenance10PropertiesKHR.html}[VkPhysicalDeviceMaintenance10PropertiesKHR]} *)
 module PhysicalDeviceMaintenance10PropertiesKHR = struct
   type t
   let t : t structure typ = structure "VkPhysicalDeviceMaintenance10PropertiesKHR"
@@ -3364,6 +3475,7 @@ module PhysicalDeviceMaintenance10PropertiesKHR = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceMaintenance11FeaturesKHR.html}[VkPhysicalDeviceMaintenance11FeaturesKHR]} *)
 module PhysicalDeviceMaintenance11FeaturesKHR = struct
   type t
   let t : t structure typ = structure "VkPhysicalDeviceMaintenance11FeaturesKHR"
@@ -3386,6 +3498,7 @@ module PhysicalDeviceMaintenance11FeaturesKHR = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceMaintenance3Properties.html}[VkPhysicalDeviceMaintenance3Properties]} *)
 module PhysicalDeviceMaintenance3Properties = struct
   type t
   let t : t structure typ = structure "VkPhysicalDeviceMaintenance3Properties"
@@ -3409,6 +3522,7 @@ module PhysicalDeviceMaintenance3Properties = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceMaintenance4Features.html}[VkPhysicalDeviceMaintenance4Features]} *)
 module PhysicalDeviceMaintenance4Features = struct
   type t
   let t : t structure typ = structure "VkPhysicalDeviceMaintenance4Features"
@@ -3431,6 +3545,7 @@ module PhysicalDeviceMaintenance4Features = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceMaintenance4Properties.html}[VkPhysicalDeviceMaintenance4Properties]} *)
 module PhysicalDeviceMaintenance4Properties = struct
   type t
   let t : t structure typ = structure "VkPhysicalDeviceMaintenance4Properties"
@@ -3452,6 +3567,7 @@ module PhysicalDeviceMaintenance4Properties = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceMaintenance5Features.html}[VkPhysicalDeviceMaintenance5Features]} *)
 module PhysicalDeviceMaintenance5Features = struct
   type t
   let t : t structure typ = structure "VkPhysicalDeviceMaintenance5Features"
@@ -3474,6 +3590,7 @@ module PhysicalDeviceMaintenance5Features = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceMaintenance5Properties.html}[VkPhysicalDeviceMaintenance5Properties]} *)
 module PhysicalDeviceMaintenance5Properties = struct
   type t
   let t : t structure typ = structure "VkPhysicalDeviceMaintenance5Properties"
@@ -3505,6 +3622,7 @@ module PhysicalDeviceMaintenance5Properties = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceMaintenance6Features.html}[VkPhysicalDeviceMaintenance6Features]} *)
 module PhysicalDeviceMaintenance6Features = struct
   type t
   let t : t structure typ = structure "VkPhysicalDeviceMaintenance6Features"
@@ -3527,6 +3645,7 @@ module PhysicalDeviceMaintenance6Features = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceMaintenance6Properties.html}[VkPhysicalDeviceMaintenance6Properties]} *)
 module PhysicalDeviceMaintenance6Properties = struct
   type t
   let t : t structure typ = structure "VkPhysicalDeviceMaintenance6Properties"
@@ -3552,6 +3671,7 @@ module PhysicalDeviceMaintenance6Properties = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceMaintenance7FeaturesKHR.html}[VkPhysicalDeviceMaintenance7FeaturesKHR]} *)
 module PhysicalDeviceMaintenance7FeaturesKHR = struct
   type t
   let t : t structure typ = structure "VkPhysicalDeviceMaintenance7FeaturesKHR"

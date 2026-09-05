@@ -3,6 +3,7 @@
 open Ctypes
 
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkImageLayout.html}[VkImageLayout]} *)
 module ImageLayout = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "ImageLayout"
@@ -94,6 +95,7 @@ module ImageLayout = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkAttachmentLoadOp.html}[VkAttachmentLoadOp]} *)
 module AttachmentLoadOp = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "AttachmentLoadOp"
@@ -113,6 +115,7 @@ module AttachmentLoadOp = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkAttachmentStoreOp.html}[VkAttachmentStoreOp]} *)
 module AttachmentStoreOp = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "AttachmentStoreOp"
@@ -132,6 +135,7 @@ module AttachmentStoreOp = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkImageType.html}[VkImageType]} *)
 module ImageType = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "ImageType"
@@ -145,6 +149,7 @@ module ImageType = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkImageTiling.html}[VkImageTiling]} *)
 module ImageTiling = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "ImageTiling"
@@ -158,6 +163,7 @@ module ImageTiling = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkImageViewType.html}[VkImageViewType]} *)
 module ImageViewType = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "ImageViewType"
@@ -179,6 +185,7 @@ module ImageViewType = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkCommandBufferLevel.html}[VkCommandBufferLevel]} *)
 module CommandBufferLevel = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "CommandBufferLevel"
@@ -190,6 +197,7 @@ module CommandBufferLevel = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkComponentSwizzle.html}[VkComponentSwizzle]} *)
 module ComponentSwizzle = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "ComponentSwizzle"
@@ -211,6 +219,7 @@ module ComponentSwizzle = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkDescriptorType.html}[VkDescriptorType]} *)
 module DescriptorType = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "DescriptorType"
@@ -260,6 +269,7 @@ module DescriptorType = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkQueryType.html}[VkQueryType]} *)
 module QueryType = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "QueryType"
@@ -303,6 +313,7 @@ module QueryType = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkBorderColor.html}[VkBorderColor]} *)
 module BorderColor = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "BorderColor"
@@ -326,6 +337,7 @@ module BorderColor = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPipelineBindPoint.html}[VkPipelineBindPoint]} *)
 module PipelineBindPoint = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "PipelineBindPoint"
@@ -347,6 +359,7 @@ module PipelineBindPoint = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPipelineCacheHeaderVersion.html}[VkPipelineCacheHeaderVersion]} *)
 module PipelineCacheHeaderVersion = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "PipelineCacheHeaderVersion"
@@ -358,6 +371,7 @@ module PipelineCacheHeaderVersion = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPrimitiveTopology.html}[VkPrimitiveTopology]} *)
 module PrimitiveTopology = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "PrimitiveTopology"
@@ -387,6 +401,7 @@ module PrimitiveTopology = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkSharingMode.html}[VkSharingMode]} *)
 module SharingMode = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "SharingMode"
@@ -398,6 +413,7 @@ module SharingMode = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkIndexType.html}[VkIndexType]} *)
 module IndexType = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "IndexType"
@@ -419,6 +435,7 @@ module IndexType = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkFilter.html}[VkFilter]} *)
 module Filter = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "Filter"
@@ -434,6 +451,7 @@ module Filter = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkSamplerMipmapMode.html}[VkSamplerMipmapMode]} *)
 module SamplerMipmapMode = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "SamplerMipmapMode"
@@ -445,6 +463,7 @@ module SamplerMipmapMode = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkSamplerAddressMode.html}[VkSamplerAddressMode]} *)
 module SamplerAddressMode = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "SamplerAddressMode"
@@ -464,6 +483,7 @@ module SamplerAddressMode = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkCompareOp.html}[VkCompareOp]} *)
 module CompareOp = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "CompareOp"
@@ -487,6 +507,7 @@ module CompareOp = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPolygonMode.html}[VkPolygonMode]} *)
 module PolygonMode = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "PolygonMode"
@@ -502,6 +523,7 @@ module PolygonMode = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkFrontFace.html}[VkFrontFace]} *)
 module FrontFace = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "FrontFace"
@@ -513,6 +535,7 @@ module FrontFace = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkBlendFactor.html}[VkBlendFactor]} *)
 module BlendFactor = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "BlendFactor"
@@ -558,6 +581,7 @@ module BlendFactor = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkBlendOp.html}[VkBlendOp]} *)
 module BlendOp = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "BlendOp"
@@ -667,6 +691,7 @@ module BlendOp = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkStencilOp.html}[VkStencilOp]} *)
 module StencilOp = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "StencilOp"
@@ -690,6 +715,7 @@ module StencilOp = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkLogicOp.html}[VkLogicOp]} *)
 module LogicOp = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "LogicOp"
@@ -729,6 +755,7 @@ module LogicOp = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkInternalAllocationType.html}[VkInternalAllocationType]} *)
 module InternalAllocationType = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "InternalAllocationType"
@@ -738,6 +765,7 @@ module InternalAllocationType = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkSystemAllocationScope.html}[VkSystemAllocationScope]} *)
 module SystemAllocationScope = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "SystemAllocationScope"
@@ -755,6 +783,7 @@ module SystemAllocationScope = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceType.html}[VkPhysicalDeviceType]} *)
 module PhysicalDeviceType = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "PhysicalDeviceType"
@@ -772,6 +801,7 @@ module PhysicalDeviceType = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkVertexInputRate.html}[VkVertexInputRate]} *)
 module VertexInputRate = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "VertexInputRate"
@@ -783,6 +813,7 @@ module VertexInputRate = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkFormat.html}[VkFormat]} *)
 module Format = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "Format"
@@ -1500,6 +1531,7 @@ module Format = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkStructureType.html}[VkStructureType]} *)
 module StructureType = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "StructureType"
@@ -4511,6 +4543,7 @@ module StructureType = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkSubpassContents.html}[VkSubpassContents]} *)
 module SubpassContents = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "SubpassContents"
@@ -4526,6 +4559,7 @@ module SubpassContents = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkResult.html}[VkResult]} *)
 module Result = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "Result"
@@ -4655,6 +4689,7 @@ module Result = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkDynamicState.html}[VkDynamicState]} *)
 module DynamicState = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "DynamicState"
@@ -4842,6 +4877,7 @@ module DynamicState = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkDescriptorUpdateTemplateType.html}[VkDescriptorUpdateTemplateType]} *)
 module DescriptorUpdateTemplateType = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "DescriptorUpdateTemplateType"
@@ -4857,6 +4893,7 @@ module DescriptorUpdateTemplateType = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkObjectType.html}[VkObjectType]} *)
 module ObjectType = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "ObjectType"
@@ -4990,6 +5027,7 @@ module ObjectType = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkRayTracingInvocationReorderModeEXT.html}[VkRayTracingInvocationReorderModeEXT]} *)
 module RayTracingInvocationReorderModeEXT = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "RayTracingInvocationReorderModeEXT"
@@ -5005,6 +5043,7 @@ module RayTracingInvocationReorderModeEXT = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkRayTracingLssIndexingModeNV.html}[VkRayTracingLssIndexingModeNV]} *)
 module RayTracingLssIndexingModeNV = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "RayTracingLssIndexingModeNV"
@@ -5016,6 +5055,7 @@ module RayTracingLssIndexingModeNV = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkRayTracingLssPrimitiveEndCapsModeNV.html}[VkRayTracingLssPrimitiveEndCapsModeNV]} *)
 module RayTracingLssPrimitiveEndCapsModeNV = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "RayTracingLssPrimitiveEndCapsModeNV"
@@ -5027,6 +5067,7 @@ module RayTracingLssPrimitiveEndCapsModeNV = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkDirectDriverLoadingModeLUNARG.html}[VkDirectDriverLoadingModeLUNARG]} *)
 module DirectDriverLoadingModeLUNARG = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "DirectDriverLoadingModeLUNARG"
@@ -5038,6 +5079,7 @@ module DirectDriverLoadingModeLUNARG = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkAntiLagModeAMD.html}[VkAntiLagModeAMD]} *)
 module AntiLagModeAMD = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "AntiLagModeAMD"
@@ -5051,6 +5093,7 @@ module AntiLagModeAMD = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkAntiLagStageAMD.html}[VkAntiLagStageAMD]} *)
 module AntiLagStageAMD = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "AntiLagStageAMD"
@@ -5062,6 +5105,7 @@ module AntiLagStageAMD = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkSemaphoreType.html}[VkSemaphoreType]} *)
 module SemaphoreType = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "SemaphoreType"
@@ -5077,6 +5121,7 @@ module SemaphoreType = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPresentModeKHR.html}[VkPresentModeKHR]} *)
 module PresentModeKHR = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "PresentModeKHR"
@@ -5100,6 +5145,7 @@ module PresentModeKHR = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkColorSpaceKHR.html}[VkColorSpaceKHR]} *)
 module ColorSpaceKHR = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "ColorSpaceKHR"
@@ -5143,6 +5189,7 @@ module ColorSpaceKHR = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkDisplaySurfaceStereoTypeNV.html}[VkDisplaySurfaceStereoTypeNV]} *)
 module DisplaySurfaceStereoTypeNV = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "DisplaySurfaceStereoTypeNV"
@@ -5158,6 +5205,7 @@ module DisplaySurfaceStereoTypeNV = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkTimeDomainKHR.html}[VkTimeDomainKHR]} *)
 module TimeDomainKHR = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "TimeDomainKHR"
@@ -5185,6 +5233,7 @@ module TimeDomainKHR = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkDebugReportObjectTypeEXT.html}[VkDebugReportObjectTypeEXT]} *)
 module DebugReportObjectTypeEXT = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "DebugReportObjectTypeEXT"
@@ -5282,6 +5331,7 @@ module DebugReportObjectTypeEXT = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkDeviceMemoryReportEventTypeEXT.html}[VkDeviceMemoryReportEventTypeEXT]} *)
 module DeviceMemoryReportEventTypeEXT = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "DeviceMemoryReportEventTypeEXT"
@@ -5299,6 +5349,7 @@ module DeviceMemoryReportEventTypeEXT = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkRasterizationOrderAMD.html}[VkRasterizationOrderAMD]} *)
 module RasterizationOrderAMD = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "RasterizationOrderAMD"
@@ -5310,6 +5361,7 @@ module RasterizationOrderAMD = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkClusterAccelerationStructureTypeNV.html}[VkClusterAccelerationStructureTypeNV]} *)
 module ClusterAccelerationStructureTypeNV = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "ClusterAccelerationStructureTypeNV"
@@ -5323,6 +5375,7 @@ module ClusterAccelerationStructureTypeNV = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkClusterAccelerationStructureOpTypeNV.html}[VkClusterAccelerationStructureOpTypeNV]} *)
 module ClusterAccelerationStructureOpTypeNV = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "ClusterAccelerationStructureOpTypeNV"
@@ -5342,6 +5395,7 @@ module ClusterAccelerationStructureOpTypeNV = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkClusterAccelerationStructureOpModeNV.html}[VkClusterAccelerationStructureOpModeNV]} *)
 module ClusterAccelerationStructureOpModeNV = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "ClusterAccelerationStructureOpModeNV"
@@ -5355,6 +5409,7 @@ module ClusterAccelerationStructureOpModeNV = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkValidationCheckEXT.html}[VkValidationCheckEXT]} *)
 module ValidationCheckEXT = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "ValidationCheckEXT"
@@ -5366,6 +5421,7 @@ module ValidationCheckEXT = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkValidationFeatureEnableEXT.html}[VkValidationFeatureEnableEXT]} *)
 module ValidationFeatureEnableEXT = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "ValidationFeatureEnableEXT"
@@ -5383,6 +5439,7 @@ module ValidationFeatureEnableEXT = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkValidationFeatureDisableEXT.html}[VkValidationFeatureDisableEXT]} *)
 module ValidationFeatureDisableEXT = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "ValidationFeatureDisableEXT"
@@ -5406,6 +5463,7 @@ module ValidationFeatureDisableEXT = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkLayerSettingTypeEXT.html}[VkLayerSettingTypeEXT]} *)
 module LayerSettingTypeEXT = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "LayerSettingTypeEXT"
@@ -5429,6 +5487,7 @@ module LayerSettingTypeEXT = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkIndirectCommandsTokenTypeNV.html}[VkIndirectCommandsTokenTypeNV]} *)
 module IndirectCommandsTokenTypeNV = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "IndirectCommandsTokenTypeNV"
@@ -5460,6 +5519,7 @@ module IndirectCommandsTokenTypeNV = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkDisplayPowerStateEXT.html}[VkDisplayPowerStateEXT]} *)
 module DisplayPowerStateEXT = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "DisplayPowerStateEXT"
@@ -5473,6 +5533,7 @@ module DisplayPowerStateEXT = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkDeviceEventTypeEXT.html}[VkDeviceEventTypeEXT]} *)
 module DeviceEventTypeEXT = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "DeviceEventTypeEXT"
@@ -5482,6 +5543,7 @@ module DeviceEventTypeEXT = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkDisplayEventTypeEXT.html}[VkDisplayEventTypeEXT]} *)
 module DisplayEventTypeEXT = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "DisplayEventTypeEXT"
@@ -5491,6 +5553,7 @@ module DisplayEventTypeEXT = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkViewportCoordinateSwizzleNV.html}[VkViewportCoordinateSwizzleNV]} *)
 module ViewportCoordinateSwizzleNV = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "ViewportCoordinateSwizzleNV"
@@ -5514,6 +5577,7 @@ module ViewportCoordinateSwizzleNV = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkDiscardRectangleModeEXT.html}[VkDiscardRectangleModeEXT]} *)
 module DiscardRectangleModeEXT = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "DiscardRectangleModeEXT"
@@ -5525,6 +5589,7 @@ module DiscardRectangleModeEXT = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPointClippingBehavior.html}[VkPointClippingBehavior]} *)
 module PointClippingBehavior = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "PointClippingBehavior"
@@ -5540,6 +5605,7 @@ module PointClippingBehavior = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkSamplerReductionMode.html}[VkSamplerReductionMode]} *)
 module SamplerReductionMode = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "SamplerReductionMode"
@@ -5561,6 +5627,7 @@ module SamplerReductionMode = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkTessellationDomainOrigin.html}[VkTessellationDomainOrigin]} *)
 module TessellationDomainOrigin = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "TessellationDomainOrigin"
@@ -5576,6 +5643,7 @@ module TessellationDomainOrigin = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkSamplerYcbcrModelConversion.html}[VkSamplerYcbcrModelConversion]} *)
 module SamplerYcbcrModelConversion = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "SamplerYcbcrModelConversion"
@@ -5603,6 +5671,7 @@ module SamplerYcbcrModelConversion = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkSamplerYcbcrRange.html}[VkSamplerYcbcrRange]} *)
 module SamplerYcbcrRange = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "SamplerYcbcrRange"
@@ -5618,6 +5687,7 @@ module SamplerYcbcrRange = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkChromaLocation.html}[VkChromaLocation]} *)
 module ChromaLocation = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "ChromaLocation"
@@ -5633,6 +5703,7 @@ module ChromaLocation = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkBlendOverlapEXT.html}[VkBlendOverlapEXT]} *)
 module BlendOverlapEXT = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "BlendOverlapEXT"
@@ -5646,6 +5717,7 @@ module BlendOverlapEXT = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkCoverageModulationModeNV.html}[VkCoverageModulationModeNV]} *)
 module CoverageModulationModeNV = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "CoverageModulationModeNV"
@@ -5661,6 +5733,7 @@ module CoverageModulationModeNV = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkCoverageReductionModeNV.html}[VkCoverageReductionModeNV]} *)
 module CoverageReductionModeNV = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "CoverageReductionModeNV"
@@ -5672,6 +5745,7 @@ module CoverageReductionModeNV = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkValidationCacheHeaderVersionEXT.html}[VkValidationCacheHeaderVersionEXT]} *)
 module ValidationCacheHeaderVersionEXT = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "ValidationCacheHeaderVersionEXT"
@@ -5681,6 +5755,7 @@ module ValidationCacheHeaderVersionEXT = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkShaderInfoTypeAMD.html}[VkShaderInfoTypeAMD]} *)
 module ShaderInfoTypeAMD = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "ShaderInfoTypeAMD"
@@ -5694,6 +5769,7 @@ module ShaderInfoTypeAMD = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkQueueGlobalPriority.html}[VkQueueGlobalPriority]} *)
 module QueueGlobalPriority = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "QueueGlobalPriority"
@@ -5725,6 +5801,7 @@ module QueueGlobalPriority = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkConservativeRasterizationModeEXT.html}[VkConservativeRasterizationModeEXT]} *)
 module ConservativeRasterizationModeEXT = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "ConservativeRasterizationModeEXT"
@@ -5738,6 +5815,7 @@ module ConservativeRasterizationModeEXT = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkVendorId.html}[VkVendorId]} *)
 module VendorId = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "VendorId"
@@ -5763,6 +5841,7 @@ module VendorId = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkDriverId.html}[VkDriverId]} *)
 module DriverId = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "DriverId"
@@ -5854,6 +5933,7 @@ module DriverId = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkShadingRatePaletteEntryNV.html}[VkShadingRatePaletteEntryNV]} *)
 module ShadingRatePaletteEntryNV = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "ShadingRatePaletteEntryNV"
@@ -5885,6 +5965,7 @@ module ShadingRatePaletteEntryNV = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkCoarseSampleOrderTypeNV.html}[VkCoarseSampleOrderTypeNV]} *)
 module CoarseSampleOrderTypeNV = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "CoarseSampleOrderTypeNV"
@@ -5900,6 +5981,7 @@ module CoarseSampleOrderTypeNV = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkCopyAccelerationStructureModeKHR.html}[VkCopyAccelerationStructureModeKHR]} *)
 module CopyAccelerationStructureModeKHR = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "CopyAccelerationStructureModeKHR"
@@ -5919,6 +6001,7 @@ module CopyAccelerationStructureModeKHR = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkBuildAccelerationStructureModeKHR.html}[VkBuildAccelerationStructureModeKHR]} *)
 module BuildAccelerationStructureModeKHR = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "BuildAccelerationStructureModeKHR"
@@ -5930,6 +6013,7 @@ module BuildAccelerationStructureModeKHR = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkAccelerationStructureTypeKHR.html}[VkAccelerationStructureTypeKHR]} *)
 module AccelerationStructureTypeKHR = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "AccelerationStructureTypeKHR"
@@ -5949,6 +6033,7 @@ module AccelerationStructureTypeKHR = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkGeometryTypeKHR.html}[VkGeometryTypeKHR]} *)
 module GeometryTypeKHR = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "GeometryTypeKHR"
@@ -5974,6 +6059,7 @@ module GeometryTypeKHR = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkAccelerationStructureMemoryRequirementsTypeNV.html}[VkAccelerationStructureMemoryRequirementsTypeNV]} *)
 module AccelerationStructureMemoryRequirementsTypeNV = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "AccelerationStructureMemoryRequirementsTypeNV"
@@ -5987,6 +6073,7 @@ module AccelerationStructureMemoryRequirementsTypeNV = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkAccelerationStructureBuildTypeKHR.html}[VkAccelerationStructureBuildTypeKHR]} *)
 module AccelerationStructureBuildTypeKHR = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "AccelerationStructureBuildTypeKHR"
@@ -6000,6 +6087,7 @@ module AccelerationStructureBuildTypeKHR = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkRayTracingShaderGroupTypeKHR.html}[VkRayTracingShaderGroupTypeKHR]} *)
 module RayTracingShaderGroupTypeKHR = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "RayTracingShaderGroupTypeKHR"
@@ -6019,6 +6107,7 @@ module RayTracingShaderGroupTypeKHR = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkAccelerationStructureCompatibilityKHR.html}[VkAccelerationStructureCompatibilityKHR]} *)
 module AccelerationStructureCompatibilityKHR = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "AccelerationStructureCompatibilityKHR"
@@ -6030,6 +6119,7 @@ module AccelerationStructureCompatibilityKHR = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkShaderGroupShaderKHR.html}[VkShaderGroupShaderKHR]} *)
 module ShaderGroupShaderKHR = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "ShaderGroupShaderKHR"
@@ -6045,6 +6135,7 @@ module ShaderGroupShaderKHR = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkMemoryOverallocationBehaviorAMD.html}[VkMemoryOverallocationBehaviorAMD]} *)
 module MemoryOverallocationBehaviorAMD = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "MemoryOverallocationBehaviorAMD"
@@ -6058,6 +6149,7 @@ module MemoryOverallocationBehaviorAMD = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkFullScreenExclusiveEXT.html}[VkFullScreenExclusiveEXT]} *)
 module FullScreenExclusiveEXT = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "FullScreenExclusiveEXT"
@@ -6073,6 +6165,7 @@ module FullScreenExclusiveEXT = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPerformanceCounterScopeKHR.html}[VkPerformanceCounterScopeKHR]} *)
 module PerformanceCounterScopeKHR = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "PerformanceCounterScopeKHR"
@@ -6092,6 +6185,7 @@ module PerformanceCounterScopeKHR = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPerformanceCounterUnitKHR.html}[VkPerformanceCounterUnitKHR]} *)
 module PerformanceCounterUnitKHR = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "PerformanceCounterUnitKHR"
@@ -6121,6 +6215,7 @@ module PerformanceCounterUnitKHR = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPerformanceCounterStorageKHR.html}[VkPerformanceCounterStorageKHR]} *)
 module PerformanceCounterStorageKHR = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "PerformanceCounterStorageKHR"
@@ -6140,6 +6235,7 @@ module PerformanceCounterStorageKHR = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPerformanceConfigurationTypeINTEL.html}[VkPerformanceConfigurationTypeINTEL]} *)
 module PerformanceConfigurationTypeINTEL = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "PerformanceConfigurationTypeINTEL"
@@ -6149,6 +6245,7 @@ module PerformanceConfigurationTypeINTEL = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkQueryPoolSamplingModeINTEL.html}[VkQueryPoolSamplingModeINTEL]} *)
 module QueryPoolSamplingModeINTEL = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "QueryPoolSamplingModeINTEL"
@@ -6158,6 +6255,7 @@ module QueryPoolSamplingModeINTEL = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPerformanceOverrideTypeINTEL.html}[VkPerformanceOverrideTypeINTEL]} *)
 module PerformanceOverrideTypeINTEL = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "PerformanceOverrideTypeINTEL"
@@ -6169,6 +6267,7 @@ module PerformanceOverrideTypeINTEL = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPerformanceParameterTypeINTEL.html}[VkPerformanceParameterTypeINTEL]} *)
 module PerformanceParameterTypeINTEL = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "PerformanceParameterTypeINTEL"
@@ -6180,6 +6279,7 @@ module PerformanceParameterTypeINTEL = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPerformanceValueTypeINTEL.html}[VkPerformanceValueTypeINTEL]} *)
 module PerformanceValueTypeINTEL = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "PerformanceValueTypeINTEL"
@@ -6197,6 +6297,7 @@ module PerformanceValueTypeINTEL = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkShaderFloatControlsIndependence.html}[VkShaderFloatControlsIndependence]} *)
 module ShaderFloatControlsIndependence = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "ShaderFloatControlsIndependence"
@@ -6216,6 +6317,7 @@ module ShaderFloatControlsIndependence = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPipelineExecutableStatisticFormatKHR.html}[VkPipelineExecutableStatisticFormatKHR]} *)
 module PipelineExecutableStatisticFormatKHR = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "PipelineExecutableStatisticFormatKHR"
@@ -6231,6 +6333,7 @@ module PipelineExecutableStatisticFormatKHR = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkLineRasterizationMode.html}[VkLineRasterizationMode]} *)
 module LineRasterizationMode = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "LineRasterizationMode"
@@ -6262,6 +6365,7 @@ module LineRasterizationMode = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkFragmentShadingRateCombinerOpKHR.html}[VkFragmentShadingRateCombinerOpKHR]} *)
 module FragmentShadingRateCombinerOpKHR = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "FragmentShadingRateCombinerOpKHR"
@@ -6279,6 +6383,7 @@ module FragmentShadingRateCombinerOpKHR = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkFragmentShadingRateNV.html}[VkFragmentShadingRateNV]} *)
 module FragmentShadingRateNV = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "FragmentShadingRateNV"
@@ -6310,6 +6415,7 @@ module FragmentShadingRateNV = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkFragmentShadingRateTypeNV.html}[VkFragmentShadingRateTypeNV]} *)
 module FragmentShadingRateTypeNV = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "FragmentShadingRateTypeNV"
@@ -6321,6 +6427,7 @@ module FragmentShadingRateTypeNV = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkSubpassMergeStatusEXT.html}[VkSubpassMergeStatusEXT]} *)
 module SubpassMergeStatusEXT = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "SubpassMergeStatusEXT"
@@ -6356,6 +6463,7 @@ module SubpassMergeStatusEXT = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkProvokingVertexModeEXT.html}[VkProvokingVertexModeEXT]} *)
 module ProvokingVertexModeEXT = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "ProvokingVertexModeEXT"
@@ -6367,6 +6475,7 @@ module ProvokingVertexModeEXT = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkAccelerationStructureMotionInstanceTypeNV.html}[VkAccelerationStructureMotionInstanceTypeNV]} *)
 module AccelerationStructureMotionInstanceTypeNV = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "AccelerationStructureMotionInstanceTypeNV"
@@ -6380,6 +6489,7 @@ module AccelerationStructureMotionInstanceTypeNV = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkDeviceAddressBindingTypeEXT.html}[VkDeviceAddressBindingTypeEXT]} *)
 module DeviceAddressBindingTypeEXT = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "DeviceAddressBindingTypeEXT"
@@ -6391,6 +6501,7 @@ module DeviceAddressBindingTypeEXT = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkQueryResultStatusKHR.html}[VkQueryResultStatusKHR]} *)
 module QueryResultStatusKHR = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "QueryResultStatusKHR"
@@ -6406,6 +6517,7 @@ module QueryResultStatusKHR = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkVideoEncodeTuningModeKHR.html}[VkVideoEncodeTuningModeKHR]} *)
 module VideoEncodeTuningModeKHR = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "VideoEncodeTuningModeKHR"
@@ -6423,6 +6535,7 @@ module VideoEncodeTuningModeKHR = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPartitionedAccelerationStructureOpTypeNV.html}[VkPartitionedAccelerationStructureOpTypeNV]} *)
 module PartitionedAccelerationStructureOpTypeNV = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "PartitionedAccelerationStructureOpTypeNV"
@@ -6436,6 +6549,7 @@ module PartitionedAccelerationStructureOpTypeNV = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkVideoEncodeAV1PredictionModeKHR.html}[VkVideoEncodeAV1PredictionModeKHR]} *)
 module VideoEncodeAV1PredictionModeKHR = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "VideoEncodeAV1PredictionModeKHR"
@@ -6451,6 +6565,7 @@ module VideoEncodeAV1PredictionModeKHR = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkVideoEncodeAV1RateControlGroupKHR.html}[VkVideoEncodeAV1RateControlGroupKHR]} *)
 module VideoEncodeAV1RateControlGroupKHR = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "VideoEncodeAV1RateControlGroupKHR"
@@ -6464,6 +6579,7 @@ module VideoEncodeAV1RateControlGroupKHR = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPipelineRobustnessBufferBehavior.html}[VkPipelineRobustnessBufferBehavior]} *)
 module PipelineRobustnessBufferBehavior = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "PipelineRobustnessBufferBehavior"
@@ -6487,6 +6603,7 @@ module PipelineRobustnessBufferBehavior = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPipelineRobustnessImageBehavior.html}[VkPipelineRobustnessImageBehavior]} *)
 module PipelineRobustnessImageBehavior = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "PipelineRobustnessImageBehavior"
@@ -6510,6 +6627,7 @@ module PipelineRobustnessImageBehavior = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkOpticalFlowPerformanceLevelNV.html}[VkOpticalFlowPerformanceLevelNV]} *)
 module OpticalFlowPerformanceLevelNV = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "OpticalFlowPerformanceLevelNV"
@@ -6525,6 +6643,7 @@ module OpticalFlowPerformanceLevelNV = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkOpticalFlowSessionBindingPointNV.html}[VkOpticalFlowSessionBindingPointNV]} *)
 module OpticalFlowSessionBindingPointNV = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "OpticalFlowSessionBindingPointNV"
@@ -6550,6 +6669,7 @@ module OpticalFlowSessionBindingPointNV = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkMicromapTypeEXT.html}[VkMicromapTypeEXT]} *)
 module MicromapTypeEXT = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "MicromapTypeEXT"
@@ -6561,6 +6681,7 @@ module MicromapTypeEXT = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkCopyMicromapModeEXT.html}[VkCopyMicromapModeEXT]} *)
 module CopyMicromapModeEXT = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "CopyMicromapModeEXT"
@@ -6576,6 +6697,7 @@ module CopyMicromapModeEXT = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkBuildMicromapModeEXT.html}[VkBuildMicromapModeEXT]} *)
 module BuildMicromapModeEXT = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "BuildMicromapModeEXT"
@@ -6585,6 +6707,7 @@ module BuildMicromapModeEXT = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkOpacityMicromapFormatKHR.html}[VkOpacityMicromapFormatKHR]} *)
 module OpacityMicromapFormatKHR = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "OpacityMicromapFormatKHR"
@@ -6600,6 +6723,7 @@ module OpacityMicromapFormatKHR = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkOpacityMicromapSpecialIndexKHR.html}[VkOpacityMicromapSpecialIndexKHR]} *)
 module OpacityMicromapSpecialIndexKHR = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "OpacityMicromapSpecialIndexKHR"
@@ -6625,6 +6749,7 @@ module OpacityMicromapSpecialIndexKHR = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkAccelerationStructureSerializedBlockTypeKHR.html}[VkAccelerationStructureSerializedBlockTypeKHR]} *)
 module AccelerationStructureSerializedBlockTypeKHR = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "AccelerationStructureSerializedBlockTypeKHR"
@@ -6634,6 +6759,7 @@ module AccelerationStructureSerializedBlockTypeKHR = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkDepthBiasRepresentationEXT.html}[VkDepthBiasRepresentationEXT]} *)
 module DepthBiasRepresentationEXT = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "DepthBiasRepresentationEXT"
@@ -6647,6 +6773,7 @@ module DepthBiasRepresentationEXT = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkDeviceFaultAddressTypeKHR.html}[VkDeviceFaultAddressTypeKHR]} *)
 module DeviceFaultAddressTypeKHR = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "DeviceFaultAddressTypeKHR"
@@ -6682,6 +6809,7 @@ module DeviceFaultAddressTypeKHR = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkDeviceFaultVendorBinaryHeaderVersionKHR.html}[VkDeviceFaultVendorBinaryHeaderVersionKHR]} *)
 module DeviceFaultVendorBinaryHeaderVersionKHR = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "DeviceFaultVendorBinaryHeaderVersionKHR"
@@ -6693,6 +6821,7 @@ module DeviceFaultVendorBinaryHeaderVersionKHR = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkIndirectExecutionSetInfoTypeEXT.html}[VkIndirectExecutionSetInfoTypeEXT]} *)
 module IndirectExecutionSetInfoTypeEXT = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "IndirectExecutionSetInfoTypeEXT"
@@ -6704,6 +6833,7 @@ module IndirectExecutionSetInfoTypeEXT = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkIndirectCommandsTokenTypeEXT.html}[VkIndirectCommandsTokenTypeEXT]} *)
 module IndirectCommandsTokenTypeEXT = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "IndirectCommandsTokenTypeEXT"
@@ -6745,6 +6875,7 @@ module IndirectCommandsTokenTypeEXT = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkDisplacementMicromapFormatNV.html}[VkDisplacementMicromapFormatNV]} *)
 module DisplacementMicromapFormatNV = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "DisplacementMicromapFormatNV"
@@ -6758,6 +6889,7 @@ module DisplacementMicromapFormatNV = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkShaderCodeTypeEXT.html}[VkShaderCodeTypeEXT]} *)
 module ShaderCodeTypeEXT = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "ShaderCodeTypeEXT"
@@ -6769,6 +6901,7 @@ module ShaderCodeTypeEXT = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkScopeKHR.html}[VkScopeKHR]} *)
 module ScopeKHR = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "ScopeKHR"
@@ -6792,6 +6925,7 @@ module ScopeKHR = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkComponentTypeKHR.html}[VkComponentTypeKHR]} *)
 module ComponentTypeKHR = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "ComponentTypeKHR"
@@ -6867,6 +7001,7 @@ module ComponentTypeKHR = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkCubicFilterWeightsQCOM.html}[VkCubicFilterWeightsQCOM]} *)
 module CubicFilterWeightsQCOM = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "CubicFilterWeightsQCOM"
@@ -6882,6 +7017,7 @@ module CubicFilterWeightsQCOM = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkBlockMatchWindowCompareModeQCOM.html}[VkBlockMatchWindowCompareModeQCOM]} *)
 module BlockMatchWindowCompareModeQCOM = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "BlockMatchWindowCompareModeQCOM"
@@ -6893,6 +7029,7 @@ module BlockMatchWindowCompareModeQCOM = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceLayeredApiKHR.html}[VkPhysicalDeviceLayeredApiKHR]} *)
 module PhysicalDeviceLayeredApiKHR = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "PhysicalDeviceLayeredApiKHR"
@@ -6910,6 +7047,7 @@ module PhysicalDeviceLayeredApiKHR = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkLayeredDriverUnderlyingApiMSFT.html}[VkLayeredDriverUnderlyingApiMSFT]} *)
 module LayeredDriverUnderlyingApiMSFT = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "LayeredDriverUnderlyingApiMSFT"
@@ -6921,6 +7059,7 @@ module LayeredDriverUnderlyingApiMSFT = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkLatencyMarkerNV.html}[VkLatencyMarkerNV]} *)
 module LatencyMarkerNV = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "LatencyMarkerNV"
@@ -6952,6 +7091,7 @@ module LatencyMarkerNV = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkOutOfBandQueueTypeNV.html}[VkOutOfBandQueueTypeNV]} *)
 module OutOfBandQueueTypeNV = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "OutOfBandQueueTypeNV"
@@ -6963,6 +7103,7 @@ module OutOfBandQueueTypeNV = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkCompressedTriangleFormatAMDX.html}[VkCompressedTriangleFormatAMDX]} *)
 module CompressedTriangleFormatAMDX = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "CompressedTriangleFormatAMDX"
@@ -6972,6 +7113,7 @@ module CompressedTriangleFormatAMDX = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkDepthClampModeEXT.html}[VkDepthClampModeEXT]} *)
 module DepthClampModeEXT = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "DepthClampModeEXT"
@@ -6983,6 +7125,7 @@ module DepthClampModeEXT = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkCooperativeVectorMatrixLayoutNV.html}[VkCooperativeVectorMatrixLayoutNV]} *)
 module CooperativeVectorMatrixLayoutNV = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "CooperativeVectorMatrixLayoutNV"
@@ -6998,6 +7141,7 @@ module CooperativeVectorMatrixLayoutNV = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkTensorTilingARM.html}[VkTensorTilingARM]} *)
 module TensorTilingARM = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "TensorTilingARM"
@@ -7019,6 +7163,7 @@ module TensorTilingARM = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkDefaultVertexAttributeValueKHR.html}[VkDefaultVertexAttributeValueKHR]} *)
 module DefaultVertexAttributeValueKHR = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "DefaultVertexAttributeValueKHR"
@@ -7030,6 +7175,7 @@ module DefaultVertexAttributeValueKHR = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkDataGraphPipelineSessionBindPointARM.html}[VkDataGraphPipelineSessionBindPointARM]} *)
 module DataGraphPipelineSessionBindPointARM = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "DataGraphPipelineSessionBindPointARM"
@@ -7043,6 +7189,7 @@ module DataGraphPipelineSessionBindPointARM = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkDataGraphPipelineSessionBindPointTypeARM.html}[VkDataGraphPipelineSessionBindPointTypeARM]} *)
 module DataGraphPipelineSessionBindPointTypeARM = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "DataGraphPipelineSessionBindPointTypeARM"
@@ -7052,6 +7199,7 @@ module DataGraphPipelineSessionBindPointTypeARM = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkDataGraphPipelinePropertyARM.html}[VkDataGraphPipelinePropertyARM]} *)
 module DataGraphPipelinePropertyARM = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "DataGraphPipelinePropertyARM"
@@ -7067,6 +7215,7 @@ module DataGraphPipelinePropertyARM = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceDataGraphProcessingEngineTypeARM.html}[VkPhysicalDeviceDataGraphProcessingEngineTypeARM]} *)
 module PhysicalDeviceDataGraphProcessingEngineTypeARM = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "PhysicalDeviceDataGraphProcessingEngineTypeARM"
@@ -7080,6 +7229,7 @@ module PhysicalDeviceDataGraphProcessingEngineTypeARM = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceDataGraphOperationTypeARM.html}[VkPhysicalDeviceDataGraphOperationTypeARM]} *)
 module PhysicalDeviceDataGraphOperationTypeARM = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "PhysicalDeviceDataGraphOperationTypeARM"
@@ -7095,6 +7245,7 @@ module PhysicalDeviceDataGraphOperationTypeARM = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkDataGraphModelCacheTypeQCOM.html}[VkDataGraphModelCacheTypeQCOM]} *)
 module DataGraphModelCacheTypeQCOM = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "DataGraphModelCacheTypeQCOM"
@@ -7104,6 +7255,7 @@ module DataGraphModelCacheTypeQCOM = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPerfHintTypeQCOM.html}[VkPerfHintTypeQCOM]} *)
 module PerfHintTypeQCOM = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "PerfHintTypeQCOM"
@@ -7119,6 +7271,7 @@ module PerfHintTypeQCOM = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkThrottleHintTypeSEC.html}[VkThrottleHintTypeSEC]} *)
 module ThrottleHintTypeSEC = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "ThrottleHintTypeSEC"
@@ -7132,6 +7285,7 @@ module ThrottleHintTypeSEC = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkDescriptorMappingSourceEXT.html}[VkDescriptorMappingSourceEXT]} *)
 module DescriptorMappingSourceEXT = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "DescriptorMappingSourceEXT"
@@ -7161,6 +7315,7 @@ module DescriptorMappingSourceEXT = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkGpaPerfBlockAMD.html}[VkGpaPerfBlockAMD]} *)
 module GpaPerfBlockAMD = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "GpaPerfBlockAMD"
@@ -7286,6 +7441,7 @@ module GpaPerfBlockAMD = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkGpaSampleTypeAMD.html}[VkGpaSampleTypeAMD]} *)
 module GpaSampleTypeAMD = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "GpaSampleTypeAMD"
@@ -7299,6 +7455,7 @@ module GpaSampleTypeAMD = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkGpaDeviceClockModeAMD.html}[VkGpaDeviceClockModeAMD]} *)
 module GpaDeviceClockModeAMD = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "GpaDeviceClockModeAMD"
@@ -7318,6 +7475,7 @@ module GpaDeviceClockModeAMD = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkDataGraphTOSALevelARM.html}[VkDataGraphTOSALevelARM]} *)
 module DataGraphTOSALevelARM = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "DataGraphTOSALevelARM"
@@ -7329,6 +7487,7 @@ module DataGraphTOSALevelARM = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkDataGraphOpticalFlowPerformanceLevelARM.html}[VkDataGraphOpticalFlowPerformanceLevelARM]} *)
 module DataGraphOpticalFlowPerformanceLevelARM = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "DataGraphOpticalFlowPerformanceLevelARM"
@@ -7344,6 +7503,7 @@ module DataGraphOpticalFlowPerformanceLevelARM = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkDataGraphPipelineNodeConnectionTypeARM.html}[VkDataGraphPipelineNodeConnectionTypeARM]} *)
 module DataGraphPipelineNodeConnectionTypeARM = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "DataGraphPipelineNodeConnectionTypeARM"
@@ -7361,6 +7521,7 @@ module DataGraphPipelineNodeConnectionTypeARM = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkDataGraphPipelineNodeTypeARM.html}[VkDataGraphPipelineNodeTypeARM]} *)
 module DataGraphPipelineNodeTypeARM = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "DataGraphPipelineNodeTypeARM"
@@ -7370,6 +7531,7 @@ module DataGraphPipelineNodeTypeARM = struct
   ]
 end
 
+(** Enum {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkNeuralAcceleratorStatisticsModeARM.html}[VkNeuralAcceleratorStatisticsModeARM]} *)
 module NeuralAcceleratorStatisticsModeARM = struct
   include Vk_base.Enum32 ()
   let () = set_type_name "NeuralAcceleratorStatisticsModeARM"
@@ -7383,6 +7545,7 @@ module NeuralAcceleratorStatisticsModeARM = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkFramebufferCreateFlagBits.html}[VkFramebufferCreateFlagBits]} *)
 module FramebufferCreateFlags = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "FramebufferCreateFlags"
@@ -7394,6 +7557,7 @@ module FramebufferCreateFlags = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkQueryPoolCreateFlagBits.html}[VkQueryPoolCreateFlagBits]} *)
 module QueryPoolCreateFlags = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "QueryPoolCreateFlags"
@@ -7403,6 +7567,7 @@ module QueryPoolCreateFlags = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkRenderPassCreateFlagBits.html}[VkRenderPassCreateFlagBits]} *)
 module RenderPassCreateFlags = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "RenderPassCreateFlags"
@@ -7414,6 +7579,7 @@ module RenderPassCreateFlags = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkSamplerCreateFlagBits.html}[VkSamplerCreateFlagBits]} *)
 module SamplerCreateFlags = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "SamplerCreateFlags"
@@ -7431,6 +7597,7 @@ module SamplerCreateFlags = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPipelineLayoutCreateFlagBits.html}[VkPipelineLayoutCreateFlagBits]} *)
 module PipelineLayoutCreateFlags = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "PipelineLayoutCreateFlags"
@@ -7442,6 +7609,7 @@ module PipelineLayoutCreateFlags = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPipelineCacheCreateFlagBits.html}[VkPipelineCacheCreateFlagBits]} *)
 module PipelineCacheCreateFlags = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "PipelineCacheCreateFlags"
@@ -7455,6 +7623,7 @@ module PipelineCacheCreateFlags = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPipelineDepthStencilStateCreateFlagBits.html}[VkPipelineDepthStencilStateCreateFlagBits]} *)
 module PipelineDepthStencilStateCreateFlags = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "PipelineDepthStencilStateCreateFlags"
@@ -7470,6 +7639,7 @@ module PipelineDepthStencilStateCreateFlags = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPipelineDynamicStateCreateFlags.html}[VkPipelineDynamicStateCreateFlags]} *)
 module PipelineDynamicStateCreateFlags = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "PipelineDynamicStateCreateFlags"
@@ -7477,6 +7647,7 @@ module PipelineDynamicStateCreateFlags = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPipelineColorBlendStateCreateFlagBits.html}[VkPipelineColorBlendStateCreateFlagBits]} *)
 module PipelineColorBlendStateCreateFlags = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "PipelineColorBlendStateCreateFlags"
@@ -7488,6 +7659,7 @@ module PipelineColorBlendStateCreateFlags = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPipelineMultisampleStateCreateFlags.html}[VkPipelineMultisampleStateCreateFlags]} *)
 module PipelineMultisampleStateCreateFlags = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "PipelineMultisampleStateCreateFlags"
@@ -7495,6 +7667,7 @@ module PipelineMultisampleStateCreateFlags = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPipelineRasterizationStateCreateFlags.html}[VkPipelineRasterizationStateCreateFlags]} *)
 module PipelineRasterizationStateCreateFlags = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "PipelineRasterizationStateCreateFlags"
@@ -7502,6 +7675,7 @@ module PipelineRasterizationStateCreateFlags = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPipelineViewportStateCreateFlags.html}[VkPipelineViewportStateCreateFlags]} *)
 module PipelineViewportStateCreateFlags = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "PipelineViewportStateCreateFlags"
@@ -7509,6 +7683,7 @@ module PipelineViewportStateCreateFlags = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPipelineTessellationStateCreateFlags.html}[VkPipelineTessellationStateCreateFlags]} *)
 module PipelineTessellationStateCreateFlags = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "PipelineTessellationStateCreateFlags"
@@ -7516,6 +7691,7 @@ module PipelineTessellationStateCreateFlags = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPipelineInputAssemblyStateCreateFlags.html}[VkPipelineInputAssemblyStateCreateFlags]} *)
 module PipelineInputAssemblyStateCreateFlags = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "PipelineInputAssemblyStateCreateFlags"
@@ -7523,6 +7699,7 @@ module PipelineInputAssemblyStateCreateFlags = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPipelineVertexInputStateCreateFlags.html}[VkPipelineVertexInputStateCreateFlags]} *)
 module PipelineVertexInputStateCreateFlags = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "PipelineVertexInputStateCreateFlags"
@@ -7530,6 +7707,7 @@ module PipelineVertexInputStateCreateFlags = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPipelineShaderStageCreateFlagBits.html}[VkPipelineShaderStageCreateFlagBits]} *)
 module PipelineShaderStageCreateFlags = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "PipelineShaderStageCreateFlags"
@@ -7545,6 +7723,7 @@ module PipelineShaderStageCreateFlags = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkDescriptorSetLayoutCreateFlagBits.html}[VkDescriptorSetLayoutCreateFlagBits]} *)
 module DescriptorSetLayoutCreateFlags = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "DescriptorSetLayoutCreateFlags"
@@ -7572,6 +7751,7 @@ module DescriptorSetLayoutCreateFlags = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkBufferViewCreateFlags.html}[VkBufferViewCreateFlags]} *)
 module BufferViewCreateFlags = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "BufferViewCreateFlags"
@@ -7579,6 +7759,7 @@ module BufferViewCreateFlags = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkInstanceCreateFlagBits.html}[VkInstanceCreateFlagBits]} *)
 module InstanceCreateFlags = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "InstanceCreateFlags"
@@ -7588,6 +7769,7 @@ module InstanceCreateFlags = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkDeviceCreateFlags.html}[VkDeviceCreateFlags]} *)
 module DeviceCreateFlags = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "DeviceCreateFlags"
@@ -7595,6 +7777,7 @@ module DeviceCreateFlags = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkDeviceQueueCreateFlagBits.html}[VkDeviceQueueCreateFlagBits]} *)
 module DeviceQueueCreateFlags = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "DeviceQueueCreateFlags"
@@ -7606,6 +7789,7 @@ module DeviceQueueCreateFlags = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkQueueFlagBits.html}[VkQueueFlagBits]} *)
 module QueueFlags = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "QueueFlags"
@@ -7631,6 +7815,7 @@ module QueueFlags = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkMemoryPropertyFlagBits.html}[VkMemoryPropertyFlagBits]} *)
 module MemoryPropertyFlags = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "MemoryPropertyFlags"
@@ -7656,6 +7841,7 @@ module MemoryPropertyFlags = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkMemoryHeapFlagBits.html}[VkMemoryHeapFlagBits]} *)
 module MemoryHeapFlags = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "MemoryHeapFlags"
@@ -7671,6 +7857,7 @@ module MemoryHeapFlags = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkAccessFlagBits.html}[VkAccessFlagBits]} *)
 module AccessFlags = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "AccessFlags"
@@ -7748,6 +7935,7 @@ module AccessFlags = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkBufferUsageFlagBits.html}[VkBufferUsageFlagBits]} *)
 module BufferUsageFlags = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "BufferUsageFlags"
@@ -7817,6 +8005,7 @@ module BufferUsageFlags = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkBufferCreateFlagBits.html}[VkBufferCreateFlagBits]} *)
 module BufferCreateFlags = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "BufferCreateFlags"
@@ -7842,6 +8031,7 @@ module BufferCreateFlags = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkShaderStageFlagBits.html}[VkShaderStageFlagBits]} *)
 module ShaderStageFlags = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "ShaderStageFlags"
@@ -7901,6 +8091,7 @@ module ShaderStageFlags = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkImageUsageFlagBits.html}[VkImageUsageFlagBits]} *)
 module ImageUsageFlags = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "ImageUsageFlags"
@@ -7962,6 +8153,7 @@ module ImageUsageFlags = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkImageCreateFlagBits.html}[VkImageCreateFlagBits]} *)
 module ImageCreateFlags = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "ImageCreateFlags"
@@ -8027,6 +8219,7 @@ module ImageCreateFlags = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkImageViewCreateFlagBits.html}[VkImageViewCreateFlagBits]} *)
 module ImageViewCreateFlags = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "ImageViewCreateFlags"
@@ -8040,6 +8233,7 @@ module ImageViewCreateFlags = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPipelineCreateFlagBits.html}[VkPipelineCreateFlagBits]} *)
 module PipelineCreateFlags = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "PipelineCreateFlags"
@@ -8131,6 +8325,7 @@ module PipelineCreateFlags = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkColorComponentFlagBits.html}[VkColorComponentFlagBits]} *)
 module ColorComponentFlags = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "ColorComponentFlags"
@@ -8146,6 +8341,7 @@ module ColorComponentFlags = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkFenceCreateFlagBits.html}[VkFenceCreateFlagBits]} *)
 module FenceCreateFlags = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "FenceCreateFlags"
@@ -8155,6 +8351,7 @@ module FenceCreateFlags = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkSemaphoreCreateFlags.html}[VkSemaphoreCreateFlags]} *)
 module SemaphoreCreateFlags = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "SemaphoreCreateFlags"
@@ -8162,6 +8359,7 @@ module SemaphoreCreateFlags = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkFormatFeatureFlagBits.html}[VkFormatFeatureFlagBits]} *)
 module FormatFeatureFlags = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "FormatFeatureFlags"
@@ -8253,6 +8451,7 @@ module FormatFeatureFlags = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkQueryControlFlagBits.html}[VkQueryControlFlagBits]} *)
 module QueryControlFlags = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "QueryControlFlags"
@@ -8262,6 +8461,7 @@ module QueryControlFlags = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkQueryResultFlagBits.html}[VkQueryResultFlagBits]} *)
 module QueryResultFlags = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "QueryResultFlags"
@@ -8279,6 +8479,7 @@ module QueryResultFlags = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkShaderModuleCreateFlags.html}[VkShaderModuleCreateFlags]} *)
 module ShaderModuleCreateFlags = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "ShaderModuleCreateFlags"
@@ -8286,6 +8487,7 @@ module ShaderModuleCreateFlags = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkEventCreateFlagBits.html}[VkEventCreateFlagBits]} *)
 module EventCreateFlags = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "EventCreateFlags"
@@ -8297,6 +8499,7 @@ module EventCreateFlags = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkCommandPoolCreateFlagBits.html}[VkCommandPoolCreateFlagBits]} *)
 module CommandPoolCreateFlags = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "CommandPoolCreateFlags"
@@ -8310,6 +8513,7 @@ module CommandPoolCreateFlags = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkCommandPoolResetFlagBits.html}[VkCommandPoolResetFlagBits]} *)
 module CommandPoolResetFlags = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "CommandPoolResetFlags"
@@ -8319,6 +8523,7 @@ module CommandPoolResetFlags = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkCommandBufferResetFlagBits.html}[VkCommandBufferResetFlagBits]} *)
 module CommandBufferResetFlags = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "CommandBufferResetFlags"
@@ -8328,6 +8533,7 @@ module CommandBufferResetFlags = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkCommandBufferUsageFlagBits.html}[VkCommandBufferUsageFlagBits]} *)
 module CommandBufferUsageFlags = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "CommandBufferUsageFlags"
@@ -8341,6 +8547,7 @@ module CommandBufferUsageFlags = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkQueryPipelineStatisticFlagBits.html}[VkQueryPipelineStatisticFlagBits]} *)
 module QueryPipelineStatisticFlags = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "QueryPipelineStatisticFlags"
@@ -8376,6 +8583,7 @@ module QueryPipelineStatisticFlags = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkMemoryMapFlagBits.html}[VkMemoryMapFlagBits]} *)
 module MemoryMapFlags = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "MemoryMapFlags"
@@ -8385,6 +8593,7 @@ module MemoryMapFlags = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkMemoryUnmapFlagBits.html}[VkMemoryUnmapFlagBits]} *)
 module MemoryUnmapFlags = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "MemoryUnmapFlags"
@@ -8394,6 +8603,7 @@ module MemoryUnmapFlags = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkImageAspectFlagBits.html}[VkImageAspectFlagBits]} *)
 module ImageAspectFlags = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "ImageAspectFlags"
@@ -8433,6 +8643,7 @@ module ImageAspectFlags = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkSparseMemoryBindFlagBits.html}[VkSparseMemoryBindFlagBits]} *)
 module SparseMemoryBindFlags = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "SparseMemoryBindFlags"
@@ -8442,6 +8653,7 @@ module SparseMemoryBindFlags = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkSparseImageFormatFlagBits.html}[VkSparseImageFormatFlagBits]} *)
 module SparseImageFormatFlags = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "SparseImageFormatFlags"
@@ -8455,6 +8667,7 @@ module SparseImageFormatFlags = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkSubpassDescriptionFlagBits.html}[VkSubpassDescriptionFlagBits]} *)
 module SubpassDescriptionFlags = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "SubpassDescriptionFlags"
@@ -8490,6 +8703,7 @@ module SubpassDescriptionFlags = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPipelineStageFlagBits.html}[VkPipelineStageFlagBits]} *)
 module PipelineStageFlags = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "PipelineStageFlags"
@@ -8565,6 +8779,7 @@ module PipelineStageFlags = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkSampleCountFlagBits.html}[VkSampleCountFlagBits]} *)
 module SampleCountFlags = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "SampleCountFlags"
@@ -8586,6 +8801,7 @@ module SampleCountFlags = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkAttachmentDescriptionFlagBits.html}[VkAttachmentDescriptionFlagBits]} *)
 module AttachmentDescriptionFlags = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "AttachmentDescriptionFlags"
@@ -8599,6 +8815,7 @@ module AttachmentDescriptionFlags = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkStencilFaceFlagBits.html}[VkStencilFaceFlagBits]} *)
 module StencilFaceFlags = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "StencilFaceFlags"
@@ -8614,6 +8831,7 @@ module StencilFaceFlags = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkCullModeFlagBits.html}[VkCullModeFlagBits]} *)
 module CullModeFlags = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "CullModeFlags"
@@ -8629,6 +8847,7 @@ module CullModeFlags = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkDescriptorPoolCreateFlagBits.html}[VkDescriptorPoolCreateFlagBits]} *)
 module DescriptorPoolCreateFlags = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "DescriptorPoolCreateFlags"
@@ -8650,6 +8869,7 @@ module DescriptorPoolCreateFlags = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkDescriptorPoolResetFlags.html}[VkDescriptorPoolResetFlags]} *)
 module DescriptorPoolResetFlags = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "DescriptorPoolResetFlags"
@@ -8657,6 +8877,7 @@ module DescriptorPoolResetFlags = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkDependencyFlagBits.html}[VkDependencyFlagBits]} *)
 module DependencyFlags = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "DependencyFlags"
@@ -8680,6 +8901,7 @@ module DependencyFlags = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkSubgroupFeatureFlagBits.html}[VkSubgroupFeatureFlagBits]} *)
 module SubgroupFeatureFlags = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "SubgroupFeatureFlags"
@@ -8715,6 +8937,7 @@ module SubgroupFeatureFlags = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkIndirectCommandsLayoutUsageFlagBitsNV.html}[VkIndirectCommandsLayoutUsageFlagBitsNV]} *)
 module IndirectCommandsLayoutUsageFlagsNV = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "IndirectCommandsLayoutUsageFlagsNV"
@@ -8728,6 +8951,7 @@ module IndirectCommandsLayoutUsageFlagsNV = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkIndirectStateFlagBitsNV.html}[VkIndirectStateFlagBitsNV]} *)
 module IndirectStateFlagsNV = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "IndirectStateFlagsNV"
@@ -8737,6 +8961,7 @@ module IndirectStateFlagsNV = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkGeometryFlagBitsKHR.html}[VkGeometryFlagBitsKHR]} *)
 module GeometryFlagsKHR = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "GeometryFlagsKHR"
@@ -8752,6 +8977,7 @@ module GeometryFlagsKHR = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkGeometryInstanceFlagBitsKHR.html}[VkGeometryInstanceFlagBitsKHR]} *)
 module GeometryInstanceFlagsKHR = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "GeometryInstanceFlagsKHR"
@@ -8789,6 +9015,7 @@ module GeometryInstanceFlagsKHR = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkClusterAccelerationStructureGeometryFlagBitsNV.html}[VkClusterAccelerationStructureGeometryFlagBitsNV]} *)
 module ClusterAccelerationStructureGeometryFlagsNV = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "ClusterAccelerationStructureGeometryFlagsNV"
@@ -8802,6 +9029,7 @@ module ClusterAccelerationStructureGeometryFlagsNV = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkClusterAccelerationStructureClusterFlagBitsNV.html}[VkClusterAccelerationStructureClusterFlagBitsNV]} *)
 module ClusterAccelerationStructureClusterFlagsNV = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "ClusterAccelerationStructureClusterFlagsNV"
@@ -8811,6 +9039,7 @@ module ClusterAccelerationStructureClusterFlagsNV = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkClusterAccelerationStructureAddressResolutionFlagBitsNV.html}[VkClusterAccelerationStructureAddressResolutionFlagBitsNV]} *)
 module ClusterAccelerationStructureAddressResolutionFlagsNV = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "ClusterAccelerationStructureAddressResolutionFlagsNV"
@@ -8832,6 +9061,7 @@ module ClusterAccelerationStructureAddressResolutionFlagsNV = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkBuildAccelerationStructureFlagBitsKHR.html}[VkBuildAccelerationStructureFlagBitsKHR]} *)
 module BuildAccelerationStructureFlagsKHR = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "BuildAccelerationStructureFlagsKHR"
@@ -8889,6 +9119,7 @@ module BuildAccelerationStructureFlagsKHR = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPrivateDataSlotCreateFlags.html}[VkPrivateDataSlotCreateFlags]} *)
 module PrivateDataSlotCreateFlags = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "PrivateDataSlotCreateFlags"
@@ -8896,6 +9127,7 @@ module PrivateDataSlotCreateFlags = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkAccelerationStructureCreateFlagBitsKHR.html}[VkAccelerationStructureCreateFlagBitsKHR]} *)
 module AccelerationStructureCreateFlagsKHR = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "AccelerationStructureCreateFlagsKHR"
@@ -8909,6 +9141,7 @@ module AccelerationStructureCreateFlagsKHR = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkDescriptorUpdateTemplateCreateFlags.html}[VkDescriptorUpdateTemplateCreateFlags]} *)
 module DescriptorUpdateTemplateCreateFlags = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "DescriptorUpdateTemplateCreateFlags"
@@ -8916,6 +9149,7 @@ module DescriptorUpdateTemplateCreateFlags = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPipelineCreationFeedbackFlagBits.html}[VkPipelineCreationFeedbackFlagBits]} *)
 module PipelineCreationFeedbackFlags = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "PipelineCreationFeedbackFlags"
@@ -8935,6 +9169,7 @@ module PipelineCreationFeedbackFlags = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPerformanceCounterDescriptionFlagBitsKHR.html}[VkPerformanceCounterDescriptionFlagBitsKHR]} *)
 module PerformanceCounterDescriptionFlagsKHR = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "PerformanceCounterDescriptionFlagsKHR"
@@ -8950,6 +9185,7 @@ module PerformanceCounterDescriptionFlagsKHR = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkAcquireProfilingLockFlagBitsKHR.html}[VkAcquireProfilingLockFlagBitsKHR]} *)
 module AcquireProfilingLockFlagsKHR = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "AcquireProfilingLockFlagsKHR"
@@ -8957,6 +9193,7 @@ module AcquireProfilingLockFlagsKHR = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkSemaphoreWaitFlagBits.html}[VkSemaphoreWaitFlagBits]} *)
 module SemaphoreWaitFlags = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "SemaphoreWaitFlags"
@@ -8968,6 +9205,7 @@ module SemaphoreWaitFlags = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPipelineCompilerControlFlagBitsAMD.html}[VkPipelineCompilerControlFlagBitsAMD]} *)
 module PipelineCompilerControlFlagsAMD = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "PipelineCompilerControlFlagsAMD"
@@ -8975,6 +9213,7 @@ module PipelineCompilerControlFlagsAMD = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkShaderCorePropertiesFlagBitsAMD.html}[VkShaderCorePropertiesFlagBitsAMD]} *)
 module ShaderCorePropertiesFlagsAMD = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "ShaderCorePropertiesFlagsAMD"
@@ -8982,6 +9221,7 @@ module ShaderCorePropertiesFlagsAMD = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkDeviceDiagnosticsConfigFlagBitsNV.html}[VkDeviceDiagnosticsConfigFlagBitsNV]} *)
 module DeviceDiagnosticsConfigFlagsNV = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "DeviceDiagnosticsConfigFlagsNV"
@@ -8997,6 +9237,7 @@ module DeviceDiagnosticsConfigFlagsNV = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkAccessFlagBits2.html}[VkAccessFlagBits2]} *)
 module AccessFlags2 = struct
   include Vk_base.Flags64 ()
   let () = set_type_name "AccessFlags2"
@@ -9158,6 +9399,7 @@ module AccessFlags2 = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPipelineStageFlagBits2.html}[VkPipelineStageFlagBits2]} *)
 module PipelineStageFlags2 = struct
   include Vk_base.Flags64 ()
   let () = set_type_name "PipelineStageFlags2"
@@ -9325,6 +9567,7 @@ module PipelineStageFlags2 = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkAccelerationStructureMotionInfoFlagsNV.html}[VkAccelerationStructureMotionInfoFlagsNV]} *)
 module AccelerationStructureMotionInfoFlagsNV = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "AccelerationStructureMotionInfoFlagsNV"
@@ -9332,6 +9575,7 @@ module AccelerationStructureMotionInfoFlagsNV = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkAccelerationStructureMotionInstanceFlagsNV.html}[VkAccelerationStructureMotionInstanceFlagsNV]} *)
 module AccelerationStructureMotionInstanceFlagsNV = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "AccelerationStructureMotionInstanceFlagsNV"
@@ -9339,6 +9583,7 @@ module AccelerationStructureMotionInstanceFlagsNV = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkFormatFeatureFlagBits2.html}[VkFormatFeatureFlagBits2]} *)
 module FormatFeatureFlags2 = struct
   include Vk_base.Flags64 ()
   let () = set_type_name "FormatFeatureFlags2"
@@ -9520,6 +9765,7 @@ module FormatFeatureFlags2 = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkFormatFeatureFlagBits4KHR.html}[VkFormatFeatureFlagBits4KHR]} *)
 module FormatFeatureFlags4KHR = struct
   include Vk_base.Flags64 ()
   let () = set_type_name "FormatFeatureFlags4KHR"
@@ -9527,6 +9773,7 @@ module FormatFeatureFlags4KHR = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkRenderingFlagBits.html}[VkRenderingFlagBits]} *)
 module RenderingFlags = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "RenderingFlags"
@@ -9560,6 +9807,7 @@ module RenderingFlags = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkMemoryDecompressionMethodFlagBitsEXT.html}[VkMemoryDecompressionMethodFlagBitsEXT]} *)
 module MemoryDecompressionMethodFlagsEXT = struct
   include Vk_base.Flags64 ()
   let () = set_type_name "MemoryDecompressionMethodFlagsEXT"
@@ -9571,6 +9819,7 @@ module MemoryDecompressionMethodFlagsEXT = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkDeviceFaultFlagBitsKHR.html}[VkDeviceFaultFlagBitsKHR]} *)
 module DeviceFaultFlagsKHR = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "DeviceFaultFlagsKHR"
@@ -9590,6 +9839,7 @@ module DeviceFaultFlagsKHR = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkBuildMicromapFlagBitsEXT.html}[VkBuildMicromapFlagBitsEXT]} *)
 module BuildMicromapFlagsEXT = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "BuildMicromapFlagsEXT"
@@ -9603,6 +9853,7 @@ module BuildMicromapFlagsEXT = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkMicromapCreateFlagBitsEXT.html}[VkMicromapCreateFlagBitsEXT]} *)
 module MicromapCreateFlagsEXT = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "MicromapCreateFlagsEXT"
@@ -9612,6 +9863,7 @@ module MicromapCreateFlagsEXT = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkIndirectCommandsLayoutUsageFlagBitsEXT.html}[VkIndirectCommandsLayoutUsageFlagBitsEXT]} *)
 module IndirectCommandsLayoutUsageFlagsEXT = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "IndirectCommandsLayoutUsageFlagsEXT"
@@ -9623,6 +9875,7 @@ module IndirectCommandsLayoutUsageFlagsEXT = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkIndirectCommandsInputModeFlagBitsEXT.html}[VkIndirectCommandsInputModeFlagBitsEXT]} *)
 module IndirectCommandsInputModeFlagsEXT = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "IndirectCommandsInputModeFlagsEXT"
@@ -9634,6 +9887,7 @@ module IndirectCommandsInputModeFlagsEXT = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkDirectDriverLoadingFlagsLUNARG.html}[VkDirectDriverLoadingFlagsLUNARG]} *)
 module DirectDriverLoadingFlagsLUNARG = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "DirectDriverLoadingFlagsLUNARG"
@@ -9641,6 +9895,7 @@ module DirectDriverLoadingFlagsLUNARG = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPipelineCreateFlagBits2.html}[VkPipelineCreateFlagBits2]} *)
 module PipelineCreateFlags2 = struct
   include Vk_base.Flags64 ()
   let () = set_type_name "PipelineCreateFlags2"
@@ -9754,6 +10009,7 @@ module PipelineCreateFlags2 = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkBufferUsageFlagBits2.html}[VkBufferUsageFlagBits2]} *)
 module BufferUsageFlags2 = struct
   include Vk_base.Flags64 ()
   let () = set_type_name "BufferUsageFlags2"
@@ -9847,6 +10103,7 @@ module BufferUsageFlags2 = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkImageUsageFlagBits2KHR.html}[VkImageUsageFlagBits2KHR]} *)
 module ImageUsageFlags2KHR = struct
   include Vk_base.Flags64 ()
   let () = set_type_name "ImageUsageFlags2KHR"
@@ -9904,6 +10161,7 @@ module ImageUsageFlags2KHR = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkImageCreateFlagBits2KHR.html}[VkImageCreateFlagBits2KHR]} *)
 module ImageCreateFlags2KHR = struct
   include Vk_base.Flags64 ()
   let () = set_type_name "ImageCreateFlags2KHR"
@@ -9953,6 +10211,7 @@ module ImageCreateFlags2KHR = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkAddressCopyFlagBitsKHR.html}[VkAddressCopyFlagBitsKHR]} *)
 module AddressCopyFlagsKHR = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "AddressCopyFlagsKHR"
@@ -9966,6 +10225,7 @@ module AddressCopyFlagsKHR = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkTensorCreateFlagBitsARM.html}[VkTensorCreateFlagBitsARM]} *)
 module TensorCreateFlagsARM = struct
   include Vk_base.Flags64 ()
   let () = set_type_name "TensorCreateFlagsARM"
@@ -9981,6 +10241,7 @@ module TensorCreateFlagsARM = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkTensorUsageFlagBitsARM.html}[VkTensorUsageFlagBitsARM]} *)
 module TensorUsageFlagsARM = struct
   include Vk_base.Flags64 ()
   let () = set_type_name "TensorUsageFlagsARM"
@@ -9998,6 +10259,7 @@ module TensorUsageFlagsARM = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkTensorViewCreateFlagBitsARM.html}[VkTensorViewCreateFlagBitsARM]} *)
 module TensorViewCreateFlagsARM = struct
   include Vk_base.Flags64 ()
   let () = set_type_name "TensorViewCreateFlagsARM"
@@ -10007,6 +10269,7 @@ module TensorViewCreateFlagsARM = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkDataGraphPipelineSessionCreateFlagBitsARM.html}[VkDataGraphPipelineSessionCreateFlagBitsARM]} *)
 module DataGraphPipelineSessionCreateFlagsARM = struct
   include Vk_base.Flags64 ()
   let () = set_type_name "DataGraphPipelineSessionCreateFlagsARM"
@@ -10018,6 +10281,7 @@ module DataGraphPipelineSessionCreateFlagsARM = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkDataGraphPipelineDispatchFlagBitsARM.html}[VkDataGraphPipelineDispatchFlagBitsARM]} *)
 module DataGraphPipelineDispatchFlagsARM = struct
   include Vk_base.Flags64 ()
   let () = set_type_name "DataGraphPipelineDispatchFlagsARM"
@@ -10025,6 +10289,7 @@ module DataGraphPipelineDispatchFlagsARM = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkVideoEncodeRgbModelConversionFlagBitsVALVE.html}[VkVideoEncodeRgbModelConversionFlagBitsVALVE]} *)
 module VideoEncodeRgbModelConversionFlagsVALVE = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "VideoEncodeRgbModelConversionFlagsVALVE"
@@ -10042,6 +10307,7 @@ module VideoEncodeRgbModelConversionFlagsVALVE = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkVideoEncodeRgbRangeCompressionFlagBitsVALVE.html}[VkVideoEncodeRgbRangeCompressionFlagBitsVALVE]} *)
 module VideoEncodeRgbRangeCompressionFlagsVALVE = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "VideoEncodeRgbRangeCompressionFlagsVALVE"
@@ -10053,6 +10319,7 @@ module VideoEncodeRgbRangeCompressionFlagsVALVE = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkVideoEncodeRgbChromaOffsetFlagBitsVALVE.html}[VkVideoEncodeRgbChromaOffsetFlagBitsVALVE]} *)
 module VideoEncodeRgbChromaOffsetFlagsVALVE = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "VideoEncodeRgbChromaOffsetFlagsVALVE"
@@ -10064,6 +10331,7 @@ module VideoEncodeRgbChromaOffsetFlagsVALVE = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkSpirvResourceTypeFlagBitsEXT.html}[VkSpirvResourceTypeFlagBitsEXT]} *)
 module SpirvResourceTypeFlagsEXT = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "SpirvResourceTypeFlagsEXT"
@@ -10093,6 +10361,7 @@ module SpirvResourceTypeFlagsEXT = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkGpaSqShaderStageFlagBitsAMD.html}[VkGpaSqShaderStageFlagBitsAMD]} *)
 module GpaSqShaderStageFlagsAMD = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "GpaSqShaderStageFlagsAMD"
@@ -10114,6 +10383,7 @@ module GpaSqShaderStageFlagsAMD = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkGpaPerfBlockPropertiesFlagsAMD.html}[VkGpaPerfBlockPropertiesFlagsAMD]} *)
 module GpaPerfBlockPropertiesFlagsAMD = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "GpaPerfBlockPropertiesFlagsAMD"
@@ -10121,6 +10391,7 @@ module GpaPerfBlockPropertiesFlagsAMD = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceGpaPropertiesFlagsAMD.html}[VkPhysicalDeviceGpaPropertiesFlagsAMD]} *)
 module PhysicalDeviceGpaPropertiesFlagsAMD = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "PhysicalDeviceGpaPropertiesFlagsAMD"
@@ -10128,6 +10399,7 @@ module PhysicalDeviceGpaPropertiesFlagsAMD = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkAddressCommandFlagBitsKHR.html}[VkAddressCommandFlagBitsKHR]} *)
 module AddressCommandFlagsKHR = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "AddressCommandFlagsKHR"
@@ -10147,6 +10419,7 @@ module AddressCommandFlagsKHR = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkCompositeAlphaFlagBitsKHR.html}[VkCompositeAlphaFlagBitsKHR]} *)
 module CompositeAlphaFlagsKHR = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "CompositeAlphaFlagsKHR"
@@ -10162,6 +10435,7 @@ module CompositeAlphaFlagsKHR = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkDisplayPlaneAlphaFlagBitsKHR.html}[VkDisplayPlaneAlphaFlagBitsKHR]} *)
 module DisplayPlaneAlphaFlagsKHR = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "DisplayPlaneAlphaFlagsKHR"
@@ -10177,6 +10451,7 @@ module DisplayPlaneAlphaFlagsKHR = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkSurfaceTransformFlagBitsKHR.html}[VkSurfaceTransformFlagBitsKHR]} *)
 module SurfaceTransformFlagsKHR = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "SurfaceTransformFlagsKHR"
@@ -10202,6 +10477,7 @@ module SurfaceTransformFlagsKHR = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkSwapchainCreateFlagBitsKHR.html}[VkSwapchainCreateFlagBitsKHR]} *)
 module SwapchainCreateFlagsKHR = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "SwapchainCreateFlagsKHR"
@@ -10227,6 +10503,7 @@ module SwapchainCreateFlagsKHR = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkDisplayModeCreateFlagsKHR.html}[VkDisplayModeCreateFlagsKHR]} *)
 module DisplayModeCreateFlagsKHR = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "DisplayModeCreateFlagsKHR"
@@ -10234,6 +10511,7 @@ module DisplayModeCreateFlagsKHR = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkDisplaySurfaceCreateFlagsKHR.html}[VkDisplaySurfaceCreateFlagsKHR]} *)
 module DisplaySurfaceCreateFlagsKHR = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "DisplaySurfaceCreateFlagsKHR"
@@ -10241,6 +10519,7 @@ module DisplaySurfaceCreateFlagsKHR = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkAndroidSurfaceCreateFlagsKHR.html}[VkAndroidSurfaceCreateFlagsKHR]} *)
 module AndroidSurfaceCreateFlagsKHR = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "AndroidSurfaceCreateFlagsKHR"
@@ -10248,6 +10527,7 @@ module AndroidSurfaceCreateFlagsKHR = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkViSurfaceCreateFlagsNN.html}[VkViSurfaceCreateFlagsNN]} *)
 module ViSurfaceCreateFlagsNN = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "ViSurfaceCreateFlagsNN"
@@ -10255,6 +10535,7 @@ module ViSurfaceCreateFlagsNN = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkWaylandSurfaceCreateFlagsKHR.html}[VkWaylandSurfaceCreateFlagsKHR]} *)
 module WaylandSurfaceCreateFlagsKHR = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "WaylandSurfaceCreateFlagsKHR"
@@ -10262,6 +10543,7 @@ module WaylandSurfaceCreateFlagsKHR = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkUbmSurfaceCreateFlagsSEC.html}[VkUbmSurfaceCreateFlagsSEC]} *)
 module UbmSurfaceCreateFlagsSEC = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "UbmSurfaceCreateFlagsSEC"
@@ -10269,6 +10551,7 @@ module UbmSurfaceCreateFlagsSEC = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkWin32SurfaceCreateFlagsKHR.html}[VkWin32SurfaceCreateFlagsKHR]} *)
 module Win32SurfaceCreateFlagsKHR = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "Win32SurfaceCreateFlagsKHR"
@@ -10276,6 +10559,7 @@ module Win32SurfaceCreateFlagsKHR = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkXlibSurfaceCreateFlagsKHR.html}[VkXlibSurfaceCreateFlagsKHR]} *)
 module XlibSurfaceCreateFlagsKHR = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "XlibSurfaceCreateFlagsKHR"
@@ -10283,6 +10567,7 @@ module XlibSurfaceCreateFlagsKHR = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkXcbSurfaceCreateFlagsKHR.html}[VkXcbSurfaceCreateFlagsKHR]} *)
 module XcbSurfaceCreateFlagsKHR = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "XcbSurfaceCreateFlagsKHR"
@@ -10290,6 +10575,7 @@ module XcbSurfaceCreateFlagsKHR = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkDirectFBSurfaceCreateFlagsEXT.html}[VkDirectFBSurfaceCreateFlagsEXT]} *)
 module DirectFBSurfaceCreateFlagsEXT = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "DirectFBSurfaceCreateFlagsEXT"
@@ -10297,6 +10583,7 @@ module DirectFBSurfaceCreateFlagsEXT = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkIOSSurfaceCreateFlagsMVK.html}[VkIOSSurfaceCreateFlagsMVK]} *)
 module IOSSurfaceCreateFlagsMVK = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "IOSSurfaceCreateFlagsMVK"
@@ -10304,6 +10591,7 @@ module IOSSurfaceCreateFlagsMVK = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkMacOSSurfaceCreateFlagsMVK.html}[VkMacOSSurfaceCreateFlagsMVK]} *)
 module MacOSSurfaceCreateFlagsMVK = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "MacOSSurfaceCreateFlagsMVK"
@@ -10311,6 +10599,7 @@ module MacOSSurfaceCreateFlagsMVK = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkMetalSurfaceCreateFlagsEXT.html}[VkMetalSurfaceCreateFlagsEXT]} *)
 module MetalSurfaceCreateFlagsEXT = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "MetalSurfaceCreateFlagsEXT"
@@ -10318,6 +10607,7 @@ module MetalSurfaceCreateFlagsEXT = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkImagePipeSurfaceCreateFlagsFUCHSIA.html}[VkImagePipeSurfaceCreateFlagsFUCHSIA]} *)
 module ImagePipeSurfaceCreateFlagsFUCHSIA = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "ImagePipeSurfaceCreateFlagsFUCHSIA"
@@ -10325,6 +10615,7 @@ module ImagePipeSurfaceCreateFlagsFUCHSIA = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkStreamDescriptorSurfaceCreateFlagsGGP.html}[VkStreamDescriptorSurfaceCreateFlagsGGP]} *)
 module StreamDescriptorSurfaceCreateFlagsGGP = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "StreamDescriptorSurfaceCreateFlagsGGP"
@@ -10332,6 +10623,7 @@ module StreamDescriptorSurfaceCreateFlagsGGP = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkHeadlessSurfaceCreateFlagsEXT.html}[VkHeadlessSurfaceCreateFlagsEXT]} *)
 module HeadlessSurfaceCreateFlagsEXT = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "HeadlessSurfaceCreateFlagsEXT"
@@ -10339,6 +10631,7 @@ module HeadlessSurfaceCreateFlagsEXT = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkScreenSurfaceCreateFlagsQNX.html}[VkScreenSurfaceCreateFlagsQNX]} *)
 module ScreenSurfaceCreateFlagsQNX = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "ScreenSurfaceCreateFlagsQNX"
@@ -10346,6 +10639,7 @@ module ScreenSurfaceCreateFlagsQNX = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPeerMemoryFeatureFlagBits.html}[VkPeerMemoryFeatureFlagBits]} *)
 module PeerMemoryFeatureFlags = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "PeerMemoryFeatureFlags"
@@ -10369,6 +10663,7 @@ module PeerMemoryFeatureFlags = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkMemoryAllocateFlagBits.html}[VkMemoryAllocateFlagBits]} *)
 module MemoryAllocateFlags = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "MemoryAllocateFlags"
@@ -10390,6 +10685,7 @@ module MemoryAllocateFlags = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkDeviceGroupPresentModeFlagBitsKHR.html}[VkDeviceGroupPresentModeFlagBitsKHR]} *)
 module DeviceGroupPresentModeFlagsKHR = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "DeviceGroupPresentModeFlagsKHR"
@@ -10405,6 +10701,7 @@ module DeviceGroupPresentModeFlagsKHR = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkDebugReportFlagBitsEXT.html}[VkDebugReportFlagBitsEXT]} *)
 module DebugReportFlagsEXT = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "DebugReportFlagsEXT"
@@ -10422,6 +10719,7 @@ module DebugReportFlagsEXT = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkCommandPoolTrimFlags.html}[VkCommandPoolTrimFlags]} *)
 module CommandPoolTrimFlags = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "CommandPoolTrimFlags"
@@ -10429,6 +10727,7 @@ module CommandPoolTrimFlags = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkExternalMemoryHandleTypeFlagBitsNV.html}[VkExternalMemoryHandleTypeFlagBitsNV]} *)
 module ExternalMemoryHandleTypeFlagsNV = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "ExternalMemoryHandleTypeFlagsNV"
@@ -10444,6 +10743,7 @@ module ExternalMemoryHandleTypeFlagsNV = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkClusterAccelerationStructureIndexFormatFlagBitsNV.html}[VkClusterAccelerationStructureIndexFormatFlagBitsNV]} *)
 module ClusterAccelerationStructureIndexFormatFlagsNV = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "ClusterAccelerationStructureIndexFormatFlagsNV"
@@ -10457,6 +10757,7 @@ module ClusterAccelerationStructureIndexFormatFlagsNV = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkExternalMemoryFeatureFlagBitsNV.html}[VkExternalMemoryFeatureFlagBitsNV]} *)
 module ExternalMemoryFeatureFlagsNV = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "ExternalMemoryFeatureFlagsNV"
@@ -10470,6 +10771,7 @@ module ExternalMemoryFeatureFlagsNV = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkExternalMemoryHandleTypeFlagBits.html}[VkExternalMemoryHandleTypeFlagBits]} *)
 module ExternalMemoryHandleTypeFlags = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "ExternalMemoryHandleTypeFlags"
@@ -10527,6 +10829,7 @@ module ExternalMemoryHandleTypeFlags = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkExternalMemoryFeatureFlagBits.html}[VkExternalMemoryFeatureFlagBits]} *)
 module ExternalMemoryFeatureFlags = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "ExternalMemoryFeatureFlags"
@@ -10546,6 +10849,7 @@ module ExternalMemoryFeatureFlags = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkExternalSemaphoreHandleTypeFlagBits.html}[VkExternalSemaphoreHandleTypeFlagBits]} *)
 module ExternalSemaphoreHandleTypeFlags = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "ExternalSemaphoreHandleTypeFlags"
@@ -10577,6 +10881,7 @@ module ExternalSemaphoreHandleTypeFlags = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkExternalSemaphoreFeatureFlagBits.html}[VkExternalSemaphoreFeatureFlagBits]} *)
 module ExternalSemaphoreFeatureFlags = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "ExternalSemaphoreFeatureFlags"
@@ -10592,6 +10897,7 @@ module ExternalSemaphoreFeatureFlags = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkSemaphoreImportFlagBits.html}[VkSemaphoreImportFlagBits]} *)
 module SemaphoreImportFlags = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "SemaphoreImportFlags"
@@ -10603,6 +10909,7 @@ module SemaphoreImportFlags = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkExternalFenceHandleTypeFlagBits.html}[VkExternalFenceHandleTypeFlagBits]} *)
 module ExternalFenceHandleTypeFlags = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "ExternalFenceHandleTypeFlags"
@@ -10626,6 +10933,7 @@ module ExternalFenceHandleTypeFlags = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkExternalFenceFeatureFlagBits.html}[VkExternalFenceFeatureFlagBits]} *)
 module ExternalFenceFeatureFlags = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "ExternalFenceFeatureFlags"
@@ -10641,6 +10949,7 @@ module ExternalFenceFeatureFlags = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkFenceImportFlagBits.html}[VkFenceImportFlagBits]} *)
 module FenceImportFlags = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "FenceImportFlags"
@@ -10652,6 +10961,7 @@ module FenceImportFlags = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkSurfaceCounterFlagBitsEXT.html}[VkSurfaceCounterFlagBitsEXT]} *)
 module SurfaceCounterFlagsEXT = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "SurfaceCounterFlagsEXT"
@@ -10663,6 +10973,7 @@ module SurfaceCounterFlagsEXT = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPipelineViewportSwizzleStateCreateFlagsNV.html}[VkPipelineViewportSwizzleStateCreateFlagsNV]} *)
 module PipelineViewportSwizzleStateCreateFlagsNV = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "PipelineViewportSwizzleStateCreateFlagsNV"
@@ -10670,6 +10981,7 @@ module PipelineViewportSwizzleStateCreateFlagsNV = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPipelineDiscardRectangleStateCreateFlagsEXT.html}[VkPipelineDiscardRectangleStateCreateFlagsEXT]} *)
 module PipelineDiscardRectangleStateCreateFlagsEXT = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "PipelineDiscardRectangleStateCreateFlagsEXT"
@@ -10677,6 +10989,7 @@ module PipelineDiscardRectangleStateCreateFlagsEXT = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPipelineCoverageToColorStateCreateFlagsNV.html}[VkPipelineCoverageToColorStateCreateFlagsNV]} *)
 module PipelineCoverageToColorStateCreateFlagsNV = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "PipelineCoverageToColorStateCreateFlagsNV"
@@ -10684,6 +10997,7 @@ module PipelineCoverageToColorStateCreateFlagsNV = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPipelineCoverageModulationStateCreateFlagsNV.html}[VkPipelineCoverageModulationStateCreateFlagsNV]} *)
 module PipelineCoverageModulationStateCreateFlagsNV = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "PipelineCoverageModulationStateCreateFlagsNV"
@@ -10691,6 +11005,7 @@ module PipelineCoverageModulationStateCreateFlagsNV = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPipelineCoverageReductionStateCreateFlagsNV.html}[VkPipelineCoverageReductionStateCreateFlagsNV]} *)
 module PipelineCoverageReductionStateCreateFlagsNV = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "PipelineCoverageReductionStateCreateFlagsNV"
@@ -10698,6 +11013,7 @@ module PipelineCoverageReductionStateCreateFlagsNV = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkValidationCacheCreateFlagsEXT.html}[VkValidationCacheCreateFlagsEXT]} *)
 module ValidationCacheCreateFlagsEXT = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "ValidationCacheCreateFlagsEXT"
@@ -10705,6 +11021,7 @@ module ValidationCacheCreateFlagsEXT = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkDebugUtilsMessageSeverityFlagBitsEXT.html}[VkDebugUtilsMessageSeverityFlagBitsEXT]} *)
 module DebugUtilsMessageSeverityFlagsEXT = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "DebugUtilsMessageSeverityFlagsEXT"
@@ -10720,6 +11037,7 @@ module DebugUtilsMessageSeverityFlagsEXT = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkDebugUtilsMessageTypeFlagBitsEXT.html}[VkDebugUtilsMessageTypeFlagBitsEXT]} *)
 module DebugUtilsMessageTypeFlagsEXT = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "DebugUtilsMessageTypeFlagsEXT"
@@ -10735,6 +11053,7 @@ module DebugUtilsMessageTypeFlagsEXT = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkDebugUtilsMessengerCreateFlagsEXT.html}[VkDebugUtilsMessengerCreateFlagsEXT]} *)
 module DebugUtilsMessengerCreateFlagsEXT = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "DebugUtilsMessengerCreateFlagsEXT"
@@ -10742,6 +11061,7 @@ module DebugUtilsMessengerCreateFlagsEXT = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkDebugUtilsMessengerCallbackDataFlagsEXT.html}[VkDebugUtilsMessengerCallbackDataFlagsEXT]} *)
 module DebugUtilsMessengerCallbackDataFlagsEXT = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "DebugUtilsMessengerCallbackDataFlagsEXT"
@@ -10749,6 +11069,7 @@ module DebugUtilsMessengerCallbackDataFlagsEXT = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkDeviceMemoryReportFlagsEXT.html}[VkDeviceMemoryReportFlagsEXT]} *)
 module DeviceMemoryReportFlagsEXT = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "DeviceMemoryReportFlagsEXT"
@@ -10756,6 +11077,7 @@ module DeviceMemoryReportFlagsEXT = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPipelineRasterizationConservativeStateCreateFlagsEXT.html}[VkPipelineRasterizationConservativeStateCreateFlagsEXT]} *)
 module PipelineRasterizationConservativeStateCreateFlagsEXT = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "PipelineRasterizationConservativeStateCreateFlagsEXT"
@@ -10763,6 +11085,7 @@ module PipelineRasterizationConservativeStateCreateFlagsEXT = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkDescriptorBindingFlagBits.html}[VkDescriptorBindingFlagBits]} *)
 module DescriptorBindingFlags = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "DescriptorBindingFlags"
@@ -10786,6 +11109,7 @@ module DescriptorBindingFlags = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkConditionalRenderingFlagBitsEXT.html}[VkConditionalRenderingFlagBitsEXT]} *)
 module ConditionalRenderingFlagsEXT = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "ConditionalRenderingFlagsEXT"
@@ -10795,6 +11119,7 @@ module ConditionalRenderingFlagsEXT = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkResolveModeFlagBits.html}[VkResolveModeFlagBits]} *)
 module ResolveModeFlags = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "ResolveModeFlags"
@@ -10828,6 +11153,7 @@ module ResolveModeFlags = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPipelineRasterizationStateStreamCreateFlagsEXT.html}[VkPipelineRasterizationStateStreamCreateFlagsEXT]} *)
 module PipelineRasterizationStateStreamCreateFlagsEXT = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "PipelineRasterizationStateStreamCreateFlagsEXT"
@@ -10835,6 +11161,7 @@ module PipelineRasterizationStateStreamCreateFlagsEXT = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPipelineRasterizationDepthClipStateCreateFlagsEXT.html}[VkPipelineRasterizationDepthClipStateCreateFlagsEXT]} *)
 module PipelineRasterizationDepthClipStateCreateFlagsEXT = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "PipelineRasterizationDepthClipStateCreateFlagsEXT"
@@ -10842,6 +11169,7 @@ module PipelineRasterizationDepthClipStateCreateFlagsEXT = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkToolPurposeFlagBits.html}[VkToolPurposeFlagBits]} *)
 module ToolPurposeFlags = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "ToolPurposeFlags"
@@ -10873,6 +11201,7 @@ module ToolPurposeFlags = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkSubmitFlagBits.html}[VkSubmitFlagBits]} *)
 module SubmitFlags = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "SubmitFlags"
@@ -10884,6 +11213,7 @@ module SubmitFlags = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkImageFormatConstraintsFlagsFUCHSIA.html}[VkImageFormatConstraintsFlagsFUCHSIA]} *)
 module ImageFormatConstraintsFlagsFUCHSIA = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "ImageFormatConstraintsFlagsFUCHSIA"
@@ -10891,6 +11221,7 @@ module ImageFormatConstraintsFlagsFUCHSIA = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkHostImageCopyFlagBits.html}[VkHostImageCopyFlagBits]} *)
 module HostImageCopyFlags = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "HostImageCopyFlags"
@@ -10906,6 +11237,7 @@ module HostImageCopyFlags = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPartitionedAccelerationStructureInstanceFlagBitsNV.html}[VkPartitionedAccelerationStructureInstanceFlagBitsNV]} *)
 module PartitionedAccelerationStructureInstanceFlagsNV = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "PartitionedAccelerationStructureInstanceFlagsNV"
@@ -10923,6 +11255,7 @@ module PartitionedAccelerationStructureInstanceFlagsNV = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkImageConstraintsInfoFlagBitsFUCHSIA.html}[VkImageConstraintsInfoFlagBitsFUCHSIA]} *)
 module ImageConstraintsInfoFlagsFUCHSIA = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "ImageConstraintsInfoFlagsFUCHSIA"
@@ -10940,6 +11273,7 @@ module ImageConstraintsInfoFlagsFUCHSIA = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkGraphicsPipelineLibraryFlagBitsEXT.html}[VkGraphicsPipelineLibraryFlagBitsEXT]} *)
 module GraphicsPipelineLibraryFlagsEXT = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "GraphicsPipelineLibraryFlagsEXT"
@@ -10955,6 +11289,7 @@ module GraphicsPipelineLibraryFlagsEXT = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkImageCompressionFlagBitsEXT.html}[VkImageCompressionFlagBitsEXT]} *)
 module ImageCompressionFlagsEXT = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "ImageCompressionFlagsEXT"
@@ -10970,6 +11305,7 @@ module ImageCompressionFlagsEXT = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkImageCompressionFixedRateFlagBitsEXT.html}[VkImageCompressionFixedRateFlagBitsEXT]} *)
 module ImageCompressionFixedRateFlagsEXT = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "ImageCompressionFixedRateFlagsEXT"
@@ -11027,6 +11363,7 @@ module ImageCompressionFixedRateFlagsEXT = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkExportMetalObjectTypeFlagBitsEXT.html}[VkExportMetalObjectTypeFlagBitsEXT]} *)
 module ExportMetalObjectTypeFlagsEXT = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "ExportMetalObjectTypeFlagsEXT"
@@ -11046,6 +11383,7 @@ module ExportMetalObjectTypeFlagsEXT = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkRenderingAttachmentFlagBitsKHR.html}[VkRenderingAttachmentFlagBitsKHR]} *)
 module RenderingAttachmentFlagsKHR = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "RenderingAttachmentFlagsKHR"
@@ -11059,6 +11397,7 @@ module RenderingAttachmentFlagsKHR = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkResolveImageFlagBitsKHR.html}[VkResolveImageFlagBitsKHR]} *)
 module ResolveImageFlagsKHR = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "ResolveImageFlagsKHR"
@@ -11070,6 +11409,7 @@ module ResolveImageFlagsKHR = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkDeviceAddressBindingFlagBitsEXT.html}[VkDeviceAddressBindingFlagBitsEXT]} *)
 module DeviceAddressBindingFlagsEXT = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "DeviceAddressBindingFlagsEXT"
@@ -11079,6 +11419,7 @@ module DeviceAddressBindingFlagsEXT = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkOpticalFlowGridSizeFlagBitsNV.html}[VkOpticalFlowGridSizeFlagBitsNV]} *)
 module OpticalFlowGridSizeFlagsNV = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "OpticalFlowGridSizeFlagsNV"
@@ -11096,6 +11437,7 @@ module OpticalFlowGridSizeFlagsNV = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkOpticalFlowUsageFlagBitsNV.html}[VkOpticalFlowUsageFlagBitsNV]} *)
 module OpticalFlowUsageFlagsNV = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "OpticalFlowUsageFlagsNV"
@@ -11115,6 +11457,7 @@ module OpticalFlowUsageFlagsNV = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkOpticalFlowSessionCreateFlagBitsNV.html}[VkOpticalFlowSessionCreateFlagBitsNV]} *)
 module OpticalFlowSessionCreateFlagsNV = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "OpticalFlowSessionCreateFlagsNV"
@@ -11132,6 +11475,7 @@ module OpticalFlowSessionCreateFlagsNV = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkOpticalFlowExecuteFlagBitsNV.html}[VkOpticalFlowExecuteFlagBitsNV]} *)
 module OpticalFlowExecuteFlagsNV = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "OpticalFlowExecuteFlagsNV"
@@ -11141,6 +11485,7 @@ module OpticalFlowExecuteFlagsNV = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkFrameBoundaryFlagBitsEXT.html}[VkFrameBoundaryFlagBitsEXT]} *)
 module FrameBoundaryFlagsEXT = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "FrameBoundaryFlagsEXT"
@@ -11150,6 +11495,7 @@ module FrameBoundaryFlagsEXT = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPresentScalingFlagBitsKHR.html}[VkPresentScalingFlagBitsKHR]} *)
 module PresentScalingFlagsKHR = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "PresentScalingFlagsKHR"
@@ -11169,6 +11515,7 @@ module PresentScalingFlagsKHR = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPresentGravityFlagBitsKHR.html}[VkPresentGravityFlagBitsKHR]} *)
 module PresentGravityFlagsKHR = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "PresentGravityFlagsKHR"
@@ -11188,6 +11535,7 @@ module PresentGravityFlagsKHR = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkShaderCreateFlagBitsEXT.html}[VkShaderCreateFlagBitsEXT]} *)
 module ShaderCreateFlagsEXT = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "ShaderCreateFlagsEXT"
@@ -11221,6 +11569,7 @@ module ShaderCreateFlagsEXT = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkTileShadingRenderPassFlagBitsQCOM.html}[VkTileShadingRenderPassFlagBitsQCOM]} *)
 module TileShadingRenderPassFlagsQCOM = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "TileShadingRenderPassFlagsQCOM"
@@ -11232,6 +11581,7 @@ module TileShadingRenderPassFlagsQCOM = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceSchedulingControlsFlagBitsARM.html}[VkPhysicalDeviceSchedulingControlsFlagBitsARM]} *)
 module PhysicalDeviceSchedulingControlsFlagsARM = struct
   include Vk_base.Flags64 ()
   let () = set_type_name "PhysicalDeviceSchedulingControlsFlagsARM"
@@ -11243,6 +11593,7 @@ module PhysicalDeviceSchedulingControlsFlagsARM = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkSurfaceCreateFlagsOHOS.html}[VkSurfaceCreateFlagsOHOS]} *)
 module SurfaceCreateFlagsOHOS = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "SurfaceCreateFlagsOHOS"
@@ -11250,6 +11601,7 @@ module SurfaceCreateFlagsOHOS = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPresentStageFlagBitsEXT.html}[VkPresentStageFlagBitsEXT]} *)
 module PresentStageFlagsEXT = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "PresentStageFlagsEXT"
@@ -11265,6 +11617,7 @@ module PresentStageFlagsEXT = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPastPresentationTimingFlagBitsEXT.html}[VkPastPresentationTimingFlagBitsEXT]} *)
 module PastPresentationTimingFlagsEXT = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "PastPresentationTimingFlagsEXT"
@@ -11276,6 +11629,7 @@ module PastPresentationTimingFlagsEXT = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPresentTimingInfoFlagBitsEXT.html}[VkPresentTimingInfoFlagBitsEXT]} *)
 module PresentTimingInfoFlagsEXT = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "PresentTimingInfoFlagsEXT"
@@ -11287,6 +11641,7 @@ module PresentTimingInfoFlagsEXT = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPerformanceCounterDescriptionFlagsARM.html}[VkPerformanceCounterDescriptionFlagsARM]} *)
 module PerformanceCounterDescriptionFlagsARM = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "PerformanceCounterDescriptionFlagsARM"
@@ -11294,6 +11649,7 @@ module PerformanceCounterDescriptionFlagsARM = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkShaderInstrumentationValuesFlagsARM.html}[VkShaderInstrumentationValuesFlagsARM]} *)
 module ShaderInstrumentationValuesFlagsARM = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "ShaderInstrumentationValuesFlagsARM"
@@ -11301,6 +11657,7 @@ module ShaderInstrumentationValuesFlagsARM = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkDataGraphTOSAQualityFlagBitsARM.html}[VkDataGraphTOSAQualityFlagBitsARM]} *)
 module DataGraphTOSAQualityFlagsARM = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "DataGraphTOSAQualityFlagsARM"
@@ -11316,6 +11673,7 @@ module DataGraphTOSAQualityFlagsARM = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkDataGraphOpticalFlowGridSizeFlagBitsARM.html}[VkDataGraphOpticalFlowGridSizeFlagBitsARM]} *)
 module DataGraphOpticalFlowGridSizeFlagsARM = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "DataGraphOpticalFlowGridSizeFlagsARM"
@@ -11333,6 +11691,7 @@ module DataGraphOpticalFlowGridSizeFlagsARM = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkDataGraphOpticalFlowImageUsageFlagBitsARM.html}[VkDataGraphOpticalFlowImageUsageFlagBitsARM]} *)
 module DataGraphOpticalFlowImageUsageFlagsARM = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "DataGraphOpticalFlowImageUsageFlagsARM"
@@ -11350,6 +11709,7 @@ module DataGraphOpticalFlowImageUsageFlagsARM = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkDataGraphOpticalFlowCreateFlagBitsARM.html}[VkDataGraphOpticalFlowCreateFlagBitsARM]} *)
 module DataGraphOpticalFlowCreateFlagsARM = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "DataGraphOpticalFlowCreateFlagsARM"
@@ -11363,6 +11723,7 @@ module DataGraphOpticalFlowCreateFlagsARM = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkDataGraphOpticalFlowExecuteFlagBitsARM.html}[VkDataGraphOpticalFlowExecuteFlagBitsARM]} *)
 module DataGraphOpticalFlowExecuteFlagsARM = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "DataGraphOpticalFlowExecuteFlagsARM"
@@ -11380,6 +11741,7 @@ module DataGraphOpticalFlowExecuteFlagsARM = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkVideoCodecOperationFlagBitsKHR.html}[VkVideoCodecOperationFlagBitsKHR]} *)
 module VideoCodecOperationFlagsKHR = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "VideoCodecOperationFlagsKHR"
@@ -11403,6 +11765,7 @@ module VideoCodecOperationFlagsKHR = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkVideoCapabilityFlagBitsKHR.html}[VkVideoCapabilityFlagBitsKHR]} *)
 module VideoCapabilityFlagsKHR = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "VideoCapabilityFlagsKHR"
@@ -11414,6 +11777,7 @@ module VideoCapabilityFlagsKHR = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkVideoSessionCreateFlagBitsKHR.html}[VkVideoSessionCreateFlagBitsKHR]} *)
 module VideoSessionCreateFlagsKHR = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "VideoSessionCreateFlagsKHR"
@@ -11433,6 +11797,7 @@ module VideoSessionCreateFlagsKHR = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkVideoSessionParametersCreateFlagBitsKHR.html}[VkVideoSessionParametersCreateFlagBitsKHR]} *)
 module VideoSessionParametersCreateFlagsKHR = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "VideoSessionParametersCreateFlagsKHR"
@@ -11442,6 +11807,7 @@ module VideoSessionParametersCreateFlagsKHR = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkVideoBeginCodingFlagsKHR.html}[VkVideoBeginCodingFlagsKHR]} *)
 module VideoBeginCodingFlagsKHR = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "VideoBeginCodingFlagsKHR"
@@ -11449,6 +11815,7 @@ module VideoBeginCodingFlagsKHR = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkVideoEndCodingFlagsKHR.html}[VkVideoEndCodingFlagsKHR]} *)
 module VideoEndCodingFlagsKHR = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "VideoEndCodingFlagsKHR"
@@ -11456,6 +11823,7 @@ module VideoEndCodingFlagsKHR = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkVideoCodingControlFlagBitsKHR.html}[VkVideoCodingControlFlagBitsKHR]} *)
 module VideoCodingControlFlagsKHR = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "VideoCodingControlFlagsKHR"
@@ -11469,6 +11837,7 @@ module VideoCodingControlFlagsKHR = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkVideoDecodeUsageFlagBitsKHR.html}[VkVideoDecodeUsageFlagBitsKHR]} *)
 module VideoDecodeUsageFlagsKHR = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "VideoDecodeUsageFlagsKHR"
@@ -11484,6 +11853,7 @@ module VideoDecodeUsageFlagsKHR = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkVideoDecodeCapabilityFlagBitsKHR.html}[VkVideoDecodeCapabilityFlagBitsKHR]} *)
 module VideoDecodeCapabilityFlagsKHR = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "VideoDecodeCapabilityFlagsKHR"
@@ -11495,6 +11865,7 @@ module VideoDecodeCapabilityFlagsKHR = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkVideoDecodeFlagsKHR.html}[VkVideoDecodeFlagsKHR]} *)
 module VideoDecodeFlagsKHR = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "VideoDecodeFlagsKHR"
@@ -11502,6 +11873,7 @@ module VideoDecodeFlagsKHR = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkVideoDecodeH264PictureLayoutFlagBitsKHR.html}[VkVideoDecodeH264PictureLayoutFlagBitsKHR]} *)
 module VideoDecodeH264PictureLayoutFlagsKHR = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "VideoDecodeH264PictureLayoutFlagsKHR"
@@ -11515,6 +11887,7 @@ module VideoDecodeH264PictureLayoutFlagsKHR = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkVideoEncodeFlagBitsKHR.html}[VkVideoEncodeFlagBitsKHR]} *)
 module VideoEncodeFlagsKHR = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "VideoEncodeFlagsKHR"
@@ -11528,6 +11901,7 @@ module VideoEncodeFlagsKHR = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkVideoEncodeUsageFlagBitsKHR.html}[VkVideoEncodeUsageFlagBitsKHR]} *)
 module VideoEncodeUsageFlagsKHR = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "VideoEncodeUsageFlagsKHR"
@@ -11545,6 +11919,7 @@ module VideoEncodeUsageFlagsKHR = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkVideoEncodeContentFlagBitsKHR.html}[VkVideoEncodeContentFlagBitsKHR]} *)
 module VideoEncodeContentFlagsKHR = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "VideoEncodeContentFlagsKHR"
@@ -11560,6 +11935,7 @@ module VideoEncodeContentFlagsKHR = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkVideoEncodeCapabilityFlagBitsKHR.html}[VkVideoEncodeCapabilityFlagBitsKHR]} *)
 module VideoEncodeCapabilityFlagsKHR = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "VideoEncodeCapabilityFlagsKHR"
@@ -11575,6 +11951,7 @@ module VideoEncodeCapabilityFlagsKHR = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkVideoEncodeFeedbackFlagBitsKHR.html}[VkVideoEncodeFeedbackFlagBitsKHR]} *)
 module VideoEncodeFeedbackFlagsKHR = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "VideoEncodeFeedbackFlagsKHR"
@@ -11602,6 +11979,7 @@ module VideoEncodeFeedbackFlagsKHR = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkVideoEncodePerPartitionFeedbackFlagBitsKHR.html}[VkVideoEncodePerPartitionFeedbackFlagBitsKHR]} *)
 module VideoEncodePerPartitionFeedbackFlagsKHR = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "VideoEncodePerPartitionFeedbackFlagsKHR"
@@ -11615,6 +11993,7 @@ module VideoEncodePerPartitionFeedbackFlagsKHR = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkVideoEncodeRateControlFlagsKHR.html}[VkVideoEncodeRateControlFlagsKHR]} *)
 module VideoEncodeRateControlFlagsKHR = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "VideoEncodeRateControlFlagsKHR"
@@ -11622,6 +12001,7 @@ module VideoEncodeRateControlFlagsKHR = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkVideoEncodeRateControlModeFlagBitsKHR.html}[VkVideoEncodeRateControlModeFlagBitsKHR]} *)
 module VideoEncodeRateControlModeFlagsKHR = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "VideoEncodeRateControlModeFlagsKHR"
@@ -11637,6 +12017,7 @@ module VideoEncodeRateControlModeFlagsKHR = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkVideoEncodeIntraRefreshModeFlagBitsKHR.html}[VkVideoEncodeIntraRefreshModeFlagBitsKHR]} *)
 module VideoEncodeIntraRefreshModeFlagsKHR = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "VideoEncodeIntraRefreshModeFlagsKHR"
@@ -11654,6 +12035,7 @@ module VideoEncodeIntraRefreshModeFlagsKHR = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkVideoChromaSubsamplingFlagBitsKHR.html}[VkVideoChromaSubsamplingFlagBitsKHR]} *)
 module VideoChromaSubsamplingFlagsKHR = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "VideoChromaSubsamplingFlagsKHR"
@@ -11671,6 +12053,7 @@ module VideoChromaSubsamplingFlagsKHR = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkVideoComponentBitDepthFlagBitsKHR.html}[VkVideoComponentBitDepthFlagBitsKHR]} *)
 module VideoComponentBitDepthFlagsKHR = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "VideoComponentBitDepthFlagsKHR"
@@ -11686,6 +12069,7 @@ module VideoComponentBitDepthFlagsKHR = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkVideoEncodeH264CapabilityFlagBitsKHR.html}[VkVideoEncodeH264CapabilityFlagBitsKHR]} *)
 module VideoEncodeH264CapabilityFlagsKHR = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "VideoEncodeH264CapabilityFlagsKHR"
@@ -11715,6 +12099,7 @@ module VideoEncodeH264CapabilityFlagsKHR = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkVideoEncodeH264StdFlagBitsKHR.html}[VkVideoEncodeH264StdFlagBitsKHR]} *)
 module VideoEncodeH264StdFlagsKHR = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "VideoEncodeH264StdFlagsKHR"
@@ -11762,6 +12147,7 @@ module VideoEncodeH264StdFlagsKHR = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkVideoEncodeH264RateControlFlagBitsKHR.html}[VkVideoEncodeH264RateControlFlagBitsKHR]} *)
 module VideoEncodeH264RateControlFlagsKHR = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "VideoEncodeH264RateControlFlagsKHR"
@@ -11779,6 +12165,7 @@ module VideoEncodeH264RateControlFlagsKHR = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkVideoEncodeH265CapabilityFlagBitsKHR.html}[VkVideoEncodeH265CapabilityFlagBitsKHR]} *)
 module VideoEncodeH265CapabilityFlagsKHR = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "VideoEncodeH265CapabilityFlagsKHR"
@@ -11810,6 +12197,7 @@ module VideoEncodeH265CapabilityFlagsKHR = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkVideoEncodeH265StdFlagBitsKHR.html}[VkVideoEncodeH265StdFlagBitsKHR]} *)
 module VideoEncodeH265StdFlagsKHR = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "VideoEncodeH265StdFlagsKHR"
@@ -11859,6 +12247,7 @@ module VideoEncodeH265StdFlagsKHR = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkVideoEncodeH265RateControlFlagBitsKHR.html}[VkVideoEncodeH265RateControlFlagBitsKHR]} *)
 module VideoEncodeH265RateControlFlagsKHR = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "VideoEncodeH265RateControlFlagsKHR"
@@ -11876,6 +12265,7 @@ module VideoEncodeH265RateControlFlagsKHR = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkVideoEncodeH265CtbSizeFlagBitsKHR.html}[VkVideoEncodeH265CtbSizeFlagBitsKHR]} *)
 module VideoEncodeH265CtbSizeFlagsKHR = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "VideoEncodeH265CtbSizeFlagsKHR"
@@ -11889,6 +12279,7 @@ module VideoEncodeH265CtbSizeFlagsKHR = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkVideoEncodeH265TransformBlockSizeFlagBitsKHR.html}[VkVideoEncodeH265TransformBlockSizeFlagBitsKHR]} *)
 module VideoEncodeH265TransformBlockSizeFlagsKHR = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "VideoEncodeH265TransformBlockSizeFlagsKHR"
@@ -11904,6 +12295,7 @@ module VideoEncodeH265TransformBlockSizeFlagsKHR = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkVideoEncodeAV1CapabilityFlagBitsKHR.html}[VkVideoEncodeAV1CapabilityFlagBitsKHR]} *)
 module VideoEncodeAV1CapabilityFlagsKHR = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "VideoEncodeAV1CapabilityFlagsKHR"
@@ -11923,6 +12315,7 @@ module VideoEncodeAV1CapabilityFlagsKHR = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkVideoEncodeAV1StdFlagBitsKHR.html}[VkVideoEncodeAV1StdFlagBitsKHR]} *)
 module VideoEncodeAV1StdFlagsKHR = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "VideoEncodeAV1StdFlagsKHR"
@@ -11938,6 +12331,7 @@ module VideoEncodeAV1StdFlagsKHR = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkVideoEncodeAV1RateControlFlagBitsKHR.html}[VkVideoEncodeAV1RateControlFlagBitsKHR]} *)
 module VideoEncodeAV1RateControlFlagsKHR = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "VideoEncodeAV1RateControlFlagsKHR"
@@ -11953,6 +12347,7 @@ module VideoEncodeAV1RateControlFlagsKHR = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkVideoEncodeAV1SuperblockSizeFlagBitsKHR.html}[VkVideoEncodeAV1SuperblockSizeFlagBitsKHR]} *)
 module VideoEncodeAV1SuperblockSizeFlagsKHR = struct
   include Vk_base.Flags32 ()
   let () = set_type_name "VideoEncodeAV1SuperblockSizeFlagsKHR"
@@ -11964,6 +12359,7 @@ module VideoEncodeAV1SuperblockSizeFlagsKHR = struct
   ]
 end
 
+(** Flags {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkAccessFlagBits3KHR.html}[VkAccessFlagBits3KHR]} *)
 module AccessFlags3KHR = struct
   include Vk_base.Flags64 ()
   let () = set_type_name "AccessFlags3KHR"
@@ -11973,186 +12369,277 @@ module AccessFlags3KHR = struct
   ]
 end
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkRayTracingInvocationReorderModeNV.html}[VkRayTracingInvocationReorderModeNV]} *)
 module RayTracingInvocationReorderModeNV = RayTracingInvocationReorderModeEXT
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkDescriptorUpdateTemplateTypeKHR.html}[VkDescriptorUpdateTemplateTypeKHR]} *)
 module DescriptorUpdateTemplateTypeKHR = DescriptorUpdateTemplateType
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPointClippingBehaviorKHR.html}[VkPointClippingBehaviorKHR]} *)
 module PointClippingBehaviorKHR = PointClippingBehavior
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkQueueGlobalPriorityKHR.html}[VkQueueGlobalPriorityKHR]} *)
 module QueueGlobalPriorityKHR = QueueGlobalPriority
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkQueueGlobalPriorityEXT.html}[VkQueueGlobalPriorityEXT]} *)
 module QueueGlobalPriorityEXT = QueueGlobalPriority
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkTimeDomainEXT.html}[VkTimeDomainEXT]} *)
 module TimeDomainEXT = TimeDomainKHR
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkResolveModeFlagBitsKHR.html}[VkResolveModeFlagBitsKHR]} *)
 module ResolveModeFlagBitsKHR = ResolveModeFlags
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkDescriptorBindingFlagBitsEXT.html}[VkDescriptorBindingFlagBitsEXT]} *)
 module DescriptorBindingFlagBitsEXT = DescriptorBindingFlags
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkSemaphoreTypeKHR.html}[VkSemaphoreTypeKHR]} *)
 module SemaphoreTypeKHR = SemaphoreType
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkGeometryFlagBitsNV.html}[VkGeometryFlagBitsNV]} *)
 module GeometryFlagBitsNV = GeometryFlagsKHR
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkGeometryInstanceFlagBitsNV.html}[VkGeometryInstanceFlagBitsNV]} *)
 module GeometryInstanceFlagBitsNV = GeometryInstanceFlagsKHR
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkBuildAccelerationStructureFlagBitsNV.html}[VkBuildAccelerationStructureFlagBitsNV]} *)
 module BuildAccelerationStructureFlagBitsNV = BuildAccelerationStructureFlagsKHR
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkCopyAccelerationStructureModeNV.html}[VkCopyAccelerationStructureModeNV]} *)
 module CopyAccelerationStructureModeNV = CopyAccelerationStructureModeKHR
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkAccelerationStructureTypeNV.html}[VkAccelerationStructureTypeNV]} *)
 module AccelerationStructureTypeNV = AccelerationStructureTypeKHR
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkGeometryTypeNV.html}[VkGeometryTypeNV]} *)
 module GeometryTypeNV = GeometryTypeKHR
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkRayTracingShaderGroupTypeNV.html}[VkRayTracingShaderGroupTypeNV]} *)
 module RayTracingShaderGroupTypeNV = RayTracingShaderGroupTypeKHR
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPipelineCreationFeedbackFlagBitsEXT.html}[VkPipelineCreationFeedbackFlagBitsEXT]} *)
 module PipelineCreationFeedbackFlagBitsEXT = PipelineCreationFeedbackFlags
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkSemaphoreWaitFlagBitsKHR.html}[VkSemaphoreWaitFlagBitsKHR]} *)
 module SemaphoreWaitFlagBitsKHR = SemaphoreWaitFlags
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkLineRasterizationModeKHR.html}[VkLineRasterizationModeKHR]} *)
 module LineRasterizationModeKHR = LineRasterizationMode
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkLineRasterizationModeEXT.html}[VkLineRasterizationModeEXT]} *)
 module LineRasterizationModeEXT = LineRasterizationMode
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkToolPurposeFlagBitsEXT.html}[VkToolPurposeFlagBitsEXT]} *)
 module ToolPurposeFlagBitsEXT = ToolPurposeFlags
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkAccessFlagBits2KHR.html}[VkAccessFlagBits2KHR]} *)
 module AccessFlagBits2KHR = AccessFlags2
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPipelineStageFlagBits2KHR.html}[VkPipelineStageFlagBits2KHR]} *)
 module PipelineStageFlagBits2KHR = PipelineStageFlags2
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkHostImageCopyFlagBitsEXT.html}[VkHostImageCopyFlagBitsEXT]} *)
 module HostImageCopyFlagBitsEXT = HostImageCopyFlags
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkFormatFeatureFlagBits2KHR.html}[VkFormatFeatureFlagBits2KHR]} *)
 module FormatFeatureFlagBits2KHR = FormatFeatureFlags2
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkRenderingFlagBitsKHR.html}[VkRenderingFlagBitsKHR]} *)
 module RenderingFlagBitsKHR = RenderingFlags
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPipelineRobustnessBufferBehaviorEXT.html}[VkPipelineRobustnessBufferBehaviorEXT]} *)
 module PipelineRobustnessBufferBehaviorEXT = PipelineRobustnessBufferBehavior
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPipelineRobustnessImageBehaviorEXT.html}[VkPipelineRobustnessImageBehaviorEXT]} *)
 module PipelineRobustnessImageBehaviorEXT = PipelineRobustnessImageBehavior
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkOpacityMicromapFormatEXT.html}[VkOpacityMicromapFormatEXT]} *)
 module OpacityMicromapFormatEXT = OpacityMicromapFormatKHR
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkOpacityMicromapSpecialIndexEXT.html}[VkOpacityMicromapSpecialIndexEXT]} *)
 module OpacityMicromapSpecialIndexEXT = OpacityMicromapSpecialIndexKHR
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkDeviceFaultVendorBinaryHeaderVersionEXT.html}[VkDeviceFaultVendorBinaryHeaderVersionEXT]} *)
 module DeviceFaultVendorBinaryHeaderVersionEXT = DeviceFaultVendorBinaryHeaderVersionKHR
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkMemoryDecompressionMethodFlagBitsNV.html}[VkMemoryDecompressionMethodFlagBitsNV]} *)
 module MemoryDecompressionMethodFlagBitsNV = MemoryDecompressionMethodFlagsEXT
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPipelineCreateFlagBits2KHR.html}[VkPipelineCreateFlagBits2KHR]} *)
 module PipelineCreateFlagBits2KHR = PipelineCreateFlags2
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkBufferUsageFlagBits2KHR.html}[VkBufferUsageFlagBits2KHR]} *)
 module BufferUsageFlagBits2KHR = BufferUsageFlags2
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkScopeNV.html}[VkScopeNV]} *)
 module ScopeNV = ScopeKHR
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkComponentTypeNV.html}[VkComponentTypeNV]} *)
 module ComponentTypeNV = ComponentTypeKHR
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkExternalMemoryHandleTypeFlagBitsKHR.html}[VkExternalMemoryHandleTypeFlagBitsKHR]} *)
 module ExternalMemoryHandleTypeFlagBitsKHR = ExternalMemoryHandleTypeFlags
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkExternalMemoryFeatureFlagBitsKHR.html}[VkExternalMemoryFeatureFlagBitsKHR]} *)
 module ExternalMemoryFeatureFlagBitsKHR = ExternalMemoryFeatureFlags
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkExternalSemaphoreHandleTypeFlagBitsKHR.html}[VkExternalSemaphoreHandleTypeFlagBitsKHR]} *)
 module ExternalSemaphoreHandleTypeFlagBitsKHR = ExternalSemaphoreHandleTypeFlags
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkExternalSemaphoreFeatureFlagBitsKHR.html}[VkExternalSemaphoreFeatureFlagBitsKHR]} *)
 module ExternalSemaphoreFeatureFlagBitsKHR = ExternalSemaphoreFeatureFlags
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkSemaphoreImportFlagBitsKHR.html}[VkSemaphoreImportFlagBitsKHR]} *)
 module SemaphoreImportFlagBitsKHR = SemaphoreImportFlags
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkExternalFenceHandleTypeFlagBitsKHR.html}[VkExternalFenceHandleTypeFlagBitsKHR]} *)
 module ExternalFenceHandleTypeFlagBitsKHR = ExternalFenceHandleTypeFlags
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkExternalFenceFeatureFlagBitsKHR.html}[VkExternalFenceFeatureFlagBitsKHR]} *)
 module ExternalFenceFeatureFlagBitsKHR = ExternalFenceFeatureFlags
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkFenceImportFlagBitsKHR.html}[VkFenceImportFlagBitsKHR]} *)
 module FenceImportFlagBitsKHR = FenceImportFlags
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPeerMemoryFeatureFlagBitsKHR.html}[VkPeerMemoryFeatureFlagBitsKHR]} *)
 module PeerMemoryFeatureFlagBitsKHR = PeerMemoryFeatureFlags
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkMemoryAllocateFlagBitsKHR.html}[VkMemoryAllocateFlagBitsKHR]} *)
 module MemoryAllocateFlagBitsKHR = MemoryAllocateFlags
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkTessellationDomainOriginKHR.html}[VkTessellationDomainOriginKHR]} *)
 module TessellationDomainOriginKHR = TessellationDomainOrigin
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkSamplerYcbcrModelConversionKHR.html}[VkSamplerYcbcrModelConversionKHR]} *)
 module SamplerYcbcrModelConversionKHR = SamplerYcbcrModelConversion
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkSamplerYcbcrRangeKHR.html}[VkSamplerYcbcrRangeKHR]} *)
 module SamplerYcbcrRangeKHR = SamplerYcbcrRange
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkChromaLocationKHR.html}[VkChromaLocationKHR]} *)
 module ChromaLocationKHR = ChromaLocation
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkSamplerReductionModeEXT.html}[VkSamplerReductionModeEXT]} *)
 module SamplerReductionModeEXT = SamplerReductionMode
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkShaderFloatControlsIndependenceKHR.html}[VkShaderFloatControlsIndependenceKHR]} *)
 module ShaderFloatControlsIndependenceKHR = ShaderFloatControlsIndependence
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkSubmitFlagBitsKHR.html}[VkSubmitFlagBitsKHR]} *)
 module SubmitFlagBitsKHR = SubmitFlags
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkDeviceFaultAddressTypeEXT.html}[VkDeviceFaultAddressTypeEXT]} *)
 module DeviceFaultAddressTypeEXT = DeviceFaultAddressTypeKHR
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPresentScalingFlagBitsEXT.html}[VkPresentScalingFlagBitsEXT]} *)
 module PresentScalingFlagBitsEXT = PresentScalingFlagsKHR
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPresentGravityFlagBitsEXT.html}[VkPresentGravityFlagBitsEXT]} *)
 module PresentGravityFlagBitsEXT = PresentGravityFlagsKHR
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkMemoryUnmapFlagBitsKHR.html}[VkMemoryUnmapFlagBitsKHR]} *)
 module MemoryUnmapFlagBitsKHR = MemoryUnmapFlags
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkDriverIdKHR.html}[VkDriverIdKHR]} *)
 module DriverIdKHR = DriverId
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkMemoryUnmapFlagsKHR.html}[VkMemoryUnmapFlagsKHR]} *)
 module MemoryUnmapFlagsKHR = MemoryUnmapFlags
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkGeometryFlagsNV.html}[VkGeometryFlagsNV]} *)
 module GeometryFlagsNV = GeometryFlagsKHR
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkGeometryInstanceFlagsNV.html}[VkGeometryInstanceFlagsNV]} *)
 module GeometryInstanceFlagsNV = GeometryInstanceFlagsKHR
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkBuildAccelerationStructureFlagsNV.html}[VkBuildAccelerationStructureFlagsNV]} *)
 module BuildAccelerationStructureFlagsNV = BuildAccelerationStructureFlagsKHR
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPrivateDataSlotCreateFlagsEXT.html}[VkPrivateDataSlotCreateFlagsEXT]} *)
 module PrivateDataSlotCreateFlagsEXT = PrivateDataSlotCreateFlags
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkDescriptorUpdateTemplateCreateFlagsKHR.html}[VkDescriptorUpdateTemplateCreateFlagsKHR]} *)
 module DescriptorUpdateTemplateCreateFlagsKHR = DescriptorUpdateTemplateCreateFlags
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPipelineCreationFeedbackFlagsEXT.html}[VkPipelineCreationFeedbackFlagsEXT]} *)
 module PipelineCreationFeedbackFlagsEXT = PipelineCreationFeedbackFlags
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkSemaphoreWaitFlagsKHR.html}[VkSemaphoreWaitFlagsKHR]} *)
 module SemaphoreWaitFlagsKHR = SemaphoreWaitFlags
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkAccessFlags2KHR.html}[VkAccessFlags2KHR]} *)
 module AccessFlags2KHR = AccessFlags2
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPipelineStageFlags2KHR.html}[VkPipelineStageFlags2KHR]} *)
 module PipelineStageFlags2KHR = PipelineStageFlags2
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkFormatFeatureFlags2KHR.html}[VkFormatFeatureFlags2KHR]} *)
 module FormatFeatureFlags2KHR = FormatFeatureFlags2
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkMemoryDecompressionMethodFlagsNV.html}[VkMemoryDecompressionMethodFlagsNV]} *)
 module MemoryDecompressionMethodFlagsNV = MemoryDecompressionMethodFlagsEXT
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkRenderingFlagsKHR.html}[VkRenderingFlagsKHR]} *)
 module RenderingFlagsKHR = RenderingFlags
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPipelineCreateFlags2KHR.html}[VkPipelineCreateFlags2KHR]} *)
 module PipelineCreateFlags2KHR = PipelineCreateFlags2
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkBufferUsageFlags2KHR.html}[VkBufferUsageFlags2KHR]} *)
 module BufferUsageFlags2KHR = BufferUsageFlags2
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPeerMemoryFeatureFlagsKHR.html}[VkPeerMemoryFeatureFlagsKHR]} *)
 module PeerMemoryFeatureFlagsKHR = PeerMemoryFeatureFlags
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkMemoryAllocateFlagsKHR.html}[VkMemoryAllocateFlagsKHR]} *)
 module MemoryAllocateFlagsKHR = MemoryAllocateFlags
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkCommandPoolTrimFlagsKHR.html}[VkCommandPoolTrimFlagsKHR]} *)
 module CommandPoolTrimFlagsKHR = CommandPoolTrimFlags
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkExternalMemoryHandleTypeFlagsKHR.html}[VkExternalMemoryHandleTypeFlagsKHR]} *)
 module ExternalMemoryHandleTypeFlagsKHR = ExternalMemoryHandleTypeFlags
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkExternalMemoryFeatureFlagsKHR.html}[VkExternalMemoryFeatureFlagsKHR]} *)
 module ExternalMemoryFeatureFlagsKHR = ExternalMemoryFeatureFlags
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkExternalSemaphoreHandleTypeFlagsKHR.html}[VkExternalSemaphoreHandleTypeFlagsKHR]} *)
 module ExternalSemaphoreHandleTypeFlagsKHR = ExternalSemaphoreHandleTypeFlags
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkExternalSemaphoreFeatureFlagsKHR.html}[VkExternalSemaphoreFeatureFlagsKHR]} *)
 module ExternalSemaphoreFeatureFlagsKHR = ExternalSemaphoreFeatureFlags
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkSemaphoreImportFlagsKHR.html}[VkSemaphoreImportFlagsKHR]} *)
 module SemaphoreImportFlagsKHR = SemaphoreImportFlags
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkExternalFenceHandleTypeFlagsKHR.html}[VkExternalFenceHandleTypeFlagsKHR]} *)
 module ExternalFenceHandleTypeFlagsKHR = ExternalFenceHandleTypeFlags
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkExternalFenceFeatureFlagsKHR.html}[VkExternalFenceFeatureFlagsKHR]} *)
 module ExternalFenceFeatureFlagsKHR = ExternalFenceFeatureFlags
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkFenceImportFlagsKHR.html}[VkFenceImportFlagsKHR]} *)
 module FenceImportFlagsKHR = FenceImportFlags
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkDescriptorBindingFlagsEXT.html}[VkDescriptorBindingFlagsEXT]} *)
 module DescriptorBindingFlagsEXT = DescriptorBindingFlags
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkResolveModeFlagsKHR.html}[VkResolveModeFlagsKHR]} *)
 module ResolveModeFlagsKHR = ResolveModeFlags
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkToolPurposeFlagsEXT.html}[VkToolPurposeFlagsEXT]} *)
 module ToolPurposeFlagsEXT = ToolPurposeFlags
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkSubmitFlagsKHR.html}[VkSubmitFlagsKHR]} *)
 module SubmitFlagsKHR = SubmitFlags
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkHostImageCopyFlagsEXT.html}[VkHostImageCopyFlagsEXT]} *)
 module HostImageCopyFlagsEXT = HostImageCopyFlags
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPresentScalingFlagsEXT.html}[VkPresentScalingFlagsEXT]} *)
 module PresentScalingFlagsEXT = PresentScalingFlagsKHR
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPresentGravityFlagsEXT.html}[VkPresentGravityFlagsEXT]} *)
 module PresentGravityFlagsEXT = PresentGravityFlagsKHR
 
 exception Error of Result.t

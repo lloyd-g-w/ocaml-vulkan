@@ -18,242 +18,362 @@ open Vk_types_11
 open Vk_types_12
 open Vk_types_13
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceBufferDeviceAddressFeaturesKHR.html}[VkPhysicalDeviceBufferDeviceAddressFeaturesKHR]} *)
 module PhysicalDeviceBufferDeviceAddressFeaturesKHR = PhysicalDeviceBufferDeviceAddressFeatures
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceBufferAddressFeaturesEXT.html}[VkPhysicalDeviceBufferAddressFeaturesEXT]} *)
 module PhysicalDeviceBufferAddressFeaturesEXT = PhysicalDeviceBufferDeviceAddressFeaturesEXT
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceComputeShaderDerivativesFeaturesNV.html}[VkPhysicalDeviceComputeShaderDerivativesFeaturesNV]} *)
 module PhysicalDeviceComputeShaderDerivativesFeaturesNV = PhysicalDeviceComputeShaderDerivativesFeaturesKHR
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceCopyMemoryIndirectPropertiesNV.html}[VkPhysicalDeviceCopyMemoryIndirectPropertiesNV]} *)
 module PhysicalDeviceCopyMemoryIndirectPropertiesNV = PhysicalDeviceCopyMemoryIndirectPropertiesKHR
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceDepthClampZeroOneFeaturesEXT.html}[VkPhysicalDeviceDepthClampZeroOneFeaturesEXT]} *)
 module PhysicalDeviceDepthClampZeroOneFeaturesEXT = PhysicalDeviceDepthClampZeroOneFeaturesKHR
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceDepthStencilResolvePropertiesKHR.html}[VkPhysicalDeviceDepthStencilResolvePropertiesKHR]} *)
 module PhysicalDeviceDepthStencilResolvePropertiesKHR = PhysicalDeviceDepthStencilResolveProperties
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceDescriptorIndexingFeaturesEXT.html}[VkPhysicalDeviceDescriptorIndexingFeaturesEXT]} *)
 module PhysicalDeviceDescriptorIndexingFeaturesEXT = PhysicalDeviceDescriptorIndexingFeatures
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceDescriptorIndexingPropertiesEXT.html}[VkPhysicalDeviceDescriptorIndexingPropertiesEXT]} *)
 module PhysicalDeviceDescriptorIndexingPropertiesEXT = PhysicalDeviceDescriptorIndexingProperties
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceDriverPropertiesKHR.html}[VkPhysicalDeviceDriverPropertiesKHR]} *)
 module PhysicalDeviceDriverPropertiesKHR = PhysicalDeviceDriverProperties
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceDynamicRenderingFeaturesKHR.html}[VkPhysicalDeviceDynamicRenderingFeaturesKHR]} *)
 module PhysicalDeviceDynamicRenderingFeaturesKHR = PhysicalDeviceDynamicRenderingFeatures
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceDynamicRenderingLocalReadFeaturesKHR.html}[VkPhysicalDeviceDynamicRenderingLocalReadFeaturesKHR]} *)
 module PhysicalDeviceDynamicRenderingLocalReadFeaturesKHR = PhysicalDeviceDynamicRenderingLocalReadFeatures
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceExternalBufferInfoKHR.html}[VkPhysicalDeviceExternalBufferInfoKHR]} *)
 module PhysicalDeviceExternalBufferInfoKHR = PhysicalDeviceExternalBufferInfo
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceExternalFenceInfoKHR.html}[VkPhysicalDeviceExternalFenceInfoKHR]} *)
 module PhysicalDeviceExternalFenceInfoKHR = PhysicalDeviceExternalFenceInfo
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceExternalImageFormatInfoKHR.html}[VkPhysicalDeviceExternalImageFormatInfoKHR]} *)
 module PhysicalDeviceExternalImageFormatInfoKHR = PhysicalDeviceExternalImageFormatInfo
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceExternalSemaphoreInfoKHR.html}[VkPhysicalDeviceExternalSemaphoreInfoKHR]} *)
 module PhysicalDeviceExternalSemaphoreInfoKHR = PhysicalDeviceExternalSemaphoreInfo
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceFeatures2KHR.html}[VkPhysicalDeviceFeatures2KHR]} *)
 module PhysicalDeviceFeatures2KHR = PhysicalDeviceFeatures2
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceFloatControlsPropertiesKHR.html}[VkPhysicalDeviceFloatControlsPropertiesKHR]} *)
 module PhysicalDeviceFloatControlsPropertiesKHR = PhysicalDeviceFloatControlsProperties
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM.html}[VkPhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM]} *)
 module PhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM = PhysicalDeviceFragmentDensityMapOffsetFeaturesEXT
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceFragmentDensityMapOffsetPropertiesQCOM.html}[VkPhysicalDeviceFragmentDensityMapOffsetPropertiesQCOM]} *)
 module PhysicalDeviceFragmentDensityMapOffsetPropertiesQCOM = PhysicalDeviceFragmentDensityMapOffsetPropertiesEXT
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV.html}[VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV]} *)
 module PhysicalDeviceFragmentShaderBarycentricFeaturesNV = PhysicalDeviceFragmentShaderBarycentricFeaturesKHR
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceGlobalPriorityQueryFeaturesEXT.html}[VkPhysicalDeviceGlobalPriorityQueryFeaturesEXT]} *)
 module PhysicalDeviceGlobalPriorityQueryFeaturesEXT = PhysicalDeviceGlobalPriorityQueryFeatures
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceGlobalPriorityQueryFeaturesKHR.html}[VkPhysicalDeviceGlobalPriorityQueryFeaturesKHR]} *)
 module PhysicalDeviceGlobalPriorityQueryFeaturesKHR = PhysicalDeviceGlobalPriorityQueryFeatures
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceGroupPropertiesKHR.html}[VkPhysicalDeviceGroupPropertiesKHR]} *)
 module PhysicalDeviceGroupPropertiesKHR = PhysicalDeviceGroupProperties
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceHostImageCopyFeaturesEXT.html}[VkPhysicalDeviceHostImageCopyFeaturesEXT]} *)
 module PhysicalDeviceHostImageCopyFeaturesEXT = PhysicalDeviceHostImageCopyFeatures
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceHostImageCopyPropertiesEXT.html}[VkPhysicalDeviceHostImageCopyPropertiesEXT]} *)
 module PhysicalDeviceHostImageCopyPropertiesEXT = PhysicalDeviceHostImageCopyProperties
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceHostQueryResetFeaturesEXT.html}[VkPhysicalDeviceHostQueryResetFeaturesEXT]} *)
 module PhysicalDeviceHostQueryResetFeaturesEXT = PhysicalDeviceHostQueryResetFeatures
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceIDPropertiesKHR.html}[VkPhysicalDeviceIDPropertiesKHR]} *)
 module PhysicalDeviceIDPropertiesKHR = PhysicalDeviceIDProperties
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceImageFormatInfo2KHR.html}[VkPhysicalDeviceImageFormatInfo2KHR]} *)
 module PhysicalDeviceImageFormatInfo2KHR = PhysicalDeviceImageFormatInfo2
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceImageRobustnessFeaturesEXT.html}[VkPhysicalDeviceImageRobustnessFeaturesEXT]} *)
 module PhysicalDeviceImageRobustnessFeaturesEXT = PhysicalDeviceImageRobustnessFeatures
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceImagelessFramebufferFeaturesKHR.html}[VkPhysicalDeviceImagelessFramebufferFeaturesKHR]} *)
 module PhysicalDeviceImagelessFramebufferFeaturesKHR = PhysicalDeviceImagelessFramebufferFeatures
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceIndexTypeUint8FeaturesEXT.html}[VkPhysicalDeviceIndexTypeUint8FeaturesEXT]} *)
 module PhysicalDeviceIndexTypeUint8FeaturesEXT = PhysicalDeviceIndexTypeUint8Features
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceIndexTypeUint8FeaturesKHR.html}[VkPhysicalDeviceIndexTypeUint8FeaturesKHR]} *)
 module PhysicalDeviceIndexTypeUint8FeaturesKHR = PhysicalDeviceIndexTypeUint8Features
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceInlineUniformBlockFeaturesEXT.html}[VkPhysicalDeviceInlineUniformBlockFeaturesEXT]} *)
 module PhysicalDeviceInlineUniformBlockFeaturesEXT = PhysicalDeviceInlineUniformBlockFeatures
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceInlineUniformBlockPropertiesEXT.html}[VkPhysicalDeviceInlineUniformBlockPropertiesEXT]} *)
 module PhysicalDeviceInlineUniformBlockPropertiesEXT = PhysicalDeviceInlineUniformBlockProperties
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceLineRasterizationFeaturesEXT.html}[VkPhysicalDeviceLineRasterizationFeaturesEXT]} *)
 module PhysicalDeviceLineRasterizationFeaturesEXT = PhysicalDeviceLineRasterizationFeatures
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceLineRasterizationFeaturesKHR.html}[VkPhysicalDeviceLineRasterizationFeaturesKHR]} *)
 module PhysicalDeviceLineRasterizationFeaturesKHR = PhysicalDeviceLineRasterizationFeatures
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceLineRasterizationPropertiesEXT.html}[VkPhysicalDeviceLineRasterizationPropertiesEXT]} *)
 module PhysicalDeviceLineRasterizationPropertiesEXT = PhysicalDeviceLineRasterizationProperties
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceLineRasterizationPropertiesKHR.html}[VkPhysicalDeviceLineRasterizationPropertiesKHR]} *)
 module PhysicalDeviceLineRasterizationPropertiesKHR = PhysicalDeviceLineRasterizationProperties
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceMaintenance3PropertiesKHR.html}[VkPhysicalDeviceMaintenance3PropertiesKHR]} *)
 module PhysicalDeviceMaintenance3PropertiesKHR = PhysicalDeviceMaintenance3Properties
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceMaintenance4FeaturesKHR.html}[VkPhysicalDeviceMaintenance4FeaturesKHR]} *)
 module PhysicalDeviceMaintenance4FeaturesKHR = PhysicalDeviceMaintenance4Features
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceMaintenance4PropertiesKHR.html}[VkPhysicalDeviceMaintenance4PropertiesKHR]} *)
 module PhysicalDeviceMaintenance4PropertiesKHR = PhysicalDeviceMaintenance4Properties
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceMaintenance5FeaturesKHR.html}[VkPhysicalDeviceMaintenance5FeaturesKHR]} *)
 module PhysicalDeviceMaintenance5FeaturesKHR = PhysicalDeviceMaintenance5Features
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceMaintenance5PropertiesKHR.html}[VkPhysicalDeviceMaintenance5PropertiesKHR]} *)
 module PhysicalDeviceMaintenance5PropertiesKHR = PhysicalDeviceMaintenance5Properties
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceMaintenance6FeaturesKHR.html}[VkPhysicalDeviceMaintenance6FeaturesKHR]} *)
 module PhysicalDeviceMaintenance6FeaturesKHR = PhysicalDeviceMaintenance6Features
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceMaintenance6PropertiesKHR.html}[VkPhysicalDeviceMaintenance6PropertiesKHR]} *)
 module PhysicalDeviceMaintenance6PropertiesKHR = PhysicalDeviceMaintenance6Properties
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceMemoryDecompressionFeaturesNV.html}[VkPhysicalDeviceMemoryDecompressionFeaturesNV]} *)
 module PhysicalDeviceMemoryDecompressionFeaturesNV = PhysicalDeviceMemoryDecompressionFeaturesEXT
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceMemoryDecompressionPropertiesNV.html}[VkPhysicalDeviceMemoryDecompressionPropertiesNV]} *)
 module PhysicalDeviceMemoryDecompressionPropertiesNV = PhysicalDeviceMemoryDecompressionPropertiesEXT
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceMemoryProperties2KHR.html}[VkPhysicalDeviceMemoryProperties2KHR]} *)
 module PhysicalDeviceMemoryProperties2KHR = PhysicalDeviceMemoryProperties2
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceMultiviewFeaturesKHR.html}[VkPhysicalDeviceMultiviewFeaturesKHR]} *)
 module PhysicalDeviceMultiviewFeaturesKHR = PhysicalDeviceMultiviewFeatures
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceMultiviewPropertiesKHR.html}[VkPhysicalDeviceMultiviewPropertiesKHR]} *)
 module PhysicalDeviceMultiviewPropertiesKHR = PhysicalDeviceMultiviewProperties
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceMutableDescriptorTypeFeaturesVALVE.html}[VkPhysicalDeviceMutableDescriptorTypeFeaturesVALVE]} *)
 module PhysicalDeviceMutableDescriptorTypeFeaturesVALVE = PhysicalDeviceMutableDescriptorTypeFeaturesEXT
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT.html}[VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT]} *)
 module PhysicalDevicePipelineCreationCacheControlFeaturesEXT = PhysicalDevicePipelineCreationCacheControlFeatures
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDevicePipelineProtectedAccessFeaturesEXT.html}[VkPhysicalDevicePipelineProtectedAccessFeaturesEXT]} *)
 module PhysicalDevicePipelineProtectedAccessFeaturesEXT = PhysicalDevicePipelineProtectedAccessFeatures
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDevicePipelineRobustnessFeaturesEXT.html}[VkPhysicalDevicePipelineRobustnessFeaturesEXT]} *)
 module PhysicalDevicePipelineRobustnessFeaturesEXT = PhysicalDevicePipelineRobustnessFeatures
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDevicePipelineRobustnessPropertiesEXT.html}[VkPhysicalDevicePipelineRobustnessPropertiesEXT]} *)
 module PhysicalDevicePipelineRobustnessPropertiesEXT = PhysicalDevicePipelineRobustnessProperties
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDevicePointClippingPropertiesKHR.html}[VkPhysicalDevicePointClippingPropertiesKHR]} *)
 module PhysicalDevicePointClippingPropertiesKHR = PhysicalDevicePointClippingProperties
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDevicePresentModeFifoLatestReadyFeaturesEXT.html}[VkPhysicalDevicePresentModeFifoLatestReadyFeaturesEXT]} *)
 module PhysicalDevicePresentModeFifoLatestReadyFeaturesEXT = PhysicalDevicePresentModeFifoLatestReadyFeaturesKHR
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDevicePrivateDataFeaturesEXT.html}[VkPhysicalDevicePrivateDataFeaturesEXT]} *)
 module PhysicalDevicePrivateDataFeaturesEXT = PhysicalDevicePrivateDataFeatures
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceProperties2KHR.html}[VkPhysicalDeviceProperties2KHR]} *)
 module PhysicalDeviceProperties2KHR = PhysicalDeviceProperties2
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDevicePushDescriptorPropertiesKHR.html}[VkPhysicalDevicePushDescriptorPropertiesKHR]} *)
 module PhysicalDevicePushDescriptorPropertiesKHR = PhysicalDevicePushDescriptorProperties
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceRasterizationOrderAttachmentAccessFeaturesARM.html}[VkPhysicalDeviceRasterizationOrderAttachmentAccessFeaturesARM]} *)
 module PhysicalDeviceRasterizationOrderAttachmentAccessFeaturesARM = PhysicalDeviceRasterizationOrderAttachmentAccessFeaturesEXT
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceRobustness2FeaturesEXT.html}[VkPhysicalDeviceRobustness2FeaturesEXT]} *)
 module PhysicalDeviceRobustness2FeaturesEXT = PhysicalDeviceRobustness2FeaturesKHR
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceRobustness2PropertiesEXT.html}[VkPhysicalDeviceRobustness2PropertiesEXT]} *)
 module PhysicalDeviceRobustness2PropertiesEXT = PhysicalDeviceRobustness2PropertiesKHR
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT.html}[VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT]} *)
 module PhysicalDeviceSamplerFilterMinmaxPropertiesEXT = PhysicalDeviceSamplerFilterMinmaxProperties
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceSamplerYcbcrConversionFeaturesKHR.html}[VkPhysicalDeviceSamplerYcbcrConversionFeaturesKHR]} *)
 module PhysicalDeviceSamplerYcbcrConversionFeaturesKHR = PhysicalDeviceSamplerYcbcrConversionFeatures
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceScalarBlockLayoutFeaturesEXT.html}[VkPhysicalDeviceScalarBlockLayoutFeaturesEXT]} *)
 module PhysicalDeviceScalarBlockLayoutFeaturesEXT = PhysicalDeviceScalarBlockLayoutFeatures
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceSeparateDepthStencilLayoutsFeaturesKHR.html}[VkPhysicalDeviceSeparateDepthStencilLayoutsFeaturesKHR]} *)
 module PhysicalDeviceSeparateDepthStencilLayoutsFeaturesKHR = PhysicalDeviceSeparateDepthStencilLayoutsFeatures
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceShaderAtomicInt64FeaturesKHR.html}[VkPhysicalDeviceShaderAtomicInt64FeaturesKHR]} *)
 module PhysicalDeviceShaderAtomicInt64FeaturesKHR = PhysicalDeviceShaderAtomicInt64Features
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT.html}[VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT]} *)
 module PhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT = PhysicalDeviceShaderDemoteToHelperInvocationFeatures
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceShaderDrawParameterFeatures.html}[VkPhysicalDeviceShaderDrawParameterFeatures]} *)
 module PhysicalDeviceShaderDrawParameterFeatures = PhysicalDeviceShaderDrawParametersFeatures
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceShaderExpectAssumeFeaturesKHR.html}[VkPhysicalDeviceShaderExpectAssumeFeaturesKHR]} *)
 module PhysicalDeviceShaderExpectAssumeFeaturesKHR = PhysicalDeviceShaderExpectAssumeFeatures
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceFloat16Int8FeaturesKHR.html}[VkPhysicalDeviceFloat16Int8FeaturesKHR]} *)
 module PhysicalDeviceFloat16Int8FeaturesKHR = PhysicalDeviceShaderFloat16Int8Features
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceShaderFloat16Int8FeaturesKHR.html}[VkPhysicalDeviceShaderFloat16Int8FeaturesKHR]} *)
 module PhysicalDeviceShaderFloat16Int8FeaturesKHR = PhysicalDeviceShaderFloat16Int8Features
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceShaderFloatControls2FeaturesKHR.html}[VkPhysicalDeviceShaderFloatControls2FeaturesKHR]} *)
 module PhysicalDeviceShaderFloatControls2FeaturesKHR = PhysicalDeviceShaderFloatControls2Features
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceShaderIntegerDotProductFeaturesKHR.html}[VkPhysicalDeviceShaderIntegerDotProductFeaturesKHR]} *)
 module PhysicalDeviceShaderIntegerDotProductFeaturesKHR = PhysicalDeviceShaderIntegerDotProductFeatures
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceShaderIntegerDotProductPropertiesKHR.html}[VkPhysicalDeviceShaderIntegerDotProductPropertiesKHR]} *)
 module PhysicalDeviceShaderIntegerDotProductPropertiesKHR = PhysicalDeviceShaderIntegerDotProductProperties
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceShaderSubgroupExtendedTypesFeaturesKHR.html}[VkPhysicalDeviceShaderSubgroupExtendedTypesFeaturesKHR]} *)
 module PhysicalDeviceShaderSubgroupExtendedTypesFeaturesKHR = PhysicalDeviceShaderSubgroupExtendedTypesFeatures
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceShaderSubgroupRotateFeaturesKHR.html}[VkPhysicalDeviceShaderSubgroupRotateFeaturesKHR]} *)
 module PhysicalDeviceShaderSubgroupRotateFeaturesKHR = PhysicalDeviceShaderSubgroupRotateFeatures
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceShaderTerminateInvocationFeaturesKHR.html}[VkPhysicalDeviceShaderTerminateInvocationFeaturesKHR]} *)
 module PhysicalDeviceShaderTerminateInvocationFeaturesKHR = PhysicalDeviceShaderTerminateInvocationFeatures
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceSparseImageFormatInfo2KHR.html}[VkPhysicalDeviceSparseImageFormatInfo2KHR]} *)
 module PhysicalDeviceSparseImageFormatInfo2KHR = PhysicalDeviceSparseImageFormatInfo2
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceSubgroupSizeControlFeaturesEXT.html}[VkPhysicalDeviceSubgroupSizeControlFeaturesEXT]} *)
 module PhysicalDeviceSubgroupSizeControlFeaturesEXT = PhysicalDeviceSubgroupSizeControlFeatures
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceSubgroupSizeControlPropertiesEXT.html}[VkPhysicalDeviceSubgroupSizeControlPropertiesEXT]} *)
 module PhysicalDeviceSubgroupSizeControlPropertiesEXT = PhysicalDeviceSubgroupSizeControlProperties
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceSwapchainMaintenance1FeaturesEXT.html}[VkPhysicalDeviceSwapchainMaintenance1FeaturesEXT]} *)
 module PhysicalDeviceSwapchainMaintenance1FeaturesEXT = PhysicalDeviceSwapchainMaintenance1FeaturesKHR
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceSynchronization2FeaturesKHR.html}[VkPhysicalDeviceSynchronization2FeaturesKHR]} *)
 module PhysicalDeviceSynchronization2FeaturesKHR = PhysicalDeviceSynchronization2Features
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceTexelBufferAlignmentPropertiesEXT.html}[VkPhysicalDeviceTexelBufferAlignmentPropertiesEXT]} *)
 module PhysicalDeviceTexelBufferAlignmentPropertiesEXT = PhysicalDeviceTexelBufferAlignmentProperties
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT.html}[VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT]} *)
 module PhysicalDeviceTextureCompressionASTCHDRFeaturesEXT = PhysicalDeviceTextureCompressionASTCHDRFeatures
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceTimelineSemaphoreFeaturesKHR.html}[VkPhysicalDeviceTimelineSemaphoreFeaturesKHR]} *)
 module PhysicalDeviceTimelineSemaphoreFeaturesKHR = PhysicalDeviceTimelineSemaphoreFeatures
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceTimelineSemaphorePropertiesKHR.html}[VkPhysicalDeviceTimelineSemaphorePropertiesKHR]} *)
 module PhysicalDeviceTimelineSemaphorePropertiesKHR = PhysicalDeviceTimelineSemaphoreProperties
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceToolPropertiesEXT.html}[VkPhysicalDeviceToolPropertiesEXT]} *)
 module PhysicalDeviceToolPropertiesEXT = PhysicalDeviceToolProperties
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceUniformBufferStandardLayoutFeaturesKHR.html}[VkPhysicalDeviceUniformBufferStandardLayoutFeaturesKHR]} *)
 module PhysicalDeviceUniformBufferStandardLayoutFeaturesKHR = PhysicalDeviceUniformBufferStandardLayoutFeatures
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceVariablePointerFeatures.html}[VkPhysicalDeviceVariablePointerFeatures]} *)
 module PhysicalDeviceVariablePointerFeatures = PhysicalDeviceVariablePointersFeatures
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceVariablePointerFeaturesKHR.html}[VkPhysicalDeviceVariablePointerFeaturesKHR]} *)
 module PhysicalDeviceVariablePointerFeaturesKHR = PhysicalDeviceVariablePointersFeatures
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceVariablePointersFeaturesKHR.html}[VkPhysicalDeviceVariablePointersFeaturesKHR]} *)
 module PhysicalDeviceVariablePointersFeaturesKHR = PhysicalDeviceVariablePointersFeatures
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT.html}[VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT]} *)
 module PhysicalDeviceVertexAttributeDivisorFeaturesEXT = PhysicalDeviceVertexAttributeDivisorFeatures
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceVertexAttributeDivisorFeaturesKHR.html}[VkPhysicalDeviceVertexAttributeDivisorFeaturesKHR]} *)
 module PhysicalDeviceVertexAttributeDivisorFeaturesKHR = PhysicalDeviceVertexAttributeDivisorFeatures
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceVertexAttributeDivisorPropertiesKHR.html}[VkPhysicalDeviceVertexAttributeDivisorPropertiesKHR]} *)
 module PhysicalDeviceVertexAttributeDivisorPropertiesKHR = PhysicalDeviceVertexAttributeDivisorProperties
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceVulkanMemoryModelFeaturesKHR.html}[VkPhysicalDeviceVulkanMemoryModelFeaturesKHR]} *)
 module PhysicalDeviceVulkanMemoryModelFeaturesKHR = PhysicalDeviceVulkanMemoryModelFeatures
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR.html}[VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR]} *)
 module PhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR = PhysicalDeviceZeroInitializeWorkgroupMemoryFeatures
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPipelineCreateFlags2CreateInfoKHR.html}[VkPipelineCreateFlags2CreateInfoKHR]} *)
 module PipelineCreateFlags2CreateInfoKHR = PipelineCreateFlags2CreateInfo
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPipelineCreationFeedbackEXT.html}[VkPipelineCreationFeedbackEXT]} *)
 module PipelineCreationFeedbackEXT = PipelineCreationFeedback
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPipelineCreationFeedbackCreateInfoEXT.html}[VkPipelineCreationFeedbackCreateInfoEXT]} *)
 module PipelineCreationFeedbackCreateInfoEXT = PipelineCreationFeedbackCreateInfo
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPipelineInfoEXT.html}[VkPipelineInfoEXT]} *)
 module PipelineInfoEXT = PipelineInfoKHR
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPipelineRasterizationLineStateCreateInfoEXT.html}[VkPipelineRasterizationLineStateCreateInfoEXT]} *)
 module PipelineRasterizationLineStateCreateInfoEXT = PipelineRasterizationLineStateCreateInfo
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPipelineRasterizationLineStateCreateInfoKHR.html}[VkPipelineRasterizationLineStateCreateInfoKHR]} *)
 module PipelineRasterizationLineStateCreateInfoKHR = PipelineRasterizationLineStateCreateInfo
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPipelineRenderingCreateInfoKHR.html}[VkPipelineRenderingCreateInfoKHR]} *)
 module PipelineRenderingCreateInfoKHR = PipelineRenderingCreateInfo
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPipelineRobustnessCreateInfoEXT.html}[VkPipelineRobustnessCreateInfoEXT]} *)
 module PipelineRobustnessCreateInfoEXT = PipelineRobustnessCreateInfo
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT.html}[VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT]} *)
 module PipelineShaderStageRequiredSubgroupSizeCreateInfoEXT = PipelineShaderStageRequiredSubgroupSizeCreateInfo
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkShaderRequiredSubgroupSizeCreateInfoEXT.html}[VkShaderRequiredSubgroupSizeCreateInfoEXT]} *)
 module ShaderRequiredSubgroupSizeCreateInfoEXT = PipelineShaderStageRequiredSubgroupSizeCreateInfo
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPipelineTessellationDomainOriginStateCreateInfoKHR.html}[VkPipelineTessellationDomainOriginStateCreateInfoKHR]} *)
 module PipelineTessellationDomainOriginStateCreateInfoKHR = PipelineTessellationDomainOriginStateCreateInfo
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPipelineVertexInputDivisorStateCreateInfoEXT.html}[VkPipelineVertexInputDivisorStateCreateInfoEXT]} *)
 module PipelineVertexInputDivisorStateCreateInfoEXT = PipelineVertexInputDivisorStateCreateInfo
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPipelineVertexInputDivisorStateCreateInfoKHR.html}[VkPipelineVertexInputDivisorStateCreateInfoKHR]} *)
 module PipelineVertexInputDivisorStateCreateInfoKHR = PipelineVertexInputDivisorStateCreateInfo
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPrivateDataSlotCreateInfoEXT.html}[VkPrivateDataSlotCreateInfoEXT]} *)
 module PrivateDataSlotCreateInfoEXT = PrivateDataSlotCreateInfo
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPushConstantsInfoKHR.html}[VkPushConstantsInfoKHR]} *)
 module PushConstantsInfoKHR = PushConstantsInfo
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPushDescriptorSetInfoKHR.html}[VkPushDescriptorSetInfoKHR]} *)
 module PushDescriptorSetInfoKHR = PushDescriptorSetInfo
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPushDescriptorSetWithTemplateInfoKHR.html}[VkPushDescriptorSetWithTemplateInfoKHR]} *)
 module PushDescriptorSetWithTemplateInfoKHR = PushDescriptorSetWithTemplateInfo
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkQueryPoolCreateInfoINTEL.html}[VkQueryPoolCreateInfoINTEL]} *)
 module QueryPoolCreateInfoINTEL = QueryPoolPerformanceQueryCreateInfoINTEL
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkQueueFamilyGlobalPriorityPropertiesEXT.html}[VkQueueFamilyGlobalPriorityPropertiesEXT]} *)
 module QueueFamilyGlobalPriorityPropertiesEXT = QueueFamilyGlobalPriorityProperties
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkQueueFamilyGlobalPriorityPropertiesKHR.html}[VkQueueFamilyGlobalPriorityPropertiesKHR]} *)
 module QueueFamilyGlobalPriorityPropertiesKHR = QueueFamilyGlobalPriorityProperties
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkQueueFamilyProperties2KHR.html}[VkQueueFamilyProperties2KHR]} *)
 module QueueFamilyProperties2KHR = QueueFamilyProperties2
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkReleaseSwapchainImagesInfoEXT.html}[VkReleaseSwapchainImagesInfoEXT]} *)
 module ReleaseSwapchainImagesInfoEXT = ReleaseSwapchainImagesInfoKHR

@@ -19,88 +19,131 @@ open Vk_types_12
 open Vk_types_13
 open Vk_types_14
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkRenderPassAttachmentBeginInfoKHR.html}[VkRenderPassAttachmentBeginInfoKHR]} *)
 module RenderPassAttachmentBeginInfoKHR = RenderPassAttachmentBeginInfo
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkRenderPassCreateInfo2KHR.html}[VkRenderPassCreateInfo2KHR]} *)
 module RenderPassCreateInfo2KHR = RenderPassCreateInfo2
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkSubpassFragmentDensityMapOffsetEndInfoQCOM.html}[VkSubpassFragmentDensityMapOffsetEndInfoQCOM]} *)
 module SubpassFragmentDensityMapOffsetEndInfoQCOM = RenderPassFragmentDensityMapOffsetEndInfoEXT
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkRenderPassInputAttachmentAspectCreateInfoKHR.html}[VkRenderPassInputAttachmentAspectCreateInfoKHR]} *)
 module RenderPassInputAttachmentAspectCreateInfoKHR = RenderPassInputAttachmentAspectCreateInfo
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkRenderPassMultiviewCreateInfoKHR.html}[VkRenderPassMultiviewCreateInfoKHR]} *)
 module RenderPassMultiviewCreateInfoKHR = RenderPassMultiviewCreateInfo
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkRenderingAreaInfoKHR.html}[VkRenderingAreaInfoKHR]} *)
 module RenderingAreaInfoKHR = RenderingAreaInfo
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkRenderingAttachmentInfoKHR.html}[VkRenderingAttachmentInfoKHR]} *)
 module RenderingAttachmentInfoKHR = RenderingAttachmentInfo
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkRenderingAttachmentLocationInfoKHR.html}[VkRenderingAttachmentLocationInfoKHR]} *)
 module RenderingAttachmentLocationInfoKHR = RenderingAttachmentLocationInfo
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkRenderingEndInfoEXT.html}[VkRenderingEndInfoEXT]} *)
 module RenderingEndInfoEXT = RenderingEndInfoKHR
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkRenderingInfoKHR.html}[VkRenderingInfoKHR]} *)
 module RenderingInfoKHR = RenderingInfo
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkRenderingInputAttachmentIndexInfoKHR.html}[VkRenderingInputAttachmentIndexInfoKHR]} *)
 module RenderingInputAttachmentIndexInfoKHR = RenderingInputAttachmentIndexInfo
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkResolveImageInfo2KHR.html}[VkResolveImageInfo2KHR]} *)
 module ResolveImageInfo2KHR = ResolveImageInfo2
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkSamplerReductionModeCreateInfoEXT.html}[VkSamplerReductionModeCreateInfoEXT]} *)
 module SamplerReductionModeCreateInfoEXT = SamplerReductionModeCreateInfo
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkSamplerYcbcrConversionCreateInfoKHR.html}[VkSamplerYcbcrConversionCreateInfoKHR]} *)
 module SamplerYcbcrConversionCreateInfoKHR = SamplerYcbcrConversionCreateInfo
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkSamplerYcbcrConversionImageFormatPropertiesKHR.html}[VkSamplerYcbcrConversionImageFormatPropertiesKHR]} *)
 module SamplerYcbcrConversionImageFormatPropertiesKHR = SamplerYcbcrConversionImageFormatProperties
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkSamplerYcbcrConversionInfoKHR.html}[VkSamplerYcbcrConversionInfoKHR]} *)
 module SamplerYcbcrConversionInfoKHR = SamplerYcbcrConversionInfo
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkSemaphoreSignalInfoKHR.html}[VkSemaphoreSignalInfoKHR]} *)
 module SemaphoreSignalInfoKHR = SemaphoreSignalInfo
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkSemaphoreSubmitInfoKHR.html}[VkSemaphoreSubmitInfoKHR]} *)
 module SemaphoreSubmitInfoKHR = SemaphoreSubmitInfo
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkSemaphoreTypeCreateInfoKHR.html}[VkSemaphoreTypeCreateInfoKHR]} *)
 module SemaphoreTypeCreateInfoKHR = SemaphoreTypeCreateInfo
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkSemaphoreWaitInfoKHR.html}[VkSemaphoreWaitInfoKHR]} *)
 module SemaphoreWaitInfoKHR = SemaphoreWaitInfo
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkSparseImageFormatProperties2KHR.html}[VkSparseImageFormatProperties2KHR]} *)
 module SparseImageFormatProperties2KHR = SparseImageFormatProperties2
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkSparseImageMemoryRequirements2KHR.html}[VkSparseImageMemoryRequirements2KHR]} *)
 module SparseImageMemoryRequirements2KHR = SparseImageMemoryRequirements2
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkSubmitInfo2KHR.html}[VkSubmitInfo2KHR]} *)
 module SubmitInfo2KHR = SubmitInfo2
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkSubpassBeginInfoKHR.html}[VkSubpassBeginInfoKHR]} *)
 module SubpassBeginInfoKHR = SubpassBeginInfo
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkSubpassDependency2KHR.html}[VkSubpassDependency2KHR]} *)
 module SubpassDependency2KHR = SubpassDependency2
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkSubpassDescription2KHR.html}[VkSubpassDescription2KHR]} *)
 module SubpassDescription2KHR = SubpassDescription2
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkSubpassDescriptionDepthStencilResolveKHR.html}[VkSubpassDescriptionDepthStencilResolveKHR]} *)
 module SubpassDescriptionDepthStencilResolveKHR = SubpassDescriptionDepthStencilResolve
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkSubpassEndInfoKHR.html}[VkSubpassEndInfoKHR]} *)
 module SubpassEndInfoKHR = SubpassEndInfo
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkSubresourceHostMemcpySizeEXT.html}[VkSubresourceHostMemcpySizeEXT]} *)
 module SubresourceHostMemcpySizeEXT = SubresourceHostMemcpySize
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkSubresourceLayout2EXT.html}[VkSubresourceLayout2EXT]} *)
 module SubresourceLayout2EXT = SubresourceLayout2
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkSubresourceLayout2KHR.html}[VkSubresourceLayout2KHR]} *)
 module SubresourceLayout2KHR = SubresourceLayout2
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkSurfacePresentModeCompatibilityEXT.html}[VkSurfacePresentModeCompatibilityEXT]} *)
 module SurfacePresentModeCompatibilityEXT = SurfacePresentModeCompatibilityKHR
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkSurfacePresentModeEXT.html}[VkSurfacePresentModeEXT]} *)
 module SurfacePresentModeEXT = SurfacePresentModeKHR
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkSurfacePresentScalingCapabilitiesEXT.html}[VkSurfacePresentScalingCapabilitiesEXT]} *)
 module SurfacePresentScalingCapabilitiesEXT = SurfacePresentScalingCapabilitiesKHR
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkSwapchainPresentFenceInfoEXT.html}[VkSwapchainPresentFenceInfoEXT]} *)
 module SwapchainPresentFenceInfoEXT = SwapchainPresentFenceInfoKHR
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkSwapchainPresentModeInfoEXT.html}[VkSwapchainPresentModeInfoEXT]} *)
 module SwapchainPresentModeInfoEXT = SwapchainPresentModeInfoKHR
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkSwapchainPresentModesCreateInfoEXT.html}[VkSwapchainPresentModesCreateInfoEXT]} *)
 module SwapchainPresentModesCreateInfoEXT = SwapchainPresentModesCreateInfoKHR
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkSwapchainPresentScalingCreateInfoEXT.html}[VkSwapchainPresentScalingCreateInfoEXT]} *)
 module SwapchainPresentScalingCreateInfoEXT = SwapchainPresentScalingCreateInfoKHR
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkTimelineSemaphoreSubmitInfoKHR.html}[VkTimelineSemaphoreSubmitInfoKHR]} *)
 module TimelineSemaphoreSubmitInfoKHR = TimelineSemaphoreSubmitInfo
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkTransformMatrixNV.html}[VkTransformMatrixNV]} *)
 module TransformMatrixNV = TransformMatrixKHR
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkVertexInputBindingDivisorDescriptionEXT.html}[VkVertexInputBindingDivisorDescriptionEXT]} *)
 module VertexInputBindingDivisorDescriptionEXT = VertexInputBindingDivisorDescription
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkVertexInputBindingDivisorDescriptionKHR.html}[VkVertexInputBindingDivisorDescriptionKHR]} *)
 module VertexInputBindingDivisorDescriptionKHR = VertexInputBindingDivisorDescription
 
+(** Alias of {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkWriteDescriptorSetInlineUniformBlockEXT.html}[VkWriteDescriptorSetInlineUniformBlockEXT]} *)
 module WriteDescriptorSetInlineUniformBlockEXT = WriteDescriptorSetInlineUniformBlock

@@ -19,6 +19,7 @@ open Vk_types_13
 open Vk_types_14
 open Vk_types_15
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateInstance.html}[vkCreateInstance]} *)
 let create_instance ?allocator:arg_allocator arg_create_info =
   let output = allocate (Instance.t) (Instance.null) in
   let result = Vk_fn.create_instance (addr arg_create_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
@@ -27,11 +28,13 @@ let create_instance ?allocator:arg_allocator arg_create_info =
   Vk_fn.load_instance !@ output;
   !@ output
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkDestroyInstance.html}[vkDestroyInstance]} *)
 let destroy_instance arg_instance ?allocator:arg_allocator () =
   Vk_fn.destroy_instance (arg_instance) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x));
   ignore (Sys.opaque_identity (arg_instance, arg_allocator));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkEnumeratePhysicalDevices.html}[vkEnumeratePhysicalDevices]} *)
 let enumerate_physical_devices arg_instance =
   let count = allocate Vk_base.uint32 0 in
   let rec fetch () =
@@ -50,22 +53,26 @@ let enumerate_physical_devices arg_instance =
   ignore (Sys.opaque_identity (arg_instance));
   enumeration_result
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetDeviceProcAddr.html}[vkGetDeviceProcAddr]} *)
 let get_device_proc_addr arg_device arg_name =
   let call_result = Vk_fn.get_device_proc_addr (arg_device) (arg_name) in
   ignore (Sys.opaque_identity (arg_device, arg_name));
   call_result
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetInstanceProcAddr.html}[vkGetInstanceProcAddr]} *)
 let get_instance_proc_addr arg_instance arg_name =
   let call_result = Vk_fn.get_instance_proc_addr (arg_instance) (arg_name) in
   ignore (Sys.opaque_identity (arg_instance, arg_name));
   call_result
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPhysicalDeviceProperties.html}[vkGetPhysicalDeviceProperties]} *)
 let get_physical_device_properties arg_physical_device =
   let output = PhysicalDeviceProperties.make () in
   Vk_fn.get_physical_device_properties (arg_physical_device) (addr output);
   ignore (Sys.opaque_identity (arg_physical_device));
   output
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPhysicalDeviceQueueFamilyProperties.html}[vkGetPhysicalDeviceQueueFamilyProperties]} *)
 let get_physical_device_queue_family_properties arg_physical_device =
   let count = allocate Vk_base.uint32 0 in
   let rec fetch () =
@@ -80,24 +87,28 @@ let get_physical_device_queue_family_properties arg_physical_device =
   ignore (Sys.opaque_identity (arg_physical_device));
   enumeration_result
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPhysicalDeviceMemoryProperties.html}[vkGetPhysicalDeviceMemoryProperties]} *)
 let get_physical_device_memory_properties arg_physical_device =
   let output = PhysicalDeviceMemoryProperties.make () in
   Vk_fn.get_physical_device_memory_properties (arg_physical_device) (addr output);
   ignore (Sys.opaque_identity (arg_physical_device));
   output
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPhysicalDeviceFeatures.html}[vkGetPhysicalDeviceFeatures]} *)
 let get_physical_device_features arg_physical_device =
   let output = PhysicalDeviceFeatures.make () in
   Vk_fn.get_physical_device_features (arg_physical_device) (addr output);
   ignore (Sys.opaque_identity (arg_physical_device));
   output
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPhysicalDeviceFormatProperties.html}[vkGetPhysicalDeviceFormatProperties]} *)
 let get_physical_device_format_properties arg_physical_device arg_format =
   let output = FormatProperties.make () in
   Vk_fn.get_physical_device_format_properties (arg_physical_device) (arg_format) (addr output);
   ignore (Sys.opaque_identity (arg_physical_device, arg_format));
   output
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPhysicalDeviceImageFormatProperties.html}[vkGetPhysicalDeviceImageFormatProperties]} *)
 let get_physical_device_image_format_properties arg_physical_device arg_format arg_type_ arg_tiling arg_usage arg_flags =
   let output = ImageFormatProperties.make () in
   let result = Vk_fn.get_physical_device_image_format_properties (arg_physical_device) (arg_format) (arg_type_) (arg_tiling) (arg_usage) (arg_flags) (addr output) in
@@ -105,6 +116,7 @@ let get_physical_device_image_format_properties arg_physical_device arg_format a
   check result;
   output
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateDevice.html}[vkCreateDevice]} *)
 let create_device ?allocator:arg_allocator arg_physical_device arg_create_info =
   let output = allocate (Device.t) (Device.null) in
   let result = Vk_fn.create_device (arg_physical_device) (addr arg_create_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
@@ -112,17 +124,20 @@ let create_device ?allocator:arg_allocator arg_physical_device arg_create_info =
   check result;
   !@ output
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkDestroyDevice.html}[vkDestroyDevice]} *)
 let destroy_device arg_device ?allocator:arg_allocator () =
   Vk_fn.destroy_device (arg_device) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x));
   ignore (Sys.opaque_identity (arg_device, arg_allocator));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkEnumerateInstanceVersion.html}[vkEnumerateInstanceVersion]} *)
 let enumerate_instance_version () =
   let output = allocate (Vk_base.uint32) (0) in
   let result = Vk_fn.enumerate_instance_version (output) in
   check result;
   !@ output
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkEnumerateInstanceLayerProperties.html}[vkEnumerateInstanceLayerProperties]} *)
 let enumerate_instance_layer_properties () =
   let count = allocate Vk_base.uint32 0 in
   let rec fetch () =
@@ -139,6 +154,7 @@ let enumerate_instance_layer_properties () =
   in
   fetch ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkEnumerateInstanceExtensionProperties.html}[vkEnumerateInstanceExtensionProperties]} *)
 let enumerate_instance_extension_properties ?layer_name:arg_layer_name () =
   let count = allocate Vk_base.uint32 0 in
   let rec fetch () =
@@ -157,6 +173,7 @@ let enumerate_instance_extension_properties ?layer_name:arg_layer_name () =
   ignore (Sys.opaque_identity (arg_layer_name));
   enumeration_result
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkEnumerateDeviceLayerProperties.html}[vkEnumerateDeviceLayerProperties]} *)
 let enumerate_device_layer_properties arg_physical_device =
   let count = allocate Vk_base.uint32 0 in
   let rec fetch () =
@@ -175,6 +192,7 @@ let enumerate_device_layer_properties arg_physical_device =
   ignore (Sys.opaque_identity (arg_physical_device));
   enumeration_result
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkEnumerateDeviceExtensionProperties.html}[vkEnumerateDeviceExtensionProperties]} *)
 let enumerate_device_extension_properties ?layer_name:arg_layer_name arg_physical_device =
   let count = allocate Vk_base.uint32 0 in
   let rec fetch () =
@@ -193,12 +211,14 @@ let enumerate_device_extension_properties ?layer_name:arg_layer_name arg_physica
   ignore (Sys.opaque_identity (arg_physical_device, arg_layer_name));
   enumeration_result
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetDeviceQueue.html}[vkGetDeviceQueue]} *)
 let get_device_queue arg_device arg_queue_family_index arg_queue_index =
   let output = allocate (Queue.t) (Queue.null) in
   Vk_fn.get_device_queue (arg_device) (arg_queue_family_index) (arg_queue_index) (output);
   ignore (Sys.opaque_identity (arg_device, arg_queue_family_index, arg_queue_index));
   !@ output
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkQueueSubmit.html}[vkQueueSubmit]} *)
 let queue_submit arg_queue arg_submits arg_fence =
   let array_submits = CArray.of_list (SubmitInfo.t) arg_submits in
   let pointer_submits = if arg_submits = [] then Vk_base.null_ptr (SubmitInfo.t) else CArray.start array_submits in
@@ -207,18 +227,21 @@ let queue_submit arg_queue arg_submits arg_fence =
   check result;
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkQueueWaitIdle.html}[vkQueueWaitIdle]} *)
 let queue_wait_idle arg_queue =
   let result = Vk_fn.queue_wait_idle (arg_queue) in
   ignore (Sys.opaque_identity (arg_queue));
   check result;
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkDeviceWaitIdle.html}[vkDeviceWaitIdle]} *)
 let device_wait_idle arg_device =
   let result = Vk_fn.device_wait_idle (arg_device) in
   ignore (Sys.opaque_identity (arg_device));
   check result;
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkAllocateMemory.html}[vkAllocateMemory]} *)
 let allocate_memory ?allocator:arg_allocator arg_device arg_allocate_info =
   let output = allocate (DeviceMemory.t) (DeviceMemory.null) in
   let result = Vk_fn.allocate_memory (arg_device) (addr arg_allocate_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
@@ -226,11 +249,13 @@ let allocate_memory ?allocator:arg_allocator arg_device arg_allocate_info =
   check result;
   !@ output
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkFreeMemory.html}[vkFreeMemory]} *)
 let free_memory arg_device arg_memory ?allocator:arg_allocator () =
   Vk_fn.free_memory (arg_device) (arg_memory) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x));
   ignore (Sys.opaque_identity (arg_device, arg_memory, arg_allocator));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkMapMemory.html}[vkMapMemory]} *)
 let map_memory arg_device arg_memory arg_offset arg_size arg_flags =
   let output = allocate (ptr (Ctypes.void)) (Vk_base.null_ptr (Ctypes.void)) in
   let result = Vk_fn.map_memory (arg_device) (arg_memory) (arg_offset) (arg_size) (arg_flags) (output) in
@@ -238,11 +263,13 @@ let map_memory arg_device arg_memory arg_offset arg_size arg_flags =
   check result;
   !@ output
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkUnmapMemory.html}[vkUnmapMemory]} *)
 let unmap_memory arg_device arg_memory =
   Vk_fn.unmap_memory (arg_device) (arg_memory);
   ignore (Sys.opaque_identity (arg_device, arg_memory));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkFlushMappedMemoryRanges.html}[vkFlushMappedMemoryRanges]} *)
 let flush_mapped_memory_ranges arg_device arg_memory_ranges =
   let array_memory_ranges = CArray.of_list (MappedMemoryRange.t) arg_memory_ranges in
   let pointer_memory_ranges = if arg_memory_ranges = [] then Vk_base.null_ptr (MappedMemoryRange.t) else CArray.start array_memory_ranges in
@@ -251,6 +278,7 @@ let flush_mapped_memory_ranges arg_device arg_memory_ranges =
   check result;
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkInvalidateMappedMemoryRanges.html}[vkInvalidateMappedMemoryRanges]} *)
 let invalidate_mapped_memory_ranges arg_device arg_memory_ranges =
   let array_memory_ranges = CArray.of_list (MappedMemoryRange.t) arg_memory_ranges in
   let pointer_memory_ranges = if arg_memory_ranges = [] then Vk_base.null_ptr (MappedMemoryRange.t) else CArray.start array_memory_ranges in
@@ -259,36 +287,42 @@ let invalidate_mapped_memory_ranges arg_device arg_memory_ranges =
   check result;
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetDeviceMemoryCommitment.html}[vkGetDeviceMemoryCommitment]} *)
 let get_device_memory_commitment arg_device arg_memory =
   let output = allocate (Vk_base.device_size) (0) in
   Vk_fn.get_device_memory_commitment (arg_device) (arg_memory) (output);
   ignore (Sys.opaque_identity (arg_device, arg_memory));
   !@ output
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetBufferMemoryRequirements.html}[vkGetBufferMemoryRequirements]} *)
 let get_buffer_memory_requirements arg_device arg_buffer =
   let output = MemoryRequirements.make () in
   Vk_fn.get_buffer_memory_requirements (arg_device) (arg_buffer) (addr output);
   ignore (Sys.opaque_identity (arg_device, arg_buffer));
   output
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkBindBufferMemory.html}[vkBindBufferMemory]} *)
 let bind_buffer_memory arg_device arg_buffer arg_memory arg_memory_offset =
   let result = Vk_fn.bind_buffer_memory (arg_device) (arg_buffer) (arg_memory) (arg_memory_offset) in
   ignore (Sys.opaque_identity (arg_device, arg_buffer, arg_memory, arg_memory_offset));
   check result;
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetImageMemoryRequirements.html}[vkGetImageMemoryRequirements]} *)
 let get_image_memory_requirements arg_device arg_image =
   let output = MemoryRequirements.make () in
   Vk_fn.get_image_memory_requirements (arg_device) (arg_image) (addr output);
   ignore (Sys.opaque_identity (arg_device, arg_image));
   output
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkBindImageMemory.html}[vkBindImageMemory]} *)
 let bind_image_memory arg_device arg_image arg_memory arg_memory_offset =
   let result = Vk_fn.bind_image_memory (arg_device) (arg_image) (arg_memory) (arg_memory_offset) in
   ignore (Sys.opaque_identity (arg_device, arg_image, arg_memory, arg_memory_offset));
   check result;
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetImageSparseMemoryRequirements.html}[vkGetImageSparseMemoryRequirements]} *)
 let get_image_sparse_memory_requirements arg_device arg_image =
   let count = allocate Vk_base.uint32 0 in
   let rec fetch () =
@@ -303,6 +337,7 @@ let get_image_sparse_memory_requirements arg_device arg_image =
   ignore (Sys.opaque_identity (arg_device, arg_image));
   enumeration_result
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPhysicalDeviceSparseImageFormatProperties.html}[vkGetPhysicalDeviceSparseImageFormatProperties]} *)
 let get_physical_device_sparse_image_format_properties arg_physical_device arg_format arg_type_ arg_samples arg_usage arg_tiling =
   let count = allocate Vk_base.uint32 0 in
   let rec fetch () =
@@ -317,6 +352,7 @@ let get_physical_device_sparse_image_format_properties arg_physical_device arg_f
   ignore (Sys.opaque_identity (arg_physical_device, arg_format, arg_type_, arg_samples, arg_usage, arg_tiling));
   enumeration_result
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkQueueBindSparse.html}[vkQueueBindSparse]} *)
 let queue_bind_sparse arg_queue arg_bind_info arg_fence =
   let array_bind_info = CArray.of_list (BindSparseInfo.t) arg_bind_info in
   let pointer_bind_info = if arg_bind_info = [] then Vk_base.null_ptr (BindSparseInfo.t) else CArray.start array_bind_info in
@@ -325,6 +361,7 @@ let queue_bind_sparse arg_queue arg_bind_info arg_fence =
   check result;
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateFence.html}[vkCreateFence]} *)
 let create_fence ?allocator:arg_allocator arg_device arg_create_info =
   let output = allocate (Fence.t) (Fence.null) in
   let result = Vk_fn.create_fence (arg_device) (addr arg_create_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
@@ -332,11 +369,13 @@ let create_fence ?allocator:arg_allocator arg_device arg_create_info =
   check result;
   !@ output
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkDestroyFence.html}[vkDestroyFence]} *)
 let destroy_fence arg_device arg_fence ?allocator:arg_allocator () =
   Vk_fn.destroy_fence (arg_device) (arg_fence) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x));
   ignore (Sys.opaque_identity (arg_device, arg_fence, arg_allocator));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkResetFences.html}[vkResetFences]} *)
 let reset_fences arg_device arg_fences =
   let array_fences = CArray.of_list (Fence.t) arg_fences in
   let pointer_fences = if arg_fences = [] then Vk_base.null_ptr (Fence.t) else CArray.start array_fences in
@@ -345,12 +384,14 @@ let reset_fences arg_device arg_fences =
   check result;
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetFenceStatus.html}[vkGetFenceStatus]} *)
 let get_fence_status arg_device arg_fence =
   let result = Vk_fn.get_fence_status (arg_device) (arg_fence) in
   ignore (Sys.opaque_identity (arg_device, arg_fence));
   check result;
   result
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkWaitForFences.html}[vkWaitForFences]} *)
 let wait_for_fences arg_device arg_fences arg_wait_all arg_timeout =
   let array_fences = CArray.of_list (Fence.t) arg_fences in
   let pointer_fences = if arg_fences = [] then Vk_base.null_ptr (Fence.t) else CArray.start array_fences in
@@ -359,6 +400,7 @@ let wait_for_fences arg_device arg_fences arg_wait_all arg_timeout =
   check result;
   result
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateSemaphore.html}[vkCreateSemaphore]} *)
 let create_semaphore ?allocator:arg_allocator arg_device arg_create_info =
   let output = allocate (Semaphore.t) (Semaphore.null) in
   let result = Vk_fn.create_semaphore (arg_device) (addr arg_create_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
@@ -366,11 +408,13 @@ let create_semaphore ?allocator:arg_allocator arg_device arg_create_info =
   check result;
   !@ output
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkDestroySemaphore.html}[vkDestroySemaphore]} *)
 let destroy_semaphore arg_device arg_semaphore ?allocator:arg_allocator () =
   Vk_fn.destroy_semaphore (arg_device) (arg_semaphore) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x));
   ignore (Sys.opaque_identity (arg_device, arg_semaphore, arg_allocator));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateEvent.html}[vkCreateEvent]} *)
 let create_event ?allocator:arg_allocator arg_device arg_create_info =
   let output = allocate (Event.t) (Event.null) in
   let result = Vk_fn.create_event (arg_device) (addr arg_create_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
@@ -378,29 +422,34 @@ let create_event ?allocator:arg_allocator arg_device arg_create_info =
   check result;
   !@ output
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkDestroyEvent.html}[vkDestroyEvent]} *)
 let destroy_event arg_device arg_event ?allocator:arg_allocator () =
   Vk_fn.destroy_event (arg_device) (arg_event) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x));
   ignore (Sys.opaque_identity (arg_device, arg_event, arg_allocator));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetEventStatus.html}[vkGetEventStatus]} *)
 let get_event_status arg_device arg_event =
   let result = Vk_fn.get_event_status (arg_device) (arg_event) in
   ignore (Sys.opaque_identity (arg_device, arg_event));
   check result;
   result
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkSetEvent.html}[vkSetEvent]} *)
 let set_event arg_device arg_event =
   let result = Vk_fn.set_event (arg_device) (arg_event) in
   ignore (Sys.opaque_identity (arg_device, arg_event));
   check result;
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkResetEvent.html}[vkResetEvent]} *)
 let reset_event arg_device arg_event =
   let result = Vk_fn.reset_event (arg_device) (arg_event) in
   ignore (Sys.opaque_identity (arg_device, arg_event));
   check result;
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateQueryPool.html}[vkCreateQueryPool]} *)
 let create_query_pool ?allocator:arg_allocator arg_device arg_create_info =
   let output = allocate (QueryPool.t) (QueryPool.null) in
   let result = Vk_fn.create_query_pool (arg_device) (addr arg_create_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
@@ -408,22 +457,26 @@ let create_query_pool ?allocator:arg_allocator arg_device arg_create_info =
   check result;
   !@ output
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkDestroyQueryPool.html}[vkDestroyQueryPool]} *)
 let destroy_query_pool arg_device arg_query_pool ?allocator:arg_allocator () =
   Vk_fn.destroy_query_pool (arg_device) (arg_query_pool) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x));
   ignore (Sys.opaque_identity (arg_device, arg_query_pool, arg_allocator));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetQueryPoolResults.html}[vkGetQueryPoolResults]} *)
 let get_query_pool_results arg_device arg_query_pool arg_first_query arg_query_count arg_data_size arg_data arg_stride arg_flags =
   let result = Vk_fn.get_query_pool_results (arg_device) (arg_query_pool) (arg_first_query) (arg_query_count) (arg_data_size) (arg_data) (arg_stride) (arg_flags) in
   ignore (Sys.opaque_identity (arg_device, arg_query_pool, arg_first_query, arg_query_count, arg_data_size, arg_data, arg_stride, arg_flags));
   check result;
   result
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkResetQueryPool.html}[vkResetQueryPool]} *)
 let reset_query_pool arg_device arg_query_pool arg_first_query arg_query_count =
   Vk_fn.reset_query_pool (arg_device) (arg_query_pool) (arg_first_query) (arg_query_count);
   ignore (Sys.opaque_identity (arg_device, arg_query_pool, arg_first_query, arg_query_count));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateBuffer.html}[vkCreateBuffer]} *)
 let create_buffer ?allocator:arg_allocator arg_device arg_create_info =
   let output = allocate (Buffer.t) (Buffer.null) in
   let result = Vk_fn.create_buffer (arg_device) (addr arg_create_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
@@ -431,11 +484,13 @@ let create_buffer ?allocator:arg_allocator arg_device arg_create_info =
   check result;
   !@ output
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkDestroyBuffer.html}[vkDestroyBuffer]} *)
 let destroy_buffer arg_device arg_buffer ?allocator:arg_allocator () =
   Vk_fn.destroy_buffer (arg_device) (arg_buffer) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x));
   ignore (Sys.opaque_identity (arg_device, arg_buffer, arg_allocator));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateBufferView.html}[vkCreateBufferView]} *)
 let create_buffer_view ?allocator:arg_allocator arg_device arg_create_info =
   let output = allocate (BufferView.t) (BufferView.null) in
   let result = Vk_fn.create_buffer_view (arg_device) (addr arg_create_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
@@ -443,11 +498,13 @@ let create_buffer_view ?allocator:arg_allocator arg_device arg_create_info =
   check result;
   !@ output
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkDestroyBufferView.html}[vkDestroyBufferView]} *)
 let destroy_buffer_view arg_device arg_buffer_view ?allocator:arg_allocator () =
   Vk_fn.destroy_buffer_view (arg_device) (arg_buffer_view) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x));
   ignore (Sys.opaque_identity (arg_device, arg_buffer_view, arg_allocator));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateImage.html}[vkCreateImage]} *)
 let create_image ?allocator:arg_allocator arg_device arg_create_info =
   let output = allocate (Image.t) (Image.null) in
   let result = Vk_fn.create_image (arg_device) (addr arg_create_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
@@ -455,17 +512,20 @@ let create_image ?allocator:arg_allocator arg_device arg_create_info =
   check result;
   !@ output
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkDestroyImage.html}[vkDestroyImage]} *)
 let destroy_image arg_device arg_image ?allocator:arg_allocator () =
   Vk_fn.destroy_image (arg_device) (arg_image) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x));
   ignore (Sys.opaque_identity (arg_device, arg_image, arg_allocator));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetImageSubresourceLayout.html}[vkGetImageSubresourceLayout]} *)
 let get_image_subresource_layout arg_device arg_image arg_subresource =
   let output = SubresourceLayout.make () in
   Vk_fn.get_image_subresource_layout (arg_device) (arg_image) (addr arg_subresource) (addr output);
   ignore (Sys.opaque_identity (arg_device, arg_image, arg_subresource));
   output
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateImageView.html}[vkCreateImageView]} *)
 let create_image_view ?allocator:arg_allocator arg_device arg_create_info =
   let output = allocate (ImageView.t) (ImageView.null) in
   let result = Vk_fn.create_image_view (arg_device) (addr arg_create_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
@@ -473,11 +533,13 @@ let create_image_view ?allocator:arg_allocator arg_device arg_create_info =
   check result;
   !@ output
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkDestroyImageView.html}[vkDestroyImageView]} *)
 let destroy_image_view arg_device arg_image_view ?allocator:arg_allocator () =
   Vk_fn.destroy_image_view (arg_device) (arg_image_view) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x));
   ignore (Sys.opaque_identity (arg_device, arg_image_view, arg_allocator));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateShaderModule.html}[vkCreateShaderModule]} *)
 let create_shader_module ?allocator:arg_allocator arg_device arg_create_info =
   let output = allocate (ShaderModule.t) (ShaderModule.null) in
   let result = Vk_fn.create_shader_module (arg_device) (addr arg_create_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
@@ -485,11 +547,13 @@ let create_shader_module ?allocator:arg_allocator arg_device arg_create_info =
   check result;
   !@ output
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkDestroyShaderModule.html}[vkDestroyShaderModule]} *)
 let destroy_shader_module arg_device arg_shader_module ?allocator:arg_allocator () =
   Vk_fn.destroy_shader_module (arg_device) (arg_shader_module) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x));
   ignore (Sys.opaque_identity (arg_device, arg_shader_module, arg_allocator));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreatePipelineCache.html}[vkCreatePipelineCache]} *)
 let create_pipeline_cache ?allocator:arg_allocator arg_device arg_create_info =
   let output = allocate (PipelineCache.t) (PipelineCache.null) in
   let result = Vk_fn.create_pipeline_cache (arg_device) (addr arg_create_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
@@ -497,17 +561,20 @@ let create_pipeline_cache ?allocator:arg_allocator arg_device arg_create_info =
   check result;
   !@ output
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkDestroyPipelineCache.html}[vkDestroyPipelineCache]} *)
 let destroy_pipeline_cache arg_device arg_pipeline_cache ?allocator:arg_allocator () =
   Vk_fn.destroy_pipeline_cache (arg_device) (arg_pipeline_cache) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x));
   ignore (Sys.opaque_identity (arg_device, arg_pipeline_cache, arg_allocator));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPipelineCacheData.html}[vkGetPipelineCacheData]} *)
 let get_pipeline_cache_data arg_device arg_pipeline_cache arg_data_size arg_data =
   let result = Vk_fn.get_pipeline_cache_data (arg_device) (arg_pipeline_cache) (arg_data_size) (arg_data) in
   ignore (Sys.opaque_identity (arg_device, arg_pipeline_cache, arg_data_size, arg_data));
   check result;
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkMergePipelineCaches.html}[vkMergePipelineCaches]} *)
 let merge_pipeline_caches arg_device arg_dst_cache arg_src_caches =
   let array_src_caches = CArray.of_list (PipelineCache.t) arg_src_caches in
   let pointer_src_caches = if arg_src_caches = [] then Vk_base.null_ptr (PipelineCache.t) else CArray.start array_src_caches in
@@ -516,35 +583,41 @@ let merge_pipeline_caches arg_device arg_dst_cache arg_src_caches =
   check result;
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreatePipelineBinariesKHR.html}[vkCreatePipelineBinariesKHR]} *)
 let create_pipeline_binaries_khr ?allocator:arg_allocator arg_device arg_create_info arg_binaries =
   let result = Vk_fn.create_pipeline_binaries_khr (arg_device) (addr arg_create_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (addr arg_binaries) in
   ignore (Sys.opaque_identity (arg_device, arg_create_info, arg_allocator, arg_binaries));
   check result;
   result
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkDestroyPipelineBinaryKHR.html}[vkDestroyPipelineBinaryKHR]} *)
 let destroy_pipeline_binary_khr arg_device arg_pipeline_binary ?allocator:arg_allocator () =
   Vk_fn.destroy_pipeline_binary_khr (arg_device) (arg_pipeline_binary) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x));
   ignore (Sys.opaque_identity (arg_device, arg_pipeline_binary, arg_allocator));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPipelineKeyKHR.html}[vkGetPipelineKeyKHR]} *)
 let get_pipeline_key_khr arg_device arg_pipeline_create_info arg_pipeline_key =
   let result = Vk_fn.get_pipeline_key_khr (arg_device) (addr arg_pipeline_create_info) (addr arg_pipeline_key) in
   ignore (Sys.opaque_identity (arg_device, arg_pipeline_create_info, arg_pipeline_key));
   check result;
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPipelineBinaryDataKHR.html}[vkGetPipelineBinaryDataKHR]} *)
 let get_pipeline_binary_data_khr arg_device arg_info arg_pipeline_binary_key arg_pipeline_binary_data_size arg_pipeline_binary_data =
   let result = Vk_fn.get_pipeline_binary_data_khr (arg_device) (addr arg_info) (addr arg_pipeline_binary_key) (arg_pipeline_binary_data_size) (arg_pipeline_binary_data) in
   ignore (Sys.opaque_identity (arg_device, arg_info, arg_pipeline_binary_key, arg_pipeline_binary_data_size, arg_pipeline_binary_data));
   check result;
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkReleaseCapturedPipelineDataKHR.html}[vkReleaseCapturedPipelineDataKHR]} *)
 let release_captured_pipeline_data_khr ?allocator:arg_allocator arg_device arg_info =
   let result = Vk_fn.release_captured_pipeline_data_khr (arg_device) (addr arg_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) in
   ignore (Sys.opaque_identity (arg_device, arg_info, arg_allocator));
   check result;
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateGraphicsPipelines.html}[vkCreateGraphicsPipelines]} *)
 let create_graphics_pipelines ?allocator:arg_allocator arg_device arg_pipeline_cache arg_create_infos =
   let array_create_infos = CArray.of_list (GraphicsPipelineCreateInfo.t) arg_create_infos in
   let pointer_create_infos = if arg_create_infos = [] then Vk_base.null_ptr (GraphicsPipelineCreateInfo.t) else CArray.start array_create_infos in
@@ -555,6 +628,7 @@ let create_graphics_pipelines ?allocator:arg_allocator arg_device arg_pipeline_c
   check result;
   (result, (CArray.to_list storage))
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateComputePipelines.html}[vkCreateComputePipelines]} *)
 let create_compute_pipelines ?allocator:arg_allocator arg_device arg_pipeline_cache arg_create_infos =
   let array_create_infos = CArray.of_list (ComputePipelineCreateInfo.t) arg_create_infos in
   let pointer_create_infos = if arg_create_infos = [] then Vk_base.null_ptr (ComputePipelineCreateInfo.t) else CArray.start array_create_infos in
@@ -565,17 +639,20 @@ let create_compute_pipelines ?allocator:arg_allocator arg_device arg_pipeline_ca
   check result;
   (result, (CArray.to_list storage))
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetDeviceSubpassShadingMaxWorkgroupSizeHUAWEI.html}[vkGetDeviceSubpassShadingMaxWorkgroupSizeHUAWEI]} *)
 let get_device_subpass_shading_max_workgroup_size_huawei arg_device arg_renderpass arg_max_workgroup_size =
   let result = Vk_fn.get_device_subpass_shading_max_workgroup_size_huawei (arg_device) (arg_renderpass) (arg_max_workgroup_size) in
   ignore (Sys.opaque_identity (arg_device, arg_renderpass, arg_max_workgroup_size));
   check result;
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkDestroyPipeline.html}[vkDestroyPipeline]} *)
 let destroy_pipeline arg_device arg_pipeline ?allocator:arg_allocator () =
   Vk_fn.destroy_pipeline (arg_device) (arg_pipeline) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x));
   ignore (Sys.opaque_identity (arg_device, arg_pipeline, arg_allocator));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreatePipelineLayout.html}[vkCreatePipelineLayout]} *)
 let create_pipeline_layout ?allocator:arg_allocator arg_device arg_create_info =
   let output = allocate (PipelineLayout.t) (PipelineLayout.null) in
   let result = Vk_fn.create_pipeline_layout (arg_device) (addr arg_create_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
@@ -583,11 +660,13 @@ let create_pipeline_layout ?allocator:arg_allocator arg_device arg_create_info =
   check result;
   !@ output
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkDestroyPipelineLayout.html}[vkDestroyPipelineLayout]} *)
 let destroy_pipeline_layout arg_device arg_pipeline_layout ?allocator:arg_allocator () =
   Vk_fn.destroy_pipeline_layout (arg_device) (arg_pipeline_layout) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x));
   ignore (Sys.opaque_identity (arg_device, arg_pipeline_layout, arg_allocator));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateSampler.html}[vkCreateSampler]} *)
 let create_sampler ?allocator:arg_allocator arg_device arg_create_info =
   let output = allocate (Sampler.t) (Sampler.null) in
   let result = Vk_fn.create_sampler (arg_device) (addr arg_create_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
@@ -595,11 +674,13 @@ let create_sampler ?allocator:arg_allocator arg_device arg_create_info =
   check result;
   !@ output
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkDestroySampler.html}[vkDestroySampler]} *)
 let destroy_sampler arg_device arg_sampler ?allocator:arg_allocator () =
   Vk_fn.destroy_sampler (arg_device) (arg_sampler) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x));
   ignore (Sys.opaque_identity (arg_device, arg_sampler, arg_allocator));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateDescriptorSetLayout.html}[vkCreateDescriptorSetLayout]} *)
 let create_descriptor_set_layout ?allocator:arg_allocator arg_device arg_create_info =
   let output = allocate (DescriptorSetLayout.t) (DescriptorSetLayout.null) in
   let result = Vk_fn.create_descriptor_set_layout (arg_device) (addr arg_create_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
@@ -607,11 +688,13 @@ let create_descriptor_set_layout ?allocator:arg_allocator arg_device arg_create_
   check result;
   !@ output
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkDestroyDescriptorSetLayout.html}[vkDestroyDescriptorSetLayout]} *)
 let destroy_descriptor_set_layout arg_device arg_descriptor_set_layout ?allocator:arg_allocator () =
   Vk_fn.destroy_descriptor_set_layout (arg_device) (arg_descriptor_set_layout) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x));
   ignore (Sys.opaque_identity (arg_device, arg_descriptor_set_layout, arg_allocator));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateDescriptorPool.html}[vkCreateDescriptorPool]} *)
 let create_descriptor_pool ?allocator:arg_allocator arg_device arg_create_info =
   let output = allocate (DescriptorPool.t) (DescriptorPool.null) in
   let result = Vk_fn.create_descriptor_pool (arg_device) (addr arg_create_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
@@ -619,17 +702,20 @@ let create_descriptor_pool ?allocator:arg_allocator arg_device arg_create_info =
   check result;
   !@ output
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkDestroyDescriptorPool.html}[vkDestroyDescriptorPool]} *)
 let destroy_descriptor_pool arg_device arg_descriptor_pool ?allocator:arg_allocator () =
   Vk_fn.destroy_descriptor_pool (arg_device) (arg_descriptor_pool) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x));
   ignore (Sys.opaque_identity (arg_device, arg_descriptor_pool, arg_allocator));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkResetDescriptorPool.html}[vkResetDescriptorPool]} *)
 let reset_descriptor_pool arg_device arg_descriptor_pool arg_flags =
   let result = Vk_fn.reset_descriptor_pool (arg_device) (arg_descriptor_pool) (arg_flags) in
   ignore (Sys.opaque_identity (arg_device, arg_descriptor_pool, arg_flags));
   check result;
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkAllocateDescriptorSets.html}[vkAllocateDescriptorSets]} *)
 let allocate_descriptor_sets arg_device arg_allocate_info =
   let output_count = Ctypes.getf arg_allocate_info DescriptorSetAllocateInfo.descriptor_set_count in
   let storage = CArray.make (DescriptorSet.t) output_count in
@@ -638,6 +724,7 @@ let allocate_descriptor_sets arg_device arg_allocate_info =
   check result;
   (CArray.to_list storage)
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkFreeDescriptorSets.html}[vkFreeDescriptorSets]} *)
 let free_descriptor_sets arg_device arg_descriptor_pool arg_descriptor_sets =
   let array_descriptor_sets = CArray.of_list (DescriptorSet.t) arg_descriptor_sets in
   let pointer_descriptor_sets = if arg_descriptor_sets = [] then Vk_base.null_ptr (DescriptorSet.t) else CArray.start array_descriptor_sets in
@@ -646,6 +733,7 @@ let free_descriptor_sets arg_device arg_descriptor_pool arg_descriptor_sets =
   check result;
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkUpdateDescriptorSets.html}[vkUpdateDescriptorSets]} *)
 let update_descriptor_sets arg_device arg_descriptor_writes arg_descriptor_copies =
   let array_descriptor_writes = CArray.of_list (WriteDescriptorSet.t) arg_descriptor_writes in
   let pointer_descriptor_writes = if arg_descriptor_writes = [] then Vk_base.null_ptr (WriteDescriptorSet.t) else CArray.start array_descriptor_writes in
@@ -655,6 +743,7 @@ let update_descriptor_sets arg_device arg_descriptor_writes arg_descriptor_copie
   ignore (Sys.opaque_identity (arg_device, arg_descriptor_writes, array_descriptor_writes, arg_descriptor_copies, array_descriptor_copies));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateFramebuffer.html}[vkCreateFramebuffer]} *)
 let create_framebuffer ?allocator:arg_allocator arg_device arg_create_info =
   let output = allocate (Framebuffer.t) (Framebuffer.null) in
   let result = Vk_fn.create_framebuffer (arg_device) (addr arg_create_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
@@ -662,11 +751,13 @@ let create_framebuffer ?allocator:arg_allocator arg_device arg_create_info =
   check result;
   !@ output
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkDestroyFramebuffer.html}[vkDestroyFramebuffer]} *)
 let destroy_framebuffer arg_device arg_framebuffer ?allocator:arg_allocator () =
   Vk_fn.destroy_framebuffer (arg_device) (arg_framebuffer) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x));
   ignore (Sys.opaque_identity (arg_device, arg_framebuffer, arg_allocator));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateRenderPass.html}[vkCreateRenderPass]} *)
 let create_render_pass ?allocator:arg_allocator arg_device arg_create_info =
   let output = allocate (RenderPass.t) (RenderPass.null) in
   let result = Vk_fn.create_render_pass (arg_device) (addr arg_create_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
@@ -674,23 +765,27 @@ let create_render_pass ?allocator:arg_allocator arg_device arg_create_info =
   check result;
   !@ output
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkDestroyRenderPass.html}[vkDestroyRenderPass]} *)
 let destroy_render_pass arg_device arg_render_pass ?allocator:arg_allocator () =
   Vk_fn.destroy_render_pass (arg_device) (arg_render_pass) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x));
   ignore (Sys.opaque_identity (arg_device, arg_render_pass, arg_allocator));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetRenderAreaGranularity.html}[vkGetRenderAreaGranularity]} *)
 let get_render_area_granularity arg_device arg_render_pass =
   let output = Extent2D.make () in
   Vk_fn.get_render_area_granularity (arg_device) (arg_render_pass) (addr output);
   ignore (Sys.opaque_identity (arg_device, arg_render_pass));
   output
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetRenderingAreaGranularity.html}[vkGetRenderingAreaGranularity]} *)
 let get_rendering_area_granularity arg_device arg_rendering_area_info =
   let output = Extent2D.make () in
   Vk_fn.get_rendering_area_granularity (arg_device) (addr arg_rendering_area_info) (addr output);
   ignore (Sys.opaque_identity (arg_device, arg_rendering_area_info));
   output
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateCommandPool.html}[vkCreateCommandPool]} *)
 let create_command_pool ?allocator:arg_allocator arg_device arg_create_info =
   let output = allocate (CommandPool.t) (CommandPool.null) in
   let result = Vk_fn.create_command_pool (arg_device) (addr arg_create_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
@@ -698,17 +793,20 @@ let create_command_pool ?allocator:arg_allocator arg_device arg_create_info =
   check result;
   !@ output
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkDestroyCommandPool.html}[vkDestroyCommandPool]} *)
 let destroy_command_pool arg_device arg_command_pool ?allocator:arg_allocator () =
   Vk_fn.destroy_command_pool (arg_device) (arg_command_pool) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x));
   ignore (Sys.opaque_identity (arg_device, arg_command_pool, arg_allocator));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkResetCommandPool.html}[vkResetCommandPool]} *)
 let reset_command_pool arg_device arg_command_pool arg_flags =
   let result = Vk_fn.reset_command_pool (arg_device) (arg_command_pool) (arg_flags) in
   ignore (Sys.opaque_identity (arg_device, arg_command_pool, arg_flags));
   check result;
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkAllocateCommandBuffers.html}[vkAllocateCommandBuffers]} *)
 let allocate_command_buffers arg_device arg_allocate_info =
   let output_count = Ctypes.getf arg_allocate_info CommandBufferAllocateInfo.command_buffer_count in
   let storage = CArray.make (CommandBuffer.t) output_count in
@@ -717,6 +815,7 @@ let allocate_command_buffers arg_device arg_allocate_info =
   check result;
   (CArray.to_list storage)
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkFreeCommandBuffers.html}[vkFreeCommandBuffers]} *)
 let free_command_buffers arg_device arg_command_pool arg_command_buffers =
   let array_command_buffers = CArray.of_list (CommandBuffer.t) arg_command_buffers in
   let pointer_command_buffers = if arg_command_buffers = [] then Vk_base.null_ptr (CommandBuffer.t) else CArray.start array_command_buffers in
@@ -724,39 +823,46 @@ let free_command_buffers arg_device arg_command_pool arg_command_buffers =
   ignore (Sys.opaque_identity (arg_device, arg_command_pool, arg_command_buffers, array_command_buffers));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkBeginCommandBuffer.html}[vkBeginCommandBuffer]} *)
 let begin_command_buffer arg_command_buffer arg_begin_info =
   let result = Vk_fn.begin_command_buffer (arg_command_buffer) (addr arg_begin_info) in
   ignore (Sys.opaque_identity (arg_command_buffer, arg_begin_info));
   check result;
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkEndCommandBuffer.html}[vkEndCommandBuffer]} *)
 let end_command_buffer arg_command_buffer =
   let result = Vk_fn.end_command_buffer (arg_command_buffer) in
   ignore (Sys.opaque_identity (arg_command_buffer));
   check result;
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkResetCommandBuffer.html}[vkResetCommandBuffer]} *)
 let reset_command_buffer arg_command_buffer arg_flags =
   let result = Vk_fn.reset_command_buffer (arg_command_buffer) (arg_flags) in
   ignore (Sys.opaque_identity (arg_command_buffer, arg_flags));
   check result;
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdBindPipeline.html}[vkCmdBindPipeline]} *)
 let cmd_bind_pipeline arg_command_buffer arg_pipeline_bind_point arg_pipeline =
   Vk_fn.cmd_bind_pipeline (arg_command_buffer) (arg_pipeline_bind_point) (arg_pipeline);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_pipeline_bind_point, arg_pipeline));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetPrimitiveRestartIndexEXT.html}[vkCmdSetPrimitiveRestartIndexEXT]} *)
 let cmd_set_primitive_restart_index_ext arg_command_buffer arg_primitive_restart_index =
   Vk_fn.cmd_set_primitive_restart_index_ext (arg_command_buffer) (arg_primitive_restart_index);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_primitive_restart_index));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetAttachmentFeedbackLoopEnableEXT.html}[vkCmdSetAttachmentFeedbackLoopEnableEXT]} *)
 let cmd_set_attachment_feedback_loop_enable_ext arg_command_buffer arg_aspect_mask =
   Vk_fn.cmd_set_attachment_feedback_loop_enable_ext (arg_command_buffer) (arg_aspect_mask);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_aspect_mask));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetViewport.html}[vkCmdSetViewport]} *)
 let cmd_set_viewport arg_command_buffer arg_first_viewport arg_viewports =
   let array_viewports = CArray.of_list (Viewport.t) arg_viewports in
   let pointer_viewports = if arg_viewports = [] then Vk_base.null_ptr (Viewport.t) else CArray.start array_viewports in
@@ -764,6 +870,7 @@ let cmd_set_viewport arg_command_buffer arg_first_viewport arg_viewports =
   ignore (Sys.opaque_identity (arg_command_buffer, arg_first_viewport, arg_viewports, array_viewports));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetScissor.html}[vkCmdSetScissor]} *)
 let cmd_set_scissor arg_command_buffer arg_first_scissor arg_scissors =
   let array_scissors = CArray.of_list (Rect2D.t) arg_scissors in
   let pointer_scissors = if arg_scissors = [] then Vk_base.null_ptr (Rect2D.t) else CArray.start array_scissors in
@@ -771,41 +878,49 @@ let cmd_set_scissor arg_command_buffer arg_first_scissor arg_scissors =
   ignore (Sys.opaque_identity (arg_command_buffer, arg_first_scissor, arg_scissors, array_scissors));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetLineWidth.html}[vkCmdSetLineWidth]} *)
 let cmd_set_line_width arg_command_buffer arg_line_width =
   Vk_fn.cmd_set_line_width (arg_command_buffer) (arg_line_width);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_line_width));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetDepthBias.html}[vkCmdSetDepthBias]} *)
 let cmd_set_depth_bias arg_command_buffer arg_depth_bias_constant_factor arg_depth_bias_clamp arg_depth_bias_slope_factor =
   Vk_fn.cmd_set_depth_bias (arg_command_buffer) (arg_depth_bias_constant_factor) (arg_depth_bias_clamp) (arg_depth_bias_slope_factor);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_depth_bias_constant_factor, arg_depth_bias_clamp, arg_depth_bias_slope_factor));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetBlendConstants.html}[vkCmdSetBlendConstants]} *)
 let cmd_set_blend_constants arg_command_buffer arg_blend_constants =
   Vk_fn.cmd_set_blend_constants (arg_command_buffer) (arg_blend_constants);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_blend_constants));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetDepthBounds.html}[vkCmdSetDepthBounds]} *)
 let cmd_set_depth_bounds arg_command_buffer arg_min_depth_bounds arg_max_depth_bounds =
   Vk_fn.cmd_set_depth_bounds (arg_command_buffer) (arg_min_depth_bounds) (arg_max_depth_bounds);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_min_depth_bounds, arg_max_depth_bounds));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetStencilCompareMask.html}[vkCmdSetStencilCompareMask]} *)
 let cmd_set_stencil_compare_mask arg_command_buffer arg_face_mask arg_compare_mask =
   Vk_fn.cmd_set_stencil_compare_mask (arg_command_buffer) (arg_face_mask) (arg_compare_mask);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_face_mask, arg_compare_mask));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetStencilWriteMask.html}[vkCmdSetStencilWriteMask]} *)
 let cmd_set_stencil_write_mask arg_command_buffer arg_face_mask arg_write_mask =
   Vk_fn.cmd_set_stencil_write_mask (arg_command_buffer) (arg_face_mask) (arg_write_mask);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_face_mask, arg_write_mask));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetStencilReference.html}[vkCmdSetStencilReference]} *)
 let cmd_set_stencil_reference arg_command_buffer arg_face_mask arg_reference =
   Vk_fn.cmd_set_stencil_reference (arg_command_buffer) (arg_face_mask) (arg_reference);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_face_mask, arg_reference));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdBindDescriptorSets.html}[vkCmdBindDescriptorSets]} *)
 let cmd_bind_descriptor_sets arg_command_buffer arg_pipeline_bind_point arg_layout arg_first_set arg_descriptor_sets arg_dynamic_offsets =
   let array_descriptor_sets = CArray.of_list (DescriptorSet.t) arg_descriptor_sets in
   let pointer_descriptor_sets = if arg_descriptor_sets = [] then Vk_base.null_ptr (DescriptorSet.t) else CArray.start array_descriptor_sets in
@@ -815,11 +930,13 @@ let cmd_bind_descriptor_sets arg_command_buffer arg_pipeline_bind_point arg_layo
   ignore (Sys.opaque_identity (arg_command_buffer, arg_pipeline_bind_point, arg_layout, arg_first_set, arg_descriptor_sets, array_descriptor_sets, arg_dynamic_offsets, array_dynamic_offsets));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdBindIndexBuffer.html}[vkCmdBindIndexBuffer]} *)
 let cmd_bind_index_buffer arg_command_buffer arg_buffer arg_offset arg_index_type =
   Vk_fn.cmd_bind_index_buffer (arg_command_buffer) (arg_buffer) (arg_offset) (arg_index_type);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_buffer, arg_offset, arg_index_type));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdBindVertexBuffers.html}[vkCmdBindVertexBuffers]} *)
 let cmd_bind_vertex_buffers arg_command_buffer arg_first_binding arg_buffers arg_offsets =
   let array_buffers = CArray.of_list (Buffer.t) arg_buffers in
   let pointer_buffers = if arg_buffers = [] then Vk_base.null_ptr (Buffer.t) else CArray.start array_buffers in
@@ -830,16 +947,19 @@ let cmd_bind_vertex_buffers arg_command_buffer arg_first_binding arg_buffers arg
   ignore (Sys.opaque_identity (arg_command_buffer, arg_first_binding, arg_buffers, array_buffers, arg_offsets, array_offsets));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdDraw.html}[vkCmdDraw]} *)
 let cmd_draw arg_command_buffer arg_vertex_count arg_instance_count arg_first_vertex arg_first_instance =
   Vk_fn.cmd_draw (arg_command_buffer) (arg_vertex_count) (arg_instance_count) (arg_first_vertex) (arg_first_instance);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_vertex_count, arg_instance_count, arg_first_vertex, arg_first_instance));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdDrawIndexed.html}[vkCmdDrawIndexed]} *)
 let cmd_draw_indexed arg_command_buffer arg_index_count arg_instance_count arg_first_index arg_vertex_offset arg_first_instance =
   Vk_fn.cmd_draw_indexed (arg_command_buffer) (arg_index_count) (arg_instance_count) (arg_first_index) (arg_vertex_offset) (arg_first_instance);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_index_count, arg_instance_count, arg_first_index, arg_vertex_offset, arg_first_instance));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdDrawMultiEXT.html}[vkCmdDrawMultiEXT]} *)
 let cmd_draw_multi_ext arg_command_buffer arg_vertex_info arg_instance_count arg_first_instance arg_stride =
   let array_vertex_info = CArray.of_list (MultiDrawInfoEXT.t) arg_vertex_info in
   let pointer_vertex_info = if arg_vertex_info = [] then Vk_base.null_ptr (MultiDrawInfoEXT.t) else CArray.start array_vertex_info in
@@ -847,6 +967,7 @@ let cmd_draw_multi_ext arg_command_buffer arg_vertex_info arg_instance_count arg
   ignore (Sys.opaque_identity (arg_command_buffer, arg_vertex_info, array_vertex_info, arg_instance_count, arg_first_instance, arg_stride));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdDrawMultiIndexedEXT.html}[vkCmdDrawMultiIndexedEXT]} *)
 let cmd_draw_multi_indexed_ext arg_command_buffer arg_index_info arg_instance_count arg_first_instance arg_stride arg_vertex_offset =
   let array_index_info = CArray.of_list (MultiDrawIndexedInfoEXT.t) arg_index_info in
   let pointer_index_info = if arg_index_info = [] then Vk_base.null_ptr (MultiDrawIndexedInfoEXT.t) else CArray.start array_index_info in
@@ -854,46 +975,55 @@ let cmd_draw_multi_indexed_ext arg_command_buffer arg_index_info arg_instance_co
   ignore (Sys.opaque_identity (arg_command_buffer, arg_index_info, array_index_info, arg_instance_count, arg_first_instance, arg_stride, arg_vertex_offset));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdDrawIndirect.html}[vkCmdDrawIndirect]} *)
 let cmd_draw_indirect arg_command_buffer arg_buffer arg_offset arg_draw_count arg_stride =
   Vk_fn.cmd_draw_indirect (arg_command_buffer) (arg_buffer) (arg_offset) (arg_draw_count) (arg_stride);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_buffer, arg_offset, arg_draw_count, arg_stride));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdDrawIndexedIndirect.html}[vkCmdDrawIndexedIndirect]} *)
 let cmd_draw_indexed_indirect arg_command_buffer arg_buffer arg_offset arg_draw_count arg_stride =
   Vk_fn.cmd_draw_indexed_indirect (arg_command_buffer) (arg_buffer) (arg_offset) (arg_draw_count) (arg_stride);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_buffer, arg_offset, arg_draw_count, arg_stride));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdDispatch.html}[vkCmdDispatch]} *)
 let cmd_dispatch arg_command_buffer arg_group_count_x arg_group_count_y arg_group_count_z =
   Vk_fn.cmd_dispatch (arg_command_buffer) (arg_group_count_x) (arg_group_count_y) (arg_group_count_z);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_group_count_x, arg_group_count_y, arg_group_count_z));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdDispatchIndirect.html}[vkCmdDispatchIndirect]} *)
 let cmd_dispatch_indirect arg_command_buffer arg_buffer arg_offset =
   Vk_fn.cmd_dispatch_indirect (arg_command_buffer) (arg_buffer) (arg_offset);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_buffer, arg_offset));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSubpassShadingHUAWEI.html}[vkCmdSubpassShadingHUAWEI]} *)
 let cmd_subpass_shading_huawei arg_command_buffer =
   Vk_fn.cmd_subpass_shading_huawei (arg_command_buffer);
   ignore (Sys.opaque_identity (arg_command_buffer));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdDrawClusterHUAWEI.html}[vkCmdDrawClusterHUAWEI]} *)
 let cmd_draw_cluster_huawei arg_command_buffer arg_group_count_x arg_group_count_y arg_group_count_z =
   Vk_fn.cmd_draw_cluster_huawei (arg_command_buffer) (arg_group_count_x) (arg_group_count_y) (arg_group_count_z);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_group_count_x, arg_group_count_y, arg_group_count_z));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdDrawClusterIndirectHUAWEI.html}[vkCmdDrawClusterIndirectHUAWEI]} *)
 let cmd_draw_cluster_indirect_huawei arg_command_buffer arg_buffer arg_offset =
   Vk_fn.cmd_draw_cluster_indirect_huawei (arg_command_buffer) (arg_buffer) (arg_offset);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_buffer, arg_offset));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdUpdatePipelineIndirectBufferNV.html}[vkCmdUpdatePipelineIndirectBufferNV]} *)
 let cmd_update_pipeline_indirect_buffer_nv arg_command_buffer arg_pipeline_bind_point arg_pipeline =
   Vk_fn.cmd_update_pipeline_indirect_buffer_nv (arg_command_buffer) (arg_pipeline_bind_point) (arg_pipeline);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_pipeline_bind_point, arg_pipeline));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdCopyBuffer.html}[vkCmdCopyBuffer]} *)
 let cmd_copy_buffer arg_command_buffer arg_src_buffer arg_dst_buffer arg_regions =
   let array_regions = CArray.of_list (BufferCopy.t) arg_regions in
   let pointer_regions = if arg_regions = [] then Vk_base.null_ptr (BufferCopy.t) else CArray.start array_regions in
@@ -901,6 +1031,7 @@ let cmd_copy_buffer arg_command_buffer arg_src_buffer arg_dst_buffer arg_regions
   ignore (Sys.opaque_identity (arg_command_buffer, arg_src_buffer, arg_dst_buffer, arg_regions, array_regions));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdCopyImage.html}[vkCmdCopyImage]} *)
 let cmd_copy_image arg_command_buffer arg_src_image arg_src_image_layout arg_dst_image arg_dst_image_layout arg_regions =
   let array_regions = CArray.of_list (ImageCopy.t) arg_regions in
   let pointer_regions = if arg_regions = [] then Vk_base.null_ptr (ImageCopy.t) else CArray.start array_regions in
@@ -908,6 +1039,7 @@ let cmd_copy_image arg_command_buffer arg_src_image arg_src_image_layout arg_dst
   ignore (Sys.opaque_identity (arg_command_buffer, arg_src_image, arg_src_image_layout, arg_dst_image, arg_dst_image_layout, arg_regions, array_regions));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdBlitImage.html}[vkCmdBlitImage]} *)
 let cmd_blit_image arg_command_buffer arg_src_image arg_src_image_layout arg_dst_image arg_dst_image_layout arg_regions arg_filter =
   let array_regions = CArray.of_list (ImageBlit.t) arg_regions in
   let pointer_regions = if arg_regions = [] then Vk_base.null_ptr (ImageBlit.t) else CArray.start array_regions in
@@ -915,6 +1047,7 @@ let cmd_blit_image arg_command_buffer arg_src_image arg_src_image_layout arg_dst
   ignore (Sys.opaque_identity (arg_command_buffer, arg_src_image, arg_src_image_layout, arg_dst_image, arg_dst_image_layout, arg_regions, array_regions, arg_filter));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdCopyBufferToImage.html}[vkCmdCopyBufferToImage]} *)
 let cmd_copy_buffer_to_image arg_command_buffer arg_src_buffer arg_dst_image arg_dst_image_layout arg_regions =
   let array_regions = CArray.of_list (BufferImageCopy.t) arg_regions in
   let pointer_regions = if arg_regions = [] then Vk_base.null_ptr (BufferImageCopy.t) else CArray.start array_regions in
@@ -922,6 +1055,7 @@ let cmd_copy_buffer_to_image arg_command_buffer arg_src_buffer arg_dst_image arg
   ignore (Sys.opaque_identity (arg_command_buffer, arg_src_buffer, arg_dst_image, arg_dst_image_layout, arg_regions, array_regions));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdCopyImageToBuffer.html}[vkCmdCopyImageToBuffer]} *)
 let cmd_copy_image_to_buffer arg_command_buffer arg_src_image arg_src_image_layout arg_dst_buffer arg_regions =
   let array_regions = CArray.of_list (BufferImageCopy.t) arg_regions in
   let pointer_regions = if arg_regions = [] then Vk_base.null_ptr (BufferImageCopy.t) else CArray.start array_regions in
@@ -929,16 +1063,19 @@ let cmd_copy_image_to_buffer arg_command_buffer arg_src_image arg_src_image_layo
   ignore (Sys.opaque_identity (arg_command_buffer, arg_src_image, arg_src_image_layout, arg_dst_buffer, arg_regions, array_regions));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdCopyMemoryIndirectNV.html}[vkCmdCopyMemoryIndirectNV]} *)
 let cmd_copy_memory_indirect_nv arg_command_buffer arg_copy_buffer_address arg_copy_count arg_stride =
   Vk_fn.cmd_copy_memory_indirect_nv (arg_command_buffer) (arg_copy_buffer_address) (arg_copy_count) (arg_stride);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_copy_buffer_address, arg_copy_count, arg_stride));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdCopyMemoryIndirectKHR.html}[vkCmdCopyMemoryIndirectKHR]} *)
 let cmd_copy_memory_indirect_khr arg_command_buffer arg_copy_memory_indirect_info =
   Vk_fn.cmd_copy_memory_indirect_khr (arg_command_buffer) (addr arg_copy_memory_indirect_info);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_copy_memory_indirect_info));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdCopyMemoryToImageIndirectNV.html}[vkCmdCopyMemoryToImageIndirectNV]} *)
 let cmd_copy_memory_to_image_indirect_nv arg_command_buffer arg_copy_buffer_address arg_stride arg_dst_image arg_dst_image_layout arg_image_subresources =
   let array_image_subresources = CArray.of_list (ImageSubresourceLayers.t) arg_image_subresources in
   let pointer_image_subresources = if arg_image_subresources = [] then Vk_base.null_ptr (ImageSubresourceLayers.t) else CArray.start array_image_subresources in
@@ -946,21 +1083,25 @@ let cmd_copy_memory_to_image_indirect_nv arg_command_buffer arg_copy_buffer_addr
   ignore (Sys.opaque_identity (arg_command_buffer, arg_copy_buffer_address, arg_stride, arg_dst_image, arg_dst_image_layout, arg_image_subresources, array_image_subresources));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdCopyMemoryToImageIndirectKHR.html}[vkCmdCopyMemoryToImageIndirectKHR]} *)
 let cmd_copy_memory_to_image_indirect_khr arg_command_buffer arg_copy_memory_to_image_indirect_info =
   Vk_fn.cmd_copy_memory_to_image_indirect_khr (arg_command_buffer) (addr arg_copy_memory_to_image_indirect_info);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_copy_memory_to_image_indirect_info));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdUpdateBuffer.html}[vkCmdUpdateBuffer]} *)
 let cmd_update_buffer arg_command_buffer arg_dst_buffer arg_dst_offset arg_data_size arg_data =
   Vk_fn.cmd_update_buffer (arg_command_buffer) (arg_dst_buffer) (arg_dst_offset) (arg_data_size) (arg_data);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_dst_buffer, arg_dst_offset, arg_data_size, arg_data));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdFillBuffer.html}[vkCmdFillBuffer]} *)
 let cmd_fill_buffer arg_command_buffer arg_dst_buffer arg_dst_offset arg_size arg_data =
   Vk_fn.cmd_fill_buffer (arg_command_buffer) (arg_dst_buffer) (arg_dst_offset) (arg_size) (arg_data);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_dst_buffer, arg_dst_offset, arg_size, arg_data));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdClearColorImage.html}[vkCmdClearColorImage]} *)
 let cmd_clear_color_image arg_command_buffer arg_image arg_image_layout arg_color arg_ranges =
   let array_ranges = CArray.of_list (ImageSubresourceRange.t) arg_ranges in
   let pointer_ranges = if arg_ranges = [] then Vk_base.null_ptr (ImageSubresourceRange.t) else CArray.start array_ranges in
@@ -968,6 +1109,7 @@ let cmd_clear_color_image arg_command_buffer arg_image arg_image_layout arg_colo
   ignore (Sys.opaque_identity (arg_command_buffer, arg_image, arg_image_layout, arg_color, arg_ranges, array_ranges));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdClearDepthStencilImage.html}[vkCmdClearDepthStencilImage]} *)
 let cmd_clear_depth_stencil_image arg_command_buffer arg_image arg_image_layout arg_depth_stencil arg_ranges =
   let array_ranges = CArray.of_list (ImageSubresourceRange.t) arg_ranges in
   let pointer_ranges = if arg_ranges = [] then Vk_base.null_ptr (ImageSubresourceRange.t) else CArray.start array_ranges in
@@ -975,6 +1117,7 @@ let cmd_clear_depth_stencil_image arg_command_buffer arg_image arg_image_layout 
   ignore (Sys.opaque_identity (arg_command_buffer, arg_image, arg_image_layout, arg_depth_stencil, arg_ranges, array_ranges));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdClearAttachments.html}[vkCmdClearAttachments]} *)
 let cmd_clear_attachments arg_command_buffer arg_attachments arg_rects =
   let array_attachments = CArray.of_list (ClearAttachment.t) arg_attachments in
   let pointer_attachments = if arg_attachments = [] then Vk_base.null_ptr (ClearAttachment.t) else CArray.start array_attachments in
@@ -984,6 +1127,7 @@ let cmd_clear_attachments arg_command_buffer arg_attachments arg_rects =
   ignore (Sys.opaque_identity (arg_command_buffer, arg_attachments, array_attachments, arg_rects, array_rects));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdResolveImage.html}[vkCmdResolveImage]} *)
 let cmd_resolve_image arg_command_buffer arg_src_image arg_src_image_layout arg_dst_image arg_dst_image_layout arg_regions =
   let array_regions = CArray.of_list (ImageResolve.t) arg_regions in
   let pointer_regions = if arg_regions = [] then Vk_base.null_ptr (ImageResolve.t) else CArray.start array_regions in
@@ -991,16 +1135,19 @@ let cmd_resolve_image arg_command_buffer arg_src_image arg_src_image_layout arg_
   ignore (Sys.opaque_identity (arg_command_buffer, arg_src_image, arg_src_image_layout, arg_dst_image, arg_dst_image_layout, arg_regions, array_regions));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetEvent.html}[vkCmdSetEvent]} *)
 let cmd_set_event arg_command_buffer arg_event arg_stage_mask =
   Vk_fn.cmd_set_event (arg_command_buffer) (arg_event) (arg_stage_mask);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_event, arg_stage_mask));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdResetEvent.html}[vkCmdResetEvent]} *)
 let cmd_reset_event arg_command_buffer arg_event arg_stage_mask =
   Vk_fn.cmd_reset_event (arg_command_buffer) (arg_event) (arg_stage_mask);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_event, arg_stage_mask));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdWaitEvents.html}[vkCmdWaitEvents]} *)
 let cmd_wait_events arg_command_buffer arg_events arg_src_stage_mask arg_dst_stage_mask arg_memory_barriers arg_buffer_memory_barriers arg_image_memory_barriers =
   let array_events = CArray.of_list (Event.t) arg_events in
   let pointer_events = if arg_events = [] then Vk_base.null_ptr (Event.t) else CArray.start array_events in
@@ -1014,6 +1161,7 @@ let cmd_wait_events arg_command_buffer arg_events arg_src_stage_mask arg_dst_sta
   ignore (Sys.opaque_identity (arg_command_buffer, arg_events, array_events, arg_src_stage_mask, arg_dst_stage_mask, arg_memory_barriers, array_memory_barriers, arg_buffer_memory_barriers, array_buffer_memory_barriers, arg_image_memory_barriers, array_image_memory_barriers));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdPipelineBarrier.html}[vkCmdPipelineBarrier]} *)
 let cmd_pipeline_barrier arg_command_buffer arg_src_stage_mask arg_dst_stage_mask arg_dependency_flags arg_memory_barriers arg_buffer_memory_barriers arg_image_memory_barriers =
   let array_memory_barriers = CArray.of_list (MemoryBarrier.t) arg_memory_barriers in
   let pointer_memory_barriers = if arg_memory_barriers = [] then Vk_base.null_ptr (MemoryBarrier.t) else CArray.start array_memory_barriers in
@@ -1025,66 +1173,79 @@ let cmd_pipeline_barrier arg_command_buffer arg_src_stage_mask arg_dst_stage_mas
   ignore (Sys.opaque_identity (arg_command_buffer, arg_src_stage_mask, arg_dst_stage_mask, arg_dependency_flags, arg_memory_barriers, array_memory_barriers, arg_buffer_memory_barriers, array_buffer_memory_barriers, arg_image_memory_barriers, array_image_memory_barriers));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdBeginQuery.html}[vkCmdBeginQuery]} *)
 let cmd_begin_query arg_command_buffer arg_query_pool arg_query arg_flags =
   Vk_fn.cmd_begin_query (arg_command_buffer) (arg_query_pool) (arg_query) (arg_flags);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_query_pool, arg_query, arg_flags));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdEndQuery.html}[vkCmdEndQuery]} *)
 let cmd_end_query arg_command_buffer arg_query_pool arg_query =
   Vk_fn.cmd_end_query (arg_command_buffer) (arg_query_pool) (arg_query);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_query_pool, arg_query));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdBeginConditionalRenderingEXT.html}[vkCmdBeginConditionalRenderingEXT]} *)
 let cmd_begin_conditional_rendering_ext arg_command_buffer arg_conditional_rendering_begin =
   Vk_fn.cmd_begin_conditional_rendering_ext (arg_command_buffer) (addr arg_conditional_rendering_begin);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_conditional_rendering_begin));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdEndConditionalRenderingEXT.html}[vkCmdEndConditionalRenderingEXT]} *)
 let cmd_end_conditional_rendering_ext arg_command_buffer =
   Vk_fn.cmd_end_conditional_rendering_ext (arg_command_buffer);
   ignore (Sys.opaque_identity (arg_command_buffer));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdBeginCustomResolveEXT.html}[vkCmdBeginCustomResolveEXT]} *)
 let cmd_begin_custom_resolve_ext arg_command_buffer arg_begin_custom_resolve_info =
   Vk_fn.cmd_begin_custom_resolve_ext (arg_command_buffer) (addr arg_begin_custom_resolve_info);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_begin_custom_resolve_info));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdResetQueryPool.html}[vkCmdResetQueryPool]} *)
 let cmd_reset_query_pool arg_command_buffer arg_query_pool arg_first_query arg_query_count =
   Vk_fn.cmd_reset_query_pool (arg_command_buffer) (arg_query_pool) (arg_first_query) (arg_query_count);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_query_pool, arg_first_query, arg_query_count));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdWriteTimestamp.html}[vkCmdWriteTimestamp]} *)
 let cmd_write_timestamp arg_command_buffer arg_pipeline_stage arg_query_pool arg_query =
   Vk_fn.cmd_write_timestamp (arg_command_buffer) (arg_pipeline_stage) (arg_query_pool) (arg_query);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_pipeline_stage, arg_query_pool, arg_query));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdCopyQueryPoolResults.html}[vkCmdCopyQueryPoolResults]} *)
 let cmd_copy_query_pool_results arg_command_buffer arg_query_pool arg_first_query arg_query_count arg_dst_buffer arg_dst_offset arg_stride arg_flags =
   Vk_fn.cmd_copy_query_pool_results (arg_command_buffer) (arg_query_pool) (arg_first_query) (arg_query_count) (arg_dst_buffer) (arg_dst_offset) (arg_stride) (arg_flags);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_query_pool, arg_first_query, arg_query_count, arg_dst_buffer, arg_dst_offset, arg_stride, arg_flags));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdPushConstants.html}[vkCmdPushConstants]} *)
 let cmd_push_constants arg_command_buffer arg_layout arg_stage_flags arg_offset arg_size arg_values =
   Vk_fn.cmd_push_constants (arg_command_buffer) (arg_layout) (arg_stage_flags) (arg_offset) (arg_size) (arg_values);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_layout, arg_stage_flags, arg_offset, arg_size, arg_values));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdBeginRenderPass.html}[vkCmdBeginRenderPass]} *)
 let cmd_begin_render_pass arg_command_buffer arg_render_pass_begin arg_contents =
   Vk_fn.cmd_begin_render_pass (arg_command_buffer) (addr arg_render_pass_begin) (arg_contents);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_render_pass_begin, arg_contents));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdNextSubpass.html}[vkCmdNextSubpass]} *)
 let cmd_next_subpass arg_command_buffer arg_contents =
   Vk_fn.cmd_next_subpass (arg_command_buffer) (arg_contents);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_contents));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdEndRenderPass.html}[vkCmdEndRenderPass]} *)
 let cmd_end_render_pass arg_command_buffer =
   Vk_fn.cmd_end_render_pass (arg_command_buffer);
   ignore (Sys.opaque_identity (arg_command_buffer));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdExecuteCommands.html}[vkCmdExecuteCommands]} *)
 let cmd_execute_commands arg_command_buffer arg_command_buffers =
   let array_command_buffers = CArray.of_list (CommandBuffer.t) arg_command_buffers in
   let pointer_command_buffers = if arg_command_buffers = [] then Vk_base.null_ptr (CommandBuffer.t) else CArray.start array_command_buffers in
@@ -1092,6 +1253,7 @@ let cmd_execute_commands arg_command_buffer arg_command_buffers =
   ignore (Sys.opaque_identity (arg_command_buffer, arg_command_buffers, array_command_buffers));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateAndroidSurfaceKHR.html}[vkCreateAndroidSurfaceKHR]} *)
 let create_android_surface_khr ?allocator:arg_allocator arg_instance arg_create_info =
   let output = allocate (SurfaceKHR.t) (SurfaceKHR.null) in
   let result = Vk_fn.create_android_surface_khr (arg_instance) (addr arg_create_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
@@ -1099,6 +1261,7 @@ let create_android_surface_khr ?allocator:arg_allocator arg_instance arg_create_
   check result;
   !@ output
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateSurfaceOHOS.html}[vkCreateSurfaceOHOS]} *)
 let create_surface_ohos ?allocator:arg_allocator arg_instance arg_create_info =
   let output = allocate (SurfaceKHR.t) (SurfaceKHR.null) in
   let result = Vk_fn.create_surface_ohos (arg_instance) (addr arg_create_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
@@ -1106,6 +1269,7 @@ let create_surface_ohos ?allocator:arg_allocator arg_instance arg_create_info =
   check result;
   !@ output
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPhysicalDeviceDisplayPropertiesKHR.html}[vkGetPhysicalDeviceDisplayPropertiesKHR]} *)
 let get_physical_device_display_properties_khr arg_physical_device =
   let count = allocate Vk_base.uint32 0 in
   let rec fetch () =
@@ -1124,6 +1288,7 @@ let get_physical_device_display_properties_khr arg_physical_device =
   ignore (Sys.opaque_identity (arg_physical_device));
   enumeration_result
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPhysicalDeviceDisplayPlanePropertiesKHR.html}[vkGetPhysicalDeviceDisplayPlanePropertiesKHR]} *)
 let get_physical_device_display_plane_properties_khr arg_physical_device =
   let count = allocate Vk_base.uint32 0 in
   let rec fetch () =
@@ -1142,6 +1307,7 @@ let get_physical_device_display_plane_properties_khr arg_physical_device =
   ignore (Sys.opaque_identity (arg_physical_device));
   enumeration_result
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetDisplayPlaneSupportedDisplaysKHR.html}[vkGetDisplayPlaneSupportedDisplaysKHR]} *)
 let get_display_plane_supported_displays_khr arg_physical_device arg_plane_index =
   let count = allocate Vk_base.uint32 0 in
   let rec fetch () =
@@ -1160,6 +1326,7 @@ let get_display_plane_supported_displays_khr arg_physical_device arg_plane_index
   ignore (Sys.opaque_identity (arg_physical_device, arg_plane_index));
   enumeration_result
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetDisplayModePropertiesKHR.html}[vkGetDisplayModePropertiesKHR]} *)
 let get_display_mode_properties_khr arg_physical_device arg_display =
   let count = allocate Vk_base.uint32 0 in
   let rec fetch () =
@@ -1178,6 +1345,7 @@ let get_display_mode_properties_khr arg_physical_device arg_display =
   ignore (Sys.opaque_identity (arg_physical_device, arg_display));
   enumeration_result
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateDisplayModeKHR.html}[vkCreateDisplayModeKHR]} *)
 let create_display_mode_khr ?allocator:arg_allocator arg_physical_device arg_display arg_create_info =
   let output = allocate (DisplayModeKHR.t) (DisplayModeKHR.null) in
   let result = Vk_fn.create_display_mode_khr (arg_physical_device) (arg_display) (addr arg_create_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
@@ -1185,6 +1353,7 @@ let create_display_mode_khr ?allocator:arg_allocator arg_physical_device arg_dis
   check result;
   !@ output
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetDisplayPlaneCapabilitiesKHR.html}[vkGetDisplayPlaneCapabilitiesKHR]} *)
 let get_display_plane_capabilities_khr arg_physical_device arg_mode arg_plane_index =
   let output = DisplayPlaneCapabilitiesKHR.make () in
   let result = Vk_fn.get_display_plane_capabilities_khr (arg_physical_device) (arg_mode) (arg_plane_index) (addr output) in
@@ -1192,6 +1361,7 @@ let get_display_plane_capabilities_khr arg_physical_device arg_mode arg_plane_in
   check result;
   output
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateDisplayPlaneSurfaceKHR.html}[vkCreateDisplayPlaneSurfaceKHR]} *)
 let create_display_plane_surface_khr ?allocator:arg_allocator arg_instance arg_create_info =
   let output = allocate (SurfaceKHR.t) (SurfaceKHR.null) in
   let result = Vk_fn.create_display_plane_surface_khr (arg_instance) (addr arg_create_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
@@ -1199,6 +1369,7 @@ let create_display_plane_surface_khr ?allocator:arg_allocator arg_instance arg_c
   check result;
   !@ output
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateSharedSwapchainsKHR.html}[vkCreateSharedSwapchainsKHR]} *)
 let create_shared_swapchains_khr ?allocator:arg_allocator arg_device arg_create_infos =
   let array_create_infos = CArray.of_list (SwapchainCreateInfoKHR.t) arg_create_infos in
   let pointer_create_infos = if arg_create_infos = [] then Vk_base.null_ptr (SwapchainCreateInfoKHR.t) else CArray.start array_create_infos in
@@ -1209,11 +1380,13 @@ let create_shared_swapchains_khr ?allocator:arg_allocator arg_device arg_create_
   check result;
   (CArray.to_list storage)
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkDestroySurfaceKHR.html}[vkDestroySurfaceKHR]} *)
 let destroy_surface_khr arg_instance arg_surface ?allocator:arg_allocator () =
   Vk_fn.destroy_surface_khr (arg_instance) (arg_surface) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x));
   ignore (Sys.opaque_identity (arg_instance, arg_surface, arg_allocator));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPhysicalDeviceSurfaceSupportKHR.html}[vkGetPhysicalDeviceSurfaceSupportKHR]} *)
 let get_physical_device_surface_support_khr arg_physical_device arg_queue_family_index arg_surface =
   let output = allocate (Vk_base.bool32) (false) in
   let result = Vk_fn.get_physical_device_surface_support_khr (arg_physical_device) (arg_queue_family_index) (arg_surface) (output) in
@@ -1221,6 +1394,7 @@ let get_physical_device_surface_support_khr arg_physical_device arg_queue_family
   check result;
   !@ output
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPhysicalDeviceSurfaceCapabilitiesKHR.html}[vkGetPhysicalDeviceSurfaceCapabilitiesKHR]} *)
 let get_physical_device_surface_capabilities_khr arg_physical_device arg_surface =
   let output = SurfaceCapabilitiesKHR.make () in
   let result = Vk_fn.get_physical_device_surface_capabilities_khr (arg_physical_device) (arg_surface) (addr output) in
@@ -1228,6 +1402,7 @@ let get_physical_device_surface_capabilities_khr arg_physical_device arg_surface
   check result;
   output
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPhysicalDeviceSurfaceFormatsKHR.html}[vkGetPhysicalDeviceSurfaceFormatsKHR]} *)
 let get_physical_device_surface_formats_khr arg_physical_device arg_surface =
   let count = allocate Vk_base.uint32 0 in
   let rec fetch () =
@@ -1246,6 +1421,7 @@ let get_physical_device_surface_formats_khr arg_physical_device arg_surface =
   ignore (Sys.opaque_identity (arg_physical_device, arg_surface));
   enumeration_result
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPhysicalDeviceSurfacePresentModesKHR.html}[vkGetPhysicalDeviceSurfacePresentModesKHR]} *)
 let get_physical_device_surface_present_modes_khr arg_physical_device arg_surface =
   let count = allocate Vk_base.uint32 0 in
   let rec fetch () =
@@ -1264,6 +1440,7 @@ let get_physical_device_surface_present_modes_khr arg_physical_device arg_surfac
   ignore (Sys.opaque_identity (arg_physical_device, arg_surface));
   enumeration_result
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateSwapchainKHR.html}[vkCreateSwapchainKHR]} *)
 let create_swapchain_khr ?allocator:arg_allocator arg_device arg_create_info =
   let output = allocate (SwapchainKHR.t) (SwapchainKHR.null) in
   let result = Vk_fn.create_swapchain_khr (arg_device) (addr arg_create_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
@@ -1271,11 +1448,13 @@ let create_swapchain_khr ?allocator:arg_allocator arg_device arg_create_info =
   check result;
   !@ output
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkDestroySwapchainKHR.html}[vkDestroySwapchainKHR]} *)
 let destroy_swapchain_khr arg_device arg_swapchain ?allocator:arg_allocator () =
   Vk_fn.destroy_swapchain_khr (arg_device) (arg_swapchain) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x));
   ignore (Sys.opaque_identity (arg_device, arg_swapchain, arg_allocator));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetSwapchainImagesKHR.html}[vkGetSwapchainImagesKHR]} *)
 let get_swapchain_images_khr arg_device arg_swapchain =
   let count = allocate Vk_base.uint32 0 in
   let rec fetch () =
@@ -1294,6 +1473,7 @@ let get_swapchain_images_khr arg_device arg_swapchain =
   ignore (Sys.opaque_identity (arg_device, arg_swapchain));
   enumeration_result
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkAcquireNextImageKHR.html}[vkAcquireNextImageKHR]} *)
 let acquire_next_image_khr arg_device arg_swapchain arg_timeout arg_semaphore arg_fence =
   let output = allocate (Vk_base.uint32) (0) in
   let result = Vk_fn.acquire_next_image_khr (arg_device) (arg_swapchain) (arg_timeout) (arg_semaphore) (arg_fence) (output) in
@@ -1301,12 +1481,14 @@ let acquire_next_image_khr arg_device arg_swapchain arg_timeout arg_semaphore ar
   check result;
   (result, !@ output)
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkQueuePresentKHR.html}[vkQueuePresentKHR]} *)
 let queue_present_khr arg_queue arg_present_info =
   let result = Vk_fn.queue_present_khr (arg_queue) (addr arg_present_info) in
   ignore (Sys.opaque_identity (arg_queue, arg_present_info));
   check result;
   result
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateViSurfaceNN.html}[vkCreateViSurfaceNN]} *)
 let create_vi_surface_nn ?allocator:arg_allocator arg_instance arg_create_info =
   let output = allocate (SurfaceKHR.t) (SurfaceKHR.null) in
   let result = Vk_fn.create_vi_surface_nn (arg_instance) (addr arg_create_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
@@ -1314,6 +1496,7 @@ let create_vi_surface_nn ?allocator:arg_allocator arg_instance arg_create_info =
   check result;
   !@ output
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateWaylandSurfaceKHR.html}[vkCreateWaylandSurfaceKHR]} *)
 let create_wayland_surface_khr ?allocator:arg_allocator arg_instance arg_create_info =
   let output = allocate (SurfaceKHR.t) (SurfaceKHR.null) in
   let result = Vk_fn.create_wayland_surface_khr (arg_instance) (addr arg_create_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
@@ -1321,11 +1504,13 @@ let create_wayland_surface_khr ?allocator:arg_allocator arg_instance arg_create_
   check result;
   !@ output
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPhysicalDeviceWaylandPresentationSupportKHR.html}[vkGetPhysicalDeviceWaylandPresentationSupportKHR]} *)
 let get_physical_device_wayland_presentation_support_khr arg_physical_device arg_queue_family_index arg_display =
   let call_result = Vk_fn.get_physical_device_wayland_presentation_support_khr (arg_physical_device) (arg_queue_family_index) (arg_display) in
   ignore (Sys.opaque_identity (arg_physical_device, arg_queue_family_index, arg_display));
   call_result
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateUbmSurfaceSEC.html}[vkCreateUbmSurfaceSEC]} *)
 let create_ubm_surface_sec ?allocator:arg_allocator arg_instance arg_create_info =
   let output = allocate (SurfaceKHR.t) (SurfaceKHR.null) in
   let result = Vk_fn.create_ubm_surface_sec (arg_instance) (addr arg_create_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
@@ -1333,11 +1518,13 @@ let create_ubm_surface_sec ?allocator:arg_allocator arg_instance arg_create_info
   check result;
   !@ output
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPhysicalDeviceUbmPresentationSupportSEC.html}[vkGetPhysicalDeviceUbmPresentationSupportSEC]} *)
 let get_physical_device_ubm_presentation_support_sec arg_physical_device arg_queue_family_index arg_device =
   let call_result = Vk_fn.get_physical_device_ubm_presentation_support_sec (arg_physical_device) (arg_queue_family_index) (arg_device) in
   ignore (Sys.opaque_identity (arg_physical_device, arg_queue_family_index, arg_device));
   call_result
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateWin32SurfaceKHR.html}[vkCreateWin32SurfaceKHR]} *)
 let create_win_32_surface_khr ?allocator:arg_allocator arg_instance arg_create_info =
   let output = allocate (SurfaceKHR.t) (SurfaceKHR.null) in
   let result = Vk_fn.create_win_32_surface_khr (arg_instance) (addr arg_create_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
@@ -1345,11 +1532,13 @@ let create_win_32_surface_khr ?allocator:arg_allocator arg_instance arg_create_i
   check result;
   !@ output
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPhysicalDeviceWin32PresentationSupportKHR.html}[vkGetPhysicalDeviceWin32PresentationSupportKHR]} *)
 let get_physical_device_win_32_presentation_support_khr arg_physical_device arg_queue_family_index =
   let call_result = Vk_fn.get_physical_device_win_32_presentation_support_khr (arg_physical_device) (arg_queue_family_index) in
   ignore (Sys.opaque_identity (arg_physical_device, arg_queue_family_index));
   call_result
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateXlibSurfaceKHR.html}[vkCreateXlibSurfaceKHR]} *)
 let create_xlib_surface_khr ?allocator:arg_allocator arg_instance arg_create_info =
   let output = allocate (SurfaceKHR.t) (SurfaceKHR.null) in
   let result = Vk_fn.create_xlib_surface_khr (arg_instance) (addr arg_create_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
@@ -1357,11 +1546,13 @@ let create_xlib_surface_khr ?allocator:arg_allocator arg_instance arg_create_inf
   check result;
   !@ output
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPhysicalDeviceXlibPresentationSupportKHR.html}[vkGetPhysicalDeviceXlibPresentationSupportKHR]} *)
 let get_physical_device_xlib_presentation_support_khr arg_physical_device arg_queue_family_index arg_dpy arg_visual_id =
   let call_result = Vk_fn.get_physical_device_xlib_presentation_support_khr (arg_physical_device) (arg_queue_family_index) (arg_dpy) (arg_visual_id) in
   ignore (Sys.opaque_identity (arg_physical_device, arg_queue_family_index, arg_dpy, arg_visual_id));
   call_result
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateXcbSurfaceKHR.html}[vkCreateXcbSurfaceKHR]} *)
 let create_xcb_surface_khr ?allocator:arg_allocator arg_instance arg_create_info =
   let output = allocate (SurfaceKHR.t) (SurfaceKHR.null) in
   let result = Vk_fn.create_xcb_surface_khr (arg_instance) (addr arg_create_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
@@ -1369,11 +1560,13 @@ let create_xcb_surface_khr ?allocator:arg_allocator arg_instance arg_create_info
   check result;
   !@ output
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPhysicalDeviceXcbPresentationSupportKHR.html}[vkGetPhysicalDeviceXcbPresentationSupportKHR]} *)
 let get_physical_device_xcb_presentation_support_khr arg_physical_device arg_queue_family_index arg_connection arg_visual_id =
   let call_result = Vk_fn.get_physical_device_xcb_presentation_support_khr (arg_physical_device) (arg_queue_family_index) (arg_connection) (arg_visual_id) in
   ignore (Sys.opaque_identity (arg_physical_device, arg_queue_family_index, arg_connection, arg_visual_id));
   call_result
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateDirectFBSurfaceEXT.html}[vkCreateDirectFBSurfaceEXT]} *)
 let create_direct_fb_surface_ext ?allocator:arg_allocator arg_instance arg_create_info =
   let output = allocate (SurfaceKHR.t) (SurfaceKHR.null) in
   let result = Vk_fn.create_direct_fb_surface_ext (arg_instance) (addr arg_create_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
@@ -1381,11 +1574,13 @@ let create_direct_fb_surface_ext ?allocator:arg_allocator arg_instance arg_creat
   check result;
   !@ output
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPhysicalDeviceDirectFBPresentationSupportEXT.html}[vkGetPhysicalDeviceDirectFBPresentationSupportEXT]} *)
 let get_physical_device_direct_fb_presentation_support_ext arg_physical_device arg_queue_family_index arg_dfb =
   let call_result = Vk_fn.get_physical_device_direct_fb_presentation_support_ext (arg_physical_device) (arg_queue_family_index) (arg_dfb) in
   ignore (Sys.opaque_identity (arg_physical_device, arg_queue_family_index, arg_dfb));
   call_result
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateImagePipeSurfaceFUCHSIA.html}[vkCreateImagePipeSurfaceFUCHSIA]} *)
 let create_image_pipe_surface_fuchsia ?allocator:arg_allocator arg_instance arg_create_info =
   let output = allocate (SurfaceKHR.t) (SurfaceKHR.null) in
   let result = Vk_fn.create_image_pipe_surface_fuchsia (arg_instance) (addr arg_create_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
@@ -1393,6 +1588,7 @@ let create_image_pipe_surface_fuchsia ?allocator:arg_allocator arg_instance arg_
   check result;
   !@ output
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateStreamDescriptorSurfaceGGP.html}[vkCreateStreamDescriptorSurfaceGGP]} *)
 let create_stream_descriptor_surface_ggp ?allocator:arg_allocator arg_instance arg_create_info =
   let output = allocate (SurfaceKHR.t) (SurfaceKHR.null) in
   let result = Vk_fn.create_stream_descriptor_surface_ggp (arg_instance) (addr arg_create_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
@@ -1400,6 +1596,7 @@ let create_stream_descriptor_surface_ggp ?allocator:arg_allocator arg_instance a
   check result;
   !@ output
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateScreenSurfaceQNX.html}[vkCreateScreenSurfaceQNX]} *)
 let create_screen_surface_qnx ?allocator:arg_allocator arg_instance arg_create_info =
   let output = allocate (SurfaceKHR.t) (SurfaceKHR.null) in
   let result = Vk_fn.create_screen_surface_qnx (arg_instance) (addr arg_create_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
@@ -1407,11 +1604,13 @@ let create_screen_surface_qnx ?allocator:arg_allocator arg_instance arg_create_i
   check result;
   !@ output
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPhysicalDeviceScreenPresentationSupportQNX.html}[vkGetPhysicalDeviceScreenPresentationSupportQNX]} *)
 let get_physical_device_screen_presentation_support_qnx arg_physical_device arg_queue_family_index arg_window =
   let call_result = Vk_fn.get_physical_device_screen_presentation_support_qnx (arg_physical_device) (arg_queue_family_index) (arg_window) in
   ignore (Sys.opaque_identity (arg_physical_device, arg_queue_family_index, arg_window));
   call_result
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateDebugReportCallbackEXT.html}[vkCreateDebugReportCallbackEXT]} *)
 let create_debug_report_callback_ext ?allocator:arg_allocator arg_instance arg_create_info =
   let output = allocate (DebugReportCallbackEXT.t) (DebugReportCallbackEXT.null) in
   let result = Vk_fn.create_debug_report_callback_ext (arg_instance) (addr arg_create_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
@@ -1419,43 +1618,51 @@ let create_debug_report_callback_ext ?allocator:arg_allocator arg_instance arg_c
   check result;
   !@ output
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkDestroyDebugReportCallbackEXT.html}[vkDestroyDebugReportCallbackEXT]} *)
 let destroy_debug_report_callback_ext arg_instance arg_callback ?allocator:arg_allocator () =
   Vk_fn.destroy_debug_report_callback_ext (arg_instance) (arg_callback) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x));
   ignore (Sys.opaque_identity (arg_instance, arg_callback, arg_allocator));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkDebugReportMessageEXT.html}[vkDebugReportMessageEXT]} *)
 let debug_report_message_ext arg_instance arg_flags arg_object_type arg_object_ arg_location arg_message_code arg_layer_prefix arg_message =
   Vk_fn.debug_report_message_ext (arg_instance) (arg_flags) (arg_object_type) (arg_object_) (arg_location) (arg_message_code) (arg_layer_prefix) (arg_message);
   ignore (Sys.opaque_identity (arg_instance, arg_flags, arg_object_type, arg_object_, arg_location, arg_message_code, arg_layer_prefix, arg_message));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkDebugMarkerSetObjectNameEXT.html}[vkDebugMarkerSetObjectNameEXT]} *)
 let debug_marker_set_object_name_ext arg_device arg_name_info =
   let result = Vk_fn.debug_marker_set_object_name_ext (arg_device) (addr arg_name_info) in
   ignore (Sys.opaque_identity (arg_device, arg_name_info));
   check result;
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkDebugMarkerSetObjectTagEXT.html}[vkDebugMarkerSetObjectTagEXT]} *)
 let debug_marker_set_object_tag_ext arg_device arg_tag_info =
   let result = Vk_fn.debug_marker_set_object_tag_ext (arg_device) (addr arg_tag_info) in
   ignore (Sys.opaque_identity (arg_device, arg_tag_info));
   check result;
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdDebugMarkerBeginEXT.html}[vkCmdDebugMarkerBeginEXT]} *)
 let cmd_debug_marker_begin_ext arg_command_buffer arg_marker_info =
   Vk_fn.cmd_debug_marker_begin_ext (arg_command_buffer) (addr arg_marker_info);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_marker_info));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdDebugMarkerEndEXT.html}[vkCmdDebugMarkerEndEXT]} *)
 let cmd_debug_marker_end_ext arg_command_buffer =
   Vk_fn.cmd_debug_marker_end_ext (arg_command_buffer);
   ignore (Sys.opaque_identity (arg_command_buffer));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdDebugMarkerInsertEXT.html}[vkCmdDebugMarkerInsertEXT]} *)
 let cmd_debug_marker_insert_ext arg_command_buffer arg_marker_info =
   Vk_fn.cmd_debug_marker_insert_ext (arg_command_buffer) (addr arg_marker_info);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_marker_info));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPhysicalDeviceExternalImageFormatPropertiesNV.html}[vkGetPhysicalDeviceExternalImageFormatPropertiesNV]} *)
 let get_physical_device_external_image_format_properties_nv arg_physical_device arg_format arg_type_ arg_tiling arg_usage arg_flags arg_external_handle_type =
   let output = ExternalImageFormatPropertiesNV.make () in
   let result = Vk_fn.get_physical_device_external_image_format_properties_nv (arg_physical_device) (arg_format) (arg_type_) (arg_tiling) (arg_usage) (arg_flags) (arg_external_handle_type) (addr output) in
@@ -1463,6 +1670,7 @@ let get_physical_device_external_image_format_properties_nv arg_physical_device 
   check result;
   output
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetMemoryWin32HandleNV.html}[vkGetMemoryWin32HandleNV]} *)
 let get_memory_win_32_handle_nv arg_device arg_memory arg_handle_type =
   let output = allocate (ptr void) (Ctypes.null) in
   let result = Vk_fn.get_memory_win_32_handle_nv (arg_device) (arg_memory) (arg_handle_type) (output) in
@@ -1470,26 +1678,31 @@ let get_memory_win_32_handle_nv arg_device arg_memory arg_handle_type =
   check result;
   !@ output
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdExecuteGeneratedCommandsNV.html}[vkCmdExecuteGeneratedCommandsNV]} *)
 let cmd_execute_generated_commands_nv arg_command_buffer arg_is_preprocessed arg_generated_commands_info =
   Vk_fn.cmd_execute_generated_commands_nv (arg_command_buffer) (arg_is_preprocessed) (addr arg_generated_commands_info);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_is_preprocessed, arg_generated_commands_info));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdPreprocessGeneratedCommandsNV.html}[vkCmdPreprocessGeneratedCommandsNV]} *)
 let cmd_preprocess_generated_commands_nv arg_command_buffer arg_generated_commands_info =
   Vk_fn.cmd_preprocess_generated_commands_nv (arg_command_buffer) (addr arg_generated_commands_info);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_generated_commands_info));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdBindPipelineShaderGroupNV.html}[vkCmdBindPipelineShaderGroupNV]} *)
 let cmd_bind_pipeline_shader_group_nv arg_command_buffer arg_pipeline_bind_point arg_pipeline arg_group_index =
   Vk_fn.cmd_bind_pipeline_shader_group_nv (arg_command_buffer) (arg_pipeline_bind_point) (arg_pipeline) (arg_group_index);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_pipeline_bind_point, arg_pipeline, arg_group_index));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetGeneratedCommandsMemoryRequirementsNV.html}[vkGetGeneratedCommandsMemoryRequirementsNV]} *)
 let get_generated_commands_memory_requirements_nv arg_device arg_info arg_memory_requirements =
   Vk_fn.get_generated_commands_memory_requirements_nv (arg_device) (addr arg_info) (addr arg_memory_requirements);
   ignore (Sys.opaque_identity (arg_device, arg_info, arg_memory_requirements));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateIndirectCommandsLayoutNV.html}[vkCreateIndirectCommandsLayoutNV]} *)
 let create_indirect_commands_layout_nv ?allocator:arg_allocator arg_device arg_create_info =
   let output = allocate (IndirectCommandsLayoutNV.t) (IndirectCommandsLayoutNV.null) in
   let result = Vk_fn.create_indirect_commands_layout_nv (arg_device) (addr arg_create_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
@@ -1497,26 +1710,31 @@ let create_indirect_commands_layout_nv ?allocator:arg_allocator arg_device arg_c
   check result;
   !@ output
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkDestroyIndirectCommandsLayoutNV.html}[vkDestroyIndirectCommandsLayoutNV]} *)
 let destroy_indirect_commands_layout_nv arg_device arg_indirect_commands_layout ?allocator:arg_allocator () =
   Vk_fn.destroy_indirect_commands_layout_nv (arg_device) (arg_indirect_commands_layout) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x));
   ignore (Sys.opaque_identity (arg_device, arg_indirect_commands_layout, arg_allocator));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdExecuteGeneratedCommandsEXT.html}[vkCmdExecuteGeneratedCommandsEXT]} *)
 let cmd_execute_generated_commands_ext arg_command_buffer arg_is_preprocessed arg_generated_commands_info =
   Vk_fn.cmd_execute_generated_commands_ext (arg_command_buffer) (arg_is_preprocessed) (addr arg_generated_commands_info);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_is_preprocessed, arg_generated_commands_info));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdPreprocessGeneratedCommandsEXT.html}[vkCmdPreprocessGeneratedCommandsEXT]} *)
 let cmd_preprocess_generated_commands_ext arg_command_buffer arg_generated_commands_info arg_state_command_buffer =
   Vk_fn.cmd_preprocess_generated_commands_ext (arg_command_buffer) (addr arg_generated_commands_info) (arg_state_command_buffer);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_generated_commands_info, arg_state_command_buffer));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetGeneratedCommandsMemoryRequirementsEXT.html}[vkGetGeneratedCommandsMemoryRequirementsEXT]} *)
 let get_generated_commands_memory_requirements_ext arg_device arg_info arg_memory_requirements =
   Vk_fn.get_generated_commands_memory_requirements_ext (arg_device) (addr arg_info) (addr arg_memory_requirements);
   ignore (Sys.opaque_identity (arg_device, arg_info, arg_memory_requirements));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateIndirectCommandsLayoutEXT.html}[vkCreateIndirectCommandsLayoutEXT]} *)
 let create_indirect_commands_layout_ext ?allocator:arg_allocator arg_device arg_create_info =
   let output = allocate (IndirectCommandsLayoutEXT.t) (IndirectCommandsLayoutEXT.null) in
   let result = Vk_fn.create_indirect_commands_layout_ext (arg_device) (addr arg_create_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
@@ -1524,11 +1742,13 @@ let create_indirect_commands_layout_ext ?allocator:arg_allocator arg_device arg_
   check result;
   !@ output
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkDestroyIndirectCommandsLayoutEXT.html}[vkDestroyIndirectCommandsLayoutEXT]} *)
 let destroy_indirect_commands_layout_ext arg_device arg_indirect_commands_layout ?allocator:arg_allocator () =
   Vk_fn.destroy_indirect_commands_layout_ext (arg_device) (arg_indirect_commands_layout) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x));
   ignore (Sys.opaque_identity (arg_device, arg_indirect_commands_layout, arg_allocator));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateIndirectExecutionSetEXT.html}[vkCreateIndirectExecutionSetEXT]} *)
 let create_indirect_execution_set_ext ?allocator:arg_allocator arg_device arg_create_info =
   let output = allocate (IndirectExecutionSetEXT.t) (IndirectExecutionSetEXT.null) in
   let result = Vk_fn.create_indirect_execution_set_ext (arg_device) (addr arg_create_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
@@ -1536,11 +1756,13 @@ let create_indirect_execution_set_ext ?allocator:arg_allocator arg_device arg_cr
   check result;
   !@ output
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkDestroyIndirectExecutionSetEXT.html}[vkDestroyIndirectExecutionSetEXT]} *)
 let destroy_indirect_execution_set_ext arg_device arg_indirect_execution_set ?allocator:arg_allocator () =
   Vk_fn.destroy_indirect_execution_set_ext (arg_device) (arg_indirect_execution_set) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x));
   ignore (Sys.opaque_identity (arg_device, arg_indirect_execution_set, arg_allocator));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkUpdateIndirectExecutionSetPipelineEXT.html}[vkUpdateIndirectExecutionSetPipelineEXT]} *)
 let update_indirect_execution_set_pipeline_ext arg_device arg_indirect_execution_set arg_execution_set_writes =
   let array_execution_set_writes = CArray.of_list (WriteIndirectExecutionSetPipelineEXT.t) arg_execution_set_writes in
   let pointer_execution_set_writes = if arg_execution_set_writes = [] then Vk_base.null_ptr (WriteIndirectExecutionSetPipelineEXT.t) else CArray.start array_execution_set_writes in
@@ -1548,6 +1770,7 @@ let update_indirect_execution_set_pipeline_ext arg_device arg_indirect_execution
   ignore (Sys.opaque_identity (arg_device, arg_indirect_execution_set, arg_execution_set_writes, array_execution_set_writes));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkUpdateIndirectExecutionSetShaderEXT.html}[vkUpdateIndirectExecutionSetShaderEXT]} *)
 let update_indirect_execution_set_shader_ext arg_device arg_indirect_execution_set arg_execution_set_writes =
   let array_execution_set_writes = CArray.of_list (WriteIndirectExecutionSetShaderEXT.t) arg_execution_set_writes in
   let pointer_execution_set_writes = if arg_execution_set_writes = [] then Vk_base.null_ptr (WriteIndirectExecutionSetShaderEXT.t) else CArray.start array_execution_set_writes in
@@ -1555,27 +1778,32 @@ let update_indirect_execution_set_shader_ext arg_device arg_indirect_execution_s
   ignore (Sys.opaque_identity (arg_device, arg_indirect_execution_set, arg_execution_set_writes, array_execution_set_writes));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPhysicalDeviceFeatures2.html}[vkGetPhysicalDeviceFeatures2]} *)
 let get_physical_device_features_2 arg_physical_device arg_features =
   Vk_fn.get_physical_device_features_2 (arg_physical_device) (addr arg_features);
   ignore (Sys.opaque_identity (arg_physical_device, arg_features));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPhysicalDeviceProperties2.html}[vkGetPhysicalDeviceProperties2]} *)
 let get_physical_device_properties_2 arg_physical_device arg_properties =
   Vk_fn.get_physical_device_properties_2 (arg_physical_device) (addr arg_properties);
   ignore (Sys.opaque_identity (arg_physical_device, arg_properties));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPhysicalDeviceFormatProperties2.html}[vkGetPhysicalDeviceFormatProperties2]} *)
 let get_physical_device_format_properties_2 arg_physical_device arg_format arg_format_properties =
   Vk_fn.get_physical_device_format_properties_2 (arg_physical_device) (arg_format) (addr arg_format_properties);
   ignore (Sys.opaque_identity (arg_physical_device, arg_format, arg_format_properties));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPhysicalDeviceImageFormatProperties2.html}[vkGetPhysicalDeviceImageFormatProperties2]} *)
 let get_physical_device_image_format_properties_2 arg_physical_device arg_image_format_info arg_image_format_properties =
   let result = Vk_fn.get_physical_device_image_format_properties_2 (arg_physical_device) (addr arg_image_format_info) (addr arg_image_format_properties) in
   ignore (Sys.opaque_identity (arg_physical_device, arg_image_format_info, arg_image_format_properties));
   check result;
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPhysicalDeviceQueueFamilyProperties2.html}[vkGetPhysicalDeviceQueueFamilyProperties2]} *)
 let get_physical_device_queue_family_properties_2 arg_physical_device =
   let count = allocate Vk_base.uint32 0 in
   let rec fetch () =
@@ -1590,11 +1818,13 @@ let get_physical_device_queue_family_properties_2 arg_physical_device =
   ignore (Sys.opaque_identity (arg_physical_device));
   enumeration_result
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPhysicalDeviceMemoryProperties2.html}[vkGetPhysicalDeviceMemoryProperties2]} *)
 let get_physical_device_memory_properties_2 arg_physical_device arg_memory_properties =
   Vk_fn.get_physical_device_memory_properties_2 (arg_physical_device) (addr arg_memory_properties);
   ignore (Sys.opaque_identity (arg_physical_device, arg_memory_properties));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPhysicalDeviceSparseImageFormatProperties2.html}[vkGetPhysicalDeviceSparseImageFormatProperties2]} *)
 let get_physical_device_sparse_image_format_properties_2 arg_physical_device arg_format_info =
   let count = allocate Vk_base.uint32 0 in
   let rec fetch () =
@@ -1609,6 +1839,7 @@ let get_physical_device_sparse_image_format_properties_2 arg_physical_device arg
   ignore (Sys.opaque_identity (arg_physical_device, arg_format_info));
   enumeration_result
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdPushDescriptorSet.html}[vkCmdPushDescriptorSet]} *)
 let cmd_push_descriptor_set arg_command_buffer arg_pipeline_bind_point arg_layout arg_set arg_descriptor_writes =
   let array_descriptor_writes = CArray.of_list (WriteDescriptorSet.t) arg_descriptor_writes in
   let pointer_descriptor_writes = if arg_descriptor_writes = [] then Vk_base.null_ptr (WriteDescriptorSet.t) else CArray.start array_descriptor_writes in
@@ -1616,16 +1847,19 @@ let cmd_push_descriptor_set arg_command_buffer arg_pipeline_bind_point arg_layou
   ignore (Sys.opaque_identity (arg_command_buffer, arg_pipeline_bind_point, arg_layout, arg_set, arg_descriptor_writes, array_descriptor_writes));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkTrimCommandPool.html}[vkTrimCommandPool]} *)
 let trim_command_pool arg_device arg_command_pool arg_flags =
   Vk_fn.trim_command_pool (arg_device) (arg_command_pool) (arg_flags);
   ignore (Sys.opaque_identity (arg_device, arg_command_pool, arg_flags));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPhysicalDeviceExternalBufferProperties.html}[vkGetPhysicalDeviceExternalBufferProperties]} *)
 let get_physical_device_external_buffer_properties arg_physical_device arg_external_buffer_info arg_external_buffer_properties =
   Vk_fn.get_physical_device_external_buffer_properties (arg_physical_device) (addr arg_external_buffer_info) (addr arg_external_buffer_properties);
   ignore (Sys.opaque_identity (arg_physical_device, arg_external_buffer_info, arg_external_buffer_properties));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetMemoryWin32HandleKHR.html}[vkGetMemoryWin32HandleKHR]} *)
 let get_memory_win_32_handle_khr arg_device arg_get_win_32_handle_info =
   let output = allocate (ptr void) (Ctypes.null) in
   let result = Vk_fn.get_memory_win_32_handle_khr (arg_device) (addr arg_get_win_32_handle_info) (output) in
@@ -1633,12 +1867,14 @@ let get_memory_win_32_handle_khr arg_device arg_get_win_32_handle_info =
   check result;
   !@ output
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetMemoryWin32HandlePropertiesKHR.html}[vkGetMemoryWin32HandlePropertiesKHR]} *)
 let get_memory_win_32_handle_properties_khr arg_device arg_handle_type arg_handle arg_memory_win_32_handle_properties =
   let result = Vk_fn.get_memory_win_32_handle_properties_khr (arg_device) (arg_handle_type) (arg_handle) (addr arg_memory_win_32_handle_properties) in
   ignore (Sys.opaque_identity (arg_device, arg_handle_type, arg_handle, arg_memory_win_32_handle_properties));
   check result;
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetMemoryFdKHR.html}[vkGetMemoryFdKHR]} *)
 let get_memory_fd_khr arg_device arg_get_fd_info =
   let output = allocate (Ctypes.int) (0) in
   let result = Vk_fn.get_memory_fd_khr (arg_device) (addr arg_get_fd_info) (output) in
@@ -1646,12 +1882,14 @@ let get_memory_fd_khr arg_device arg_get_fd_info =
   check result;
   !@ output
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetMemoryFdPropertiesKHR.html}[vkGetMemoryFdPropertiesKHR]} *)
 let get_memory_fd_properties_khr arg_device arg_handle_type arg_fd arg_memory_fd_properties =
   let result = Vk_fn.get_memory_fd_properties_khr (arg_device) (arg_handle_type) (arg_fd) (addr arg_memory_fd_properties) in
   ignore (Sys.opaque_identity (arg_device, arg_handle_type, arg_fd, arg_memory_fd_properties));
   check result;
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetMemoryZirconHandleFUCHSIA.html}[vkGetMemoryZirconHandleFUCHSIA]} *)
 let get_memory_zircon_handle_fuchsia arg_device arg_get_zircon_handle_info =
   let output = allocate (Vk_base.uint32) (0) in
   let result = Vk_fn.get_memory_zircon_handle_fuchsia (arg_device) (addr arg_get_zircon_handle_info) (output) in
@@ -1659,12 +1897,14 @@ let get_memory_zircon_handle_fuchsia arg_device arg_get_zircon_handle_info =
   check result;
   !@ output
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetMemoryZirconHandlePropertiesFUCHSIA.html}[vkGetMemoryZirconHandlePropertiesFUCHSIA]} *)
 let get_memory_zircon_handle_properties_fuchsia arg_device arg_handle_type arg_zircon_handle arg_memory_zircon_handle_properties =
   let result = Vk_fn.get_memory_zircon_handle_properties_fuchsia (arg_device) (arg_handle_type) (arg_zircon_handle) (addr arg_memory_zircon_handle_properties) in
   ignore (Sys.opaque_identity (arg_device, arg_handle_type, arg_zircon_handle, arg_memory_zircon_handle_properties));
   check result;
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetMemoryRemoteAddressNV.html}[vkGetMemoryRemoteAddressNV]} *)
 let get_memory_remote_address_nv arg_device arg_memory_get_remote_address_info =
   let output = allocate (ptr void) (Ctypes.null) in
   let result = Vk_fn.get_memory_remote_address_nv (arg_device) (addr arg_memory_get_remote_address_info) (output) in
@@ -1672,11 +1912,13 @@ let get_memory_remote_address_nv arg_device arg_memory_get_remote_address_info =
   check result;
   !@ output
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPhysicalDeviceExternalSemaphoreProperties.html}[vkGetPhysicalDeviceExternalSemaphoreProperties]} *)
 let get_physical_device_external_semaphore_properties arg_physical_device arg_external_semaphore_info arg_external_semaphore_properties =
   Vk_fn.get_physical_device_external_semaphore_properties (arg_physical_device) (addr arg_external_semaphore_info) (addr arg_external_semaphore_properties);
   ignore (Sys.opaque_identity (arg_physical_device, arg_external_semaphore_info, arg_external_semaphore_properties));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetSemaphoreWin32HandleKHR.html}[vkGetSemaphoreWin32HandleKHR]} *)
 let get_semaphore_win_32_handle_khr arg_device arg_get_win_32_handle_info =
   let output = allocate (ptr void) (Ctypes.null) in
   let result = Vk_fn.get_semaphore_win_32_handle_khr (arg_device) (addr arg_get_win_32_handle_info) (output) in
@@ -1684,12 +1926,14 @@ let get_semaphore_win_32_handle_khr arg_device arg_get_win_32_handle_info =
   check result;
   !@ output
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkImportSemaphoreWin32HandleKHR.html}[vkImportSemaphoreWin32HandleKHR]} *)
 let import_semaphore_win_32_handle_khr arg_device arg_import_semaphore_win_32_handle_info =
   let result = Vk_fn.import_semaphore_win_32_handle_khr (arg_device) (addr arg_import_semaphore_win_32_handle_info) in
   ignore (Sys.opaque_identity (arg_device, arg_import_semaphore_win_32_handle_info));
   check result;
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetSemaphoreFdKHR.html}[vkGetSemaphoreFdKHR]} *)
 let get_semaphore_fd_khr arg_device arg_get_fd_info =
   let output = allocate (Ctypes.int) (0) in
   let result = Vk_fn.get_semaphore_fd_khr (arg_device) (addr arg_get_fd_info) (output) in
@@ -1697,12 +1941,14 @@ let get_semaphore_fd_khr arg_device arg_get_fd_info =
   check result;
   !@ output
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkImportSemaphoreFdKHR.html}[vkImportSemaphoreFdKHR]} *)
 let import_semaphore_fd_khr arg_device arg_import_semaphore_fd_info =
   let result = Vk_fn.import_semaphore_fd_khr (arg_device) (addr arg_import_semaphore_fd_info) in
   ignore (Sys.opaque_identity (arg_device, arg_import_semaphore_fd_info));
   check result;
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetSemaphoreZirconHandleFUCHSIA.html}[vkGetSemaphoreZirconHandleFUCHSIA]} *)
 let get_semaphore_zircon_handle_fuchsia arg_device arg_get_zircon_handle_info =
   let output = allocate (Vk_base.uint32) (0) in
   let result = Vk_fn.get_semaphore_zircon_handle_fuchsia (arg_device) (addr arg_get_zircon_handle_info) (output) in
@@ -1710,17 +1956,20 @@ let get_semaphore_zircon_handle_fuchsia arg_device arg_get_zircon_handle_info =
   check result;
   !@ output
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkImportSemaphoreZirconHandleFUCHSIA.html}[vkImportSemaphoreZirconHandleFUCHSIA]} *)
 let import_semaphore_zircon_handle_fuchsia arg_device arg_import_semaphore_zircon_handle_info =
   let result = Vk_fn.import_semaphore_zircon_handle_fuchsia (arg_device) (addr arg_import_semaphore_zircon_handle_info) in
   ignore (Sys.opaque_identity (arg_device, arg_import_semaphore_zircon_handle_info));
   check result;
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPhysicalDeviceExternalFenceProperties.html}[vkGetPhysicalDeviceExternalFenceProperties]} *)
 let get_physical_device_external_fence_properties arg_physical_device arg_external_fence_info arg_external_fence_properties =
   Vk_fn.get_physical_device_external_fence_properties (arg_physical_device) (addr arg_external_fence_info) (addr arg_external_fence_properties);
   ignore (Sys.opaque_identity (arg_physical_device, arg_external_fence_info, arg_external_fence_properties));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetFenceWin32HandleKHR.html}[vkGetFenceWin32HandleKHR]} *)
 let get_fence_win_32_handle_khr arg_device arg_get_win_32_handle_info =
   let output = allocate (ptr void) (Ctypes.null) in
   let result = Vk_fn.get_fence_win_32_handle_khr (arg_device) (addr arg_get_win_32_handle_info) (output) in
@@ -1728,12 +1977,14 @@ let get_fence_win_32_handle_khr arg_device arg_get_win_32_handle_info =
   check result;
   !@ output
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkImportFenceWin32HandleKHR.html}[vkImportFenceWin32HandleKHR]} *)
 let import_fence_win_32_handle_khr arg_device arg_import_fence_win_32_handle_info =
   let result = Vk_fn.import_fence_win_32_handle_khr (arg_device) (addr arg_import_fence_win_32_handle_info) in
   ignore (Sys.opaque_identity (arg_device, arg_import_fence_win_32_handle_info));
   check result;
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetFenceFdKHR.html}[vkGetFenceFdKHR]} *)
 let get_fence_fd_khr arg_device arg_get_fd_info =
   let output = allocate (Ctypes.int) (0) in
   let result = Vk_fn.get_fence_fd_khr (arg_device) (addr arg_get_fd_info) (output) in
@@ -1741,24 +1992,28 @@ let get_fence_fd_khr arg_device arg_get_fd_info =
   check result;
   !@ output
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkImportFenceFdKHR.html}[vkImportFenceFdKHR]} *)
 let import_fence_fd_khr arg_device arg_import_fence_fd_info =
   let result = Vk_fn.import_fence_fd_khr (arg_device) (addr arg_import_fence_fd_info) in
   ignore (Sys.opaque_identity (arg_device, arg_import_fence_fd_info));
   check result;
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkReleaseDisplayEXT.html}[vkReleaseDisplayEXT]} *)
 let release_display_ext arg_physical_device arg_display =
   let result = Vk_fn.release_display_ext (arg_physical_device) (arg_display) in
   ignore (Sys.opaque_identity (arg_physical_device, arg_display));
   check result;
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkAcquireXlibDisplayEXT.html}[vkAcquireXlibDisplayEXT]} *)
 let acquire_xlib_display_ext arg_physical_device arg_dpy arg_display =
   let result = Vk_fn.acquire_xlib_display_ext (arg_physical_device) (arg_dpy) (arg_display) in
   ignore (Sys.opaque_identity (arg_physical_device, arg_dpy, arg_display));
   check result;
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetRandROutputDisplayEXT.html}[vkGetRandROutputDisplayEXT]} *)
 let get_rand_r_output_display_ext arg_physical_device arg_dpy arg_rr_output =
   let output = allocate (DisplayKHR.t) (DisplayKHR.null) in
   let result = Vk_fn.get_rand_r_output_display_ext (arg_physical_device) (arg_dpy) (arg_rr_output) (output) in
@@ -1766,12 +2021,14 @@ let get_rand_r_output_display_ext arg_physical_device arg_dpy arg_rr_output =
   check result;
   !@ output
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkAcquireWinrtDisplayNV.html}[vkAcquireWinrtDisplayNV]} *)
 let acquire_winrt_display_nv arg_physical_device arg_display =
   let result = Vk_fn.acquire_winrt_display_nv (arg_physical_device) (arg_display) in
   ignore (Sys.opaque_identity (arg_physical_device, arg_display));
   check result;
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetWinrtDisplayNV.html}[vkGetWinrtDisplayNV]} *)
 let get_winrt_display_nv arg_physical_device arg_device_relative_id =
   let output = allocate (DisplayKHR.t) (DisplayKHR.null) in
   let result = Vk_fn.get_winrt_display_nv (arg_physical_device) (arg_device_relative_id) (output) in
@@ -1779,12 +2036,14 @@ let get_winrt_display_nv arg_physical_device arg_device_relative_id =
   check result;
   !@ output
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkDisplayPowerControlEXT.html}[vkDisplayPowerControlEXT]} *)
 let display_power_control_ext arg_device arg_display arg_display_power_info =
   let result = Vk_fn.display_power_control_ext (arg_device) (arg_display) (addr arg_display_power_info) in
   ignore (Sys.opaque_identity (arg_device, arg_display, arg_display_power_info));
   check result;
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkRegisterDeviceEventEXT.html}[vkRegisterDeviceEventEXT]} *)
 let register_device_event_ext ?allocator:arg_allocator arg_device arg_device_event_info =
   let output = allocate (Fence.t) (Fence.null) in
   let result = Vk_fn.register_device_event_ext (arg_device) (addr arg_device_event_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
@@ -1792,6 +2051,7 @@ let register_device_event_ext ?allocator:arg_allocator arg_device arg_device_eve
   check result;
   !@ output
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkRegisterDisplayEventEXT.html}[vkRegisterDisplayEventEXT]} *)
 let register_display_event_ext ?allocator:arg_allocator arg_device arg_display arg_display_event_info =
   let output = allocate (Fence.t) (Fence.null) in
   let result = Vk_fn.register_display_event_ext (arg_device) (arg_display) (addr arg_display_event_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
@@ -1799,6 +2059,7 @@ let register_display_event_ext ?allocator:arg_allocator arg_device arg_display a
   check result;
   !@ output
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetSwapchainCounterEXT.html}[vkGetSwapchainCounterEXT]} *)
 let get_swapchain_counter_ext arg_device arg_swapchain arg_counter =
   let output = allocate (Vk_base.uint64) (0) in
   let result = Vk_fn.get_swapchain_counter_ext (arg_device) (arg_swapchain) (arg_counter) (output) in
@@ -1806,12 +2067,14 @@ let get_swapchain_counter_ext arg_device arg_swapchain arg_counter =
   check result;
   !@ output
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPhysicalDeviceSurfaceCapabilities2EXT.html}[vkGetPhysicalDeviceSurfaceCapabilities2EXT]} *)
 let get_physical_device_surface_capabilities_2_ext arg_physical_device arg_surface arg_surface_capabilities =
   let result = Vk_fn.get_physical_device_surface_capabilities_2_ext (arg_physical_device) (arg_surface) (addr arg_surface_capabilities) in
   ignore (Sys.opaque_identity (arg_physical_device, arg_surface, arg_surface_capabilities));
   check result;
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkEnumeratePhysicalDeviceGroups.html}[vkEnumeratePhysicalDeviceGroups]} *)
 let enumerate_physical_device_groups arg_instance =
   let count = allocate Vk_base.uint32 0 in
   let rec fetch () =
@@ -1830,12 +2093,14 @@ let enumerate_physical_device_groups arg_instance =
   ignore (Sys.opaque_identity (arg_instance));
   enumeration_result
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetDeviceGroupPeerMemoryFeatures.html}[vkGetDeviceGroupPeerMemoryFeatures]} *)
 let get_device_group_peer_memory_features arg_device arg_heap_index arg_local_device_index arg_remote_device_index =
   let output = allocate (PeerMemoryFeatureFlags.t) (PeerMemoryFeatureFlags.of_int 0) in
   Vk_fn.get_device_group_peer_memory_features (arg_device) (arg_heap_index) (arg_local_device_index) (arg_remote_device_index) (output);
   ignore (Sys.opaque_identity (arg_device, arg_heap_index, arg_local_device_index, arg_remote_device_index));
   !@ output
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkBindBufferMemory2.html}[vkBindBufferMemory2]} *)
 let bind_buffer_memory_2 arg_device arg_bind_infos =
   let array_bind_infos = CArray.of_list (BindBufferMemoryInfo.t) arg_bind_infos in
   let pointer_bind_infos = if arg_bind_infos = [] then Vk_base.null_ptr (BindBufferMemoryInfo.t) else CArray.start array_bind_infos in
@@ -1844,6 +2109,7 @@ let bind_buffer_memory_2 arg_device arg_bind_infos =
   check result;
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkBindImageMemory2.html}[vkBindImageMemory2]} *)
 let bind_image_memory_2 arg_device arg_bind_infos =
   let array_bind_infos = CArray.of_list (BindImageMemoryInfo.t) arg_bind_infos in
   let pointer_bind_infos = if arg_bind_infos = [] then Vk_base.null_ptr (BindImageMemoryInfo.t) else CArray.start array_bind_infos in
@@ -1852,17 +2118,20 @@ let bind_image_memory_2 arg_device arg_bind_infos =
   check result;
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetDeviceMask.html}[vkCmdSetDeviceMask]} *)
 let cmd_set_device_mask arg_command_buffer arg_device_mask =
   Vk_fn.cmd_set_device_mask (arg_command_buffer) (arg_device_mask);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_device_mask));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetDeviceGroupPresentCapabilitiesKHR.html}[vkGetDeviceGroupPresentCapabilitiesKHR]} *)
 let get_device_group_present_capabilities_khr arg_device arg_device_group_present_capabilities =
   let result = Vk_fn.get_device_group_present_capabilities_khr (arg_device) (addr arg_device_group_present_capabilities) in
   ignore (Sys.opaque_identity (arg_device, arg_device_group_present_capabilities));
   check result;
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetDeviceGroupSurfacePresentModesKHR.html}[vkGetDeviceGroupSurfacePresentModesKHR]} *)
 let get_device_group_surface_present_modes_khr arg_device arg_surface =
   let output = allocate (DeviceGroupPresentModeFlagsKHR.t) (DeviceGroupPresentModeFlagsKHR.of_int 0) in
   let result = Vk_fn.get_device_group_surface_present_modes_khr (arg_device) (arg_surface) (output) in
@@ -1870,6 +2139,7 @@ let get_device_group_surface_present_modes_khr arg_device arg_surface =
   check result;
   !@ output
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkAcquireNextImage2KHR.html}[vkAcquireNextImage2KHR]} *)
 let acquire_next_image_2_khr arg_device arg_acquire_info =
   let output = allocate (Vk_base.uint32) (0) in
   let result = Vk_fn.acquire_next_image_2_khr (arg_device) (addr arg_acquire_info) (output) in
@@ -1877,11 +2147,13 @@ let acquire_next_image_2_khr arg_device arg_acquire_info =
   check result;
   (result, !@ output)
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdDispatchBase.html}[vkCmdDispatchBase]} *)
 let cmd_dispatch_base arg_command_buffer arg_base_group_x arg_base_group_y arg_base_group_z arg_group_count_x arg_group_count_y arg_group_count_z =
   Vk_fn.cmd_dispatch_base (arg_command_buffer) (arg_base_group_x) (arg_base_group_y) (arg_base_group_z) (arg_group_count_x) (arg_group_count_y) (arg_group_count_z);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_base_group_x, arg_base_group_y, arg_base_group_z, arg_group_count_x, arg_group_count_y, arg_group_count_z));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPhysicalDevicePresentRectanglesKHR.html}[vkGetPhysicalDevicePresentRectanglesKHR]} *)
 let get_physical_device_present_rectangles_khr arg_physical_device arg_surface =
   let count = allocate Vk_base.uint32 0 in
   let rec fetch () =
@@ -1900,6 +2172,7 @@ let get_physical_device_present_rectangles_khr arg_physical_device arg_surface =
   ignore (Sys.opaque_identity (arg_physical_device, arg_surface));
   enumeration_result
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateDescriptorUpdateTemplate.html}[vkCreateDescriptorUpdateTemplate]} *)
 let create_descriptor_update_template ?allocator:arg_allocator arg_device arg_create_info =
   let output = allocate (DescriptorUpdateTemplate.t) (DescriptorUpdateTemplate.null) in
   let result = Vk_fn.create_descriptor_update_template (arg_device) (addr arg_create_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
@@ -1907,21 +2180,25 @@ let create_descriptor_update_template ?allocator:arg_allocator arg_device arg_cr
   check result;
   !@ output
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkDestroyDescriptorUpdateTemplate.html}[vkDestroyDescriptorUpdateTemplate]} *)
 let destroy_descriptor_update_template arg_device arg_descriptor_update_template ?allocator:arg_allocator () =
   Vk_fn.destroy_descriptor_update_template (arg_device) (arg_descriptor_update_template) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x));
   ignore (Sys.opaque_identity (arg_device, arg_descriptor_update_template, arg_allocator));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkUpdateDescriptorSetWithTemplate.html}[vkUpdateDescriptorSetWithTemplate]} *)
 let update_descriptor_set_with_template arg_device arg_descriptor_set arg_descriptor_update_template arg_data =
   Vk_fn.update_descriptor_set_with_template (arg_device) (arg_descriptor_set) (arg_descriptor_update_template) (arg_data);
   ignore (Sys.opaque_identity (arg_device, arg_descriptor_set, arg_descriptor_update_template, arg_data));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdPushDescriptorSetWithTemplate.html}[vkCmdPushDescriptorSetWithTemplate]} *)
 let cmd_push_descriptor_set_with_template arg_command_buffer arg_descriptor_update_template arg_layout arg_set arg_data =
   Vk_fn.cmd_push_descriptor_set_with_template (arg_command_buffer) (arg_descriptor_update_template) (arg_layout) (arg_set) (arg_data);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_descriptor_update_template, arg_layout, arg_set, arg_data));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkSetHdrMetadataEXT.html}[vkSetHdrMetadataEXT]} *)
 let set_hdr_metadata_ext arg_device arg_swapchains arg_metadata =
   let array_swapchains = CArray.of_list (SwapchainKHR.t) arg_swapchains in
   let pointer_swapchains = if arg_swapchains = [] then Vk_base.null_ptr (SwapchainKHR.t) else CArray.start array_swapchains in
@@ -1932,12 +2209,14 @@ let set_hdr_metadata_ext arg_device arg_swapchains arg_metadata =
   ignore (Sys.opaque_identity (arg_device, arg_swapchains, array_swapchains, arg_metadata, array_metadata));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetSwapchainStatusKHR.html}[vkGetSwapchainStatusKHR]} *)
 let get_swapchain_status_khr arg_device arg_swapchain =
   let result = Vk_fn.get_swapchain_status_khr (arg_device) (arg_swapchain) in
   ignore (Sys.opaque_identity (arg_device, arg_swapchain));
   check result;
   result
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetRefreshCycleDurationGOOGLE.html}[vkGetRefreshCycleDurationGOOGLE]} *)
 let get_refresh_cycle_duration_google arg_device arg_swapchain =
   let output = RefreshCycleDurationGOOGLE.make () in
   let result = Vk_fn.get_refresh_cycle_duration_google (arg_device) (arg_swapchain) (addr output) in
@@ -1945,6 +2224,7 @@ let get_refresh_cycle_duration_google arg_device arg_swapchain =
   check result;
   output
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPastPresentationTimingGOOGLE.html}[vkGetPastPresentationTimingGOOGLE]} *)
 let get_past_presentation_timing_google arg_device arg_swapchain =
   let count = allocate Vk_base.uint32 0 in
   let rec fetch () =
@@ -1963,6 +2243,7 @@ let get_past_presentation_timing_google arg_device arg_swapchain =
   ignore (Sys.opaque_identity (arg_device, arg_swapchain));
   enumeration_result
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateIOSSurfaceMVK.html}[vkCreateIOSSurfaceMVK]} *)
 let create_ios_surface_mvk ?allocator:arg_allocator arg_instance arg_create_info =
   let output = allocate (SurfaceKHR.t) (SurfaceKHR.null) in
   let result = Vk_fn.create_ios_surface_mvk (arg_instance) (addr arg_create_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
@@ -1970,6 +2251,7 @@ let create_ios_surface_mvk ?allocator:arg_allocator arg_instance arg_create_info
   check result;
   !@ output
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateMacOSSurfaceMVK.html}[vkCreateMacOSSurfaceMVK]} *)
 let create_mac_os_surface_mvk ?allocator:arg_allocator arg_instance arg_create_info =
   let output = allocate (SurfaceKHR.t) (SurfaceKHR.null) in
   let result = Vk_fn.create_mac_os_surface_mvk (arg_instance) (addr arg_create_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
@@ -1977,6 +2259,7 @@ let create_mac_os_surface_mvk ?allocator:arg_allocator arg_instance arg_create_i
   check result;
   !@ output
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateMetalSurfaceEXT.html}[vkCreateMetalSurfaceEXT]} *)
 let create_metal_surface_ext ?allocator:arg_allocator arg_instance arg_create_info =
   let output = allocate (SurfaceKHR.t) (SurfaceKHR.null) in
   let result = Vk_fn.create_metal_surface_ext (arg_instance) (addr arg_create_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
@@ -1984,6 +2267,7 @@ let create_metal_surface_ext ?allocator:arg_allocator arg_instance arg_create_in
   check result;
   !@ output
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetViewportWScalingNV.html}[vkCmdSetViewportWScalingNV]} *)
 let cmd_set_viewport_w_scaling_nv arg_command_buffer arg_first_viewport arg_viewport_w_scalings =
   let array_viewport_w_scalings = CArray.of_list (ViewportWScalingNV.t) arg_viewport_w_scalings in
   let pointer_viewport_w_scalings = if arg_viewport_w_scalings = [] then Vk_base.null_ptr (ViewportWScalingNV.t) else CArray.start array_viewport_w_scalings in
@@ -1991,6 +2275,7 @@ let cmd_set_viewport_w_scaling_nv arg_command_buffer arg_first_viewport arg_view
   ignore (Sys.opaque_identity (arg_command_buffer, arg_first_viewport, arg_viewport_w_scalings, array_viewport_w_scalings));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetDiscardRectangleEXT.html}[vkCmdSetDiscardRectangleEXT]} *)
 let cmd_set_discard_rectangle_ext arg_command_buffer arg_first_discard_rectangle arg_discard_rectangles =
   let array_discard_rectangles = CArray.of_list (Rect2D.t) arg_discard_rectangles in
   let pointer_discard_rectangles = if arg_discard_rectangles = [] then Vk_base.null_ptr (Rect2D.t) else CArray.start array_discard_rectangles in
@@ -1998,32 +2283,38 @@ let cmd_set_discard_rectangle_ext arg_command_buffer arg_first_discard_rectangle
   ignore (Sys.opaque_identity (arg_command_buffer, arg_first_discard_rectangle, arg_discard_rectangles, array_discard_rectangles));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetDiscardRectangleEnableEXT.html}[vkCmdSetDiscardRectangleEnableEXT]} *)
 let cmd_set_discard_rectangle_enable_ext arg_command_buffer arg_discard_rectangle_enable =
   Vk_fn.cmd_set_discard_rectangle_enable_ext (arg_command_buffer) (arg_discard_rectangle_enable);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_discard_rectangle_enable));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetDiscardRectangleModeEXT.html}[vkCmdSetDiscardRectangleModeEXT]} *)
 let cmd_set_discard_rectangle_mode_ext arg_command_buffer arg_discard_rectangle_mode =
   Vk_fn.cmd_set_discard_rectangle_mode_ext (arg_command_buffer) (arg_discard_rectangle_mode);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_discard_rectangle_mode));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetSampleLocationsEXT.html}[vkCmdSetSampleLocationsEXT]} *)
 let cmd_set_sample_locations_ext arg_command_buffer arg_sample_locations_info =
   Vk_fn.cmd_set_sample_locations_ext (arg_command_buffer) (addr arg_sample_locations_info);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_sample_locations_info));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPhysicalDeviceMultisamplePropertiesEXT.html}[vkGetPhysicalDeviceMultisamplePropertiesEXT]} *)
 let get_physical_device_multisample_properties_ext arg_physical_device arg_samples arg_multisample_properties =
   Vk_fn.get_physical_device_multisample_properties_ext (arg_physical_device) (arg_samples) (addr arg_multisample_properties);
   ignore (Sys.opaque_identity (arg_physical_device, arg_samples, arg_multisample_properties));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPhysicalDeviceSurfaceCapabilities2KHR.html}[vkGetPhysicalDeviceSurfaceCapabilities2KHR]} *)
 let get_physical_device_surface_capabilities_2_khr arg_physical_device arg_surface_info arg_surface_capabilities =
   let result = Vk_fn.get_physical_device_surface_capabilities_2_khr (arg_physical_device) (addr arg_surface_info) (addr arg_surface_capabilities) in
   ignore (Sys.opaque_identity (arg_physical_device, arg_surface_info, arg_surface_capabilities));
   check result;
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPhysicalDeviceSurfaceFormats2KHR.html}[vkGetPhysicalDeviceSurfaceFormats2KHR]} *)
 let get_physical_device_surface_formats_2_khr arg_physical_device arg_surface_info =
   let count = allocate Vk_base.uint32 0 in
   let rec fetch () =
@@ -2042,6 +2333,7 @@ let get_physical_device_surface_formats_2_khr arg_physical_device arg_surface_in
   ignore (Sys.opaque_identity (arg_physical_device, arg_surface_info));
   enumeration_result
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPhysicalDeviceDisplayProperties2KHR.html}[vkGetPhysicalDeviceDisplayProperties2KHR]} *)
 let get_physical_device_display_properties_2_khr arg_physical_device =
   let count = allocate Vk_base.uint32 0 in
   let rec fetch () =
@@ -2060,6 +2352,7 @@ let get_physical_device_display_properties_2_khr arg_physical_device =
   ignore (Sys.opaque_identity (arg_physical_device));
   enumeration_result
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPhysicalDeviceDisplayPlaneProperties2KHR.html}[vkGetPhysicalDeviceDisplayPlaneProperties2KHR]} *)
 let get_physical_device_display_plane_properties_2_khr arg_physical_device =
   let count = allocate Vk_base.uint32 0 in
   let rec fetch () =
@@ -2078,6 +2371,7 @@ let get_physical_device_display_plane_properties_2_khr arg_physical_device =
   ignore (Sys.opaque_identity (arg_physical_device));
   enumeration_result
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetDisplayModeProperties2KHR.html}[vkGetDisplayModeProperties2KHR]} *)
 let get_display_mode_properties_2_khr arg_physical_device arg_display =
   let count = allocate Vk_base.uint32 0 in
   let rec fetch () =
@@ -2096,22 +2390,26 @@ let get_display_mode_properties_2_khr arg_physical_device arg_display =
   ignore (Sys.opaque_identity (arg_physical_device, arg_display));
   enumeration_result
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetDisplayPlaneCapabilities2KHR.html}[vkGetDisplayPlaneCapabilities2KHR]} *)
 let get_display_plane_capabilities_2_khr arg_physical_device arg_display_plane_info arg_capabilities =
   let result = Vk_fn.get_display_plane_capabilities_2_khr (arg_physical_device) (addr arg_display_plane_info) (addr arg_capabilities) in
   ignore (Sys.opaque_identity (arg_physical_device, arg_display_plane_info, arg_capabilities));
   check result;
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetBufferMemoryRequirements2.html}[vkGetBufferMemoryRequirements2]} *)
 let get_buffer_memory_requirements_2 arg_device arg_info arg_memory_requirements =
   Vk_fn.get_buffer_memory_requirements_2 (arg_device) (addr arg_info) (addr arg_memory_requirements);
   ignore (Sys.opaque_identity (arg_device, arg_info, arg_memory_requirements));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetImageMemoryRequirements2.html}[vkGetImageMemoryRequirements2]} *)
 let get_image_memory_requirements_2 arg_device arg_info arg_memory_requirements =
   Vk_fn.get_image_memory_requirements_2 (arg_device) (addr arg_info) (addr arg_memory_requirements);
   ignore (Sys.opaque_identity (arg_device, arg_info, arg_memory_requirements));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetImageSparseMemoryRequirements2.html}[vkGetImageSparseMemoryRequirements2]} *)
 let get_image_sparse_memory_requirements_2 arg_device arg_info =
   let count = allocate Vk_base.uint32 0 in
   let rec fetch () =
@@ -2126,16 +2424,19 @@ let get_image_sparse_memory_requirements_2 arg_device arg_info =
   ignore (Sys.opaque_identity (arg_device, arg_info));
   enumeration_result
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetDeviceBufferMemoryRequirements.html}[vkGetDeviceBufferMemoryRequirements]} *)
 let get_device_buffer_memory_requirements arg_device arg_info arg_memory_requirements =
   Vk_fn.get_device_buffer_memory_requirements (arg_device) (addr arg_info) (addr arg_memory_requirements);
   ignore (Sys.opaque_identity (arg_device, arg_info, arg_memory_requirements));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetDeviceImageMemoryRequirements.html}[vkGetDeviceImageMemoryRequirements]} *)
 let get_device_image_memory_requirements arg_device arg_info arg_memory_requirements =
   Vk_fn.get_device_image_memory_requirements (arg_device) (addr arg_info) (addr arg_memory_requirements);
   ignore (Sys.opaque_identity (arg_device, arg_info, arg_memory_requirements));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetDeviceImageSparseMemoryRequirements.html}[vkGetDeviceImageSparseMemoryRequirements]} *)
 let get_device_image_sparse_memory_requirements arg_device arg_info =
   let count = allocate Vk_base.uint32 0 in
   let rec fetch () =
@@ -2150,6 +2451,7 @@ let get_device_image_sparse_memory_requirements arg_device arg_info =
   ignore (Sys.opaque_identity (arg_device, arg_info));
   enumeration_result
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateSamplerYcbcrConversion.html}[vkCreateSamplerYcbcrConversion]} *)
 let create_sampler_ycbcr_conversion ?allocator:arg_allocator arg_device arg_create_info =
   let output = allocate (SamplerYcbcrConversion.t) (SamplerYcbcrConversion.null) in
   let result = Vk_fn.create_sampler_ycbcr_conversion (arg_device) (addr arg_create_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
@@ -2157,17 +2459,20 @@ let create_sampler_ycbcr_conversion ?allocator:arg_allocator arg_device arg_crea
   check result;
   !@ output
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkDestroySamplerYcbcrConversion.html}[vkDestroySamplerYcbcrConversion]} *)
 let destroy_sampler_ycbcr_conversion arg_device arg_ycbcr_conversion ?allocator:arg_allocator () =
   Vk_fn.destroy_sampler_ycbcr_conversion (arg_device) (arg_ycbcr_conversion) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x));
   ignore (Sys.opaque_identity (arg_device, arg_ycbcr_conversion, arg_allocator));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetDeviceQueue2.html}[vkGetDeviceQueue2]} *)
 let get_device_queue_2 arg_device arg_queue_info =
   let output = allocate (Queue.t) (Queue.null) in
   Vk_fn.get_device_queue_2 (arg_device) (addr arg_queue_info) (output);
   ignore (Sys.opaque_identity (arg_device, arg_queue_info));
   !@ output
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateValidationCacheEXT.html}[vkCreateValidationCacheEXT]} *)
 let create_validation_cache_ext ?allocator:arg_allocator arg_device arg_create_info =
   let output = allocate (ValidationCacheEXT.t) (ValidationCacheEXT.null) in
   let result = Vk_fn.create_validation_cache_ext (arg_device) (addr arg_create_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
@@ -2175,17 +2480,20 @@ let create_validation_cache_ext ?allocator:arg_allocator arg_device arg_create_i
   check result;
   !@ output
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkDestroyValidationCacheEXT.html}[vkDestroyValidationCacheEXT]} *)
 let destroy_validation_cache_ext arg_device arg_validation_cache ?allocator:arg_allocator () =
   Vk_fn.destroy_validation_cache_ext (arg_device) (arg_validation_cache) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x));
   ignore (Sys.opaque_identity (arg_device, arg_validation_cache, arg_allocator));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetValidationCacheDataEXT.html}[vkGetValidationCacheDataEXT]} *)
 let get_validation_cache_data_ext arg_device arg_validation_cache arg_data_size arg_data =
   let result = Vk_fn.get_validation_cache_data_ext (arg_device) (arg_validation_cache) (arg_data_size) (arg_data) in
   ignore (Sys.opaque_identity (arg_device, arg_validation_cache, arg_data_size, arg_data));
   check result;
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkMergeValidationCachesEXT.html}[vkMergeValidationCachesEXT]} *)
 let merge_validation_caches_ext arg_device arg_dst_cache arg_src_caches =
   let array_src_caches = CArray.of_list (ValidationCacheEXT.t) arg_src_caches in
   let pointer_src_caches = if arg_src_caches = [] then Vk_base.null_ptr (ValidationCacheEXT.t) else CArray.start array_src_caches in
@@ -2194,22 +2502,26 @@ let merge_validation_caches_ext arg_device arg_dst_cache arg_src_caches =
   check result;
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetDescriptorSetLayoutSupport.html}[vkGetDescriptorSetLayoutSupport]} *)
 let get_descriptor_set_layout_support arg_device arg_create_info arg_support =
   Vk_fn.get_descriptor_set_layout_support (arg_device) (addr arg_create_info) (addr arg_support);
   ignore (Sys.opaque_identity (arg_device, arg_create_info, arg_support));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetShaderInfoAMD.html}[vkGetShaderInfoAMD]} *)
 let get_shader_info_amd arg_device arg_pipeline arg_shader_stage arg_info_type arg_info_size arg_info =
   let result = Vk_fn.get_shader_info_amd (arg_device) (arg_pipeline) (arg_shader_stage) (arg_info_type) (arg_info_size) (arg_info) in
   ignore (Sys.opaque_identity (arg_device, arg_pipeline, arg_shader_stage, arg_info_type, arg_info_size, arg_info));
   check result;
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkSetLocalDimmingAMD.html}[vkSetLocalDimmingAMD]} *)
 let set_local_dimming_amd arg_device arg_swap_chain arg_local_dimming_enable =
   Vk_fn.set_local_dimming_amd (arg_device) (arg_swap_chain) (arg_local_dimming_enable);
   ignore (Sys.opaque_identity (arg_device, arg_swap_chain, arg_local_dimming_enable));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPhysicalDeviceCalibrateableTimeDomainsKHR.html}[vkGetPhysicalDeviceCalibrateableTimeDomainsKHR]} *)
 let get_physical_device_calibrateable_time_domains_khr arg_physical_device =
   let count = allocate Vk_base.uint32 0 in
   let rec fetch () =
@@ -2228,6 +2540,7 @@ let get_physical_device_calibrateable_time_domains_khr arg_physical_device =
   ignore (Sys.opaque_identity (arg_physical_device));
   enumeration_result
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetCalibratedTimestampsKHR.html}[vkGetCalibratedTimestampsKHR]} *)
 let get_calibrated_timestamps_khr arg_device arg_timestamp_infos arg_max_deviation =
   let array_timestamp_infos = CArray.of_list (CalibratedTimestampInfoKHR.t) arg_timestamp_infos in
   let pointer_timestamp_infos = if arg_timestamp_infos = [] then Vk_base.null_ptr (CalibratedTimestampInfoKHR.t) else CArray.start array_timestamp_infos in
@@ -2238,48 +2551,57 @@ let get_calibrated_timestamps_khr arg_device arg_timestamp_infos arg_max_deviati
   check result;
   (CArray.to_list storage)
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkSetDebugUtilsObjectNameEXT.html}[vkSetDebugUtilsObjectNameEXT]} *)
 let set_debug_utils_object_name_ext arg_device arg_name_info =
   let result = Vk_fn.set_debug_utils_object_name_ext (arg_device) (addr arg_name_info) in
   ignore (Sys.opaque_identity (arg_device, arg_name_info));
   check result;
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkSetDebugUtilsObjectTagEXT.html}[vkSetDebugUtilsObjectTagEXT]} *)
 let set_debug_utils_object_tag_ext arg_device arg_tag_info =
   let result = Vk_fn.set_debug_utils_object_tag_ext (arg_device) (addr arg_tag_info) in
   ignore (Sys.opaque_identity (arg_device, arg_tag_info));
   check result;
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkQueueBeginDebugUtilsLabelEXT.html}[vkQueueBeginDebugUtilsLabelEXT]} *)
 let queue_begin_debug_utils_label_ext arg_queue arg_label_info =
   Vk_fn.queue_begin_debug_utils_label_ext (arg_queue) (addr arg_label_info);
   ignore (Sys.opaque_identity (arg_queue, arg_label_info));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkQueueEndDebugUtilsLabelEXT.html}[vkQueueEndDebugUtilsLabelEXT]} *)
 let queue_end_debug_utils_label_ext arg_queue =
   Vk_fn.queue_end_debug_utils_label_ext (arg_queue);
   ignore (Sys.opaque_identity (arg_queue));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkQueueInsertDebugUtilsLabelEXT.html}[vkQueueInsertDebugUtilsLabelEXT]} *)
 let queue_insert_debug_utils_label_ext arg_queue arg_label_info =
   Vk_fn.queue_insert_debug_utils_label_ext (arg_queue) (addr arg_label_info);
   ignore (Sys.opaque_identity (arg_queue, arg_label_info));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdBeginDebugUtilsLabelEXT.html}[vkCmdBeginDebugUtilsLabelEXT]} *)
 let cmd_begin_debug_utils_label_ext arg_command_buffer arg_label_info =
   Vk_fn.cmd_begin_debug_utils_label_ext (arg_command_buffer) (addr arg_label_info);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_label_info));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdEndDebugUtilsLabelEXT.html}[vkCmdEndDebugUtilsLabelEXT]} *)
 let cmd_end_debug_utils_label_ext arg_command_buffer =
   Vk_fn.cmd_end_debug_utils_label_ext (arg_command_buffer);
   ignore (Sys.opaque_identity (arg_command_buffer));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdInsertDebugUtilsLabelEXT.html}[vkCmdInsertDebugUtilsLabelEXT]} *)
 let cmd_insert_debug_utils_label_ext arg_command_buffer arg_label_info =
   Vk_fn.cmd_insert_debug_utils_label_ext (arg_command_buffer) (addr arg_label_info);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_label_info));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateDebugUtilsMessengerEXT.html}[vkCreateDebugUtilsMessengerEXT]} *)
 let create_debug_utils_messenger_ext ?allocator:arg_allocator arg_instance arg_create_info =
   let output = allocate (DebugUtilsMessengerEXT.t) (DebugUtilsMessengerEXT.null) in
   let result = Vk_fn.create_debug_utils_messenger_ext (arg_instance) (addr arg_create_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
@@ -2287,27 +2609,32 @@ let create_debug_utils_messenger_ext ?allocator:arg_allocator arg_instance arg_c
   check result;
   !@ output
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkDestroyDebugUtilsMessengerEXT.html}[vkDestroyDebugUtilsMessengerEXT]} *)
 let destroy_debug_utils_messenger_ext arg_instance arg_messenger ?allocator:arg_allocator () =
   Vk_fn.destroy_debug_utils_messenger_ext (arg_instance) (arg_messenger) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x));
   ignore (Sys.opaque_identity (arg_instance, arg_messenger, arg_allocator));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkSubmitDebugUtilsMessageEXT.html}[vkSubmitDebugUtilsMessageEXT]} *)
 let submit_debug_utils_message_ext arg_instance arg_message_severity arg_message_types arg_callback_data =
   Vk_fn.submit_debug_utils_message_ext (arg_instance) (arg_message_severity) (arg_message_types) (addr arg_callback_data);
   ignore (Sys.opaque_identity (arg_instance, arg_message_severity, arg_message_types, arg_callback_data));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetMemoryHostPointerPropertiesEXT.html}[vkGetMemoryHostPointerPropertiesEXT]} *)
 let get_memory_host_pointer_properties_ext arg_device arg_handle_type arg_host_pointer arg_memory_host_pointer_properties =
   let result = Vk_fn.get_memory_host_pointer_properties_ext (arg_device) (arg_handle_type) (arg_host_pointer) (addr arg_memory_host_pointer_properties) in
   ignore (Sys.opaque_identity (arg_device, arg_handle_type, arg_host_pointer, arg_memory_host_pointer_properties));
   check result;
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdWriteBufferMarkerAMD.html}[vkCmdWriteBufferMarkerAMD]} *)
 let cmd_write_buffer_marker_amd arg_command_buffer arg_pipeline_stage arg_dst_buffer arg_dst_offset arg_marker =
   Vk_fn.cmd_write_buffer_marker_amd (arg_command_buffer) (arg_pipeline_stage) (arg_dst_buffer) (arg_dst_offset) (arg_marker);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_pipeline_stage, arg_dst_buffer, arg_dst_offset, arg_marker));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateRenderPass2.html}[vkCreateRenderPass2]} *)
 let create_render_pass_2 ?allocator:arg_allocator arg_device arg_create_info =
   let output = allocate (RenderPass.t) (RenderPass.null) in
   let result = Vk_fn.create_render_pass_2 (arg_device) (addr arg_create_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
@@ -2315,21 +2642,25 @@ let create_render_pass_2 ?allocator:arg_allocator arg_device arg_create_info =
   check result;
   !@ output
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdBeginRenderPass2.html}[vkCmdBeginRenderPass2]} *)
 let cmd_begin_render_pass_2 arg_command_buffer arg_render_pass_begin arg_subpass_begin_info =
   Vk_fn.cmd_begin_render_pass_2 (arg_command_buffer) (addr arg_render_pass_begin) (addr arg_subpass_begin_info);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_render_pass_begin, arg_subpass_begin_info));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdNextSubpass2.html}[vkCmdNextSubpass2]} *)
 let cmd_next_subpass_2 arg_command_buffer arg_subpass_begin_info arg_subpass_end_info =
   Vk_fn.cmd_next_subpass_2 (arg_command_buffer) (addr arg_subpass_begin_info) (addr arg_subpass_end_info);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_subpass_begin_info, arg_subpass_end_info));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdEndRenderPass2.html}[vkCmdEndRenderPass2]} *)
 let cmd_end_render_pass_2 arg_command_buffer arg_subpass_end_info =
   Vk_fn.cmd_end_render_pass_2 (arg_command_buffer) (addr arg_subpass_end_info);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_subpass_end_info));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetSemaphoreCounterValue.html}[vkGetSemaphoreCounterValue]} *)
 let get_semaphore_counter_value arg_device arg_semaphore =
   let output = allocate (Vk_base.uint64) (0) in
   let result = Vk_fn.get_semaphore_counter_value (arg_device) (arg_semaphore) (output) in
@@ -2337,24 +2668,28 @@ let get_semaphore_counter_value arg_device arg_semaphore =
   check result;
   !@ output
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkWaitSemaphores.html}[vkWaitSemaphores]} *)
 let wait_semaphores arg_device arg_wait_info arg_timeout =
   let result = Vk_fn.wait_semaphores (arg_device) (addr arg_wait_info) (arg_timeout) in
   ignore (Sys.opaque_identity (arg_device, arg_wait_info, arg_timeout));
   check result;
   result
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkSignalSemaphore.html}[vkSignalSemaphore]} *)
 let signal_semaphore arg_device arg_signal_info =
   let result = Vk_fn.signal_semaphore (arg_device) (addr arg_signal_info) in
   ignore (Sys.opaque_identity (arg_device, arg_signal_info));
   check result;
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetAndroidHardwareBufferPropertiesANDROID.html}[vkGetAndroidHardwareBufferPropertiesANDROID]} *)
 let get_android_hardware_buffer_properties_android arg_device arg_buffer arg_properties =
   let result = Vk_fn.get_android_hardware_buffer_properties_android (arg_device) (arg_buffer) (addr arg_properties) in
   ignore (Sys.opaque_identity (arg_device, arg_buffer, arg_properties));
   check result;
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetMemoryAndroidHardwareBufferANDROID.html}[vkGetMemoryAndroidHardwareBufferANDROID]} *)
 let get_memory_android_hardware_buffer_android arg_device arg_info =
   let output = allocate (ptr (void)) (Vk_base.null_ptr (void)) in
   let result = Vk_fn.get_memory_android_hardware_buffer_android (arg_device) (addr arg_info) (output) in
@@ -2362,21 +2697,25 @@ let get_memory_android_hardware_buffer_android arg_device arg_info =
   check result;
   !@ output
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdDrawIndirectCount.html}[vkCmdDrawIndirectCount]} *)
 let cmd_draw_indirect_count arg_command_buffer arg_buffer arg_offset arg_count_buffer arg_count_buffer_offset arg_max_draw_count arg_stride =
   Vk_fn.cmd_draw_indirect_count (arg_command_buffer) (arg_buffer) (arg_offset) (arg_count_buffer) (arg_count_buffer_offset) (arg_max_draw_count) (arg_stride);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_buffer, arg_offset, arg_count_buffer, arg_count_buffer_offset, arg_max_draw_count, arg_stride));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdDrawIndexedIndirectCount.html}[vkCmdDrawIndexedIndirectCount]} *)
 let cmd_draw_indexed_indirect_count arg_command_buffer arg_buffer arg_offset arg_count_buffer arg_count_buffer_offset arg_max_draw_count arg_stride =
   Vk_fn.cmd_draw_indexed_indirect_count (arg_command_buffer) (arg_buffer) (arg_offset) (arg_count_buffer) (arg_count_buffer_offset) (arg_max_draw_count) (arg_stride);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_buffer, arg_offset, arg_count_buffer, arg_count_buffer_offset, arg_max_draw_count, arg_stride));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetCheckpointNV.html}[vkCmdSetCheckpointNV]} *)
 let cmd_set_checkpoint_nv arg_command_buffer arg_checkpoint_marker =
   Vk_fn.cmd_set_checkpoint_nv (arg_command_buffer) (arg_checkpoint_marker);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_checkpoint_marker));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetQueueCheckpointDataNV.html}[vkGetQueueCheckpointDataNV]} *)
 let get_queue_checkpoint_data_nv arg_queue =
   let count = allocate Vk_base.uint32 0 in
   let rec fetch () =
@@ -2391,6 +2730,7 @@ let get_queue_checkpoint_data_nv arg_queue =
   ignore (Sys.opaque_identity (arg_queue));
   enumeration_result
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdBindTransformFeedbackBuffersEXT.html}[vkCmdBindTransformFeedbackBuffersEXT]} *)
 let cmd_bind_transform_feedback_buffers_ext arg_command_buffer arg_first_binding arg_buffers arg_offsets arg_sizes =
   let array_buffers = CArray.of_list (Buffer.t) arg_buffers in
   let pointer_buffers = if arg_buffers = [] then Vk_base.null_ptr (Buffer.t) else CArray.start array_buffers in
@@ -2404,6 +2744,7 @@ let cmd_bind_transform_feedback_buffers_ext arg_command_buffer arg_first_binding
   ignore (Sys.opaque_identity (arg_command_buffer, arg_first_binding, arg_buffers, array_buffers, arg_offsets, array_offsets, arg_sizes, array_sizes));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdBeginTransformFeedbackEXT.html}[vkCmdBeginTransformFeedbackEXT]} *)
 let cmd_begin_transform_feedback_ext arg_command_buffer arg_first_counter_buffer arg_counter_buffers arg_counter_buffer_offsets =
   let array_counter_buffers = CArray.of_list (Buffer.t) arg_counter_buffers in
   let pointer_counter_buffers = if arg_counter_buffers = [] then Vk_base.null_ptr (Buffer.t) else CArray.start array_counter_buffers in
@@ -2414,6 +2755,7 @@ let cmd_begin_transform_feedback_ext arg_command_buffer arg_first_counter_buffer
   ignore (Sys.opaque_identity (arg_command_buffer, arg_first_counter_buffer, arg_counter_buffers, array_counter_buffers, arg_counter_buffer_offsets, array_counter_buffer_offsets));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdEndTransformFeedbackEXT.html}[vkCmdEndTransformFeedbackEXT]} *)
 let cmd_end_transform_feedback_ext arg_command_buffer arg_first_counter_buffer arg_counter_buffers arg_counter_buffer_offsets =
   let array_counter_buffers = CArray.of_list (Buffer.t) arg_counter_buffers in
   let pointer_counter_buffers = if arg_counter_buffers = [] then Vk_base.null_ptr (Buffer.t) else CArray.start array_counter_buffers in
@@ -2424,21 +2766,25 @@ let cmd_end_transform_feedback_ext arg_command_buffer arg_first_counter_buffer a
   ignore (Sys.opaque_identity (arg_command_buffer, arg_first_counter_buffer, arg_counter_buffers, array_counter_buffers, arg_counter_buffer_offsets, array_counter_buffer_offsets));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdBeginQueryIndexedEXT.html}[vkCmdBeginQueryIndexedEXT]} *)
 let cmd_begin_query_indexed_ext arg_command_buffer arg_query_pool arg_query arg_flags arg_index =
   Vk_fn.cmd_begin_query_indexed_ext (arg_command_buffer) (arg_query_pool) (arg_query) (arg_flags) (arg_index);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_query_pool, arg_query, arg_flags, arg_index));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdEndQueryIndexedEXT.html}[vkCmdEndQueryIndexedEXT]} *)
 let cmd_end_query_indexed_ext arg_command_buffer arg_query_pool arg_query arg_index =
   Vk_fn.cmd_end_query_indexed_ext (arg_command_buffer) (arg_query_pool) (arg_query) (arg_index);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_query_pool, arg_query, arg_index));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdDrawIndirectByteCountEXT.html}[vkCmdDrawIndirectByteCountEXT]} *)
 let cmd_draw_indirect_byte_count_ext arg_command_buffer arg_instance_count arg_first_instance arg_counter_buffer arg_counter_buffer_offset arg_counter_offset arg_vertex_stride =
   Vk_fn.cmd_draw_indirect_byte_count_ext (arg_command_buffer) (arg_instance_count) (arg_first_instance) (arg_counter_buffer) (arg_counter_buffer_offset) (arg_counter_offset) (arg_vertex_stride);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_instance_count, arg_first_instance, arg_counter_buffer, arg_counter_buffer_offset, arg_counter_offset, arg_vertex_stride));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetExclusiveScissorNV.html}[vkCmdSetExclusiveScissorNV]} *)
 let cmd_set_exclusive_scissor_nv arg_command_buffer arg_first_exclusive_scissor arg_exclusive_scissors =
   let array_exclusive_scissors = CArray.of_list (Rect2D.t) arg_exclusive_scissors in
   let pointer_exclusive_scissors = if arg_exclusive_scissors = [] then Vk_base.null_ptr (Rect2D.t) else CArray.start array_exclusive_scissors in
@@ -2446,6 +2792,7 @@ let cmd_set_exclusive_scissor_nv arg_command_buffer arg_first_exclusive_scissor 
   ignore (Sys.opaque_identity (arg_command_buffer, arg_first_exclusive_scissor, arg_exclusive_scissors, array_exclusive_scissors));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetExclusiveScissorEnableNV.html}[vkCmdSetExclusiveScissorEnableNV]} *)
 let cmd_set_exclusive_scissor_enable_nv arg_command_buffer arg_first_exclusive_scissor arg_exclusive_scissor_enables =
   let array_exclusive_scissor_enables = CArray.of_list (Vk_base.bool32) arg_exclusive_scissor_enables in
   let pointer_exclusive_scissor_enables = if arg_exclusive_scissor_enables = [] then Vk_base.null_ptr (Vk_base.bool32) else CArray.start array_exclusive_scissor_enables in
@@ -2453,11 +2800,13 @@ let cmd_set_exclusive_scissor_enable_nv arg_command_buffer arg_first_exclusive_s
   ignore (Sys.opaque_identity (arg_command_buffer, arg_first_exclusive_scissor, arg_exclusive_scissor_enables, array_exclusive_scissor_enables));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdBindShadingRateImageNV.html}[vkCmdBindShadingRateImageNV]} *)
 let cmd_bind_shading_rate_image_nv arg_command_buffer arg_image_view arg_image_layout =
   Vk_fn.cmd_bind_shading_rate_image_nv (arg_command_buffer) (arg_image_view) (arg_image_layout);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_image_view, arg_image_layout));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetViewportShadingRatePaletteNV.html}[vkCmdSetViewportShadingRatePaletteNV]} *)
 let cmd_set_viewport_shading_rate_palette_nv arg_command_buffer arg_first_viewport arg_shading_rate_palettes =
   let array_shading_rate_palettes = CArray.of_list (ShadingRatePaletteNV.t) arg_shading_rate_palettes in
   let pointer_shading_rate_palettes = if arg_shading_rate_palettes = [] then Vk_base.null_ptr (ShadingRatePaletteNV.t) else CArray.start array_shading_rate_palettes in
@@ -2465,6 +2814,7 @@ let cmd_set_viewport_shading_rate_palette_nv arg_command_buffer arg_first_viewpo
   ignore (Sys.opaque_identity (arg_command_buffer, arg_first_viewport, arg_shading_rate_palettes, array_shading_rate_palettes));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetCoarseSampleOrderNV.html}[vkCmdSetCoarseSampleOrderNV]} *)
 let cmd_set_coarse_sample_order_nv arg_command_buffer arg_sample_order_type arg_custom_sample_orders =
   let array_custom_sample_orders = CArray.of_list (CoarseSampleOrderCustomNV.t) arg_custom_sample_orders in
   let pointer_custom_sample_orders = if arg_custom_sample_orders = [] then Vk_base.null_ptr (CoarseSampleOrderCustomNV.t) else CArray.start array_custom_sample_orders in
@@ -2472,42 +2822,50 @@ let cmd_set_coarse_sample_order_nv arg_command_buffer arg_sample_order_type arg_
   ignore (Sys.opaque_identity (arg_command_buffer, arg_sample_order_type, arg_custom_sample_orders, array_custom_sample_orders));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdDrawMeshTasksNV.html}[vkCmdDrawMeshTasksNV]} *)
 let cmd_draw_mesh_tasks_nv arg_command_buffer arg_task_count arg_first_task =
   Vk_fn.cmd_draw_mesh_tasks_nv (arg_command_buffer) (arg_task_count) (arg_first_task);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_task_count, arg_first_task));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdDrawMeshTasksIndirectNV.html}[vkCmdDrawMeshTasksIndirectNV]} *)
 let cmd_draw_mesh_tasks_indirect_nv arg_command_buffer arg_buffer arg_offset arg_draw_count arg_stride =
   Vk_fn.cmd_draw_mesh_tasks_indirect_nv (arg_command_buffer) (arg_buffer) (arg_offset) (arg_draw_count) (arg_stride);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_buffer, arg_offset, arg_draw_count, arg_stride));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdDrawMeshTasksIndirectCountNV.html}[vkCmdDrawMeshTasksIndirectCountNV]} *)
 let cmd_draw_mesh_tasks_indirect_count_nv arg_command_buffer arg_buffer arg_offset arg_count_buffer arg_count_buffer_offset arg_max_draw_count arg_stride =
   Vk_fn.cmd_draw_mesh_tasks_indirect_count_nv (arg_command_buffer) (arg_buffer) (arg_offset) (arg_count_buffer) (arg_count_buffer_offset) (arg_max_draw_count) (arg_stride);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_buffer, arg_offset, arg_count_buffer, arg_count_buffer_offset, arg_max_draw_count, arg_stride));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdDrawMeshTasksEXT.html}[vkCmdDrawMeshTasksEXT]} *)
 let cmd_draw_mesh_tasks_ext arg_command_buffer arg_group_count_x arg_group_count_y arg_group_count_z =
   Vk_fn.cmd_draw_mesh_tasks_ext (arg_command_buffer) (arg_group_count_x) (arg_group_count_y) (arg_group_count_z);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_group_count_x, arg_group_count_y, arg_group_count_z));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdDrawMeshTasksIndirectEXT.html}[vkCmdDrawMeshTasksIndirectEXT]} *)
 let cmd_draw_mesh_tasks_indirect_ext arg_command_buffer arg_buffer arg_offset arg_draw_count arg_stride =
   Vk_fn.cmd_draw_mesh_tasks_indirect_ext (arg_command_buffer) (arg_buffer) (arg_offset) (arg_draw_count) (arg_stride);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_buffer, arg_offset, arg_draw_count, arg_stride));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdDrawMeshTasksIndirectCountEXT.html}[vkCmdDrawMeshTasksIndirectCountEXT]} *)
 let cmd_draw_mesh_tasks_indirect_count_ext arg_command_buffer arg_buffer arg_offset arg_count_buffer arg_count_buffer_offset arg_max_draw_count arg_stride =
   Vk_fn.cmd_draw_mesh_tasks_indirect_count_ext (arg_command_buffer) (arg_buffer) (arg_offset) (arg_count_buffer) (arg_count_buffer_offset) (arg_max_draw_count) (arg_stride);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_buffer, arg_offset, arg_count_buffer, arg_count_buffer_offset, arg_max_draw_count, arg_stride));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCompileDeferredNV.html}[vkCompileDeferredNV]} *)
 let compile_deferred_nv arg_device arg_pipeline arg_shader =
   let result = Vk_fn.compile_deferred_nv (arg_device) (arg_pipeline) (arg_shader) in
   ignore (Sys.opaque_identity (arg_device, arg_pipeline, arg_shader));
   check result;
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateAccelerationStructureNV.html}[vkCreateAccelerationStructureNV]} *)
 let create_acceleration_structure_nv ?allocator:arg_allocator arg_device arg_create_info =
   let output = allocate (AccelerationStructureNV.t) (AccelerationStructureNV.null) in
   let result = Vk_fn.create_acceleration_structure_nv (arg_device) (addr arg_create_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
@@ -2515,26 +2873,31 @@ let create_acceleration_structure_nv ?allocator:arg_allocator arg_device arg_cre
   check result;
   !@ output
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdBindInvocationMaskHUAWEI.html}[vkCmdBindInvocationMaskHUAWEI]} *)
 let cmd_bind_invocation_mask_huawei arg_command_buffer arg_image_view arg_image_layout =
   Vk_fn.cmd_bind_invocation_mask_huawei (arg_command_buffer) (arg_image_view) (arg_image_layout);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_image_view, arg_image_layout));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkDestroyAccelerationStructureKHR.html}[vkDestroyAccelerationStructureKHR]} *)
 let destroy_acceleration_structure_khr arg_device arg_acceleration_structure ?allocator:arg_allocator () =
   Vk_fn.destroy_acceleration_structure_khr (arg_device) (arg_acceleration_structure) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x));
   ignore (Sys.opaque_identity (arg_device, arg_acceleration_structure, arg_allocator));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkDestroyAccelerationStructureNV.html}[vkDestroyAccelerationStructureNV]} *)
 let destroy_acceleration_structure_nv arg_device arg_acceleration_structure ?allocator:arg_allocator () =
   Vk_fn.destroy_acceleration_structure_nv (arg_device) (arg_acceleration_structure) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x));
   ignore (Sys.opaque_identity (arg_device, arg_acceleration_structure, arg_allocator));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetAccelerationStructureMemoryRequirementsNV.html}[vkGetAccelerationStructureMemoryRequirementsNV]} *)
 let get_acceleration_structure_memory_requirements_nv arg_device arg_info arg_memory_requirements =
   Vk_fn.get_acceleration_structure_memory_requirements_nv (arg_device) (addr arg_info) (addr arg_memory_requirements);
   ignore (Sys.opaque_identity (arg_device, arg_info, arg_memory_requirements));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkBindAccelerationStructureMemoryNV.html}[vkBindAccelerationStructureMemoryNV]} *)
 let bind_acceleration_structure_memory_nv arg_device arg_bind_infos =
   let array_bind_infos = CArray.of_list (BindAccelerationStructureMemoryInfoNV.t) arg_bind_infos in
   let pointer_bind_infos = if arg_bind_infos = [] then Vk_base.null_ptr (BindAccelerationStructureMemoryInfoNV.t) else CArray.start array_bind_infos in
@@ -2543,44 +2906,52 @@ let bind_acceleration_structure_memory_nv arg_device arg_bind_infos =
   check result;
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdCopyAccelerationStructureNV.html}[vkCmdCopyAccelerationStructureNV]} *)
 let cmd_copy_acceleration_structure_nv arg_command_buffer arg_dst arg_src arg_mode =
   Vk_fn.cmd_copy_acceleration_structure_nv (arg_command_buffer) (arg_dst) (arg_src) (arg_mode);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_dst, arg_src, arg_mode));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdCopyAccelerationStructureKHR.html}[vkCmdCopyAccelerationStructureKHR]} *)
 let cmd_copy_acceleration_structure_khr arg_command_buffer arg_info =
   Vk_fn.cmd_copy_acceleration_structure_khr (arg_command_buffer) (addr arg_info);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_info));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCopyAccelerationStructureKHR.html}[vkCopyAccelerationStructureKHR]} *)
 let copy_acceleration_structure_khr arg_device arg_deferred_operation arg_info =
   let result = Vk_fn.copy_acceleration_structure_khr (arg_device) (arg_deferred_operation) (addr arg_info) in
   ignore (Sys.opaque_identity (arg_device, arg_deferred_operation, arg_info));
   check result;
   result
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdCopyAccelerationStructureToMemoryKHR.html}[vkCmdCopyAccelerationStructureToMemoryKHR]} *)
 let cmd_copy_acceleration_structure_to_memory_khr arg_command_buffer arg_info =
   Vk_fn.cmd_copy_acceleration_structure_to_memory_khr (arg_command_buffer) (addr arg_info);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_info));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCopyAccelerationStructureToMemoryKHR.html}[vkCopyAccelerationStructureToMemoryKHR]} *)
 let copy_acceleration_structure_to_memory_khr arg_device arg_deferred_operation arg_info =
   let result = Vk_fn.copy_acceleration_structure_to_memory_khr (arg_device) (arg_deferred_operation) (addr arg_info) in
   ignore (Sys.opaque_identity (arg_device, arg_deferred_operation, arg_info));
   check result;
   result
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdCopyMemoryToAccelerationStructureKHR.html}[vkCmdCopyMemoryToAccelerationStructureKHR]} *)
 let cmd_copy_memory_to_acceleration_structure_khr arg_command_buffer arg_info =
   Vk_fn.cmd_copy_memory_to_acceleration_structure_khr (arg_command_buffer) (addr arg_info);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_info));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCopyMemoryToAccelerationStructureKHR.html}[vkCopyMemoryToAccelerationStructureKHR]} *)
 let copy_memory_to_acceleration_structure_khr arg_device arg_deferred_operation arg_info =
   let result = Vk_fn.copy_memory_to_acceleration_structure_khr (arg_device) (arg_deferred_operation) (addr arg_info) in
   ignore (Sys.opaque_identity (arg_device, arg_deferred_operation, arg_info));
   check result;
   result
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdWriteAccelerationStructuresPropertiesKHR.html}[vkCmdWriteAccelerationStructuresPropertiesKHR]} *)
 let cmd_write_acceleration_structures_properties_khr arg_command_buffer arg_acceleration_structures arg_query_type arg_query_pool arg_first_query =
   let array_acceleration_structures = CArray.of_list (AccelerationStructureKHR.t) arg_acceleration_structures in
   let pointer_acceleration_structures = if arg_acceleration_structures = [] then Vk_base.null_ptr (AccelerationStructureKHR.t) else CArray.start array_acceleration_structures in
@@ -2588,6 +2959,7 @@ let cmd_write_acceleration_structures_properties_khr arg_command_buffer arg_acce
   ignore (Sys.opaque_identity (arg_command_buffer, arg_acceleration_structures, array_acceleration_structures, arg_query_type, arg_query_pool, arg_first_query));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdWriteAccelerationStructuresPropertiesNV.html}[vkCmdWriteAccelerationStructuresPropertiesNV]} *)
 let cmd_write_acceleration_structures_properties_nv arg_command_buffer arg_acceleration_structures arg_query_type arg_query_pool arg_first_query =
   let array_acceleration_structures = CArray.of_list (AccelerationStructureNV.t) arg_acceleration_structures in
   let pointer_acceleration_structures = if arg_acceleration_structures = [] then Vk_base.null_ptr (AccelerationStructureNV.t) else CArray.start array_acceleration_structures in
@@ -2595,11 +2967,13 @@ let cmd_write_acceleration_structures_properties_nv arg_command_buffer arg_accel
   ignore (Sys.opaque_identity (arg_command_buffer, arg_acceleration_structures, array_acceleration_structures, arg_query_type, arg_query_pool, arg_first_query));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdBuildAccelerationStructureNV.html}[vkCmdBuildAccelerationStructureNV]} *)
 let cmd_build_acceleration_structure_nv arg_command_buffer arg_info arg_instance_data arg_instance_offset arg_update arg_dst arg_src arg_scratch arg_scratch_offset =
   Vk_fn.cmd_build_acceleration_structure_nv (arg_command_buffer) (addr arg_info) (arg_instance_data) (arg_instance_offset) (arg_update) (arg_dst) (arg_src) (arg_scratch) (arg_scratch_offset);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_info, arg_instance_data, arg_instance_offset, arg_update, arg_dst, arg_src, arg_scratch, arg_scratch_offset));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkWriteAccelerationStructuresPropertiesKHR.html}[vkWriteAccelerationStructuresPropertiesKHR]} *)
 let write_acceleration_structures_properties_khr arg_device arg_acceleration_structures arg_query_type arg_data_size arg_data arg_stride =
   let array_acceleration_structures = CArray.of_list (AccelerationStructureKHR.t) arg_acceleration_structures in
   let pointer_acceleration_structures = if arg_acceleration_structures = [] then Vk_base.null_ptr (AccelerationStructureKHR.t) else CArray.start array_acceleration_structures in
@@ -2608,34 +2982,40 @@ let write_acceleration_structures_properties_khr arg_device arg_acceleration_str
   check result;
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdTraceRaysKHR.html}[vkCmdTraceRaysKHR]} *)
 let cmd_trace_rays_khr arg_command_buffer arg_raygen_shader_binding_table arg_miss_shader_binding_table arg_hit_shader_binding_table arg_callable_shader_binding_table arg_width arg_height arg_depth =
   Vk_fn.cmd_trace_rays_khr (arg_command_buffer) (addr arg_raygen_shader_binding_table) (addr arg_miss_shader_binding_table) (addr arg_hit_shader_binding_table) (addr arg_callable_shader_binding_table) (arg_width) (arg_height) (arg_depth);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_raygen_shader_binding_table, arg_miss_shader_binding_table, arg_hit_shader_binding_table, arg_callable_shader_binding_table, arg_width, arg_height, arg_depth));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdTraceRaysNV.html}[vkCmdTraceRaysNV]} *)
 let cmd_trace_rays_nv arg_command_buffer arg_raygen_shader_binding_table_buffer arg_raygen_shader_binding_offset arg_miss_shader_binding_table_buffer arg_miss_shader_binding_offset arg_miss_shader_binding_stride arg_hit_shader_binding_table_buffer arg_hit_shader_binding_offset arg_hit_shader_binding_stride arg_callable_shader_binding_table_buffer arg_callable_shader_binding_offset arg_callable_shader_binding_stride arg_width arg_height arg_depth =
   Vk_fn.cmd_trace_rays_nv (arg_command_buffer) (arg_raygen_shader_binding_table_buffer) (arg_raygen_shader_binding_offset) (arg_miss_shader_binding_table_buffer) (arg_miss_shader_binding_offset) (arg_miss_shader_binding_stride) (arg_hit_shader_binding_table_buffer) (arg_hit_shader_binding_offset) (arg_hit_shader_binding_stride) (arg_callable_shader_binding_table_buffer) (arg_callable_shader_binding_offset) (arg_callable_shader_binding_stride) (arg_width) (arg_height) (arg_depth);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_raygen_shader_binding_table_buffer, arg_raygen_shader_binding_offset, arg_miss_shader_binding_table_buffer, arg_miss_shader_binding_offset, arg_miss_shader_binding_stride, arg_hit_shader_binding_table_buffer, arg_hit_shader_binding_offset, arg_hit_shader_binding_stride, arg_callable_shader_binding_table_buffer, arg_callable_shader_binding_offset, arg_callable_shader_binding_stride, arg_width, arg_height, arg_depth));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetRayTracingShaderGroupHandlesKHR.html}[vkGetRayTracingShaderGroupHandlesKHR]} *)
 let get_ray_tracing_shader_group_handles_khr arg_device arg_pipeline arg_first_group arg_group_count arg_data_size arg_data =
   let result = Vk_fn.get_ray_tracing_shader_group_handles_khr (arg_device) (arg_pipeline) (arg_first_group) (arg_group_count) (arg_data_size) (arg_data) in
   ignore (Sys.opaque_identity (arg_device, arg_pipeline, arg_first_group, arg_group_count, arg_data_size, arg_data));
   check result;
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetRayTracingCaptureReplayShaderGroupHandlesKHR.html}[vkGetRayTracingCaptureReplayShaderGroupHandlesKHR]} *)
 let get_ray_tracing_capture_replay_shader_group_handles_khr arg_device arg_pipeline arg_first_group arg_group_count arg_data_size arg_data =
   let result = Vk_fn.get_ray_tracing_capture_replay_shader_group_handles_khr (arg_device) (arg_pipeline) (arg_first_group) (arg_group_count) (arg_data_size) (arg_data) in
   ignore (Sys.opaque_identity (arg_device, arg_pipeline, arg_first_group, arg_group_count, arg_data_size, arg_data));
   check result;
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetAccelerationStructureHandleNV.html}[vkGetAccelerationStructureHandleNV]} *)
 let get_acceleration_structure_handle_nv arg_device arg_acceleration_structure arg_data_size arg_data =
   let result = Vk_fn.get_acceleration_structure_handle_nv (arg_device) (arg_acceleration_structure) (arg_data_size) (arg_data) in
   ignore (Sys.opaque_identity (arg_device, arg_acceleration_structure, arg_data_size, arg_data));
   check result;
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateRayTracingPipelinesNV.html}[vkCreateRayTracingPipelinesNV]} *)
 let create_ray_tracing_pipelines_nv ?allocator:arg_allocator arg_device arg_pipeline_cache arg_create_infos =
   let array_create_infos = CArray.of_list (RayTracingPipelineCreateInfoNV.t) arg_create_infos in
   let pointer_create_infos = if arg_create_infos = [] then Vk_base.null_ptr (RayTracingPipelineCreateInfoNV.t) else CArray.start array_create_infos in
@@ -2646,6 +3026,7 @@ let create_ray_tracing_pipelines_nv ?allocator:arg_allocator arg_device arg_pipe
   check result;
   (result, (CArray.to_list storage))
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateRayTracingPipelinesKHR.html}[vkCreateRayTracingPipelinesKHR]} *)
 let create_ray_tracing_pipelines_khr ?allocator:arg_allocator arg_device arg_deferred_operation arg_pipeline_cache arg_create_infos =
   let array_create_infos = CArray.of_list (RayTracingPipelineCreateInfoKHR.t) arg_create_infos in
   let pointer_create_infos = if arg_create_infos = [] then Vk_base.null_ptr (RayTracingPipelineCreateInfoKHR.t) else CArray.start array_create_infos in
@@ -2656,6 +3037,7 @@ let create_ray_tracing_pipelines_khr ?allocator:arg_allocator arg_device arg_def
   check result;
   (result, (CArray.to_list storage))
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPhysicalDeviceCooperativeMatrixPropertiesNV.html}[vkGetPhysicalDeviceCooperativeMatrixPropertiesNV]} *)
 let get_physical_device_cooperative_matrix_properties_nv arg_physical_device =
   let count = allocate Vk_base.uint32 0 in
   let rec fetch () =
@@ -2674,63 +3056,75 @@ let get_physical_device_cooperative_matrix_properties_nv arg_physical_device =
   ignore (Sys.opaque_identity (arg_physical_device));
   enumeration_result
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdTraceRaysIndirectKHR.html}[vkCmdTraceRaysIndirectKHR]} *)
 let cmd_trace_rays_indirect_khr arg_command_buffer arg_raygen_shader_binding_table arg_miss_shader_binding_table arg_hit_shader_binding_table arg_callable_shader_binding_table arg_indirect_device_address =
   Vk_fn.cmd_trace_rays_indirect_khr (arg_command_buffer) (addr arg_raygen_shader_binding_table) (addr arg_miss_shader_binding_table) (addr arg_hit_shader_binding_table) (addr arg_callable_shader_binding_table) (arg_indirect_device_address);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_raygen_shader_binding_table, arg_miss_shader_binding_table, arg_hit_shader_binding_table, arg_callable_shader_binding_table, arg_indirect_device_address));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdTraceRaysIndirect2KHR.html}[vkCmdTraceRaysIndirect2KHR]} *)
 let cmd_trace_rays_indirect_2_khr arg_command_buffer arg_indirect_device_address =
   Vk_fn.cmd_trace_rays_indirect_2_khr (arg_command_buffer) (arg_indirect_device_address);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_indirect_device_address));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetClusterAccelerationStructureBuildSizesNV.html}[vkGetClusterAccelerationStructureBuildSizesNV]} *)
 let get_cluster_acceleration_structure_build_sizes_nv arg_device arg_info arg_size_info =
   Vk_fn.get_cluster_acceleration_structure_build_sizes_nv (arg_device) (addr arg_info) (addr arg_size_info);
   ignore (Sys.opaque_identity (arg_device, arg_info, arg_size_info));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdBuildClusterAccelerationStructureIndirectNV.html}[vkCmdBuildClusterAccelerationStructureIndirectNV]} *)
 let cmd_build_cluster_acceleration_structure_indirect_nv arg_command_buffer arg_command_infos =
   Vk_fn.cmd_build_cluster_acceleration_structure_indirect_nv (arg_command_buffer) (addr arg_command_infos);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_command_infos));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetDeviceAccelerationStructureCompatibilityKHR.html}[vkGetDeviceAccelerationStructureCompatibilityKHR]} *)
 let get_device_acceleration_structure_compatibility_khr arg_device arg_version_info =
   let output = allocate (AccelerationStructureCompatibilityKHR.t) (AccelerationStructureCompatibilityKHR.of_int 0) in
   Vk_fn.get_device_acceleration_structure_compatibility_khr (arg_device) (addr arg_version_info) (output);
   ignore (Sys.opaque_identity (arg_device, arg_version_info));
   !@ output
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetRayTracingShaderGroupStackSizeKHR.html}[vkGetRayTracingShaderGroupStackSizeKHR]} *)
 let get_ray_tracing_shader_group_stack_size_khr arg_device arg_pipeline arg_group arg_group_shader =
   let call_result = Vk_fn.get_ray_tracing_shader_group_stack_size_khr (arg_device) (arg_pipeline) (arg_group) (arg_group_shader) in
   ignore (Sys.opaque_identity (arg_device, arg_pipeline, arg_group, arg_group_shader));
   call_result
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetRayTracingPipelineStackSizeKHR.html}[vkCmdSetRayTracingPipelineStackSizeKHR]} *)
 let cmd_set_ray_tracing_pipeline_stack_size_khr arg_command_buffer arg_pipeline_stack_size =
   Vk_fn.cmd_set_ray_tracing_pipeline_stack_size_khr (arg_command_buffer) (arg_pipeline_stack_size);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_pipeline_stack_size));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetImageViewHandleNVX.html}[vkGetImageViewHandleNVX]} *)
 let get_image_view_handle_nvx arg_device arg_info =
   let call_result = Vk_fn.get_image_view_handle_nvx (arg_device) (addr arg_info) in
   ignore (Sys.opaque_identity (arg_device, arg_info));
   call_result
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetImageViewHandle64NVX.html}[vkGetImageViewHandle64NVX]} *)
 let get_image_view_handle_64_nvx arg_device arg_info =
   let call_result = Vk_fn.get_image_view_handle_64_nvx (arg_device) (addr arg_info) in
   ignore (Sys.opaque_identity (arg_device, arg_info));
   call_result
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetImageViewAddressNVX.html}[vkGetImageViewAddressNVX]} *)
 let get_image_view_address_nvx arg_device arg_image_view arg_properties =
   let result = Vk_fn.get_image_view_address_nvx (arg_device) (arg_image_view) (addr arg_properties) in
   ignore (Sys.opaque_identity (arg_device, arg_image_view, arg_properties));
   check result;
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetDeviceCombinedImageSamplerIndexNVX.html}[vkGetDeviceCombinedImageSamplerIndexNVX]} *)
 let get_device_combined_image_sampler_index_nvx arg_device arg_image_view_index arg_sampler_index =
   let call_result = Vk_fn.get_device_combined_image_sampler_index_nvx (arg_device) (arg_image_view_index) (arg_sampler_index) in
   ignore (Sys.opaque_identity (arg_device, arg_image_view_index, arg_sampler_index));
   call_result
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPhysicalDeviceSurfacePresentModes2EXT.html}[vkGetPhysicalDeviceSurfacePresentModes2EXT]} *)
 let get_physical_device_surface_present_modes_2_ext arg_physical_device arg_surface_info =
   let count = allocate Vk_base.uint32 0 in
   let rec fetch () =
@@ -2749,6 +3143,7 @@ let get_physical_device_surface_present_modes_2_ext arg_physical_device arg_surf
   ignore (Sys.opaque_identity (arg_physical_device, arg_surface_info));
   enumeration_result
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetDeviceGroupSurfacePresentModes2EXT.html}[vkGetDeviceGroupSurfacePresentModes2EXT]} *)
 let get_device_group_surface_present_modes_2_ext arg_device arg_surface_info =
   let output = allocate (DeviceGroupPresentModeFlagsKHR.t) (DeviceGroupPresentModeFlagsKHR.of_int 0) in
   let result = Vk_fn.get_device_group_surface_present_modes_2_ext (arg_device) (addr arg_surface_info) (output) in
@@ -2756,18 +3151,21 @@ let get_device_group_surface_present_modes_2_ext arg_device arg_surface_info =
   check result;
   !@ output
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkAcquireFullScreenExclusiveModeEXT.html}[vkAcquireFullScreenExclusiveModeEXT]} *)
 let acquire_full_screen_exclusive_mode_ext arg_device arg_swapchain =
   let result = Vk_fn.acquire_full_screen_exclusive_mode_ext (arg_device) (arg_swapchain) in
   ignore (Sys.opaque_identity (arg_device, arg_swapchain));
   check result;
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkReleaseFullScreenExclusiveModeEXT.html}[vkReleaseFullScreenExclusiveModeEXT]} *)
 let release_full_screen_exclusive_mode_ext arg_device arg_swapchain =
   let result = Vk_fn.release_full_screen_exclusive_mode_ext (arg_device) (arg_swapchain) in
   ignore (Sys.opaque_identity (arg_device, arg_swapchain));
   check result;
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkEnumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR.html}[vkEnumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR]} *)
 let enumerate_physical_device_queue_family_performance_query_counters_khr arg_physical_device arg_queue_family_index arg_counter_descriptions =
   let count = allocate Vk_base.uint32 0 in
   let rec fetch () =
@@ -2786,39 +3184,46 @@ let enumerate_physical_device_queue_family_performance_query_counters_khr arg_ph
   ignore (Sys.opaque_identity (arg_physical_device, arg_queue_family_index, arg_counter_descriptions));
   enumeration_result
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPhysicalDeviceQueueFamilyPerformanceQueryPassesKHR.html}[vkGetPhysicalDeviceQueueFamilyPerformanceQueryPassesKHR]} *)
 let get_physical_device_queue_family_performance_query_passes_khr arg_physical_device arg_performance_query_create_info =
   let output = allocate (Vk_base.uint32) (0) in
   Vk_fn.get_physical_device_queue_family_performance_query_passes_khr (arg_physical_device) (addr arg_performance_query_create_info) (output);
   ignore (Sys.opaque_identity (arg_physical_device, arg_performance_query_create_info));
   !@ output
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkAcquireProfilingLockKHR.html}[vkAcquireProfilingLockKHR]} *)
 let acquire_profiling_lock_khr arg_device arg_info =
   let result = Vk_fn.acquire_profiling_lock_khr (arg_device) (addr arg_info) in
   ignore (Sys.opaque_identity (arg_device, arg_info));
   check result;
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkReleaseProfilingLockKHR.html}[vkReleaseProfilingLockKHR]} *)
 let release_profiling_lock_khr arg_device =
   Vk_fn.release_profiling_lock_khr (arg_device);
   ignore (Sys.opaque_identity (arg_device));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetImageDrmFormatModifierPropertiesEXT.html}[vkGetImageDrmFormatModifierPropertiesEXT]} *)
 let get_image_drm_format_modifier_properties_ext arg_device arg_image arg_properties =
   let result = Vk_fn.get_image_drm_format_modifier_properties_ext (arg_device) (arg_image) (addr arg_properties) in
   ignore (Sys.opaque_identity (arg_device, arg_image, arg_properties));
   check result;
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetBufferOpaqueCaptureAddress.html}[vkGetBufferOpaqueCaptureAddress]} *)
 let get_buffer_opaque_capture_address arg_device arg_info =
   let call_result = Vk_fn.get_buffer_opaque_capture_address (arg_device) (addr arg_info) in
   ignore (Sys.opaque_identity (arg_device, arg_info));
   call_result
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetBufferDeviceAddress.html}[vkGetBufferDeviceAddress]} *)
 let get_buffer_device_address arg_device arg_info =
   let call_result = Vk_fn.get_buffer_device_address (arg_device) (addr arg_info) in
   ignore (Sys.opaque_identity (arg_device, arg_info));
   call_result
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateHeadlessSurfaceEXT.html}[vkCreateHeadlessSurfaceEXT]} *)
 let create_headless_surface_ext ?allocator:arg_allocator arg_instance arg_create_info =
   let output = allocate (SurfaceKHR.t) (SurfaceKHR.null) in
   let result = Vk_fn.create_headless_surface_ext (arg_instance) (addr arg_create_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
@@ -2826,6 +3231,7 @@ let create_headless_surface_ext ?allocator:arg_allocator arg_instance arg_create
   check result;
   !@ output
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV.html}[vkGetPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV]} *)
 let get_physical_device_supported_framebuffer_mixed_samples_combinations_nv arg_physical_device =
   let count = allocate Vk_base.uint32 0 in
   let rec fetch () =
@@ -2844,35 +3250,41 @@ let get_physical_device_supported_framebuffer_mixed_samples_combinations_nv arg_
   ignore (Sys.opaque_identity (arg_physical_device));
   enumeration_result
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkInitializePerformanceApiINTEL.html}[vkInitializePerformanceApiINTEL]} *)
 let initialize_performance_api_intel arg_device arg_initialize_info =
   let result = Vk_fn.initialize_performance_api_intel (arg_device) (addr arg_initialize_info) in
   ignore (Sys.opaque_identity (arg_device, arg_initialize_info));
   check result;
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkUninitializePerformanceApiINTEL.html}[vkUninitializePerformanceApiINTEL]} *)
 let uninitialize_performance_api_intel arg_device =
   Vk_fn.uninitialize_performance_api_intel (arg_device);
   ignore (Sys.opaque_identity (arg_device));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetPerformanceMarkerINTEL.html}[vkCmdSetPerformanceMarkerINTEL]} *)
 let cmd_set_performance_marker_intel arg_command_buffer arg_marker_info =
   let result = Vk_fn.cmd_set_performance_marker_intel (arg_command_buffer) (addr arg_marker_info) in
   ignore (Sys.opaque_identity (arg_command_buffer, arg_marker_info));
   check result;
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetPerformanceStreamMarkerINTEL.html}[vkCmdSetPerformanceStreamMarkerINTEL]} *)
 let cmd_set_performance_stream_marker_intel arg_command_buffer arg_marker_info =
   let result = Vk_fn.cmd_set_performance_stream_marker_intel (arg_command_buffer) (addr arg_marker_info) in
   ignore (Sys.opaque_identity (arg_command_buffer, arg_marker_info));
   check result;
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetPerformanceOverrideINTEL.html}[vkCmdSetPerformanceOverrideINTEL]} *)
 let cmd_set_performance_override_intel arg_command_buffer arg_override_info =
   let result = Vk_fn.cmd_set_performance_override_intel (arg_command_buffer) (addr arg_override_info) in
   ignore (Sys.opaque_identity (arg_command_buffer, arg_override_info));
   check result;
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkAcquirePerformanceConfigurationINTEL.html}[vkAcquirePerformanceConfigurationINTEL]} *)
 let acquire_performance_configuration_intel arg_device arg_acquire_info =
   let output = allocate (PerformanceConfigurationINTEL.t) (PerformanceConfigurationINTEL.null) in
   let result = Vk_fn.acquire_performance_configuration_intel (arg_device) (addr arg_acquire_info) (output) in
@@ -2880,18 +3292,21 @@ let acquire_performance_configuration_intel arg_device arg_acquire_info =
   check result;
   !@ output
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkReleasePerformanceConfigurationINTEL.html}[vkReleasePerformanceConfigurationINTEL]} *)
 let release_performance_configuration_intel arg_device arg_configuration =
   let result = Vk_fn.release_performance_configuration_intel (arg_device) (arg_configuration) in
   ignore (Sys.opaque_identity (arg_device, arg_configuration));
   check result;
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkQueueSetPerformanceConfigurationINTEL.html}[vkQueueSetPerformanceConfigurationINTEL]} *)
 let queue_set_performance_configuration_intel arg_queue arg_configuration =
   let result = Vk_fn.queue_set_performance_configuration_intel (arg_queue) (arg_configuration) in
   ignore (Sys.opaque_identity (arg_queue, arg_configuration));
   check result;
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPerformanceParameterINTEL.html}[vkGetPerformanceParameterINTEL]} *)
 let get_performance_parameter_intel arg_device arg_parameter =
   let output = PerformanceValueINTEL.make () in
   let result = Vk_fn.get_performance_parameter_intel (arg_device) (arg_parameter) (addr output) in
@@ -2899,11 +3314,13 @@ let get_performance_parameter_intel arg_device arg_parameter =
   check result;
   output
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetDeviceMemoryOpaqueCaptureAddress.html}[vkGetDeviceMemoryOpaqueCaptureAddress]} *)
 let get_device_memory_opaque_capture_address arg_device arg_info =
   let call_result = Vk_fn.get_device_memory_opaque_capture_address (arg_device) (addr arg_info) in
   ignore (Sys.opaque_identity (arg_device, arg_info));
   call_result
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPipelineExecutablePropertiesKHR.html}[vkGetPipelineExecutablePropertiesKHR]} *)
 let get_pipeline_executable_properties_khr arg_device arg_pipeline_info =
   let count = allocate Vk_base.uint32 0 in
   let rec fetch () =
@@ -2922,6 +3339,7 @@ let get_pipeline_executable_properties_khr arg_device arg_pipeline_info =
   ignore (Sys.opaque_identity (arg_device, arg_pipeline_info));
   enumeration_result
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPipelineExecutableStatisticsKHR.html}[vkGetPipelineExecutableStatisticsKHR]} *)
 let get_pipeline_executable_statistics_khr arg_device arg_executable_info =
   let count = allocate Vk_base.uint32 0 in
   let rec fetch () =
@@ -2940,6 +3358,7 @@ let get_pipeline_executable_statistics_khr arg_device arg_executable_info =
   ignore (Sys.opaque_identity (arg_device, arg_executable_info));
   enumeration_result
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPipelineExecutableInternalRepresentationsKHR.html}[vkGetPipelineExecutableInternalRepresentationsKHR]} *)
 let get_pipeline_executable_internal_representations_khr arg_device arg_executable_info =
   let count = allocate Vk_base.uint32 0 in
   let rec fetch () =
@@ -2958,11 +3377,13 @@ let get_pipeline_executable_internal_representations_khr arg_device arg_executab
   ignore (Sys.opaque_identity (arg_device, arg_executable_info));
   enumeration_result
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetLineStipple.html}[vkCmdSetLineStipple]} *)
 let cmd_set_line_stipple arg_command_buffer arg_line_stipple_factor arg_line_stipple_pattern =
   Vk_fn.cmd_set_line_stipple (arg_command_buffer) (arg_line_stipple_factor) (arg_line_stipple_pattern);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_line_stipple_factor, arg_line_stipple_pattern));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPhysicalDeviceToolProperties.html}[vkGetPhysicalDeviceToolProperties]} *)
 let get_physical_device_tool_properties arg_physical_device =
   let count = allocate Vk_base.uint32 0 in
   let rec fetch () =
@@ -2981,6 +3402,7 @@ let get_physical_device_tool_properties arg_physical_device =
   ignore (Sys.opaque_identity (arg_physical_device));
   enumeration_result
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateAccelerationStructureKHR.html}[vkCreateAccelerationStructureKHR]} *)
 let create_acceleration_structure_khr ?allocator:arg_allocator arg_device arg_create_info =
   let output = allocate (AccelerationStructureKHR.t) (AccelerationStructureKHR.null) in
   let result = Vk_fn.create_acceleration_structure_khr (arg_device) (addr arg_create_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
@@ -2988,6 +3410,7 @@ let create_acceleration_structure_khr ?allocator:arg_allocator arg_device arg_cr
   check result;
   !@ output
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdBuildAccelerationStructuresKHR.html}[vkCmdBuildAccelerationStructuresKHR]} *)
 let cmd_build_acceleration_structures_khr arg_command_buffer arg_infos arg_build_range_infos =
   let array_infos = CArray.of_list (AccelerationStructureBuildGeometryInfoKHR.t) arg_infos in
   let pointer_infos = if arg_infos = [] then Vk_base.null_ptr (AccelerationStructureBuildGeometryInfoKHR.t) else CArray.start array_infos in
@@ -2995,6 +3418,7 @@ let cmd_build_acceleration_structures_khr arg_command_buffer arg_infos arg_build
   ignore (Sys.opaque_identity (arg_command_buffer, arg_infos, array_infos, arg_build_range_infos));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdBuildAccelerationStructuresIndirectKHR.html}[vkCmdBuildAccelerationStructuresIndirectKHR]} *)
 let cmd_build_acceleration_structures_indirect_khr arg_command_buffer arg_infos arg_indirect_device_addresses arg_indirect_strides arg_max_primitive_counts =
   let array_infos = CArray.of_list (AccelerationStructureBuildGeometryInfoKHR.t) arg_infos in
   let pointer_infos = if arg_infos = [] then Vk_base.null_ptr (AccelerationStructureBuildGeometryInfoKHR.t) else CArray.start array_infos in
@@ -3008,6 +3432,7 @@ let cmd_build_acceleration_structures_indirect_khr arg_command_buffer arg_infos 
   ignore (Sys.opaque_identity (arg_command_buffer, arg_infos, array_infos, arg_indirect_device_addresses, array_indirect_device_addresses, arg_indirect_strides, array_indirect_strides, arg_max_primitive_counts));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkBuildAccelerationStructuresKHR.html}[vkBuildAccelerationStructuresKHR]} *)
 let build_acceleration_structures_khr arg_device arg_deferred_operation arg_infos arg_build_range_infos =
   let array_infos = CArray.of_list (AccelerationStructureBuildGeometryInfoKHR.t) arg_infos in
   let pointer_infos = if arg_infos = [] then Vk_base.null_ptr (AccelerationStructureBuildGeometryInfoKHR.t) else CArray.start array_infos in
@@ -3016,11 +3441,13 @@ let build_acceleration_structures_khr arg_device arg_deferred_operation arg_info
   check result;
   result
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetAccelerationStructureDeviceAddressKHR.html}[vkGetAccelerationStructureDeviceAddressKHR]} *)
 let get_acceleration_structure_device_address_khr arg_device arg_info =
   let call_result = Vk_fn.get_acceleration_structure_device_address_khr (arg_device) (addr arg_info) in
   ignore (Sys.opaque_identity (arg_device, arg_info));
   call_result
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateDeferredOperationKHR.html}[vkCreateDeferredOperationKHR]} *)
 let create_deferred_operation_khr ?allocator:arg_allocator arg_device =
   let output = allocate (DeferredOperationKHR.t) (DeferredOperationKHR.null) in
   let result = Vk_fn.create_deferred_operation_khr (arg_device) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
@@ -3028,58 +3455,69 @@ let create_deferred_operation_khr ?allocator:arg_allocator arg_device =
   check result;
   !@ output
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkDestroyDeferredOperationKHR.html}[vkDestroyDeferredOperationKHR]} *)
 let destroy_deferred_operation_khr arg_device arg_operation ?allocator:arg_allocator () =
   Vk_fn.destroy_deferred_operation_khr (arg_device) (arg_operation) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x));
   ignore (Sys.opaque_identity (arg_device, arg_operation, arg_allocator));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetDeferredOperationMaxConcurrencyKHR.html}[vkGetDeferredOperationMaxConcurrencyKHR]} *)
 let get_deferred_operation_max_concurrency_khr arg_device arg_operation =
   let call_result = Vk_fn.get_deferred_operation_max_concurrency_khr (arg_device) (arg_operation) in
   ignore (Sys.opaque_identity (arg_device, arg_operation));
   call_result
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetDeferredOperationResultKHR.html}[vkGetDeferredOperationResultKHR]} *)
 let get_deferred_operation_result_khr arg_device arg_operation =
   let result = Vk_fn.get_deferred_operation_result_khr (arg_device) (arg_operation) in
   ignore (Sys.opaque_identity (arg_device, arg_operation));
   check result;
   result
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkDeferredOperationJoinKHR.html}[vkDeferredOperationJoinKHR]} *)
 let deferred_operation_join_khr arg_device arg_operation =
   let result = Vk_fn.deferred_operation_join_khr (arg_device) (arg_operation) in
   ignore (Sys.opaque_identity (arg_device, arg_operation));
   check result;
   result
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPipelineIndirectMemoryRequirementsNV.html}[vkGetPipelineIndirectMemoryRequirementsNV]} *)
 let get_pipeline_indirect_memory_requirements_nv arg_device arg_create_info arg_memory_requirements =
   Vk_fn.get_pipeline_indirect_memory_requirements_nv (arg_device) (addr arg_create_info) (addr arg_memory_requirements);
   ignore (Sys.opaque_identity (arg_device, arg_create_info, arg_memory_requirements));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPipelineIndirectDeviceAddressNV.html}[vkGetPipelineIndirectDeviceAddressNV]} *)
 let get_pipeline_indirect_device_address_nv arg_device arg_info =
   let call_result = Vk_fn.get_pipeline_indirect_device_address_nv (arg_device) (addr arg_info) in
   ignore (Sys.opaque_identity (arg_device, arg_info));
   call_result
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkAntiLagUpdateAMD.html}[vkAntiLagUpdateAMD]} *)
 let anti_lag_update_amd arg_device arg_data =
   Vk_fn.anti_lag_update_amd (arg_device) (addr arg_data);
   ignore (Sys.opaque_identity (arg_device, arg_data));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetCullMode.html}[vkCmdSetCullMode]} *)
 let cmd_set_cull_mode arg_command_buffer arg_cull_mode =
   Vk_fn.cmd_set_cull_mode (arg_command_buffer) (arg_cull_mode);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_cull_mode));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetFrontFace.html}[vkCmdSetFrontFace]} *)
 let cmd_set_front_face arg_command_buffer arg_front_face =
   Vk_fn.cmd_set_front_face (arg_command_buffer) (arg_front_face);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_front_face));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetPrimitiveTopology.html}[vkCmdSetPrimitiveTopology]} *)
 let cmd_set_primitive_topology arg_command_buffer arg_primitive_topology =
   Vk_fn.cmd_set_primitive_topology (arg_command_buffer) (arg_primitive_topology);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_primitive_topology));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetViewportWithCount.html}[vkCmdSetViewportWithCount]} *)
 let cmd_set_viewport_with_count arg_command_buffer arg_viewports =
   let array_viewports = CArray.of_list (Viewport.t) arg_viewports in
   let pointer_viewports = if arg_viewports = [] then Vk_base.null_ptr (Viewport.t) else CArray.start array_viewports in
@@ -3087,6 +3525,7 @@ let cmd_set_viewport_with_count arg_command_buffer arg_viewports =
   ignore (Sys.opaque_identity (arg_command_buffer, arg_viewports, array_viewports));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetScissorWithCount.html}[vkCmdSetScissorWithCount]} *)
 let cmd_set_scissor_with_count arg_command_buffer arg_scissors =
   let array_scissors = CArray.of_list (Rect2D.t) arg_scissors in
   let pointer_scissors = if arg_scissors = [] then Vk_base.null_ptr (Rect2D.t) else CArray.start array_scissors in
@@ -3094,11 +3533,13 @@ let cmd_set_scissor_with_count arg_command_buffer arg_scissors =
   ignore (Sys.opaque_identity (arg_command_buffer, arg_scissors, array_scissors));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdBindIndexBuffer2.html}[vkCmdBindIndexBuffer2]} *)
 let cmd_bind_index_buffer_2 arg_command_buffer arg_buffer arg_offset arg_size arg_index_type =
   Vk_fn.cmd_bind_index_buffer_2 (arg_command_buffer) (arg_buffer) (arg_offset) (arg_size) (arg_index_type);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_buffer, arg_offset, arg_size, arg_index_type));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdBindVertexBuffers2.html}[vkCmdBindVertexBuffers2]} *)
 let cmd_bind_vertex_buffers_2 arg_command_buffer arg_first_binding arg_buffers arg_offsets arg_sizes arg_strides =
   let array_buffers = CArray.of_list (Buffer.t) arg_buffers in
   let pointer_buffers = if arg_buffers = [] then Vk_base.null_ptr (Buffer.t) else CArray.start array_buffers in
@@ -3115,101 +3556,121 @@ let cmd_bind_vertex_buffers_2 arg_command_buffer arg_first_binding arg_buffers a
   ignore (Sys.opaque_identity (arg_command_buffer, arg_first_binding, arg_buffers, array_buffers, arg_offsets, array_offsets, arg_sizes, array_sizes, arg_strides, array_strides));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetDepthTestEnable.html}[vkCmdSetDepthTestEnable]} *)
 let cmd_set_depth_test_enable arg_command_buffer arg_depth_test_enable =
   Vk_fn.cmd_set_depth_test_enable (arg_command_buffer) (arg_depth_test_enable);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_depth_test_enable));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetDepthWriteEnable.html}[vkCmdSetDepthWriteEnable]} *)
 let cmd_set_depth_write_enable arg_command_buffer arg_depth_write_enable =
   Vk_fn.cmd_set_depth_write_enable (arg_command_buffer) (arg_depth_write_enable);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_depth_write_enable));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetDepthCompareOp.html}[vkCmdSetDepthCompareOp]} *)
 let cmd_set_depth_compare_op arg_command_buffer arg_depth_compare_op =
   Vk_fn.cmd_set_depth_compare_op (arg_command_buffer) (arg_depth_compare_op);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_depth_compare_op));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetDepthBoundsTestEnable.html}[vkCmdSetDepthBoundsTestEnable]} *)
 let cmd_set_depth_bounds_test_enable arg_command_buffer arg_depth_bounds_test_enable =
   Vk_fn.cmd_set_depth_bounds_test_enable (arg_command_buffer) (arg_depth_bounds_test_enable);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_depth_bounds_test_enable));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetStencilTestEnable.html}[vkCmdSetStencilTestEnable]} *)
 let cmd_set_stencil_test_enable arg_command_buffer arg_stencil_test_enable =
   Vk_fn.cmd_set_stencil_test_enable (arg_command_buffer) (arg_stencil_test_enable);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_stencil_test_enable));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetStencilOp.html}[vkCmdSetStencilOp]} *)
 let cmd_set_stencil_op arg_command_buffer arg_face_mask arg_fail_op arg_pass_op arg_depth_fail_op arg_compare_op =
   Vk_fn.cmd_set_stencil_op (arg_command_buffer) (arg_face_mask) (arg_fail_op) (arg_pass_op) (arg_depth_fail_op) (arg_compare_op);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_face_mask, arg_fail_op, arg_pass_op, arg_depth_fail_op, arg_compare_op));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetPatchControlPointsEXT.html}[vkCmdSetPatchControlPointsEXT]} *)
 let cmd_set_patch_control_points_ext arg_command_buffer arg_patch_control_points =
   Vk_fn.cmd_set_patch_control_points_ext (arg_command_buffer) (arg_patch_control_points);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_patch_control_points));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetRasterizerDiscardEnable.html}[vkCmdSetRasterizerDiscardEnable]} *)
 let cmd_set_rasterizer_discard_enable arg_command_buffer arg_rasterizer_discard_enable =
   Vk_fn.cmd_set_rasterizer_discard_enable (arg_command_buffer) (arg_rasterizer_discard_enable);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_rasterizer_discard_enable));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetDepthBiasEnable.html}[vkCmdSetDepthBiasEnable]} *)
 let cmd_set_depth_bias_enable arg_command_buffer arg_depth_bias_enable =
   Vk_fn.cmd_set_depth_bias_enable (arg_command_buffer) (arg_depth_bias_enable);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_depth_bias_enable));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetLogicOpEXT.html}[vkCmdSetLogicOpEXT]} *)
 let cmd_set_logic_op_ext arg_command_buffer arg_logic_op =
   Vk_fn.cmd_set_logic_op_ext (arg_command_buffer) (arg_logic_op);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_logic_op));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetPrimitiveRestartEnable.html}[vkCmdSetPrimitiveRestartEnable]} *)
 let cmd_set_primitive_restart_enable arg_command_buffer arg_primitive_restart_enable =
   Vk_fn.cmd_set_primitive_restart_enable (arg_command_buffer) (arg_primitive_restart_enable);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_primitive_restart_enable));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetTessellationDomainOriginEXT.html}[vkCmdSetTessellationDomainOriginEXT]} *)
 let cmd_set_tessellation_domain_origin_ext arg_command_buffer arg_domain_origin =
   Vk_fn.cmd_set_tessellation_domain_origin_ext (arg_command_buffer) (arg_domain_origin);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_domain_origin));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetDepthClampEnableEXT.html}[vkCmdSetDepthClampEnableEXT]} *)
 let cmd_set_depth_clamp_enable_ext arg_command_buffer arg_depth_clamp_enable =
   Vk_fn.cmd_set_depth_clamp_enable_ext (arg_command_buffer) (arg_depth_clamp_enable);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_depth_clamp_enable));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetPolygonModeEXT.html}[vkCmdSetPolygonModeEXT]} *)
 let cmd_set_polygon_mode_ext arg_command_buffer arg_polygon_mode =
   Vk_fn.cmd_set_polygon_mode_ext (arg_command_buffer) (arg_polygon_mode);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_polygon_mode));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetRasterizationSamplesEXT.html}[vkCmdSetRasterizationSamplesEXT]} *)
 let cmd_set_rasterization_samples_ext arg_command_buffer arg_rasterization_samples =
   Vk_fn.cmd_set_rasterization_samples_ext (arg_command_buffer) (arg_rasterization_samples);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_rasterization_samples));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetSampleMaskEXT.html}[vkCmdSetSampleMaskEXT]} *)
 let cmd_set_sample_mask_ext arg_command_buffer arg_samples arg_sample_mask =
   Vk_fn.cmd_set_sample_mask_ext (arg_command_buffer) (arg_samples) (arg_sample_mask);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_samples, arg_sample_mask));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetAlphaToCoverageEnableEXT.html}[vkCmdSetAlphaToCoverageEnableEXT]} *)
 let cmd_set_alpha_to_coverage_enable_ext arg_command_buffer arg_alpha_to_coverage_enable =
   Vk_fn.cmd_set_alpha_to_coverage_enable_ext (arg_command_buffer) (arg_alpha_to_coverage_enable);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_alpha_to_coverage_enable));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetAlphaToOneEnableEXT.html}[vkCmdSetAlphaToOneEnableEXT]} *)
 let cmd_set_alpha_to_one_enable_ext arg_command_buffer arg_alpha_to_one_enable =
   Vk_fn.cmd_set_alpha_to_one_enable_ext (arg_command_buffer) (arg_alpha_to_one_enable);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_alpha_to_one_enable));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetLogicOpEnableEXT.html}[vkCmdSetLogicOpEnableEXT]} *)
 let cmd_set_logic_op_enable_ext arg_command_buffer arg_logic_op_enable =
   Vk_fn.cmd_set_logic_op_enable_ext (arg_command_buffer) (arg_logic_op_enable);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_logic_op_enable));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetColorBlendEnableEXT.html}[vkCmdSetColorBlendEnableEXT]} *)
 let cmd_set_color_blend_enable_ext arg_command_buffer arg_first_attachment arg_color_blend_enables =
   let array_color_blend_enables = CArray.of_list (Vk_base.bool32) arg_color_blend_enables in
   let pointer_color_blend_enables = if arg_color_blend_enables = [] then Vk_base.null_ptr (Vk_base.bool32) else CArray.start array_color_blend_enables in
@@ -3217,6 +3678,7 @@ let cmd_set_color_blend_enable_ext arg_command_buffer arg_first_attachment arg_c
   ignore (Sys.opaque_identity (arg_command_buffer, arg_first_attachment, arg_color_blend_enables, array_color_blend_enables));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetColorBlendEquationEXT.html}[vkCmdSetColorBlendEquationEXT]} *)
 let cmd_set_color_blend_equation_ext arg_command_buffer arg_first_attachment arg_color_blend_equations =
   let array_color_blend_equations = CArray.of_list (ColorBlendEquationEXT.t) arg_color_blend_equations in
   let pointer_color_blend_equations = if arg_color_blend_equations = [] then Vk_base.null_ptr (ColorBlendEquationEXT.t) else CArray.start array_color_blend_equations in
@@ -3224,6 +3686,7 @@ let cmd_set_color_blend_equation_ext arg_command_buffer arg_first_attachment arg
   ignore (Sys.opaque_identity (arg_command_buffer, arg_first_attachment, arg_color_blend_equations, array_color_blend_equations));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetColorWriteMaskEXT.html}[vkCmdSetColorWriteMaskEXT]} *)
 let cmd_set_color_write_mask_ext arg_command_buffer arg_first_attachment arg_color_write_masks =
   let array_color_write_masks = CArray.of_list (ColorComponentFlags.t) arg_color_write_masks in
   let pointer_color_write_masks = if arg_color_write_masks = [] then Vk_base.null_ptr (ColorComponentFlags.t) else CArray.start array_color_write_masks in
@@ -3231,31 +3694,37 @@ let cmd_set_color_write_mask_ext arg_command_buffer arg_first_attachment arg_col
   ignore (Sys.opaque_identity (arg_command_buffer, arg_first_attachment, arg_color_write_masks, array_color_write_masks));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetRasterizationStreamEXT.html}[vkCmdSetRasterizationStreamEXT]} *)
 let cmd_set_rasterization_stream_ext arg_command_buffer arg_rasterization_stream =
   Vk_fn.cmd_set_rasterization_stream_ext (arg_command_buffer) (arg_rasterization_stream);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_rasterization_stream));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetConservativeRasterizationModeEXT.html}[vkCmdSetConservativeRasterizationModeEXT]} *)
 let cmd_set_conservative_rasterization_mode_ext arg_command_buffer arg_conservative_rasterization_mode =
   Vk_fn.cmd_set_conservative_rasterization_mode_ext (arg_command_buffer) (arg_conservative_rasterization_mode);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_conservative_rasterization_mode));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetExtraPrimitiveOverestimationSizeEXT.html}[vkCmdSetExtraPrimitiveOverestimationSizeEXT]} *)
 let cmd_set_extra_primitive_overestimation_size_ext arg_command_buffer arg_extra_primitive_overestimation_size =
   Vk_fn.cmd_set_extra_primitive_overestimation_size_ext (arg_command_buffer) (arg_extra_primitive_overestimation_size);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_extra_primitive_overestimation_size));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetDepthClipEnableEXT.html}[vkCmdSetDepthClipEnableEXT]} *)
 let cmd_set_depth_clip_enable_ext arg_command_buffer arg_depth_clip_enable =
   Vk_fn.cmd_set_depth_clip_enable_ext (arg_command_buffer) (arg_depth_clip_enable);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_depth_clip_enable));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetSampleLocationsEnableEXT.html}[vkCmdSetSampleLocationsEnableEXT]} *)
 let cmd_set_sample_locations_enable_ext arg_command_buffer arg_sample_locations_enable =
   Vk_fn.cmd_set_sample_locations_enable_ext (arg_command_buffer) (arg_sample_locations_enable);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_sample_locations_enable));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetColorBlendAdvancedEXT.html}[vkCmdSetColorBlendAdvancedEXT]} *)
 let cmd_set_color_blend_advanced_ext arg_command_buffer arg_first_attachment arg_color_blend_advanced =
   let array_color_blend_advanced = CArray.of_list (ColorBlendAdvancedEXT.t) arg_color_blend_advanced in
   let pointer_color_blend_advanced = if arg_color_blend_advanced = [] then Vk_base.null_ptr (ColorBlendAdvancedEXT.t) else CArray.start array_color_blend_advanced in
@@ -3263,31 +3732,37 @@ let cmd_set_color_blend_advanced_ext arg_command_buffer arg_first_attachment arg
   ignore (Sys.opaque_identity (arg_command_buffer, arg_first_attachment, arg_color_blend_advanced, array_color_blend_advanced));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetProvokingVertexModeEXT.html}[vkCmdSetProvokingVertexModeEXT]} *)
 let cmd_set_provoking_vertex_mode_ext arg_command_buffer arg_provoking_vertex_mode =
   Vk_fn.cmd_set_provoking_vertex_mode_ext (arg_command_buffer) (arg_provoking_vertex_mode);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_provoking_vertex_mode));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetLineRasterizationModeEXT.html}[vkCmdSetLineRasterizationModeEXT]} *)
 let cmd_set_line_rasterization_mode_ext arg_command_buffer arg_line_rasterization_mode =
   Vk_fn.cmd_set_line_rasterization_mode_ext (arg_command_buffer) (arg_line_rasterization_mode);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_line_rasterization_mode));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetLineStippleEnableEXT.html}[vkCmdSetLineStippleEnableEXT]} *)
 let cmd_set_line_stipple_enable_ext arg_command_buffer arg_stippled_line_enable =
   Vk_fn.cmd_set_line_stipple_enable_ext (arg_command_buffer) (arg_stippled_line_enable);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_stippled_line_enable));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetDepthClipNegativeOneToOneEXT.html}[vkCmdSetDepthClipNegativeOneToOneEXT]} *)
 let cmd_set_depth_clip_negative_one_to_one_ext arg_command_buffer arg_negative_one_to_one =
   Vk_fn.cmd_set_depth_clip_negative_one_to_one_ext (arg_command_buffer) (arg_negative_one_to_one);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_negative_one_to_one));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetViewportWScalingEnableNV.html}[vkCmdSetViewportWScalingEnableNV]} *)
 let cmd_set_viewport_w_scaling_enable_nv arg_command_buffer arg_viewport_w_scaling_enable =
   Vk_fn.cmd_set_viewport_w_scaling_enable_nv (arg_command_buffer) (arg_viewport_w_scaling_enable);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_viewport_w_scaling_enable));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetViewportSwizzleNV.html}[vkCmdSetViewportSwizzleNV]} *)
 let cmd_set_viewport_swizzle_nv arg_command_buffer arg_first_viewport arg_viewport_swizzles =
   let array_viewport_swizzles = CArray.of_list (ViewportSwizzleNV.t) arg_viewport_swizzles in
   let pointer_viewport_swizzles = if arg_viewport_swizzles = [] then Vk_base.null_ptr (ViewportSwizzleNV.t) else CArray.start array_viewport_swizzles in
@@ -3295,26 +3770,31 @@ let cmd_set_viewport_swizzle_nv arg_command_buffer arg_first_viewport arg_viewpo
   ignore (Sys.opaque_identity (arg_command_buffer, arg_first_viewport, arg_viewport_swizzles, array_viewport_swizzles));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetCoverageToColorEnableNV.html}[vkCmdSetCoverageToColorEnableNV]} *)
 let cmd_set_coverage_to_color_enable_nv arg_command_buffer arg_coverage_to_color_enable =
   Vk_fn.cmd_set_coverage_to_color_enable_nv (arg_command_buffer) (arg_coverage_to_color_enable);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_coverage_to_color_enable));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetCoverageToColorLocationNV.html}[vkCmdSetCoverageToColorLocationNV]} *)
 let cmd_set_coverage_to_color_location_nv arg_command_buffer arg_coverage_to_color_location =
   Vk_fn.cmd_set_coverage_to_color_location_nv (arg_command_buffer) (arg_coverage_to_color_location);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_coverage_to_color_location));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetCoverageModulationModeNV.html}[vkCmdSetCoverageModulationModeNV]} *)
 let cmd_set_coverage_modulation_mode_nv arg_command_buffer arg_coverage_modulation_mode =
   Vk_fn.cmd_set_coverage_modulation_mode_nv (arg_command_buffer) (arg_coverage_modulation_mode);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_coverage_modulation_mode));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetCoverageModulationTableEnableNV.html}[vkCmdSetCoverageModulationTableEnableNV]} *)
 let cmd_set_coverage_modulation_table_enable_nv arg_command_buffer arg_coverage_modulation_table_enable =
   Vk_fn.cmd_set_coverage_modulation_table_enable_nv (arg_command_buffer) (arg_coverage_modulation_table_enable);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_coverage_modulation_table_enable));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetCoverageModulationTableNV.html}[vkCmdSetCoverageModulationTableNV]} *)
 let cmd_set_coverage_modulation_table_nv arg_command_buffer arg_coverage_modulation_table =
   let array_coverage_modulation_table = CArray.of_list (Ctypes.float) arg_coverage_modulation_table in
   let pointer_coverage_modulation_table = if arg_coverage_modulation_table = [] then Vk_base.null_ptr (Ctypes.float) else CArray.start array_coverage_modulation_table in
@@ -3322,21 +3802,25 @@ let cmd_set_coverage_modulation_table_nv arg_command_buffer arg_coverage_modulat
   ignore (Sys.opaque_identity (arg_command_buffer, arg_coverage_modulation_table, array_coverage_modulation_table));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetShadingRateImageEnableNV.html}[vkCmdSetShadingRateImageEnableNV]} *)
 let cmd_set_shading_rate_image_enable_nv arg_command_buffer arg_shading_rate_image_enable =
   Vk_fn.cmd_set_shading_rate_image_enable_nv (arg_command_buffer) (arg_shading_rate_image_enable);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_shading_rate_image_enable));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetCoverageReductionModeNV.html}[vkCmdSetCoverageReductionModeNV]} *)
 let cmd_set_coverage_reduction_mode_nv arg_command_buffer arg_coverage_reduction_mode =
   Vk_fn.cmd_set_coverage_reduction_mode_nv (arg_command_buffer) (arg_coverage_reduction_mode);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_coverage_reduction_mode));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetRepresentativeFragmentTestEnableNV.html}[vkCmdSetRepresentativeFragmentTestEnableNV]} *)
 let cmd_set_representative_fragment_test_enable_nv arg_command_buffer arg_representative_fragment_test_enable =
   Vk_fn.cmd_set_representative_fragment_test_enable_nv (arg_command_buffer) (arg_representative_fragment_test_enable);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_representative_fragment_test_enable));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreatePrivateDataSlot.html}[vkCreatePrivateDataSlot]} *)
 let create_private_data_slot ?allocator:arg_allocator arg_device arg_create_info =
   let output = allocate (PrivateDataSlot.t) (PrivateDataSlot.null) in
   let result = Vk_fn.create_private_data_slot (arg_device) (addr arg_create_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
@@ -3344,58 +3828,69 @@ let create_private_data_slot ?allocator:arg_allocator arg_device arg_create_info
   check result;
   !@ output
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkDestroyPrivateDataSlot.html}[vkDestroyPrivateDataSlot]} *)
 let destroy_private_data_slot arg_device arg_private_data_slot ?allocator:arg_allocator () =
   Vk_fn.destroy_private_data_slot (arg_device) (arg_private_data_slot) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x));
   ignore (Sys.opaque_identity (arg_device, arg_private_data_slot, arg_allocator));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkSetPrivateData.html}[vkSetPrivateData]} *)
 let set_private_data arg_device arg_object_type arg_object_handle arg_private_data_slot arg_data =
   let result = Vk_fn.set_private_data (arg_device) (arg_object_type) (arg_object_handle) (arg_private_data_slot) (arg_data) in
   ignore (Sys.opaque_identity (arg_device, arg_object_type, arg_object_handle, arg_private_data_slot, arg_data));
   check result;
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPrivateData.html}[vkGetPrivateData]} *)
 let get_private_data arg_device arg_object_type arg_object_handle arg_private_data_slot =
   let output = allocate (Vk_base.uint64) (0) in
   Vk_fn.get_private_data (arg_device) (arg_object_type) (arg_object_handle) (arg_private_data_slot) (output);
   ignore (Sys.opaque_identity (arg_device, arg_object_type, arg_object_handle, arg_private_data_slot));
   !@ output
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdCopyBuffer2.html}[vkCmdCopyBuffer2]} *)
 let cmd_copy_buffer_2 arg_command_buffer arg_copy_buffer_info =
   Vk_fn.cmd_copy_buffer_2 (arg_command_buffer) (addr arg_copy_buffer_info);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_copy_buffer_info));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdCopyImage2.html}[vkCmdCopyImage2]} *)
 let cmd_copy_image_2 arg_command_buffer arg_copy_image_info =
   Vk_fn.cmd_copy_image_2 (arg_command_buffer) (addr arg_copy_image_info);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_copy_image_info));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdBlitImage2.html}[vkCmdBlitImage2]} *)
 let cmd_blit_image_2 arg_command_buffer arg_blit_image_info =
   Vk_fn.cmd_blit_image_2 (arg_command_buffer) (addr arg_blit_image_info);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_blit_image_info));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdCopyBufferToImage2.html}[vkCmdCopyBufferToImage2]} *)
 let cmd_copy_buffer_to_image_2 arg_command_buffer arg_copy_buffer_to_image_info =
   Vk_fn.cmd_copy_buffer_to_image_2 (arg_command_buffer) (addr arg_copy_buffer_to_image_info);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_copy_buffer_to_image_info));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdCopyImageToBuffer2.html}[vkCmdCopyImageToBuffer2]} *)
 let cmd_copy_image_to_buffer_2 arg_command_buffer arg_copy_image_to_buffer_info =
   Vk_fn.cmd_copy_image_to_buffer_2 (arg_command_buffer) (addr arg_copy_image_to_buffer_info);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_copy_image_to_buffer_info));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdResolveImage2.html}[vkCmdResolveImage2]} *)
 let cmd_resolve_image_2 arg_command_buffer arg_resolve_image_info =
   Vk_fn.cmd_resolve_image_2 (arg_command_buffer) (addr arg_resolve_image_info);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_resolve_image_info));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetFragmentShadingRateKHR.html}[vkCmdSetFragmentShadingRateKHR]} *)
 let cmd_set_fragment_shading_rate_khr arg_command_buffer arg_fragment_size arg_combiner_ops =
   Vk_fn.cmd_set_fragment_shading_rate_khr (arg_command_buffer) (addr arg_fragment_size) (arg_combiner_ops);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_fragment_size, arg_combiner_ops));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPhysicalDeviceFragmentShadingRatesKHR.html}[vkGetPhysicalDeviceFragmentShadingRatesKHR]} *)
 let get_physical_device_fragment_shading_rates_khr arg_physical_device =
   let count = allocate Vk_base.uint32 0 in
   let rec fetch () =
@@ -3414,16 +3909,19 @@ let get_physical_device_fragment_shading_rates_khr arg_physical_device =
   ignore (Sys.opaque_identity (arg_physical_device));
   enumeration_result
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetFragmentShadingRateEnumNV.html}[vkCmdSetFragmentShadingRateEnumNV]} *)
 let cmd_set_fragment_shading_rate_enum_nv arg_command_buffer arg_shading_rate arg_combiner_ops =
   Vk_fn.cmd_set_fragment_shading_rate_enum_nv (arg_command_buffer) (arg_shading_rate) (arg_combiner_ops);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_shading_rate, arg_combiner_ops));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetAccelerationStructureBuildSizesKHR.html}[vkGetAccelerationStructureBuildSizesKHR]} *)
 let get_acceleration_structure_build_sizes_khr arg_device arg_build_type arg_build_info arg_max_primitive_counts arg_size_info =
   Vk_fn.get_acceleration_structure_build_sizes_khr (arg_device) (arg_build_type) (addr arg_build_info) (arg_max_primitive_counts) (addr arg_size_info);
   ignore (Sys.opaque_identity (arg_device, arg_build_type, arg_build_info, arg_max_primitive_counts, arg_size_info));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetVertexInputEXT.html}[vkCmdSetVertexInputEXT]} *)
 let cmd_set_vertex_input_ext arg_command_buffer arg_vertex_binding_descriptions arg_vertex_attribute_descriptions =
   let array_vertex_binding_descriptions = CArray.of_list (VertexInputBindingDescription2EXT.t) arg_vertex_binding_descriptions in
   let pointer_vertex_binding_descriptions = if arg_vertex_binding_descriptions = [] then Vk_base.null_ptr (VertexInputBindingDescription2EXT.t) else CArray.start array_vertex_binding_descriptions in
@@ -3433,6 +3931,7 @@ let cmd_set_vertex_input_ext arg_command_buffer arg_vertex_binding_descriptions 
   ignore (Sys.opaque_identity (arg_command_buffer, arg_vertex_binding_descriptions, array_vertex_binding_descriptions, arg_vertex_attribute_descriptions, array_vertex_attribute_descriptions));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetColorWriteEnableEXT.html}[vkCmdSetColorWriteEnableEXT]} *)
 let cmd_set_color_write_enable_ext arg_command_buffer arg_color_write_enables =
   let array_color_write_enables = CArray.of_list (Vk_base.bool32) arg_color_write_enables in
   let pointer_color_write_enables = if arg_color_write_enables = [] then Vk_base.null_ptr (Vk_base.bool32) else CArray.start array_color_write_enables in
@@ -3440,16 +3939,19 @@ let cmd_set_color_write_enable_ext arg_command_buffer arg_color_write_enables =
   ignore (Sys.opaque_identity (arg_command_buffer, arg_color_write_enables, array_color_write_enables));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetEvent2.html}[vkCmdSetEvent2]} *)
 let cmd_set_event_2 arg_command_buffer arg_event arg_dependency_info =
   Vk_fn.cmd_set_event_2 (arg_command_buffer) (arg_event) (addr arg_dependency_info);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_event, arg_dependency_info));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdResetEvent2.html}[vkCmdResetEvent2]} *)
 let cmd_reset_event_2 arg_command_buffer arg_event arg_stage_mask =
   Vk_fn.cmd_reset_event_2 (arg_command_buffer) (arg_event) (arg_stage_mask);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_event, arg_stage_mask));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdWaitEvents2.html}[vkCmdWaitEvents2]} *)
 let cmd_wait_events_2 arg_command_buffer arg_events arg_dependency_infos =
   let array_events = CArray.of_list (Event.t) arg_events in
   let pointer_events = if arg_events = [] then Vk_base.null_ptr (Event.t) else CArray.start array_events in
@@ -3460,11 +3962,13 @@ let cmd_wait_events_2 arg_command_buffer arg_events arg_dependency_infos =
   ignore (Sys.opaque_identity (arg_command_buffer, arg_events, array_events, arg_dependency_infos, array_dependency_infos));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdPipelineBarrier2.html}[vkCmdPipelineBarrier2]} *)
 let cmd_pipeline_barrier_2 arg_command_buffer arg_dependency_info =
   Vk_fn.cmd_pipeline_barrier_2 (arg_command_buffer) (addr arg_dependency_info);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_dependency_info));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkQueueSubmit2.html}[vkQueueSubmit2]} *)
 let queue_submit_2 arg_queue arg_submits arg_fence =
   let array_submits = CArray.of_list (SubmitInfo2.t) arg_submits in
   let pointer_submits = if arg_submits = [] then Vk_base.null_ptr (SubmitInfo2.t) else CArray.start array_submits in
@@ -3473,16 +3977,19 @@ let queue_submit_2 arg_queue arg_submits arg_fence =
   check result;
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdWriteTimestamp2.html}[vkCmdWriteTimestamp2]} *)
 let cmd_write_timestamp_2 arg_command_buffer arg_stage arg_query_pool arg_query =
   Vk_fn.cmd_write_timestamp_2 (arg_command_buffer) (arg_stage) (arg_query_pool) (arg_query);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_stage, arg_query_pool, arg_query));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdWriteBufferMarker2AMD.html}[vkCmdWriteBufferMarker2AMD]} *)
 let cmd_write_buffer_marker_2_amd arg_command_buffer arg_stage arg_dst_buffer arg_dst_offset arg_marker =
   Vk_fn.cmd_write_buffer_marker_2_amd (arg_command_buffer) (arg_stage) (arg_dst_buffer) (arg_dst_offset) (arg_marker);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_stage, arg_dst_buffer, arg_dst_offset, arg_marker));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetQueueCheckpointData2NV.html}[vkGetQueueCheckpointData2NV]} *)
 let get_queue_checkpoint_data_2_nv arg_queue =
   let count = allocate Vk_base.uint32 0 in
   let rec fetch () =
@@ -3497,24 +4004,28 @@ let get_queue_checkpoint_data_2_nv arg_queue =
   ignore (Sys.opaque_identity (arg_queue));
   enumeration_result
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCopyMemoryToImage.html}[vkCopyMemoryToImage]} *)
 let copy_memory_to_image arg_device arg_copy_memory_to_image_info =
   let result = Vk_fn.copy_memory_to_image (arg_device) (addr arg_copy_memory_to_image_info) in
   ignore (Sys.opaque_identity (arg_device, arg_copy_memory_to_image_info));
   check result;
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCopyImageToMemory.html}[vkCopyImageToMemory]} *)
 let copy_image_to_memory arg_device arg_copy_image_to_memory_info =
   let result = Vk_fn.copy_image_to_memory (arg_device) (addr arg_copy_image_to_memory_info) in
   ignore (Sys.opaque_identity (arg_device, arg_copy_image_to_memory_info));
   check result;
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCopyImageToImage.html}[vkCopyImageToImage]} *)
 let copy_image_to_image arg_device arg_copy_image_to_image_info =
   let result = Vk_fn.copy_image_to_image (arg_device) (addr arg_copy_image_to_image_info) in
   ignore (Sys.opaque_identity (arg_device, arg_copy_image_to_image_info));
   check result;
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkTransitionImageLayout.html}[vkTransitionImageLayout]} *)
 let transition_image_layout arg_device arg_transitions =
   let array_transitions = CArray.of_list (HostImageLayoutTransitionInfo.t) arg_transitions in
   let pointer_transitions = if arg_transitions = [] then Vk_base.null_ptr (HostImageLayoutTransitionInfo.t) else CArray.start array_transitions in
@@ -3523,12 +4034,14 @@ let transition_image_layout arg_device arg_transitions =
   check result;
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPhysicalDeviceVideoCapabilitiesKHR.html}[vkGetPhysicalDeviceVideoCapabilitiesKHR]} *)
 let get_physical_device_video_capabilities_khr arg_physical_device arg_video_profile arg_capabilities =
   let result = Vk_fn.get_physical_device_video_capabilities_khr (arg_physical_device) (addr arg_video_profile) (addr arg_capabilities) in
   ignore (Sys.opaque_identity (arg_physical_device, arg_video_profile, arg_capabilities));
   check result;
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPhysicalDeviceVideoFormatPropertiesKHR.html}[vkGetPhysicalDeviceVideoFormatPropertiesKHR]} *)
 let get_physical_device_video_format_properties_khr arg_physical_device arg_video_format_info =
   let count = allocate Vk_base.uint32 0 in
   let rec fetch () =
@@ -3547,12 +4060,14 @@ let get_physical_device_video_format_properties_khr arg_physical_device arg_vide
   ignore (Sys.opaque_identity (arg_physical_device, arg_video_format_info));
   enumeration_result
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPhysicalDeviceVideoEncodeQualityLevelPropertiesKHR.html}[vkGetPhysicalDeviceVideoEncodeQualityLevelPropertiesKHR]} *)
 let get_physical_device_video_encode_quality_level_properties_khr arg_physical_device arg_quality_level_info arg_quality_level_properties =
   let result = Vk_fn.get_physical_device_video_encode_quality_level_properties_khr (arg_physical_device) (addr arg_quality_level_info) (addr arg_quality_level_properties) in
   ignore (Sys.opaque_identity (arg_physical_device, arg_quality_level_info, arg_quality_level_properties));
   check result;
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateVideoSessionKHR.html}[vkCreateVideoSessionKHR]} *)
 let create_video_session_khr ?allocator:arg_allocator arg_device arg_create_info =
   let output = allocate (VideoSessionKHR.t) (VideoSessionKHR.null) in
   let result = Vk_fn.create_video_session_khr (arg_device) (addr arg_create_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
@@ -3560,11 +4075,13 @@ let create_video_session_khr ?allocator:arg_allocator arg_device arg_create_info
   check result;
   !@ output
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkDestroyVideoSessionKHR.html}[vkDestroyVideoSessionKHR]} *)
 let destroy_video_session_khr arg_device arg_video_session ?allocator:arg_allocator () =
   Vk_fn.destroy_video_session_khr (arg_device) (arg_video_session) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x));
   ignore (Sys.opaque_identity (arg_device, arg_video_session, arg_allocator));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateVideoSessionParametersKHR.html}[vkCreateVideoSessionParametersKHR]} *)
 let create_video_session_parameters_khr ?allocator:arg_allocator arg_device arg_create_info =
   let output = allocate (VideoSessionParametersKHR.t) (VideoSessionParametersKHR.null) in
   let result = Vk_fn.create_video_session_parameters_khr (arg_device) (addr arg_create_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
@@ -3572,23 +4089,27 @@ let create_video_session_parameters_khr ?allocator:arg_allocator arg_device arg_
   check result;
   !@ output
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkUpdateVideoSessionParametersKHR.html}[vkUpdateVideoSessionParametersKHR]} *)
 let update_video_session_parameters_khr arg_device arg_video_session_parameters arg_update_info =
   let result = Vk_fn.update_video_session_parameters_khr (arg_device) (arg_video_session_parameters) (addr arg_update_info) in
   ignore (Sys.opaque_identity (arg_device, arg_video_session_parameters, arg_update_info));
   check result;
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetEncodedVideoSessionParametersKHR.html}[vkGetEncodedVideoSessionParametersKHR]} *)
 let get_encoded_video_session_parameters_khr arg_device arg_video_session_parameters_info arg_feedback_info arg_data_size arg_data =
   let result = Vk_fn.get_encoded_video_session_parameters_khr (arg_device) (addr arg_video_session_parameters_info) (addr arg_feedback_info) (arg_data_size) (arg_data) in
   ignore (Sys.opaque_identity (arg_device, arg_video_session_parameters_info, arg_feedback_info, arg_data_size, arg_data));
   check result;
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkDestroyVideoSessionParametersKHR.html}[vkDestroyVideoSessionParametersKHR]} *)
 let destroy_video_session_parameters_khr arg_device arg_video_session_parameters ?allocator:arg_allocator () =
   Vk_fn.destroy_video_session_parameters_khr (arg_device) (arg_video_session_parameters) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x));
   ignore (Sys.opaque_identity (arg_device, arg_video_session_parameters, arg_allocator));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetVideoSessionMemoryRequirementsKHR.html}[vkGetVideoSessionMemoryRequirementsKHR]} *)
 let get_video_session_memory_requirements_khr arg_device arg_video_session =
   let count = allocate Vk_base.uint32 0 in
   let rec fetch () =
@@ -3607,6 +4128,7 @@ let get_video_session_memory_requirements_khr arg_device arg_video_session =
   ignore (Sys.opaque_identity (arg_device, arg_video_session));
   enumeration_result
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkBindVideoSessionMemoryKHR.html}[vkBindVideoSessionMemoryKHR]} *)
 let bind_video_session_memory_khr arg_device arg_video_session arg_bind_session_memory_infos =
   let array_bind_session_memory_infos = CArray.of_list (BindVideoSessionMemoryInfoKHR.t) arg_bind_session_memory_infos in
   let pointer_bind_session_memory_infos = if arg_bind_session_memory_infos = [] then Vk_base.null_ptr (BindVideoSessionMemoryInfoKHR.t) else CArray.start array_bind_session_memory_infos in
@@ -3615,31 +4137,37 @@ let bind_video_session_memory_khr arg_device arg_video_session arg_bind_session_
   check result;
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdDecodeVideoKHR.html}[vkCmdDecodeVideoKHR]} *)
 let cmd_decode_video_khr arg_command_buffer arg_decode_info =
   Vk_fn.cmd_decode_video_khr (arg_command_buffer) (addr arg_decode_info);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_decode_info));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdBeginVideoCodingKHR.html}[vkCmdBeginVideoCodingKHR]} *)
 let cmd_begin_video_coding_khr arg_command_buffer arg_begin_info =
   Vk_fn.cmd_begin_video_coding_khr (arg_command_buffer) (addr arg_begin_info);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_begin_info));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdControlVideoCodingKHR.html}[vkCmdControlVideoCodingKHR]} *)
 let cmd_control_video_coding_khr arg_command_buffer arg_coding_control_info =
   Vk_fn.cmd_control_video_coding_khr (arg_command_buffer) (addr arg_coding_control_info);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_coding_control_info));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdEndVideoCodingKHR.html}[vkCmdEndVideoCodingKHR]} *)
 let cmd_end_video_coding_khr arg_command_buffer arg_end_coding_info =
   Vk_fn.cmd_end_video_coding_khr (arg_command_buffer) (addr arg_end_coding_info);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_end_coding_info));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdEncodeVideoKHR.html}[vkCmdEncodeVideoKHR]} *)
 let cmd_encode_video_khr arg_command_buffer arg_encode_info =
   Vk_fn.cmd_encode_video_khr (arg_command_buffer) (addr arg_encode_info);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_encode_info));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdDecompressMemoryNV.html}[vkCmdDecompressMemoryNV]} *)
 let cmd_decompress_memory_nv arg_command_buffer arg_decompress_memory_regions =
   let array_decompress_memory_regions = CArray.of_list (DecompressMemoryRegionNV.t) arg_decompress_memory_regions in
   let pointer_decompress_memory_regions = if arg_decompress_memory_regions = [] then Vk_base.null_ptr (DecompressMemoryRegionNV.t) else CArray.start array_decompress_memory_regions in
@@ -3647,31 +4175,37 @@ let cmd_decompress_memory_nv arg_command_buffer arg_decompress_memory_regions =
   ignore (Sys.opaque_identity (arg_command_buffer, arg_decompress_memory_regions, array_decompress_memory_regions));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdDecompressMemoryIndirectCountNV.html}[vkCmdDecompressMemoryIndirectCountNV]} *)
 let cmd_decompress_memory_indirect_count_nv arg_command_buffer arg_indirect_commands_address arg_indirect_commands_count_address arg_stride =
   Vk_fn.cmd_decompress_memory_indirect_count_nv (arg_command_buffer) (arg_indirect_commands_address) (arg_indirect_commands_count_address) (arg_stride);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_indirect_commands_address, arg_indirect_commands_count_address, arg_stride));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPartitionedAccelerationStructuresBuildSizesNV.html}[vkGetPartitionedAccelerationStructuresBuildSizesNV]} *)
 let get_partitioned_acceleration_structures_build_sizes_nv arg_device arg_info arg_size_info =
   Vk_fn.get_partitioned_acceleration_structures_build_sizes_nv (arg_device) (addr arg_info) (addr arg_size_info);
   ignore (Sys.opaque_identity (arg_device, arg_info, arg_size_info));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdBuildPartitionedAccelerationStructuresNV.html}[vkCmdBuildPartitionedAccelerationStructuresNV]} *)
 let cmd_build_partitioned_acceleration_structures_nv arg_command_buffer arg_build_info =
   Vk_fn.cmd_build_partitioned_acceleration_structures_nv (arg_command_buffer) (addr arg_build_info);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_build_info));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdDecompressMemoryEXT.html}[vkCmdDecompressMemoryEXT]} *)
 let cmd_decompress_memory_ext arg_command_buffer arg_decompress_memory_info_ext =
   Vk_fn.cmd_decompress_memory_ext (arg_command_buffer) (addr arg_decompress_memory_info_ext);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_decompress_memory_info_ext));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdDecompressMemoryIndirectCountEXT.html}[vkCmdDecompressMemoryIndirectCountEXT]} *)
 let cmd_decompress_memory_indirect_count_ext arg_command_buffer arg_decompression_method arg_indirect_commands_address arg_indirect_commands_count_address arg_max_decompression_count arg_stride =
   Vk_fn.cmd_decompress_memory_indirect_count_ext (arg_command_buffer) (arg_decompression_method) (arg_indirect_commands_address) (arg_indirect_commands_count_address) (arg_max_decompression_count) (arg_stride);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_decompression_method, arg_indirect_commands_address, arg_indirect_commands_count_address, arg_max_decompression_count, arg_stride));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateCuModuleNVX.html}[vkCreateCuModuleNVX]} *)
 let create_cu_module_nvx ?allocator:arg_allocator arg_device arg_create_info =
   let output = allocate (CuModuleNVX.t) (CuModuleNVX.null) in
   let result = Vk_fn.create_cu_module_nvx (arg_device) (addr arg_create_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
@@ -3679,6 +4213,7 @@ let create_cu_module_nvx ?allocator:arg_allocator arg_device arg_create_info =
   check result;
   !@ output
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateCuFunctionNVX.html}[vkCreateCuFunctionNVX]} *)
 let create_cu_function_nvx ?allocator:arg_allocator arg_device arg_create_info =
   let output = allocate (CuFunctionNVX.t) (CuFunctionNVX.null) in
   let result = Vk_fn.create_cu_function_nvx (arg_device) (addr arg_create_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
@@ -3686,38 +4221,45 @@ let create_cu_function_nvx ?allocator:arg_allocator arg_device arg_create_info =
   check result;
   !@ output
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkDestroyCuModuleNVX.html}[vkDestroyCuModuleNVX]} *)
 let destroy_cu_module_nvx arg_device arg_module_ ?allocator:arg_allocator () =
   Vk_fn.destroy_cu_module_nvx (arg_device) (arg_module_) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x));
   ignore (Sys.opaque_identity (arg_device, arg_module_, arg_allocator));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkDestroyCuFunctionNVX.html}[vkDestroyCuFunctionNVX]} *)
 let destroy_cu_function_nvx arg_device arg_function_ ?allocator:arg_allocator () =
   Vk_fn.destroy_cu_function_nvx (arg_device) (arg_function_) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x));
   ignore (Sys.opaque_identity (arg_device, arg_function_, arg_allocator));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdCuLaunchKernelNVX.html}[vkCmdCuLaunchKernelNVX]} *)
 let cmd_cu_launch_kernel_nvx arg_command_buffer arg_launch_info =
   Vk_fn.cmd_cu_launch_kernel_nvx (arg_command_buffer) (addr arg_launch_info);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_launch_info));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetDescriptorSetLayoutSizeEXT.html}[vkGetDescriptorSetLayoutSizeEXT]} *)
 let get_descriptor_set_layout_size_ext arg_device arg_layout =
   let output = allocate (Vk_base.device_size) (0) in
   Vk_fn.get_descriptor_set_layout_size_ext (arg_device) (arg_layout) (output);
   ignore (Sys.opaque_identity (arg_device, arg_layout));
   !@ output
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetDescriptorSetLayoutBindingOffsetEXT.html}[vkGetDescriptorSetLayoutBindingOffsetEXT]} *)
 let get_descriptor_set_layout_binding_offset_ext arg_device arg_layout arg_binding =
   let output = allocate (Vk_base.device_size) (0) in
   Vk_fn.get_descriptor_set_layout_binding_offset_ext (arg_device) (arg_layout) (arg_binding) (output);
   ignore (Sys.opaque_identity (arg_device, arg_layout, arg_binding));
   !@ output
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetDescriptorEXT.html}[vkGetDescriptorEXT]} *)
 let get_descriptor_ext arg_device arg_descriptor_info arg_data_size arg_descriptor =
   Vk_fn.get_descriptor_ext (arg_device) (addr arg_descriptor_info) (arg_data_size) (arg_descriptor);
   ignore (Sys.opaque_identity (arg_device, arg_descriptor_info, arg_data_size, arg_descriptor));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdBindDescriptorBuffersEXT.html}[vkCmdBindDescriptorBuffersEXT]} *)
 let cmd_bind_descriptor_buffers_ext arg_command_buffer arg_binding_infos =
   let array_binding_infos = CArray.of_list (DescriptorBufferBindingInfoEXT.t) arg_binding_infos in
   let pointer_binding_infos = if arg_binding_infos = [] then Vk_base.null_ptr (DescriptorBufferBindingInfoEXT.t) else CArray.start array_binding_infos in
@@ -3725,6 +4267,7 @@ let cmd_bind_descriptor_buffers_ext arg_command_buffer arg_binding_infos =
   ignore (Sys.opaque_identity (arg_command_buffer, arg_binding_infos, array_binding_infos));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetDescriptorBufferOffsetsEXT.html}[vkCmdSetDescriptorBufferOffsetsEXT]} *)
 let cmd_set_descriptor_buffer_offsets_ext arg_command_buffer arg_pipeline_bind_point arg_layout arg_first_set arg_buffer_indices arg_offsets =
   let array_buffer_indices = CArray.of_list (Vk_base.uint32) arg_buffer_indices in
   let pointer_buffer_indices = if arg_buffer_indices = [] then Vk_base.null_ptr (Vk_base.uint32) else CArray.start array_buffer_indices in
@@ -3735,70 +4278,82 @@ let cmd_set_descriptor_buffer_offsets_ext arg_command_buffer arg_pipeline_bind_p
   ignore (Sys.opaque_identity (arg_command_buffer, arg_pipeline_bind_point, arg_layout, arg_first_set, arg_buffer_indices, array_buffer_indices, arg_offsets, array_offsets));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdBindDescriptorBufferEmbeddedSamplersEXT.html}[vkCmdBindDescriptorBufferEmbeddedSamplersEXT]} *)
 let cmd_bind_descriptor_buffer_embedded_samplers_ext arg_command_buffer arg_pipeline_bind_point arg_layout arg_set =
   Vk_fn.cmd_bind_descriptor_buffer_embedded_samplers_ext (arg_command_buffer) (arg_pipeline_bind_point) (arg_layout) (arg_set);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_pipeline_bind_point, arg_layout, arg_set));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetBufferOpaqueCaptureDescriptorDataEXT.html}[vkGetBufferOpaqueCaptureDescriptorDataEXT]} *)
 let get_buffer_opaque_capture_descriptor_data_ext arg_device arg_info arg_data =
   let result = Vk_fn.get_buffer_opaque_capture_descriptor_data_ext (arg_device) (addr arg_info) (arg_data) in
   ignore (Sys.opaque_identity (arg_device, arg_info, arg_data));
   check result;
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetImageOpaqueCaptureDescriptorDataEXT.html}[vkGetImageOpaqueCaptureDescriptorDataEXT]} *)
 let get_image_opaque_capture_descriptor_data_ext arg_device arg_info arg_data =
   let result = Vk_fn.get_image_opaque_capture_descriptor_data_ext (arg_device) (addr arg_info) (arg_data) in
   ignore (Sys.opaque_identity (arg_device, arg_info, arg_data));
   check result;
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetImageViewOpaqueCaptureDescriptorDataEXT.html}[vkGetImageViewOpaqueCaptureDescriptorDataEXT]} *)
 let get_image_view_opaque_capture_descriptor_data_ext arg_device arg_info arg_data =
   let result = Vk_fn.get_image_view_opaque_capture_descriptor_data_ext (arg_device) (addr arg_info) (arg_data) in
   ignore (Sys.opaque_identity (arg_device, arg_info, arg_data));
   check result;
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetSamplerOpaqueCaptureDescriptorDataEXT.html}[vkGetSamplerOpaqueCaptureDescriptorDataEXT]} *)
 let get_sampler_opaque_capture_descriptor_data_ext arg_device arg_info arg_data =
   let result = Vk_fn.get_sampler_opaque_capture_descriptor_data_ext (arg_device) (addr arg_info) (arg_data) in
   ignore (Sys.opaque_identity (arg_device, arg_info, arg_data));
   check result;
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetAccelerationStructureOpaqueCaptureDescriptorDataEXT.html}[vkGetAccelerationStructureOpaqueCaptureDescriptorDataEXT]} *)
 let get_acceleration_structure_opaque_capture_descriptor_data_ext arg_device arg_info arg_data =
   let result = Vk_fn.get_acceleration_structure_opaque_capture_descriptor_data_ext (arg_device) (addr arg_info) (arg_data) in
   ignore (Sys.opaque_identity (arg_device, arg_info, arg_data));
   check result;
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkSetDeviceMemoryPriorityEXT.html}[vkSetDeviceMemoryPriorityEXT]} *)
 let set_device_memory_priority_ext arg_device arg_memory arg_priority =
   Vk_fn.set_device_memory_priority_ext (arg_device) (arg_memory) (arg_priority);
   ignore (Sys.opaque_identity (arg_device, arg_memory, arg_priority));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkAcquireDrmDisplayEXT.html}[vkAcquireDrmDisplayEXT]} *)
 let acquire_drm_display_ext arg_physical_device arg_drm_fd arg_display =
   let result = Vk_fn.acquire_drm_display_ext (arg_physical_device) (arg_drm_fd) (arg_display) in
   ignore (Sys.opaque_identity (arg_physical_device, arg_drm_fd, arg_display));
   check result;
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetDrmDisplayEXT.html}[vkGetDrmDisplayEXT]} *)
 let get_drm_display_ext arg_physical_device arg_drm_fd arg_connector_id arg_display =
   let result = Vk_fn.get_drm_display_ext (arg_physical_device) (arg_drm_fd) (arg_connector_id) (arg_display) in
   ignore (Sys.opaque_identity (arg_physical_device, arg_drm_fd, arg_connector_id, arg_display));
   check result;
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkWaitForPresent2KHR.html}[vkWaitForPresent2KHR]} *)
 let wait_for_present_2_khr arg_device arg_swapchain arg_present_wait_2_info =
   let result = Vk_fn.wait_for_present_2_khr (arg_device) (arg_swapchain) (addr arg_present_wait_2_info) in
   ignore (Sys.opaque_identity (arg_device, arg_swapchain, arg_present_wait_2_info));
   check result;
   result
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkWaitForPresentKHR.html}[vkWaitForPresentKHR]} *)
 let wait_for_present_khr arg_device arg_swapchain arg_present_id arg_timeout =
   let result = Vk_fn.wait_for_present_khr (arg_device) (arg_swapchain) (arg_present_id) (arg_timeout) in
   ignore (Sys.opaque_identity (arg_device, arg_swapchain, arg_present_id, arg_timeout));
   check result;
   result
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateBufferCollectionFUCHSIA.html}[vkCreateBufferCollectionFUCHSIA]} *)
 let create_buffer_collection_fuchsia ?allocator:arg_allocator arg_device arg_create_info =
   let output = allocate (BufferCollectionFUCHSIA.t) (BufferCollectionFUCHSIA.null) in
   let result = Vk_fn.create_buffer_collection_fuchsia (arg_device) (addr arg_create_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
@@ -3806,29 +4361,34 @@ let create_buffer_collection_fuchsia ?allocator:arg_allocator arg_device arg_cre
   check result;
   !@ output
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkSetBufferCollectionBufferConstraintsFUCHSIA.html}[vkSetBufferCollectionBufferConstraintsFUCHSIA]} *)
 let set_buffer_collection_buffer_constraints_fuchsia arg_device arg_collection arg_buffer_constraints_info =
   let result = Vk_fn.set_buffer_collection_buffer_constraints_fuchsia (arg_device) (arg_collection) (addr arg_buffer_constraints_info) in
   ignore (Sys.opaque_identity (arg_device, arg_collection, arg_buffer_constraints_info));
   check result;
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkSetBufferCollectionImageConstraintsFUCHSIA.html}[vkSetBufferCollectionImageConstraintsFUCHSIA]} *)
 let set_buffer_collection_image_constraints_fuchsia arg_device arg_collection arg_image_constraints_info =
   let result = Vk_fn.set_buffer_collection_image_constraints_fuchsia (arg_device) (arg_collection) (addr arg_image_constraints_info) in
   ignore (Sys.opaque_identity (arg_device, arg_collection, arg_image_constraints_info));
   check result;
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkDestroyBufferCollectionFUCHSIA.html}[vkDestroyBufferCollectionFUCHSIA]} *)
 let destroy_buffer_collection_fuchsia arg_device arg_collection ?allocator:arg_allocator () =
   Vk_fn.destroy_buffer_collection_fuchsia (arg_device) (arg_collection) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x));
   ignore (Sys.opaque_identity (arg_device, arg_collection, arg_allocator));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetBufferCollectionPropertiesFUCHSIA.html}[vkGetBufferCollectionPropertiesFUCHSIA]} *)
 let get_buffer_collection_properties_fuchsia arg_device arg_collection arg_properties =
   let result = Vk_fn.get_buffer_collection_properties_fuchsia (arg_device) (arg_collection) (addr arg_properties) in
   ignore (Sys.opaque_identity (arg_device, arg_collection, arg_properties));
   check result;
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateCudaModuleNV.html}[vkCreateCudaModuleNV]} *)
 let create_cuda_module_nv ?allocator:arg_allocator arg_device arg_create_info =
   let output = allocate (CudaModuleNV.t) (CudaModuleNV.null) in
   let result = Vk_fn.create_cuda_module_nv (arg_device) (addr arg_create_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
@@ -3836,12 +4396,14 @@ let create_cuda_module_nv ?allocator:arg_allocator arg_device arg_create_info =
   check result;
   !@ output
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetCudaModuleCacheNV.html}[vkGetCudaModuleCacheNV]} *)
 let get_cuda_module_cache_nv arg_device arg_module_ arg_cache_size arg_cache_data =
   let result = Vk_fn.get_cuda_module_cache_nv (arg_device) (arg_module_) (arg_cache_size) (arg_cache_data) in
   ignore (Sys.opaque_identity (arg_device, arg_module_, arg_cache_size, arg_cache_data));
   check result;
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateCudaFunctionNV.html}[vkCreateCudaFunctionNV]} *)
 let create_cuda_function_nv ?allocator:arg_allocator arg_device arg_create_info =
   let output = allocate (CudaFunctionNV.t) (CudaFunctionNV.null) in
   let result = Vk_fn.create_cuda_function_nv (arg_device) (addr arg_create_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
@@ -3849,47 +4411,56 @@ let create_cuda_function_nv ?allocator:arg_allocator arg_device arg_create_info 
   check result;
   !@ output
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkDestroyCudaModuleNV.html}[vkDestroyCudaModuleNV]} *)
 let destroy_cuda_module_nv arg_device arg_module_ ?allocator:arg_allocator () =
   Vk_fn.destroy_cuda_module_nv (arg_device) (arg_module_) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x));
   ignore (Sys.opaque_identity (arg_device, arg_module_, arg_allocator));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkDestroyCudaFunctionNV.html}[vkDestroyCudaFunctionNV]} *)
 let destroy_cuda_function_nv arg_device arg_function_ ?allocator:arg_allocator () =
   Vk_fn.destroy_cuda_function_nv (arg_device) (arg_function_) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x));
   ignore (Sys.opaque_identity (arg_device, arg_function_, arg_allocator));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdCudaLaunchKernelNV.html}[vkCmdCudaLaunchKernelNV]} *)
 let cmd_cuda_launch_kernel_nv arg_command_buffer arg_launch_info =
   Vk_fn.cmd_cuda_launch_kernel_nv (arg_command_buffer) (addr arg_launch_info);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_launch_info));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdBeginRendering.html}[vkCmdBeginRendering]} *)
 let cmd_begin_rendering arg_command_buffer arg_rendering_info =
   Vk_fn.cmd_begin_rendering (arg_command_buffer) (addr arg_rendering_info);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_rendering_info));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdEndRendering.html}[vkCmdEndRendering]} *)
 let cmd_end_rendering arg_command_buffer =
   Vk_fn.cmd_end_rendering (arg_command_buffer);
   ignore (Sys.opaque_identity (arg_command_buffer));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdEndRendering2KHR.html}[vkCmdEndRendering2KHR]} *)
 let cmd_end_rendering_2_khr arg_command_buffer arg_rendering_end_info =
   Vk_fn.cmd_end_rendering_2_khr (arg_command_buffer) (addr arg_rendering_end_info);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_rendering_end_info));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetDescriptorSetLayoutHostMappingInfoVALVE.html}[vkGetDescriptorSetLayoutHostMappingInfoVALVE]} *)
 let get_descriptor_set_layout_host_mapping_info_valve arg_device arg_binding_reference arg_host_mapping =
   Vk_fn.get_descriptor_set_layout_host_mapping_info_valve (arg_device) (addr arg_binding_reference) (addr arg_host_mapping);
   ignore (Sys.opaque_identity (arg_device, arg_binding_reference, arg_host_mapping));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetDescriptorSetHostMappingVALVE.html}[vkGetDescriptorSetHostMappingVALVE]} *)
 let get_descriptor_set_host_mapping_valve arg_device arg_descriptor_set =
   let output = allocate (ptr (Ctypes.void)) (Vk_base.null_ptr (Ctypes.void)) in
   Vk_fn.get_descriptor_set_host_mapping_valve (arg_device) (arg_descriptor_set) (output);
   ignore (Sys.opaque_identity (arg_device, arg_descriptor_set));
   !@ output
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateMicromapEXT.html}[vkCreateMicromapEXT]} *)
 let create_micromap_ext ?allocator:arg_allocator arg_device arg_create_info =
   let output = allocate (MicromapEXT.t) (MicromapEXT.null) in
   let result = Vk_fn.create_micromap_ext (arg_device) (addr arg_create_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
@@ -3897,6 +4468,7 @@ let create_micromap_ext ?allocator:arg_allocator arg_device arg_create_info =
   check result;
   !@ output
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdBuildMicromapsEXT.html}[vkCmdBuildMicromapsEXT]} *)
 let cmd_build_micromaps_ext arg_command_buffer arg_infos =
   let array_infos = CArray.of_list (MicromapBuildInfoEXT.t) arg_infos in
   let pointer_infos = if arg_infos = [] then Vk_base.null_ptr (MicromapBuildInfoEXT.t) else CArray.start array_infos in
@@ -3904,6 +4476,7 @@ let cmd_build_micromaps_ext arg_command_buffer arg_infos =
   ignore (Sys.opaque_identity (arg_command_buffer, arg_infos, array_infos));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkBuildMicromapsEXT.html}[vkBuildMicromapsEXT]} *)
 let build_micromaps_ext arg_device arg_deferred_operation arg_infos =
   let array_infos = CArray.of_list (MicromapBuildInfoEXT.t) arg_infos in
   let pointer_infos = if arg_infos = [] then Vk_base.null_ptr (MicromapBuildInfoEXT.t) else CArray.start array_infos in
@@ -3912,44 +4485,52 @@ let build_micromaps_ext arg_device arg_deferred_operation arg_infos =
   check result;
   result
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkDestroyMicromapEXT.html}[vkDestroyMicromapEXT]} *)
 let destroy_micromap_ext arg_device arg_micromap ?allocator:arg_allocator () =
   Vk_fn.destroy_micromap_ext (arg_device) (arg_micromap) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x));
   ignore (Sys.opaque_identity (arg_device, arg_micromap, arg_allocator));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdCopyMicromapEXT.html}[vkCmdCopyMicromapEXT]} *)
 let cmd_copy_micromap_ext arg_command_buffer arg_info =
   Vk_fn.cmd_copy_micromap_ext (arg_command_buffer) (addr arg_info);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_info));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCopyMicromapEXT.html}[vkCopyMicromapEXT]} *)
 let copy_micromap_ext arg_device arg_deferred_operation arg_info =
   let result = Vk_fn.copy_micromap_ext (arg_device) (arg_deferred_operation) (addr arg_info) in
   ignore (Sys.opaque_identity (arg_device, arg_deferred_operation, arg_info));
   check result;
   result
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdCopyMicromapToMemoryEXT.html}[vkCmdCopyMicromapToMemoryEXT]} *)
 let cmd_copy_micromap_to_memory_ext arg_command_buffer arg_info =
   Vk_fn.cmd_copy_micromap_to_memory_ext (arg_command_buffer) (addr arg_info);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_info));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCopyMicromapToMemoryEXT.html}[vkCopyMicromapToMemoryEXT]} *)
 let copy_micromap_to_memory_ext arg_device arg_deferred_operation arg_info =
   let result = Vk_fn.copy_micromap_to_memory_ext (arg_device) (arg_deferred_operation) (addr arg_info) in
   ignore (Sys.opaque_identity (arg_device, arg_deferred_operation, arg_info));
   check result;
   result
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdCopyMemoryToMicromapEXT.html}[vkCmdCopyMemoryToMicromapEXT]} *)
 let cmd_copy_memory_to_micromap_ext arg_command_buffer arg_info =
   Vk_fn.cmd_copy_memory_to_micromap_ext (arg_command_buffer) (addr arg_info);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_info));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCopyMemoryToMicromapEXT.html}[vkCopyMemoryToMicromapEXT]} *)
 let copy_memory_to_micromap_ext arg_device arg_deferred_operation arg_info =
   let result = Vk_fn.copy_memory_to_micromap_ext (arg_device) (arg_deferred_operation) (addr arg_info) in
   ignore (Sys.opaque_identity (arg_device, arg_deferred_operation, arg_info));
   check result;
   result
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdWriteMicromapsPropertiesEXT.html}[vkCmdWriteMicromapsPropertiesEXT]} *)
 let cmd_write_micromaps_properties_ext arg_command_buffer arg_micromaps arg_query_type arg_query_pool arg_first_query =
   let array_micromaps = CArray.of_list (MicromapEXT.t) arg_micromaps in
   let pointer_micromaps = if arg_micromaps = [] then Vk_base.null_ptr (MicromapEXT.t) else CArray.start array_micromaps in
@@ -3957,6 +4538,7 @@ let cmd_write_micromaps_properties_ext arg_command_buffer arg_micromaps arg_quer
   ignore (Sys.opaque_identity (arg_command_buffer, arg_micromaps, array_micromaps, arg_query_type, arg_query_pool, arg_first_query));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkWriteMicromapsPropertiesEXT.html}[vkWriteMicromapsPropertiesEXT]} *)
 let write_micromaps_properties_ext arg_device arg_micromaps arg_query_type arg_data_size arg_data arg_stride =
   let array_micromaps = CArray.of_list (MicromapEXT.t) arg_micromaps in
   let pointer_micromaps = if arg_micromaps = [] then Vk_base.null_ptr (MicromapEXT.t) else CArray.start array_micromaps in
@@ -3965,48 +4547,57 @@ let write_micromaps_properties_ext arg_device arg_micromaps arg_query_type arg_d
   check result;
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetDeviceMicromapCompatibilityEXT.html}[vkGetDeviceMicromapCompatibilityEXT]} *)
 let get_device_micromap_compatibility_ext arg_device arg_version_info =
   let output = allocate (AccelerationStructureCompatibilityKHR.t) (AccelerationStructureCompatibilityKHR.of_int 0) in
   Vk_fn.get_device_micromap_compatibility_ext (arg_device) (addr arg_version_info) (output);
   ignore (Sys.opaque_identity (arg_device, arg_version_info));
   !@ output
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetMicromapBuildSizesEXT.html}[vkGetMicromapBuildSizesEXT]} *)
 let get_micromap_build_sizes_ext arg_device arg_build_type arg_build_info arg_size_info =
   Vk_fn.get_micromap_build_sizes_ext (arg_device) (arg_build_type) (addr arg_build_info) (addr arg_size_info);
   ignore (Sys.opaque_identity (arg_device, arg_build_type, arg_build_info, arg_size_info));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetShaderModuleIdentifierEXT.html}[vkGetShaderModuleIdentifierEXT]} *)
 let get_shader_module_identifier_ext arg_device arg_shader_module arg_identifier =
   Vk_fn.get_shader_module_identifier_ext (arg_device) (arg_shader_module) (addr arg_identifier);
   ignore (Sys.opaque_identity (arg_device, arg_shader_module, arg_identifier));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetShaderModuleCreateInfoIdentifierEXT.html}[vkGetShaderModuleCreateInfoIdentifierEXT]} *)
 let get_shader_module_create_info_identifier_ext arg_device arg_create_info arg_identifier =
   Vk_fn.get_shader_module_create_info_identifier_ext (arg_device) (addr arg_create_info) (addr arg_identifier);
   ignore (Sys.opaque_identity (arg_device, arg_create_info, arg_identifier));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetImageSubresourceLayout2.html}[vkGetImageSubresourceLayout2]} *)
 let get_image_subresource_layout_2 arg_device arg_image arg_subresource arg_layout =
   Vk_fn.get_image_subresource_layout_2 (arg_device) (arg_image) (addr arg_subresource) (addr arg_layout);
   ignore (Sys.opaque_identity (arg_device, arg_image, arg_subresource, arg_layout));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPipelinePropertiesEXT.html}[vkGetPipelinePropertiesEXT]} *)
 let get_pipeline_properties_ext arg_device arg_pipeline_info arg_pipeline_properties =
   let result = Vk_fn.get_pipeline_properties_ext (arg_device) (addr arg_pipeline_info) (addr arg_pipeline_properties) in
   ignore (Sys.opaque_identity (arg_device, arg_pipeline_info, arg_pipeline_properties));
   check result;
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkExportMetalObjectsEXT.html}[vkExportMetalObjectsEXT]} *)
 let export_metal_objects_ext arg_device arg_metal_objects_info =
   Vk_fn.export_metal_objects_ext (arg_device) (addr arg_metal_objects_info);
   ignore (Sys.opaque_identity (arg_device, arg_metal_objects_info));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdBindTileMemoryQCOM.html}[vkCmdBindTileMemoryQCOM]} *)
 let cmd_bind_tile_memory_qcom arg_command_buffer arg_tile_memory_bind_info =
   Vk_fn.cmd_bind_tile_memory_qcom (arg_command_buffer) (addr arg_tile_memory_bind_info);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_tile_memory_bind_info));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetFramebufferTilePropertiesQCOM.html}[vkGetFramebufferTilePropertiesQCOM]} *)
 let get_framebuffer_tile_properties_qcom arg_device arg_framebuffer =
   let count = allocate Vk_base.uint32 0 in
   let rec fetch () =
@@ -4025,12 +4616,14 @@ let get_framebuffer_tile_properties_qcom arg_device arg_framebuffer =
   ignore (Sys.opaque_identity (arg_device, arg_framebuffer));
   enumeration_result
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetDynamicRenderingTilePropertiesQCOM.html}[vkGetDynamicRenderingTilePropertiesQCOM]} *)
 let get_dynamic_rendering_tile_properties_qcom arg_device arg_rendering_info arg_properties =
   let result = Vk_fn.get_dynamic_rendering_tile_properties_qcom (arg_device) (addr arg_rendering_info) (addr arg_properties) in
   ignore (Sys.opaque_identity (arg_device, arg_rendering_info, arg_properties));
   check result;
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPhysicalDeviceOpticalFlowImageFormatsNV.html}[vkGetPhysicalDeviceOpticalFlowImageFormatsNV]} *)
 let get_physical_device_optical_flow_image_formats_nv arg_physical_device arg_optical_flow_image_format_info =
   let count = allocate Vk_base.uint32 0 in
   let rec fetch () =
@@ -4049,6 +4642,7 @@ let get_physical_device_optical_flow_image_formats_nv arg_physical_device arg_op
   ignore (Sys.opaque_identity (arg_physical_device, arg_optical_flow_image_format_info));
   enumeration_result
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateOpticalFlowSessionNV.html}[vkCreateOpticalFlowSessionNV]} *)
 let create_optical_flow_session_nv ?allocator:arg_allocator arg_device arg_create_info =
   let output = allocate (OpticalFlowSessionNV.t) (OpticalFlowSessionNV.null) in
   let result = Vk_fn.create_optical_flow_session_nv (arg_device) (addr arg_create_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
@@ -4056,28 +4650,33 @@ let create_optical_flow_session_nv ?allocator:arg_allocator arg_device arg_creat
   check result;
   !@ output
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkDestroyOpticalFlowSessionNV.html}[vkDestroyOpticalFlowSessionNV]} *)
 let destroy_optical_flow_session_nv arg_device arg_session ?allocator:arg_allocator () =
   Vk_fn.destroy_optical_flow_session_nv (arg_device) (arg_session) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x));
   ignore (Sys.opaque_identity (arg_device, arg_session, arg_allocator));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkBindOpticalFlowSessionImageNV.html}[vkBindOpticalFlowSessionImageNV]} *)
 let bind_optical_flow_session_image_nv arg_device arg_session arg_binding_point arg_view arg_layout =
   let result = Vk_fn.bind_optical_flow_session_image_nv (arg_device) (arg_session) (arg_binding_point) (arg_view) (arg_layout) in
   ignore (Sys.opaque_identity (arg_device, arg_session, arg_binding_point, arg_view, arg_layout));
   check result;
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdOpticalFlowExecuteNV.html}[vkCmdOpticalFlowExecuteNV]} *)
 let cmd_optical_flow_execute_nv arg_command_buffer arg_session arg_execute_info =
   Vk_fn.cmd_optical_flow_execute_nv (arg_command_buffer) (arg_session) (addr arg_execute_info);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_session, arg_execute_info));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetDeviceFaultInfoEXT.html}[vkGetDeviceFaultInfoEXT]} *)
 let get_device_fault_info_ext arg_device arg_fault_counts arg_fault_info =
   let result = Vk_fn.get_device_fault_info_ext (arg_device) (addr arg_fault_counts) (addr arg_fault_info) in
   ignore (Sys.opaque_identity (arg_device, arg_fault_counts, arg_fault_info));
   check result;
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetDeviceFaultReportsKHR.html}[vkGetDeviceFaultReportsKHR]} *)
 let get_device_fault_reports_khr arg_device arg_timeout =
   let count = allocate Vk_base.uint32 0 in
   let rec fetch () =
@@ -4096,28 +4695,33 @@ let get_device_fault_reports_khr arg_device arg_timeout =
   ignore (Sys.opaque_identity (arg_device, arg_timeout));
   enumeration_result
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetDeviceFaultDebugInfoKHR.html}[vkGetDeviceFaultDebugInfoKHR]} *)
 let get_device_fault_debug_info_khr arg_device arg_debug_info =
   let result = Vk_fn.get_device_fault_debug_info_khr (arg_device) (addr arg_debug_info) in
   ignore (Sys.opaque_identity (arg_device, arg_debug_info));
   check result;
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetDepthBias2EXT.html}[vkCmdSetDepthBias2EXT]} *)
 let cmd_set_depth_bias_2_ext arg_command_buffer arg_depth_bias_info =
   Vk_fn.cmd_set_depth_bias_2_ext (arg_command_buffer) (addr arg_depth_bias_info);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_depth_bias_info));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkReleaseSwapchainImagesKHR.html}[vkReleaseSwapchainImagesKHR]} *)
 let release_swapchain_images_khr arg_device arg_release_info =
   let result = Vk_fn.release_swapchain_images_khr (arg_device) (addr arg_release_info) in
   ignore (Sys.opaque_identity (arg_device, arg_release_info));
   check result;
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetDeviceImageSubresourceLayout.html}[vkGetDeviceImageSubresourceLayout]} *)
 let get_device_image_subresource_layout arg_device arg_info arg_layout =
   Vk_fn.get_device_image_subresource_layout (arg_device) (addr arg_info) (addr arg_layout);
   ignore (Sys.opaque_identity (arg_device, arg_info, arg_layout));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkMapMemory2.html}[vkMapMemory2]} *)
 let map_memory_2 arg_device arg_memory_map_info =
   let output = allocate (ptr (Ctypes.void)) (Vk_base.null_ptr (Ctypes.void)) in
   let result = Vk_fn.map_memory_2 (arg_device) (addr arg_memory_map_info) (output) in
@@ -4125,12 +4729,14 @@ let map_memory_2 arg_device arg_memory_map_info =
   check result;
   !@ output
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkUnmapMemory2.html}[vkUnmapMemory2]} *)
 let unmap_memory_2 arg_device arg_memory_unmap_info =
   let result = Vk_fn.unmap_memory_2 (arg_device) (addr arg_memory_unmap_info) in
   ignore (Sys.opaque_identity (arg_device, arg_memory_unmap_info));
   check result;
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateShadersEXT.html}[vkCreateShadersEXT]} *)
 let create_shaders_ext ?allocator:arg_allocator arg_device arg_create_infos =
   let array_create_infos = CArray.of_list (ShaderCreateInfoEXT.t) arg_create_infos in
   let pointer_create_infos = if arg_create_infos = [] then Vk_base.null_ptr (ShaderCreateInfoEXT.t) else CArray.start array_create_infos in
@@ -4141,17 +4747,20 @@ let create_shaders_ext ?allocator:arg_allocator arg_device arg_create_infos =
   check result;
   (result, (CArray.to_list storage))
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkDestroyShaderEXT.html}[vkDestroyShaderEXT]} *)
 let destroy_shader_ext arg_device arg_shader ?allocator:arg_allocator () =
   Vk_fn.destroy_shader_ext (arg_device) (arg_shader) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x));
   ignore (Sys.opaque_identity (arg_device, arg_shader, arg_allocator));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetShaderBinaryDataEXT.html}[vkGetShaderBinaryDataEXT]} *)
 let get_shader_binary_data_ext arg_device arg_shader arg_data_size arg_data =
   let result = Vk_fn.get_shader_binary_data_ext (arg_device) (arg_shader) (arg_data_size) (arg_data) in
   ignore (Sys.opaque_identity (arg_device, arg_shader, arg_data_size, arg_data));
   check result;
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdBindShadersEXT.html}[vkCmdBindShadersEXT]} *)
 let cmd_bind_shaders_ext arg_command_buffer arg_stages arg_shaders =
   let array_stages = CArray.of_list (ShaderStageFlags.t) arg_stages in
   let pointer_stages = if arg_stages = [] then Vk_base.null_ptr (ShaderStageFlags.t) else CArray.start array_stages in
@@ -4162,12 +4771,14 @@ let cmd_bind_shaders_ext arg_command_buffer arg_stages arg_shaders =
   ignore (Sys.opaque_identity (arg_command_buffer, arg_stages, array_stages, arg_shaders, array_shaders));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkSetSwapchainPresentTimingQueueSizeEXT.html}[vkSetSwapchainPresentTimingQueueSizeEXT]} *)
 let set_swapchain_present_timing_queue_size_ext arg_device arg_swapchain arg_size =
   let result = Vk_fn.set_swapchain_present_timing_queue_size_ext (arg_device) (arg_swapchain) (arg_size) in
   ignore (Sys.opaque_identity (arg_device, arg_swapchain, arg_size));
   check result;
   result
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetSwapchainTimingPropertiesEXT.html}[vkGetSwapchainTimingPropertiesEXT]} *)
 let get_swapchain_timing_properties_ext arg_device arg_swapchain arg_swapchain_timing_properties =
   let output = allocate (Vk_base.uint64) (0) in
   let result = Vk_fn.get_swapchain_timing_properties_ext (arg_device) (arg_swapchain) (addr arg_swapchain_timing_properties) (output) in
@@ -4175,6 +4786,7 @@ let get_swapchain_timing_properties_ext arg_device arg_swapchain arg_swapchain_t
   check result;
   (result, !@ output)
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetSwapchainTimeDomainPropertiesEXT.html}[vkGetSwapchainTimeDomainPropertiesEXT]} *)
 let get_swapchain_time_domain_properties_ext arg_device arg_swapchain arg_swapchain_time_domain_properties =
   let output = allocate (Vk_base.uint64) (0) in
   let result = Vk_fn.get_swapchain_time_domain_properties_ext (arg_device) (arg_swapchain) (addr arg_swapchain_time_domain_properties) (output) in
@@ -4182,18 +4794,21 @@ let get_swapchain_time_domain_properties_ext arg_device arg_swapchain arg_swapch
   check result;
   !@ output
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPastPresentationTimingEXT.html}[vkGetPastPresentationTimingEXT]} *)
 let get_past_presentation_timing_ext arg_device arg_past_presentation_timing_info arg_past_presentation_timing_properties =
   let result = Vk_fn.get_past_presentation_timing_ext (arg_device) (addr arg_past_presentation_timing_info) (addr arg_past_presentation_timing_properties) in
   ignore (Sys.opaque_identity (arg_device, arg_past_presentation_timing_info, arg_past_presentation_timing_properties));
   check result;
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetScreenBufferPropertiesQNX.html}[vkGetScreenBufferPropertiesQNX]} *)
 let get_screen_buffer_properties_qnx arg_device arg_buffer arg_properties =
   let result = Vk_fn.get_screen_buffer_properties_qnx (arg_device) (arg_buffer) (addr arg_properties) in
   ignore (Sys.opaque_identity (arg_device, arg_buffer, arg_properties));
   check result;
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPhysicalDeviceCooperativeMatrixPropertiesKHR.html}[vkGetPhysicalDeviceCooperativeMatrixPropertiesKHR]} *)
 let get_physical_device_cooperative_matrix_properties_khr arg_physical_device =
   let count = allocate Vk_base.uint32 0 in
   let rec fetch () =
@@ -4212,12 +4827,14 @@ let get_physical_device_cooperative_matrix_properties_khr arg_physical_device =
   ignore (Sys.opaque_identity (arg_physical_device));
   enumeration_result
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetExecutionGraphPipelineScratchSizeAMDX.html}[vkGetExecutionGraphPipelineScratchSizeAMDX]} *)
 let get_execution_graph_pipeline_scratch_size_amdx arg_device arg_execution_graph arg_size_info =
   let result = Vk_fn.get_execution_graph_pipeline_scratch_size_amdx (arg_device) (arg_execution_graph) (addr arg_size_info) in
   ignore (Sys.opaque_identity (arg_device, arg_execution_graph, arg_size_info));
   check result;
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetExecutionGraphPipelineNodeIndexAMDX.html}[vkGetExecutionGraphPipelineNodeIndexAMDX]} *)
 let get_execution_graph_pipeline_node_index_amdx arg_device arg_execution_graph arg_node_info =
   let output = allocate (Vk_base.uint32) (0) in
   let result = Vk_fn.get_execution_graph_pipeline_node_index_amdx (arg_device) (arg_execution_graph) (addr arg_node_info) (output) in
@@ -4225,6 +4842,7 @@ let get_execution_graph_pipeline_node_index_amdx arg_device arg_execution_graph 
   check result;
   !@ output
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateExecutionGraphPipelinesAMDX.html}[vkCreateExecutionGraphPipelinesAMDX]} *)
 let create_execution_graph_pipelines_amdx ?allocator:arg_allocator arg_device arg_pipeline_cache arg_create_infos =
   let array_create_infos = CArray.of_list (ExecutionGraphPipelineCreateInfoAMDX.t) arg_create_infos in
   let pointer_create_infos = if arg_create_infos = [] then Vk_base.null_ptr (ExecutionGraphPipelineCreateInfoAMDX.t) else CArray.start array_create_infos in
@@ -4235,26 +4853,31 @@ let create_execution_graph_pipelines_amdx ?allocator:arg_allocator arg_device ar
   check result;
   (result, (CArray.to_list storage))
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdInitializeGraphScratchMemoryAMDX.html}[vkCmdInitializeGraphScratchMemoryAMDX]} *)
 let cmd_initialize_graph_scratch_memory_amdx arg_command_buffer arg_execution_graph arg_scratch arg_scratch_size =
   Vk_fn.cmd_initialize_graph_scratch_memory_amdx (arg_command_buffer) (arg_execution_graph) (arg_scratch) (arg_scratch_size);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_execution_graph, arg_scratch, arg_scratch_size));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdDispatchGraphAMDX.html}[vkCmdDispatchGraphAMDX]} *)
 let cmd_dispatch_graph_amdx arg_command_buffer arg_scratch arg_scratch_size arg_count_info =
   Vk_fn.cmd_dispatch_graph_amdx (arg_command_buffer) (arg_scratch) (arg_scratch_size) (addr arg_count_info);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_scratch, arg_scratch_size, arg_count_info));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdDispatchGraphIndirectAMDX.html}[vkCmdDispatchGraphIndirectAMDX]} *)
 let cmd_dispatch_graph_indirect_amdx arg_command_buffer arg_scratch arg_scratch_size arg_count_info =
   Vk_fn.cmd_dispatch_graph_indirect_amdx (arg_command_buffer) (arg_scratch) (arg_scratch_size) (addr arg_count_info);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_scratch, arg_scratch_size, arg_count_info));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdDispatchGraphIndirectCountAMDX.html}[vkCmdDispatchGraphIndirectCountAMDX]} *)
 let cmd_dispatch_graph_indirect_count_amdx arg_command_buffer arg_scratch arg_scratch_size arg_count_info =
   Vk_fn.cmd_dispatch_graph_indirect_count_amdx (arg_command_buffer) (arg_scratch) (arg_scratch_size) (arg_count_info);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_scratch, arg_scratch_size, arg_count_info));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateGpaSessionAMD.html}[vkCreateGpaSessionAMD]} *)
 let create_gpa_session_amd ?allocator:arg_allocator arg_device arg_create_info =
   let output = allocate (GpaSessionAMD.t) (GpaSessionAMD.null) in
   let result = Vk_fn.create_gpa_session_amd (arg_device) (addr arg_create_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
@@ -4262,35 +4885,41 @@ let create_gpa_session_amd ?allocator:arg_allocator arg_device arg_create_info =
   check result;
   !@ output
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkDestroyGpaSessionAMD.html}[vkDestroyGpaSessionAMD]} *)
 let destroy_gpa_session_amd arg_device arg_gpa_session ?allocator:arg_allocator () =
   Vk_fn.destroy_gpa_session_amd (arg_device) (arg_gpa_session) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x));
   ignore (Sys.opaque_identity (arg_device, arg_gpa_session, arg_allocator));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkSetGpaDeviceClockModeAMD.html}[vkSetGpaDeviceClockModeAMD]} *)
 let set_gpa_device_clock_mode_amd arg_device arg_info =
   let result = Vk_fn.set_gpa_device_clock_mode_amd (arg_device) (addr arg_info) in
   ignore (Sys.opaque_identity (arg_device, arg_info));
   check result;
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetGpaDeviceClockInfoAMD.html}[vkGetGpaDeviceClockInfoAMD]} *)
 let get_gpa_device_clock_info_amd arg_device arg_info =
   let result = Vk_fn.get_gpa_device_clock_info_amd (arg_device) (addr arg_info) in
   ignore (Sys.opaque_identity (arg_device, arg_info));
   check result;
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdBeginGpaSessionAMD.html}[vkCmdBeginGpaSessionAMD]} *)
 let cmd_begin_gpa_session_amd arg_command_buffer arg_gpa_session =
   let result = Vk_fn.cmd_begin_gpa_session_amd (arg_command_buffer) (arg_gpa_session) in
   ignore (Sys.opaque_identity (arg_command_buffer, arg_gpa_session));
   check result;
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdEndGpaSessionAMD.html}[vkCmdEndGpaSessionAMD]} *)
 let cmd_end_gpa_session_amd arg_command_buffer arg_gpa_session =
   let result = Vk_fn.cmd_end_gpa_session_amd (arg_command_buffer) (arg_gpa_session) in
   ignore (Sys.opaque_identity (arg_command_buffer, arg_gpa_session));
   check result;
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdBeginGpaSampleAMD.html}[vkCmdBeginGpaSampleAMD]} *)
 let cmd_begin_gpa_sample_amd arg_command_buffer arg_gpa_session arg_gpa_sample_begin_info =
   let output = allocate (Vk_base.uint32) (0) in
   let result = Vk_fn.cmd_begin_gpa_sample_amd (arg_command_buffer) (arg_gpa_session) (addr arg_gpa_sample_begin_info) (output) in
@@ -4298,142 +4927,169 @@ let cmd_begin_gpa_sample_amd arg_command_buffer arg_gpa_session arg_gpa_sample_b
   check result;
   !@ output
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdEndGpaSampleAMD.html}[vkCmdEndGpaSampleAMD]} *)
 let cmd_end_gpa_sample_amd arg_command_buffer arg_gpa_session arg_sample_id =
   Vk_fn.cmd_end_gpa_sample_amd (arg_command_buffer) (arg_gpa_session) (arg_sample_id);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_gpa_session, arg_sample_id));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetGpaSessionStatusAMD.html}[vkGetGpaSessionStatusAMD]} *)
 let get_gpa_session_status_amd arg_device arg_gpa_session =
   let result = Vk_fn.get_gpa_session_status_amd (arg_device) (arg_gpa_session) in
   ignore (Sys.opaque_identity (arg_device, arg_gpa_session));
   check result;
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetGpaSessionResultsAMD.html}[vkGetGpaSessionResultsAMD]} *)
 let get_gpa_session_results_amd arg_device arg_gpa_session arg_sample_id arg_size_in_bytes arg_data =
   let result = Vk_fn.get_gpa_session_results_amd (arg_device) (arg_gpa_session) (arg_sample_id) (arg_size_in_bytes) (arg_data) in
   ignore (Sys.opaque_identity (arg_device, arg_gpa_session, arg_sample_id, arg_size_in_bytes, arg_data));
   check result;
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkResetGpaSessionAMD.html}[vkResetGpaSessionAMD]} *)
 let reset_gpa_session_amd arg_device arg_gpa_session =
   let result = Vk_fn.reset_gpa_session_amd (arg_device) (arg_gpa_session) in
   ignore (Sys.opaque_identity (arg_device, arg_gpa_session));
   check result;
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdCopyGpaSessionResultsAMD.html}[vkCmdCopyGpaSessionResultsAMD]} *)
 let cmd_copy_gpa_session_results_amd arg_command_buffer arg_gpa_session =
   Vk_fn.cmd_copy_gpa_session_results_amd (arg_command_buffer) (arg_gpa_session);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_gpa_session));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdBindDescriptorSets2.html}[vkCmdBindDescriptorSets2]} *)
 let cmd_bind_descriptor_sets_2 arg_command_buffer arg_bind_descriptor_sets_info =
   Vk_fn.cmd_bind_descriptor_sets_2 (arg_command_buffer) (addr arg_bind_descriptor_sets_info);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_bind_descriptor_sets_info));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdPushConstants2.html}[vkCmdPushConstants2]} *)
 let cmd_push_constants_2 arg_command_buffer arg_push_constants_info =
   Vk_fn.cmd_push_constants_2 (arg_command_buffer) (addr arg_push_constants_info);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_push_constants_info));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdPushDescriptorSet2.html}[vkCmdPushDescriptorSet2]} *)
 let cmd_push_descriptor_set_2 arg_command_buffer arg_push_descriptor_set_info =
   Vk_fn.cmd_push_descriptor_set_2 (arg_command_buffer) (addr arg_push_descriptor_set_info);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_push_descriptor_set_info));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdPushDescriptorSetWithTemplate2.html}[vkCmdPushDescriptorSetWithTemplate2]} *)
 let cmd_push_descriptor_set_with_template_2 arg_command_buffer arg_push_descriptor_set_with_template_info =
   Vk_fn.cmd_push_descriptor_set_with_template_2 (arg_command_buffer) (addr arg_push_descriptor_set_with_template_info);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_push_descriptor_set_with_template_info));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetDescriptorBufferOffsets2EXT.html}[vkCmdSetDescriptorBufferOffsets2EXT]} *)
 let cmd_set_descriptor_buffer_offsets_2_ext arg_command_buffer arg_set_descriptor_buffer_offsets_info =
   Vk_fn.cmd_set_descriptor_buffer_offsets_2_ext (arg_command_buffer) (addr arg_set_descriptor_buffer_offsets_info);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_set_descriptor_buffer_offsets_info));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdBindDescriptorBufferEmbeddedSamplers2EXT.html}[vkCmdBindDescriptorBufferEmbeddedSamplers2EXT]} *)
 let cmd_bind_descriptor_buffer_embedded_samplers_2_ext arg_command_buffer arg_bind_descriptor_buffer_embedded_samplers_info =
   Vk_fn.cmd_bind_descriptor_buffer_embedded_samplers_2_ext (arg_command_buffer) (addr arg_bind_descriptor_buffer_embedded_samplers_info);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_bind_descriptor_buffer_embedded_samplers_info));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkSetLatencySleepModeNV.html}[vkSetLatencySleepModeNV]} *)
 let set_latency_sleep_mode_nv arg_device arg_swapchain arg_sleep_mode_info =
   let result = Vk_fn.set_latency_sleep_mode_nv (arg_device) (arg_swapchain) (addr arg_sleep_mode_info) in
   ignore (Sys.opaque_identity (arg_device, arg_swapchain, arg_sleep_mode_info));
   check result;
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkLatencySleepNV.html}[vkLatencySleepNV]} *)
 let latency_sleep_nv arg_device arg_swapchain arg_sleep_info =
   let result = Vk_fn.latency_sleep_nv (arg_device) (arg_swapchain) (addr arg_sleep_info) in
   ignore (Sys.opaque_identity (arg_device, arg_swapchain, arg_sleep_info));
   check result;
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkSetLatencyMarkerNV.html}[vkSetLatencyMarkerNV]} *)
 let set_latency_marker_nv arg_device arg_swapchain arg_latency_marker_info =
   Vk_fn.set_latency_marker_nv (arg_device) (arg_swapchain) (addr arg_latency_marker_info);
   ignore (Sys.opaque_identity (arg_device, arg_swapchain, arg_latency_marker_info));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetLatencyTimingsNV.html}[vkGetLatencyTimingsNV]} *)
 let get_latency_timings_nv arg_device arg_swapchain arg_latency_marker_info =
   Vk_fn.get_latency_timings_nv (arg_device) (arg_swapchain) (addr arg_latency_marker_info);
   ignore (Sys.opaque_identity (arg_device, arg_swapchain, arg_latency_marker_info));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkQueueNotifyOutOfBandNV.html}[vkQueueNotifyOutOfBandNV]} *)
 let queue_notify_out_of_band_nv arg_queue arg_queue_type_info =
   Vk_fn.queue_notify_out_of_band_nv (arg_queue) (addr arg_queue_type_info);
   ignore (Sys.opaque_identity (arg_queue, arg_queue_type_info));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkSetLatencySleepModeLegacyNV.html}[vkSetLatencySleepModeLegacyNV]} *)
 let set_latency_sleep_mode_legacy_nv arg_device arg_low_latency_mode arg_low_latency_boost arg_minimum_interval_us =
   Vk_fn.set_latency_sleep_mode_legacy_nv (arg_device) (arg_low_latency_mode) (arg_low_latency_boost) (arg_minimum_interval_us);
   ignore (Sys.opaque_identity (arg_device, arg_low_latency_mode, arg_low_latency_boost, arg_minimum_interval_us));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkLatencySleepLegacyNV.html}[vkLatencySleepLegacyNV]} *)
 let latency_sleep_legacy_nv arg_device arg_signal_semaphore arg_value =
   Vk_fn.latency_sleep_legacy_nv (arg_device) (arg_signal_semaphore) (arg_value);
   ignore (Sys.opaque_identity (arg_device, arg_signal_semaphore, arg_value));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkSetLatencyMarkerLegacyNV.html}[vkSetLatencyMarkerLegacyNV]} *)
 let set_latency_marker_legacy_nv arg_device arg_frame_id arg_marker =
   Vk_fn.set_latency_marker_legacy_nv (arg_device) (arg_frame_id) (arg_marker);
   ignore (Sys.opaque_identity (arg_device, arg_frame_id, arg_marker));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetLatencyTimingsLegacyNV.html}[vkGetLatencyTimingsLegacyNV]} *)
 let get_latency_timings_legacy_nv arg_device arg_timings =
   Vk_fn.get_latency_timings_legacy_nv (arg_device) (arg_timings);
   ignore (Sys.opaque_identity (arg_device, arg_timings));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkQueueNotifyOutOfBandLegacyNV.html}[vkQueueNotifyOutOfBandLegacyNV]} *)
 let queue_notify_out_of_band_legacy_nv arg_queue arg_queue_type =
   Vk_fn.queue_notify_out_of_band_legacy_nv (arg_queue) (arg_queue_type);
   ignore (Sys.opaque_identity (arg_queue, arg_queue_type));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetSleepStatusLegacyNV.html}[vkGetSleepStatusLegacyNV]} *)
 let get_sleep_status_legacy_nv arg_device =
   let output = allocate (Vk_base.bool32) (false) in
   Vk_fn.get_sleep_status_legacy_nv (arg_device) (output);
   ignore (Sys.opaque_identity (arg_device));
   !@ output
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkShutdownLatencyDeviceLegacyNV.html}[vkShutdownLatencyDeviceLegacyNV]} *)
 let shutdown_latency_device_legacy_nv arg_device =
   Vk_fn.shutdown_latency_device_legacy_nv (arg_device);
   ignore (Sys.opaque_identity (arg_device));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetRenderingAttachmentLocations.html}[vkCmdSetRenderingAttachmentLocations]} *)
 let cmd_set_rendering_attachment_locations arg_command_buffer arg_location_info =
   Vk_fn.cmd_set_rendering_attachment_locations (arg_command_buffer) (addr arg_location_info);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_location_info));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetRenderingInputAttachmentIndices.html}[vkCmdSetRenderingInputAttachmentIndices]} *)
 let cmd_set_rendering_input_attachment_indices arg_command_buffer arg_input_attachment_index_info =
   Vk_fn.cmd_set_rendering_input_attachment_indices (arg_command_buffer) (addr arg_input_attachment_index_info);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_input_attachment_index_info));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetDepthClampRangeEXT.html}[vkCmdSetDepthClampRangeEXT]} *)
 let cmd_set_depth_clamp_range_ext arg_command_buffer arg_depth_clamp_mode arg_depth_clamp_range =
   Vk_fn.cmd_set_depth_clamp_range_ext (arg_command_buffer) (arg_depth_clamp_mode) (addr arg_depth_clamp_range);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_depth_clamp_mode, arg_depth_clamp_range));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPhysicalDeviceCooperativeMatrixFlexibleDimensionsPropertiesNV.html}[vkGetPhysicalDeviceCooperativeMatrixFlexibleDimensionsPropertiesNV]} *)
 let get_physical_device_cooperative_matrix_flexible_dimensions_properties_nv arg_physical_device =
   let count = allocate Vk_base.uint32 0 in
   let rec fetch () =
@@ -4452,6 +5108,7 @@ let get_physical_device_cooperative_matrix_flexible_dimensions_properties_nv arg
   ignore (Sys.opaque_identity (arg_physical_device));
   enumeration_result
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetMemoryMetalHandleEXT.html}[vkGetMemoryMetalHandleEXT]} *)
 let get_memory_metal_handle_ext arg_device arg_get_metal_handle_info =
   let output = allocate (ptr (Ctypes.void)) (Vk_base.null_ptr (Ctypes.void)) in
   let result = Vk_fn.get_memory_metal_handle_ext (arg_device) (addr arg_get_metal_handle_info) (output) in
@@ -4459,12 +5116,14 @@ let get_memory_metal_handle_ext arg_device arg_get_metal_handle_info =
   check result;
   !@ output
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetMemoryMetalHandlePropertiesEXT.html}[vkGetMemoryMetalHandlePropertiesEXT]} *)
 let get_memory_metal_handle_properties_ext arg_device arg_handle_type arg_handle arg_memory_metal_handle_properties =
   let result = Vk_fn.get_memory_metal_handle_properties_ext (arg_device) (arg_handle_type) (arg_handle) (addr arg_memory_metal_handle_properties) in
   ignore (Sys.opaque_identity (arg_device, arg_handle_type, arg_handle, arg_memory_metal_handle_properties));
   check result;
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPhysicalDeviceCooperativeVectorPropertiesNV.html}[vkGetPhysicalDeviceCooperativeVectorPropertiesNV]} *)
 let get_physical_device_cooperative_vector_properties_nv arg_physical_device =
   let count = allocate Vk_base.uint32 0 in
   let rec fetch () =
@@ -4483,12 +5142,14 @@ let get_physical_device_cooperative_vector_properties_nv arg_physical_device =
   ignore (Sys.opaque_identity (arg_physical_device));
   enumeration_result
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkConvertCooperativeVectorMatrixNV.html}[vkConvertCooperativeVectorMatrixNV]} *)
 let convert_cooperative_vector_matrix_nv arg_device arg_info =
   let result = Vk_fn.convert_cooperative_vector_matrix_nv (arg_device) (addr arg_info) in
   ignore (Sys.opaque_identity (arg_device, arg_info));
   check result;
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdConvertCooperativeVectorMatrixNV.html}[vkCmdConvertCooperativeVectorMatrixNV]} *)
 let cmd_convert_cooperative_vector_matrix_nv arg_command_buffer arg_infos =
   let array_infos = CArray.of_list (ConvertCooperativeVectorMatrixInfoNV.t) arg_infos in
   let pointer_infos = if arg_infos = [] then Vk_base.null_ptr (ConvertCooperativeVectorMatrixInfoNV.t) else CArray.start array_infos in
@@ -4496,21 +5157,25 @@ let cmd_convert_cooperative_vector_matrix_nv arg_command_buffer arg_infos =
   ignore (Sys.opaque_identity (arg_command_buffer, arg_infos, array_infos));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdDispatchTileQCOM.html}[vkCmdDispatchTileQCOM]} *)
 let cmd_dispatch_tile_qcom arg_command_buffer arg_dispatch_tile_info =
   Vk_fn.cmd_dispatch_tile_qcom (arg_command_buffer) (addr arg_dispatch_tile_info);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_dispatch_tile_info));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdBeginPerTileExecutionQCOM.html}[vkCmdBeginPerTileExecutionQCOM]} *)
 let cmd_begin_per_tile_execution_qcom arg_command_buffer arg_per_tile_begin_info =
   Vk_fn.cmd_begin_per_tile_execution_qcom (arg_command_buffer) (addr arg_per_tile_begin_info);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_per_tile_begin_info));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdEndPerTileExecutionQCOM.html}[vkCmdEndPerTileExecutionQCOM]} *)
 let cmd_end_per_tile_execution_qcom arg_command_buffer arg_per_tile_end_info =
   Vk_fn.cmd_end_per_tile_execution_qcom (arg_command_buffer) (addr arg_per_tile_end_info);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_per_tile_end_info));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateExternalComputeQueueNV.html}[vkCreateExternalComputeQueueNV]} *)
 let create_external_compute_queue_nv ?allocator:arg_allocator arg_device arg_create_info =
   let output = allocate (ExternalComputeQueueNV.t) (ExternalComputeQueueNV.null) in
   let result = Vk_fn.create_external_compute_queue_nv (arg_device) (addr arg_create_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
@@ -4518,16 +5183,19 @@ let create_external_compute_queue_nv ?allocator:arg_allocator arg_device arg_cre
   check result;
   !@ output
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkDestroyExternalComputeQueueNV.html}[vkDestroyExternalComputeQueueNV]} *)
 let destroy_external_compute_queue_nv arg_device arg_external_queue ?allocator:arg_allocator () =
   Vk_fn.destroy_external_compute_queue_nv (arg_device) (arg_external_queue) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x));
   ignore (Sys.opaque_identity (arg_device, arg_external_queue, arg_allocator));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetExternalComputeQueueDataNV.html}[vkGetExternalComputeQueueDataNV]} *)
 let get_external_compute_queue_data_nv arg_external_queue arg_params arg_data =
   Vk_fn.get_external_compute_queue_data_nv (arg_external_queue) (addr arg_params) (arg_data);
   ignore (Sys.opaque_identity (arg_external_queue, arg_params, arg_data));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkEnumeratePhysicalDeviceShaderInstrumentationMetricsARM.html}[vkEnumeratePhysicalDeviceShaderInstrumentationMetricsARM]} *)
 let enumerate_physical_device_shader_instrumentation_metrics_arm arg_physical_device =
   let count = allocate Vk_base.uint32 0 in
   let rec fetch () =
@@ -4546,6 +5214,7 @@ let enumerate_physical_device_shader_instrumentation_metrics_arm arg_physical_de
   ignore (Sys.opaque_identity (arg_physical_device));
   enumeration_result
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateShaderInstrumentationARM.html}[vkCreateShaderInstrumentationARM]} *)
 let create_shader_instrumentation_arm ?allocator:arg_allocator arg_device arg_create_info =
   let output = allocate (ShaderInstrumentationARM.t) (ShaderInstrumentationARM.null) in
   let result = Vk_fn.create_shader_instrumentation_arm (arg_device) (addr arg_create_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
@@ -4553,32 +5222,38 @@ let create_shader_instrumentation_arm ?allocator:arg_allocator arg_device arg_cr
   check result;
   !@ output
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkDestroyShaderInstrumentationARM.html}[vkDestroyShaderInstrumentationARM]} *)
 let destroy_shader_instrumentation_arm arg_device arg_instrumentation ?allocator:arg_allocator () =
   Vk_fn.destroy_shader_instrumentation_arm (arg_device) (arg_instrumentation) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x));
   ignore (Sys.opaque_identity (arg_device, arg_instrumentation, arg_allocator));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdBeginShaderInstrumentationARM.html}[vkCmdBeginShaderInstrumentationARM]} *)
 let cmd_begin_shader_instrumentation_arm arg_command_buffer arg_instrumentation =
   Vk_fn.cmd_begin_shader_instrumentation_arm (arg_command_buffer) (arg_instrumentation);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_instrumentation));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdEndShaderInstrumentationARM.html}[vkCmdEndShaderInstrumentationARM]} *)
 let cmd_end_shader_instrumentation_arm arg_command_buffer =
   Vk_fn.cmd_end_shader_instrumentation_arm (arg_command_buffer);
   ignore (Sys.opaque_identity (arg_command_buffer));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetShaderInstrumentationValuesARM.html}[vkGetShaderInstrumentationValuesARM]} *)
 let get_shader_instrumentation_values_arm arg_device arg_instrumentation arg_metric_block_count arg_metric_values arg_flags =
   let result = Vk_fn.get_shader_instrumentation_values_arm (arg_device) (arg_instrumentation) (arg_metric_block_count) (arg_metric_values) (arg_flags) in
   ignore (Sys.opaque_identity (arg_device, arg_instrumentation, arg_metric_block_count, arg_metric_values, arg_flags));
   check result;
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkClearShaderInstrumentationMetricsARM.html}[vkClearShaderInstrumentationMetricsARM]} *)
 let clear_shader_instrumentation_metrics_arm arg_device arg_instrumentation =
   Vk_fn.clear_shader_instrumentation_metrics_arm (arg_device) (arg_instrumentation);
   ignore (Sys.opaque_identity (arg_device, arg_instrumentation));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateTensorARM.html}[vkCreateTensorARM]} *)
 let create_tensor_arm ?allocator:arg_allocator arg_device arg_create_info =
   let output = allocate (TensorARM.t) (TensorARM.null) in
   let result = Vk_fn.create_tensor_arm (arg_device) (addr arg_create_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
@@ -4586,11 +5261,13 @@ let create_tensor_arm ?allocator:arg_allocator arg_device arg_create_info =
   check result;
   !@ output
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkDestroyTensorARM.html}[vkDestroyTensorARM]} *)
 let destroy_tensor_arm arg_device arg_tensor ?allocator:arg_allocator () =
   Vk_fn.destroy_tensor_arm (arg_device) (arg_tensor) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x));
   ignore (Sys.opaque_identity (arg_device, arg_tensor, arg_allocator));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateTensorViewARM.html}[vkCreateTensorViewARM]} *)
 let create_tensor_view_arm ?allocator:arg_allocator arg_device arg_create_info =
   let output = allocate (TensorViewARM.t) (TensorViewARM.null) in
   let result = Vk_fn.create_tensor_view_arm (arg_device) (addr arg_create_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
@@ -4598,16 +5275,19 @@ let create_tensor_view_arm ?allocator:arg_allocator arg_device arg_create_info =
   check result;
   !@ output
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkDestroyTensorViewARM.html}[vkDestroyTensorViewARM]} *)
 let destroy_tensor_view_arm arg_device arg_tensor_view ?allocator:arg_allocator () =
   Vk_fn.destroy_tensor_view_arm (arg_device) (arg_tensor_view) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x));
   ignore (Sys.opaque_identity (arg_device, arg_tensor_view, arg_allocator));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetTensorMemoryRequirementsARM.html}[vkGetTensorMemoryRequirementsARM]} *)
 let get_tensor_memory_requirements_arm arg_device arg_info arg_memory_requirements =
   Vk_fn.get_tensor_memory_requirements_arm (arg_device) (addr arg_info) (addr arg_memory_requirements);
   ignore (Sys.opaque_identity (arg_device, arg_info, arg_memory_requirements));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkBindTensorMemoryARM.html}[vkBindTensorMemoryARM]} *)
 let bind_tensor_memory_arm arg_device arg_bind_infos =
   let array_bind_infos = CArray.of_list (BindTensorMemoryInfoARM.t) arg_bind_infos in
   let pointer_bind_infos = if arg_bind_infos = [] then Vk_base.null_ptr (BindTensorMemoryInfoARM.t) else CArray.start array_bind_infos in
@@ -4616,33 +5296,39 @@ let bind_tensor_memory_arm arg_device arg_bind_infos =
   check result;
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetDeviceTensorMemoryRequirementsARM.html}[vkGetDeviceTensorMemoryRequirementsARM]} *)
 let get_device_tensor_memory_requirements_arm arg_device arg_info arg_memory_requirements =
   Vk_fn.get_device_tensor_memory_requirements_arm (arg_device) (addr arg_info) (addr arg_memory_requirements);
   ignore (Sys.opaque_identity (arg_device, arg_info, arg_memory_requirements));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdCopyTensorARM.html}[vkCmdCopyTensorARM]} *)
 let cmd_copy_tensor_arm arg_command_buffer arg_copy_tensor_info =
   Vk_fn.cmd_copy_tensor_arm (arg_command_buffer) (addr arg_copy_tensor_info);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_copy_tensor_info));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetTensorOpaqueCaptureDescriptorDataARM.html}[vkGetTensorOpaqueCaptureDescriptorDataARM]} *)
 let get_tensor_opaque_capture_descriptor_data_arm arg_device arg_info arg_data =
   let result = Vk_fn.get_tensor_opaque_capture_descriptor_data_arm (arg_device) (addr arg_info) (arg_data) in
   ignore (Sys.opaque_identity (arg_device, arg_info, arg_data));
   check result;
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetTensorViewOpaqueCaptureDescriptorDataARM.html}[vkGetTensorViewOpaqueCaptureDescriptorDataARM]} *)
 let get_tensor_view_opaque_capture_descriptor_data_arm arg_device arg_info arg_data =
   let result = Vk_fn.get_tensor_view_opaque_capture_descriptor_data_arm (arg_device) (addr arg_info) (arg_data) in
   ignore (Sys.opaque_identity (arg_device, arg_info, arg_data));
   check result;
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPhysicalDeviceExternalTensorPropertiesARM.html}[vkGetPhysicalDeviceExternalTensorPropertiesARM]} *)
 let get_physical_device_external_tensor_properties_arm arg_physical_device arg_external_tensor_info arg_external_tensor_properties =
   Vk_fn.get_physical_device_external_tensor_properties_arm (arg_physical_device) (addr arg_external_tensor_info) (addr arg_external_tensor_properties);
   ignore (Sys.opaque_identity (arg_physical_device, arg_external_tensor_info, arg_external_tensor_properties));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateDataGraphPipelinesARM.html}[vkCreateDataGraphPipelinesARM]} *)
 let create_data_graph_pipelines_arm ?allocator:arg_allocator arg_device arg_deferred_operation arg_pipeline_cache arg_create_infos =
   let array_create_infos = CArray.of_list (DataGraphPipelineCreateInfoARM.t) arg_create_infos in
   let pointer_create_infos = if arg_create_infos = [] then Vk_base.null_ptr (DataGraphPipelineCreateInfoARM.t) else CArray.start array_create_infos in
@@ -4653,6 +5339,7 @@ let create_data_graph_pipelines_arm ?allocator:arg_allocator arg_device arg_defe
   check result;
   (result, (CArray.to_list storage))
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateDataGraphPipelineSessionARM.html}[vkCreateDataGraphPipelineSessionARM]} *)
 let create_data_graph_pipeline_session_arm ?allocator:arg_allocator arg_device arg_create_info =
   let output = allocate (DataGraphPipelineSessionARM.t) (DataGraphPipelineSessionARM.null) in
   let result = Vk_fn.create_data_graph_pipeline_session_arm (arg_device) (addr arg_create_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
@@ -4660,6 +5347,7 @@ let create_data_graph_pipeline_session_arm ?allocator:arg_allocator arg_device a
   check result;
   !@ output
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetDataGraphPipelineSessionBindPointRequirementsARM.html}[vkGetDataGraphPipelineSessionBindPointRequirementsARM]} *)
 let get_data_graph_pipeline_session_bind_point_requirements_arm arg_device arg_info =
   let count = allocate Vk_base.uint32 0 in
   let rec fetch () =
@@ -4678,11 +5366,13 @@ let get_data_graph_pipeline_session_bind_point_requirements_arm arg_device arg_i
   ignore (Sys.opaque_identity (arg_device, arg_info));
   enumeration_result
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetDataGraphPipelineSessionMemoryRequirementsARM.html}[vkGetDataGraphPipelineSessionMemoryRequirementsARM]} *)
 let get_data_graph_pipeline_session_memory_requirements_arm arg_device arg_info arg_memory_requirements =
   Vk_fn.get_data_graph_pipeline_session_memory_requirements_arm (arg_device) (addr arg_info) (addr arg_memory_requirements);
   ignore (Sys.opaque_identity (arg_device, arg_info, arg_memory_requirements));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkBindDataGraphPipelineSessionMemoryARM.html}[vkBindDataGraphPipelineSessionMemoryARM]} *)
 let bind_data_graph_pipeline_session_memory_arm arg_device arg_bind_infos =
   let array_bind_infos = CArray.of_list (BindDataGraphPipelineSessionMemoryInfoARM.t) arg_bind_infos in
   let pointer_bind_infos = if arg_bind_infos = [] then Vk_base.null_ptr (BindDataGraphPipelineSessionMemoryInfoARM.t) else CArray.start array_bind_infos in
@@ -4691,16 +5381,19 @@ let bind_data_graph_pipeline_session_memory_arm arg_device arg_bind_infos =
   check result;
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkDestroyDataGraphPipelineSessionARM.html}[vkDestroyDataGraphPipelineSessionARM]} *)
 let destroy_data_graph_pipeline_session_arm arg_device arg_session ?allocator:arg_allocator () =
   Vk_fn.destroy_data_graph_pipeline_session_arm (arg_device) (arg_session) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x));
   ignore (Sys.opaque_identity (arg_device, arg_session, arg_allocator));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdDispatchDataGraphARM.html}[vkCmdDispatchDataGraphARM]} *)
 let cmd_dispatch_data_graph_arm arg_command_buffer arg_session arg_info =
   Vk_fn.cmd_dispatch_data_graph_arm (arg_command_buffer) (arg_session) (addr arg_info);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_session, arg_info));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetDataGraphPipelineAvailablePropertiesARM.html}[vkGetDataGraphPipelineAvailablePropertiesARM]} *)
 let get_data_graph_pipeline_available_properties_arm arg_device arg_pipeline_info =
   let count = allocate Vk_base.uint32 0 in
   let rec fetch () =
@@ -4719,12 +5412,14 @@ let get_data_graph_pipeline_available_properties_arm arg_device arg_pipeline_inf
   ignore (Sys.opaque_identity (arg_device, arg_pipeline_info));
   enumeration_result
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetDataGraphPipelinePropertiesARM.html}[vkGetDataGraphPipelinePropertiesARM]} *)
 let get_data_graph_pipeline_properties_arm arg_device arg_pipeline_info arg_properties_count arg_properties =
   let result = Vk_fn.get_data_graph_pipeline_properties_arm (arg_device) (addr arg_pipeline_info) (arg_properties_count) (addr arg_properties) in
   ignore (Sys.opaque_identity (arg_device, arg_pipeline_info, arg_properties_count, arg_properties));
   check result;
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPhysicalDeviceQueueFamilyDataGraphPropertiesARM.html}[vkGetPhysicalDeviceQueueFamilyDataGraphPropertiesARM]} *)
 let get_physical_device_queue_family_data_graph_properties_arm arg_physical_device arg_queue_family_index =
   let count = allocate Vk_base.uint32 0 in
   let rec fetch () =
@@ -4743,17 +5438,20 @@ let get_physical_device_queue_family_data_graph_properties_arm arg_physical_devi
   ignore (Sys.opaque_identity (arg_physical_device, arg_queue_family_index));
   enumeration_result
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPhysicalDeviceQueueFamilyDataGraphProcessingEnginePropertiesARM.html}[vkGetPhysicalDeviceQueueFamilyDataGraphProcessingEnginePropertiesARM]} *)
 let get_physical_device_queue_family_data_graph_processing_engine_properties_arm arg_physical_device arg_queue_family_data_graph_processing_engine_info arg_queue_family_data_graph_processing_engine_properties =
   Vk_fn.get_physical_device_queue_family_data_graph_processing_engine_properties_arm (arg_physical_device) (addr arg_queue_family_data_graph_processing_engine_info) (addr arg_queue_family_data_graph_processing_engine_properties);
   ignore (Sys.opaque_identity (arg_physical_device, arg_queue_family_data_graph_processing_engine_info, arg_queue_family_data_graph_processing_engine_properties));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetNativeBufferPropertiesOHOS.html}[vkGetNativeBufferPropertiesOHOS]} *)
 let get_native_buffer_properties_ohos arg_device arg_buffer arg_properties =
   let result = Vk_fn.get_native_buffer_properties_ohos (arg_device) (arg_buffer) (addr arg_properties) in
   ignore (Sys.opaque_identity (arg_device, arg_buffer, arg_properties));
   check result;
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetMemoryNativeBufferOHOS.html}[vkGetMemoryNativeBufferOHOS]} *)
 let get_memory_native_buffer_ohos arg_device arg_info =
   let output = allocate (ptr (void)) (Vk_base.null_ptr (void)) in
   let result = Vk_fn.get_memory_native_buffer_ohos (arg_device) (addr arg_info) (output) in
@@ -4761,12 +5459,14 @@ let get_memory_native_buffer_ohos arg_device arg_info =
   check result;
   !@ output
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkQueueSetPerfHintQCOM.html}[vkQueueSetPerfHintQCOM]} *)
 let queue_set_perf_hint_qcom arg_queue arg_perf_hint_info =
   let result = Vk_fn.queue_set_perf_hint_qcom (arg_queue) (addr arg_perf_hint_info) in
   ignore (Sys.opaque_identity (arg_queue, arg_perf_hint_info));
   check result;
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkEnumeratePhysicalDeviceQueueFamilyPerformanceCountersByRegionARM.html}[vkEnumeratePhysicalDeviceQueueFamilyPerformanceCountersByRegionARM]} *)
 let enumerate_physical_device_queue_family_performance_counters_by_region_arm arg_physical_device arg_queue_family_index arg_counter_descriptions =
   let count = allocate Vk_base.uint32 0 in
   let rec fetch () =
@@ -4785,11 +5485,13 @@ let enumerate_physical_device_queue_family_performance_counters_by_region_arm ar
   ignore (Sys.opaque_identity (arg_physical_device, arg_queue_family_index, arg_counter_descriptions));
   enumeration_result
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetComputeOccupancyPriorityNV.html}[vkCmdSetComputeOccupancyPriorityNV]} *)
 let cmd_set_compute_occupancy_priority_nv arg_command_buffer arg_parameters =
   Vk_fn.cmd_set_compute_occupancy_priority_nv (arg_command_buffer) (addr arg_parameters);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_parameters));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkWriteSamplerDescriptorsEXT.html}[vkWriteSamplerDescriptorsEXT]} *)
 let write_sampler_descriptors_ext arg_device arg_samplers arg_descriptors =
   let array_samplers = CArray.of_list (SamplerCreateInfo.t) arg_samplers in
   let pointer_samplers = if arg_samplers = [] then Vk_base.null_ptr (SamplerCreateInfo.t) else CArray.start array_samplers in
@@ -4801,6 +5503,7 @@ let write_sampler_descriptors_ext arg_device arg_samplers arg_descriptors =
   check result;
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkWriteResourceDescriptorsEXT.html}[vkWriteResourceDescriptorsEXT]} *)
 let write_resource_descriptors_ext arg_device arg_resources arg_descriptors =
   let array_resources = CArray.of_list (ResourceDescriptorInfoEXT.t) arg_resources in
   let pointer_resources = if arg_resources = [] then Vk_base.null_ptr (ResourceDescriptorInfoEXT.t) else CArray.start array_resources in
@@ -4812,21 +5515,25 @@ let write_resource_descriptors_ext arg_device arg_resources arg_descriptors =
   check result;
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdBindSamplerHeapEXT.html}[vkCmdBindSamplerHeapEXT]} *)
 let cmd_bind_sampler_heap_ext arg_command_buffer arg_bind_info =
   Vk_fn.cmd_bind_sampler_heap_ext (arg_command_buffer) (addr arg_bind_info);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_bind_info));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdBindResourceHeapEXT.html}[vkCmdBindResourceHeapEXT]} *)
 let cmd_bind_resource_heap_ext arg_command_buffer arg_bind_info =
   Vk_fn.cmd_bind_resource_heap_ext (arg_command_buffer) (addr arg_bind_info);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_bind_info));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdPushDataEXT.html}[vkCmdPushDataEXT]} *)
 let cmd_push_data_ext arg_command_buffer arg_push_data_info =
   Vk_fn.cmd_push_data_ext (arg_command_buffer) (addr arg_push_data_info);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_push_data_info));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkRegisterCustomBorderColorEXT.html}[vkRegisterCustomBorderColorEXT]} *)
 let register_custom_border_color_ext arg_device arg_border_color arg_request_index =
   let output = allocate (Vk_base.uint32) (0) in
   let result = Vk_fn.register_custom_border_color_ext (arg_device) (addr arg_border_color) (arg_request_index) (output) in
@@ -4834,11 +5541,13 @@ let register_custom_border_color_ext arg_device arg_border_color arg_request_ind
   check result;
   !@ output
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkUnregisterCustomBorderColorEXT.html}[vkUnregisterCustomBorderColorEXT]} *)
 let unregister_custom_border_color_ext arg_device arg_index =
   Vk_fn.unregister_custom_border_color_ext (arg_device) (arg_index);
   ignore (Sys.opaque_identity (arg_device, arg_index));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetImageOpaqueCaptureDataEXT.html}[vkGetImageOpaqueCaptureDataEXT]} *)
 let get_image_opaque_capture_data_ext arg_device arg_images =
   let array_images = CArray.of_list (Image.t) arg_images in
   let pointer_images = if arg_images = [] then Vk_base.null_ptr (Image.t) else CArray.start array_images in
@@ -4849,11 +5558,13 @@ let get_image_opaque_capture_data_ext arg_device arg_images =
   check result;
   (CArray.to_list storage)
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPhysicalDeviceDescriptorSizeEXT.html}[vkGetPhysicalDeviceDescriptorSizeEXT]} *)
 let get_physical_device_descriptor_size_ext arg_physical_device arg_descriptor_type =
   let call_result = Vk_fn.get_physical_device_descriptor_size_ext (arg_physical_device) (arg_descriptor_type) in
   ignore (Sys.opaque_identity (arg_physical_device, arg_descriptor_type));
   call_result
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetTensorOpaqueCaptureDataARM.html}[vkGetTensorOpaqueCaptureDataARM]} *)
 let get_tensor_opaque_capture_data_arm arg_device arg_tensors =
   let array_tensors = CArray.of_list (TensorARM.t) arg_tensors in
   let pointer_tensors = if arg_tensors = [] then Vk_base.null_ptr (TensorARM.t) else CArray.start array_tensors in
@@ -4864,41 +5575,49 @@ let get_tensor_opaque_capture_data_arm arg_device arg_tensors =
   check result;
   (CArray.to_list storage)
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdCopyMemoryKHR.html}[vkCmdCopyMemoryKHR]} *)
 let cmd_copy_memory_khr arg_command_buffer arg_copy_memory_info =
   Vk_fn.cmd_copy_memory_khr (arg_command_buffer) (addr arg_copy_memory_info);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_copy_memory_info));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdCopyMemoryToImageKHR.html}[vkCmdCopyMemoryToImageKHR]} *)
 let cmd_copy_memory_to_image_khr arg_command_buffer arg_copy_memory_info =
   Vk_fn.cmd_copy_memory_to_image_khr (arg_command_buffer) (addr arg_copy_memory_info);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_copy_memory_info));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdCopyImageToMemoryKHR.html}[vkCmdCopyImageToMemoryKHR]} *)
 let cmd_copy_image_to_memory_khr arg_command_buffer arg_copy_memory_info =
   Vk_fn.cmd_copy_image_to_memory_khr (arg_command_buffer) (addr arg_copy_memory_info);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_copy_memory_info));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdUpdateMemoryKHR.html}[vkCmdUpdateMemoryKHR]} *)
 let cmd_update_memory_khr arg_command_buffer arg_dst_range arg_dst_flags arg_data_size arg_data =
   Vk_fn.cmd_update_memory_khr (arg_command_buffer) (addr arg_dst_range) (arg_dst_flags) (arg_data_size) (arg_data);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_dst_range, arg_dst_flags, arg_data_size, arg_data));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdFillMemoryKHR.html}[vkCmdFillMemoryKHR]} *)
 let cmd_fill_memory_khr arg_command_buffer arg_dst_range arg_dst_flags arg_data =
   Vk_fn.cmd_fill_memory_khr (arg_command_buffer) (addr arg_dst_range) (arg_dst_flags) (arg_data);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_dst_range, arg_dst_flags, arg_data));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdCopyQueryPoolResultsToMemoryKHR.html}[vkCmdCopyQueryPoolResultsToMemoryKHR]} *)
 let cmd_copy_query_pool_results_to_memory_khr arg_command_buffer arg_query_pool arg_first_query arg_query_count arg_dst_range arg_dst_flags arg_query_result_flags =
   Vk_fn.cmd_copy_query_pool_results_to_memory_khr (arg_command_buffer) (arg_query_pool) (arg_first_query) (arg_query_count) (addr arg_dst_range) (arg_dst_flags) (arg_query_result_flags);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_query_pool, arg_first_query, arg_query_count, arg_dst_range, arg_dst_flags, arg_query_result_flags));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdBeginConditionalRendering2EXT.html}[vkCmdBeginConditionalRendering2EXT]} *)
 let cmd_begin_conditional_rendering_2_ext arg_command_buffer arg_conditional_rendering_begin =
   Vk_fn.cmd_begin_conditional_rendering_2_ext (arg_command_buffer) (addr arg_conditional_rendering_begin);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_conditional_rendering_begin));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdBindTransformFeedbackBuffers2EXT.html}[vkCmdBindTransformFeedbackBuffers2EXT]} *)
 let cmd_bind_transform_feedback_buffers_2_ext arg_command_buffer arg_first_binding arg_binding_infos =
   let array_binding_infos = CArray.of_list (BindTransformFeedbackBuffer2InfoEXT.t) arg_binding_infos in
   let pointer_binding_infos = if arg_binding_infos = [] then Vk_base.null_ptr (BindTransformFeedbackBuffer2InfoEXT.t) else CArray.start array_binding_infos in
@@ -4906,6 +5625,7 @@ let cmd_bind_transform_feedback_buffers_2_ext arg_command_buffer arg_first_bindi
   ignore (Sys.opaque_identity (arg_command_buffer, arg_first_binding, arg_binding_infos, array_binding_infos));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdBeginTransformFeedback2EXT.html}[vkCmdBeginTransformFeedback2EXT]} *)
 let cmd_begin_transform_feedback_2_ext arg_command_buffer arg_first_counter_range arg_counter_infos =
   let array_counter_infos = CArray.of_list (BindTransformFeedbackBuffer2InfoEXT.t) arg_counter_infos in
   let pointer_counter_infos = if arg_counter_infos = [] then Vk_base.null_ptr (BindTransformFeedbackBuffer2InfoEXT.t) else CArray.start array_counter_infos in
@@ -4913,6 +5633,7 @@ let cmd_begin_transform_feedback_2_ext arg_command_buffer arg_first_counter_rang
   ignore (Sys.opaque_identity (arg_command_buffer, arg_first_counter_range, arg_counter_infos, array_counter_infos));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdEndTransformFeedback2EXT.html}[vkCmdEndTransformFeedback2EXT]} *)
 let cmd_end_transform_feedback_2_ext arg_command_buffer arg_first_counter_range arg_counter_infos =
   let array_counter_infos = CArray.of_list (BindTransformFeedbackBuffer2InfoEXT.t) arg_counter_infos in
   let pointer_counter_infos = if arg_counter_infos = [] then Vk_base.null_ptr (BindTransformFeedbackBuffer2InfoEXT.t) else CArray.start array_counter_infos in
@@ -4920,21 +5641,25 @@ let cmd_end_transform_feedback_2_ext arg_command_buffer arg_first_counter_range 
   ignore (Sys.opaque_identity (arg_command_buffer, arg_first_counter_range, arg_counter_infos, array_counter_infos));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdDrawIndirectByteCount2EXT.html}[vkCmdDrawIndirectByteCount2EXT]} *)
 let cmd_draw_indirect_byte_count_2_ext arg_command_buffer arg_instance_count arg_first_instance arg_counter_info arg_counter_offset arg_vertex_stride =
   Vk_fn.cmd_draw_indirect_byte_count_2_ext (arg_command_buffer) (arg_instance_count) (arg_first_instance) (addr arg_counter_info) (arg_counter_offset) (arg_vertex_stride);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_instance_count, arg_first_instance, arg_counter_info, arg_counter_offset, arg_vertex_stride));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdWriteMarkerToMemoryAMD.html}[vkCmdWriteMarkerToMemoryAMD]} *)
 let cmd_write_marker_to_memory_amd arg_command_buffer arg_info =
   Vk_fn.cmd_write_marker_to_memory_amd (arg_command_buffer) (addr arg_info);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_info));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdBindIndexBuffer3KHR.html}[vkCmdBindIndexBuffer3KHR]} *)
 let cmd_bind_index_buffer_3_khr arg_command_buffer arg_info =
   Vk_fn.cmd_bind_index_buffer_3_khr (arg_command_buffer) (addr arg_info);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_info));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdBindVertexBuffers3KHR.html}[vkCmdBindVertexBuffers3KHR]} *)
 let cmd_bind_vertex_buffers_3_khr arg_command_buffer arg_first_binding arg_binding_infos =
   let array_binding_infos = CArray.of_list (BindVertexBuffer3InfoKHR.t) arg_binding_infos in
   let pointer_binding_infos = if arg_binding_infos = [] then Vk_base.null_ptr (BindVertexBuffer3InfoKHR.t) else CArray.start array_binding_infos in
@@ -4942,41 +5667,49 @@ let cmd_bind_vertex_buffers_3_khr arg_command_buffer arg_first_binding arg_bindi
   ignore (Sys.opaque_identity (arg_command_buffer, arg_first_binding, arg_binding_infos, array_binding_infos));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdDrawIndirect2KHR.html}[vkCmdDrawIndirect2KHR]} *)
 let cmd_draw_indirect_2_khr arg_command_buffer arg_info =
   Vk_fn.cmd_draw_indirect_2_khr (arg_command_buffer) (addr arg_info);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_info));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdDrawIndexedIndirect2KHR.html}[vkCmdDrawIndexedIndirect2KHR]} *)
 let cmd_draw_indexed_indirect_2_khr arg_command_buffer arg_info =
   Vk_fn.cmd_draw_indexed_indirect_2_khr (arg_command_buffer) (addr arg_info);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_info));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdDrawIndirectCount2KHR.html}[vkCmdDrawIndirectCount2KHR]} *)
 let cmd_draw_indirect_count_2_khr arg_command_buffer arg_info =
   Vk_fn.cmd_draw_indirect_count_2_khr (arg_command_buffer) (addr arg_info);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_info));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdDrawIndexedIndirectCount2KHR.html}[vkCmdDrawIndexedIndirectCount2KHR]} *)
 let cmd_draw_indexed_indirect_count_2_khr arg_command_buffer arg_info =
   Vk_fn.cmd_draw_indexed_indirect_count_2_khr (arg_command_buffer) (addr arg_info);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_info));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdDrawMeshTasksIndirect2EXT.html}[vkCmdDrawMeshTasksIndirect2EXT]} *)
 let cmd_draw_mesh_tasks_indirect_2_ext arg_command_buffer arg_info =
   Vk_fn.cmd_draw_mesh_tasks_indirect_2_ext (arg_command_buffer) (addr arg_info);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_info));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdDrawMeshTasksIndirectCount2EXT.html}[vkCmdDrawMeshTasksIndirectCount2EXT]} *)
 let cmd_draw_mesh_tasks_indirect_count_2_ext arg_command_buffer arg_info =
   Vk_fn.cmd_draw_mesh_tasks_indirect_count_2_ext (arg_command_buffer) (addr arg_info);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_info));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdDispatchIndirect2KHR.html}[vkCmdDispatchIndirect2KHR]} *)
 let cmd_dispatch_indirect_2_khr arg_command_buffer arg_info =
   Vk_fn.cmd_dispatch_indirect_2_khr (arg_command_buffer) (addr arg_info);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_info));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateAccelerationStructure2KHR.html}[vkCreateAccelerationStructure2KHR]} *)
 let create_acceleration_structure_2_khr ?allocator:arg_allocator arg_device arg_create_info =
   let output = allocate (AccelerationStructureKHR.t) (AccelerationStructureKHR.null) in
   let result = Vk_fn.create_acceleration_structure_2_khr (arg_device) (addr arg_create_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
@@ -4984,17 +5717,20 @@ let create_acceleration_structure_2_khr ?allocator:arg_allocator arg_device arg_
   check result;
   !@ output
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPhysicalDeviceQueueFamilyDataGraphEngineOperationPropertiesARM.html}[vkGetPhysicalDeviceQueueFamilyDataGraphEngineOperationPropertiesARM]} *)
 let get_physical_device_queue_family_data_graph_engine_operation_properties_arm arg_physical_device arg_queue_family_index arg_queue_family_data_graph_properties arg_properties =
   let result = Vk_fn.get_physical_device_queue_family_data_graph_engine_operation_properties_arm (arg_physical_device) (arg_queue_family_index) (addr arg_queue_family_data_graph_properties) (addr arg_properties) in
   ignore (Sys.opaque_identity (arg_physical_device, arg_queue_family_index, arg_queue_family_data_graph_properties, arg_properties));
   check result;
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetDispatchParametersARM.html}[vkCmdSetDispatchParametersARM]} *)
 let cmd_set_dispatch_parameters_arm arg_command_buffer arg_dispatch_parameters =
   Vk_fn.cmd_set_dispatch_parameters_arm (arg_command_buffer) (addr arg_dispatch_parameters);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_dispatch_parameters));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPhysicalDeviceQueueFamilyDataGraphOpticalFlowImageFormatsARM.html}[vkGetPhysicalDeviceQueueFamilyDataGraphOpticalFlowImageFormatsARM]} *)
 let get_physical_device_queue_family_data_graph_optical_flow_image_formats_arm arg_physical_device arg_queue_family_index arg_queue_family_data_graph_properties arg_optical_flow_image_format_info =
   let count = allocate Vk_base.uint32 0 in
   let rec fetch () =
@@ -5013,38 +5749,45 @@ let get_physical_device_queue_family_data_graph_optical_flow_image_formats_arm a
   ignore (Sys.opaque_identity (arg_physical_device, arg_queue_family_index, arg_queue_family_data_graph_properties, arg_optical_flow_image_format_info));
   enumeration_result
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkResetQueryPoolEXT.html}[vkResetQueryPoolEXT]} *)
 let reset_query_pool_ext arg_device arg_query_pool arg_first_query arg_query_count =
   Vk_fn.reset_query_pool_ext (arg_device) (arg_query_pool) (arg_first_query) (arg_query_count);
   ignore (Sys.opaque_identity (arg_device, arg_query_pool, arg_first_query, arg_query_count));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetRenderingAreaGranularityKHR.html}[vkGetRenderingAreaGranularityKHR]} *)
 let get_rendering_area_granularity_khr arg_device arg_rendering_area_info =
   let output = Extent2D.make () in
   Vk_fn.get_rendering_area_granularity_khr (arg_device) (addr arg_rendering_area_info) (addr output);
   ignore (Sys.opaque_identity (arg_device, arg_rendering_area_info));
   output
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPhysicalDeviceFeatures2KHR.html}[vkGetPhysicalDeviceFeatures2KHR]} *)
 let get_physical_device_features_2_khr arg_physical_device arg_features =
   Vk_fn.get_physical_device_features_2_khr (arg_physical_device) (addr arg_features);
   ignore (Sys.opaque_identity (arg_physical_device, arg_features));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPhysicalDeviceProperties2KHR.html}[vkGetPhysicalDeviceProperties2KHR]} *)
 let get_physical_device_properties_2_khr arg_physical_device arg_properties =
   Vk_fn.get_physical_device_properties_2_khr (arg_physical_device) (addr arg_properties);
   ignore (Sys.opaque_identity (arg_physical_device, arg_properties));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPhysicalDeviceFormatProperties2KHR.html}[vkGetPhysicalDeviceFormatProperties2KHR]} *)
 let get_physical_device_format_properties_2_khr arg_physical_device arg_format arg_format_properties =
   Vk_fn.get_physical_device_format_properties_2_khr (arg_physical_device) (arg_format) (addr arg_format_properties);
   ignore (Sys.opaque_identity (arg_physical_device, arg_format, arg_format_properties));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPhysicalDeviceImageFormatProperties2KHR.html}[vkGetPhysicalDeviceImageFormatProperties2KHR]} *)
 let get_physical_device_image_format_properties_2_khr arg_physical_device arg_image_format_info arg_image_format_properties =
   let result = Vk_fn.get_physical_device_image_format_properties_2_khr (arg_physical_device) (addr arg_image_format_info) (addr arg_image_format_properties) in
   ignore (Sys.opaque_identity (arg_physical_device, arg_image_format_info, arg_image_format_properties));
   check result;
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPhysicalDeviceQueueFamilyProperties2KHR.html}[vkGetPhysicalDeviceQueueFamilyProperties2KHR]} *)
 let get_physical_device_queue_family_properties_2_khr arg_physical_device =
   let count = allocate Vk_base.uint32 0 in
   let rec fetch () =
@@ -5059,11 +5802,13 @@ let get_physical_device_queue_family_properties_2_khr arg_physical_device =
   ignore (Sys.opaque_identity (arg_physical_device));
   enumeration_result
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPhysicalDeviceMemoryProperties2KHR.html}[vkGetPhysicalDeviceMemoryProperties2KHR]} *)
 let get_physical_device_memory_properties_2_khr arg_physical_device arg_memory_properties =
   Vk_fn.get_physical_device_memory_properties_2_khr (arg_physical_device) (addr arg_memory_properties);
   ignore (Sys.opaque_identity (arg_physical_device, arg_memory_properties));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPhysicalDeviceSparseImageFormatProperties2KHR.html}[vkGetPhysicalDeviceSparseImageFormatProperties2KHR]} *)
 let get_physical_device_sparse_image_format_properties_2_khr arg_physical_device arg_format_info =
   let count = allocate Vk_base.uint32 0 in
   let rec fetch () =
@@ -5078,6 +5823,7 @@ let get_physical_device_sparse_image_format_properties_2_khr arg_physical_device
   ignore (Sys.opaque_identity (arg_physical_device, arg_format_info));
   enumeration_result
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdPushDescriptorSetKHR.html}[vkCmdPushDescriptorSetKHR]} *)
 let cmd_push_descriptor_set_khr arg_command_buffer arg_pipeline_bind_point arg_layout arg_set arg_descriptor_writes =
   let array_descriptor_writes = CArray.of_list (WriteDescriptorSet.t) arg_descriptor_writes in
   let pointer_descriptor_writes = if arg_descriptor_writes = [] then Vk_base.null_ptr (WriteDescriptorSet.t) else CArray.start array_descriptor_writes in
@@ -5085,26 +5831,31 @@ let cmd_push_descriptor_set_khr arg_command_buffer arg_pipeline_bind_point arg_l
   ignore (Sys.opaque_identity (arg_command_buffer, arg_pipeline_bind_point, arg_layout, arg_set, arg_descriptor_writes, array_descriptor_writes));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkTrimCommandPoolKHR.html}[vkTrimCommandPoolKHR]} *)
 let trim_command_pool_khr arg_device arg_command_pool arg_flags =
   Vk_fn.trim_command_pool_khr (arg_device) (arg_command_pool) (arg_flags);
   ignore (Sys.opaque_identity (arg_device, arg_command_pool, arg_flags));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPhysicalDeviceExternalBufferPropertiesKHR.html}[vkGetPhysicalDeviceExternalBufferPropertiesKHR]} *)
 let get_physical_device_external_buffer_properties_khr arg_physical_device arg_external_buffer_info arg_external_buffer_properties =
   Vk_fn.get_physical_device_external_buffer_properties_khr (arg_physical_device) (addr arg_external_buffer_info) (addr arg_external_buffer_properties);
   ignore (Sys.opaque_identity (arg_physical_device, arg_external_buffer_info, arg_external_buffer_properties));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPhysicalDeviceExternalSemaphorePropertiesKHR.html}[vkGetPhysicalDeviceExternalSemaphorePropertiesKHR]} *)
 let get_physical_device_external_semaphore_properties_khr arg_physical_device arg_external_semaphore_info arg_external_semaphore_properties =
   Vk_fn.get_physical_device_external_semaphore_properties_khr (arg_physical_device) (addr arg_external_semaphore_info) (addr arg_external_semaphore_properties);
   ignore (Sys.opaque_identity (arg_physical_device, arg_external_semaphore_info, arg_external_semaphore_properties));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPhysicalDeviceExternalFencePropertiesKHR.html}[vkGetPhysicalDeviceExternalFencePropertiesKHR]} *)
 let get_physical_device_external_fence_properties_khr arg_physical_device arg_external_fence_info arg_external_fence_properties =
   Vk_fn.get_physical_device_external_fence_properties_khr (arg_physical_device) (addr arg_external_fence_info) (addr arg_external_fence_properties);
   ignore (Sys.opaque_identity (arg_physical_device, arg_external_fence_info, arg_external_fence_properties));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkEnumeratePhysicalDeviceGroupsKHR.html}[vkEnumeratePhysicalDeviceGroupsKHR]} *)
 let enumerate_physical_device_groups_khr arg_instance =
   let count = allocate Vk_base.uint32 0 in
   let rec fetch () =
@@ -5123,12 +5874,14 @@ let enumerate_physical_device_groups_khr arg_instance =
   ignore (Sys.opaque_identity (arg_instance));
   enumeration_result
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetDeviceGroupPeerMemoryFeaturesKHR.html}[vkGetDeviceGroupPeerMemoryFeaturesKHR]} *)
 let get_device_group_peer_memory_features_khr arg_device arg_heap_index arg_local_device_index arg_remote_device_index =
   let output = allocate (PeerMemoryFeatureFlags.t) (PeerMemoryFeatureFlags.of_int 0) in
   Vk_fn.get_device_group_peer_memory_features_khr (arg_device) (arg_heap_index) (arg_local_device_index) (arg_remote_device_index) (output);
   ignore (Sys.opaque_identity (arg_device, arg_heap_index, arg_local_device_index, arg_remote_device_index));
   !@ output
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkBindBufferMemory2KHR.html}[vkBindBufferMemory2KHR]} *)
 let bind_buffer_memory_2_khr arg_device arg_bind_infos =
   let array_bind_infos = CArray.of_list (BindBufferMemoryInfo.t) arg_bind_infos in
   let pointer_bind_infos = if arg_bind_infos = [] then Vk_base.null_ptr (BindBufferMemoryInfo.t) else CArray.start array_bind_infos in
@@ -5137,6 +5890,7 @@ let bind_buffer_memory_2_khr arg_device arg_bind_infos =
   check result;
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkBindImageMemory2KHR.html}[vkBindImageMemory2KHR]} *)
 let bind_image_memory_2_khr arg_device arg_bind_infos =
   let array_bind_infos = CArray.of_list (BindImageMemoryInfo.t) arg_bind_infos in
   let pointer_bind_infos = if arg_bind_infos = [] then Vk_base.null_ptr (BindImageMemoryInfo.t) else CArray.start array_bind_infos in
@@ -5145,16 +5899,19 @@ let bind_image_memory_2_khr arg_device arg_bind_infos =
   check result;
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetDeviceMaskKHR.html}[vkCmdSetDeviceMaskKHR]} *)
 let cmd_set_device_mask_khr arg_command_buffer arg_device_mask =
   Vk_fn.cmd_set_device_mask_khr (arg_command_buffer) (arg_device_mask);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_device_mask));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdDispatchBaseKHR.html}[vkCmdDispatchBaseKHR]} *)
 let cmd_dispatch_base_khr arg_command_buffer arg_base_group_x arg_base_group_y arg_base_group_z arg_group_count_x arg_group_count_y arg_group_count_z =
   Vk_fn.cmd_dispatch_base_khr (arg_command_buffer) (arg_base_group_x) (arg_base_group_y) (arg_base_group_z) (arg_group_count_x) (arg_group_count_y) (arg_group_count_z);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_base_group_x, arg_base_group_y, arg_base_group_z, arg_group_count_x, arg_group_count_y, arg_group_count_z));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateDescriptorUpdateTemplateKHR.html}[vkCreateDescriptorUpdateTemplateKHR]} *)
 let create_descriptor_update_template_khr ?allocator:arg_allocator arg_device arg_create_info =
   let output = allocate (DescriptorUpdateTemplate.t) (DescriptorUpdateTemplate.null) in
   let result = Vk_fn.create_descriptor_update_template_khr (arg_device) (addr arg_create_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
@@ -5162,31 +5919,37 @@ let create_descriptor_update_template_khr ?allocator:arg_allocator arg_device ar
   check result;
   !@ output
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkDestroyDescriptorUpdateTemplateKHR.html}[vkDestroyDescriptorUpdateTemplateKHR]} *)
 let destroy_descriptor_update_template_khr arg_device arg_descriptor_update_template ?allocator:arg_allocator () =
   Vk_fn.destroy_descriptor_update_template_khr (arg_device) (arg_descriptor_update_template) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x));
   ignore (Sys.opaque_identity (arg_device, arg_descriptor_update_template, arg_allocator));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkUpdateDescriptorSetWithTemplateKHR.html}[vkUpdateDescriptorSetWithTemplateKHR]} *)
 let update_descriptor_set_with_template_khr arg_device arg_descriptor_set arg_descriptor_update_template arg_data =
   Vk_fn.update_descriptor_set_with_template_khr (arg_device) (arg_descriptor_set) (arg_descriptor_update_template) (arg_data);
   ignore (Sys.opaque_identity (arg_device, arg_descriptor_set, arg_descriptor_update_template, arg_data));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdPushDescriptorSetWithTemplateKHR.html}[vkCmdPushDescriptorSetWithTemplateKHR]} *)
 let cmd_push_descriptor_set_with_template_khr arg_command_buffer arg_descriptor_update_template arg_layout arg_set arg_data =
   Vk_fn.cmd_push_descriptor_set_with_template_khr (arg_command_buffer) (arg_descriptor_update_template) (arg_layout) (arg_set) (arg_data);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_descriptor_update_template, arg_layout, arg_set, arg_data));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetBufferMemoryRequirements2KHR.html}[vkGetBufferMemoryRequirements2KHR]} *)
 let get_buffer_memory_requirements_2_khr arg_device arg_info arg_memory_requirements =
   Vk_fn.get_buffer_memory_requirements_2_khr (arg_device) (addr arg_info) (addr arg_memory_requirements);
   ignore (Sys.opaque_identity (arg_device, arg_info, arg_memory_requirements));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetImageMemoryRequirements2KHR.html}[vkGetImageMemoryRequirements2KHR]} *)
 let get_image_memory_requirements_2_khr arg_device arg_info arg_memory_requirements =
   Vk_fn.get_image_memory_requirements_2_khr (arg_device) (addr arg_info) (addr arg_memory_requirements);
   ignore (Sys.opaque_identity (arg_device, arg_info, arg_memory_requirements));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetImageSparseMemoryRequirements2KHR.html}[vkGetImageSparseMemoryRequirements2KHR]} *)
 let get_image_sparse_memory_requirements_2_khr arg_device arg_info =
   let count = allocate Vk_base.uint32 0 in
   let rec fetch () =
@@ -5201,16 +5964,19 @@ let get_image_sparse_memory_requirements_2_khr arg_device arg_info =
   ignore (Sys.opaque_identity (arg_device, arg_info));
   enumeration_result
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetDeviceBufferMemoryRequirementsKHR.html}[vkGetDeviceBufferMemoryRequirementsKHR]} *)
 let get_device_buffer_memory_requirements_khr arg_device arg_info arg_memory_requirements =
   Vk_fn.get_device_buffer_memory_requirements_khr (arg_device) (addr arg_info) (addr arg_memory_requirements);
   ignore (Sys.opaque_identity (arg_device, arg_info, arg_memory_requirements));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetDeviceImageMemoryRequirementsKHR.html}[vkGetDeviceImageMemoryRequirementsKHR]} *)
 let get_device_image_memory_requirements_khr arg_device arg_info arg_memory_requirements =
   Vk_fn.get_device_image_memory_requirements_khr (arg_device) (addr arg_info) (addr arg_memory_requirements);
   ignore (Sys.opaque_identity (arg_device, arg_info, arg_memory_requirements));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetDeviceImageSparseMemoryRequirementsKHR.html}[vkGetDeviceImageSparseMemoryRequirementsKHR]} *)
 let get_device_image_sparse_memory_requirements_khr arg_device arg_info =
   let count = allocate Vk_base.uint32 0 in
   let rec fetch () =
@@ -5225,6 +5991,7 @@ let get_device_image_sparse_memory_requirements_khr arg_device arg_info =
   ignore (Sys.opaque_identity (arg_device, arg_info));
   enumeration_result
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateSamplerYcbcrConversionKHR.html}[vkCreateSamplerYcbcrConversionKHR]} *)
 let create_sampler_ycbcr_conversion_khr ?allocator:arg_allocator arg_device arg_create_info =
   let output = allocate (SamplerYcbcrConversion.t) (SamplerYcbcrConversion.null) in
   let result = Vk_fn.create_sampler_ycbcr_conversion_khr (arg_device) (addr arg_create_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
@@ -5232,16 +5999,19 @@ let create_sampler_ycbcr_conversion_khr ?allocator:arg_allocator arg_device arg_
   check result;
   !@ output
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkDestroySamplerYcbcrConversionKHR.html}[vkDestroySamplerYcbcrConversionKHR]} *)
 let destroy_sampler_ycbcr_conversion_khr arg_device arg_ycbcr_conversion ?allocator:arg_allocator () =
   Vk_fn.destroy_sampler_ycbcr_conversion_khr (arg_device) (arg_ycbcr_conversion) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x));
   ignore (Sys.opaque_identity (arg_device, arg_ycbcr_conversion, arg_allocator));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetDescriptorSetLayoutSupportKHR.html}[vkGetDescriptorSetLayoutSupportKHR]} *)
 let get_descriptor_set_layout_support_khr arg_device arg_create_info arg_support =
   Vk_fn.get_descriptor_set_layout_support_khr (arg_device) (addr arg_create_info) (addr arg_support);
   ignore (Sys.opaque_identity (arg_device, arg_create_info, arg_support));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPhysicalDeviceCalibrateableTimeDomainsEXT.html}[vkGetPhysicalDeviceCalibrateableTimeDomainsEXT]} *)
 let get_physical_device_calibrateable_time_domains_ext arg_physical_device =
   let count = allocate Vk_base.uint32 0 in
   let rec fetch () =
@@ -5260,6 +6030,7 @@ let get_physical_device_calibrateable_time_domains_ext arg_physical_device =
   ignore (Sys.opaque_identity (arg_physical_device));
   enumeration_result
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetCalibratedTimestampsEXT.html}[vkGetCalibratedTimestampsEXT]} *)
 let get_calibrated_timestamps_ext arg_device arg_timestamp_infos arg_max_deviation =
   let array_timestamp_infos = CArray.of_list (CalibratedTimestampInfoKHR.t) arg_timestamp_infos in
   let pointer_timestamp_infos = if arg_timestamp_infos = [] then Vk_base.null_ptr (CalibratedTimestampInfoKHR.t) else CArray.start array_timestamp_infos in
@@ -5270,6 +6041,7 @@ let get_calibrated_timestamps_ext arg_device arg_timestamp_infos arg_max_deviati
   check result;
   (CArray.to_list storage)
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateRenderPass2KHR.html}[vkCreateRenderPass2KHR]} *)
 let create_render_pass_2_khr ?allocator:arg_allocator arg_device arg_create_info =
   let output = allocate (RenderPass.t) (RenderPass.null) in
   let result = Vk_fn.create_render_pass_2_khr (arg_device) (addr arg_create_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
@@ -5277,21 +6049,25 @@ let create_render_pass_2_khr ?allocator:arg_allocator arg_device arg_create_info
   check result;
   !@ output
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdBeginRenderPass2KHR.html}[vkCmdBeginRenderPass2KHR]} *)
 let cmd_begin_render_pass_2_khr arg_command_buffer arg_render_pass_begin arg_subpass_begin_info =
   Vk_fn.cmd_begin_render_pass_2_khr (arg_command_buffer) (addr arg_render_pass_begin) (addr arg_subpass_begin_info);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_render_pass_begin, arg_subpass_begin_info));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdNextSubpass2KHR.html}[vkCmdNextSubpass2KHR]} *)
 let cmd_next_subpass_2_khr arg_command_buffer arg_subpass_begin_info arg_subpass_end_info =
   Vk_fn.cmd_next_subpass_2_khr (arg_command_buffer) (addr arg_subpass_begin_info) (addr arg_subpass_end_info);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_subpass_begin_info, arg_subpass_end_info));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdEndRenderPass2KHR.html}[vkCmdEndRenderPass2KHR]} *)
 let cmd_end_render_pass_2_khr arg_command_buffer arg_subpass_end_info =
   Vk_fn.cmd_end_render_pass_2_khr (arg_command_buffer) (addr arg_subpass_end_info);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_subpass_end_info));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetSemaphoreCounterValueKHR.html}[vkGetSemaphoreCounterValueKHR]} *)
 let get_semaphore_counter_value_khr arg_device arg_semaphore =
   let output = allocate (Vk_base.uint64) (0) in
   let result = Vk_fn.get_semaphore_counter_value_khr (arg_device) (arg_semaphore) (output) in
@@ -5299,74 +6075,88 @@ let get_semaphore_counter_value_khr arg_device arg_semaphore =
   check result;
   !@ output
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkWaitSemaphoresKHR.html}[vkWaitSemaphoresKHR]} *)
 let wait_semaphores_khr arg_device arg_wait_info arg_timeout =
   let result = Vk_fn.wait_semaphores_khr (arg_device) (addr arg_wait_info) (arg_timeout) in
   ignore (Sys.opaque_identity (arg_device, arg_wait_info, arg_timeout));
   check result;
   result
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkSignalSemaphoreKHR.html}[vkSignalSemaphoreKHR]} *)
 let signal_semaphore_khr arg_device arg_signal_info =
   let result = Vk_fn.signal_semaphore_khr (arg_device) (addr arg_signal_info) in
   ignore (Sys.opaque_identity (arg_device, arg_signal_info));
   check result;
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdDrawIndirectCountKHR.html}[vkCmdDrawIndirectCountKHR]} *)
 let cmd_draw_indirect_count_khr arg_command_buffer arg_buffer arg_offset arg_count_buffer arg_count_buffer_offset arg_max_draw_count arg_stride =
   Vk_fn.cmd_draw_indirect_count_khr (arg_command_buffer) (arg_buffer) (arg_offset) (arg_count_buffer) (arg_count_buffer_offset) (arg_max_draw_count) (arg_stride);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_buffer, arg_offset, arg_count_buffer, arg_count_buffer_offset, arg_max_draw_count, arg_stride));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdDrawIndirectCountAMD.html}[vkCmdDrawIndirectCountAMD]} *)
 let cmd_draw_indirect_count_amd arg_command_buffer arg_buffer arg_offset arg_count_buffer arg_count_buffer_offset arg_max_draw_count arg_stride =
   Vk_fn.cmd_draw_indirect_count_amd (arg_command_buffer) (arg_buffer) (arg_offset) (arg_count_buffer) (arg_count_buffer_offset) (arg_max_draw_count) (arg_stride);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_buffer, arg_offset, arg_count_buffer, arg_count_buffer_offset, arg_max_draw_count, arg_stride));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdDrawIndexedIndirectCountKHR.html}[vkCmdDrawIndexedIndirectCountKHR]} *)
 let cmd_draw_indexed_indirect_count_khr arg_command_buffer arg_buffer arg_offset arg_count_buffer arg_count_buffer_offset arg_max_draw_count arg_stride =
   Vk_fn.cmd_draw_indexed_indirect_count_khr (arg_command_buffer) (arg_buffer) (arg_offset) (arg_count_buffer) (arg_count_buffer_offset) (arg_max_draw_count) (arg_stride);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_buffer, arg_offset, arg_count_buffer, arg_count_buffer_offset, arg_max_draw_count, arg_stride));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdDrawIndexedIndirectCountAMD.html}[vkCmdDrawIndexedIndirectCountAMD]} *)
 let cmd_draw_indexed_indirect_count_amd arg_command_buffer arg_buffer arg_offset arg_count_buffer arg_count_buffer_offset arg_max_draw_count arg_stride =
   Vk_fn.cmd_draw_indexed_indirect_count_amd (arg_command_buffer) (arg_buffer) (arg_offset) (arg_count_buffer) (arg_count_buffer_offset) (arg_max_draw_count) (arg_stride);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_buffer, arg_offset, arg_count_buffer, arg_count_buffer_offset, arg_max_draw_count, arg_stride));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetRayTracingShaderGroupHandlesNV.html}[vkGetRayTracingShaderGroupHandlesNV]} *)
 let get_ray_tracing_shader_group_handles_nv arg_device arg_pipeline arg_first_group arg_group_count arg_data_size arg_data =
   let result = Vk_fn.get_ray_tracing_shader_group_handles_nv (arg_device) (arg_pipeline) (arg_first_group) (arg_group_count) (arg_data_size) (arg_data) in
   ignore (Sys.opaque_identity (arg_device, arg_pipeline, arg_first_group, arg_group_count, arg_data_size, arg_data));
   check result;
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetBufferOpaqueCaptureAddressKHR.html}[vkGetBufferOpaqueCaptureAddressKHR]} *)
 let get_buffer_opaque_capture_address_khr arg_device arg_info =
   let call_result = Vk_fn.get_buffer_opaque_capture_address_khr (arg_device) (addr arg_info) in
   ignore (Sys.opaque_identity (arg_device, arg_info));
   call_result
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetBufferDeviceAddressKHR.html}[vkGetBufferDeviceAddressKHR]} *)
 let get_buffer_device_address_khr arg_device arg_info =
   let call_result = Vk_fn.get_buffer_device_address_khr (arg_device) (addr arg_info) in
   ignore (Sys.opaque_identity (arg_device, arg_info));
   call_result
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetBufferDeviceAddressEXT.html}[vkGetBufferDeviceAddressEXT]} *)
 let get_buffer_device_address_ext arg_device arg_info =
   let call_result = Vk_fn.get_buffer_device_address_ext (arg_device) (addr arg_info) in
   ignore (Sys.opaque_identity (arg_device, arg_info));
   call_result
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetDeviceMemoryOpaqueCaptureAddressKHR.html}[vkGetDeviceMemoryOpaqueCaptureAddressKHR]} *)
 let get_device_memory_opaque_capture_address_khr arg_device arg_info =
   let call_result = Vk_fn.get_device_memory_opaque_capture_address_khr (arg_device) (addr arg_info) in
   ignore (Sys.opaque_identity (arg_device, arg_info));
   call_result
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetLineStippleKHR.html}[vkCmdSetLineStippleKHR]} *)
 let cmd_set_line_stipple_khr arg_command_buffer arg_line_stipple_factor arg_line_stipple_pattern =
   Vk_fn.cmd_set_line_stipple_khr (arg_command_buffer) (arg_line_stipple_factor) (arg_line_stipple_pattern);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_line_stipple_factor, arg_line_stipple_pattern));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetLineStippleEXT.html}[vkCmdSetLineStippleEXT]} *)
 let cmd_set_line_stipple_ext arg_command_buffer arg_line_stipple_factor arg_line_stipple_pattern =
   Vk_fn.cmd_set_line_stipple_ext (arg_command_buffer) (arg_line_stipple_factor) (arg_line_stipple_pattern);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_line_stipple_factor, arg_line_stipple_pattern));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPhysicalDeviceToolPropertiesEXT.html}[vkGetPhysicalDeviceToolPropertiesEXT]} *)
 let get_physical_device_tool_properties_ext arg_physical_device =
   let count = allocate Vk_base.uint32 0 in
   let rec fetch () =
@@ -5385,21 +6175,25 @@ let get_physical_device_tool_properties_ext arg_physical_device =
   ignore (Sys.opaque_identity (arg_physical_device));
   enumeration_result
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetCullModeEXT.html}[vkCmdSetCullModeEXT]} *)
 let cmd_set_cull_mode_ext arg_command_buffer arg_cull_mode =
   Vk_fn.cmd_set_cull_mode_ext (arg_command_buffer) (arg_cull_mode);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_cull_mode));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetFrontFaceEXT.html}[vkCmdSetFrontFaceEXT]} *)
 let cmd_set_front_face_ext arg_command_buffer arg_front_face =
   Vk_fn.cmd_set_front_face_ext (arg_command_buffer) (arg_front_face);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_front_face));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetPrimitiveTopologyEXT.html}[vkCmdSetPrimitiveTopologyEXT]} *)
 let cmd_set_primitive_topology_ext arg_command_buffer arg_primitive_topology =
   Vk_fn.cmd_set_primitive_topology_ext (arg_command_buffer) (arg_primitive_topology);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_primitive_topology));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetViewportWithCountEXT.html}[vkCmdSetViewportWithCountEXT]} *)
 let cmd_set_viewport_with_count_ext arg_command_buffer arg_viewports =
   let array_viewports = CArray.of_list (Viewport.t) arg_viewports in
   let pointer_viewports = if arg_viewports = [] then Vk_base.null_ptr (Viewport.t) else CArray.start array_viewports in
@@ -5407,6 +6201,7 @@ let cmd_set_viewport_with_count_ext arg_command_buffer arg_viewports =
   ignore (Sys.opaque_identity (arg_command_buffer, arg_viewports, array_viewports));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetScissorWithCountEXT.html}[vkCmdSetScissorWithCountEXT]} *)
 let cmd_set_scissor_with_count_ext arg_command_buffer arg_scissors =
   let array_scissors = CArray.of_list (Rect2D.t) arg_scissors in
   let pointer_scissors = if arg_scissors = [] then Vk_base.null_ptr (Rect2D.t) else CArray.start array_scissors in
@@ -5414,11 +6209,13 @@ let cmd_set_scissor_with_count_ext arg_command_buffer arg_scissors =
   ignore (Sys.opaque_identity (arg_command_buffer, arg_scissors, array_scissors));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdBindIndexBuffer2KHR.html}[vkCmdBindIndexBuffer2KHR]} *)
 let cmd_bind_index_buffer_2_khr arg_command_buffer arg_buffer arg_offset arg_size arg_index_type =
   Vk_fn.cmd_bind_index_buffer_2_khr (arg_command_buffer) (arg_buffer) (arg_offset) (arg_size) (arg_index_type);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_buffer, arg_offset, arg_size, arg_index_type));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdBindVertexBuffers2EXT.html}[vkCmdBindVertexBuffers2EXT]} *)
 let cmd_bind_vertex_buffers_2_ext arg_command_buffer arg_first_binding arg_buffers arg_offsets arg_sizes arg_strides =
   let array_buffers = CArray.of_list (Buffer.t) arg_buffers in
   let pointer_buffers = if arg_buffers = [] then Vk_base.null_ptr (Buffer.t) else CArray.start array_buffers in
@@ -5435,51 +6232,61 @@ let cmd_bind_vertex_buffers_2_ext arg_command_buffer arg_first_binding arg_buffe
   ignore (Sys.opaque_identity (arg_command_buffer, arg_first_binding, arg_buffers, array_buffers, arg_offsets, array_offsets, arg_sizes, array_sizes, arg_strides, array_strides));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetDepthTestEnableEXT.html}[vkCmdSetDepthTestEnableEXT]} *)
 let cmd_set_depth_test_enable_ext arg_command_buffer arg_depth_test_enable =
   Vk_fn.cmd_set_depth_test_enable_ext (arg_command_buffer) (arg_depth_test_enable);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_depth_test_enable));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetDepthWriteEnableEXT.html}[vkCmdSetDepthWriteEnableEXT]} *)
 let cmd_set_depth_write_enable_ext arg_command_buffer arg_depth_write_enable =
   Vk_fn.cmd_set_depth_write_enable_ext (arg_command_buffer) (arg_depth_write_enable);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_depth_write_enable));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetDepthCompareOpEXT.html}[vkCmdSetDepthCompareOpEXT]} *)
 let cmd_set_depth_compare_op_ext arg_command_buffer arg_depth_compare_op =
   Vk_fn.cmd_set_depth_compare_op_ext (arg_command_buffer) (arg_depth_compare_op);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_depth_compare_op));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetDepthBoundsTestEnableEXT.html}[vkCmdSetDepthBoundsTestEnableEXT]} *)
 let cmd_set_depth_bounds_test_enable_ext arg_command_buffer arg_depth_bounds_test_enable =
   Vk_fn.cmd_set_depth_bounds_test_enable_ext (arg_command_buffer) (arg_depth_bounds_test_enable);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_depth_bounds_test_enable));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetStencilTestEnableEXT.html}[vkCmdSetStencilTestEnableEXT]} *)
 let cmd_set_stencil_test_enable_ext arg_command_buffer arg_stencil_test_enable =
   Vk_fn.cmd_set_stencil_test_enable_ext (arg_command_buffer) (arg_stencil_test_enable);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_stencil_test_enable));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetStencilOpEXT.html}[vkCmdSetStencilOpEXT]} *)
 let cmd_set_stencil_op_ext arg_command_buffer arg_face_mask arg_fail_op arg_pass_op arg_depth_fail_op arg_compare_op =
   Vk_fn.cmd_set_stencil_op_ext (arg_command_buffer) (arg_face_mask) (arg_fail_op) (arg_pass_op) (arg_depth_fail_op) (arg_compare_op);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_face_mask, arg_fail_op, arg_pass_op, arg_depth_fail_op, arg_compare_op));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetRasterizerDiscardEnableEXT.html}[vkCmdSetRasterizerDiscardEnableEXT]} *)
 let cmd_set_rasterizer_discard_enable_ext arg_command_buffer arg_rasterizer_discard_enable =
   Vk_fn.cmd_set_rasterizer_discard_enable_ext (arg_command_buffer) (arg_rasterizer_discard_enable);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_rasterizer_discard_enable));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetDepthBiasEnableEXT.html}[vkCmdSetDepthBiasEnableEXT]} *)
 let cmd_set_depth_bias_enable_ext arg_command_buffer arg_depth_bias_enable =
   Vk_fn.cmd_set_depth_bias_enable_ext (arg_command_buffer) (arg_depth_bias_enable);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_depth_bias_enable));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetPrimitiveRestartEnableEXT.html}[vkCmdSetPrimitiveRestartEnableEXT]} *)
 let cmd_set_primitive_restart_enable_ext arg_command_buffer arg_primitive_restart_enable =
   Vk_fn.cmd_set_primitive_restart_enable_ext (arg_command_buffer) (arg_primitive_restart_enable);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_primitive_restart_enable));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreatePrivateDataSlotEXT.html}[vkCreatePrivateDataSlotEXT]} *)
 let create_private_data_slot_ext ?allocator:arg_allocator arg_device arg_create_info =
   let output = allocate (PrivateDataSlot.t) (PrivateDataSlot.null) in
   let result = Vk_fn.create_private_data_slot_ext (arg_device) (addr arg_create_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
@@ -5487,63 +6294,75 @@ let create_private_data_slot_ext ?allocator:arg_allocator arg_device arg_create_
   check result;
   !@ output
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkDestroyPrivateDataSlotEXT.html}[vkDestroyPrivateDataSlotEXT]} *)
 let destroy_private_data_slot_ext arg_device arg_private_data_slot ?allocator:arg_allocator () =
   Vk_fn.destroy_private_data_slot_ext (arg_device) (arg_private_data_slot) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x));
   ignore (Sys.opaque_identity (arg_device, arg_private_data_slot, arg_allocator));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkSetPrivateDataEXT.html}[vkSetPrivateDataEXT]} *)
 let set_private_data_ext arg_device arg_object_type arg_object_handle arg_private_data_slot arg_data =
   let result = Vk_fn.set_private_data_ext (arg_device) (arg_object_type) (arg_object_handle) (arg_private_data_slot) (arg_data) in
   ignore (Sys.opaque_identity (arg_device, arg_object_type, arg_object_handle, arg_private_data_slot, arg_data));
   check result;
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPrivateDataEXT.html}[vkGetPrivateDataEXT]} *)
 let get_private_data_ext arg_device arg_object_type arg_object_handle arg_private_data_slot =
   let output = allocate (Vk_base.uint64) (0) in
   Vk_fn.get_private_data_ext (arg_device) (arg_object_type) (arg_object_handle) (arg_private_data_slot) (output);
   ignore (Sys.opaque_identity (arg_device, arg_object_type, arg_object_handle, arg_private_data_slot));
   !@ output
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdCopyBuffer2KHR.html}[vkCmdCopyBuffer2KHR]} *)
 let cmd_copy_buffer_2_khr arg_command_buffer arg_copy_buffer_info =
   Vk_fn.cmd_copy_buffer_2_khr (arg_command_buffer) (addr arg_copy_buffer_info);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_copy_buffer_info));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdCopyImage2KHR.html}[vkCmdCopyImage2KHR]} *)
 let cmd_copy_image_2_khr arg_command_buffer arg_copy_image_info =
   Vk_fn.cmd_copy_image_2_khr (arg_command_buffer) (addr arg_copy_image_info);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_copy_image_info));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdBlitImage2KHR.html}[vkCmdBlitImage2KHR]} *)
 let cmd_blit_image_2_khr arg_command_buffer arg_blit_image_info =
   Vk_fn.cmd_blit_image_2_khr (arg_command_buffer) (addr arg_blit_image_info);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_blit_image_info));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdCopyBufferToImage2KHR.html}[vkCmdCopyBufferToImage2KHR]} *)
 let cmd_copy_buffer_to_image_2_khr arg_command_buffer arg_copy_buffer_to_image_info =
   Vk_fn.cmd_copy_buffer_to_image_2_khr (arg_command_buffer) (addr arg_copy_buffer_to_image_info);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_copy_buffer_to_image_info));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdCopyImageToBuffer2KHR.html}[vkCmdCopyImageToBuffer2KHR]} *)
 let cmd_copy_image_to_buffer_2_khr arg_command_buffer arg_copy_image_to_buffer_info =
   Vk_fn.cmd_copy_image_to_buffer_2_khr (arg_command_buffer) (addr arg_copy_image_to_buffer_info);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_copy_image_to_buffer_info));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdResolveImage2KHR.html}[vkCmdResolveImage2KHR]} *)
 let cmd_resolve_image_2_khr arg_command_buffer arg_resolve_image_info =
   Vk_fn.cmd_resolve_image_2_khr (arg_command_buffer) (addr arg_resolve_image_info);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_resolve_image_info));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetEvent2KHR.html}[vkCmdSetEvent2KHR]} *)
 let cmd_set_event_2_khr arg_command_buffer arg_event arg_dependency_info =
   Vk_fn.cmd_set_event_2_khr (arg_command_buffer) (arg_event) (addr arg_dependency_info);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_event, arg_dependency_info));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdResetEvent2KHR.html}[vkCmdResetEvent2KHR]} *)
 let cmd_reset_event_2_khr arg_command_buffer arg_event arg_stage_mask =
   Vk_fn.cmd_reset_event_2_khr (arg_command_buffer) (arg_event) (arg_stage_mask);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_event, arg_stage_mask));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdWaitEvents2KHR.html}[vkCmdWaitEvents2KHR]} *)
 let cmd_wait_events_2_khr arg_command_buffer arg_events arg_dependency_infos =
   let array_events = CArray.of_list (Event.t) arg_events in
   let pointer_events = if arg_events = [] then Vk_base.null_ptr (Event.t) else CArray.start array_events in
@@ -5554,11 +6373,13 @@ let cmd_wait_events_2_khr arg_command_buffer arg_events arg_dependency_infos =
   ignore (Sys.opaque_identity (arg_command_buffer, arg_events, array_events, arg_dependency_infos, array_dependency_infos));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdPipelineBarrier2KHR.html}[vkCmdPipelineBarrier2KHR]} *)
 let cmd_pipeline_barrier_2_khr arg_command_buffer arg_dependency_info =
   Vk_fn.cmd_pipeline_barrier_2_khr (arg_command_buffer) (addr arg_dependency_info);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_dependency_info));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkQueueSubmit2KHR.html}[vkQueueSubmit2KHR]} *)
 let queue_submit_2_khr arg_queue arg_submits arg_fence =
   let array_submits = CArray.of_list (SubmitInfo2.t) arg_submits in
   let pointer_submits = if arg_submits = [] then Vk_base.null_ptr (SubmitInfo2.t) else CArray.start array_submits in
@@ -5567,29 +6388,34 @@ let queue_submit_2_khr arg_queue arg_submits arg_fence =
   check result;
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdWriteTimestamp2KHR.html}[vkCmdWriteTimestamp2KHR]} *)
 let cmd_write_timestamp_2_khr arg_command_buffer arg_stage arg_query_pool arg_query =
   Vk_fn.cmd_write_timestamp_2_khr (arg_command_buffer) (arg_stage) (arg_query_pool) (arg_query);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_stage, arg_query_pool, arg_query));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCopyMemoryToImageEXT.html}[vkCopyMemoryToImageEXT]} *)
 let copy_memory_to_image_ext arg_device arg_copy_memory_to_image_info =
   let result = Vk_fn.copy_memory_to_image_ext (arg_device) (addr arg_copy_memory_to_image_info) in
   ignore (Sys.opaque_identity (arg_device, arg_copy_memory_to_image_info));
   check result;
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCopyImageToMemoryEXT.html}[vkCopyImageToMemoryEXT]} *)
 let copy_image_to_memory_ext arg_device arg_copy_image_to_memory_info =
   let result = Vk_fn.copy_image_to_memory_ext (arg_device) (addr arg_copy_image_to_memory_info) in
   ignore (Sys.opaque_identity (arg_device, arg_copy_image_to_memory_info));
   check result;
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCopyImageToImageEXT.html}[vkCopyImageToImageEXT]} *)
 let copy_image_to_image_ext arg_device arg_copy_image_to_image_info =
   let result = Vk_fn.copy_image_to_image_ext (arg_device) (addr arg_copy_image_to_image_info) in
   ignore (Sys.opaque_identity (arg_device, arg_copy_image_to_image_info));
   check result;
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkTransitionImageLayoutEXT.html}[vkTransitionImageLayoutEXT]} *)
 let transition_image_layout_ext arg_device arg_transitions =
   let array_transitions = CArray.of_list (HostImageLayoutTransitionInfo.t) arg_transitions in
   let pointer_transitions = if arg_transitions = [] then Vk_base.null_ptr (HostImageLayoutTransitionInfo.t) else CArray.start array_transitions in
@@ -5598,42 +6424,50 @@ let transition_image_layout_ext arg_device arg_transitions =
   check result;
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdBeginRenderingKHR.html}[vkCmdBeginRenderingKHR]} *)
 let cmd_begin_rendering_khr arg_command_buffer arg_rendering_info =
   Vk_fn.cmd_begin_rendering_khr (arg_command_buffer) (addr arg_rendering_info);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_rendering_info));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdEndRendering2EXT.html}[vkCmdEndRendering2EXT]} *)
 let cmd_end_rendering_2_ext arg_command_buffer arg_rendering_end_info =
   Vk_fn.cmd_end_rendering_2_ext (arg_command_buffer) (addr arg_rendering_end_info);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_rendering_end_info));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdEndRenderingKHR.html}[vkCmdEndRenderingKHR]} *)
 let cmd_end_rendering_khr arg_command_buffer =
   Vk_fn.cmd_end_rendering_khr (arg_command_buffer);
   ignore (Sys.opaque_identity (arg_command_buffer));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetImageSubresourceLayout2KHR.html}[vkGetImageSubresourceLayout2KHR]} *)
 let get_image_subresource_layout_2_khr arg_device arg_image arg_subresource arg_layout =
   Vk_fn.get_image_subresource_layout_2_khr (arg_device) (arg_image) (addr arg_subresource) (addr arg_layout);
   ignore (Sys.opaque_identity (arg_device, arg_image, arg_subresource, arg_layout));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetImageSubresourceLayout2EXT.html}[vkGetImageSubresourceLayout2EXT]} *)
 let get_image_subresource_layout_2_ext arg_device arg_image arg_subresource arg_layout =
   Vk_fn.get_image_subresource_layout_2_ext (arg_device) (arg_image) (addr arg_subresource) (addr arg_layout);
   ignore (Sys.opaque_identity (arg_device, arg_image, arg_subresource, arg_layout));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkReleaseSwapchainImagesEXT.html}[vkReleaseSwapchainImagesEXT]} *)
 let release_swapchain_images_ext arg_device arg_release_info =
   let result = Vk_fn.release_swapchain_images_ext (arg_device) (addr arg_release_info) in
   ignore (Sys.opaque_identity (arg_device, arg_release_info));
   check result;
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetDeviceImageSubresourceLayoutKHR.html}[vkGetDeviceImageSubresourceLayoutKHR]} *)
 let get_device_image_subresource_layout_khr arg_device arg_info arg_layout =
   Vk_fn.get_device_image_subresource_layout_khr (arg_device) (addr arg_info) (addr arg_layout);
   ignore (Sys.opaque_identity (arg_device, arg_info, arg_layout));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkMapMemory2KHR.html}[vkMapMemory2KHR]} *)
 let map_memory_2_khr arg_device arg_memory_map_info =
   let output = allocate (ptr (Ctypes.void)) (Vk_base.null_ptr (Ctypes.void)) in
   let result = Vk_fn.map_memory_2_khr (arg_device) (addr arg_memory_map_info) (output) in
@@ -5641,37 +6475,44 @@ let map_memory_2_khr arg_device arg_memory_map_info =
   check result;
   !@ output
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkUnmapMemory2KHR.html}[vkUnmapMemory2KHR]} *)
 let unmap_memory_2_khr arg_device arg_memory_unmap_info =
   let result = Vk_fn.unmap_memory_2_khr (arg_device) (addr arg_memory_unmap_info) in
   ignore (Sys.opaque_identity (arg_device, arg_memory_unmap_info));
   check result;
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdBindDescriptorSets2KHR.html}[vkCmdBindDescriptorSets2KHR]} *)
 let cmd_bind_descriptor_sets_2_khr arg_command_buffer arg_bind_descriptor_sets_info =
   Vk_fn.cmd_bind_descriptor_sets_2_khr (arg_command_buffer) (addr arg_bind_descriptor_sets_info);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_bind_descriptor_sets_info));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdPushConstants2KHR.html}[vkCmdPushConstants2KHR]} *)
 let cmd_push_constants_2_khr arg_command_buffer arg_push_constants_info =
   Vk_fn.cmd_push_constants_2_khr (arg_command_buffer) (addr arg_push_constants_info);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_push_constants_info));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdPushDescriptorSet2KHR.html}[vkCmdPushDescriptorSet2KHR]} *)
 let cmd_push_descriptor_set_2_khr arg_command_buffer arg_push_descriptor_set_info =
   Vk_fn.cmd_push_descriptor_set_2_khr (arg_command_buffer) (addr arg_push_descriptor_set_info);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_push_descriptor_set_info));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdPushDescriptorSetWithTemplate2KHR.html}[vkCmdPushDescriptorSetWithTemplate2KHR]} *)
 let cmd_push_descriptor_set_with_template_2_khr arg_command_buffer arg_push_descriptor_set_with_template_info =
   Vk_fn.cmd_push_descriptor_set_with_template_2_khr (arg_command_buffer) (addr arg_push_descriptor_set_with_template_info);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_push_descriptor_set_with_template_info));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetRenderingAttachmentLocationsKHR.html}[vkCmdSetRenderingAttachmentLocationsKHR]} *)
 let cmd_set_rendering_attachment_locations_khr arg_command_buffer arg_location_info =
   Vk_fn.cmd_set_rendering_attachment_locations_khr (arg_command_buffer) (addr arg_location_info);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_location_info));
   ()
 
+(** Wrapper for {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetRenderingInputAttachmentIndicesKHR.html}[vkCmdSetRenderingInputAttachmentIndicesKHR]} *)
 let cmd_set_rendering_input_attachment_indices_khr arg_command_buffer arg_input_attachment_index_info =
   Vk_fn.cmd_set_rendering_input_attachment_indices_khr (arg_command_buffer) (addr arg_input_attachment_index_info);
   ignore (Sys.opaque_identity (arg_command_buffer, arg_input_attachment_index_info));

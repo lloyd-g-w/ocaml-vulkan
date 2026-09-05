@@ -3,7 +3,7 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from .emit_common import Context, ocaml_int, resolve_enum_values, write_generated
+from .emit_common import Context, ocaml_int, resolve_enum_values, spec_doc, write_generated
 from . import naming
 from .registry import EnumValue
 
@@ -11,7 +11,8 @@ from .registry import EnumValue
 def _module(ctx: Context, ctype: str, module: str, values: list[EnumValue],
             *, flags: bool, bitwidth: int) -> str:
     functor = ("Flags" if flags else "Enum") + ("64" if bitwidth == 64 else "32")
-    lines = [f"module {module} = struct", f"  include Vk_base.{functor} ()", f"  let () = set_type_name \"{module}\""]
+    lines = [spec_doc(ctype, ("Flags " if flags else "Enum ")),
+             f"module {module} = struct", f"  include Vk_base.{functor} ()", f"  let () = set_type_name \"{module}\""]
     used: dict[str, int] = {}
     constants: list[tuple[str, str]] = []
     for value, number in resolve_enum_values(ctx, values):
@@ -63,10 +64,10 @@ def emit(ctx: Context, out: Path) -> None:
 
     for name, enum in registry.enums.items():
         if enum.alias and enum.alias in registry.enums:
-            sections.append(f"module {naming.module_name(name)} = {ctx.enum_module(enum.alias)}")
+            sections.append(spec_doc(name, "Alias of ") + f"\nmodule {naming.module_name(name)} = {ctx.enum_module(enum.alias)}")
     for name, bitmask in registry.bitmasks.items():
         if bitmask.alias and bitmask.alias in registry.bitmasks:
-            sections.append(f"module {naming.module_name(name)} = {naming.module_name(bitmask.alias)}")
+            sections.append(spec_doc(name, "Alias of ") + f"\nmodule {naming.module_name(name)} = {naming.module_name(bitmask.alias)}")
 
     if "VkResult" in registry.enums:
         sections.append("""exception Error of Result.t

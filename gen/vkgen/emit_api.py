@@ -9,7 +9,7 @@ from __future__ import annotations
 from dataclasses import dataclass, replace
 from pathlib import Path
 
-from .emit_common import Context, write_generated
+from .emit_common import Context, spec_doc, write_generated
 from . import naming
 from .registry import Command, Member
 
@@ -275,7 +275,8 @@ def _function_head(command: Command, args: list[Arg], name: str, *, destructor: 
         declarations = [a.declaration for a in optionals] + [a.declaration for a in required]
         if not required:
             declarations.append("()")
-    return f"let {name} {' '.join(declarations)} ="
+    doc = spec_doc(command.name, "Wrapper for ")
+    return f"{doc}\nlet {name} {' '.join(declarations)} ="
 
 
 def _call(command: Command, by_param: dict[str, Arg], overrides: dict[str, str] | None = None) -> str:

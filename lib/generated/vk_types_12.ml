@@ -16,6 +16,7 @@ open Vk_types_09
 open Vk_types_10
 open Vk_types_11
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkTensorDependencyInfoARM.html}[VkTensorDependencyInfoARM]} *)
 module TensorDependencyInfoARM = struct
   type t
   let t : t structure typ = structure "VkTensorDependencyInfoARM"
@@ -47,6 +48,7 @@ module TensorDependencyInfoARM = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkTexelBufferDescriptorInfoEXT.html}[VkTexelBufferDescriptorInfoEXT]} *)
 module TexelBufferDescriptorInfoEXT = struct
   type t
   let t : t structure typ = structure "VkTexelBufferDescriptorInfoEXT"
@@ -72,6 +74,7 @@ module TexelBufferDescriptorInfoEXT = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkTilePropertiesQCOM.html}[VkTilePropertiesQCOM]} *)
 module TilePropertiesQCOM = struct
   type t
   let t : t structure typ = structure "VkTilePropertiesQCOM"
@@ -100,6 +103,7 @@ module TilePropertiesQCOM = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkVideoCapabilitiesKHR.html}[VkVideoCapabilitiesKHR]} *)
 module VideoCapabilitiesKHR = struct
   type t
   let t : t structure typ = structure "VkVideoCapabilitiesKHR"
@@ -137,6 +141,7 @@ module VideoCapabilitiesKHR = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkVideoDecodeH264CapabilitiesKHR.html}[VkVideoDecodeH264CapabilitiesKHR]} *)
 module VideoDecodeH264CapabilitiesKHR = struct
   type t
   let t : t structure typ = structure "VkVideoDecodeH264CapabilitiesKHR"
@@ -160,6 +165,7 @@ module VideoDecodeH264CapabilitiesKHR = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkVideoDecodeH264SessionParametersCreateInfoKHR.html}[VkVideoDecodeH264SessionParametersCreateInfoKHR]} *)
 module VideoDecodeH264SessionParametersCreateInfoKHR = struct
   type t
   let t : t structure typ = structure "VkVideoDecodeH264SessionParametersCreateInfoKHR"
@@ -190,6 +196,7 @@ module VideoDecodeH264SessionParametersCreateInfoKHR = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkVideoDecodeH265SessionParametersCreateInfoKHR.html}[VkVideoDecodeH265SessionParametersCreateInfoKHR]} *)
 module VideoDecodeH265SessionParametersCreateInfoKHR = struct
   type t
   let t : t structure typ = structure "VkVideoDecodeH265SessionParametersCreateInfoKHR"
@@ -223,6 +230,7 @@ module VideoDecodeH265SessionParametersCreateInfoKHR = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkVideoEncodeAV1CapabilitiesKHR.html}[VkVideoEncodeAV1CapabilitiesKHR]} *)
 module VideoEncodeAV1CapabilitiesKHR = struct
   type t
   let t : t structure typ = structure "VkVideoEncodeAV1CapabilitiesKHR"
@@ -290,6 +298,7 @@ module VideoEncodeAV1CapabilitiesKHR = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkVideoEncodeAV1QualityLevelPropertiesKHR.html}[VkVideoEncodeAV1QualityLevelPropertiesKHR]} *)
 module VideoEncodeAV1QualityLevelPropertiesKHR = struct
   type t
   let t : t structure typ = structure "VkVideoEncodeAV1QualityLevelPropertiesKHR"
@@ -339,6 +348,7 @@ module VideoEncodeAV1QualityLevelPropertiesKHR = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkVideoEncodeAV1RateControlLayerInfoKHR.html}[VkVideoEncodeAV1RateControlLayerInfoKHR]} *)
 module VideoEncodeAV1RateControlLayerInfoKHR = struct
   type t
   let t : t structure typ = structure "VkVideoEncodeAV1RateControlLayerInfoKHR"
@@ -376,6 +386,7 @@ module VideoEncodeAV1RateControlLayerInfoKHR = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkVideoEncodeCapabilitiesKHR.html}[VkVideoEncodeCapabilitiesKHR]} *)
 module VideoEncodeCapabilitiesKHR = struct
   type t
   let t : t structure typ = structure "VkVideoEncodeCapabilitiesKHR"
@@ -409,6 +420,7 @@ module VideoEncodeCapabilitiesKHR = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkVideoEncodeH264PictureInfoKHR.html}[VkVideoEncodeH264PictureInfoKHR]} *)
 module VideoEncodeH264PictureInfoKHR = struct
   type t
   let t : t structure typ = structure "VkVideoEncodeH264PictureInfoKHR"
@@ -446,6 +458,7 @@ module VideoEncodeH264PictureInfoKHR = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkVideoEncodeH264QualityLevelPropertiesKHR.html}[VkVideoEncodeH264QualityLevelPropertiesKHR]} *)
 module VideoEncodeH264QualityLevelPropertiesKHR = struct
   type t
   let t : t structure typ = structure "VkVideoEncodeH264QualityLevelPropertiesKHR"
@@ -483,6 +496,7 @@ module VideoEncodeH264QualityLevelPropertiesKHR = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkVideoEncodeH264RateControlLayerInfoKHR.html}[VkVideoEncodeH264RateControlLayerInfoKHR]} *)
 module VideoEncodeH264RateControlLayerInfoKHR = struct
   type t
   let t : t structure typ = structure "VkVideoEncodeH264RateControlLayerInfoKHR"
@@ -520,6 +534,7 @@ module VideoEncodeH264RateControlLayerInfoKHR = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkVideoEncodeH264SessionParametersCreateInfoKHR.html}[VkVideoEncodeH264SessionParametersCreateInfoKHR]} *)
 module VideoEncodeH264SessionParametersCreateInfoKHR = struct
   type t
   let t : t structure typ = structure "VkVideoEncodeH264SessionParametersCreateInfoKHR"
@@ -550,6 +565,7 @@ module VideoEncodeH264SessionParametersCreateInfoKHR = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkVideoEncodeH265CapabilitiesKHR.html}[VkVideoEncodeH265CapabilitiesKHR]} *)
 module VideoEncodeH265CapabilitiesKHR = struct
   type t
   let t : t structure typ = structure "VkVideoEncodeH265CapabilitiesKHR"
@@ -601,6 +617,7 @@ module VideoEncodeH265CapabilitiesKHR = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkVideoEncodeH265PictureInfoKHR.html}[VkVideoEncodeH265PictureInfoKHR]} *)
 module VideoEncodeH265PictureInfoKHR = struct
   type t
   let t : t structure typ = structure "VkVideoEncodeH265PictureInfoKHR"
@@ -635,6 +652,7 @@ module VideoEncodeH265PictureInfoKHR = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkVideoEncodeH265QualityLevelPropertiesKHR.html}[VkVideoEncodeH265QualityLevelPropertiesKHR]} *)
 module VideoEncodeH265QualityLevelPropertiesKHR = struct
   type t
   let t : t structure typ = structure "VkVideoEncodeH265QualityLevelPropertiesKHR"
@@ -670,6 +688,7 @@ module VideoEncodeH265QualityLevelPropertiesKHR = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkVideoEncodeH265RateControlLayerInfoKHR.html}[VkVideoEncodeH265RateControlLayerInfoKHR]} *)
 module VideoEncodeH265RateControlLayerInfoKHR = struct
   type t
   let t : t structure typ = structure "VkVideoEncodeH265RateControlLayerInfoKHR"
@@ -707,6 +726,7 @@ module VideoEncodeH265RateControlLayerInfoKHR = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkVideoEncodeH265SessionParametersCreateInfoKHR.html}[VkVideoEncodeH265SessionParametersCreateInfoKHR]} *)
 module VideoEncodeH265SessionParametersCreateInfoKHR = struct
   type t
   let t : t structure typ = structure "VkVideoEncodeH265SessionParametersCreateInfoKHR"
@@ -740,6 +760,7 @@ module VideoEncodeH265SessionParametersCreateInfoKHR = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkVideoEncodeQuantizationMapCapabilitiesKHR.html}[VkVideoEncodeQuantizationMapCapabilitiesKHR]} *)
 module VideoEncodeQuantizationMapCapabilitiesKHR = struct
   type t
   let t : t structure typ = structure "VkVideoEncodeQuantizationMapCapabilitiesKHR"
@@ -761,6 +782,7 @@ module VideoEncodeQuantizationMapCapabilitiesKHR = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkVideoEncodeQuantizationMapInfoKHR.html}[VkVideoEncodeQuantizationMapInfoKHR]} *)
 module VideoEncodeQuantizationMapInfoKHR = struct
   type t
   let t : t structure typ = structure "VkVideoEncodeQuantizationMapInfoKHR"
@@ -786,6 +808,7 @@ module VideoEncodeQuantizationMapInfoKHR = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkVideoEncodeQuantizationMapSessionParametersCreateInfoKHR.html}[VkVideoEncodeQuantizationMapSessionParametersCreateInfoKHR]} *)
 module VideoEncodeQuantizationMapSessionParametersCreateInfoKHR = struct
   type t
   let t : t structure typ = structure "VkVideoEncodeQuantizationMapSessionParametersCreateInfoKHR"
@@ -808,6 +831,7 @@ module VideoEncodeQuantizationMapSessionParametersCreateInfoKHR = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkVideoEncodeRateControlInfoKHR.html}[VkVideoEncodeRateControlInfoKHR]} *)
 module VideoEncodeRateControlInfoKHR = struct
   type t
   let t : t structure typ = structure "VkVideoEncodeRateControlInfoKHR"
@@ -851,6 +875,7 @@ module VideoEncodeRateControlInfoKHR = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkVideoFormatPropertiesKHR.html}[VkVideoFormatPropertiesKHR]} *)
 module VideoFormatPropertiesKHR = struct
   type t
   let t : t structure typ = structure "VkVideoFormatPropertiesKHR"
@@ -882,6 +907,7 @@ module VideoFormatPropertiesKHR = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkVideoFormatQuantizationMapPropertiesKHR.html}[VkVideoFormatQuantizationMapPropertiesKHR]} *)
 module VideoFormatQuantizationMapPropertiesKHR = struct
   type t
   let t : t structure typ = structure "VkVideoFormatQuantizationMapPropertiesKHR"
@@ -903,6 +929,7 @@ module VideoFormatQuantizationMapPropertiesKHR = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkVideoPictureResourceInfoKHR.html}[VkVideoPictureResourceInfoKHR]} *)
 module VideoPictureResourceInfoKHR = struct
   type t
   let t : t structure typ = structure "VkVideoPictureResourceInfoKHR"
@@ -934,6 +961,7 @@ module VideoPictureResourceInfoKHR = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkVideoProfileListInfoKHR.html}[VkVideoProfileListInfoKHR]} *)
 module VideoProfileListInfoKHR = struct
   type t
   let t : t structure typ = structure "VkVideoProfileListInfoKHR"
@@ -965,6 +993,7 @@ module VideoProfileListInfoKHR = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkVideoSessionCreateInfoKHR.html}[VkVideoSessionCreateInfoKHR]} *)
 module VideoSessionCreateInfoKHR = struct
   type t
   let t : t structure typ = structure "VkVideoSessionCreateInfoKHR"
@@ -1015,6 +1044,7 @@ module VideoSessionCreateInfoKHR = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkVideoSessionMemoryRequirementsKHR.html}[VkVideoSessionMemoryRequirementsKHR]} *)
 module VideoSessionMemoryRequirementsKHR = struct
   type t
   let t : t structure typ = structure "VkVideoSessionMemoryRequirementsKHR"
@@ -1038,6 +1068,7 @@ module VideoSessionMemoryRequirementsKHR = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkWriteDescriptorSet.html}[VkWriteDescriptorSet]} *)
 module WriteDescriptorSet = struct
   type t
   let t : t structure typ = structure "VkWriteDescriptorSet"
@@ -1097,6 +1128,7 @@ module WriteDescriptorSet = struct
     value
 end
 
+(** Function pointer {{:https://registry.khronos.org/vulkan/specs/latest/man/html/PFN_vkDebugUtilsMessengerCallbackEXT.html}[PFN_vkDebugUtilsMessengerCallbackEXT]} *)
 module PfnDebugUtilsMessengerCallbackEXT = struct
   type fn = DebugUtilsMessageSeverityFlagsEXT.t -> DebugUtilsMessageTypeFlagsEXT.t -> DebugUtilsMessengerCallbackDataEXT.t Ctypes.structure Ctypes.ptr -> unit Ctypes.ptr -> bool
   let signature = DebugUtilsMessageSeverityFlagsEXT.t @-> DebugUtilsMessageTypeFlagsEXT.t @-> ptr (DebugUtilsMessengerCallbackDataEXT.t) @-> ptr (Ctypes.void) @-> returning (Vk_base.bool32)
@@ -1104,6 +1136,7 @@ module PfnDebugUtilsMessengerCallbackEXT = struct
   let opt : fn option typ = Foreign.funptr_opt signature
 end
 
+(** Union {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkAccelerationStructureGeometryDataKHR.html}[VkAccelerationStructureGeometryDataKHR]} *)
 module AccelerationStructureGeometryDataKHR = struct
   type t
   let t : t union typ = union "VkAccelerationStructureGeometryDataKHR"
@@ -1119,6 +1152,7 @@ module AccelerationStructureGeometryDataKHR = struct
   let instances x = let value = make t in setf value _instances x; value
 end
 
+(** Union {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkAccelerationStructureMotionInstanceDataNV.html}[VkAccelerationStructureMotionInstanceDataNV]} *)
 module AccelerationStructureMotionInstanceDataNV = struct
   type t
   let t : t union typ = union "VkAccelerationStructureMotionInstanceDataNV"
@@ -1134,6 +1168,7 @@ module AccelerationStructureMotionInstanceDataNV = struct
   let srt_motion_instance x = let value = make t in setf value _srt_motion_instance x; value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkAttachmentSampleLocationsEXT.html}[VkAttachmentSampleLocationsEXT]} *)
 module AttachmentSampleLocationsEXT = struct
   type t
   let t : t structure typ = structure "VkAttachmentSampleLocationsEXT"
@@ -1151,6 +1186,7 @@ module AttachmentSampleLocationsEXT = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkBindImageMemoryDeviceGroupInfo.html}[VkBindImageMemoryDeviceGroupInfo]} *)
 module BindImageMemoryDeviceGroupInfo = struct
   type t
   let t : t structure typ = structure "VkBindImageMemoryDeviceGroupInfo"
@@ -1194,6 +1230,7 @@ module BindImageMemoryDeviceGroupInfo = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkBlitImageInfo2.html}[VkBlitImageInfo2]} *)
 module BlitImageInfo2 = struct
   type t
   let t : t structure typ = structure "VkBlitImageInfo2"
@@ -1240,6 +1277,7 @@ module BlitImageInfo2 = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkClearAttachment.html}[VkClearAttachment]} *)
 module ClearAttachment = struct
   type t
   let t : t structure typ = structure "VkClearAttachment"
@@ -1260,6 +1298,7 @@ module ClearAttachment = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkClearRect.html}[VkClearRect]} *)
 module ClearRect = struct
   type t
   let t : t structure typ = structure "VkClearRect"
@@ -1280,6 +1319,7 @@ module ClearRect = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkClusterAccelerationStructureInputInfoNV.html}[VkClusterAccelerationStructureInputInfoNV]} *)
 module ClusterAccelerationStructureInputInfoNV = struct
   type t
   let t : t structure typ = structure "VkClusterAccelerationStructureInputInfoNV"
@@ -1314,6 +1354,7 @@ module ClusterAccelerationStructureInputInfoNV = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkCommandBufferInheritanceDescriptorHeapInfoEXT.html}[VkCommandBufferInheritanceDescriptorHeapInfoEXT]} *)
 module CommandBufferInheritanceDescriptorHeapInfoEXT = struct
   type t
   let t : t structure typ = structure "VkCommandBufferInheritanceDescriptorHeapInfoEXT"
@@ -1343,6 +1384,7 @@ module CommandBufferInheritanceDescriptorHeapInfoEXT = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkCommandBufferInheritanceRenderPassTransformInfoQCOM.html}[VkCommandBufferInheritanceRenderPassTransformInfoQCOM]} *)
 module CommandBufferInheritanceRenderPassTransformInfoQCOM = struct
   type t
   let t : t structure typ = structure "VkCommandBufferInheritanceRenderPassTransformInfoQCOM"
@@ -1368,6 +1410,7 @@ module CommandBufferInheritanceRenderPassTransformInfoQCOM = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkCopyBufferToImageInfo2.html}[VkCopyBufferToImageInfo2]} *)
 module CopyBufferToImageInfo2 = struct
   type t
   let t : t structure typ = structure "VkCopyBufferToImageInfo2"
@@ -1408,6 +1451,7 @@ module CopyBufferToImageInfo2 = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkCopyDeviceMemoryImageInfoKHR.html}[VkCopyDeviceMemoryImageInfoKHR]} *)
 module CopyDeviceMemoryImageInfoKHR = struct
   type t
   let t : t structure typ = structure "VkCopyDeviceMemoryImageInfoKHR"
@@ -1442,6 +1486,7 @@ module CopyDeviceMemoryImageInfoKHR = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkCopyDeviceMemoryInfoKHR.html}[VkCopyDeviceMemoryInfoKHR]} *)
 module CopyDeviceMemoryInfoKHR = struct
   type t
   let t : t structure typ = structure "VkCopyDeviceMemoryInfoKHR"
@@ -1473,6 +1518,7 @@ module CopyDeviceMemoryInfoKHR = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkCopyImageInfo2.html}[VkCopyImageInfo2]} *)
 module CopyImageInfo2 = struct
   type t
   let t : t structure typ = structure "VkCopyImageInfo2"
@@ -1516,6 +1562,7 @@ module CopyImageInfo2 = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkCopyImageToBufferInfo2.html}[VkCopyImageToBufferInfo2]} *)
 module CopyImageToBufferInfo2 = struct
   type t
   let t : t structure typ = structure "VkCopyImageToBufferInfo2"
@@ -1556,6 +1603,7 @@ module CopyImageToBufferInfo2 = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkCopyImageToImageInfo.html}[VkCopyImageToImageInfo]} *)
 module CopyImageToImageInfo = struct
   type t
   let t : t structure typ = structure "VkCopyImageToImageInfo"
@@ -1602,6 +1650,7 @@ module CopyImageToImageInfo = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkCopyImageToMemoryInfo.html}[VkCopyImageToMemoryInfo]} *)
 module CopyImageToMemoryInfo = struct
   type t
   let t : t structure typ = structure "VkCopyImageToMemoryInfo"
@@ -1642,6 +1691,7 @@ module CopyImageToMemoryInfo = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkCopyMemoryToImageInfo.html}[VkCopyMemoryToImageInfo]} *)
 module CopyMemoryToImageInfo = struct
   type t
   let t : t structure typ = structure "VkCopyMemoryToImageInfo"
@@ -1682,6 +1732,7 @@ module CopyMemoryToImageInfo = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkDataGraphPipelineShaderModuleCreateInfoARM.html}[VkDataGraphPipelineShaderModuleCreateInfoARM]} *)
 module DataGraphPipelineShaderModuleCreateInfoARM = struct
   type t
   let t : t structure typ = structure "VkDataGraphPipelineShaderModuleCreateInfoARM"
@@ -1727,6 +1778,7 @@ module DataGraphPipelineShaderModuleCreateInfoARM = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkDependencyInfo.html}[VkDependencyInfo]} *)
 module DependencyInfo = struct
   type t
   let t : t structure typ = structure "VkDependencyInfo"
@@ -1785,6 +1837,7 @@ module DependencyInfo = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkDescriptorGetInfoEXT.html}[VkDescriptorGetInfoEXT]} *)
 module DescriptorGetInfoEXT = struct
   type t
   let t : t structure typ = structure "VkDescriptorGetInfoEXT"
@@ -1810,6 +1863,7 @@ module DescriptorGetInfoEXT = struct
     value
 end
 
+(** Union {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkDescriptorMappingSourceDataEXT.html}[VkDescriptorMappingSourceDataEXT]} *)
 module DescriptorMappingSourceDataEXT = struct
   type t
   let t : t union typ = union "VkDescriptorMappingSourceDataEXT"
@@ -1849,6 +1903,7 @@ module DescriptorMappingSourceDataEXT = struct
   let shader_record_address_offset x = let value = make t in setf value _shader_record_address_offset x; value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkDeviceDeviceMemoryReportCreateInfoEXT.html}[VkDeviceDeviceMemoryReportCreateInfoEXT]} *)
 module DeviceDeviceMemoryReportCreateInfoEXT = struct
   type t
   let t : t structure typ = structure "VkDeviceDeviceMemoryReportCreateInfoEXT"
@@ -1879,6 +1934,7 @@ module DeviceDeviceMemoryReportCreateInfoEXT = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkDeviceGroupRenderPassBeginInfo.html}[VkDeviceGroupRenderPassBeginInfo]} *)
 module DeviceGroupRenderPassBeginInfo = struct
   type t
   let t : t structure typ = structure "VkDeviceGroupRenderPassBeginInfo"
@@ -1913,6 +1969,7 @@ module DeviceGroupRenderPassBeginInfo = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkDeviceImageMemoryRequirements.html}[VkDeviceImageMemoryRequirements]} *)
 module DeviceImageMemoryRequirements = struct
   type t
   let t : t structure typ = structure "VkDeviceImageMemoryRequirements"
@@ -1940,6 +1997,7 @@ module DeviceImageMemoryRequirements = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkDeviceImageSubresourceInfo.html}[VkDeviceImageSubresourceInfo]} *)
 module DeviceImageSubresourceInfo = struct
   type t
   let t : t structure typ = structure "VkDeviceImageSubresourceInfo"
@@ -1969,6 +2027,7 @@ module DeviceImageSubresourceInfo = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkDeviceTensorMemoryRequirementsARM.html}[VkDeviceTensorMemoryRequirementsARM]} *)
 module DeviceTensorMemoryRequirementsARM = struct
   type t
   let t : t structure typ = structure "VkDeviceTensorMemoryRequirementsARM"
@@ -1993,6 +2052,7 @@ module DeviceTensorMemoryRequirementsARM = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkDirectDriverLoadingInfoLUNARG.html}[VkDirectDriverLoadingInfoLUNARG]} *)
 module DirectDriverLoadingInfoLUNARG = struct
   type t
   let t : t structure typ = structure "VkDirectDriverLoadingInfoLUNARG"
@@ -2020,6 +2080,7 @@ module DirectDriverLoadingInfoLUNARG = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkDisplayModeCreateInfoKHR.html}[VkDisplayModeCreateInfoKHR]} *)
 module DisplayModeCreateInfoKHR = struct
   type t
   let t : t structure typ = structure "VkDisplayModeCreateInfoKHR"
@@ -2045,6 +2106,7 @@ module DisplayModeCreateInfoKHR = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkDisplayModePropertiesKHR.html}[VkDisplayModePropertiesKHR]} *)
 module DisplayModePropertiesKHR = struct
   type t
   let t : t structure typ = structure "VkDisplayModePropertiesKHR"
@@ -2060,6 +2122,7 @@ module DisplayModePropertiesKHR = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkDisplayPlaneCapabilities2KHR.html}[VkDisplayPlaneCapabilities2KHR]} *)
 module DisplayPlaneCapabilities2KHR = struct
   type t
   let t : t structure typ = structure "VkDisplayPlaneCapabilities2KHR"
@@ -2081,6 +2144,7 @@ module DisplayPlaneCapabilities2KHR = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkDisplayPresentInfoKHR.html}[VkDisplayPresentInfoKHR]} *)
 module DisplayPresentInfoKHR = struct
   type t
   let t : t structure typ = structure "VkDisplayPresentInfoKHR"
@@ -2109,6 +2173,7 @@ module DisplayPresentInfoKHR = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkDisplayProperties2KHR.html}[VkDisplayProperties2KHR]} *)
 module DisplayProperties2KHR = struct
   type t
   let t : t structure typ = structure "VkDisplayProperties2KHR"
@@ -2130,6 +2195,7 @@ module DisplayProperties2KHR = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkExternalImageFormatPropertiesNV.html}[VkExternalImageFormatPropertiesNV]} *)
 module ExternalImageFormatPropertiesNV = struct
   type t
   let t : t structure typ = structure "VkExternalImageFormatPropertiesNV"
@@ -2149,6 +2215,7 @@ module ExternalImageFormatPropertiesNV = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkGeometryNV.html}[VkGeometryNV]} *)
 module GeometryNV = struct
   type t
   let t : t structure typ = structure "VkGeometryNV"
@@ -2177,6 +2244,7 @@ module GeometryNV = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkImageDescriptorInfoEXT.html}[VkImageDescriptorInfoEXT]} *)
 module ImageDescriptorInfoEXT = struct
   type t
   let t : t structure typ = structure "VkImageDescriptorInfoEXT"
@@ -2204,6 +2272,7 @@ module ImageDescriptorInfoEXT = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkImageFormatConstraintsInfoFUCHSIA.html}[VkImageFormatConstraintsInfoFUCHSIA]} *)
 module ImageFormatConstraintsInfoFUCHSIA = struct
   type t
   let t : t structure typ = structure "VkImageFormatConstraintsInfoFUCHSIA"
@@ -2247,6 +2316,7 @@ module ImageFormatConstraintsInfoFUCHSIA = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkImageFormatProperties2.html}[VkImageFormatProperties2]} *)
 module ImageFormatProperties2 = struct
   type t
   let t : t structure typ = structure "VkImageFormatProperties2"
@@ -2268,6 +2338,7 @@ module ImageFormatProperties2 = struct
     value
 end
 
+(** Union {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkIndirectCommandsTokenDataEXT.html}[VkIndirectCommandsTokenDataEXT]} *)
 module IndirectCommandsTokenDataEXT = struct
   type t
   let t : t union typ = union "VkIndirectCommandsTokenDataEXT"
@@ -2286,6 +2357,7 @@ module IndirectCommandsTokenDataEXT = struct
   let p_execution_set x = let value = make t in setf value _p_execution_set x; value
 end
 
+(** Union {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkIndirectExecutionSetInfoEXT.html}[VkIndirectExecutionSetInfoEXT]} *)
 module IndirectExecutionSetInfoEXT = struct
   type t
   let t : t union typ = union "VkIndirectExecutionSetInfoEXT"
@@ -2298,6 +2370,7 @@ module IndirectExecutionSetInfoEXT = struct
   let p_shader_info x = let value = make t in setf value _p_shader_info x; value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkMemoryRangeBarriersInfoKHR.html}[VkMemoryRangeBarriersInfoKHR]} *)
 module MemoryRangeBarriersInfoKHR = struct
   type t
   let t : t structure typ = structure "VkMemoryRangeBarriersInfoKHR"
@@ -2329,6 +2402,7 @@ module MemoryRangeBarriersInfoKHR = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkMultiviewPerViewRenderAreasRenderPassBeginInfoQCOM.html}[VkMultiviewPerViewRenderAreasRenderPassBeginInfoQCOM]} *)
 module MultiviewPerViewRenderAreasRenderPassBeginInfoQCOM = struct
   type t
   let t : t structure typ = structure "VkMultiviewPerViewRenderAreasRenderPassBeginInfoQCOM"
@@ -2360,6 +2434,7 @@ module MultiviewPerViewRenderAreasRenderPassBeginInfoQCOM = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkOpticalFlowExecuteInfoNV.html}[VkOpticalFlowExecuteInfoNV]} *)
 module OpticalFlowExecuteInfoNV = struct
   type t
   let t : t structure typ = structure "VkOpticalFlowExecuteInfoNV"
@@ -2394,6 +2469,7 @@ module OpticalFlowExecuteInfoNV = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPastPresentationTimingPropertiesEXT.html}[VkPastPresentationTimingPropertiesEXT]} *)
 module PastPresentationTimingPropertiesEXT = struct
   type t
   let t : t structure typ = structure "VkPastPresentationTimingPropertiesEXT"
@@ -2421,6 +2497,7 @@ module PastPresentationTimingPropertiesEXT = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceMemoryProperties2.html}[VkPhysicalDeviceMemoryProperties2]} *)
 module PhysicalDeviceMemoryProperties2 = struct
   type t
   let t : t structure typ = structure "VkPhysicalDeviceMemoryProperties2"
@@ -2442,6 +2519,7 @@ module PhysicalDeviceMemoryProperties2 = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceProperties2.html}[VkPhysicalDeviceProperties2]} *)
 module PhysicalDeviceProperties2 = struct
   type t
   let t : t structure typ = structure "VkPhysicalDeviceProperties2"
@@ -2463,6 +2541,7 @@ module PhysicalDeviceProperties2 = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPipelineBinaryCreateInfoKHR.html}[VkPipelineBinaryCreateInfoKHR]} *)
 module PipelineBinaryCreateInfoKHR = struct
   type t
   let t : t structure typ = structure "VkPipelineBinaryCreateInfoKHR"
@@ -2495,6 +2574,7 @@ module PipelineBinaryCreateInfoKHR = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPipelineDiscardRectangleStateCreateInfoEXT.html}[VkPipelineDiscardRectangleStateCreateInfoEXT]} *)
 module PipelineDiscardRectangleStateCreateInfoEXT = struct
   type t
   let t : t structure typ = structure "VkPipelineDiscardRectangleStateCreateInfoEXT"
@@ -2532,6 +2612,7 @@ module PipelineDiscardRectangleStateCreateInfoEXT = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPipelineSampleLocationsStateCreateInfoEXT.html}[VkPipelineSampleLocationsStateCreateInfoEXT]} *)
 module PipelineSampleLocationsStateCreateInfoEXT = struct
   type t
   let t : t structure typ = structure "VkPipelineSampleLocationsStateCreateInfoEXT"
@@ -2557,6 +2638,7 @@ module PipelineSampleLocationsStateCreateInfoEXT = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPipelineShaderStageCreateInfo.html}[VkPipelineShaderStageCreateInfo]} *)
 module PipelineShaderStageCreateInfo = struct
   type t
   let t : t structure typ = structure "VkPipelineShaderStageCreateInfo"
@@ -2596,6 +2678,7 @@ module PipelineShaderStageCreateInfo = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPipelineViewportCoarseSampleOrderStateCreateInfoNV.html}[VkPipelineViewportCoarseSampleOrderStateCreateInfoNV]} *)
 module PipelineViewportCoarseSampleOrderStateCreateInfoNV = struct
   type t
   let t : t structure typ = structure "VkPipelineViewportCoarseSampleOrderStateCreateInfoNV"
@@ -2630,6 +2713,7 @@ module PipelineViewportCoarseSampleOrderStateCreateInfoNV = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPipelineViewportExclusiveScissorStateCreateInfoNV.html}[VkPipelineViewportExclusiveScissorStateCreateInfoNV]} *)
 module PipelineViewportExclusiveScissorStateCreateInfoNV = struct
   type t
   let t : t structure typ = structure "VkPipelineViewportExclusiveScissorStateCreateInfoNV"
@@ -2661,6 +2745,7 @@ module PipelineViewportExclusiveScissorStateCreateInfoNV = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPipelineViewportStateCreateInfo.html}[VkPipelineViewportStateCreateInfo]} *)
 module PipelineViewportStateCreateInfo = struct
   type t
   let t : t structure typ = structure "VkPipelineViewportStateCreateInfo"
@@ -2707,6 +2792,7 @@ module PipelineViewportStateCreateInfo = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPresentRegionKHR.html}[VkPresentRegionKHR]} *)
 module PresentRegionKHR = struct
   type t
   let t : t structure typ = structure "VkPresentRegionKHR"
@@ -2730,6 +2816,7 @@ module PresentRegionKHR = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPushDescriptorSetInfo.html}[VkPushDescriptorSetInfo]} *)
 module PushDescriptorSetInfo = struct
   type t
   let t : t structure typ = structure "VkPushDescriptorSetInfo"
@@ -2770,6 +2857,7 @@ module PushDescriptorSetInfo = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkQueueFamilyProperties2.html}[VkQueueFamilyProperties2]} *)
 module QueueFamilyProperties2 = struct
   type t
   let t : t structure typ = structure "VkQueueFamilyProperties2"
@@ -2791,6 +2879,7 @@ module QueueFamilyProperties2 = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkRenderPassBeginInfo.html}[VkRenderPassBeginInfo]} *)
 module RenderPassBeginInfo = struct
   type t
   let t : t structure typ = structure "VkRenderPassBeginInfo"
@@ -2831,6 +2920,7 @@ module RenderPassBeginInfo = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkRenderPassCreateInfo.html}[VkRenderPassCreateInfo]} *)
 module RenderPassCreateInfo = struct
   type t
   let t : t structure typ = structure "VkRenderPassCreateInfo"
@@ -2889,6 +2979,7 @@ module RenderPassCreateInfo = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkRenderPassCreateInfo2.html}[VkRenderPassCreateInfo2]} *)
 module RenderPassCreateInfo2 = struct
   type t
   let t : t structure typ = structure "VkRenderPassCreateInfo2"
@@ -2959,6 +3050,7 @@ module RenderPassCreateInfo2 = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkRenderPassStripeInfoARM.html}[VkRenderPassStripeInfoARM]} *)
 module RenderPassStripeInfoARM = struct
   type t
   let t : t structure typ = structure "VkRenderPassStripeInfoARM"
@@ -2981,6 +3073,7 @@ module RenderPassStripeInfoARM = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkRenderingAttachmentInfo.html}[VkRenderingAttachmentInfo]} *)
 module RenderingAttachmentInfo = struct
   type t
   let t : t structure typ = structure "VkRenderingAttachmentInfo"
@@ -3024,6 +3117,7 @@ module RenderingAttachmentInfo = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkResolveImageInfo2.html}[VkResolveImageInfo2]} *)
 module ResolveImageInfo2 = struct
   type t
   let t : t structure typ = structure "VkResolveImageInfo2"
@@ -3067,6 +3161,7 @@ module ResolveImageInfo2 = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkShaderCreateInfoEXT.html}[VkShaderCreateInfoEXT]} *)
 module ShaderCreateInfoEXT = struct
   type t
   let t : t structure typ = structure "VkShaderCreateInfoEXT"
@@ -3142,6 +3237,7 @@ module ShaderCreateInfoEXT = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkSparseImageFormatProperties2.html}[VkSparseImageFormatProperties2]} *)
 module SparseImageFormatProperties2 = struct
   type t
   let t : t structure typ = structure "VkSparseImageFormatProperties2"
@@ -3163,6 +3259,7 @@ module SparseImageFormatProperties2 = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkSparseImageMemoryBindInfo.html}[VkSparseImageMemoryBindInfo]} *)
 module SparseImageMemoryBindInfo = struct
   type t
   let t : t structure typ = structure "VkSparseImageMemoryBindInfo"
@@ -3189,6 +3286,7 @@ module SparseImageMemoryBindInfo = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkSparseImageMemoryRequirements.html}[VkSparseImageMemoryRequirements]} *)
 module SparseImageMemoryRequirements = struct
   type t
   let t : t structure typ = structure "VkSparseImageMemoryRequirements"
@@ -3210,6 +3308,7 @@ module SparseImageMemoryRequirements = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkSubpassSampleLocationsEXT.html}[VkSubpassSampleLocationsEXT]} *)
 module SubpassSampleLocationsEXT = struct
   type t
   let t : t structure typ = structure "VkSubpassSampleLocationsEXT"
@@ -3227,6 +3326,7 @@ module SubpassSampleLocationsEXT = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkSurfaceCapabilities2KHR.html}[VkSurfaceCapabilities2KHR]} *)
 module SurfaceCapabilities2KHR = struct
   type t
   let t : t structure typ = structure "VkSurfaceCapabilities2KHR"
@@ -3248,6 +3348,7 @@ module SurfaceCapabilities2KHR = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkVideoReferenceSlotInfoKHR.html}[VkVideoReferenceSlotInfoKHR]} *)
 module VideoReferenceSlotInfoKHR = struct
   type t
   let t : t structure typ = structure "VkVideoReferenceSlotInfoKHR"
@@ -3275,6 +3376,7 @@ module VideoReferenceSlotInfoKHR = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkAccelerationStructureGeometryKHR.html}[VkAccelerationStructureGeometryKHR]} *)
 module AccelerationStructureGeometryKHR = struct
   type t
   let t : t structure typ = structure "VkAccelerationStructureGeometryKHR"
@@ -3303,6 +3405,7 @@ module AccelerationStructureGeometryKHR = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkAccelerationStructureInfoNV.html}[VkAccelerationStructureInfoNV]} *)
 module AccelerationStructureInfoNV = struct
   type t
   let t : t structure typ = structure "VkAccelerationStructureInfoNV"
@@ -3343,6 +3446,7 @@ module AccelerationStructureInfoNV = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkAccelerationStructureMotionInstanceNV.html}[VkAccelerationStructureMotionInstanceNV]} *)
 module AccelerationStructureMotionInstanceNV = struct
   type t
   let t : t structure typ = structure "VkAccelerationStructureMotionInstanceNV"
@@ -3363,6 +3467,7 @@ module AccelerationStructureMotionInstanceNV = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkBindSparseInfo.html}[VkBindSparseInfo]} *)
 module BindSparseInfo = struct
   type t
   let t : t structure typ = structure "VkBindSparseInfo"
@@ -3442,6 +3547,7 @@ module BindSparseInfo = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkClusterAccelerationStructureCommandsInfoNV.html}[VkClusterAccelerationStructureCommandsInfoNV]} *)
 module ClusterAccelerationStructureCommandsInfoNV = struct
   type t
   let t : t structure typ = structure "VkClusterAccelerationStructureCommandsInfoNV"
@@ -3485,6 +3591,7 @@ module ClusterAccelerationStructureCommandsInfoNV = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkComputePipelineCreateInfo.html}[VkComputePipelineCreateInfo]} *)
 module ComputePipelineCreateInfo = struct
   type t
   let t : t structure typ = structure "VkComputePipelineCreateInfo"
@@ -3519,6 +3626,7 @@ module ComputePipelineCreateInfo = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkDebugUtilsMessengerCreateInfoEXT.html}[VkDebugUtilsMessengerCreateInfoEXT]} *)
 module DebugUtilsMessengerCreateInfoEXT = struct
   type t
   let t : t structure typ = structure "VkDebugUtilsMessengerCreateInfoEXT"
@@ -3555,6 +3663,7 @@ module DebugUtilsMessengerCreateInfoEXT = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkDescriptorSetAndBindingMappingEXT.html}[VkDescriptorSetAndBindingMappingEXT]} *)
 module DescriptorSetAndBindingMappingEXT = struct
   type t
   let t : t structure typ = structure "VkDescriptorSetAndBindingMappingEXT"
@@ -3592,6 +3701,7 @@ module DescriptorSetAndBindingMappingEXT = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkDirectDriverLoadingListLUNARG.html}[VkDirectDriverLoadingListLUNARG]} *)
 module DirectDriverLoadingListLUNARG = struct
   type t
   let t : t structure typ = structure "VkDirectDriverLoadingListLUNARG"
@@ -3626,6 +3736,7 @@ module DirectDriverLoadingListLUNARG = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkDisplayModeProperties2KHR.html}[VkDisplayModeProperties2KHR]} *)
 module DisplayModeProperties2KHR = struct
   type t
   let t : t structure typ = structure "VkDisplayModeProperties2KHR"
@@ -3647,6 +3758,7 @@ module DisplayModeProperties2KHR = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkExecutionGraphPipelineCreateInfoAMDX.html}[VkExecutionGraphPipelineCreateInfoAMDX]} *)
 module ExecutionGraphPipelineCreateInfoAMDX = struct
   type t
   let t : t structure typ = structure "VkExecutionGraphPipelineCreateInfoAMDX"
@@ -3695,6 +3807,7 @@ module ExecutionGraphPipelineCreateInfoAMDX = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkGraphicsPipelineCreateInfo.html}[VkGraphicsPipelineCreateInfo]} *)
 module GraphicsPipelineCreateInfo = struct
   type t
   let t : t structure typ = structure "VkGraphicsPipelineCreateInfo"
@@ -3789,6 +3902,7 @@ module GraphicsPipelineCreateInfo = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkGraphicsShaderGroupCreateInfoNV.html}[VkGraphicsShaderGroupCreateInfoNV]} *)
 module GraphicsShaderGroupCreateInfoNV = struct
   type t
   let t : t structure typ = structure "VkGraphicsShaderGroupCreateInfoNV"
@@ -3830,6 +3944,7 @@ module GraphicsShaderGroupCreateInfoNV = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkImageConstraintsInfoFUCHSIA.html}[VkImageConstraintsInfoFUCHSIA]} *)
 module ImageConstraintsInfoFUCHSIA = struct
   type t
   let t : t structure typ = structure "VkImageConstraintsInfoFUCHSIA"
@@ -3867,6 +3982,7 @@ module ImageConstraintsInfoFUCHSIA = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkIndirectCommandsLayoutTokenEXT.html}[VkIndirectCommandsLayoutTokenEXT]} *)
 module IndirectCommandsLayoutTokenEXT = struct
   type t
   let t : t structure typ = structure "VkIndirectCommandsLayoutTokenEXT"
@@ -3895,6 +4011,7 @@ module IndirectCommandsLayoutTokenEXT = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkIndirectExecutionSetCreateInfoEXT.html}[VkIndirectExecutionSetCreateInfoEXT]} *)
 module IndirectExecutionSetCreateInfoEXT = struct
   type t
   let t : t structure typ = structure "VkIndirectExecutionSetCreateInfoEXT"
@@ -3920,6 +4037,7 @@ module IndirectExecutionSetCreateInfoEXT = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPhysicalDeviceLayeredApiVulkanPropertiesKHR.html}[VkPhysicalDeviceLayeredApiVulkanPropertiesKHR]} *)
 module PhysicalDeviceLayeredApiVulkanPropertiesKHR = struct
   type t
   let t : t structure typ = structure "VkPhysicalDeviceLayeredApiVulkanPropertiesKHR"
@@ -3941,6 +4059,7 @@ module PhysicalDeviceLayeredApiVulkanPropertiesKHR = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkPresentRegionsKHR.html}[VkPresentRegionsKHR]} *)
 module PresentRegionsKHR = struct
   type t
   let t : t structure typ = structure "VkPresentRegionsKHR"
@@ -3972,6 +4091,7 @@ module PresentRegionsKHR = struct
     value
 end
 
+(** Struct {{:https://registry.khronos.org/vulkan/specs/latest/man/html/VkRayTracingPipelineCreateInfoKHR.html}[VkRayTracingPipelineCreateInfoKHR]} *)
 module RayTracingPipelineCreateInfoKHR = struct
   type t
   let t : t structure typ = structure "VkRayTracingPipelineCreateInfoKHR"

@@ -23,6 +23,8 @@ let bind signature address = coerce (ptr void) (Foreign.funptr_opt signature) ad
 
 let create_instance_typ = ptr (InstanceCreateInfo.t) @-> ptr (AllocationCallbacks.t) @-> ptr (Instance.t) @-> returning (Result.t)
 let create_instance_ref = ref (bind create_instance_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateInstance.html}[vkCreateInstance]} *)
 let create_instance arg0 arg1 arg2 =
   Vk_base.Loader.ensure (); match !create_instance_ref with
   | Some f -> f arg0 arg1 arg2
@@ -30,6 +32,8 @@ let create_instance arg0 arg1 arg2 =
 
 let destroy_instance_typ = Instance.t @-> ptr (AllocationCallbacks.t) @-> returning (Ctypes.void)
 let destroy_instance_ref = ref (bind destroy_instance_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkDestroyInstance.html}[vkDestroyInstance]} *)
 let destroy_instance arg0 arg1 =
   match !destroy_instance_ref with
   | Some f -> f arg0 arg1
@@ -37,6 +41,8 @@ let destroy_instance arg0 arg1 =
 
 let enumerate_physical_devices_typ = Instance.t @-> ptr (Vk_base.uint32) @-> ptr (PhysicalDevice.t) @-> returning (Result.t)
 let enumerate_physical_devices_ref = ref (bind enumerate_physical_devices_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkEnumeratePhysicalDevices.html}[vkEnumeratePhysicalDevices]} *)
 let enumerate_physical_devices arg0 arg1 arg2 =
   match !enumerate_physical_devices_ref with
   | Some f -> f arg0 arg1 arg2
@@ -44,6 +50,8 @@ let enumerate_physical_devices arg0 arg1 arg2 =
 
 let get_device_proc_addr_typ = Device.t @-> string @-> returning (ptr void)
 let get_device_proc_addr_ref = ref (bind get_device_proc_addr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetDeviceProcAddr.html}[vkGetDeviceProcAddr]} *)
 let get_device_proc_addr arg0 arg1 =
   match !get_device_proc_addr_ref with
   | Some f -> f arg0 arg1
@@ -51,6 +59,8 @@ let get_device_proc_addr arg0 arg1 =
 
 let get_instance_proc_addr_typ = Instance.t @-> string @-> returning (ptr void)
 let get_instance_proc_addr_ref = ref (bind get_instance_proc_addr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetInstanceProcAddr.html}[vkGetInstanceProcAddr]} *)
 let get_instance_proc_addr arg0 arg1 =
   Vk_base.Loader.ensure (); match !get_instance_proc_addr_ref with
   | Some f -> f arg0 arg1
@@ -58,6 +68,8 @@ let get_instance_proc_addr arg0 arg1 =
 
 let get_physical_device_properties_typ = PhysicalDevice.t @-> ptr (PhysicalDeviceProperties.t) @-> returning (Ctypes.void)
 let get_physical_device_properties_ref = ref (bind get_physical_device_properties_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPhysicalDeviceProperties.html}[vkGetPhysicalDeviceProperties]} *)
 let get_physical_device_properties arg0 arg1 =
   match !get_physical_device_properties_ref with
   | Some f -> f arg0 arg1
@@ -65,6 +77,8 @@ let get_physical_device_properties arg0 arg1 =
 
 let get_physical_device_queue_family_properties_typ = PhysicalDevice.t @-> ptr (Vk_base.uint32) @-> ptr (QueueFamilyProperties.t) @-> returning (Ctypes.void)
 let get_physical_device_queue_family_properties_ref = ref (bind get_physical_device_queue_family_properties_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPhysicalDeviceQueueFamilyProperties.html}[vkGetPhysicalDeviceQueueFamilyProperties]} *)
 let get_physical_device_queue_family_properties arg0 arg1 arg2 =
   match !get_physical_device_queue_family_properties_ref with
   | Some f -> f arg0 arg1 arg2
@@ -72,6 +86,8 @@ let get_physical_device_queue_family_properties arg0 arg1 arg2 =
 
 let get_physical_device_memory_properties_typ = PhysicalDevice.t @-> ptr (PhysicalDeviceMemoryProperties.t) @-> returning (Ctypes.void)
 let get_physical_device_memory_properties_ref = ref (bind get_physical_device_memory_properties_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPhysicalDeviceMemoryProperties.html}[vkGetPhysicalDeviceMemoryProperties]} *)
 let get_physical_device_memory_properties arg0 arg1 =
   match !get_physical_device_memory_properties_ref with
   | Some f -> f arg0 arg1
@@ -79,6 +95,8 @@ let get_physical_device_memory_properties arg0 arg1 =
 
 let get_physical_device_features_typ = PhysicalDevice.t @-> ptr (PhysicalDeviceFeatures.t) @-> returning (Ctypes.void)
 let get_physical_device_features_ref = ref (bind get_physical_device_features_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPhysicalDeviceFeatures.html}[vkGetPhysicalDeviceFeatures]} *)
 let get_physical_device_features arg0 arg1 =
   match !get_physical_device_features_ref with
   | Some f -> f arg0 arg1
@@ -86,6 +104,8 @@ let get_physical_device_features arg0 arg1 =
 
 let get_physical_device_format_properties_typ = PhysicalDevice.t @-> Format.t @-> ptr (FormatProperties.t) @-> returning (Ctypes.void)
 let get_physical_device_format_properties_ref = ref (bind get_physical_device_format_properties_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPhysicalDeviceFormatProperties.html}[vkGetPhysicalDeviceFormatProperties]} *)
 let get_physical_device_format_properties arg0 arg1 arg2 =
   match !get_physical_device_format_properties_ref with
   | Some f -> f arg0 arg1 arg2
@@ -93,6 +113,8 @@ let get_physical_device_format_properties arg0 arg1 arg2 =
 
 let get_physical_device_image_format_properties_typ = PhysicalDevice.t @-> Format.t @-> ImageType.t @-> ImageTiling.t @-> ImageUsageFlags.t @-> ImageCreateFlags.t @-> ptr (ImageFormatProperties.t) @-> returning (Result.t)
 let get_physical_device_image_format_properties_ref = ref (bind get_physical_device_image_format_properties_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPhysicalDeviceImageFormatProperties.html}[vkGetPhysicalDeviceImageFormatProperties]} *)
 let get_physical_device_image_format_properties arg0 arg1 arg2 arg3 arg4 arg5 arg6 =
   match !get_physical_device_image_format_properties_ref with
   | Some f -> f arg0 arg1 arg2 arg3 arg4 arg5 arg6
@@ -100,6 +122,8 @@ let get_physical_device_image_format_properties arg0 arg1 arg2 arg3 arg4 arg5 ar
 
 let create_device_typ = PhysicalDevice.t @-> ptr (DeviceCreateInfo.t) @-> ptr (AllocationCallbacks.t) @-> ptr (Device.t) @-> returning (Result.t)
 let create_device_ref = ref (bind create_device_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateDevice.html}[vkCreateDevice]} *)
 let create_device arg0 arg1 arg2 arg3 =
   match !create_device_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -107,6 +131,8 @@ let create_device arg0 arg1 arg2 arg3 =
 
 let destroy_device_typ = Device.t @-> ptr (AllocationCallbacks.t) @-> returning (Ctypes.void)
 let destroy_device_ref = ref (bind destroy_device_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkDestroyDevice.html}[vkDestroyDevice]} *)
 let destroy_device arg0 arg1 =
   match !destroy_device_ref with
   | Some f -> f arg0 arg1
@@ -114,6 +140,8 @@ let destroy_device arg0 arg1 =
 
 let enumerate_instance_version_typ = ptr (Vk_base.uint32) @-> returning (Result.t)
 let enumerate_instance_version_ref = ref (bind enumerate_instance_version_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkEnumerateInstanceVersion.html}[vkEnumerateInstanceVersion]} *)
 let enumerate_instance_version arg0 =
   Vk_base.Loader.ensure (); match !enumerate_instance_version_ref with
   | Some f -> f arg0
@@ -121,6 +149,8 @@ let enumerate_instance_version arg0 =
 
 let enumerate_instance_layer_properties_typ = ptr (Vk_base.uint32) @-> ptr (LayerProperties.t) @-> returning (Result.t)
 let enumerate_instance_layer_properties_ref = ref (bind enumerate_instance_layer_properties_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkEnumerateInstanceLayerProperties.html}[vkEnumerateInstanceLayerProperties]} *)
 let enumerate_instance_layer_properties arg0 arg1 =
   Vk_base.Loader.ensure (); match !enumerate_instance_layer_properties_ref with
   | Some f -> f arg0 arg1
@@ -128,6 +158,8 @@ let enumerate_instance_layer_properties arg0 arg1 =
 
 let enumerate_instance_extension_properties_typ = string_opt @-> ptr (Vk_base.uint32) @-> ptr (ExtensionProperties.t) @-> returning (Result.t)
 let enumerate_instance_extension_properties_ref = ref (bind enumerate_instance_extension_properties_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkEnumerateInstanceExtensionProperties.html}[vkEnumerateInstanceExtensionProperties]} *)
 let enumerate_instance_extension_properties arg0 arg1 arg2 =
   Vk_base.Loader.ensure (); match !enumerate_instance_extension_properties_ref with
   | Some f -> f arg0 arg1 arg2
@@ -135,6 +167,8 @@ let enumerate_instance_extension_properties arg0 arg1 arg2 =
 
 let enumerate_device_layer_properties_typ = PhysicalDevice.t @-> ptr (Vk_base.uint32) @-> ptr (LayerProperties.t) @-> returning (Result.t)
 let enumerate_device_layer_properties_ref = ref (bind enumerate_device_layer_properties_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkEnumerateDeviceLayerProperties.html}[vkEnumerateDeviceLayerProperties]} *)
 let enumerate_device_layer_properties arg0 arg1 arg2 =
   match !enumerate_device_layer_properties_ref with
   | Some f -> f arg0 arg1 arg2
@@ -142,6 +176,8 @@ let enumerate_device_layer_properties arg0 arg1 arg2 =
 
 let enumerate_device_extension_properties_typ = PhysicalDevice.t @-> string_opt @-> ptr (Vk_base.uint32) @-> ptr (ExtensionProperties.t) @-> returning (Result.t)
 let enumerate_device_extension_properties_ref = ref (bind enumerate_device_extension_properties_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkEnumerateDeviceExtensionProperties.html}[vkEnumerateDeviceExtensionProperties]} *)
 let enumerate_device_extension_properties arg0 arg1 arg2 arg3 =
   match !enumerate_device_extension_properties_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -149,6 +185,8 @@ let enumerate_device_extension_properties arg0 arg1 arg2 arg3 =
 
 let get_device_queue_typ = Device.t @-> Vk_base.uint32 @-> Vk_base.uint32 @-> ptr (Queue.t) @-> returning (Ctypes.void)
 let get_device_queue_ref = ref (bind get_device_queue_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetDeviceQueue.html}[vkGetDeviceQueue]} *)
 let get_device_queue arg0 arg1 arg2 arg3 =
   match !get_device_queue_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -156,6 +194,8 @@ let get_device_queue arg0 arg1 arg2 arg3 =
 
 let queue_submit_typ = Queue.t @-> Vk_base.uint32 @-> ptr (SubmitInfo.t) @-> Fence.t @-> returning (Result.t)
 let queue_submit_ref = ref (bind queue_submit_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkQueueSubmit.html}[vkQueueSubmit]} *)
 let queue_submit arg0 arg1 arg2 arg3 =
   match !queue_submit_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -163,6 +203,8 @@ let queue_submit arg0 arg1 arg2 arg3 =
 
 let queue_wait_idle_typ = Queue.t @-> returning (Result.t)
 let queue_wait_idle_ref = ref (bind queue_wait_idle_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkQueueWaitIdle.html}[vkQueueWaitIdle]} *)
 let queue_wait_idle arg0 =
   match !queue_wait_idle_ref with
   | Some f -> f arg0
@@ -170,6 +212,8 @@ let queue_wait_idle arg0 =
 
 let device_wait_idle_typ = Device.t @-> returning (Result.t)
 let device_wait_idle_ref = ref (bind device_wait_idle_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkDeviceWaitIdle.html}[vkDeviceWaitIdle]} *)
 let device_wait_idle arg0 =
   match !device_wait_idle_ref with
   | Some f -> f arg0
@@ -177,6 +221,8 @@ let device_wait_idle arg0 =
 
 let allocate_memory_typ = Device.t @-> ptr (MemoryAllocateInfo.t) @-> ptr (AllocationCallbacks.t) @-> ptr (DeviceMemory.t) @-> returning (Result.t)
 let allocate_memory_ref = ref (bind allocate_memory_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkAllocateMemory.html}[vkAllocateMemory]} *)
 let allocate_memory arg0 arg1 arg2 arg3 =
   match !allocate_memory_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -184,6 +230,8 @@ let allocate_memory arg0 arg1 arg2 arg3 =
 
 let free_memory_typ = Device.t @-> DeviceMemory.t @-> ptr (AllocationCallbacks.t) @-> returning (Ctypes.void)
 let free_memory_ref = ref (bind free_memory_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkFreeMemory.html}[vkFreeMemory]} *)
 let free_memory arg0 arg1 arg2 =
   match !free_memory_ref with
   | Some f -> f arg0 arg1 arg2
@@ -191,6 +239,8 @@ let free_memory arg0 arg1 arg2 =
 
 let map_memory_typ = Device.t @-> DeviceMemory.t @-> Vk_base.device_size @-> Vk_base.device_size @-> MemoryMapFlags.t @-> ptr (ptr (Ctypes.void)) @-> returning (Result.t)
 let map_memory_ref = ref (bind map_memory_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkMapMemory.html}[vkMapMemory]} *)
 let map_memory arg0 arg1 arg2 arg3 arg4 arg5 =
   match !map_memory_ref with
   | Some f -> f arg0 arg1 arg2 arg3 arg4 arg5
@@ -198,6 +248,8 @@ let map_memory arg0 arg1 arg2 arg3 arg4 arg5 =
 
 let unmap_memory_typ = Device.t @-> DeviceMemory.t @-> returning (Ctypes.void)
 let unmap_memory_ref = ref (bind unmap_memory_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkUnmapMemory.html}[vkUnmapMemory]} *)
 let unmap_memory arg0 arg1 =
   match !unmap_memory_ref with
   | Some f -> f arg0 arg1
@@ -205,6 +257,8 @@ let unmap_memory arg0 arg1 =
 
 let flush_mapped_memory_ranges_typ = Device.t @-> Vk_base.uint32 @-> ptr (MappedMemoryRange.t) @-> returning (Result.t)
 let flush_mapped_memory_ranges_ref = ref (bind flush_mapped_memory_ranges_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkFlushMappedMemoryRanges.html}[vkFlushMappedMemoryRanges]} *)
 let flush_mapped_memory_ranges arg0 arg1 arg2 =
   match !flush_mapped_memory_ranges_ref with
   | Some f -> f arg0 arg1 arg2
@@ -212,6 +266,8 @@ let flush_mapped_memory_ranges arg0 arg1 arg2 =
 
 let invalidate_mapped_memory_ranges_typ = Device.t @-> Vk_base.uint32 @-> ptr (MappedMemoryRange.t) @-> returning (Result.t)
 let invalidate_mapped_memory_ranges_ref = ref (bind invalidate_mapped_memory_ranges_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkInvalidateMappedMemoryRanges.html}[vkInvalidateMappedMemoryRanges]} *)
 let invalidate_mapped_memory_ranges arg0 arg1 arg2 =
   match !invalidate_mapped_memory_ranges_ref with
   | Some f -> f arg0 arg1 arg2
@@ -219,6 +275,8 @@ let invalidate_mapped_memory_ranges arg0 arg1 arg2 =
 
 let get_device_memory_commitment_typ = Device.t @-> DeviceMemory.t @-> ptr (Vk_base.device_size) @-> returning (Ctypes.void)
 let get_device_memory_commitment_ref = ref (bind get_device_memory_commitment_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetDeviceMemoryCommitment.html}[vkGetDeviceMemoryCommitment]} *)
 let get_device_memory_commitment arg0 arg1 arg2 =
   match !get_device_memory_commitment_ref with
   | Some f -> f arg0 arg1 arg2
@@ -226,6 +284,8 @@ let get_device_memory_commitment arg0 arg1 arg2 =
 
 let get_buffer_memory_requirements_typ = Device.t @-> Buffer.t @-> ptr (MemoryRequirements.t) @-> returning (Ctypes.void)
 let get_buffer_memory_requirements_ref = ref (bind get_buffer_memory_requirements_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetBufferMemoryRequirements.html}[vkGetBufferMemoryRequirements]} *)
 let get_buffer_memory_requirements arg0 arg1 arg2 =
   match !get_buffer_memory_requirements_ref with
   | Some f -> f arg0 arg1 arg2
@@ -233,6 +293,8 @@ let get_buffer_memory_requirements arg0 arg1 arg2 =
 
 let bind_buffer_memory_typ = Device.t @-> Buffer.t @-> DeviceMemory.t @-> Vk_base.device_size @-> returning (Result.t)
 let bind_buffer_memory_ref = ref (bind bind_buffer_memory_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkBindBufferMemory.html}[vkBindBufferMemory]} *)
 let bind_buffer_memory arg0 arg1 arg2 arg3 =
   match !bind_buffer_memory_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -240,6 +302,8 @@ let bind_buffer_memory arg0 arg1 arg2 arg3 =
 
 let get_image_memory_requirements_typ = Device.t @-> Image.t @-> ptr (MemoryRequirements.t) @-> returning (Ctypes.void)
 let get_image_memory_requirements_ref = ref (bind get_image_memory_requirements_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetImageMemoryRequirements.html}[vkGetImageMemoryRequirements]} *)
 let get_image_memory_requirements arg0 arg1 arg2 =
   match !get_image_memory_requirements_ref with
   | Some f -> f arg0 arg1 arg2
@@ -247,6 +311,8 @@ let get_image_memory_requirements arg0 arg1 arg2 =
 
 let bind_image_memory_typ = Device.t @-> Image.t @-> DeviceMemory.t @-> Vk_base.device_size @-> returning (Result.t)
 let bind_image_memory_ref = ref (bind bind_image_memory_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkBindImageMemory.html}[vkBindImageMemory]} *)
 let bind_image_memory arg0 arg1 arg2 arg3 =
   match !bind_image_memory_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -254,6 +320,8 @@ let bind_image_memory arg0 arg1 arg2 arg3 =
 
 let get_image_sparse_memory_requirements_typ = Device.t @-> Image.t @-> ptr (Vk_base.uint32) @-> ptr (SparseImageMemoryRequirements.t) @-> returning (Ctypes.void)
 let get_image_sparse_memory_requirements_ref = ref (bind get_image_sparse_memory_requirements_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetImageSparseMemoryRequirements.html}[vkGetImageSparseMemoryRequirements]} *)
 let get_image_sparse_memory_requirements arg0 arg1 arg2 arg3 =
   match !get_image_sparse_memory_requirements_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -261,6 +329,8 @@ let get_image_sparse_memory_requirements arg0 arg1 arg2 arg3 =
 
 let get_physical_device_sparse_image_format_properties_typ = PhysicalDevice.t @-> Format.t @-> ImageType.t @-> SampleCountFlags.t @-> ImageUsageFlags.t @-> ImageTiling.t @-> ptr (Vk_base.uint32) @-> ptr (SparseImageFormatProperties.t) @-> returning (Ctypes.void)
 let get_physical_device_sparse_image_format_properties_ref = ref (bind get_physical_device_sparse_image_format_properties_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPhysicalDeviceSparseImageFormatProperties.html}[vkGetPhysicalDeviceSparseImageFormatProperties]} *)
 let get_physical_device_sparse_image_format_properties arg0 arg1 arg2 arg3 arg4 arg5 arg6 arg7 =
   match !get_physical_device_sparse_image_format_properties_ref with
   | Some f -> f arg0 arg1 arg2 arg3 arg4 arg5 arg6 arg7
@@ -268,6 +338,8 @@ let get_physical_device_sparse_image_format_properties arg0 arg1 arg2 arg3 arg4 
 
 let queue_bind_sparse_typ = Queue.t @-> Vk_base.uint32 @-> ptr (BindSparseInfo.t) @-> Fence.t @-> returning (Result.t)
 let queue_bind_sparse_ref = ref (bind queue_bind_sparse_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkQueueBindSparse.html}[vkQueueBindSparse]} *)
 let queue_bind_sparse arg0 arg1 arg2 arg3 =
   match !queue_bind_sparse_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -275,6 +347,8 @@ let queue_bind_sparse arg0 arg1 arg2 arg3 =
 
 let create_fence_typ = Device.t @-> ptr (FenceCreateInfo.t) @-> ptr (AllocationCallbacks.t) @-> ptr (Fence.t) @-> returning (Result.t)
 let create_fence_ref = ref (bind create_fence_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateFence.html}[vkCreateFence]} *)
 let create_fence arg0 arg1 arg2 arg3 =
   match !create_fence_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -282,6 +356,8 @@ let create_fence arg0 arg1 arg2 arg3 =
 
 let destroy_fence_typ = Device.t @-> Fence.t @-> ptr (AllocationCallbacks.t) @-> returning (Ctypes.void)
 let destroy_fence_ref = ref (bind destroy_fence_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkDestroyFence.html}[vkDestroyFence]} *)
 let destroy_fence arg0 arg1 arg2 =
   match !destroy_fence_ref with
   | Some f -> f arg0 arg1 arg2
@@ -289,6 +365,8 @@ let destroy_fence arg0 arg1 arg2 =
 
 let reset_fences_typ = Device.t @-> Vk_base.uint32 @-> ptr (Fence.t) @-> returning (Result.t)
 let reset_fences_ref = ref (bind reset_fences_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkResetFences.html}[vkResetFences]} *)
 let reset_fences arg0 arg1 arg2 =
   match !reset_fences_ref with
   | Some f -> f arg0 arg1 arg2
@@ -296,6 +374,8 @@ let reset_fences arg0 arg1 arg2 =
 
 let get_fence_status_typ = Device.t @-> Fence.t @-> returning (Result.t)
 let get_fence_status_ref = ref (bind get_fence_status_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetFenceStatus.html}[vkGetFenceStatus]} *)
 let get_fence_status arg0 arg1 =
   match !get_fence_status_ref with
   | Some f -> f arg0 arg1
@@ -303,6 +383,8 @@ let get_fence_status arg0 arg1 =
 
 let wait_for_fences_typ = Device.t @-> Vk_base.uint32 @-> ptr (Fence.t) @-> Vk_base.bool32 @-> Vk_base.uint64 @-> returning (Result.t)
 let wait_for_fences_ref = ref (bind wait_for_fences_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkWaitForFences.html}[vkWaitForFences]} *)
 let wait_for_fences arg0 arg1 arg2 arg3 arg4 =
   match !wait_for_fences_ref with
   | Some f -> f arg0 arg1 arg2 arg3 arg4
@@ -310,6 +392,8 @@ let wait_for_fences arg0 arg1 arg2 arg3 arg4 =
 
 let create_semaphore_typ = Device.t @-> ptr (SemaphoreCreateInfo.t) @-> ptr (AllocationCallbacks.t) @-> ptr (Semaphore.t) @-> returning (Result.t)
 let create_semaphore_ref = ref (bind create_semaphore_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateSemaphore.html}[vkCreateSemaphore]} *)
 let create_semaphore arg0 arg1 arg2 arg3 =
   match !create_semaphore_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -317,6 +401,8 @@ let create_semaphore arg0 arg1 arg2 arg3 =
 
 let destroy_semaphore_typ = Device.t @-> Semaphore.t @-> ptr (AllocationCallbacks.t) @-> returning (Ctypes.void)
 let destroy_semaphore_ref = ref (bind destroy_semaphore_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkDestroySemaphore.html}[vkDestroySemaphore]} *)
 let destroy_semaphore arg0 arg1 arg2 =
   match !destroy_semaphore_ref with
   | Some f -> f arg0 arg1 arg2
@@ -324,6 +410,8 @@ let destroy_semaphore arg0 arg1 arg2 =
 
 let create_event_typ = Device.t @-> ptr (EventCreateInfo.t) @-> ptr (AllocationCallbacks.t) @-> ptr (Event.t) @-> returning (Result.t)
 let create_event_ref = ref (bind create_event_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateEvent.html}[vkCreateEvent]} *)
 let create_event arg0 arg1 arg2 arg3 =
   match !create_event_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -331,6 +419,8 @@ let create_event arg0 arg1 arg2 arg3 =
 
 let destroy_event_typ = Device.t @-> Event.t @-> ptr (AllocationCallbacks.t) @-> returning (Ctypes.void)
 let destroy_event_ref = ref (bind destroy_event_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkDestroyEvent.html}[vkDestroyEvent]} *)
 let destroy_event arg0 arg1 arg2 =
   match !destroy_event_ref with
   | Some f -> f arg0 arg1 arg2
@@ -338,6 +428,8 @@ let destroy_event arg0 arg1 arg2 =
 
 let get_event_status_typ = Device.t @-> Event.t @-> returning (Result.t)
 let get_event_status_ref = ref (bind get_event_status_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetEventStatus.html}[vkGetEventStatus]} *)
 let get_event_status arg0 arg1 =
   match !get_event_status_ref with
   | Some f -> f arg0 arg1
@@ -345,6 +437,8 @@ let get_event_status arg0 arg1 =
 
 let set_event_typ = Device.t @-> Event.t @-> returning (Result.t)
 let set_event_ref = ref (bind set_event_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkSetEvent.html}[vkSetEvent]} *)
 let set_event arg0 arg1 =
   match !set_event_ref with
   | Some f -> f arg0 arg1
@@ -352,6 +446,8 @@ let set_event arg0 arg1 =
 
 let reset_event_typ = Device.t @-> Event.t @-> returning (Result.t)
 let reset_event_ref = ref (bind reset_event_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkResetEvent.html}[vkResetEvent]} *)
 let reset_event arg0 arg1 =
   match !reset_event_ref with
   | Some f -> f arg0 arg1
@@ -359,6 +455,8 @@ let reset_event arg0 arg1 =
 
 let create_query_pool_typ = Device.t @-> ptr (QueryPoolCreateInfo.t) @-> ptr (AllocationCallbacks.t) @-> ptr (QueryPool.t) @-> returning (Result.t)
 let create_query_pool_ref = ref (bind create_query_pool_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateQueryPool.html}[vkCreateQueryPool]} *)
 let create_query_pool arg0 arg1 arg2 arg3 =
   match !create_query_pool_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -366,6 +464,8 @@ let create_query_pool arg0 arg1 arg2 arg3 =
 
 let destroy_query_pool_typ = Device.t @-> QueryPool.t @-> ptr (AllocationCallbacks.t) @-> returning (Ctypes.void)
 let destroy_query_pool_ref = ref (bind destroy_query_pool_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkDestroyQueryPool.html}[vkDestroyQueryPool]} *)
 let destroy_query_pool arg0 arg1 arg2 =
   match !destroy_query_pool_ref with
   | Some f -> f arg0 arg1 arg2
@@ -373,6 +473,8 @@ let destroy_query_pool arg0 arg1 arg2 =
 
 let get_query_pool_results_typ = Device.t @-> QueryPool.t @-> Vk_base.uint32 @-> Vk_base.uint32 @-> Vk_base.size_t @-> ptr (Ctypes.void) @-> Vk_base.device_size @-> QueryResultFlags.t @-> returning (Result.t)
 let get_query_pool_results_ref = ref (bind get_query_pool_results_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetQueryPoolResults.html}[vkGetQueryPoolResults]} *)
 let get_query_pool_results arg0 arg1 arg2 arg3 arg4 arg5 arg6 arg7 =
   match !get_query_pool_results_ref with
   | Some f -> f arg0 arg1 arg2 arg3 arg4 arg5 arg6 arg7
@@ -380,6 +482,8 @@ let get_query_pool_results arg0 arg1 arg2 arg3 arg4 arg5 arg6 arg7 =
 
 let reset_query_pool_typ = Device.t @-> QueryPool.t @-> Vk_base.uint32 @-> Vk_base.uint32 @-> returning (Ctypes.void)
 let reset_query_pool_ref = ref (bind reset_query_pool_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkResetQueryPool.html}[vkResetQueryPool]} *)
 let reset_query_pool arg0 arg1 arg2 arg3 =
   match !reset_query_pool_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -387,6 +491,8 @@ let reset_query_pool arg0 arg1 arg2 arg3 =
 
 let create_buffer_typ = Device.t @-> ptr (BufferCreateInfo.t) @-> ptr (AllocationCallbacks.t) @-> ptr (Buffer.t) @-> returning (Result.t)
 let create_buffer_ref = ref (bind create_buffer_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateBuffer.html}[vkCreateBuffer]} *)
 let create_buffer arg0 arg1 arg2 arg3 =
   match !create_buffer_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -394,6 +500,8 @@ let create_buffer arg0 arg1 arg2 arg3 =
 
 let destroy_buffer_typ = Device.t @-> Buffer.t @-> ptr (AllocationCallbacks.t) @-> returning (Ctypes.void)
 let destroy_buffer_ref = ref (bind destroy_buffer_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkDestroyBuffer.html}[vkDestroyBuffer]} *)
 let destroy_buffer arg0 arg1 arg2 =
   match !destroy_buffer_ref with
   | Some f -> f arg0 arg1 arg2
@@ -401,6 +509,8 @@ let destroy_buffer arg0 arg1 arg2 =
 
 let create_buffer_view_typ = Device.t @-> ptr (BufferViewCreateInfo.t) @-> ptr (AllocationCallbacks.t) @-> ptr (BufferView.t) @-> returning (Result.t)
 let create_buffer_view_ref = ref (bind create_buffer_view_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateBufferView.html}[vkCreateBufferView]} *)
 let create_buffer_view arg0 arg1 arg2 arg3 =
   match !create_buffer_view_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -408,6 +518,8 @@ let create_buffer_view arg0 arg1 arg2 arg3 =
 
 let destroy_buffer_view_typ = Device.t @-> BufferView.t @-> ptr (AllocationCallbacks.t) @-> returning (Ctypes.void)
 let destroy_buffer_view_ref = ref (bind destroy_buffer_view_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkDestroyBufferView.html}[vkDestroyBufferView]} *)
 let destroy_buffer_view arg0 arg1 arg2 =
   match !destroy_buffer_view_ref with
   | Some f -> f arg0 arg1 arg2
@@ -415,6 +527,8 @@ let destroy_buffer_view arg0 arg1 arg2 =
 
 let create_image_typ = Device.t @-> ptr (ImageCreateInfo.t) @-> ptr (AllocationCallbacks.t) @-> ptr (Image.t) @-> returning (Result.t)
 let create_image_ref = ref (bind create_image_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateImage.html}[vkCreateImage]} *)
 let create_image arg0 arg1 arg2 arg3 =
   match !create_image_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -422,6 +536,8 @@ let create_image arg0 arg1 arg2 arg3 =
 
 let destroy_image_typ = Device.t @-> Image.t @-> ptr (AllocationCallbacks.t) @-> returning (Ctypes.void)
 let destroy_image_ref = ref (bind destroy_image_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkDestroyImage.html}[vkDestroyImage]} *)
 let destroy_image arg0 arg1 arg2 =
   match !destroy_image_ref with
   | Some f -> f arg0 arg1 arg2
@@ -429,6 +545,8 @@ let destroy_image arg0 arg1 arg2 =
 
 let get_image_subresource_layout_typ = Device.t @-> Image.t @-> ptr (ImageSubresource.t) @-> ptr (SubresourceLayout.t) @-> returning (Ctypes.void)
 let get_image_subresource_layout_ref = ref (bind get_image_subresource_layout_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetImageSubresourceLayout.html}[vkGetImageSubresourceLayout]} *)
 let get_image_subresource_layout arg0 arg1 arg2 arg3 =
   match !get_image_subresource_layout_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -436,6 +554,8 @@ let get_image_subresource_layout arg0 arg1 arg2 arg3 =
 
 let create_image_view_typ = Device.t @-> ptr (ImageViewCreateInfo.t) @-> ptr (AllocationCallbacks.t) @-> ptr (ImageView.t) @-> returning (Result.t)
 let create_image_view_ref = ref (bind create_image_view_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateImageView.html}[vkCreateImageView]} *)
 let create_image_view arg0 arg1 arg2 arg3 =
   match !create_image_view_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -443,6 +563,8 @@ let create_image_view arg0 arg1 arg2 arg3 =
 
 let destroy_image_view_typ = Device.t @-> ImageView.t @-> ptr (AllocationCallbacks.t) @-> returning (Ctypes.void)
 let destroy_image_view_ref = ref (bind destroy_image_view_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkDestroyImageView.html}[vkDestroyImageView]} *)
 let destroy_image_view arg0 arg1 arg2 =
   match !destroy_image_view_ref with
   | Some f -> f arg0 arg1 arg2
@@ -450,6 +572,8 @@ let destroy_image_view arg0 arg1 arg2 =
 
 let create_shader_module_typ = Device.t @-> ptr (ShaderModuleCreateInfo.t) @-> ptr (AllocationCallbacks.t) @-> ptr (ShaderModule.t) @-> returning (Result.t)
 let create_shader_module_ref = ref (bind create_shader_module_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateShaderModule.html}[vkCreateShaderModule]} *)
 let create_shader_module arg0 arg1 arg2 arg3 =
   match !create_shader_module_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -457,6 +581,8 @@ let create_shader_module arg0 arg1 arg2 arg3 =
 
 let destroy_shader_module_typ = Device.t @-> ShaderModule.t @-> ptr (AllocationCallbacks.t) @-> returning (Ctypes.void)
 let destroy_shader_module_ref = ref (bind destroy_shader_module_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkDestroyShaderModule.html}[vkDestroyShaderModule]} *)
 let destroy_shader_module arg0 arg1 arg2 =
   match !destroy_shader_module_ref with
   | Some f -> f arg0 arg1 arg2
@@ -464,6 +590,8 @@ let destroy_shader_module arg0 arg1 arg2 =
 
 let create_pipeline_cache_typ = Device.t @-> ptr (PipelineCacheCreateInfo.t) @-> ptr (AllocationCallbacks.t) @-> ptr (PipelineCache.t) @-> returning (Result.t)
 let create_pipeline_cache_ref = ref (bind create_pipeline_cache_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreatePipelineCache.html}[vkCreatePipelineCache]} *)
 let create_pipeline_cache arg0 arg1 arg2 arg3 =
   match !create_pipeline_cache_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -471,6 +599,8 @@ let create_pipeline_cache arg0 arg1 arg2 arg3 =
 
 let destroy_pipeline_cache_typ = Device.t @-> PipelineCache.t @-> ptr (AllocationCallbacks.t) @-> returning (Ctypes.void)
 let destroy_pipeline_cache_ref = ref (bind destroy_pipeline_cache_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkDestroyPipelineCache.html}[vkDestroyPipelineCache]} *)
 let destroy_pipeline_cache arg0 arg1 arg2 =
   match !destroy_pipeline_cache_ref with
   | Some f -> f arg0 arg1 arg2
@@ -478,6 +608,8 @@ let destroy_pipeline_cache arg0 arg1 arg2 =
 
 let get_pipeline_cache_data_typ = Device.t @-> PipelineCache.t @-> ptr (Vk_base.size_t) @-> ptr (Ctypes.void) @-> returning (Result.t)
 let get_pipeline_cache_data_ref = ref (bind get_pipeline_cache_data_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPipelineCacheData.html}[vkGetPipelineCacheData]} *)
 let get_pipeline_cache_data arg0 arg1 arg2 arg3 =
   match !get_pipeline_cache_data_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -485,6 +617,8 @@ let get_pipeline_cache_data arg0 arg1 arg2 arg3 =
 
 let merge_pipeline_caches_typ = Device.t @-> PipelineCache.t @-> Vk_base.uint32 @-> ptr (PipelineCache.t) @-> returning (Result.t)
 let merge_pipeline_caches_ref = ref (bind merge_pipeline_caches_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkMergePipelineCaches.html}[vkMergePipelineCaches]} *)
 let merge_pipeline_caches arg0 arg1 arg2 arg3 =
   match !merge_pipeline_caches_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -492,6 +626,8 @@ let merge_pipeline_caches arg0 arg1 arg2 arg3 =
 
 let create_pipeline_binaries_khr_typ = Device.t @-> ptr (PipelineBinaryCreateInfoKHR.t) @-> ptr (AllocationCallbacks.t) @-> ptr (PipelineBinaryHandlesInfoKHR.t) @-> returning (Result.t)
 let create_pipeline_binaries_khr_ref = ref (bind create_pipeline_binaries_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreatePipelineBinariesKHR.html}[vkCreatePipelineBinariesKHR]} *)
 let create_pipeline_binaries_khr arg0 arg1 arg2 arg3 =
   match !create_pipeline_binaries_khr_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -499,6 +635,8 @@ let create_pipeline_binaries_khr arg0 arg1 arg2 arg3 =
 
 let destroy_pipeline_binary_khr_typ = Device.t @-> PipelineBinaryKHR.t @-> ptr (AllocationCallbacks.t) @-> returning (Ctypes.void)
 let destroy_pipeline_binary_khr_ref = ref (bind destroy_pipeline_binary_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkDestroyPipelineBinaryKHR.html}[vkDestroyPipelineBinaryKHR]} *)
 let destroy_pipeline_binary_khr arg0 arg1 arg2 =
   match !destroy_pipeline_binary_khr_ref with
   | Some f -> f arg0 arg1 arg2
@@ -506,6 +644,8 @@ let destroy_pipeline_binary_khr arg0 arg1 arg2 =
 
 let get_pipeline_key_khr_typ = Device.t @-> ptr (PipelineCreateInfoKHR.t) @-> ptr (PipelineBinaryKeyKHR.t) @-> returning (Result.t)
 let get_pipeline_key_khr_ref = ref (bind get_pipeline_key_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPipelineKeyKHR.html}[vkGetPipelineKeyKHR]} *)
 let get_pipeline_key_khr arg0 arg1 arg2 =
   match !get_pipeline_key_khr_ref with
   | Some f -> f arg0 arg1 arg2
@@ -513,6 +653,8 @@ let get_pipeline_key_khr arg0 arg1 arg2 =
 
 let get_pipeline_binary_data_khr_typ = Device.t @-> ptr (PipelineBinaryDataInfoKHR.t) @-> ptr (PipelineBinaryKeyKHR.t) @-> ptr (Vk_base.size_t) @-> ptr (Ctypes.void) @-> returning (Result.t)
 let get_pipeline_binary_data_khr_ref = ref (bind get_pipeline_binary_data_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPipelineBinaryDataKHR.html}[vkGetPipelineBinaryDataKHR]} *)
 let get_pipeline_binary_data_khr arg0 arg1 arg2 arg3 arg4 =
   match !get_pipeline_binary_data_khr_ref with
   | Some f -> f arg0 arg1 arg2 arg3 arg4
@@ -520,6 +662,8 @@ let get_pipeline_binary_data_khr arg0 arg1 arg2 arg3 arg4 =
 
 let release_captured_pipeline_data_khr_typ = Device.t @-> ptr (ReleaseCapturedPipelineDataInfoKHR.t) @-> ptr (AllocationCallbacks.t) @-> returning (Result.t)
 let release_captured_pipeline_data_khr_ref = ref (bind release_captured_pipeline_data_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkReleaseCapturedPipelineDataKHR.html}[vkReleaseCapturedPipelineDataKHR]} *)
 let release_captured_pipeline_data_khr arg0 arg1 arg2 =
   match !release_captured_pipeline_data_khr_ref with
   | Some f -> f arg0 arg1 arg2
@@ -527,6 +671,8 @@ let release_captured_pipeline_data_khr arg0 arg1 arg2 =
 
 let create_graphics_pipelines_typ = Device.t @-> PipelineCache.t @-> Vk_base.uint32 @-> ptr (GraphicsPipelineCreateInfo.t) @-> ptr (AllocationCallbacks.t) @-> ptr (Pipeline.t) @-> returning (Result.t)
 let create_graphics_pipelines_ref = ref (bind create_graphics_pipelines_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateGraphicsPipelines.html}[vkCreateGraphicsPipelines]} *)
 let create_graphics_pipelines arg0 arg1 arg2 arg3 arg4 arg5 =
   match !create_graphics_pipelines_ref with
   | Some f -> f arg0 arg1 arg2 arg3 arg4 arg5
@@ -534,6 +680,8 @@ let create_graphics_pipelines arg0 arg1 arg2 arg3 arg4 arg5 =
 
 let create_compute_pipelines_typ = Device.t @-> PipelineCache.t @-> Vk_base.uint32 @-> ptr (ComputePipelineCreateInfo.t) @-> ptr (AllocationCallbacks.t) @-> ptr (Pipeline.t) @-> returning (Result.t)
 let create_compute_pipelines_ref = ref (bind create_compute_pipelines_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateComputePipelines.html}[vkCreateComputePipelines]} *)
 let create_compute_pipelines arg0 arg1 arg2 arg3 arg4 arg5 =
   match !create_compute_pipelines_ref with
   | Some f -> f arg0 arg1 arg2 arg3 arg4 arg5
@@ -541,6 +689,8 @@ let create_compute_pipelines arg0 arg1 arg2 arg3 arg4 arg5 =
 
 let get_device_subpass_shading_max_workgroup_size_huawei_typ = Device.t @-> RenderPass.t @-> ptr (Extent2D.t) @-> returning (Result.t)
 let get_device_subpass_shading_max_workgroup_size_huawei_ref = ref (bind get_device_subpass_shading_max_workgroup_size_huawei_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetDeviceSubpassShadingMaxWorkgroupSizeHUAWEI.html}[vkGetDeviceSubpassShadingMaxWorkgroupSizeHUAWEI]} *)
 let get_device_subpass_shading_max_workgroup_size_huawei arg0 arg1 arg2 =
   match !get_device_subpass_shading_max_workgroup_size_huawei_ref with
   | Some f -> f arg0 arg1 arg2
@@ -548,6 +698,8 @@ let get_device_subpass_shading_max_workgroup_size_huawei arg0 arg1 arg2 =
 
 let destroy_pipeline_typ = Device.t @-> Pipeline.t @-> ptr (AllocationCallbacks.t) @-> returning (Ctypes.void)
 let destroy_pipeline_ref = ref (bind destroy_pipeline_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkDestroyPipeline.html}[vkDestroyPipeline]} *)
 let destroy_pipeline arg0 arg1 arg2 =
   match !destroy_pipeline_ref with
   | Some f -> f arg0 arg1 arg2
@@ -555,6 +707,8 @@ let destroy_pipeline arg0 arg1 arg2 =
 
 let create_pipeline_layout_typ = Device.t @-> ptr (PipelineLayoutCreateInfo.t) @-> ptr (AllocationCallbacks.t) @-> ptr (PipelineLayout.t) @-> returning (Result.t)
 let create_pipeline_layout_ref = ref (bind create_pipeline_layout_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreatePipelineLayout.html}[vkCreatePipelineLayout]} *)
 let create_pipeline_layout arg0 arg1 arg2 arg3 =
   match !create_pipeline_layout_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -562,6 +716,8 @@ let create_pipeline_layout arg0 arg1 arg2 arg3 =
 
 let destroy_pipeline_layout_typ = Device.t @-> PipelineLayout.t @-> ptr (AllocationCallbacks.t) @-> returning (Ctypes.void)
 let destroy_pipeline_layout_ref = ref (bind destroy_pipeline_layout_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkDestroyPipelineLayout.html}[vkDestroyPipelineLayout]} *)
 let destroy_pipeline_layout arg0 arg1 arg2 =
   match !destroy_pipeline_layout_ref with
   | Some f -> f arg0 arg1 arg2
@@ -569,6 +725,8 @@ let destroy_pipeline_layout arg0 arg1 arg2 =
 
 let create_sampler_typ = Device.t @-> ptr (SamplerCreateInfo.t) @-> ptr (AllocationCallbacks.t) @-> ptr (Sampler.t) @-> returning (Result.t)
 let create_sampler_ref = ref (bind create_sampler_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateSampler.html}[vkCreateSampler]} *)
 let create_sampler arg0 arg1 arg2 arg3 =
   match !create_sampler_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -576,6 +734,8 @@ let create_sampler arg0 arg1 arg2 arg3 =
 
 let destroy_sampler_typ = Device.t @-> Sampler.t @-> ptr (AllocationCallbacks.t) @-> returning (Ctypes.void)
 let destroy_sampler_ref = ref (bind destroy_sampler_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkDestroySampler.html}[vkDestroySampler]} *)
 let destroy_sampler arg0 arg1 arg2 =
   match !destroy_sampler_ref with
   | Some f -> f arg0 arg1 arg2
@@ -583,6 +743,8 @@ let destroy_sampler arg0 arg1 arg2 =
 
 let create_descriptor_set_layout_typ = Device.t @-> ptr (DescriptorSetLayoutCreateInfo.t) @-> ptr (AllocationCallbacks.t) @-> ptr (DescriptorSetLayout.t) @-> returning (Result.t)
 let create_descriptor_set_layout_ref = ref (bind create_descriptor_set_layout_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateDescriptorSetLayout.html}[vkCreateDescriptorSetLayout]} *)
 let create_descriptor_set_layout arg0 arg1 arg2 arg3 =
   match !create_descriptor_set_layout_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -590,6 +752,8 @@ let create_descriptor_set_layout arg0 arg1 arg2 arg3 =
 
 let destroy_descriptor_set_layout_typ = Device.t @-> DescriptorSetLayout.t @-> ptr (AllocationCallbacks.t) @-> returning (Ctypes.void)
 let destroy_descriptor_set_layout_ref = ref (bind destroy_descriptor_set_layout_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkDestroyDescriptorSetLayout.html}[vkDestroyDescriptorSetLayout]} *)
 let destroy_descriptor_set_layout arg0 arg1 arg2 =
   match !destroy_descriptor_set_layout_ref with
   | Some f -> f arg0 arg1 arg2
@@ -597,6 +761,8 @@ let destroy_descriptor_set_layout arg0 arg1 arg2 =
 
 let create_descriptor_pool_typ = Device.t @-> ptr (DescriptorPoolCreateInfo.t) @-> ptr (AllocationCallbacks.t) @-> ptr (DescriptorPool.t) @-> returning (Result.t)
 let create_descriptor_pool_ref = ref (bind create_descriptor_pool_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateDescriptorPool.html}[vkCreateDescriptorPool]} *)
 let create_descriptor_pool arg0 arg1 arg2 arg3 =
   match !create_descriptor_pool_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -604,6 +770,8 @@ let create_descriptor_pool arg0 arg1 arg2 arg3 =
 
 let destroy_descriptor_pool_typ = Device.t @-> DescriptorPool.t @-> ptr (AllocationCallbacks.t) @-> returning (Ctypes.void)
 let destroy_descriptor_pool_ref = ref (bind destroy_descriptor_pool_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkDestroyDescriptorPool.html}[vkDestroyDescriptorPool]} *)
 let destroy_descriptor_pool arg0 arg1 arg2 =
   match !destroy_descriptor_pool_ref with
   | Some f -> f arg0 arg1 arg2
@@ -611,6 +779,8 @@ let destroy_descriptor_pool arg0 arg1 arg2 =
 
 let reset_descriptor_pool_typ = Device.t @-> DescriptorPool.t @-> DescriptorPoolResetFlags.t @-> returning (Result.t)
 let reset_descriptor_pool_ref = ref (bind reset_descriptor_pool_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkResetDescriptorPool.html}[vkResetDescriptorPool]} *)
 let reset_descriptor_pool arg0 arg1 arg2 =
   match !reset_descriptor_pool_ref with
   | Some f -> f arg0 arg1 arg2
@@ -618,6 +788,8 @@ let reset_descriptor_pool arg0 arg1 arg2 =
 
 let allocate_descriptor_sets_typ = Device.t @-> ptr (DescriptorSetAllocateInfo.t) @-> ptr (DescriptorSet.t) @-> returning (Result.t)
 let allocate_descriptor_sets_ref = ref (bind allocate_descriptor_sets_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkAllocateDescriptorSets.html}[vkAllocateDescriptorSets]} *)
 let allocate_descriptor_sets arg0 arg1 arg2 =
   match !allocate_descriptor_sets_ref with
   | Some f -> f arg0 arg1 arg2
@@ -625,6 +797,8 @@ let allocate_descriptor_sets arg0 arg1 arg2 =
 
 let free_descriptor_sets_typ = Device.t @-> DescriptorPool.t @-> Vk_base.uint32 @-> ptr (DescriptorSet.t) @-> returning (Result.t)
 let free_descriptor_sets_ref = ref (bind free_descriptor_sets_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkFreeDescriptorSets.html}[vkFreeDescriptorSets]} *)
 let free_descriptor_sets arg0 arg1 arg2 arg3 =
   match !free_descriptor_sets_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -632,6 +806,8 @@ let free_descriptor_sets arg0 arg1 arg2 arg3 =
 
 let update_descriptor_sets_typ = Device.t @-> Vk_base.uint32 @-> ptr (WriteDescriptorSet.t) @-> Vk_base.uint32 @-> ptr (CopyDescriptorSet.t) @-> returning (Ctypes.void)
 let update_descriptor_sets_ref = ref (bind update_descriptor_sets_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkUpdateDescriptorSets.html}[vkUpdateDescriptorSets]} *)
 let update_descriptor_sets arg0 arg1 arg2 arg3 arg4 =
   match !update_descriptor_sets_ref with
   | Some f -> f arg0 arg1 arg2 arg3 arg4
@@ -639,6 +815,8 @@ let update_descriptor_sets arg0 arg1 arg2 arg3 arg4 =
 
 let create_framebuffer_typ = Device.t @-> ptr (FramebufferCreateInfo.t) @-> ptr (AllocationCallbacks.t) @-> ptr (Framebuffer.t) @-> returning (Result.t)
 let create_framebuffer_ref = ref (bind create_framebuffer_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateFramebuffer.html}[vkCreateFramebuffer]} *)
 let create_framebuffer arg0 arg1 arg2 arg3 =
   match !create_framebuffer_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -646,6 +824,8 @@ let create_framebuffer arg0 arg1 arg2 arg3 =
 
 let destroy_framebuffer_typ = Device.t @-> Framebuffer.t @-> ptr (AllocationCallbacks.t) @-> returning (Ctypes.void)
 let destroy_framebuffer_ref = ref (bind destroy_framebuffer_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkDestroyFramebuffer.html}[vkDestroyFramebuffer]} *)
 let destroy_framebuffer arg0 arg1 arg2 =
   match !destroy_framebuffer_ref with
   | Some f -> f arg0 arg1 arg2
@@ -653,6 +833,8 @@ let destroy_framebuffer arg0 arg1 arg2 =
 
 let create_render_pass_typ = Device.t @-> ptr (RenderPassCreateInfo.t) @-> ptr (AllocationCallbacks.t) @-> ptr (RenderPass.t) @-> returning (Result.t)
 let create_render_pass_ref = ref (bind create_render_pass_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateRenderPass.html}[vkCreateRenderPass]} *)
 let create_render_pass arg0 arg1 arg2 arg3 =
   match !create_render_pass_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -660,6 +842,8 @@ let create_render_pass arg0 arg1 arg2 arg3 =
 
 let destroy_render_pass_typ = Device.t @-> RenderPass.t @-> ptr (AllocationCallbacks.t) @-> returning (Ctypes.void)
 let destroy_render_pass_ref = ref (bind destroy_render_pass_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkDestroyRenderPass.html}[vkDestroyRenderPass]} *)
 let destroy_render_pass arg0 arg1 arg2 =
   match !destroy_render_pass_ref with
   | Some f -> f arg0 arg1 arg2
@@ -667,6 +851,8 @@ let destroy_render_pass arg0 arg1 arg2 =
 
 let get_render_area_granularity_typ = Device.t @-> RenderPass.t @-> ptr (Extent2D.t) @-> returning (Ctypes.void)
 let get_render_area_granularity_ref = ref (bind get_render_area_granularity_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetRenderAreaGranularity.html}[vkGetRenderAreaGranularity]} *)
 let get_render_area_granularity arg0 arg1 arg2 =
   match !get_render_area_granularity_ref with
   | Some f -> f arg0 arg1 arg2
@@ -674,6 +860,8 @@ let get_render_area_granularity arg0 arg1 arg2 =
 
 let get_rendering_area_granularity_typ = Device.t @-> ptr (RenderingAreaInfo.t) @-> ptr (Extent2D.t) @-> returning (Ctypes.void)
 let get_rendering_area_granularity_ref = ref (bind get_rendering_area_granularity_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetRenderingAreaGranularity.html}[vkGetRenderingAreaGranularity]} *)
 let get_rendering_area_granularity arg0 arg1 arg2 =
   match !get_rendering_area_granularity_ref with
   | Some f -> f arg0 arg1 arg2
@@ -681,6 +869,8 @@ let get_rendering_area_granularity arg0 arg1 arg2 =
 
 let create_command_pool_typ = Device.t @-> ptr (CommandPoolCreateInfo.t) @-> ptr (AllocationCallbacks.t) @-> ptr (CommandPool.t) @-> returning (Result.t)
 let create_command_pool_ref = ref (bind create_command_pool_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateCommandPool.html}[vkCreateCommandPool]} *)
 let create_command_pool arg0 arg1 arg2 arg3 =
   match !create_command_pool_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -688,6 +878,8 @@ let create_command_pool arg0 arg1 arg2 arg3 =
 
 let destroy_command_pool_typ = Device.t @-> CommandPool.t @-> ptr (AllocationCallbacks.t) @-> returning (Ctypes.void)
 let destroy_command_pool_ref = ref (bind destroy_command_pool_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkDestroyCommandPool.html}[vkDestroyCommandPool]} *)
 let destroy_command_pool arg0 arg1 arg2 =
   match !destroy_command_pool_ref with
   | Some f -> f arg0 arg1 arg2
@@ -695,6 +887,8 @@ let destroy_command_pool arg0 arg1 arg2 =
 
 let reset_command_pool_typ = Device.t @-> CommandPool.t @-> CommandPoolResetFlags.t @-> returning (Result.t)
 let reset_command_pool_ref = ref (bind reset_command_pool_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkResetCommandPool.html}[vkResetCommandPool]} *)
 let reset_command_pool arg0 arg1 arg2 =
   match !reset_command_pool_ref with
   | Some f -> f arg0 arg1 arg2
@@ -702,6 +896,8 @@ let reset_command_pool arg0 arg1 arg2 =
 
 let allocate_command_buffers_typ = Device.t @-> ptr (CommandBufferAllocateInfo.t) @-> ptr (CommandBuffer.t) @-> returning (Result.t)
 let allocate_command_buffers_ref = ref (bind allocate_command_buffers_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkAllocateCommandBuffers.html}[vkAllocateCommandBuffers]} *)
 let allocate_command_buffers arg0 arg1 arg2 =
   match !allocate_command_buffers_ref with
   | Some f -> f arg0 arg1 arg2
@@ -709,6 +905,8 @@ let allocate_command_buffers arg0 arg1 arg2 =
 
 let free_command_buffers_typ = Device.t @-> CommandPool.t @-> Vk_base.uint32 @-> ptr (CommandBuffer.t) @-> returning (Ctypes.void)
 let free_command_buffers_ref = ref (bind free_command_buffers_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkFreeCommandBuffers.html}[vkFreeCommandBuffers]} *)
 let free_command_buffers arg0 arg1 arg2 arg3 =
   match !free_command_buffers_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -716,6 +914,8 @@ let free_command_buffers arg0 arg1 arg2 arg3 =
 
 let begin_command_buffer_typ = CommandBuffer.t @-> ptr (CommandBufferBeginInfo.t) @-> returning (Result.t)
 let begin_command_buffer_ref = ref (bind begin_command_buffer_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkBeginCommandBuffer.html}[vkBeginCommandBuffer]} *)
 let begin_command_buffer arg0 arg1 =
   match !begin_command_buffer_ref with
   | Some f -> f arg0 arg1
@@ -723,6 +923,8 @@ let begin_command_buffer arg0 arg1 =
 
 let end_command_buffer_typ = CommandBuffer.t @-> returning (Result.t)
 let end_command_buffer_ref = ref (bind end_command_buffer_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkEndCommandBuffer.html}[vkEndCommandBuffer]} *)
 let end_command_buffer arg0 =
   match !end_command_buffer_ref with
   | Some f -> f arg0
@@ -730,6 +932,8 @@ let end_command_buffer arg0 =
 
 let reset_command_buffer_typ = CommandBuffer.t @-> CommandBufferResetFlags.t @-> returning (Result.t)
 let reset_command_buffer_ref = ref (bind reset_command_buffer_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkResetCommandBuffer.html}[vkResetCommandBuffer]} *)
 let reset_command_buffer arg0 arg1 =
   match !reset_command_buffer_ref with
   | Some f -> f arg0 arg1
@@ -737,6 +941,8 @@ let reset_command_buffer arg0 arg1 =
 
 let cmd_bind_pipeline_typ = CommandBuffer.t @-> PipelineBindPoint.t @-> Pipeline.t @-> returning (Ctypes.void)
 let cmd_bind_pipeline_ref = ref (bind cmd_bind_pipeline_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdBindPipeline.html}[vkCmdBindPipeline]} *)
 let cmd_bind_pipeline arg0 arg1 arg2 =
   match !cmd_bind_pipeline_ref with
   | Some f -> f arg0 arg1 arg2
@@ -744,6 +950,8 @@ let cmd_bind_pipeline arg0 arg1 arg2 =
 
 let cmd_set_primitive_restart_index_ext_typ = CommandBuffer.t @-> Vk_base.uint32 @-> returning (Ctypes.void)
 let cmd_set_primitive_restart_index_ext_ref = ref (bind cmd_set_primitive_restart_index_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetPrimitiveRestartIndexEXT.html}[vkCmdSetPrimitiveRestartIndexEXT]} *)
 let cmd_set_primitive_restart_index_ext arg0 arg1 =
   match !cmd_set_primitive_restart_index_ext_ref with
   | Some f -> f arg0 arg1
@@ -751,6 +959,8 @@ let cmd_set_primitive_restart_index_ext arg0 arg1 =
 
 let cmd_set_attachment_feedback_loop_enable_ext_typ = CommandBuffer.t @-> ImageAspectFlags.t @-> returning (Ctypes.void)
 let cmd_set_attachment_feedback_loop_enable_ext_ref = ref (bind cmd_set_attachment_feedback_loop_enable_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetAttachmentFeedbackLoopEnableEXT.html}[vkCmdSetAttachmentFeedbackLoopEnableEXT]} *)
 let cmd_set_attachment_feedback_loop_enable_ext arg0 arg1 =
   match !cmd_set_attachment_feedback_loop_enable_ext_ref with
   | Some f -> f arg0 arg1
@@ -758,6 +968,8 @@ let cmd_set_attachment_feedback_loop_enable_ext arg0 arg1 =
 
 let cmd_set_viewport_typ = CommandBuffer.t @-> Vk_base.uint32 @-> Vk_base.uint32 @-> ptr (Viewport.t) @-> returning (Ctypes.void)
 let cmd_set_viewport_ref = ref (bind cmd_set_viewport_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetViewport.html}[vkCmdSetViewport]} *)
 let cmd_set_viewport arg0 arg1 arg2 arg3 =
   match !cmd_set_viewport_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -765,6 +977,8 @@ let cmd_set_viewport arg0 arg1 arg2 arg3 =
 
 let cmd_set_scissor_typ = CommandBuffer.t @-> Vk_base.uint32 @-> Vk_base.uint32 @-> ptr (Rect2D.t) @-> returning (Ctypes.void)
 let cmd_set_scissor_ref = ref (bind cmd_set_scissor_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetScissor.html}[vkCmdSetScissor]} *)
 let cmd_set_scissor arg0 arg1 arg2 arg3 =
   match !cmd_set_scissor_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -772,6 +986,8 @@ let cmd_set_scissor arg0 arg1 arg2 arg3 =
 
 let cmd_set_line_width_typ = CommandBuffer.t @-> Ctypes.float @-> returning (Ctypes.void)
 let cmd_set_line_width_ref = ref (bind cmd_set_line_width_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetLineWidth.html}[vkCmdSetLineWidth]} *)
 let cmd_set_line_width arg0 arg1 =
   match !cmd_set_line_width_ref with
   | Some f -> f arg0 arg1
@@ -779,6 +995,8 @@ let cmd_set_line_width arg0 arg1 =
 
 let cmd_set_depth_bias_typ = CommandBuffer.t @-> Ctypes.float @-> Ctypes.float @-> Ctypes.float @-> returning (Ctypes.void)
 let cmd_set_depth_bias_ref = ref (bind cmd_set_depth_bias_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetDepthBias.html}[vkCmdSetDepthBias]} *)
 let cmd_set_depth_bias arg0 arg1 arg2 arg3 =
   match !cmd_set_depth_bias_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -786,6 +1004,8 @@ let cmd_set_depth_bias arg0 arg1 arg2 arg3 =
 
 let cmd_set_blend_constants_typ = CommandBuffer.t @-> ptr (Ctypes.float) @-> returning (Ctypes.void)
 let cmd_set_blend_constants_ref = ref (bind cmd_set_blend_constants_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetBlendConstants.html}[vkCmdSetBlendConstants]} *)
 let cmd_set_blend_constants arg0 arg1 =
   match !cmd_set_blend_constants_ref with
   | Some f -> f arg0 arg1
@@ -793,6 +1013,8 @@ let cmd_set_blend_constants arg0 arg1 =
 
 let cmd_set_depth_bounds_typ = CommandBuffer.t @-> Ctypes.float @-> Ctypes.float @-> returning (Ctypes.void)
 let cmd_set_depth_bounds_ref = ref (bind cmd_set_depth_bounds_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetDepthBounds.html}[vkCmdSetDepthBounds]} *)
 let cmd_set_depth_bounds arg0 arg1 arg2 =
   match !cmd_set_depth_bounds_ref with
   | Some f -> f arg0 arg1 arg2
@@ -800,6 +1022,8 @@ let cmd_set_depth_bounds arg0 arg1 arg2 =
 
 let cmd_set_stencil_compare_mask_typ = CommandBuffer.t @-> StencilFaceFlags.t @-> Vk_base.uint32 @-> returning (Ctypes.void)
 let cmd_set_stencil_compare_mask_ref = ref (bind cmd_set_stencil_compare_mask_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetStencilCompareMask.html}[vkCmdSetStencilCompareMask]} *)
 let cmd_set_stencil_compare_mask arg0 arg1 arg2 =
   match !cmd_set_stencil_compare_mask_ref with
   | Some f -> f arg0 arg1 arg2
@@ -807,6 +1031,8 @@ let cmd_set_stencil_compare_mask arg0 arg1 arg2 =
 
 let cmd_set_stencil_write_mask_typ = CommandBuffer.t @-> StencilFaceFlags.t @-> Vk_base.uint32 @-> returning (Ctypes.void)
 let cmd_set_stencil_write_mask_ref = ref (bind cmd_set_stencil_write_mask_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetStencilWriteMask.html}[vkCmdSetStencilWriteMask]} *)
 let cmd_set_stencil_write_mask arg0 arg1 arg2 =
   match !cmd_set_stencil_write_mask_ref with
   | Some f -> f arg0 arg1 arg2
@@ -814,6 +1040,8 @@ let cmd_set_stencil_write_mask arg0 arg1 arg2 =
 
 let cmd_set_stencil_reference_typ = CommandBuffer.t @-> StencilFaceFlags.t @-> Vk_base.uint32 @-> returning (Ctypes.void)
 let cmd_set_stencil_reference_ref = ref (bind cmd_set_stencil_reference_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetStencilReference.html}[vkCmdSetStencilReference]} *)
 let cmd_set_stencil_reference arg0 arg1 arg2 =
   match !cmd_set_stencil_reference_ref with
   | Some f -> f arg0 arg1 arg2
@@ -821,6 +1049,8 @@ let cmd_set_stencil_reference arg0 arg1 arg2 =
 
 let cmd_bind_descriptor_sets_typ = CommandBuffer.t @-> PipelineBindPoint.t @-> PipelineLayout.t @-> Vk_base.uint32 @-> Vk_base.uint32 @-> ptr (DescriptorSet.t) @-> Vk_base.uint32 @-> ptr (Vk_base.uint32) @-> returning (Ctypes.void)
 let cmd_bind_descriptor_sets_ref = ref (bind cmd_bind_descriptor_sets_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdBindDescriptorSets.html}[vkCmdBindDescriptorSets]} *)
 let cmd_bind_descriptor_sets arg0 arg1 arg2 arg3 arg4 arg5 arg6 arg7 =
   match !cmd_bind_descriptor_sets_ref with
   | Some f -> f arg0 arg1 arg2 arg3 arg4 arg5 arg6 arg7
@@ -828,6 +1058,8 @@ let cmd_bind_descriptor_sets arg0 arg1 arg2 arg3 arg4 arg5 arg6 arg7 =
 
 let cmd_bind_index_buffer_typ = CommandBuffer.t @-> Buffer.t @-> Vk_base.device_size @-> IndexType.t @-> returning (Ctypes.void)
 let cmd_bind_index_buffer_ref = ref (bind cmd_bind_index_buffer_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdBindIndexBuffer.html}[vkCmdBindIndexBuffer]} *)
 let cmd_bind_index_buffer arg0 arg1 arg2 arg3 =
   match !cmd_bind_index_buffer_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -835,6 +1067,8 @@ let cmd_bind_index_buffer arg0 arg1 arg2 arg3 =
 
 let cmd_bind_vertex_buffers_typ = CommandBuffer.t @-> Vk_base.uint32 @-> Vk_base.uint32 @-> ptr (Buffer.t) @-> ptr (Vk_base.device_size) @-> returning (Ctypes.void)
 let cmd_bind_vertex_buffers_ref = ref (bind cmd_bind_vertex_buffers_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdBindVertexBuffers.html}[vkCmdBindVertexBuffers]} *)
 let cmd_bind_vertex_buffers arg0 arg1 arg2 arg3 arg4 =
   match !cmd_bind_vertex_buffers_ref with
   | Some f -> f arg0 arg1 arg2 arg3 arg4
@@ -842,6 +1076,8 @@ let cmd_bind_vertex_buffers arg0 arg1 arg2 arg3 arg4 =
 
 let cmd_draw_typ = CommandBuffer.t @-> Vk_base.uint32 @-> Vk_base.uint32 @-> Vk_base.uint32 @-> Vk_base.uint32 @-> returning (Ctypes.void)
 let cmd_draw_ref = ref (bind cmd_draw_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdDraw.html}[vkCmdDraw]} *)
 let cmd_draw arg0 arg1 arg2 arg3 arg4 =
   match !cmd_draw_ref with
   | Some f -> f arg0 arg1 arg2 arg3 arg4
@@ -849,6 +1085,8 @@ let cmd_draw arg0 arg1 arg2 arg3 arg4 =
 
 let cmd_draw_indexed_typ = CommandBuffer.t @-> Vk_base.uint32 @-> Vk_base.uint32 @-> Vk_base.uint32 @-> Vk_base.int32 @-> Vk_base.uint32 @-> returning (Ctypes.void)
 let cmd_draw_indexed_ref = ref (bind cmd_draw_indexed_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdDrawIndexed.html}[vkCmdDrawIndexed]} *)
 let cmd_draw_indexed arg0 arg1 arg2 arg3 arg4 arg5 =
   match !cmd_draw_indexed_ref with
   | Some f -> f arg0 arg1 arg2 arg3 arg4 arg5
@@ -856,6 +1094,8 @@ let cmd_draw_indexed arg0 arg1 arg2 arg3 arg4 arg5 =
 
 let cmd_draw_multi_ext_typ = CommandBuffer.t @-> Vk_base.uint32 @-> ptr (MultiDrawInfoEXT.t) @-> Vk_base.uint32 @-> Vk_base.uint32 @-> Vk_base.uint32 @-> returning (Ctypes.void)
 let cmd_draw_multi_ext_ref = ref (bind cmd_draw_multi_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdDrawMultiEXT.html}[vkCmdDrawMultiEXT]} *)
 let cmd_draw_multi_ext arg0 arg1 arg2 arg3 arg4 arg5 =
   match !cmd_draw_multi_ext_ref with
   | Some f -> f arg0 arg1 arg2 arg3 arg4 arg5
@@ -863,6 +1103,8 @@ let cmd_draw_multi_ext arg0 arg1 arg2 arg3 arg4 arg5 =
 
 let cmd_draw_multi_indexed_ext_typ = CommandBuffer.t @-> Vk_base.uint32 @-> ptr (MultiDrawIndexedInfoEXT.t) @-> Vk_base.uint32 @-> Vk_base.uint32 @-> Vk_base.uint32 @-> ptr (Vk_base.int32) @-> returning (Ctypes.void)
 let cmd_draw_multi_indexed_ext_ref = ref (bind cmd_draw_multi_indexed_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdDrawMultiIndexedEXT.html}[vkCmdDrawMultiIndexedEXT]} *)
 let cmd_draw_multi_indexed_ext arg0 arg1 arg2 arg3 arg4 arg5 arg6 =
   match !cmd_draw_multi_indexed_ext_ref with
   | Some f -> f arg0 arg1 arg2 arg3 arg4 arg5 arg6
@@ -870,6 +1112,8 @@ let cmd_draw_multi_indexed_ext arg0 arg1 arg2 arg3 arg4 arg5 arg6 =
 
 let cmd_draw_indirect_typ = CommandBuffer.t @-> Buffer.t @-> Vk_base.device_size @-> Vk_base.uint32 @-> Vk_base.uint32 @-> returning (Ctypes.void)
 let cmd_draw_indirect_ref = ref (bind cmd_draw_indirect_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdDrawIndirect.html}[vkCmdDrawIndirect]} *)
 let cmd_draw_indirect arg0 arg1 arg2 arg3 arg4 =
   match !cmd_draw_indirect_ref with
   | Some f -> f arg0 arg1 arg2 arg3 arg4
@@ -877,6 +1121,8 @@ let cmd_draw_indirect arg0 arg1 arg2 arg3 arg4 =
 
 let cmd_draw_indexed_indirect_typ = CommandBuffer.t @-> Buffer.t @-> Vk_base.device_size @-> Vk_base.uint32 @-> Vk_base.uint32 @-> returning (Ctypes.void)
 let cmd_draw_indexed_indirect_ref = ref (bind cmd_draw_indexed_indirect_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdDrawIndexedIndirect.html}[vkCmdDrawIndexedIndirect]} *)
 let cmd_draw_indexed_indirect arg0 arg1 arg2 arg3 arg4 =
   match !cmd_draw_indexed_indirect_ref with
   | Some f -> f arg0 arg1 arg2 arg3 arg4
@@ -884,6 +1130,8 @@ let cmd_draw_indexed_indirect arg0 arg1 arg2 arg3 arg4 =
 
 let cmd_dispatch_typ = CommandBuffer.t @-> Vk_base.uint32 @-> Vk_base.uint32 @-> Vk_base.uint32 @-> returning (Ctypes.void)
 let cmd_dispatch_ref = ref (bind cmd_dispatch_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdDispatch.html}[vkCmdDispatch]} *)
 let cmd_dispatch arg0 arg1 arg2 arg3 =
   match !cmd_dispatch_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -891,6 +1139,8 @@ let cmd_dispatch arg0 arg1 arg2 arg3 =
 
 let cmd_dispatch_indirect_typ = CommandBuffer.t @-> Buffer.t @-> Vk_base.device_size @-> returning (Ctypes.void)
 let cmd_dispatch_indirect_ref = ref (bind cmd_dispatch_indirect_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdDispatchIndirect.html}[vkCmdDispatchIndirect]} *)
 let cmd_dispatch_indirect arg0 arg1 arg2 =
   match !cmd_dispatch_indirect_ref with
   | Some f -> f arg0 arg1 arg2
@@ -898,6 +1148,8 @@ let cmd_dispatch_indirect arg0 arg1 arg2 =
 
 let cmd_subpass_shading_huawei_typ = CommandBuffer.t @-> returning (Ctypes.void)
 let cmd_subpass_shading_huawei_ref = ref (bind cmd_subpass_shading_huawei_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSubpassShadingHUAWEI.html}[vkCmdSubpassShadingHUAWEI]} *)
 let cmd_subpass_shading_huawei arg0 =
   match !cmd_subpass_shading_huawei_ref with
   | Some f -> f arg0
@@ -905,6 +1157,8 @@ let cmd_subpass_shading_huawei arg0 =
 
 let cmd_draw_cluster_huawei_typ = CommandBuffer.t @-> Vk_base.uint32 @-> Vk_base.uint32 @-> Vk_base.uint32 @-> returning (Ctypes.void)
 let cmd_draw_cluster_huawei_ref = ref (bind cmd_draw_cluster_huawei_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdDrawClusterHUAWEI.html}[vkCmdDrawClusterHUAWEI]} *)
 let cmd_draw_cluster_huawei arg0 arg1 arg2 arg3 =
   match !cmd_draw_cluster_huawei_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -912,6 +1166,8 @@ let cmd_draw_cluster_huawei arg0 arg1 arg2 arg3 =
 
 let cmd_draw_cluster_indirect_huawei_typ = CommandBuffer.t @-> Buffer.t @-> Vk_base.device_size @-> returning (Ctypes.void)
 let cmd_draw_cluster_indirect_huawei_ref = ref (bind cmd_draw_cluster_indirect_huawei_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdDrawClusterIndirectHUAWEI.html}[vkCmdDrawClusterIndirectHUAWEI]} *)
 let cmd_draw_cluster_indirect_huawei arg0 arg1 arg2 =
   match !cmd_draw_cluster_indirect_huawei_ref with
   | Some f -> f arg0 arg1 arg2
@@ -919,6 +1175,8 @@ let cmd_draw_cluster_indirect_huawei arg0 arg1 arg2 =
 
 let cmd_update_pipeline_indirect_buffer_nv_typ = CommandBuffer.t @-> PipelineBindPoint.t @-> Pipeline.t @-> returning (Ctypes.void)
 let cmd_update_pipeline_indirect_buffer_nv_ref = ref (bind cmd_update_pipeline_indirect_buffer_nv_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdUpdatePipelineIndirectBufferNV.html}[vkCmdUpdatePipelineIndirectBufferNV]} *)
 let cmd_update_pipeline_indirect_buffer_nv arg0 arg1 arg2 =
   match !cmd_update_pipeline_indirect_buffer_nv_ref with
   | Some f -> f arg0 arg1 arg2
@@ -926,6 +1184,8 @@ let cmd_update_pipeline_indirect_buffer_nv arg0 arg1 arg2 =
 
 let cmd_copy_buffer_typ = CommandBuffer.t @-> Buffer.t @-> Buffer.t @-> Vk_base.uint32 @-> ptr (BufferCopy.t) @-> returning (Ctypes.void)
 let cmd_copy_buffer_ref = ref (bind cmd_copy_buffer_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdCopyBuffer.html}[vkCmdCopyBuffer]} *)
 let cmd_copy_buffer arg0 arg1 arg2 arg3 arg4 =
   match !cmd_copy_buffer_ref with
   | Some f -> f arg0 arg1 arg2 arg3 arg4
@@ -933,6 +1193,8 @@ let cmd_copy_buffer arg0 arg1 arg2 arg3 arg4 =
 
 let cmd_copy_image_typ = CommandBuffer.t @-> Image.t @-> ImageLayout.t @-> Image.t @-> ImageLayout.t @-> Vk_base.uint32 @-> ptr (ImageCopy.t) @-> returning (Ctypes.void)
 let cmd_copy_image_ref = ref (bind cmd_copy_image_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdCopyImage.html}[vkCmdCopyImage]} *)
 let cmd_copy_image arg0 arg1 arg2 arg3 arg4 arg5 arg6 =
   match !cmd_copy_image_ref with
   | Some f -> f arg0 arg1 arg2 arg3 arg4 arg5 arg6
@@ -940,6 +1202,8 @@ let cmd_copy_image arg0 arg1 arg2 arg3 arg4 arg5 arg6 =
 
 let cmd_blit_image_typ = CommandBuffer.t @-> Image.t @-> ImageLayout.t @-> Image.t @-> ImageLayout.t @-> Vk_base.uint32 @-> ptr (ImageBlit.t) @-> Filter.t @-> returning (Ctypes.void)
 let cmd_blit_image_ref = ref (bind cmd_blit_image_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdBlitImage.html}[vkCmdBlitImage]} *)
 let cmd_blit_image arg0 arg1 arg2 arg3 arg4 arg5 arg6 arg7 =
   match !cmd_blit_image_ref with
   | Some f -> f arg0 arg1 arg2 arg3 arg4 arg5 arg6 arg7
@@ -947,6 +1211,8 @@ let cmd_blit_image arg0 arg1 arg2 arg3 arg4 arg5 arg6 arg7 =
 
 let cmd_copy_buffer_to_image_typ = CommandBuffer.t @-> Buffer.t @-> Image.t @-> ImageLayout.t @-> Vk_base.uint32 @-> ptr (BufferImageCopy.t) @-> returning (Ctypes.void)
 let cmd_copy_buffer_to_image_ref = ref (bind cmd_copy_buffer_to_image_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdCopyBufferToImage.html}[vkCmdCopyBufferToImage]} *)
 let cmd_copy_buffer_to_image arg0 arg1 arg2 arg3 arg4 arg5 =
   match !cmd_copy_buffer_to_image_ref with
   | Some f -> f arg0 arg1 arg2 arg3 arg4 arg5
@@ -954,6 +1220,8 @@ let cmd_copy_buffer_to_image arg0 arg1 arg2 arg3 arg4 arg5 =
 
 let cmd_copy_image_to_buffer_typ = CommandBuffer.t @-> Image.t @-> ImageLayout.t @-> Buffer.t @-> Vk_base.uint32 @-> ptr (BufferImageCopy.t) @-> returning (Ctypes.void)
 let cmd_copy_image_to_buffer_ref = ref (bind cmd_copy_image_to_buffer_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdCopyImageToBuffer.html}[vkCmdCopyImageToBuffer]} *)
 let cmd_copy_image_to_buffer arg0 arg1 arg2 arg3 arg4 arg5 =
   match !cmd_copy_image_to_buffer_ref with
   | Some f -> f arg0 arg1 arg2 arg3 arg4 arg5
@@ -961,6 +1229,8 @@ let cmd_copy_image_to_buffer arg0 arg1 arg2 arg3 arg4 arg5 =
 
 let cmd_copy_memory_indirect_nv_typ = CommandBuffer.t @-> Vk_base.device_address @-> Vk_base.uint32 @-> Vk_base.uint32 @-> returning (Ctypes.void)
 let cmd_copy_memory_indirect_nv_ref = ref (bind cmd_copy_memory_indirect_nv_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdCopyMemoryIndirectNV.html}[vkCmdCopyMemoryIndirectNV]} *)
 let cmd_copy_memory_indirect_nv arg0 arg1 arg2 arg3 =
   match !cmd_copy_memory_indirect_nv_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -968,6 +1238,8 @@ let cmd_copy_memory_indirect_nv arg0 arg1 arg2 arg3 =
 
 let cmd_copy_memory_indirect_khr_typ = CommandBuffer.t @-> ptr (CopyMemoryIndirectInfoKHR.t) @-> returning (Ctypes.void)
 let cmd_copy_memory_indirect_khr_ref = ref (bind cmd_copy_memory_indirect_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdCopyMemoryIndirectKHR.html}[vkCmdCopyMemoryIndirectKHR]} *)
 let cmd_copy_memory_indirect_khr arg0 arg1 =
   match !cmd_copy_memory_indirect_khr_ref with
   | Some f -> f arg0 arg1
@@ -975,6 +1247,8 @@ let cmd_copy_memory_indirect_khr arg0 arg1 =
 
 let cmd_copy_memory_to_image_indirect_nv_typ = CommandBuffer.t @-> Vk_base.device_address @-> Vk_base.uint32 @-> Vk_base.uint32 @-> Image.t @-> ImageLayout.t @-> ptr (ImageSubresourceLayers.t) @-> returning (Ctypes.void)
 let cmd_copy_memory_to_image_indirect_nv_ref = ref (bind cmd_copy_memory_to_image_indirect_nv_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdCopyMemoryToImageIndirectNV.html}[vkCmdCopyMemoryToImageIndirectNV]} *)
 let cmd_copy_memory_to_image_indirect_nv arg0 arg1 arg2 arg3 arg4 arg5 arg6 =
   match !cmd_copy_memory_to_image_indirect_nv_ref with
   | Some f -> f arg0 arg1 arg2 arg3 arg4 arg5 arg6
@@ -982,6 +1256,8 @@ let cmd_copy_memory_to_image_indirect_nv arg0 arg1 arg2 arg3 arg4 arg5 arg6 =
 
 let cmd_copy_memory_to_image_indirect_khr_typ = CommandBuffer.t @-> ptr (CopyMemoryToImageIndirectInfoKHR.t) @-> returning (Ctypes.void)
 let cmd_copy_memory_to_image_indirect_khr_ref = ref (bind cmd_copy_memory_to_image_indirect_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdCopyMemoryToImageIndirectKHR.html}[vkCmdCopyMemoryToImageIndirectKHR]} *)
 let cmd_copy_memory_to_image_indirect_khr arg0 arg1 =
   match !cmd_copy_memory_to_image_indirect_khr_ref with
   | Some f -> f arg0 arg1
@@ -989,6 +1265,8 @@ let cmd_copy_memory_to_image_indirect_khr arg0 arg1 =
 
 let cmd_update_buffer_typ = CommandBuffer.t @-> Buffer.t @-> Vk_base.device_size @-> Vk_base.device_size @-> ptr (Ctypes.void) @-> returning (Ctypes.void)
 let cmd_update_buffer_ref = ref (bind cmd_update_buffer_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdUpdateBuffer.html}[vkCmdUpdateBuffer]} *)
 let cmd_update_buffer arg0 arg1 arg2 arg3 arg4 =
   match !cmd_update_buffer_ref with
   | Some f -> f arg0 arg1 arg2 arg3 arg4
@@ -996,6 +1274,8 @@ let cmd_update_buffer arg0 arg1 arg2 arg3 arg4 =
 
 let cmd_fill_buffer_typ = CommandBuffer.t @-> Buffer.t @-> Vk_base.device_size @-> Vk_base.device_size @-> Vk_base.uint32 @-> returning (Ctypes.void)
 let cmd_fill_buffer_ref = ref (bind cmd_fill_buffer_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdFillBuffer.html}[vkCmdFillBuffer]} *)
 let cmd_fill_buffer arg0 arg1 arg2 arg3 arg4 =
   match !cmd_fill_buffer_ref with
   | Some f -> f arg0 arg1 arg2 arg3 arg4
@@ -1003,6 +1283,8 @@ let cmd_fill_buffer arg0 arg1 arg2 arg3 arg4 =
 
 let cmd_clear_color_image_typ = CommandBuffer.t @-> Image.t @-> ImageLayout.t @-> ptr (ClearColorValue.t) @-> Vk_base.uint32 @-> ptr (ImageSubresourceRange.t) @-> returning (Ctypes.void)
 let cmd_clear_color_image_ref = ref (bind cmd_clear_color_image_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdClearColorImage.html}[vkCmdClearColorImage]} *)
 let cmd_clear_color_image arg0 arg1 arg2 arg3 arg4 arg5 =
   match !cmd_clear_color_image_ref with
   | Some f -> f arg0 arg1 arg2 arg3 arg4 arg5
@@ -1010,6 +1292,8 @@ let cmd_clear_color_image arg0 arg1 arg2 arg3 arg4 arg5 =
 
 let cmd_clear_depth_stencil_image_typ = CommandBuffer.t @-> Image.t @-> ImageLayout.t @-> ptr (ClearDepthStencilValue.t) @-> Vk_base.uint32 @-> ptr (ImageSubresourceRange.t) @-> returning (Ctypes.void)
 let cmd_clear_depth_stencil_image_ref = ref (bind cmd_clear_depth_stencil_image_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdClearDepthStencilImage.html}[vkCmdClearDepthStencilImage]} *)
 let cmd_clear_depth_stencil_image arg0 arg1 arg2 arg3 arg4 arg5 =
   match !cmd_clear_depth_stencil_image_ref with
   | Some f -> f arg0 arg1 arg2 arg3 arg4 arg5
@@ -1017,6 +1301,8 @@ let cmd_clear_depth_stencil_image arg0 arg1 arg2 arg3 arg4 arg5 =
 
 let cmd_clear_attachments_typ = CommandBuffer.t @-> Vk_base.uint32 @-> ptr (ClearAttachment.t) @-> Vk_base.uint32 @-> ptr (ClearRect.t) @-> returning (Ctypes.void)
 let cmd_clear_attachments_ref = ref (bind cmd_clear_attachments_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdClearAttachments.html}[vkCmdClearAttachments]} *)
 let cmd_clear_attachments arg0 arg1 arg2 arg3 arg4 =
   match !cmd_clear_attachments_ref with
   | Some f -> f arg0 arg1 arg2 arg3 arg4
@@ -1024,6 +1310,8 @@ let cmd_clear_attachments arg0 arg1 arg2 arg3 arg4 =
 
 let cmd_resolve_image_typ = CommandBuffer.t @-> Image.t @-> ImageLayout.t @-> Image.t @-> ImageLayout.t @-> Vk_base.uint32 @-> ptr (ImageResolve.t) @-> returning (Ctypes.void)
 let cmd_resolve_image_ref = ref (bind cmd_resolve_image_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdResolveImage.html}[vkCmdResolveImage]} *)
 let cmd_resolve_image arg0 arg1 arg2 arg3 arg4 arg5 arg6 =
   match !cmd_resolve_image_ref with
   | Some f -> f arg0 arg1 arg2 arg3 arg4 arg5 arg6
@@ -1031,6 +1319,8 @@ let cmd_resolve_image arg0 arg1 arg2 arg3 arg4 arg5 arg6 =
 
 let cmd_set_event_typ = CommandBuffer.t @-> Event.t @-> PipelineStageFlags.t @-> returning (Ctypes.void)
 let cmd_set_event_ref = ref (bind cmd_set_event_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetEvent.html}[vkCmdSetEvent]} *)
 let cmd_set_event arg0 arg1 arg2 =
   match !cmd_set_event_ref with
   | Some f -> f arg0 arg1 arg2
@@ -1038,6 +1328,8 @@ let cmd_set_event arg0 arg1 arg2 =
 
 let cmd_reset_event_typ = CommandBuffer.t @-> Event.t @-> PipelineStageFlags.t @-> returning (Ctypes.void)
 let cmd_reset_event_ref = ref (bind cmd_reset_event_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdResetEvent.html}[vkCmdResetEvent]} *)
 let cmd_reset_event arg0 arg1 arg2 =
   match !cmd_reset_event_ref with
   | Some f -> f arg0 arg1 arg2
@@ -1045,6 +1337,8 @@ let cmd_reset_event arg0 arg1 arg2 =
 
 let cmd_wait_events_typ = CommandBuffer.t @-> Vk_base.uint32 @-> ptr (Event.t) @-> PipelineStageFlags.t @-> PipelineStageFlags.t @-> Vk_base.uint32 @-> ptr (MemoryBarrier.t) @-> Vk_base.uint32 @-> ptr (BufferMemoryBarrier.t) @-> Vk_base.uint32 @-> ptr (ImageMemoryBarrier.t) @-> returning (Ctypes.void)
 let cmd_wait_events_ref = ref (bind cmd_wait_events_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdWaitEvents.html}[vkCmdWaitEvents]} *)
 let cmd_wait_events arg0 arg1 arg2 arg3 arg4 arg5 arg6 arg7 arg8 arg9 arg10 =
   match !cmd_wait_events_ref with
   | Some f -> f arg0 arg1 arg2 arg3 arg4 arg5 arg6 arg7 arg8 arg9 arg10
@@ -1052,6 +1346,8 @@ let cmd_wait_events arg0 arg1 arg2 arg3 arg4 arg5 arg6 arg7 arg8 arg9 arg10 =
 
 let cmd_pipeline_barrier_typ = CommandBuffer.t @-> PipelineStageFlags.t @-> PipelineStageFlags.t @-> DependencyFlags.t @-> Vk_base.uint32 @-> ptr (MemoryBarrier.t) @-> Vk_base.uint32 @-> ptr (BufferMemoryBarrier.t) @-> Vk_base.uint32 @-> ptr (ImageMemoryBarrier.t) @-> returning (Ctypes.void)
 let cmd_pipeline_barrier_ref = ref (bind cmd_pipeline_barrier_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdPipelineBarrier.html}[vkCmdPipelineBarrier]} *)
 let cmd_pipeline_barrier arg0 arg1 arg2 arg3 arg4 arg5 arg6 arg7 arg8 arg9 =
   match !cmd_pipeline_barrier_ref with
   | Some f -> f arg0 arg1 arg2 arg3 arg4 arg5 arg6 arg7 arg8 arg9
@@ -1059,6 +1355,8 @@ let cmd_pipeline_barrier arg0 arg1 arg2 arg3 arg4 arg5 arg6 arg7 arg8 arg9 =
 
 let cmd_begin_query_typ = CommandBuffer.t @-> QueryPool.t @-> Vk_base.uint32 @-> QueryControlFlags.t @-> returning (Ctypes.void)
 let cmd_begin_query_ref = ref (bind cmd_begin_query_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdBeginQuery.html}[vkCmdBeginQuery]} *)
 let cmd_begin_query arg0 arg1 arg2 arg3 =
   match !cmd_begin_query_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -1066,6 +1364,8 @@ let cmd_begin_query arg0 arg1 arg2 arg3 =
 
 let cmd_end_query_typ = CommandBuffer.t @-> QueryPool.t @-> Vk_base.uint32 @-> returning (Ctypes.void)
 let cmd_end_query_ref = ref (bind cmd_end_query_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdEndQuery.html}[vkCmdEndQuery]} *)
 let cmd_end_query arg0 arg1 arg2 =
   match !cmd_end_query_ref with
   | Some f -> f arg0 arg1 arg2
@@ -1073,6 +1373,8 @@ let cmd_end_query arg0 arg1 arg2 =
 
 let cmd_begin_conditional_rendering_ext_typ = CommandBuffer.t @-> ptr (ConditionalRenderingBeginInfoEXT.t) @-> returning (Ctypes.void)
 let cmd_begin_conditional_rendering_ext_ref = ref (bind cmd_begin_conditional_rendering_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdBeginConditionalRenderingEXT.html}[vkCmdBeginConditionalRenderingEXT]} *)
 let cmd_begin_conditional_rendering_ext arg0 arg1 =
   match !cmd_begin_conditional_rendering_ext_ref with
   | Some f -> f arg0 arg1
@@ -1080,6 +1382,8 @@ let cmd_begin_conditional_rendering_ext arg0 arg1 =
 
 let cmd_end_conditional_rendering_ext_typ = CommandBuffer.t @-> returning (Ctypes.void)
 let cmd_end_conditional_rendering_ext_ref = ref (bind cmd_end_conditional_rendering_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdEndConditionalRenderingEXT.html}[vkCmdEndConditionalRenderingEXT]} *)
 let cmd_end_conditional_rendering_ext arg0 =
   match !cmd_end_conditional_rendering_ext_ref with
   | Some f -> f arg0
@@ -1087,6 +1391,8 @@ let cmd_end_conditional_rendering_ext arg0 =
 
 let cmd_begin_custom_resolve_ext_typ = CommandBuffer.t @-> ptr (BeginCustomResolveInfoEXT.t) @-> returning (Ctypes.void)
 let cmd_begin_custom_resolve_ext_ref = ref (bind cmd_begin_custom_resolve_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdBeginCustomResolveEXT.html}[vkCmdBeginCustomResolveEXT]} *)
 let cmd_begin_custom_resolve_ext arg0 arg1 =
   match !cmd_begin_custom_resolve_ext_ref with
   | Some f -> f arg0 arg1
@@ -1094,6 +1400,8 @@ let cmd_begin_custom_resolve_ext arg0 arg1 =
 
 let cmd_reset_query_pool_typ = CommandBuffer.t @-> QueryPool.t @-> Vk_base.uint32 @-> Vk_base.uint32 @-> returning (Ctypes.void)
 let cmd_reset_query_pool_ref = ref (bind cmd_reset_query_pool_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdResetQueryPool.html}[vkCmdResetQueryPool]} *)
 let cmd_reset_query_pool arg0 arg1 arg2 arg3 =
   match !cmd_reset_query_pool_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -1101,6 +1409,8 @@ let cmd_reset_query_pool arg0 arg1 arg2 arg3 =
 
 let cmd_write_timestamp_typ = CommandBuffer.t @-> PipelineStageFlags.t @-> QueryPool.t @-> Vk_base.uint32 @-> returning (Ctypes.void)
 let cmd_write_timestamp_ref = ref (bind cmd_write_timestamp_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdWriteTimestamp.html}[vkCmdWriteTimestamp]} *)
 let cmd_write_timestamp arg0 arg1 arg2 arg3 =
   match !cmd_write_timestamp_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -1108,6 +1418,8 @@ let cmd_write_timestamp arg0 arg1 arg2 arg3 =
 
 let cmd_copy_query_pool_results_typ = CommandBuffer.t @-> QueryPool.t @-> Vk_base.uint32 @-> Vk_base.uint32 @-> Buffer.t @-> Vk_base.device_size @-> Vk_base.device_size @-> QueryResultFlags.t @-> returning (Ctypes.void)
 let cmd_copy_query_pool_results_ref = ref (bind cmd_copy_query_pool_results_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdCopyQueryPoolResults.html}[vkCmdCopyQueryPoolResults]} *)
 let cmd_copy_query_pool_results arg0 arg1 arg2 arg3 arg4 arg5 arg6 arg7 =
   match !cmd_copy_query_pool_results_ref with
   | Some f -> f arg0 arg1 arg2 arg3 arg4 arg5 arg6 arg7
@@ -1115,6 +1427,8 @@ let cmd_copy_query_pool_results arg0 arg1 arg2 arg3 arg4 arg5 arg6 arg7 =
 
 let cmd_push_constants_typ = CommandBuffer.t @-> PipelineLayout.t @-> ShaderStageFlags.t @-> Vk_base.uint32 @-> Vk_base.uint32 @-> ptr (Ctypes.void) @-> returning (Ctypes.void)
 let cmd_push_constants_ref = ref (bind cmd_push_constants_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdPushConstants.html}[vkCmdPushConstants]} *)
 let cmd_push_constants arg0 arg1 arg2 arg3 arg4 arg5 =
   match !cmd_push_constants_ref with
   | Some f -> f arg0 arg1 arg2 arg3 arg4 arg5
@@ -1122,6 +1436,8 @@ let cmd_push_constants arg0 arg1 arg2 arg3 arg4 arg5 =
 
 let cmd_begin_render_pass_typ = CommandBuffer.t @-> ptr (RenderPassBeginInfo.t) @-> SubpassContents.t @-> returning (Ctypes.void)
 let cmd_begin_render_pass_ref = ref (bind cmd_begin_render_pass_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdBeginRenderPass.html}[vkCmdBeginRenderPass]} *)
 let cmd_begin_render_pass arg0 arg1 arg2 =
   match !cmd_begin_render_pass_ref with
   | Some f -> f arg0 arg1 arg2
@@ -1129,6 +1445,8 @@ let cmd_begin_render_pass arg0 arg1 arg2 =
 
 let cmd_next_subpass_typ = CommandBuffer.t @-> SubpassContents.t @-> returning (Ctypes.void)
 let cmd_next_subpass_ref = ref (bind cmd_next_subpass_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdNextSubpass.html}[vkCmdNextSubpass]} *)
 let cmd_next_subpass arg0 arg1 =
   match !cmd_next_subpass_ref with
   | Some f -> f arg0 arg1
@@ -1136,6 +1454,8 @@ let cmd_next_subpass arg0 arg1 =
 
 let cmd_end_render_pass_typ = CommandBuffer.t @-> returning (Ctypes.void)
 let cmd_end_render_pass_ref = ref (bind cmd_end_render_pass_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdEndRenderPass.html}[vkCmdEndRenderPass]} *)
 let cmd_end_render_pass arg0 =
   match !cmd_end_render_pass_ref with
   | Some f -> f arg0
@@ -1143,6 +1463,8 @@ let cmd_end_render_pass arg0 =
 
 let cmd_execute_commands_typ = CommandBuffer.t @-> Vk_base.uint32 @-> ptr (CommandBuffer.t) @-> returning (Ctypes.void)
 let cmd_execute_commands_ref = ref (bind cmd_execute_commands_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdExecuteCommands.html}[vkCmdExecuteCommands]} *)
 let cmd_execute_commands arg0 arg1 arg2 =
   match !cmd_execute_commands_ref with
   | Some f -> f arg0 arg1 arg2
@@ -1150,6 +1472,8 @@ let cmd_execute_commands arg0 arg1 arg2 =
 
 let create_android_surface_khr_typ = Instance.t @-> ptr (AndroidSurfaceCreateInfoKHR.t) @-> ptr (AllocationCallbacks.t) @-> ptr (SurfaceKHR.t) @-> returning (Result.t)
 let create_android_surface_khr_ref = ref (bind create_android_surface_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateAndroidSurfaceKHR.html}[vkCreateAndroidSurfaceKHR]} *)
 let create_android_surface_khr arg0 arg1 arg2 arg3 =
   match !create_android_surface_khr_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -1157,6 +1481,8 @@ let create_android_surface_khr arg0 arg1 arg2 arg3 =
 
 let create_surface_ohos_typ = Instance.t @-> ptr (SurfaceCreateInfoOHOS.t) @-> ptr (AllocationCallbacks.t) @-> ptr (SurfaceKHR.t) @-> returning (Result.t)
 let create_surface_ohos_ref = ref (bind create_surface_ohos_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateSurfaceOHOS.html}[vkCreateSurfaceOHOS]} *)
 let create_surface_ohos arg0 arg1 arg2 arg3 =
   match !create_surface_ohos_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -1164,6 +1490,8 @@ let create_surface_ohos arg0 arg1 arg2 arg3 =
 
 let get_physical_device_display_properties_khr_typ = PhysicalDevice.t @-> ptr (Vk_base.uint32) @-> ptr (DisplayPropertiesKHR.t) @-> returning (Result.t)
 let get_physical_device_display_properties_khr_ref = ref (bind get_physical_device_display_properties_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPhysicalDeviceDisplayPropertiesKHR.html}[vkGetPhysicalDeviceDisplayPropertiesKHR]} *)
 let get_physical_device_display_properties_khr arg0 arg1 arg2 =
   match !get_physical_device_display_properties_khr_ref with
   | Some f -> f arg0 arg1 arg2
@@ -1171,6 +1499,8 @@ let get_physical_device_display_properties_khr arg0 arg1 arg2 =
 
 let get_physical_device_display_plane_properties_khr_typ = PhysicalDevice.t @-> ptr (Vk_base.uint32) @-> ptr (DisplayPlanePropertiesKHR.t) @-> returning (Result.t)
 let get_physical_device_display_plane_properties_khr_ref = ref (bind get_physical_device_display_plane_properties_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPhysicalDeviceDisplayPlanePropertiesKHR.html}[vkGetPhysicalDeviceDisplayPlanePropertiesKHR]} *)
 let get_physical_device_display_plane_properties_khr arg0 arg1 arg2 =
   match !get_physical_device_display_plane_properties_khr_ref with
   | Some f -> f arg0 arg1 arg2
@@ -1178,6 +1508,8 @@ let get_physical_device_display_plane_properties_khr arg0 arg1 arg2 =
 
 let get_display_plane_supported_displays_khr_typ = PhysicalDevice.t @-> Vk_base.uint32 @-> ptr (Vk_base.uint32) @-> ptr (DisplayKHR.t) @-> returning (Result.t)
 let get_display_plane_supported_displays_khr_ref = ref (bind get_display_plane_supported_displays_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetDisplayPlaneSupportedDisplaysKHR.html}[vkGetDisplayPlaneSupportedDisplaysKHR]} *)
 let get_display_plane_supported_displays_khr arg0 arg1 arg2 arg3 =
   match !get_display_plane_supported_displays_khr_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -1185,6 +1517,8 @@ let get_display_plane_supported_displays_khr arg0 arg1 arg2 arg3 =
 
 let get_display_mode_properties_khr_typ = PhysicalDevice.t @-> DisplayKHR.t @-> ptr (Vk_base.uint32) @-> ptr (DisplayModePropertiesKHR.t) @-> returning (Result.t)
 let get_display_mode_properties_khr_ref = ref (bind get_display_mode_properties_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetDisplayModePropertiesKHR.html}[vkGetDisplayModePropertiesKHR]} *)
 let get_display_mode_properties_khr arg0 arg1 arg2 arg3 =
   match !get_display_mode_properties_khr_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -1192,6 +1526,8 @@ let get_display_mode_properties_khr arg0 arg1 arg2 arg3 =
 
 let create_display_mode_khr_typ = PhysicalDevice.t @-> DisplayKHR.t @-> ptr (DisplayModeCreateInfoKHR.t) @-> ptr (AllocationCallbacks.t) @-> ptr (DisplayModeKHR.t) @-> returning (Result.t)
 let create_display_mode_khr_ref = ref (bind create_display_mode_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateDisplayModeKHR.html}[vkCreateDisplayModeKHR]} *)
 let create_display_mode_khr arg0 arg1 arg2 arg3 arg4 =
   match !create_display_mode_khr_ref with
   | Some f -> f arg0 arg1 arg2 arg3 arg4
@@ -1199,6 +1535,8 @@ let create_display_mode_khr arg0 arg1 arg2 arg3 arg4 =
 
 let get_display_plane_capabilities_khr_typ = PhysicalDevice.t @-> DisplayModeKHR.t @-> Vk_base.uint32 @-> ptr (DisplayPlaneCapabilitiesKHR.t) @-> returning (Result.t)
 let get_display_plane_capabilities_khr_ref = ref (bind get_display_plane_capabilities_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetDisplayPlaneCapabilitiesKHR.html}[vkGetDisplayPlaneCapabilitiesKHR]} *)
 let get_display_plane_capabilities_khr arg0 arg1 arg2 arg3 =
   match !get_display_plane_capabilities_khr_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -1206,6 +1544,8 @@ let get_display_plane_capabilities_khr arg0 arg1 arg2 arg3 =
 
 let create_display_plane_surface_khr_typ = Instance.t @-> ptr (DisplaySurfaceCreateInfoKHR.t) @-> ptr (AllocationCallbacks.t) @-> ptr (SurfaceKHR.t) @-> returning (Result.t)
 let create_display_plane_surface_khr_ref = ref (bind create_display_plane_surface_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateDisplayPlaneSurfaceKHR.html}[vkCreateDisplayPlaneSurfaceKHR]} *)
 let create_display_plane_surface_khr arg0 arg1 arg2 arg3 =
   match !create_display_plane_surface_khr_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -1213,6 +1553,8 @@ let create_display_plane_surface_khr arg0 arg1 arg2 arg3 =
 
 let create_shared_swapchains_khr_typ = Device.t @-> Vk_base.uint32 @-> ptr (SwapchainCreateInfoKHR.t) @-> ptr (AllocationCallbacks.t) @-> ptr (SwapchainKHR.t) @-> returning (Result.t)
 let create_shared_swapchains_khr_ref = ref (bind create_shared_swapchains_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateSharedSwapchainsKHR.html}[vkCreateSharedSwapchainsKHR]} *)
 let create_shared_swapchains_khr arg0 arg1 arg2 arg3 arg4 =
   match !create_shared_swapchains_khr_ref with
   | Some f -> f arg0 arg1 arg2 arg3 arg4
@@ -1220,6 +1562,8 @@ let create_shared_swapchains_khr arg0 arg1 arg2 arg3 arg4 =
 
 let destroy_surface_khr_typ = Instance.t @-> SurfaceKHR.t @-> ptr (AllocationCallbacks.t) @-> returning (Ctypes.void)
 let destroy_surface_khr_ref = ref (bind destroy_surface_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkDestroySurfaceKHR.html}[vkDestroySurfaceKHR]} *)
 let destroy_surface_khr arg0 arg1 arg2 =
   match !destroy_surface_khr_ref with
   | Some f -> f arg0 arg1 arg2
@@ -1227,6 +1571,8 @@ let destroy_surface_khr arg0 arg1 arg2 =
 
 let get_physical_device_surface_support_khr_typ = PhysicalDevice.t @-> Vk_base.uint32 @-> SurfaceKHR.t @-> ptr (Vk_base.bool32) @-> returning (Result.t)
 let get_physical_device_surface_support_khr_ref = ref (bind get_physical_device_surface_support_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPhysicalDeviceSurfaceSupportKHR.html}[vkGetPhysicalDeviceSurfaceSupportKHR]} *)
 let get_physical_device_surface_support_khr arg0 arg1 arg2 arg3 =
   match !get_physical_device_surface_support_khr_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -1234,6 +1580,8 @@ let get_physical_device_surface_support_khr arg0 arg1 arg2 arg3 =
 
 let get_physical_device_surface_capabilities_khr_typ = PhysicalDevice.t @-> SurfaceKHR.t @-> ptr (SurfaceCapabilitiesKHR.t) @-> returning (Result.t)
 let get_physical_device_surface_capabilities_khr_ref = ref (bind get_physical_device_surface_capabilities_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPhysicalDeviceSurfaceCapabilitiesKHR.html}[vkGetPhysicalDeviceSurfaceCapabilitiesKHR]} *)
 let get_physical_device_surface_capabilities_khr arg0 arg1 arg2 =
   match !get_physical_device_surface_capabilities_khr_ref with
   | Some f -> f arg0 arg1 arg2
@@ -1241,6 +1589,8 @@ let get_physical_device_surface_capabilities_khr arg0 arg1 arg2 =
 
 let get_physical_device_surface_formats_khr_typ = PhysicalDevice.t @-> SurfaceKHR.t @-> ptr (Vk_base.uint32) @-> ptr (SurfaceFormatKHR.t) @-> returning (Result.t)
 let get_physical_device_surface_formats_khr_ref = ref (bind get_physical_device_surface_formats_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPhysicalDeviceSurfaceFormatsKHR.html}[vkGetPhysicalDeviceSurfaceFormatsKHR]} *)
 let get_physical_device_surface_formats_khr arg0 arg1 arg2 arg3 =
   match !get_physical_device_surface_formats_khr_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -1248,6 +1598,8 @@ let get_physical_device_surface_formats_khr arg0 arg1 arg2 arg3 =
 
 let get_physical_device_surface_present_modes_khr_typ = PhysicalDevice.t @-> SurfaceKHR.t @-> ptr (Vk_base.uint32) @-> ptr (PresentModeKHR.t) @-> returning (Result.t)
 let get_physical_device_surface_present_modes_khr_ref = ref (bind get_physical_device_surface_present_modes_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPhysicalDeviceSurfacePresentModesKHR.html}[vkGetPhysicalDeviceSurfacePresentModesKHR]} *)
 let get_physical_device_surface_present_modes_khr arg0 arg1 arg2 arg3 =
   match !get_physical_device_surface_present_modes_khr_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -1255,6 +1607,8 @@ let get_physical_device_surface_present_modes_khr arg0 arg1 arg2 arg3 =
 
 let create_swapchain_khr_typ = Device.t @-> ptr (SwapchainCreateInfoKHR.t) @-> ptr (AllocationCallbacks.t) @-> ptr (SwapchainKHR.t) @-> returning (Result.t)
 let create_swapchain_khr_ref = ref (bind create_swapchain_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateSwapchainKHR.html}[vkCreateSwapchainKHR]} *)
 let create_swapchain_khr arg0 arg1 arg2 arg3 =
   match !create_swapchain_khr_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -1262,6 +1616,8 @@ let create_swapchain_khr arg0 arg1 arg2 arg3 =
 
 let destroy_swapchain_khr_typ = Device.t @-> SwapchainKHR.t @-> ptr (AllocationCallbacks.t) @-> returning (Ctypes.void)
 let destroy_swapchain_khr_ref = ref (bind destroy_swapchain_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkDestroySwapchainKHR.html}[vkDestroySwapchainKHR]} *)
 let destroy_swapchain_khr arg0 arg1 arg2 =
   match !destroy_swapchain_khr_ref with
   | Some f -> f arg0 arg1 arg2
@@ -1269,6 +1625,8 @@ let destroy_swapchain_khr arg0 arg1 arg2 =
 
 let get_swapchain_images_khr_typ = Device.t @-> SwapchainKHR.t @-> ptr (Vk_base.uint32) @-> ptr (Image.t) @-> returning (Result.t)
 let get_swapchain_images_khr_ref = ref (bind get_swapchain_images_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetSwapchainImagesKHR.html}[vkGetSwapchainImagesKHR]} *)
 let get_swapchain_images_khr arg0 arg1 arg2 arg3 =
   match !get_swapchain_images_khr_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -1276,6 +1634,8 @@ let get_swapchain_images_khr arg0 arg1 arg2 arg3 =
 
 let acquire_next_image_khr_typ = Device.t @-> SwapchainKHR.t @-> Vk_base.uint64 @-> Semaphore.t @-> Fence.t @-> ptr (Vk_base.uint32) @-> returning (Result.t)
 let acquire_next_image_khr_ref = ref (bind acquire_next_image_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkAcquireNextImageKHR.html}[vkAcquireNextImageKHR]} *)
 let acquire_next_image_khr arg0 arg1 arg2 arg3 arg4 arg5 =
   match !acquire_next_image_khr_ref with
   | Some f -> f arg0 arg1 arg2 arg3 arg4 arg5
@@ -1283,6 +1643,8 @@ let acquire_next_image_khr arg0 arg1 arg2 arg3 arg4 arg5 =
 
 let queue_present_khr_typ = Queue.t @-> ptr (PresentInfoKHR.t) @-> returning (Result.t)
 let queue_present_khr_ref = ref (bind queue_present_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkQueuePresentKHR.html}[vkQueuePresentKHR]} *)
 let queue_present_khr arg0 arg1 =
   match !queue_present_khr_ref with
   | Some f -> f arg0 arg1
@@ -1290,6 +1652,8 @@ let queue_present_khr arg0 arg1 =
 
 let create_vi_surface_nn_typ = Instance.t @-> ptr (ViSurfaceCreateInfoNN.t) @-> ptr (AllocationCallbacks.t) @-> ptr (SurfaceKHR.t) @-> returning (Result.t)
 let create_vi_surface_nn_ref = ref (bind create_vi_surface_nn_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateViSurfaceNN.html}[vkCreateViSurfaceNN]} *)
 let create_vi_surface_nn arg0 arg1 arg2 arg3 =
   match !create_vi_surface_nn_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -1297,6 +1661,8 @@ let create_vi_surface_nn arg0 arg1 arg2 arg3 =
 
 let create_wayland_surface_khr_typ = Instance.t @-> ptr (WaylandSurfaceCreateInfoKHR.t) @-> ptr (AllocationCallbacks.t) @-> ptr (SurfaceKHR.t) @-> returning (Result.t)
 let create_wayland_surface_khr_ref = ref (bind create_wayland_surface_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateWaylandSurfaceKHR.html}[vkCreateWaylandSurfaceKHR]} *)
 let create_wayland_surface_khr arg0 arg1 arg2 arg3 =
   match !create_wayland_surface_khr_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -1304,6 +1670,8 @@ let create_wayland_surface_khr arg0 arg1 arg2 arg3 =
 
 let get_physical_device_wayland_presentation_support_khr_typ = PhysicalDevice.t @-> Vk_base.uint32 @-> ptr (void) @-> returning (Vk_base.bool32)
 let get_physical_device_wayland_presentation_support_khr_ref = ref (bind get_physical_device_wayland_presentation_support_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPhysicalDeviceWaylandPresentationSupportKHR.html}[vkGetPhysicalDeviceWaylandPresentationSupportKHR]} *)
 let get_physical_device_wayland_presentation_support_khr arg0 arg1 arg2 =
   match !get_physical_device_wayland_presentation_support_khr_ref with
   | Some f -> f arg0 arg1 arg2
@@ -1311,6 +1679,8 @@ let get_physical_device_wayland_presentation_support_khr arg0 arg1 arg2 =
 
 let create_ubm_surface_sec_typ = Instance.t @-> ptr (UbmSurfaceCreateInfoSEC.t) @-> ptr (AllocationCallbacks.t) @-> ptr (SurfaceKHR.t) @-> returning (Result.t)
 let create_ubm_surface_sec_ref = ref (bind create_ubm_surface_sec_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateUbmSurfaceSEC.html}[vkCreateUbmSurfaceSEC]} *)
 let create_ubm_surface_sec arg0 arg1 arg2 arg3 =
   match !create_ubm_surface_sec_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -1318,6 +1688,8 @@ let create_ubm_surface_sec arg0 arg1 arg2 arg3 =
 
 let get_physical_device_ubm_presentation_support_sec_typ = PhysicalDevice.t @-> Vk_base.uint32 @-> ptr (void) @-> returning (Vk_base.bool32)
 let get_physical_device_ubm_presentation_support_sec_ref = ref (bind get_physical_device_ubm_presentation_support_sec_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPhysicalDeviceUbmPresentationSupportSEC.html}[vkGetPhysicalDeviceUbmPresentationSupportSEC]} *)
 let get_physical_device_ubm_presentation_support_sec arg0 arg1 arg2 =
   match !get_physical_device_ubm_presentation_support_sec_ref with
   | Some f -> f arg0 arg1 arg2
@@ -1325,6 +1697,8 @@ let get_physical_device_ubm_presentation_support_sec arg0 arg1 arg2 =
 
 let create_win_32_surface_khr_typ = Instance.t @-> ptr (Win32SurfaceCreateInfoKHR.t) @-> ptr (AllocationCallbacks.t) @-> ptr (SurfaceKHR.t) @-> returning (Result.t)
 let create_win_32_surface_khr_ref = ref (bind create_win_32_surface_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateWin32SurfaceKHR.html}[vkCreateWin32SurfaceKHR]} *)
 let create_win_32_surface_khr arg0 arg1 arg2 arg3 =
   match !create_win_32_surface_khr_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -1332,6 +1706,8 @@ let create_win_32_surface_khr arg0 arg1 arg2 arg3 =
 
 let get_physical_device_win_32_presentation_support_khr_typ = PhysicalDevice.t @-> Vk_base.uint32 @-> returning (Vk_base.bool32)
 let get_physical_device_win_32_presentation_support_khr_ref = ref (bind get_physical_device_win_32_presentation_support_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPhysicalDeviceWin32PresentationSupportKHR.html}[vkGetPhysicalDeviceWin32PresentationSupportKHR]} *)
 let get_physical_device_win_32_presentation_support_khr arg0 arg1 =
   match !get_physical_device_win_32_presentation_support_khr_ref with
   | Some f -> f arg0 arg1
@@ -1339,6 +1715,8 @@ let get_physical_device_win_32_presentation_support_khr arg0 arg1 =
 
 let create_xlib_surface_khr_typ = Instance.t @-> ptr (XlibSurfaceCreateInfoKHR.t) @-> ptr (AllocationCallbacks.t) @-> ptr (SurfaceKHR.t) @-> returning (Result.t)
 let create_xlib_surface_khr_ref = ref (bind create_xlib_surface_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateXlibSurfaceKHR.html}[vkCreateXlibSurfaceKHR]} *)
 let create_xlib_surface_khr arg0 arg1 arg2 arg3 =
   match !create_xlib_surface_khr_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -1346,6 +1724,8 @@ let create_xlib_surface_khr arg0 arg1 arg2 arg3 =
 
 let get_physical_device_xlib_presentation_support_khr_typ = PhysicalDevice.t @-> Vk_base.uint32 @-> ptr (void) @-> Vk_base.uint64 @-> returning (Vk_base.bool32)
 let get_physical_device_xlib_presentation_support_khr_ref = ref (bind get_physical_device_xlib_presentation_support_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPhysicalDeviceXlibPresentationSupportKHR.html}[vkGetPhysicalDeviceXlibPresentationSupportKHR]} *)
 let get_physical_device_xlib_presentation_support_khr arg0 arg1 arg2 arg3 =
   match !get_physical_device_xlib_presentation_support_khr_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -1353,6 +1733,8 @@ let get_physical_device_xlib_presentation_support_khr arg0 arg1 arg2 arg3 =
 
 let create_xcb_surface_khr_typ = Instance.t @-> ptr (XcbSurfaceCreateInfoKHR.t) @-> ptr (AllocationCallbacks.t) @-> ptr (SurfaceKHR.t) @-> returning (Result.t)
 let create_xcb_surface_khr_ref = ref (bind create_xcb_surface_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateXcbSurfaceKHR.html}[vkCreateXcbSurfaceKHR]} *)
 let create_xcb_surface_khr arg0 arg1 arg2 arg3 =
   match !create_xcb_surface_khr_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -1360,6 +1742,8 @@ let create_xcb_surface_khr arg0 arg1 arg2 arg3 =
 
 let get_physical_device_xcb_presentation_support_khr_typ = PhysicalDevice.t @-> Vk_base.uint32 @-> ptr (void) @-> Vk_base.uint32 @-> returning (Vk_base.bool32)
 let get_physical_device_xcb_presentation_support_khr_ref = ref (bind get_physical_device_xcb_presentation_support_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPhysicalDeviceXcbPresentationSupportKHR.html}[vkGetPhysicalDeviceXcbPresentationSupportKHR]} *)
 let get_physical_device_xcb_presentation_support_khr arg0 arg1 arg2 arg3 =
   match !get_physical_device_xcb_presentation_support_khr_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -1367,6 +1751,8 @@ let get_physical_device_xcb_presentation_support_khr arg0 arg1 arg2 arg3 =
 
 let create_direct_fb_surface_ext_typ = Instance.t @-> ptr (DirectFBSurfaceCreateInfoEXT.t) @-> ptr (AllocationCallbacks.t) @-> ptr (SurfaceKHR.t) @-> returning (Result.t)
 let create_direct_fb_surface_ext_ref = ref (bind create_direct_fb_surface_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateDirectFBSurfaceEXT.html}[vkCreateDirectFBSurfaceEXT]} *)
 let create_direct_fb_surface_ext arg0 arg1 arg2 arg3 =
   match !create_direct_fb_surface_ext_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -1374,6 +1760,8 @@ let create_direct_fb_surface_ext arg0 arg1 arg2 arg3 =
 
 let get_physical_device_direct_fb_presentation_support_ext_typ = PhysicalDevice.t @-> Vk_base.uint32 @-> ptr (void) @-> returning (Vk_base.bool32)
 let get_physical_device_direct_fb_presentation_support_ext_ref = ref (bind get_physical_device_direct_fb_presentation_support_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPhysicalDeviceDirectFBPresentationSupportEXT.html}[vkGetPhysicalDeviceDirectFBPresentationSupportEXT]} *)
 let get_physical_device_direct_fb_presentation_support_ext arg0 arg1 arg2 =
   match !get_physical_device_direct_fb_presentation_support_ext_ref with
   | Some f -> f arg0 arg1 arg2
@@ -1381,6 +1769,8 @@ let get_physical_device_direct_fb_presentation_support_ext arg0 arg1 arg2 =
 
 let create_image_pipe_surface_fuchsia_typ = Instance.t @-> ptr (ImagePipeSurfaceCreateInfoFUCHSIA.t) @-> ptr (AllocationCallbacks.t) @-> ptr (SurfaceKHR.t) @-> returning (Result.t)
 let create_image_pipe_surface_fuchsia_ref = ref (bind create_image_pipe_surface_fuchsia_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateImagePipeSurfaceFUCHSIA.html}[vkCreateImagePipeSurfaceFUCHSIA]} *)
 let create_image_pipe_surface_fuchsia arg0 arg1 arg2 arg3 =
   match !create_image_pipe_surface_fuchsia_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -1388,6 +1778,8 @@ let create_image_pipe_surface_fuchsia arg0 arg1 arg2 arg3 =
 
 let create_stream_descriptor_surface_ggp_typ = Instance.t @-> ptr (StreamDescriptorSurfaceCreateInfoGGP.t) @-> ptr (AllocationCallbacks.t) @-> ptr (SurfaceKHR.t) @-> returning (Result.t)
 let create_stream_descriptor_surface_ggp_ref = ref (bind create_stream_descriptor_surface_ggp_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateStreamDescriptorSurfaceGGP.html}[vkCreateStreamDescriptorSurfaceGGP]} *)
 let create_stream_descriptor_surface_ggp arg0 arg1 arg2 arg3 =
   match !create_stream_descriptor_surface_ggp_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -1395,6 +1787,8 @@ let create_stream_descriptor_surface_ggp arg0 arg1 arg2 arg3 =
 
 let create_screen_surface_qnx_typ = Instance.t @-> ptr (ScreenSurfaceCreateInfoQNX.t) @-> ptr (AllocationCallbacks.t) @-> ptr (SurfaceKHR.t) @-> returning (Result.t)
 let create_screen_surface_qnx_ref = ref (bind create_screen_surface_qnx_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateScreenSurfaceQNX.html}[vkCreateScreenSurfaceQNX]} *)
 let create_screen_surface_qnx arg0 arg1 arg2 arg3 =
   match !create_screen_surface_qnx_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -1402,6 +1796,8 @@ let create_screen_surface_qnx arg0 arg1 arg2 arg3 =
 
 let get_physical_device_screen_presentation_support_qnx_typ = PhysicalDevice.t @-> Vk_base.uint32 @-> ptr (void) @-> returning (Vk_base.bool32)
 let get_physical_device_screen_presentation_support_qnx_ref = ref (bind get_physical_device_screen_presentation_support_qnx_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPhysicalDeviceScreenPresentationSupportQNX.html}[vkGetPhysicalDeviceScreenPresentationSupportQNX]} *)
 let get_physical_device_screen_presentation_support_qnx arg0 arg1 arg2 =
   match !get_physical_device_screen_presentation_support_qnx_ref with
   | Some f -> f arg0 arg1 arg2
@@ -1409,6 +1805,8 @@ let get_physical_device_screen_presentation_support_qnx arg0 arg1 arg2 =
 
 let create_debug_report_callback_ext_typ = Instance.t @-> ptr (DebugReportCallbackCreateInfoEXT.t) @-> ptr (AllocationCallbacks.t) @-> ptr (DebugReportCallbackEXT.t) @-> returning (Result.t)
 let create_debug_report_callback_ext_ref = ref (bind create_debug_report_callback_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateDebugReportCallbackEXT.html}[vkCreateDebugReportCallbackEXT]} *)
 let create_debug_report_callback_ext arg0 arg1 arg2 arg3 =
   match !create_debug_report_callback_ext_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -1416,6 +1814,8 @@ let create_debug_report_callback_ext arg0 arg1 arg2 arg3 =
 
 let destroy_debug_report_callback_ext_typ = Instance.t @-> DebugReportCallbackEXT.t @-> ptr (AllocationCallbacks.t) @-> returning (Ctypes.void)
 let destroy_debug_report_callback_ext_ref = ref (bind destroy_debug_report_callback_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkDestroyDebugReportCallbackEXT.html}[vkDestroyDebugReportCallbackEXT]} *)
 let destroy_debug_report_callback_ext arg0 arg1 arg2 =
   match !destroy_debug_report_callback_ext_ref with
   | Some f -> f arg0 arg1 arg2
@@ -1423,6 +1823,8 @@ let destroy_debug_report_callback_ext arg0 arg1 arg2 =
 
 let debug_report_message_ext_typ = Instance.t @-> DebugReportFlagsEXT.t @-> DebugReportObjectTypeEXT.t @-> Vk_base.uint64 @-> Vk_base.size_t @-> Vk_base.int32 @-> string @-> string @-> returning (Ctypes.void)
 let debug_report_message_ext_ref = ref (bind debug_report_message_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkDebugReportMessageEXT.html}[vkDebugReportMessageEXT]} *)
 let debug_report_message_ext arg0 arg1 arg2 arg3 arg4 arg5 arg6 arg7 =
   match !debug_report_message_ext_ref with
   | Some f -> f arg0 arg1 arg2 arg3 arg4 arg5 arg6 arg7
@@ -1430,6 +1832,8 @@ let debug_report_message_ext arg0 arg1 arg2 arg3 arg4 arg5 arg6 arg7 =
 
 let debug_marker_set_object_name_ext_typ = Device.t @-> ptr (DebugMarkerObjectNameInfoEXT.t) @-> returning (Result.t)
 let debug_marker_set_object_name_ext_ref = ref (bind debug_marker_set_object_name_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkDebugMarkerSetObjectNameEXT.html}[vkDebugMarkerSetObjectNameEXT]} *)
 let debug_marker_set_object_name_ext arg0 arg1 =
   match !debug_marker_set_object_name_ext_ref with
   | Some f -> f arg0 arg1
@@ -1437,6 +1841,8 @@ let debug_marker_set_object_name_ext arg0 arg1 =
 
 let debug_marker_set_object_tag_ext_typ = Device.t @-> ptr (DebugMarkerObjectTagInfoEXT.t) @-> returning (Result.t)
 let debug_marker_set_object_tag_ext_ref = ref (bind debug_marker_set_object_tag_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkDebugMarkerSetObjectTagEXT.html}[vkDebugMarkerSetObjectTagEXT]} *)
 let debug_marker_set_object_tag_ext arg0 arg1 =
   match !debug_marker_set_object_tag_ext_ref with
   | Some f -> f arg0 arg1
@@ -1444,6 +1850,8 @@ let debug_marker_set_object_tag_ext arg0 arg1 =
 
 let cmd_debug_marker_begin_ext_typ = CommandBuffer.t @-> ptr (DebugMarkerMarkerInfoEXT.t) @-> returning (Ctypes.void)
 let cmd_debug_marker_begin_ext_ref = ref (bind cmd_debug_marker_begin_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdDebugMarkerBeginEXT.html}[vkCmdDebugMarkerBeginEXT]} *)
 let cmd_debug_marker_begin_ext arg0 arg1 =
   match !cmd_debug_marker_begin_ext_ref with
   | Some f -> f arg0 arg1
@@ -1451,6 +1859,8 @@ let cmd_debug_marker_begin_ext arg0 arg1 =
 
 let cmd_debug_marker_end_ext_typ = CommandBuffer.t @-> returning (Ctypes.void)
 let cmd_debug_marker_end_ext_ref = ref (bind cmd_debug_marker_end_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdDebugMarkerEndEXT.html}[vkCmdDebugMarkerEndEXT]} *)
 let cmd_debug_marker_end_ext arg0 =
   match !cmd_debug_marker_end_ext_ref with
   | Some f -> f arg0
@@ -1458,6 +1868,8 @@ let cmd_debug_marker_end_ext arg0 =
 
 let cmd_debug_marker_insert_ext_typ = CommandBuffer.t @-> ptr (DebugMarkerMarkerInfoEXT.t) @-> returning (Ctypes.void)
 let cmd_debug_marker_insert_ext_ref = ref (bind cmd_debug_marker_insert_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdDebugMarkerInsertEXT.html}[vkCmdDebugMarkerInsertEXT]} *)
 let cmd_debug_marker_insert_ext arg0 arg1 =
   match !cmd_debug_marker_insert_ext_ref with
   | Some f -> f arg0 arg1
@@ -1465,6 +1877,8 @@ let cmd_debug_marker_insert_ext arg0 arg1 =
 
 let get_physical_device_external_image_format_properties_nv_typ = PhysicalDevice.t @-> Format.t @-> ImageType.t @-> ImageTiling.t @-> ImageUsageFlags.t @-> ImageCreateFlags.t @-> ExternalMemoryHandleTypeFlagsNV.t @-> ptr (ExternalImageFormatPropertiesNV.t) @-> returning (Result.t)
 let get_physical_device_external_image_format_properties_nv_ref = ref (bind get_physical_device_external_image_format_properties_nv_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPhysicalDeviceExternalImageFormatPropertiesNV.html}[vkGetPhysicalDeviceExternalImageFormatPropertiesNV]} *)
 let get_physical_device_external_image_format_properties_nv arg0 arg1 arg2 arg3 arg4 arg5 arg6 arg7 =
   match !get_physical_device_external_image_format_properties_nv_ref with
   | Some f -> f arg0 arg1 arg2 arg3 arg4 arg5 arg6 arg7
@@ -1472,6 +1886,8 @@ let get_physical_device_external_image_format_properties_nv arg0 arg1 arg2 arg3 
 
 let get_memory_win_32_handle_nv_typ = Device.t @-> DeviceMemory.t @-> ExternalMemoryHandleTypeFlagsNV.t @-> ptr (ptr void) @-> returning (Result.t)
 let get_memory_win_32_handle_nv_ref = ref (bind get_memory_win_32_handle_nv_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetMemoryWin32HandleNV.html}[vkGetMemoryWin32HandleNV]} *)
 let get_memory_win_32_handle_nv arg0 arg1 arg2 arg3 =
   match !get_memory_win_32_handle_nv_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -1479,6 +1895,8 @@ let get_memory_win_32_handle_nv arg0 arg1 arg2 arg3 =
 
 let cmd_execute_generated_commands_nv_typ = CommandBuffer.t @-> Vk_base.bool32 @-> ptr (GeneratedCommandsInfoNV.t) @-> returning (Ctypes.void)
 let cmd_execute_generated_commands_nv_ref = ref (bind cmd_execute_generated_commands_nv_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdExecuteGeneratedCommandsNV.html}[vkCmdExecuteGeneratedCommandsNV]} *)
 let cmd_execute_generated_commands_nv arg0 arg1 arg2 =
   match !cmd_execute_generated_commands_nv_ref with
   | Some f -> f arg0 arg1 arg2
@@ -1486,6 +1904,8 @@ let cmd_execute_generated_commands_nv arg0 arg1 arg2 =
 
 let cmd_preprocess_generated_commands_nv_typ = CommandBuffer.t @-> ptr (GeneratedCommandsInfoNV.t) @-> returning (Ctypes.void)
 let cmd_preprocess_generated_commands_nv_ref = ref (bind cmd_preprocess_generated_commands_nv_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdPreprocessGeneratedCommandsNV.html}[vkCmdPreprocessGeneratedCommandsNV]} *)
 let cmd_preprocess_generated_commands_nv arg0 arg1 =
   match !cmd_preprocess_generated_commands_nv_ref with
   | Some f -> f arg0 arg1
@@ -1493,6 +1913,8 @@ let cmd_preprocess_generated_commands_nv arg0 arg1 =
 
 let cmd_bind_pipeline_shader_group_nv_typ = CommandBuffer.t @-> PipelineBindPoint.t @-> Pipeline.t @-> Vk_base.uint32 @-> returning (Ctypes.void)
 let cmd_bind_pipeline_shader_group_nv_ref = ref (bind cmd_bind_pipeline_shader_group_nv_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdBindPipelineShaderGroupNV.html}[vkCmdBindPipelineShaderGroupNV]} *)
 let cmd_bind_pipeline_shader_group_nv arg0 arg1 arg2 arg3 =
   match !cmd_bind_pipeline_shader_group_nv_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -1500,6 +1922,8 @@ let cmd_bind_pipeline_shader_group_nv arg0 arg1 arg2 arg3 =
 
 let get_generated_commands_memory_requirements_nv_typ = Device.t @-> ptr (GeneratedCommandsMemoryRequirementsInfoNV.t) @-> ptr (MemoryRequirements2.t) @-> returning (Ctypes.void)
 let get_generated_commands_memory_requirements_nv_ref = ref (bind get_generated_commands_memory_requirements_nv_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetGeneratedCommandsMemoryRequirementsNV.html}[vkGetGeneratedCommandsMemoryRequirementsNV]} *)
 let get_generated_commands_memory_requirements_nv arg0 arg1 arg2 =
   match !get_generated_commands_memory_requirements_nv_ref with
   | Some f -> f arg0 arg1 arg2
@@ -1507,6 +1931,8 @@ let get_generated_commands_memory_requirements_nv arg0 arg1 arg2 =
 
 let create_indirect_commands_layout_nv_typ = Device.t @-> ptr (IndirectCommandsLayoutCreateInfoNV.t) @-> ptr (AllocationCallbacks.t) @-> ptr (IndirectCommandsLayoutNV.t) @-> returning (Result.t)
 let create_indirect_commands_layout_nv_ref = ref (bind create_indirect_commands_layout_nv_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateIndirectCommandsLayoutNV.html}[vkCreateIndirectCommandsLayoutNV]} *)
 let create_indirect_commands_layout_nv arg0 arg1 arg2 arg3 =
   match !create_indirect_commands_layout_nv_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -1514,6 +1940,8 @@ let create_indirect_commands_layout_nv arg0 arg1 arg2 arg3 =
 
 let destroy_indirect_commands_layout_nv_typ = Device.t @-> IndirectCommandsLayoutNV.t @-> ptr (AllocationCallbacks.t) @-> returning (Ctypes.void)
 let destroy_indirect_commands_layout_nv_ref = ref (bind destroy_indirect_commands_layout_nv_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkDestroyIndirectCommandsLayoutNV.html}[vkDestroyIndirectCommandsLayoutNV]} *)
 let destroy_indirect_commands_layout_nv arg0 arg1 arg2 =
   match !destroy_indirect_commands_layout_nv_ref with
   | Some f -> f arg0 arg1 arg2
@@ -1521,6 +1949,8 @@ let destroy_indirect_commands_layout_nv arg0 arg1 arg2 =
 
 let cmd_execute_generated_commands_ext_typ = CommandBuffer.t @-> Vk_base.bool32 @-> ptr (GeneratedCommandsInfoEXT.t) @-> returning (Ctypes.void)
 let cmd_execute_generated_commands_ext_ref = ref (bind cmd_execute_generated_commands_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdExecuteGeneratedCommandsEXT.html}[vkCmdExecuteGeneratedCommandsEXT]} *)
 let cmd_execute_generated_commands_ext arg0 arg1 arg2 =
   match !cmd_execute_generated_commands_ext_ref with
   | Some f -> f arg0 arg1 arg2
@@ -1528,6 +1958,8 @@ let cmd_execute_generated_commands_ext arg0 arg1 arg2 =
 
 let cmd_preprocess_generated_commands_ext_typ = CommandBuffer.t @-> ptr (GeneratedCommandsInfoEXT.t) @-> CommandBuffer.t @-> returning (Ctypes.void)
 let cmd_preprocess_generated_commands_ext_ref = ref (bind cmd_preprocess_generated_commands_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdPreprocessGeneratedCommandsEXT.html}[vkCmdPreprocessGeneratedCommandsEXT]} *)
 let cmd_preprocess_generated_commands_ext arg0 arg1 arg2 =
   match !cmd_preprocess_generated_commands_ext_ref with
   | Some f -> f arg0 arg1 arg2
@@ -1535,6 +1967,8 @@ let cmd_preprocess_generated_commands_ext arg0 arg1 arg2 =
 
 let get_generated_commands_memory_requirements_ext_typ = Device.t @-> ptr (GeneratedCommandsMemoryRequirementsInfoEXT.t) @-> ptr (MemoryRequirements2.t) @-> returning (Ctypes.void)
 let get_generated_commands_memory_requirements_ext_ref = ref (bind get_generated_commands_memory_requirements_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetGeneratedCommandsMemoryRequirementsEXT.html}[vkGetGeneratedCommandsMemoryRequirementsEXT]} *)
 let get_generated_commands_memory_requirements_ext arg0 arg1 arg2 =
   match !get_generated_commands_memory_requirements_ext_ref with
   | Some f -> f arg0 arg1 arg2
@@ -1542,6 +1976,8 @@ let get_generated_commands_memory_requirements_ext arg0 arg1 arg2 =
 
 let create_indirect_commands_layout_ext_typ = Device.t @-> ptr (IndirectCommandsLayoutCreateInfoEXT.t) @-> ptr (AllocationCallbacks.t) @-> ptr (IndirectCommandsLayoutEXT.t) @-> returning (Result.t)
 let create_indirect_commands_layout_ext_ref = ref (bind create_indirect_commands_layout_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateIndirectCommandsLayoutEXT.html}[vkCreateIndirectCommandsLayoutEXT]} *)
 let create_indirect_commands_layout_ext arg0 arg1 arg2 arg3 =
   match !create_indirect_commands_layout_ext_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -1549,6 +1985,8 @@ let create_indirect_commands_layout_ext arg0 arg1 arg2 arg3 =
 
 let destroy_indirect_commands_layout_ext_typ = Device.t @-> IndirectCommandsLayoutEXT.t @-> ptr (AllocationCallbacks.t) @-> returning (Ctypes.void)
 let destroy_indirect_commands_layout_ext_ref = ref (bind destroy_indirect_commands_layout_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkDestroyIndirectCommandsLayoutEXT.html}[vkDestroyIndirectCommandsLayoutEXT]} *)
 let destroy_indirect_commands_layout_ext arg0 arg1 arg2 =
   match !destroy_indirect_commands_layout_ext_ref with
   | Some f -> f arg0 arg1 arg2
@@ -1556,6 +1994,8 @@ let destroy_indirect_commands_layout_ext arg0 arg1 arg2 =
 
 let create_indirect_execution_set_ext_typ = Device.t @-> ptr (IndirectExecutionSetCreateInfoEXT.t) @-> ptr (AllocationCallbacks.t) @-> ptr (IndirectExecutionSetEXT.t) @-> returning (Result.t)
 let create_indirect_execution_set_ext_ref = ref (bind create_indirect_execution_set_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateIndirectExecutionSetEXT.html}[vkCreateIndirectExecutionSetEXT]} *)
 let create_indirect_execution_set_ext arg0 arg1 arg2 arg3 =
   match !create_indirect_execution_set_ext_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -1563,6 +2003,8 @@ let create_indirect_execution_set_ext arg0 arg1 arg2 arg3 =
 
 let destroy_indirect_execution_set_ext_typ = Device.t @-> IndirectExecutionSetEXT.t @-> ptr (AllocationCallbacks.t) @-> returning (Ctypes.void)
 let destroy_indirect_execution_set_ext_ref = ref (bind destroy_indirect_execution_set_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkDestroyIndirectExecutionSetEXT.html}[vkDestroyIndirectExecutionSetEXT]} *)
 let destroy_indirect_execution_set_ext arg0 arg1 arg2 =
   match !destroy_indirect_execution_set_ext_ref with
   | Some f -> f arg0 arg1 arg2
@@ -1570,6 +2012,8 @@ let destroy_indirect_execution_set_ext arg0 arg1 arg2 =
 
 let update_indirect_execution_set_pipeline_ext_typ = Device.t @-> IndirectExecutionSetEXT.t @-> Vk_base.uint32 @-> ptr (WriteIndirectExecutionSetPipelineEXT.t) @-> returning (Ctypes.void)
 let update_indirect_execution_set_pipeline_ext_ref = ref (bind update_indirect_execution_set_pipeline_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkUpdateIndirectExecutionSetPipelineEXT.html}[vkUpdateIndirectExecutionSetPipelineEXT]} *)
 let update_indirect_execution_set_pipeline_ext arg0 arg1 arg2 arg3 =
   match !update_indirect_execution_set_pipeline_ext_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -1577,6 +2021,8 @@ let update_indirect_execution_set_pipeline_ext arg0 arg1 arg2 arg3 =
 
 let update_indirect_execution_set_shader_ext_typ = Device.t @-> IndirectExecutionSetEXT.t @-> Vk_base.uint32 @-> ptr (WriteIndirectExecutionSetShaderEXT.t) @-> returning (Ctypes.void)
 let update_indirect_execution_set_shader_ext_ref = ref (bind update_indirect_execution_set_shader_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkUpdateIndirectExecutionSetShaderEXT.html}[vkUpdateIndirectExecutionSetShaderEXT]} *)
 let update_indirect_execution_set_shader_ext arg0 arg1 arg2 arg3 =
   match !update_indirect_execution_set_shader_ext_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -1584,6 +2030,8 @@ let update_indirect_execution_set_shader_ext arg0 arg1 arg2 arg3 =
 
 let get_physical_device_features_2_typ = PhysicalDevice.t @-> ptr (PhysicalDeviceFeatures2.t) @-> returning (Ctypes.void)
 let get_physical_device_features_2_ref = ref (bind get_physical_device_features_2_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPhysicalDeviceFeatures2.html}[vkGetPhysicalDeviceFeatures2]} *)
 let get_physical_device_features_2 arg0 arg1 =
   match !get_physical_device_features_2_ref with
   | Some f -> f arg0 arg1
@@ -1591,6 +2039,8 @@ let get_physical_device_features_2 arg0 arg1 =
 
 let get_physical_device_properties_2_typ = PhysicalDevice.t @-> ptr (PhysicalDeviceProperties2.t) @-> returning (Ctypes.void)
 let get_physical_device_properties_2_ref = ref (bind get_physical_device_properties_2_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPhysicalDeviceProperties2.html}[vkGetPhysicalDeviceProperties2]} *)
 let get_physical_device_properties_2 arg0 arg1 =
   match !get_physical_device_properties_2_ref with
   | Some f -> f arg0 arg1
@@ -1598,6 +2048,8 @@ let get_physical_device_properties_2 arg0 arg1 =
 
 let get_physical_device_format_properties_2_typ = PhysicalDevice.t @-> Format.t @-> ptr (FormatProperties2.t) @-> returning (Ctypes.void)
 let get_physical_device_format_properties_2_ref = ref (bind get_physical_device_format_properties_2_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPhysicalDeviceFormatProperties2.html}[vkGetPhysicalDeviceFormatProperties2]} *)
 let get_physical_device_format_properties_2 arg0 arg1 arg2 =
   match !get_physical_device_format_properties_2_ref with
   | Some f -> f arg0 arg1 arg2
@@ -1605,6 +2057,8 @@ let get_physical_device_format_properties_2 arg0 arg1 arg2 =
 
 let get_physical_device_image_format_properties_2_typ = PhysicalDevice.t @-> ptr (PhysicalDeviceImageFormatInfo2.t) @-> ptr (ImageFormatProperties2.t) @-> returning (Result.t)
 let get_physical_device_image_format_properties_2_ref = ref (bind get_physical_device_image_format_properties_2_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPhysicalDeviceImageFormatProperties2.html}[vkGetPhysicalDeviceImageFormatProperties2]} *)
 let get_physical_device_image_format_properties_2 arg0 arg1 arg2 =
   match !get_physical_device_image_format_properties_2_ref with
   | Some f -> f arg0 arg1 arg2
@@ -1612,6 +2066,8 @@ let get_physical_device_image_format_properties_2 arg0 arg1 arg2 =
 
 let get_physical_device_queue_family_properties_2_typ = PhysicalDevice.t @-> ptr (Vk_base.uint32) @-> ptr (QueueFamilyProperties2.t) @-> returning (Ctypes.void)
 let get_physical_device_queue_family_properties_2_ref = ref (bind get_physical_device_queue_family_properties_2_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPhysicalDeviceQueueFamilyProperties2.html}[vkGetPhysicalDeviceQueueFamilyProperties2]} *)
 let get_physical_device_queue_family_properties_2 arg0 arg1 arg2 =
   match !get_physical_device_queue_family_properties_2_ref with
   | Some f -> f arg0 arg1 arg2
@@ -1619,6 +2075,8 @@ let get_physical_device_queue_family_properties_2 arg0 arg1 arg2 =
 
 let get_physical_device_memory_properties_2_typ = PhysicalDevice.t @-> ptr (PhysicalDeviceMemoryProperties2.t) @-> returning (Ctypes.void)
 let get_physical_device_memory_properties_2_ref = ref (bind get_physical_device_memory_properties_2_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPhysicalDeviceMemoryProperties2.html}[vkGetPhysicalDeviceMemoryProperties2]} *)
 let get_physical_device_memory_properties_2 arg0 arg1 =
   match !get_physical_device_memory_properties_2_ref with
   | Some f -> f arg0 arg1
@@ -1626,6 +2084,8 @@ let get_physical_device_memory_properties_2 arg0 arg1 =
 
 let get_physical_device_sparse_image_format_properties_2_typ = PhysicalDevice.t @-> ptr (PhysicalDeviceSparseImageFormatInfo2.t) @-> ptr (Vk_base.uint32) @-> ptr (SparseImageFormatProperties2.t) @-> returning (Ctypes.void)
 let get_physical_device_sparse_image_format_properties_2_ref = ref (bind get_physical_device_sparse_image_format_properties_2_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPhysicalDeviceSparseImageFormatProperties2.html}[vkGetPhysicalDeviceSparseImageFormatProperties2]} *)
 let get_physical_device_sparse_image_format_properties_2 arg0 arg1 arg2 arg3 =
   match !get_physical_device_sparse_image_format_properties_2_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -1633,6 +2093,8 @@ let get_physical_device_sparse_image_format_properties_2 arg0 arg1 arg2 arg3 =
 
 let cmd_push_descriptor_set_typ = CommandBuffer.t @-> PipelineBindPoint.t @-> PipelineLayout.t @-> Vk_base.uint32 @-> Vk_base.uint32 @-> ptr (WriteDescriptorSet.t) @-> returning (Ctypes.void)
 let cmd_push_descriptor_set_ref = ref (bind cmd_push_descriptor_set_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdPushDescriptorSet.html}[vkCmdPushDescriptorSet]} *)
 let cmd_push_descriptor_set arg0 arg1 arg2 arg3 arg4 arg5 =
   match !cmd_push_descriptor_set_ref with
   | Some f -> f arg0 arg1 arg2 arg3 arg4 arg5
@@ -1640,6 +2102,8 @@ let cmd_push_descriptor_set arg0 arg1 arg2 arg3 arg4 arg5 =
 
 let trim_command_pool_typ = Device.t @-> CommandPool.t @-> CommandPoolTrimFlags.t @-> returning (Ctypes.void)
 let trim_command_pool_ref = ref (bind trim_command_pool_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkTrimCommandPool.html}[vkTrimCommandPool]} *)
 let trim_command_pool arg0 arg1 arg2 =
   match !trim_command_pool_ref with
   | Some f -> f arg0 arg1 arg2
@@ -1647,6 +2111,8 @@ let trim_command_pool arg0 arg1 arg2 =
 
 let get_physical_device_external_buffer_properties_typ = PhysicalDevice.t @-> ptr (PhysicalDeviceExternalBufferInfo.t) @-> ptr (ExternalBufferProperties.t) @-> returning (Ctypes.void)
 let get_physical_device_external_buffer_properties_ref = ref (bind get_physical_device_external_buffer_properties_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPhysicalDeviceExternalBufferProperties.html}[vkGetPhysicalDeviceExternalBufferProperties]} *)
 let get_physical_device_external_buffer_properties arg0 arg1 arg2 =
   match !get_physical_device_external_buffer_properties_ref with
   | Some f -> f arg0 arg1 arg2
@@ -1654,6 +2120,8 @@ let get_physical_device_external_buffer_properties arg0 arg1 arg2 =
 
 let get_memory_win_32_handle_khr_typ = Device.t @-> ptr (MemoryGetWin32HandleInfoKHR.t) @-> ptr (ptr void) @-> returning (Result.t)
 let get_memory_win_32_handle_khr_ref = ref (bind get_memory_win_32_handle_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetMemoryWin32HandleKHR.html}[vkGetMemoryWin32HandleKHR]} *)
 let get_memory_win_32_handle_khr arg0 arg1 arg2 =
   match !get_memory_win_32_handle_khr_ref with
   | Some f -> f arg0 arg1 arg2
@@ -1661,6 +2129,8 @@ let get_memory_win_32_handle_khr arg0 arg1 arg2 =
 
 let get_memory_win_32_handle_properties_khr_typ = Device.t @-> ExternalMemoryHandleTypeFlags.t @-> ptr void @-> ptr (MemoryWin32HandlePropertiesKHR.t) @-> returning (Result.t)
 let get_memory_win_32_handle_properties_khr_ref = ref (bind get_memory_win_32_handle_properties_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetMemoryWin32HandlePropertiesKHR.html}[vkGetMemoryWin32HandlePropertiesKHR]} *)
 let get_memory_win_32_handle_properties_khr arg0 arg1 arg2 arg3 =
   match !get_memory_win_32_handle_properties_khr_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -1668,6 +2138,8 @@ let get_memory_win_32_handle_properties_khr arg0 arg1 arg2 arg3 =
 
 let get_memory_fd_khr_typ = Device.t @-> ptr (MemoryGetFdInfoKHR.t) @-> ptr (Ctypes.int) @-> returning (Result.t)
 let get_memory_fd_khr_ref = ref (bind get_memory_fd_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetMemoryFdKHR.html}[vkGetMemoryFdKHR]} *)
 let get_memory_fd_khr arg0 arg1 arg2 =
   match !get_memory_fd_khr_ref with
   | Some f -> f arg0 arg1 arg2
@@ -1675,6 +2147,8 @@ let get_memory_fd_khr arg0 arg1 arg2 =
 
 let get_memory_fd_properties_khr_typ = Device.t @-> ExternalMemoryHandleTypeFlags.t @-> Ctypes.int @-> ptr (MemoryFdPropertiesKHR.t) @-> returning (Result.t)
 let get_memory_fd_properties_khr_ref = ref (bind get_memory_fd_properties_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetMemoryFdPropertiesKHR.html}[vkGetMemoryFdPropertiesKHR]} *)
 let get_memory_fd_properties_khr arg0 arg1 arg2 arg3 =
   match !get_memory_fd_properties_khr_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -1682,6 +2156,8 @@ let get_memory_fd_properties_khr arg0 arg1 arg2 arg3 =
 
 let get_memory_zircon_handle_fuchsia_typ = Device.t @-> ptr (MemoryGetZirconHandleInfoFUCHSIA.t) @-> ptr (Vk_base.uint32) @-> returning (Result.t)
 let get_memory_zircon_handle_fuchsia_ref = ref (bind get_memory_zircon_handle_fuchsia_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetMemoryZirconHandleFUCHSIA.html}[vkGetMemoryZirconHandleFUCHSIA]} *)
 let get_memory_zircon_handle_fuchsia arg0 arg1 arg2 =
   match !get_memory_zircon_handle_fuchsia_ref with
   | Some f -> f arg0 arg1 arg2
@@ -1689,6 +2165,8 @@ let get_memory_zircon_handle_fuchsia arg0 arg1 arg2 =
 
 let get_memory_zircon_handle_properties_fuchsia_typ = Device.t @-> ExternalMemoryHandleTypeFlags.t @-> Vk_base.uint32 @-> ptr (MemoryZirconHandlePropertiesFUCHSIA.t) @-> returning (Result.t)
 let get_memory_zircon_handle_properties_fuchsia_ref = ref (bind get_memory_zircon_handle_properties_fuchsia_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetMemoryZirconHandlePropertiesFUCHSIA.html}[vkGetMemoryZirconHandlePropertiesFUCHSIA]} *)
 let get_memory_zircon_handle_properties_fuchsia arg0 arg1 arg2 arg3 =
   match !get_memory_zircon_handle_properties_fuchsia_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -1696,6 +2174,8 @@ let get_memory_zircon_handle_properties_fuchsia arg0 arg1 arg2 arg3 =
 
 let get_memory_remote_address_nv_typ = Device.t @-> ptr (MemoryGetRemoteAddressInfoNV.t) @-> ptr (ptr void) @-> returning (Result.t)
 let get_memory_remote_address_nv_ref = ref (bind get_memory_remote_address_nv_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetMemoryRemoteAddressNV.html}[vkGetMemoryRemoteAddressNV]} *)
 let get_memory_remote_address_nv arg0 arg1 arg2 =
   match !get_memory_remote_address_nv_ref with
   | Some f -> f arg0 arg1 arg2
@@ -1703,6 +2183,8 @@ let get_memory_remote_address_nv arg0 arg1 arg2 =
 
 let get_physical_device_external_semaphore_properties_typ = PhysicalDevice.t @-> ptr (PhysicalDeviceExternalSemaphoreInfo.t) @-> ptr (ExternalSemaphoreProperties.t) @-> returning (Ctypes.void)
 let get_physical_device_external_semaphore_properties_ref = ref (bind get_physical_device_external_semaphore_properties_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPhysicalDeviceExternalSemaphoreProperties.html}[vkGetPhysicalDeviceExternalSemaphoreProperties]} *)
 let get_physical_device_external_semaphore_properties arg0 arg1 arg2 =
   match !get_physical_device_external_semaphore_properties_ref with
   | Some f -> f arg0 arg1 arg2
@@ -1710,6 +2192,8 @@ let get_physical_device_external_semaphore_properties arg0 arg1 arg2 =
 
 let get_semaphore_win_32_handle_khr_typ = Device.t @-> ptr (SemaphoreGetWin32HandleInfoKHR.t) @-> ptr (ptr void) @-> returning (Result.t)
 let get_semaphore_win_32_handle_khr_ref = ref (bind get_semaphore_win_32_handle_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetSemaphoreWin32HandleKHR.html}[vkGetSemaphoreWin32HandleKHR]} *)
 let get_semaphore_win_32_handle_khr arg0 arg1 arg2 =
   match !get_semaphore_win_32_handle_khr_ref with
   | Some f -> f arg0 arg1 arg2
@@ -1717,6 +2201,8 @@ let get_semaphore_win_32_handle_khr arg0 arg1 arg2 =
 
 let import_semaphore_win_32_handle_khr_typ = Device.t @-> ptr (ImportSemaphoreWin32HandleInfoKHR.t) @-> returning (Result.t)
 let import_semaphore_win_32_handle_khr_ref = ref (bind import_semaphore_win_32_handle_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkImportSemaphoreWin32HandleKHR.html}[vkImportSemaphoreWin32HandleKHR]} *)
 let import_semaphore_win_32_handle_khr arg0 arg1 =
   match !import_semaphore_win_32_handle_khr_ref with
   | Some f -> f arg0 arg1
@@ -1724,6 +2210,8 @@ let import_semaphore_win_32_handle_khr arg0 arg1 =
 
 let get_semaphore_fd_khr_typ = Device.t @-> ptr (SemaphoreGetFdInfoKHR.t) @-> ptr (Ctypes.int) @-> returning (Result.t)
 let get_semaphore_fd_khr_ref = ref (bind get_semaphore_fd_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetSemaphoreFdKHR.html}[vkGetSemaphoreFdKHR]} *)
 let get_semaphore_fd_khr arg0 arg1 arg2 =
   match !get_semaphore_fd_khr_ref with
   | Some f -> f arg0 arg1 arg2
@@ -1731,6 +2219,8 @@ let get_semaphore_fd_khr arg0 arg1 arg2 =
 
 let import_semaphore_fd_khr_typ = Device.t @-> ptr (ImportSemaphoreFdInfoKHR.t) @-> returning (Result.t)
 let import_semaphore_fd_khr_ref = ref (bind import_semaphore_fd_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkImportSemaphoreFdKHR.html}[vkImportSemaphoreFdKHR]} *)
 let import_semaphore_fd_khr arg0 arg1 =
   match !import_semaphore_fd_khr_ref with
   | Some f -> f arg0 arg1
@@ -1738,6 +2228,8 @@ let import_semaphore_fd_khr arg0 arg1 =
 
 let get_semaphore_zircon_handle_fuchsia_typ = Device.t @-> ptr (SemaphoreGetZirconHandleInfoFUCHSIA.t) @-> ptr (Vk_base.uint32) @-> returning (Result.t)
 let get_semaphore_zircon_handle_fuchsia_ref = ref (bind get_semaphore_zircon_handle_fuchsia_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetSemaphoreZirconHandleFUCHSIA.html}[vkGetSemaphoreZirconHandleFUCHSIA]} *)
 let get_semaphore_zircon_handle_fuchsia arg0 arg1 arg2 =
   match !get_semaphore_zircon_handle_fuchsia_ref with
   | Some f -> f arg0 arg1 arg2
@@ -1745,6 +2237,8 @@ let get_semaphore_zircon_handle_fuchsia arg0 arg1 arg2 =
 
 let import_semaphore_zircon_handle_fuchsia_typ = Device.t @-> ptr (ImportSemaphoreZirconHandleInfoFUCHSIA.t) @-> returning (Result.t)
 let import_semaphore_zircon_handle_fuchsia_ref = ref (bind import_semaphore_zircon_handle_fuchsia_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkImportSemaphoreZirconHandleFUCHSIA.html}[vkImportSemaphoreZirconHandleFUCHSIA]} *)
 let import_semaphore_zircon_handle_fuchsia arg0 arg1 =
   match !import_semaphore_zircon_handle_fuchsia_ref with
   | Some f -> f arg0 arg1
@@ -1752,6 +2246,8 @@ let import_semaphore_zircon_handle_fuchsia arg0 arg1 =
 
 let get_physical_device_external_fence_properties_typ = PhysicalDevice.t @-> ptr (PhysicalDeviceExternalFenceInfo.t) @-> ptr (ExternalFenceProperties.t) @-> returning (Ctypes.void)
 let get_physical_device_external_fence_properties_ref = ref (bind get_physical_device_external_fence_properties_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPhysicalDeviceExternalFenceProperties.html}[vkGetPhysicalDeviceExternalFenceProperties]} *)
 let get_physical_device_external_fence_properties arg0 arg1 arg2 =
   match !get_physical_device_external_fence_properties_ref with
   | Some f -> f arg0 arg1 arg2
@@ -1759,6 +2255,8 @@ let get_physical_device_external_fence_properties arg0 arg1 arg2 =
 
 let get_fence_win_32_handle_khr_typ = Device.t @-> ptr (FenceGetWin32HandleInfoKHR.t) @-> ptr (ptr void) @-> returning (Result.t)
 let get_fence_win_32_handle_khr_ref = ref (bind get_fence_win_32_handle_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetFenceWin32HandleKHR.html}[vkGetFenceWin32HandleKHR]} *)
 let get_fence_win_32_handle_khr arg0 arg1 arg2 =
   match !get_fence_win_32_handle_khr_ref with
   | Some f -> f arg0 arg1 arg2
@@ -1766,6 +2264,8 @@ let get_fence_win_32_handle_khr arg0 arg1 arg2 =
 
 let import_fence_win_32_handle_khr_typ = Device.t @-> ptr (ImportFenceWin32HandleInfoKHR.t) @-> returning (Result.t)
 let import_fence_win_32_handle_khr_ref = ref (bind import_fence_win_32_handle_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkImportFenceWin32HandleKHR.html}[vkImportFenceWin32HandleKHR]} *)
 let import_fence_win_32_handle_khr arg0 arg1 =
   match !import_fence_win_32_handle_khr_ref with
   | Some f -> f arg0 arg1
@@ -1773,6 +2273,8 @@ let import_fence_win_32_handle_khr arg0 arg1 =
 
 let get_fence_fd_khr_typ = Device.t @-> ptr (FenceGetFdInfoKHR.t) @-> ptr (Ctypes.int) @-> returning (Result.t)
 let get_fence_fd_khr_ref = ref (bind get_fence_fd_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetFenceFdKHR.html}[vkGetFenceFdKHR]} *)
 let get_fence_fd_khr arg0 arg1 arg2 =
   match !get_fence_fd_khr_ref with
   | Some f -> f arg0 arg1 arg2
@@ -1780,6 +2282,8 @@ let get_fence_fd_khr arg0 arg1 arg2 =
 
 let import_fence_fd_khr_typ = Device.t @-> ptr (ImportFenceFdInfoKHR.t) @-> returning (Result.t)
 let import_fence_fd_khr_ref = ref (bind import_fence_fd_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkImportFenceFdKHR.html}[vkImportFenceFdKHR]} *)
 let import_fence_fd_khr arg0 arg1 =
   match !import_fence_fd_khr_ref with
   | Some f -> f arg0 arg1
@@ -1787,6 +2291,8 @@ let import_fence_fd_khr arg0 arg1 =
 
 let release_display_ext_typ = PhysicalDevice.t @-> DisplayKHR.t @-> returning (Result.t)
 let release_display_ext_ref = ref (bind release_display_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkReleaseDisplayEXT.html}[vkReleaseDisplayEXT]} *)
 let release_display_ext arg0 arg1 =
   match !release_display_ext_ref with
   | Some f -> f arg0 arg1
@@ -1794,6 +2300,8 @@ let release_display_ext arg0 arg1 =
 
 let acquire_xlib_display_ext_typ = PhysicalDevice.t @-> ptr (void) @-> DisplayKHR.t @-> returning (Result.t)
 let acquire_xlib_display_ext_ref = ref (bind acquire_xlib_display_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkAcquireXlibDisplayEXT.html}[vkAcquireXlibDisplayEXT]} *)
 let acquire_xlib_display_ext arg0 arg1 arg2 =
   match !acquire_xlib_display_ext_ref with
   | Some f -> f arg0 arg1 arg2
@@ -1801,6 +2309,8 @@ let acquire_xlib_display_ext arg0 arg1 arg2 =
 
 let get_rand_r_output_display_ext_typ = PhysicalDevice.t @-> ptr (void) @-> Vk_base.uint64 @-> ptr (DisplayKHR.t) @-> returning (Result.t)
 let get_rand_r_output_display_ext_ref = ref (bind get_rand_r_output_display_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetRandROutputDisplayEXT.html}[vkGetRandROutputDisplayEXT]} *)
 let get_rand_r_output_display_ext arg0 arg1 arg2 arg3 =
   match !get_rand_r_output_display_ext_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -1808,6 +2318,8 @@ let get_rand_r_output_display_ext arg0 arg1 arg2 arg3 =
 
 let acquire_winrt_display_nv_typ = PhysicalDevice.t @-> DisplayKHR.t @-> returning (Result.t)
 let acquire_winrt_display_nv_ref = ref (bind acquire_winrt_display_nv_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkAcquireWinrtDisplayNV.html}[vkAcquireWinrtDisplayNV]} *)
 let acquire_winrt_display_nv arg0 arg1 =
   match !acquire_winrt_display_nv_ref with
   | Some f -> f arg0 arg1
@@ -1815,6 +2327,8 @@ let acquire_winrt_display_nv arg0 arg1 =
 
 let get_winrt_display_nv_typ = PhysicalDevice.t @-> Vk_base.uint32 @-> ptr (DisplayKHR.t) @-> returning (Result.t)
 let get_winrt_display_nv_ref = ref (bind get_winrt_display_nv_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetWinrtDisplayNV.html}[vkGetWinrtDisplayNV]} *)
 let get_winrt_display_nv arg0 arg1 arg2 =
   match !get_winrt_display_nv_ref with
   | Some f -> f arg0 arg1 arg2
@@ -1822,6 +2336,8 @@ let get_winrt_display_nv arg0 arg1 arg2 =
 
 let display_power_control_ext_typ = Device.t @-> DisplayKHR.t @-> ptr (DisplayPowerInfoEXT.t) @-> returning (Result.t)
 let display_power_control_ext_ref = ref (bind display_power_control_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkDisplayPowerControlEXT.html}[vkDisplayPowerControlEXT]} *)
 let display_power_control_ext arg0 arg1 arg2 =
   match !display_power_control_ext_ref with
   | Some f -> f arg0 arg1 arg2
@@ -1829,6 +2345,8 @@ let display_power_control_ext arg0 arg1 arg2 =
 
 let register_device_event_ext_typ = Device.t @-> ptr (DeviceEventInfoEXT.t) @-> ptr (AllocationCallbacks.t) @-> ptr (Fence.t) @-> returning (Result.t)
 let register_device_event_ext_ref = ref (bind register_device_event_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkRegisterDeviceEventEXT.html}[vkRegisterDeviceEventEXT]} *)
 let register_device_event_ext arg0 arg1 arg2 arg3 =
   match !register_device_event_ext_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -1836,6 +2354,8 @@ let register_device_event_ext arg0 arg1 arg2 arg3 =
 
 let register_display_event_ext_typ = Device.t @-> DisplayKHR.t @-> ptr (DisplayEventInfoEXT.t) @-> ptr (AllocationCallbacks.t) @-> ptr (Fence.t) @-> returning (Result.t)
 let register_display_event_ext_ref = ref (bind register_display_event_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkRegisterDisplayEventEXT.html}[vkRegisterDisplayEventEXT]} *)
 let register_display_event_ext arg0 arg1 arg2 arg3 arg4 =
   match !register_display_event_ext_ref with
   | Some f -> f arg0 arg1 arg2 arg3 arg4
@@ -1843,6 +2363,8 @@ let register_display_event_ext arg0 arg1 arg2 arg3 arg4 =
 
 let get_swapchain_counter_ext_typ = Device.t @-> SwapchainKHR.t @-> SurfaceCounterFlagsEXT.t @-> ptr (Vk_base.uint64) @-> returning (Result.t)
 let get_swapchain_counter_ext_ref = ref (bind get_swapchain_counter_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetSwapchainCounterEXT.html}[vkGetSwapchainCounterEXT]} *)
 let get_swapchain_counter_ext arg0 arg1 arg2 arg3 =
   match !get_swapchain_counter_ext_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -1850,6 +2372,8 @@ let get_swapchain_counter_ext arg0 arg1 arg2 arg3 =
 
 let get_physical_device_surface_capabilities_2_ext_typ = PhysicalDevice.t @-> SurfaceKHR.t @-> ptr (SurfaceCapabilities2EXT.t) @-> returning (Result.t)
 let get_physical_device_surface_capabilities_2_ext_ref = ref (bind get_physical_device_surface_capabilities_2_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPhysicalDeviceSurfaceCapabilities2EXT.html}[vkGetPhysicalDeviceSurfaceCapabilities2EXT]} *)
 let get_physical_device_surface_capabilities_2_ext arg0 arg1 arg2 =
   match !get_physical_device_surface_capabilities_2_ext_ref with
   | Some f -> f arg0 arg1 arg2
@@ -1857,6 +2381,8 @@ let get_physical_device_surface_capabilities_2_ext arg0 arg1 arg2 =
 
 let enumerate_physical_device_groups_typ = Instance.t @-> ptr (Vk_base.uint32) @-> ptr (PhysicalDeviceGroupProperties.t) @-> returning (Result.t)
 let enumerate_physical_device_groups_ref = ref (bind enumerate_physical_device_groups_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkEnumeratePhysicalDeviceGroups.html}[vkEnumeratePhysicalDeviceGroups]} *)
 let enumerate_physical_device_groups arg0 arg1 arg2 =
   match !enumerate_physical_device_groups_ref with
   | Some f -> f arg0 arg1 arg2
@@ -1864,6 +2390,8 @@ let enumerate_physical_device_groups arg0 arg1 arg2 =
 
 let get_device_group_peer_memory_features_typ = Device.t @-> Vk_base.uint32 @-> Vk_base.uint32 @-> Vk_base.uint32 @-> ptr (PeerMemoryFeatureFlags.t) @-> returning (Ctypes.void)
 let get_device_group_peer_memory_features_ref = ref (bind get_device_group_peer_memory_features_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetDeviceGroupPeerMemoryFeatures.html}[vkGetDeviceGroupPeerMemoryFeatures]} *)
 let get_device_group_peer_memory_features arg0 arg1 arg2 arg3 arg4 =
   match !get_device_group_peer_memory_features_ref with
   | Some f -> f arg0 arg1 arg2 arg3 arg4
@@ -1871,6 +2399,8 @@ let get_device_group_peer_memory_features arg0 arg1 arg2 arg3 arg4 =
 
 let bind_buffer_memory_2_typ = Device.t @-> Vk_base.uint32 @-> ptr (BindBufferMemoryInfo.t) @-> returning (Result.t)
 let bind_buffer_memory_2_ref = ref (bind bind_buffer_memory_2_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkBindBufferMemory2.html}[vkBindBufferMemory2]} *)
 let bind_buffer_memory_2 arg0 arg1 arg2 =
   match !bind_buffer_memory_2_ref with
   | Some f -> f arg0 arg1 arg2
@@ -1878,6 +2408,8 @@ let bind_buffer_memory_2 arg0 arg1 arg2 =
 
 let bind_image_memory_2_typ = Device.t @-> Vk_base.uint32 @-> ptr (BindImageMemoryInfo.t) @-> returning (Result.t)
 let bind_image_memory_2_ref = ref (bind bind_image_memory_2_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkBindImageMemory2.html}[vkBindImageMemory2]} *)
 let bind_image_memory_2 arg0 arg1 arg2 =
   match !bind_image_memory_2_ref with
   | Some f -> f arg0 arg1 arg2
@@ -1885,6 +2417,8 @@ let bind_image_memory_2 arg0 arg1 arg2 =
 
 let cmd_set_device_mask_typ = CommandBuffer.t @-> Vk_base.uint32 @-> returning (Ctypes.void)
 let cmd_set_device_mask_ref = ref (bind cmd_set_device_mask_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetDeviceMask.html}[vkCmdSetDeviceMask]} *)
 let cmd_set_device_mask arg0 arg1 =
   match !cmd_set_device_mask_ref with
   | Some f -> f arg0 arg1
@@ -1892,6 +2426,8 @@ let cmd_set_device_mask arg0 arg1 =
 
 let get_device_group_present_capabilities_khr_typ = Device.t @-> ptr (DeviceGroupPresentCapabilitiesKHR.t) @-> returning (Result.t)
 let get_device_group_present_capabilities_khr_ref = ref (bind get_device_group_present_capabilities_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetDeviceGroupPresentCapabilitiesKHR.html}[vkGetDeviceGroupPresentCapabilitiesKHR]} *)
 let get_device_group_present_capabilities_khr arg0 arg1 =
   match !get_device_group_present_capabilities_khr_ref with
   | Some f -> f arg0 arg1
@@ -1899,6 +2435,8 @@ let get_device_group_present_capabilities_khr arg0 arg1 =
 
 let get_device_group_surface_present_modes_khr_typ = Device.t @-> SurfaceKHR.t @-> ptr (DeviceGroupPresentModeFlagsKHR.t) @-> returning (Result.t)
 let get_device_group_surface_present_modes_khr_ref = ref (bind get_device_group_surface_present_modes_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetDeviceGroupSurfacePresentModesKHR.html}[vkGetDeviceGroupSurfacePresentModesKHR]} *)
 let get_device_group_surface_present_modes_khr arg0 arg1 arg2 =
   match !get_device_group_surface_present_modes_khr_ref with
   | Some f -> f arg0 arg1 arg2
@@ -1906,6 +2444,8 @@ let get_device_group_surface_present_modes_khr arg0 arg1 arg2 =
 
 let acquire_next_image_2_khr_typ = Device.t @-> ptr (AcquireNextImageInfoKHR.t) @-> ptr (Vk_base.uint32) @-> returning (Result.t)
 let acquire_next_image_2_khr_ref = ref (bind acquire_next_image_2_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkAcquireNextImage2KHR.html}[vkAcquireNextImage2KHR]} *)
 let acquire_next_image_2_khr arg0 arg1 arg2 =
   match !acquire_next_image_2_khr_ref with
   | Some f -> f arg0 arg1 arg2
@@ -1913,6 +2453,8 @@ let acquire_next_image_2_khr arg0 arg1 arg2 =
 
 let cmd_dispatch_base_typ = CommandBuffer.t @-> Vk_base.uint32 @-> Vk_base.uint32 @-> Vk_base.uint32 @-> Vk_base.uint32 @-> Vk_base.uint32 @-> Vk_base.uint32 @-> returning (Ctypes.void)
 let cmd_dispatch_base_ref = ref (bind cmd_dispatch_base_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdDispatchBase.html}[vkCmdDispatchBase]} *)
 let cmd_dispatch_base arg0 arg1 arg2 arg3 arg4 arg5 arg6 =
   match !cmd_dispatch_base_ref with
   | Some f -> f arg0 arg1 arg2 arg3 arg4 arg5 arg6
@@ -1920,6 +2462,8 @@ let cmd_dispatch_base arg0 arg1 arg2 arg3 arg4 arg5 arg6 =
 
 let get_physical_device_present_rectangles_khr_typ = PhysicalDevice.t @-> SurfaceKHR.t @-> ptr (Vk_base.uint32) @-> ptr (Rect2D.t) @-> returning (Result.t)
 let get_physical_device_present_rectangles_khr_ref = ref (bind get_physical_device_present_rectangles_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPhysicalDevicePresentRectanglesKHR.html}[vkGetPhysicalDevicePresentRectanglesKHR]} *)
 let get_physical_device_present_rectangles_khr arg0 arg1 arg2 arg3 =
   match !get_physical_device_present_rectangles_khr_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -1927,6 +2471,8 @@ let get_physical_device_present_rectangles_khr arg0 arg1 arg2 arg3 =
 
 let create_descriptor_update_template_typ = Device.t @-> ptr (DescriptorUpdateTemplateCreateInfo.t) @-> ptr (AllocationCallbacks.t) @-> ptr (DescriptorUpdateTemplate.t) @-> returning (Result.t)
 let create_descriptor_update_template_ref = ref (bind create_descriptor_update_template_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateDescriptorUpdateTemplate.html}[vkCreateDescriptorUpdateTemplate]} *)
 let create_descriptor_update_template arg0 arg1 arg2 arg3 =
   match !create_descriptor_update_template_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -1934,6 +2480,8 @@ let create_descriptor_update_template arg0 arg1 arg2 arg3 =
 
 let destroy_descriptor_update_template_typ = Device.t @-> DescriptorUpdateTemplate.t @-> ptr (AllocationCallbacks.t) @-> returning (Ctypes.void)
 let destroy_descriptor_update_template_ref = ref (bind destroy_descriptor_update_template_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkDestroyDescriptorUpdateTemplate.html}[vkDestroyDescriptorUpdateTemplate]} *)
 let destroy_descriptor_update_template arg0 arg1 arg2 =
   match !destroy_descriptor_update_template_ref with
   | Some f -> f arg0 arg1 arg2
@@ -1941,6 +2489,8 @@ let destroy_descriptor_update_template arg0 arg1 arg2 =
 
 let update_descriptor_set_with_template_typ = Device.t @-> DescriptorSet.t @-> DescriptorUpdateTemplate.t @-> ptr (Ctypes.void) @-> returning (Ctypes.void)
 let update_descriptor_set_with_template_ref = ref (bind update_descriptor_set_with_template_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkUpdateDescriptorSetWithTemplate.html}[vkUpdateDescriptorSetWithTemplate]} *)
 let update_descriptor_set_with_template arg0 arg1 arg2 arg3 =
   match !update_descriptor_set_with_template_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -1948,6 +2498,8 @@ let update_descriptor_set_with_template arg0 arg1 arg2 arg3 =
 
 let cmd_push_descriptor_set_with_template_typ = CommandBuffer.t @-> DescriptorUpdateTemplate.t @-> PipelineLayout.t @-> Vk_base.uint32 @-> ptr (Ctypes.void) @-> returning (Ctypes.void)
 let cmd_push_descriptor_set_with_template_ref = ref (bind cmd_push_descriptor_set_with_template_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdPushDescriptorSetWithTemplate.html}[vkCmdPushDescriptorSetWithTemplate]} *)
 let cmd_push_descriptor_set_with_template arg0 arg1 arg2 arg3 arg4 =
   match !cmd_push_descriptor_set_with_template_ref with
   | Some f -> f arg0 arg1 arg2 arg3 arg4
@@ -1955,6 +2507,8 @@ let cmd_push_descriptor_set_with_template arg0 arg1 arg2 arg3 arg4 =
 
 let set_hdr_metadata_ext_typ = Device.t @-> Vk_base.uint32 @-> ptr (SwapchainKHR.t) @-> ptr (HdrMetadataEXT.t) @-> returning (Ctypes.void)
 let set_hdr_metadata_ext_ref = ref (bind set_hdr_metadata_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkSetHdrMetadataEXT.html}[vkSetHdrMetadataEXT]} *)
 let set_hdr_metadata_ext arg0 arg1 arg2 arg3 =
   match !set_hdr_metadata_ext_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -1962,6 +2516,8 @@ let set_hdr_metadata_ext arg0 arg1 arg2 arg3 =
 
 let get_swapchain_status_khr_typ = Device.t @-> SwapchainKHR.t @-> returning (Result.t)
 let get_swapchain_status_khr_ref = ref (bind get_swapchain_status_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetSwapchainStatusKHR.html}[vkGetSwapchainStatusKHR]} *)
 let get_swapchain_status_khr arg0 arg1 =
   match !get_swapchain_status_khr_ref with
   | Some f -> f arg0 arg1
@@ -1969,6 +2525,8 @@ let get_swapchain_status_khr arg0 arg1 =
 
 let get_refresh_cycle_duration_google_typ = Device.t @-> SwapchainKHR.t @-> ptr (RefreshCycleDurationGOOGLE.t) @-> returning (Result.t)
 let get_refresh_cycle_duration_google_ref = ref (bind get_refresh_cycle_duration_google_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetRefreshCycleDurationGOOGLE.html}[vkGetRefreshCycleDurationGOOGLE]} *)
 let get_refresh_cycle_duration_google arg0 arg1 arg2 =
   match !get_refresh_cycle_duration_google_ref with
   | Some f -> f arg0 arg1 arg2
@@ -1976,6 +2534,8 @@ let get_refresh_cycle_duration_google arg0 arg1 arg2 =
 
 let get_past_presentation_timing_google_typ = Device.t @-> SwapchainKHR.t @-> ptr (Vk_base.uint32) @-> ptr (PastPresentationTimingGOOGLE.t) @-> returning (Result.t)
 let get_past_presentation_timing_google_ref = ref (bind get_past_presentation_timing_google_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPastPresentationTimingGOOGLE.html}[vkGetPastPresentationTimingGOOGLE]} *)
 let get_past_presentation_timing_google arg0 arg1 arg2 arg3 =
   match !get_past_presentation_timing_google_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -1983,6 +2543,8 @@ let get_past_presentation_timing_google arg0 arg1 arg2 arg3 =
 
 let create_ios_surface_mvk_typ = Instance.t @-> ptr (IOSSurfaceCreateInfoMVK.t) @-> ptr (AllocationCallbacks.t) @-> ptr (SurfaceKHR.t) @-> returning (Result.t)
 let create_ios_surface_mvk_ref = ref (bind create_ios_surface_mvk_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateIOSSurfaceMVK.html}[vkCreateIOSSurfaceMVK]} *)
 let create_ios_surface_mvk arg0 arg1 arg2 arg3 =
   match !create_ios_surface_mvk_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -1990,6 +2552,8 @@ let create_ios_surface_mvk arg0 arg1 arg2 arg3 =
 
 let create_mac_os_surface_mvk_typ = Instance.t @-> ptr (MacOSSurfaceCreateInfoMVK.t) @-> ptr (AllocationCallbacks.t) @-> ptr (SurfaceKHR.t) @-> returning (Result.t)
 let create_mac_os_surface_mvk_ref = ref (bind create_mac_os_surface_mvk_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateMacOSSurfaceMVK.html}[vkCreateMacOSSurfaceMVK]} *)
 let create_mac_os_surface_mvk arg0 arg1 arg2 arg3 =
   match !create_mac_os_surface_mvk_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -1997,6 +2561,8 @@ let create_mac_os_surface_mvk arg0 arg1 arg2 arg3 =
 
 let create_metal_surface_ext_typ = Instance.t @-> ptr (MetalSurfaceCreateInfoEXT.t) @-> ptr (AllocationCallbacks.t) @-> ptr (SurfaceKHR.t) @-> returning (Result.t)
 let create_metal_surface_ext_ref = ref (bind create_metal_surface_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateMetalSurfaceEXT.html}[vkCreateMetalSurfaceEXT]} *)
 let create_metal_surface_ext arg0 arg1 arg2 arg3 =
   match !create_metal_surface_ext_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -2004,6 +2570,8 @@ let create_metal_surface_ext arg0 arg1 arg2 arg3 =
 
 let cmd_set_viewport_w_scaling_nv_typ = CommandBuffer.t @-> Vk_base.uint32 @-> Vk_base.uint32 @-> ptr (ViewportWScalingNV.t) @-> returning (Ctypes.void)
 let cmd_set_viewport_w_scaling_nv_ref = ref (bind cmd_set_viewport_w_scaling_nv_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetViewportWScalingNV.html}[vkCmdSetViewportWScalingNV]} *)
 let cmd_set_viewport_w_scaling_nv arg0 arg1 arg2 arg3 =
   match !cmd_set_viewport_w_scaling_nv_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -2011,6 +2579,8 @@ let cmd_set_viewport_w_scaling_nv arg0 arg1 arg2 arg3 =
 
 let cmd_set_discard_rectangle_ext_typ = CommandBuffer.t @-> Vk_base.uint32 @-> Vk_base.uint32 @-> ptr (Rect2D.t) @-> returning (Ctypes.void)
 let cmd_set_discard_rectangle_ext_ref = ref (bind cmd_set_discard_rectangle_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetDiscardRectangleEXT.html}[vkCmdSetDiscardRectangleEXT]} *)
 let cmd_set_discard_rectangle_ext arg0 arg1 arg2 arg3 =
   match !cmd_set_discard_rectangle_ext_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -2018,6 +2588,8 @@ let cmd_set_discard_rectangle_ext arg0 arg1 arg2 arg3 =
 
 let cmd_set_discard_rectangle_enable_ext_typ = CommandBuffer.t @-> Vk_base.bool32 @-> returning (Ctypes.void)
 let cmd_set_discard_rectangle_enable_ext_ref = ref (bind cmd_set_discard_rectangle_enable_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetDiscardRectangleEnableEXT.html}[vkCmdSetDiscardRectangleEnableEXT]} *)
 let cmd_set_discard_rectangle_enable_ext arg0 arg1 =
   match !cmd_set_discard_rectangle_enable_ext_ref with
   | Some f -> f arg0 arg1
@@ -2025,6 +2597,8 @@ let cmd_set_discard_rectangle_enable_ext arg0 arg1 =
 
 let cmd_set_discard_rectangle_mode_ext_typ = CommandBuffer.t @-> DiscardRectangleModeEXT.t @-> returning (Ctypes.void)
 let cmd_set_discard_rectangle_mode_ext_ref = ref (bind cmd_set_discard_rectangle_mode_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetDiscardRectangleModeEXT.html}[vkCmdSetDiscardRectangleModeEXT]} *)
 let cmd_set_discard_rectangle_mode_ext arg0 arg1 =
   match !cmd_set_discard_rectangle_mode_ext_ref with
   | Some f -> f arg0 arg1
@@ -2032,6 +2606,8 @@ let cmd_set_discard_rectangle_mode_ext arg0 arg1 =
 
 let cmd_set_sample_locations_ext_typ = CommandBuffer.t @-> ptr (SampleLocationsInfoEXT.t) @-> returning (Ctypes.void)
 let cmd_set_sample_locations_ext_ref = ref (bind cmd_set_sample_locations_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetSampleLocationsEXT.html}[vkCmdSetSampleLocationsEXT]} *)
 let cmd_set_sample_locations_ext arg0 arg1 =
   match !cmd_set_sample_locations_ext_ref with
   | Some f -> f arg0 arg1
@@ -2039,6 +2615,8 @@ let cmd_set_sample_locations_ext arg0 arg1 =
 
 let get_physical_device_multisample_properties_ext_typ = PhysicalDevice.t @-> SampleCountFlags.t @-> ptr (MultisamplePropertiesEXT.t) @-> returning (Ctypes.void)
 let get_physical_device_multisample_properties_ext_ref = ref (bind get_physical_device_multisample_properties_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPhysicalDeviceMultisamplePropertiesEXT.html}[vkGetPhysicalDeviceMultisamplePropertiesEXT]} *)
 let get_physical_device_multisample_properties_ext arg0 arg1 arg2 =
   match !get_physical_device_multisample_properties_ext_ref with
   | Some f -> f arg0 arg1 arg2
@@ -2046,6 +2624,8 @@ let get_physical_device_multisample_properties_ext arg0 arg1 arg2 =
 
 let get_physical_device_surface_capabilities_2_khr_typ = PhysicalDevice.t @-> ptr (PhysicalDeviceSurfaceInfo2KHR.t) @-> ptr (SurfaceCapabilities2KHR.t) @-> returning (Result.t)
 let get_physical_device_surface_capabilities_2_khr_ref = ref (bind get_physical_device_surface_capabilities_2_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPhysicalDeviceSurfaceCapabilities2KHR.html}[vkGetPhysicalDeviceSurfaceCapabilities2KHR]} *)
 let get_physical_device_surface_capabilities_2_khr arg0 arg1 arg2 =
   match !get_physical_device_surface_capabilities_2_khr_ref with
   | Some f -> f arg0 arg1 arg2
@@ -2053,6 +2633,8 @@ let get_physical_device_surface_capabilities_2_khr arg0 arg1 arg2 =
 
 let get_physical_device_surface_formats_2_khr_typ = PhysicalDevice.t @-> ptr (PhysicalDeviceSurfaceInfo2KHR.t) @-> ptr (Vk_base.uint32) @-> ptr (SurfaceFormat2KHR.t) @-> returning (Result.t)
 let get_physical_device_surface_formats_2_khr_ref = ref (bind get_physical_device_surface_formats_2_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPhysicalDeviceSurfaceFormats2KHR.html}[vkGetPhysicalDeviceSurfaceFormats2KHR]} *)
 let get_physical_device_surface_formats_2_khr arg0 arg1 arg2 arg3 =
   match !get_physical_device_surface_formats_2_khr_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -2060,6 +2642,8 @@ let get_physical_device_surface_formats_2_khr arg0 arg1 arg2 arg3 =
 
 let get_physical_device_display_properties_2_khr_typ = PhysicalDevice.t @-> ptr (Vk_base.uint32) @-> ptr (DisplayProperties2KHR.t) @-> returning (Result.t)
 let get_physical_device_display_properties_2_khr_ref = ref (bind get_physical_device_display_properties_2_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPhysicalDeviceDisplayProperties2KHR.html}[vkGetPhysicalDeviceDisplayProperties2KHR]} *)
 let get_physical_device_display_properties_2_khr arg0 arg1 arg2 =
   match !get_physical_device_display_properties_2_khr_ref with
   | Some f -> f arg0 arg1 arg2
@@ -2067,6 +2651,8 @@ let get_physical_device_display_properties_2_khr arg0 arg1 arg2 =
 
 let get_physical_device_display_plane_properties_2_khr_typ = PhysicalDevice.t @-> ptr (Vk_base.uint32) @-> ptr (DisplayPlaneProperties2KHR.t) @-> returning (Result.t)
 let get_physical_device_display_plane_properties_2_khr_ref = ref (bind get_physical_device_display_plane_properties_2_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPhysicalDeviceDisplayPlaneProperties2KHR.html}[vkGetPhysicalDeviceDisplayPlaneProperties2KHR]} *)
 let get_physical_device_display_plane_properties_2_khr arg0 arg1 arg2 =
   match !get_physical_device_display_plane_properties_2_khr_ref with
   | Some f -> f arg0 arg1 arg2
@@ -2074,6 +2660,8 @@ let get_physical_device_display_plane_properties_2_khr arg0 arg1 arg2 =
 
 let get_display_mode_properties_2_khr_typ = PhysicalDevice.t @-> DisplayKHR.t @-> ptr (Vk_base.uint32) @-> ptr (DisplayModeProperties2KHR.t) @-> returning (Result.t)
 let get_display_mode_properties_2_khr_ref = ref (bind get_display_mode_properties_2_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetDisplayModeProperties2KHR.html}[vkGetDisplayModeProperties2KHR]} *)
 let get_display_mode_properties_2_khr arg0 arg1 arg2 arg3 =
   match !get_display_mode_properties_2_khr_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -2081,6 +2669,8 @@ let get_display_mode_properties_2_khr arg0 arg1 arg2 arg3 =
 
 let get_display_plane_capabilities_2_khr_typ = PhysicalDevice.t @-> ptr (DisplayPlaneInfo2KHR.t) @-> ptr (DisplayPlaneCapabilities2KHR.t) @-> returning (Result.t)
 let get_display_plane_capabilities_2_khr_ref = ref (bind get_display_plane_capabilities_2_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetDisplayPlaneCapabilities2KHR.html}[vkGetDisplayPlaneCapabilities2KHR]} *)
 let get_display_plane_capabilities_2_khr arg0 arg1 arg2 =
   match !get_display_plane_capabilities_2_khr_ref with
   | Some f -> f arg0 arg1 arg2
@@ -2088,6 +2678,8 @@ let get_display_plane_capabilities_2_khr arg0 arg1 arg2 =
 
 let get_buffer_memory_requirements_2_typ = Device.t @-> ptr (BufferMemoryRequirementsInfo2.t) @-> ptr (MemoryRequirements2.t) @-> returning (Ctypes.void)
 let get_buffer_memory_requirements_2_ref = ref (bind get_buffer_memory_requirements_2_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetBufferMemoryRequirements2.html}[vkGetBufferMemoryRequirements2]} *)
 let get_buffer_memory_requirements_2 arg0 arg1 arg2 =
   match !get_buffer_memory_requirements_2_ref with
   | Some f -> f arg0 arg1 arg2
@@ -2095,6 +2687,8 @@ let get_buffer_memory_requirements_2 arg0 arg1 arg2 =
 
 let get_image_memory_requirements_2_typ = Device.t @-> ptr (ImageMemoryRequirementsInfo2.t) @-> ptr (MemoryRequirements2.t) @-> returning (Ctypes.void)
 let get_image_memory_requirements_2_ref = ref (bind get_image_memory_requirements_2_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetImageMemoryRequirements2.html}[vkGetImageMemoryRequirements2]} *)
 let get_image_memory_requirements_2 arg0 arg1 arg2 =
   match !get_image_memory_requirements_2_ref with
   | Some f -> f arg0 arg1 arg2
@@ -2102,6 +2696,8 @@ let get_image_memory_requirements_2 arg0 arg1 arg2 =
 
 let get_image_sparse_memory_requirements_2_typ = Device.t @-> ptr (ImageSparseMemoryRequirementsInfo2.t) @-> ptr (Vk_base.uint32) @-> ptr (SparseImageMemoryRequirements2.t) @-> returning (Ctypes.void)
 let get_image_sparse_memory_requirements_2_ref = ref (bind get_image_sparse_memory_requirements_2_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetImageSparseMemoryRequirements2.html}[vkGetImageSparseMemoryRequirements2]} *)
 let get_image_sparse_memory_requirements_2 arg0 arg1 arg2 arg3 =
   match !get_image_sparse_memory_requirements_2_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -2109,6 +2705,8 @@ let get_image_sparse_memory_requirements_2 arg0 arg1 arg2 arg3 =
 
 let get_device_buffer_memory_requirements_typ = Device.t @-> ptr (DeviceBufferMemoryRequirements.t) @-> ptr (MemoryRequirements2.t) @-> returning (Ctypes.void)
 let get_device_buffer_memory_requirements_ref = ref (bind get_device_buffer_memory_requirements_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetDeviceBufferMemoryRequirements.html}[vkGetDeviceBufferMemoryRequirements]} *)
 let get_device_buffer_memory_requirements arg0 arg1 arg2 =
   match !get_device_buffer_memory_requirements_ref with
   | Some f -> f arg0 arg1 arg2
@@ -2116,6 +2714,8 @@ let get_device_buffer_memory_requirements arg0 arg1 arg2 =
 
 let get_device_image_memory_requirements_typ = Device.t @-> ptr (DeviceImageMemoryRequirements.t) @-> ptr (MemoryRequirements2.t) @-> returning (Ctypes.void)
 let get_device_image_memory_requirements_ref = ref (bind get_device_image_memory_requirements_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetDeviceImageMemoryRequirements.html}[vkGetDeviceImageMemoryRequirements]} *)
 let get_device_image_memory_requirements arg0 arg1 arg2 =
   match !get_device_image_memory_requirements_ref with
   | Some f -> f arg0 arg1 arg2
@@ -2123,6 +2723,8 @@ let get_device_image_memory_requirements arg0 arg1 arg2 =
 
 let get_device_image_sparse_memory_requirements_typ = Device.t @-> ptr (DeviceImageMemoryRequirements.t) @-> ptr (Vk_base.uint32) @-> ptr (SparseImageMemoryRequirements2.t) @-> returning (Ctypes.void)
 let get_device_image_sparse_memory_requirements_ref = ref (bind get_device_image_sparse_memory_requirements_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetDeviceImageSparseMemoryRequirements.html}[vkGetDeviceImageSparseMemoryRequirements]} *)
 let get_device_image_sparse_memory_requirements arg0 arg1 arg2 arg3 =
   match !get_device_image_sparse_memory_requirements_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -2130,6 +2732,8 @@ let get_device_image_sparse_memory_requirements arg0 arg1 arg2 arg3 =
 
 let create_sampler_ycbcr_conversion_typ = Device.t @-> ptr (SamplerYcbcrConversionCreateInfo.t) @-> ptr (AllocationCallbacks.t) @-> ptr (SamplerYcbcrConversion.t) @-> returning (Result.t)
 let create_sampler_ycbcr_conversion_ref = ref (bind create_sampler_ycbcr_conversion_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateSamplerYcbcrConversion.html}[vkCreateSamplerYcbcrConversion]} *)
 let create_sampler_ycbcr_conversion arg0 arg1 arg2 arg3 =
   match !create_sampler_ycbcr_conversion_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -2137,6 +2741,8 @@ let create_sampler_ycbcr_conversion arg0 arg1 arg2 arg3 =
 
 let destroy_sampler_ycbcr_conversion_typ = Device.t @-> SamplerYcbcrConversion.t @-> ptr (AllocationCallbacks.t) @-> returning (Ctypes.void)
 let destroy_sampler_ycbcr_conversion_ref = ref (bind destroy_sampler_ycbcr_conversion_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkDestroySamplerYcbcrConversion.html}[vkDestroySamplerYcbcrConversion]} *)
 let destroy_sampler_ycbcr_conversion arg0 arg1 arg2 =
   match !destroy_sampler_ycbcr_conversion_ref with
   | Some f -> f arg0 arg1 arg2
@@ -2144,6 +2750,8 @@ let destroy_sampler_ycbcr_conversion arg0 arg1 arg2 =
 
 let get_device_queue_2_typ = Device.t @-> ptr (DeviceQueueInfo2.t) @-> ptr (Queue.t) @-> returning (Ctypes.void)
 let get_device_queue_2_ref = ref (bind get_device_queue_2_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetDeviceQueue2.html}[vkGetDeviceQueue2]} *)
 let get_device_queue_2 arg0 arg1 arg2 =
   match !get_device_queue_2_ref with
   | Some f -> f arg0 arg1 arg2
@@ -2151,6 +2759,8 @@ let get_device_queue_2 arg0 arg1 arg2 =
 
 let create_validation_cache_ext_typ = Device.t @-> ptr (ValidationCacheCreateInfoEXT.t) @-> ptr (AllocationCallbacks.t) @-> ptr (ValidationCacheEXT.t) @-> returning (Result.t)
 let create_validation_cache_ext_ref = ref (bind create_validation_cache_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateValidationCacheEXT.html}[vkCreateValidationCacheEXT]} *)
 let create_validation_cache_ext arg0 arg1 arg2 arg3 =
   match !create_validation_cache_ext_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -2158,6 +2768,8 @@ let create_validation_cache_ext arg0 arg1 arg2 arg3 =
 
 let destroy_validation_cache_ext_typ = Device.t @-> ValidationCacheEXT.t @-> ptr (AllocationCallbacks.t) @-> returning (Ctypes.void)
 let destroy_validation_cache_ext_ref = ref (bind destroy_validation_cache_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkDestroyValidationCacheEXT.html}[vkDestroyValidationCacheEXT]} *)
 let destroy_validation_cache_ext arg0 arg1 arg2 =
   match !destroy_validation_cache_ext_ref with
   | Some f -> f arg0 arg1 arg2
@@ -2165,6 +2777,8 @@ let destroy_validation_cache_ext arg0 arg1 arg2 =
 
 let get_validation_cache_data_ext_typ = Device.t @-> ValidationCacheEXT.t @-> ptr (Vk_base.size_t) @-> ptr (Ctypes.void) @-> returning (Result.t)
 let get_validation_cache_data_ext_ref = ref (bind get_validation_cache_data_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetValidationCacheDataEXT.html}[vkGetValidationCacheDataEXT]} *)
 let get_validation_cache_data_ext arg0 arg1 arg2 arg3 =
   match !get_validation_cache_data_ext_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -2172,6 +2786,8 @@ let get_validation_cache_data_ext arg0 arg1 arg2 arg3 =
 
 let merge_validation_caches_ext_typ = Device.t @-> ValidationCacheEXT.t @-> Vk_base.uint32 @-> ptr (ValidationCacheEXT.t) @-> returning (Result.t)
 let merge_validation_caches_ext_ref = ref (bind merge_validation_caches_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkMergeValidationCachesEXT.html}[vkMergeValidationCachesEXT]} *)
 let merge_validation_caches_ext arg0 arg1 arg2 arg3 =
   match !merge_validation_caches_ext_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -2179,6 +2795,8 @@ let merge_validation_caches_ext arg0 arg1 arg2 arg3 =
 
 let get_descriptor_set_layout_support_typ = Device.t @-> ptr (DescriptorSetLayoutCreateInfo.t) @-> ptr (DescriptorSetLayoutSupport.t) @-> returning (Ctypes.void)
 let get_descriptor_set_layout_support_ref = ref (bind get_descriptor_set_layout_support_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetDescriptorSetLayoutSupport.html}[vkGetDescriptorSetLayoutSupport]} *)
 let get_descriptor_set_layout_support arg0 arg1 arg2 =
   match !get_descriptor_set_layout_support_ref with
   | Some f -> f arg0 arg1 arg2
@@ -2186,6 +2804,8 @@ let get_descriptor_set_layout_support arg0 arg1 arg2 =
 
 let get_shader_info_amd_typ = Device.t @-> Pipeline.t @-> ShaderStageFlags.t @-> ShaderInfoTypeAMD.t @-> ptr (Vk_base.size_t) @-> ptr (Ctypes.void) @-> returning (Result.t)
 let get_shader_info_amd_ref = ref (bind get_shader_info_amd_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetShaderInfoAMD.html}[vkGetShaderInfoAMD]} *)
 let get_shader_info_amd arg0 arg1 arg2 arg3 arg4 arg5 =
   match !get_shader_info_amd_ref with
   | Some f -> f arg0 arg1 arg2 arg3 arg4 arg5
@@ -2193,6 +2813,8 @@ let get_shader_info_amd arg0 arg1 arg2 arg3 arg4 arg5 =
 
 let set_local_dimming_amd_typ = Device.t @-> SwapchainKHR.t @-> Vk_base.bool32 @-> returning (Ctypes.void)
 let set_local_dimming_amd_ref = ref (bind set_local_dimming_amd_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkSetLocalDimmingAMD.html}[vkSetLocalDimmingAMD]} *)
 let set_local_dimming_amd arg0 arg1 arg2 =
   match !set_local_dimming_amd_ref with
   | Some f -> f arg0 arg1 arg2
@@ -2200,6 +2822,8 @@ let set_local_dimming_amd arg0 arg1 arg2 =
 
 let get_physical_device_calibrateable_time_domains_khr_typ = PhysicalDevice.t @-> ptr (Vk_base.uint32) @-> ptr (TimeDomainKHR.t) @-> returning (Result.t)
 let get_physical_device_calibrateable_time_domains_khr_ref = ref (bind get_physical_device_calibrateable_time_domains_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPhysicalDeviceCalibrateableTimeDomainsKHR.html}[vkGetPhysicalDeviceCalibrateableTimeDomainsKHR]} *)
 let get_physical_device_calibrateable_time_domains_khr arg0 arg1 arg2 =
   match !get_physical_device_calibrateable_time_domains_khr_ref with
   | Some f -> f arg0 arg1 arg2
@@ -2207,6 +2831,8 @@ let get_physical_device_calibrateable_time_domains_khr arg0 arg1 arg2 =
 
 let get_calibrated_timestamps_khr_typ = Device.t @-> Vk_base.uint32 @-> ptr (CalibratedTimestampInfoKHR.t) @-> ptr (Vk_base.uint64) @-> ptr (Vk_base.uint64) @-> returning (Result.t)
 let get_calibrated_timestamps_khr_ref = ref (bind get_calibrated_timestamps_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetCalibratedTimestampsKHR.html}[vkGetCalibratedTimestampsKHR]} *)
 let get_calibrated_timestamps_khr arg0 arg1 arg2 arg3 arg4 =
   match !get_calibrated_timestamps_khr_ref with
   | Some f -> f arg0 arg1 arg2 arg3 arg4
@@ -2214,6 +2840,8 @@ let get_calibrated_timestamps_khr arg0 arg1 arg2 arg3 arg4 =
 
 let set_debug_utils_object_name_ext_typ = Device.t @-> ptr (DebugUtilsObjectNameInfoEXT.t) @-> returning (Result.t)
 let set_debug_utils_object_name_ext_ref = ref (bind set_debug_utils_object_name_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkSetDebugUtilsObjectNameEXT.html}[vkSetDebugUtilsObjectNameEXT]} *)
 let set_debug_utils_object_name_ext arg0 arg1 =
   match !set_debug_utils_object_name_ext_ref with
   | Some f -> f arg0 arg1
@@ -2221,6 +2849,8 @@ let set_debug_utils_object_name_ext arg0 arg1 =
 
 let set_debug_utils_object_tag_ext_typ = Device.t @-> ptr (DebugUtilsObjectTagInfoEXT.t) @-> returning (Result.t)
 let set_debug_utils_object_tag_ext_ref = ref (bind set_debug_utils_object_tag_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkSetDebugUtilsObjectTagEXT.html}[vkSetDebugUtilsObjectTagEXT]} *)
 let set_debug_utils_object_tag_ext arg0 arg1 =
   match !set_debug_utils_object_tag_ext_ref with
   | Some f -> f arg0 arg1
@@ -2228,6 +2858,8 @@ let set_debug_utils_object_tag_ext arg0 arg1 =
 
 let queue_begin_debug_utils_label_ext_typ = Queue.t @-> ptr (DebugUtilsLabelEXT.t) @-> returning (Ctypes.void)
 let queue_begin_debug_utils_label_ext_ref = ref (bind queue_begin_debug_utils_label_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkQueueBeginDebugUtilsLabelEXT.html}[vkQueueBeginDebugUtilsLabelEXT]} *)
 let queue_begin_debug_utils_label_ext arg0 arg1 =
   match !queue_begin_debug_utils_label_ext_ref with
   | Some f -> f arg0 arg1
@@ -2235,6 +2867,8 @@ let queue_begin_debug_utils_label_ext arg0 arg1 =
 
 let queue_end_debug_utils_label_ext_typ = Queue.t @-> returning (Ctypes.void)
 let queue_end_debug_utils_label_ext_ref = ref (bind queue_end_debug_utils_label_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkQueueEndDebugUtilsLabelEXT.html}[vkQueueEndDebugUtilsLabelEXT]} *)
 let queue_end_debug_utils_label_ext arg0 =
   match !queue_end_debug_utils_label_ext_ref with
   | Some f -> f arg0
@@ -2242,6 +2876,8 @@ let queue_end_debug_utils_label_ext arg0 =
 
 let queue_insert_debug_utils_label_ext_typ = Queue.t @-> ptr (DebugUtilsLabelEXT.t) @-> returning (Ctypes.void)
 let queue_insert_debug_utils_label_ext_ref = ref (bind queue_insert_debug_utils_label_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkQueueInsertDebugUtilsLabelEXT.html}[vkQueueInsertDebugUtilsLabelEXT]} *)
 let queue_insert_debug_utils_label_ext arg0 arg1 =
   match !queue_insert_debug_utils_label_ext_ref with
   | Some f -> f arg0 arg1
@@ -2249,6 +2885,8 @@ let queue_insert_debug_utils_label_ext arg0 arg1 =
 
 let cmd_begin_debug_utils_label_ext_typ = CommandBuffer.t @-> ptr (DebugUtilsLabelEXT.t) @-> returning (Ctypes.void)
 let cmd_begin_debug_utils_label_ext_ref = ref (bind cmd_begin_debug_utils_label_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdBeginDebugUtilsLabelEXT.html}[vkCmdBeginDebugUtilsLabelEXT]} *)
 let cmd_begin_debug_utils_label_ext arg0 arg1 =
   match !cmd_begin_debug_utils_label_ext_ref with
   | Some f -> f arg0 arg1
@@ -2256,6 +2894,8 @@ let cmd_begin_debug_utils_label_ext arg0 arg1 =
 
 let cmd_end_debug_utils_label_ext_typ = CommandBuffer.t @-> returning (Ctypes.void)
 let cmd_end_debug_utils_label_ext_ref = ref (bind cmd_end_debug_utils_label_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdEndDebugUtilsLabelEXT.html}[vkCmdEndDebugUtilsLabelEXT]} *)
 let cmd_end_debug_utils_label_ext arg0 =
   match !cmd_end_debug_utils_label_ext_ref with
   | Some f -> f arg0
@@ -2263,6 +2903,8 @@ let cmd_end_debug_utils_label_ext arg0 =
 
 let cmd_insert_debug_utils_label_ext_typ = CommandBuffer.t @-> ptr (DebugUtilsLabelEXT.t) @-> returning (Ctypes.void)
 let cmd_insert_debug_utils_label_ext_ref = ref (bind cmd_insert_debug_utils_label_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdInsertDebugUtilsLabelEXT.html}[vkCmdInsertDebugUtilsLabelEXT]} *)
 let cmd_insert_debug_utils_label_ext arg0 arg1 =
   match !cmd_insert_debug_utils_label_ext_ref with
   | Some f -> f arg0 arg1
@@ -2270,6 +2912,8 @@ let cmd_insert_debug_utils_label_ext arg0 arg1 =
 
 let create_debug_utils_messenger_ext_typ = Instance.t @-> ptr (DebugUtilsMessengerCreateInfoEXT.t) @-> ptr (AllocationCallbacks.t) @-> ptr (DebugUtilsMessengerEXT.t) @-> returning (Result.t)
 let create_debug_utils_messenger_ext_ref = ref (bind create_debug_utils_messenger_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateDebugUtilsMessengerEXT.html}[vkCreateDebugUtilsMessengerEXT]} *)
 let create_debug_utils_messenger_ext arg0 arg1 arg2 arg3 =
   match !create_debug_utils_messenger_ext_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -2277,6 +2921,8 @@ let create_debug_utils_messenger_ext arg0 arg1 arg2 arg3 =
 
 let destroy_debug_utils_messenger_ext_typ = Instance.t @-> DebugUtilsMessengerEXT.t @-> ptr (AllocationCallbacks.t) @-> returning (Ctypes.void)
 let destroy_debug_utils_messenger_ext_ref = ref (bind destroy_debug_utils_messenger_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkDestroyDebugUtilsMessengerEXT.html}[vkDestroyDebugUtilsMessengerEXT]} *)
 let destroy_debug_utils_messenger_ext arg0 arg1 arg2 =
   match !destroy_debug_utils_messenger_ext_ref with
   | Some f -> f arg0 arg1 arg2
@@ -2284,6 +2930,8 @@ let destroy_debug_utils_messenger_ext arg0 arg1 arg2 =
 
 let submit_debug_utils_message_ext_typ = Instance.t @-> DebugUtilsMessageSeverityFlagsEXT.t @-> DebugUtilsMessageTypeFlagsEXT.t @-> ptr (DebugUtilsMessengerCallbackDataEXT.t) @-> returning (Ctypes.void)
 let submit_debug_utils_message_ext_ref = ref (bind submit_debug_utils_message_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkSubmitDebugUtilsMessageEXT.html}[vkSubmitDebugUtilsMessageEXT]} *)
 let submit_debug_utils_message_ext arg0 arg1 arg2 arg3 =
   match !submit_debug_utils_message_ext_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -2291,6 +2939,8 @@ let submit_debug_utils_message_ext arg0 arg1 arg2 arg3 =
 
 let get_memory_host_pointer_properties_ext_typ = Device.t @-> ExternalMemoryHandleTypeFlags.t @-> ptr (Ctypes.void) @-> ptr (MemoryHostPointerPropertiesEXT.t) @-> returning (Result.t)
 let get_memory_host_pointer_properties_ext_ref = ref (bind get_memory_host_pointer_properties_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetMemoryHostPointerPropertiesEXT.html}[vkGetMemoryHostPointerPropertiesEXT]} *)
 let get_memory_host_pointer_properties_ext arg0 arg1 arg2 arg3 =
   match !get_memory_host_pointer_properties_ext_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -2298,6 +2948,8 @@ let get_memory_host_pointer_properties_ext arg0 arg1 arg2 arg3 =
 
 let cmd_write_buffer_marker_amd_typ = CommandBuffer.t @-> PipelineStageFlags.t @-> Buffer.t @-> Vk_base.device_size @-> Vk_base.uint32 @-> returning (Ctypes.void)
 let cmd_write_buffer_marker_amd_ref = ref (bind cmd_write_buffer_marker_amd_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdWriteBufferMarkerAMD.html}[vkCmdWriteBufferMarkerAMD]} *)
 let cmd_write_buffer_marker_amd arg0 arg1 arg2 arg3 arg4 =
   match !cmd_write_buffer_marker_amd_ref with
   | Some f -> f arg0 arg1 arg2 arg3 arg4
@@ -2305,6 +2957,8 @@ let cmd_write_buffer_marker_amd arg0 arg1 arg2 arg3 arg4 =
 
 let create_render_pass_2_typ = Device.t @-> ptr (RenderPassCreateInfo2.t) @-> ptr (AllocationCallbacks.t) @-> ptr (RenderPass.t) @-> returning (Result.t)
 let create_render_pass_2_ref = ref (bind create_render_pass_2_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateRenderPass2.html}[vkCreateRenderPass2]} *)
 let create_render_pass_2 arg0 arg1 arg2 arg3 =
   match !create_render_pass_2_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -2312,6 +2966,8 @@ let create_render_pass_2 arg0 arg1 arg2 arg3 =
 
 let cmd_begin_render_pass_2_typ = CommandBuffer.t @-> ptr (RenderPassBeginInfo.t) @-> ptr (SubpassBeginInfo.t) @-> returning (Ctypes.void)
 let cmd_begin_render_pass_2_ref = ref (bind cmd_begin_render_pass_2_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdBeginRenderPass2.html}[vkCmdBeginRenderPass2]} *)
 let cmd_begin_render_pass_2 arg0 arg1 arg2 =
   match !cmd_begin_render_pass_2_ref with
   | Some f -> f arg0 arg1 arg2
@@ -2319,6 +2975,8 @@ let cmd_begin_render_pass_2 arg0 arg1 arg2 =
 
 let cmd_next_subpass_2_typ = CommandBuffer.t @-> ptr (SubpassBeginInfo.t) @-> ptr (SubpassEndInfo.t) @-> returning (Ctypes.void)
 let cmd_next_subpass_2_ref = ref (bind cmd_next_subpass_2_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdNextSubpass2.html}[vkCmdNextSubpass2]} *)
 let cmd_next_subpass_2 arg0 arg1 arg2 =
   match !cmd_next_subpass_2_ref with
   | Some f -> f arg0 arg1 arg2
@@ -2326,6 +2984,8 @@ let cmd_next_subpass_2 arg0 arg1 arg2 =
 
 let cmd_end_render_pass_2_typ = CommandBuffer.t @-> ptr (SubpassEndInfo.t) @-> returning (Ctypes.void)
 let cmd_end_render_pass_2_ref = ref (bind cmd_end_render_pass_2_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdEndRenderPass2.html}[vkCmdEndRenderPass2]} *)
 let cmd_end_render_pass_2 arg0 arg1 =
   match !cmd_end_render_pass_2_ref with
   | Some f -> f arg0 arg1
@@ -2333,6 +2993,8 @@ let cmd_end_render_pass_2 arg0 arg1 =
 
 let get_semaphore_counter_value_typ = Device.t @-> Semaphore.t @-> ptr (Vk_base.uint64) @-> returning (Result.t)
 let get_semaphore_counter_value_ref = ref (bind get_semaphore_counter_value_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetSemaphoreCounterValue.html}[vkGetSemaphoreCounterValue]} *)
 let get_semaphore_counter_value arg0 arg1 arg2 =
   match !get_semaphore_counter_value_ref with
   | Some f -> f arg0 arg1 arg2
@@ -2340,6 +3002,8 @@ let get_semaphore_counter_value arg0 arg1 arg2 =
 
 let wait_semaphores_typ = Device.t @-> ptr (SemaphoreWaitInfo.t) @-> Vk_base.uint64 @-> returning (Result.t)
 let wait_semaphores_ref = ref (bind wait_semaphores_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkWaitSemaphores.html}[vkWaitSemaphores]} *)
 let wait_semaphores arg0 arg1 arg2 =
   match !wait_semaphores_ref with
   | Some f -> f arg0 arg1 arg2
@@ -2347,6 +3011,8 @@ let wait_semaphores arg0 arg1 arg2 =
 
 let signal_semaphore_typ = Device.t @-> ptr (SemaphoreSignalInfo.t) @-> returning (Result.t)
 let signal_semaphore_ref = ref (bind signal_semaphore_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkSignalSemaphore.html}[vkSignalSemaphore]} *)
 let signal_semaphore arg0 arg1 =
   match !signal_semaphore_ref with
   | Some f -> f arg0 arg1
@@ -2354,6 +3020,8 @@ let signal_semaphore arg0 arg1 =
 
 let get_android_hardware_buffer_properties_android_typ = Device.t @-> ptr (void) @-> ptr (AndroidHardwareBufferPropertiesANDROID.t) @-> returning (Result.t)
 let get_android_hardware_buffer_properties_android_ref = ref (bind get_android_hardware_buffer_properties_android_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetAndroidHardwareBufferPropertiesANDROID.html}[vkGetAndroidHardwareBufferPropertiesANDROID]} *)
 let get_android_hardware_buffer_properties_android arg0 arg1 arg2 =
   match !get_android_hardware_buffer_properties_android_ref with
   | Some f -> f arg0 arg1 arg2
@@ -2361,6 +3029,8 @@ let get_android_hardware_buffer_properties_android arg0 arg1 arg2 =
 
 let get_memory_android_hardware_buffer_android_typ = Device.t @-> ptr (MemoryGetAndroidHardwareBufferInfoANDROID.t) @-> ptr (ptr (void)) @-> returning (Result.t)
 let get_memory_android_hardware_buffer_android_ref = ref (bind get_memory_android_hardware_buffer_android_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetMemoryAndroidHardwareBufferANDROID.html}[vkGetMemoryAndroidHardwareBufferANDROID]} *)
 let get_memory_android_hardware_buffer_android arg0 arg1 arg2 =
   match !get_memory_android_hardware_buffer_android_ref with
   | Some f -> f arg0 arg1 arg2
@@ -2368,6 +3038,8 @@ let get_memory_android_hardware_buffer_android arg0 arg1 arg2 =
 
 let cmd_draw_indirect_count_typ = CommandBuffer.t @-> Buffer.t @-> Vk_base.device_size @-> Buffer.t @-> Vk_base.device_size @-> Vk_base.uint32 @-> Vk_base.uint32 @-> returning (Ctypes.void)
 let cmd_draw_indirect_count_ref = ref (bind cmd_draw_indirect_count_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdDrawIndirectCount.html}[vkCmdDrawIndirectCount]} *)
 let cmd_draw_indirect_count arg0 arg1 arg2 arg3 arg4 arg5 arg6 =
   match !cmd_draw_indirect_count_ref with
   | Some f -> f arg0 arg1 arg2 arg3 arg4 arg5 arg6
@@ -2375,6 +3047,8 @@ let cmd_draw_indirect_count arg0 arg1 arg2 arg3 arg4 arg5 arg6 =
 
 let cmd_draw_indexed_indirect_count_typ = CommandBuffer.t @-> Buffer.t @-> Vk_base.device_size @-> Buffer.t @-> Vk_base.device_size @-> Vk_base.uint32 @-> Vk_base.uint32 @-> returning (Ctypes.void)
 let cmd_draw_indexed_indirect_count_ref = ref (bind cmd_draw_indexed_indirect_count_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdDrawIndexedIndirectCount.html}[vkCmdDrawIndexedIndirectCount]} *)
 let cmd_draw_indexed_indirect_count arg0 arg1 arg2 arg3 arg4 arg5 arg6 =
   match !cmd_draw_indexed_indirect_count_ref with
   | Some f -> f arg0 arg1 arg2 arg3 arg4 arg5 arg6
@@ -2382,6 +3056,8 @@ let cmd_draw_indexed_indirect_count arg0 arg1 arg2 arg3 arg4 arg5 arg6 =
 
 let cmd_set_checkpoint_nv_typ = CommandBuffer.t @-> ptr (Ctypes.void) @-> returning (Ctypes.void)
 let cmd_set_checkpoint_nv_ref = ref (bind cmd_set_checkpoint_nv_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetCheckpointNV.html}[vkCmdSetCheckpointNV]} *)
 let cmd_set_checkpoint_nv arg0 arg1 =
   match !cmd_set_checkpoint_nv_ref with
   | Some f -> f arg0 arg1
@@ -2389,6 +3065,8 @@ let cmd_set_checkpoint_nv arg0 arg1 =
 
 let get_queue_checkpoint_data_nv_typ = Queue.t @-> ptr (Vk_base.uint32) @-> ptr (CheckpointDataNV.t) @-> returning (Ctypes.void)
 let get_queue_checkpoint_data_nv_ref = ref (bind get_queue_checkpoint_data_nv_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetQueueCheckpointDataNV.html}[vkGetQueueCheckpointDataNV]} *)
 let get_queue_checkpoint_data_nv arg0 arg1 arg2 =
   match !get_queue_checkpoint_data_nv_ref with
   | Some f -> f arg0 arg1 arg2
@@ -2396,6 +3074,8 @@ let get_queue_checkpoint_data_nv arg0 arg1 arg2 =
 
 let cmd_bind_transform_feedback_buffers_ext_typ = CommandBuffer.t @-> Vk_base.uint32 @-> Vk_base.uint32 @-> ptr (Buffer.t) @-> ptr (Vk_base.device_size) @-> ptr (Vk_base.device_size) @-> returning (Ctypes.void)
 let cmd_bind_transform_feedback_buffers_ext_ref = ref (bind cmd_bind_transform_feedback_buffers_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdBindTransformFeedbackBuffersEXT.html}[vkCmdBindTransformFeedbackBuffersEXT]} *)
 let cmd_bind_transform_feedback_buffers_ext arg0 arg1 arg2 arg3 arg4 arg5 =
   match !cmd_bind_transform_feedback_buffers_ext_ref with
   | Some f -> f arg0 arg1 arg2 arg3 arg4 arg5
@@ -2403,6 +3083,8 @@ let cmd_bind_transform_feedback_buffers_ext arg0 arg1 arg2 arg3 arg4 arg5 =
 
 let cmd_begin_transform_feedback_ext_typ = CommandBuffer.t @-> Vk_base.uint32 @-> Vk_base.uint32 @-> ptr (Buffer.t) @-> ptr (Vk_base.device_size) @-> returning (Ctypes.void)
 let cmd_begin_transform_feedback_ext_ref = ref (bind cmd_begin_transform_feedback_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdBeginTransformFeedbackEXT.html}[vkCmdBeginTransformFeedbackEXT]} *)
 let cmd_begin_transform_feedback_ext arg0 arg1 arg2 arg3 arg4 =
   match !cmd_begin_transform_feedback_ext_ref with
   | Some f -> f arg0 arg1 arg2 arg3 arg4
@@ -2410,6 +3092,8 @@ let cmd_begin_transform_feedback_ext arg0 arg1 arg2 arg3 arg4 =
 
 let cmd_end_transform_feedback_ext_typ = CommandBuffer.t @-> Vk_base.uint32 @-> Vk_base.uint32 @-> ptr (Buffer.t) @-> ptr (Vk_base.device_size) @-> returning (Ctypes.void)
 let cmd_end_transform_feedback_ext_ref = ref (bind cmd_end_transform_feedback_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdEndTransformFeedbackEXT.html}[vkCmdEndTransformFeedbackEXT]} *)
 let cmd_end_transform_feedback_ext arg0 arg1 arg2 arg3 arg4 =
   match !cmd_end_transform_feedback_ext_ref with
   | Some f -> f arg0 arg1 arg2 arg3 arg4
@@ -2417,6 +3101,8 @@ let cmd_end_transform_feedback_ext arg0 arg1 arg2 arg3 arg4 =
 
 let cmd_begin_query_indexed_ext_typ = CommandBuffer.t @-> QueryPool.t @-> Vk_base.uint32 @-> QueryControlFlags.t @-> Vk_base.uint32 @-> returning (Ctypes.void)
 let cmd_begin_query_indexed_ext_ref = ref (bind cmd_begin_query_indexed_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdBeginQueryIndexedEXT.html}[vkCmdBeginQueryIndexedEXT]} *)
 let cmd_begin_query_indexed_ext arg0 arg1 arg2 arg3 arg4 =
   match !cmd_begin_query_indexed_ext_ref with
   | Some f -> f arg0 arg1 arg2 arg3 arg4
@@ -2424,6 +3110,8 @@ let cmd_begin_query_indexed_ext arg0 arg1 arg2 arg3 arg4 =
 
 let cmd_end_query_indexed_ext_typ = CommandBuffer.t @-> QueryPool.t @-> Vk_base.uint32 @-> Vk_base.uint32 @-> returning (Ctypes.void)
 let cmd_end_query_indexed_ext_ref = ref (bind cmd_end_query_indexed_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdEndQueryIndexedEXT.html}[vkCmdEndQueryIndexedEXT]} *)
 let cmd_end_query_indexed_ext arg0 arg1 arg2 arg3 =
   match !cmd_end_query_indexed_ext_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -2431,6 +3119,8 @@ let cmd_end_query_indexed_ext arg0 arg1 arg2 arg3 =
 
 let cmd_draw_indirect_byte_count_ext_typ = CommandBuffer.t @-> Vk_base.uint32 @-> Vk_base.uint32 @-> Buffer.t @-> Vk_base.device_size @-> Vk_base.uint32 @-> Vk_base.uint32 @-> returning (Ctypes.void)
 let cmd_draw_indirect_byte_count_ext_ref = ref (bind cmd_draw_indirect_byte_count_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdDrawIndirectByteCountEXT.html}[vkCmdDrawIndirectByteCountEXT]} *)
 let cmd_draw_indirect_byte_count_ext arg0 arg1 arg2 arg3 arg4 arg5 arg6 =
   match !cmd_draw_indirect_byte_count_ext_ref with
   | Some f -> f arg0 arg1 arg2 arg3 arg4 arg5 arg6
@@ -2438,6 +3128,8 @@ let cmd_draw_indirect_byte_count_ext arg0 arg1 arg2 arg3 arg4 arg5 arg6 =
 
 let cmd_set_exclusive_scissor_nv_typ = CommandBuffer.t @-> Vk_base.uint32 @-> Vk_base.uint32 @-> ptr (Rect2D.t) @-> returning (Ctypes.void)
 let cmd_set_exclusive_scissor_nv_ref = ref (bind cmd_set_exclusive_scissor_nv_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetExclusiveScissorNV.html}[vkCmdSetExclusiveScissorNV]} *)
 let cmd_set_exclusive_scissor_nv arg0 arg1 arg2 arg3 =
   match !cmd_set_exclusive_scissor_nv_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -2445,6 +3137,8 @@ let cmd_set_exclusive_scissor_nv arg0 arg1 arg2 arg3 =
 
 let cmd_set_exclusive_scissor_enable_nv_typ = CommandBuffer.t @-> Vk_base.uint32 @-> Vk_base.uint32 @-> ptr (Vk_base.bool32) @-> returning (Ctypes.void)
 let cmd_set_exclusive_scissor_enable_nv_ref = ref (bind cmd_set_exclusive_scissor_enable_nv_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetExclusiveScissorEnableNV.html}[vkCmdSetExclusiveScissorEnableNV]} *)
 let cmd_set_exclusive_scissor_enable_nv arg0 arg1 arg2 arg3 =
   match !cmd_set_exclusive_scissor_enable_nv_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -2452,6 +3146,8 @@ let cmd_set_exclusive_scissor_enable_nv arg0 arg1 arg2 arg3 =
 
 let cmd_bind_shading_rate_image_nv_typ = CommandBuffer.t @-> ImageView.t @-> ImageLayout.t @-> returning (Ctypes.void)
 let cmd_bind_shading_rate_image_nv_ref = ref (bind cmd_bind_shading_rate_image_nv_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdBindShadingRateImageNV.html}[vkCmdBindShadingRateImageNV]} *)
 let cmd_bind_shading_rate_image_nv arg0 arg1 arg2 =
   match !cmd_bind_shading_rate_image_nv_ref with
   | Some f -> f arg0 arg1 arg2
@@ -2459,6 +3155,8 @@ let cmd_bind_shading_rate_image_nv arg0 arg1 arg2 =
 
 let cmd_set_viewport_shading_rate_palette_nv_typ = CommandBuffer.t @-> Vk_base.uint32 @-> Vk_base.uint32 @-> ptr (ShadingRatePaletteNV.t) @-> returning (Ctypes.void)
 let cmd_set_viewport_shading_rate_palette_nv_ref = ref (bind cmd_set_viewport_shading_rate_palette_nv_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetViewportShadingRatePaletteNV.html}[vkCmdSetViewportShadingRatePaletteNV]} *)
 let cmd_set_viewport_shading_rate_palette_nv arg0 arg1 arg2 arg3 =
   match !cmd_set_viewport_shading_rate_palette_nv_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -2466,6 +3164,8 @@ let cmd_set_viewport_shading_rate_palette_nv arg0 arg1 arg2 arg3 =
 
 let cmd_set_coarse_sample_order_nv_typ = CommandBuffer.t @-> CoarseSampleOrderTypeNV.t @-> Vk_base.uint32 @-> ptr (CoarseSampleOrderCustomNV.t) @-> returning (Ctypes.void)
 let cmd_set_coarse_sample_order_nv_ref = ref (bind cmd_set_coarse_sample_order_nv_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetCoarseSampleOrderNV.html}[vkCmdSetCoarseSampleOrderNV]} *)
 let cmd_set_coarse_sample_order_nv arg0 arg1 arg2 arg3 =
   match !cmd_set_coarse_sample_order_nv_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -2473,6 +3173,8 @@ let cmd_set_coarse_sample_order_nv arg0 arg1 arg2 arg3 =
 
 let cmd_draw_mesh_tasks_nv_typ = CommandBuffer.t @-> Vk_base.uint32 @-> Vk_base.uint32 @-> returning (Ctypes.void)
 let cmd_draw_mesh_tasks_nv_ref = ref (bind cmd_draw_mesh_tasks_nv_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdDrawMeshTasksNV.html}[vkCmdDrawMeshTasksNV]} *)
 let cmd_draw_mesh_tasks_nv arg0 arg1 arg2 =
   match !cmd_draw_mesh_tasks_nv_ref with
   | Some f -> f arg0 arg1 arg2
@@ -2480,6 +3182,8 @@ let cmd_draw_mesh_tasks_nv arg0 arg1 arg2 =
 
 let cmd_draw_mesh_tasks_indirect_nv_typ = CommandBuffer.t @-> Buffer.t @-> Vk_base.device_size @-> Vk_base.uint32 @-> Vk_base.uint32 @-> returning (Ctypes.void)
 let cmd_draw_mesh_tasks_indirect_nv_ref = ref (bind cmd_draw_mesh_tasks_indirect_nv_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdDrawMeshTasksIndirectNV.html}[vkCmdDrawMeshTasksIndirectNV]} *)
 let cmd_draw_mesh_tasks_indirect_nv arg0 arg1 arg2 arg3 arg4 =
   match !cmd_draw_mesh_tasks_indirect_nv_ref with
   | Some f -> f arg0 arg1 arg2 arg3 arg4
@@ -2487,6 +3191,8 @@ let cmd_draw_mesh_tasks_indirect_nv arg0 arg1 arg2 arg3 arg4 =
 
 let cmd_draw_mesh_tasks_indirect_count_nv_typ = CommandBuffer.t @-> Buffer.t @-> Vk_base.device_size @-> Buffer.t @-> Vk_base.device_size @-> Vk_base.uint32 @-> Vk_base.uint32 @-> returning (Ctypes.void)
 let cmd_draw_mesh_tasks_indirect_count_nv_ref = ref (bind cmd_draw_mesh_tasks_indirect_count_nv_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdDrawMeshTasksIndirectCountNV.html}[vkCmdDrawMeshTasksIndirectCountNV]} *)
 let cmd_draw_mesh_tasks_indirect_count_nv arg0 arg1 arg2 arg3 arg4 arg5 arg6 =
   match !cmd_draw_mesh_tasks_indirect_count_nv_ref with
   | Some f -> f arg0 arg1 arg2 arg3 arg4 arg5 arg6
@@ -2494,6 +3200,8 @@ let cmd_draw_mesh_tasks_indirect_count_nv arg0 arg1 arg2 arg3 arg4 arg5 arg6 =
 
 let cmd_draw_mesh_tasks_ext_typ = CommandBuffer.t @-> Vk_base.uint32 @-> Vk_base.uint32 @-> Vk_base.uint32 @-> returning (Ctypes.void)
 let cmd_draw_mesh_tasks_ext_ref = ref (bind cmd_draw_mesh_tasks_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdDrawMeshTasksEXT.html}[vkCmdDrawMeshTasksEXT]} *)
 let cmd_draw_mesh_tasks_ext arg0 arg1 arg2 arg3 =
   match !cmd_draw_mesh_tasks_ext_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -2501,6 +3209,8 @@ let cmd_draw_mesh_tasks_ext arg0 arg1 arg2 arg3 =
 
 let cmd_draw_mesh_tasks_indirect_ext_typ = CommandBuffer.t @-> Buffer.t @-> Vk_base.device_size @-> Vk_base.uint32 @-> Vk_base.uint32 @-> returning (Ctypes.void)
 let cmd_draw_mesh_tasks_indirect_ext_ref = ref (bind cmd_draw_mesh_tasks_indirect_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdDrawMeshTasksIndirectEXT.html}[vkCmdDrawMeshTasksIndirectEXT]} *)
 let cmd_draw_mesh_tasks_indirect_ext arg0 arg1 arg2 arg3 arg4 =
   match !cmd_draw_mesh_tasks_indirect_ext_ref with
   | Some f -> f arg0 arg1 arg2 arg3 arg4
@@ -2508,6 +3218,8 @@ let cmd_draw_mesh_tasks_indirect_ext arg0 arg1 arg2 arg3 arg4 =
 
 let cmd_draw_mesh_tasks_indirect_count_ext_typ = CommandBuffer.t @-> Buffer.t @-> Vk_base.device_size @-> Buffer.t @-> Vk_base.device_size @-> Vk_base.uint32 @-> Vk_base.uint32 @-> returning (Ctypes.void)
 let cmd_draw_mesh_tasks_indirect_count_ext_ref = ref (bind cmd_draw_mesh_tasks_indirect_count_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdDrawMeshTasksIndirectCountEXT.html}[vkCmdDrawMeshTasksIndirectCountEXT]} *)
 let cmd_draw_mesh_tasks_indirect_count_ext arg0 arg1 arg2 arg3 arg4 arg5 arg6 =
   match !cmd_draw_mesh_tasks_indirect_count_ext_ref with
   | Some f -> f arg0 arg1 arg2 arg3 arg4 arg5 arg6
@@ -2515,6 +3227,8 @@ let cmd_draw_mesh_tasks_indirect_count_ext arg0 arg1 arg2 arg3 arg4 arg5 arg6 =
 
 let compile_deferred_nv_typ = Device.t @-> Pipeline.t @-> Vk_base.uint32 @-> returning (Result.t)
 let compile_deferred_nv_ref = ref (bind compile_deferred_nv_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCompileDeferredNV.html}[vkCompileDeferredNV]} *)
 let compile_deferred_nv arg0 arg1 arg2 =
   match !compile_deferred_nv_ref with
   | Some f -> f arg0 arg1 arg2
@@ -2522,6 +3236,8 @@ let compile_deferred_nv arg0 arg1 arg2 =
 
 let create_acceleration_structure_nv_typ = Device.t @-> ptr (AccelerationStructureCreateInfoNV.t) @-> ptr (AllocationCallbacks.t) @-> ptr (AccelerationStructureNV.t) @-> returning (Result.t)
 let create_acceleration_structure_nv_ref = ref (bind create_acceleration_structure_nv_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateAccelerationStructureNV.html}[vkCreateAccelerationStructureNV]} *)
 let create_acceleration_structure_nv arg0 arg1 arg2 arg3 =
   match !create_acceleration_structure_nv_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -2529,6 +3245,8 @@ let create_acceleration_structure_nv arg0 arg1 arg2 arg3 =
 
 let cmd_bind_invocation_mask_huawei_typ = CommandBuffer.t @-> ImageView.t @-> ImageLayout.t @-> returning (Ctypes.void)
 let cmd_bind_invocation_mask_huawei_ref = ref (bind cmd_bind_invocation_mask_huawei_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdBindInvocationMaskHUAWEI.html}[vkCmdBindInvocationMaskHUAWEI]} *)
 let cmd_bind_invocation_mask_huawei arg0 arg1 arg2 =
   match !cmd_bind_invocation_mask_huawei_ref with
   | Some f -> f arg0 arg1 arg2
@@ -2536,6 +3254,8 @@ let cmd_bind_invocation_mask_huawei arg0 arg1 arg2 =
 
 let destroy_acceleration_structure_khr_typ = Device.t @-> AccelerationStructureKHR.t @-> ptr (AllocationCallbacks.t) @-> returning (Ctypes.void)
 let destroy_acceleration_structure_khr_ref = ref (bind destroy_acceleration_structure_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkDestroyAccelerationStructureKHR.html}[vkDestroyAccelerationStructureKHR]} *)
 let destroy_acceleration_structure_khr arg0 arg1 arg2 =
   match !destroy_acceleration_structure_khr_ref with
   | Some f -> f arg0 arg1 arg2
@@ -2543,6 +3263,8 @@ let destroy_acceleration_structure_khr arg0 arg1 arg2 =
 
 let destroy_acceleration_structure_nv_typ = Device.t @-> AccelerationStructureNV.t @-> ptr (AllocationCallbacks.t) @-> returning (Ctypes.void)
 let destroy_acceleration_structure_nv_ref = ref (bind destroy_acceleration_structure_nv_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkDestroyAccelerationStructureNV.html}[vkDestroyAccelerationStructureNV]} *)
 let destroy_acceleration_structure_nv arg0 arg1 arg2 =
   match !destroy_acceleration_structure_nv_ref with
   | Some f -> f arg0 arg1 arg2
@@ -2550,6 +3272,8 @@ let destroy_acceleration_structure_nv arg0 arg1 arg2 =
 
 let get_acceleration_structure_memory_requirements_nv_typ = Device.t @-> ptr (AccelerationStructureMemoryRequirementsInfoNV.t) @-> ptr (MemoryRequirements2.t) @-> returning (Ctypes.void)
 let get_acceleration_structure_memory_requirements_nv_ref = ref (bind get_acceleration_structure_memory_requirements_nv_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetAccelerationStructureMemoryRequirementsNV.html}[vkGetAccelerationStructureMemoryRequirementsNV]} *)
 let get_acceleration_structure_memory_requirements_nv arg0 arg1 arg2 =
   match !get_acceleration_structure_memory_requirements_nv_ref with
   | Some f -> f arg0 arg1 arg2
@@ -2557,6 +3281,8 @@ let get_acceleration_structure_memory_requirements_nv arg0 arg1 arg2 =
 
 let bind_acceleration_structure_memory_nv_typ = Device.t @-> Vk_base.uint32 @-> ptr (BindAccelerationStructureMemoryInfoNV.t) @-> returning (Result.t)
 let bind_acceleration_structure_memory_nv_ref = ref (bind bind_acceleration_structure_memory_nv_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkBindAccelerationStructureMemoryNV.html}[vkBindAccelerationStructureMemoryNV]} *)
 let bind_acceleration_structure_memory_nv arg0 arg1 arg2 =
   match !bind_acceleration_structure_memory_nv_ref with
   | Some f -> f arg0 arg1 arg2
@@ -2564,6 +3290,8 @@ let bind_acceleration_structure_memory_nv arg0 arg1 arg2 =
 
 let cmd_copy_acceleration_structure_nv_typ = CommandBuffer.t @-> AccelerationStructureNV.t @-> AccelerationStructureNV.t @-> CopyAccelerationStructureModeKHR.t @-> returning (Ctypes.void)
 let cmd_copy_acceleration_structure_nv_ref = ref (bind cmd_copy_acceleration_structure_nv_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdCopyAccelerationStructureNV.html}[vkCmdCopyAccelerationStructureNV]} *)
 let cmd_copy_acceleration_structure_nv arg0 arg1 arg2 arg3 =
   match !cmd_copy_acceleration_structure_nv_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -2571,6 +3299,8 @@ let cmd_copy_acceleration_structure_nv arg0 arg1 arg2 arg3 =
 
 let cmd_copy_acceleration_structure_khr_typ = CommandBuffer.t @-> ptr (CopyAccelerationStructureInfoKHR.t) @-> returning (Ctypes.void)
 let cmd_copy_acceleration_structure_khr_ref = ref (bind cmd_copy_acceleration_structure_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdCopyAccelerationStructureKHR.html}[vkCmdCopyAccelerationStructureKHR]} *)
 let cmd_copy_acceleration_structure_khr arg0 arg1 =
   match !cmd_copy_acceleration_structure_khr_ref with
   | Some f -> f arg0 arg1
@@ -2578,6 +3308,8 @@ let cmd_copy_acceleration_structure_khr arg0 arg1 =
 
 let copy_acceleration_structure_khr_typ = Device.t @-> DeferredOperationKHR.t @-> ptr (CopyAccelerationStructureInfoKHR.t) @-> returning (Result.t)
 let copy_acceleration_structure_khr_ref = ref (bind copy_acceleration_structure_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCopyAccelerationStructureKHR.html}[vkCopyAccelerationStructureKHR]} *)
 let copy_acceleration_structure_khr arg0 arg1 arg2 =
   match !copy_acceleration_structure_khr_ref with
   | Some f -> f arg0 arg1 arg2
@@ -2585,6 +3317,8 @@ let copy_acceleration_structure_khr arg0 arg1 arg2 =
 
 let cmd_copy_acceleration_structure_to_memory_khr_typ = CommandBuffer.t @-> ptr (CopyAccelerationStructureToMemoryInfoKHR.t) @-> returning (Ctypes.void)
 let cmd_copy_acceleration_structure_to_memory_khr_ref = ref (bind cmd_copy_acceleration_structure_to_memory_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdCopyAccelerationStructureToMemoryKHR.html}[vkCmdCopyAccelerationStructureToMemoryKHR]} *)
 let cmd_copy_acceleration_structure_to_memory_khr arg0 arg1 =
   match !cmd_copy_acceleration_structure_to_memory_khr_ref with
   | Some f -> f arg0 arg1
@@ -2592,6 +3326,8 @@ let cmd_copy_acceleration_structure_to_memory_khr arg0 arg1 =
 
 let copy_acceleration_structure_to_memory_khr_typ = Device.t @-> DeferredOperationKHR.t @-> ptr (CopyAccelerationStructureToMemoryInfoKHR.t) @-> returning (Result.t)
 let copy_acceleration_structure_to_memory_khr_ref = ref (bind copy_acceleration_structure_to_memory_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCopyAccelerationStructureToMemoryKHR.html}[vkCopyAccelerationStructureToMemoryKHR]} *)
 let copy_acceleration_structure_to_memory_khr arg0 arg1 arg2 =
   match !copy_acceleration_structure_to_memory_khr_ref with
   | Some f -> f arg0 arg1 arg2
@@ -2599,6 +3335,8 @@ let copy_acceleration_structure_to_memory_khr arg0 arg1 arg2 =
 
 let cmd_copy_memory_to_acceleration_structure_khr_typ = CommandBuffer.t @-> ptr (CopyMemoryToAccelerationStructureInfoKHR.t) @-> returning (Ctypes.void)
 let cmd_copy_memory_to_acceleration_structure_khr_ref = ref (bind cmd_copy_memory_to_acceleration_structure_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdCopyMemoryToAccelerationStructureKHR.html}[vkCmdCopyMemoryToAccelerationStructureKHR]} *)
 let cmd_copy_memory_to_acceleration_structure_khr arg0 arg1 =
   match !cmd_copy_memory_to_acceleration_structure_khr_ref with
   | Some f -> f arg0 arg1
@@ -2606,6 +3344,8 @@ let cmd_copy_memory_to_acceleration_structure_khr arg0 arg1 =
 
 let copy_memory_to_acceleration_structure_khr_typ = Device.t @-> DeferredOperationKHR.t @-> ptr (CopyMemoryToAccelerationStructureInfoKHR.t) @-> returning (Result.t)
 let copy_memory_to_acceleration_structure_khr_ref = ref (bind copy_memory_to_acceleration_structure_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCopyMemoryToAccelerationStructureKHR.html}[vkCopyMemoryToAccelerationStructureKHR]} *)
 let copy_memory_to_acceleration_structure_khr arg0 arg1 arg2 =
   match !copy_memory_to_acceleration_structure_khr_ref with
   | Some f -> f arg0 arg1 arg2
@@ -2613,6 +3353,8 @@ let copy_memory_to_acceleration_structure_khr arg0 arg1 arg2 =
 
 let cmd_write_acceleration_structures_properties_khr_typ = CommandBuffer.t @-> Vk_base.uint32 @-> ptr (AccelerationStructureKHR.t) @-> QueryType.t @-> QueryPool.t @-> Vk_base.uint32 @-> returning (Ctypes.void)
 let cmd_write_acceleration_structures_properties_khr_ref = ref (bind cmd_write_acceleration_structures_properties_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdWriteAccelerationStructuresPropertiesKHR.html}[vkCmdWriteAccelerationStructuresPropertiesKHR]} *)
 let cmd_write_acceleration_structures_properties_khr arg0 arg1 arg2 arg3 arg4 arg5 =
   match !cmd_write_acceleration_structures_properties_khr_ref with
   | Some f -> f arg0 arg1 arg2 arg3 arg4 arg5
@@ -2620,6 +3362,8 @@ let cmd_write_acceleration_structures_properties_khr arg0 arg1 arg2 arg3 arg4 ar
 
 let cmd_write_acceleration_structures_properties_nv_typ = CommandBuffer.t @-> Vk_base.uint32 @-> ptr (AccelerationStructureNV.t) @-> QueryType.t @-> QueryPool.t @-> Vk_base.uint32 @-> returning (Ctypes.void)
 let cmd_write_acceleration_structures_properties_nv_ref = ref (bind cmd_write_acceleration_structures_properties_nv_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdWriteAccelerationStructuresPropertiesNV.html}[vkCmdWriteAccelerationStructuresPropertiesNV]} *)
 let cmd_write_acceleration_structures_properties_nv arg0 arg1 arg2 arg3 arg4 arg5 =
   match !cmd_write_acceleration_structures_properties_nv_ref with
   | Some f -> f arg0 arg1 arg2 arg3 arg4 arg5
@@ -2627,6 +3371,8 @@ let cmd_write_acceleration_structures_properties_nv arg0 arg1 arg2 arg3 arg4 arg
 
 let cmd_build_acceleration_structure_nv_typ = CommandBuffer.t @-> ptr (AccelerationStructureInfoNV.t) @-> Buffer.t @-> Vk_base.device_size @-> Vk_base.bool32 @-> AccelerationStructureNV.t @-> AccelerationStructureNV.t @-> Buffer.t @-> Vk_base.device_size @-> returning (Ctypes.void)
 let cmd_build_acceleration_structure_nv_ref = ref (bind cmd_build_acceleration_structure_nv_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdBuildAccelerationStructureNV.html}[vkCmdBuildAccelerationStructureNV]} *)
 let cmd_build_acceleration_structure_nv arg0 arg1 arg2 arg3 arg4 arg5 arg6 arg7 arg8 =
   match !cmd_build_acceleration_structure_nv_ref with
   | Some f -> f arg0 arg1 arg2 arg3 arg4 arg5 arg6 arg7 arg8
@@ -2634,6 +3380,8 @@ let cmd_build_acceleration_structure_nv arg0 arg1 arg2 arg3 arg4 arg5 arg6 arg7 
 
 let write_acceleration_structures_properties_khr_typ = Device.t @-> Vk_base.uint32 @-> ptr (AccelerationStructureKHR.t) @-> QueryType.t @-> Vk_base.size_t @-> ptr (Ctypes.void) @-> Vk_base.size_t @-> returning (Result.t)
 let write_acceleration_structures_properties_khr_ref = ref (bind write_acceleration_structures_properties_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkWriteAccelerationStructuresPropertiesKHR.html}[vkWriteAccelerationStructuresPropertiesKHR]} *)
 let write_acceleration_structures_properties_khr arg0 arg1 arg2 arg3 arg4 arg5 arg6 =
   match !write_acceleration_structures_properties_khr_ref with
   | Some f -> f arg0 arg1 arg2 arg3 arg4 arg5 arg6
@@ -2641,6 +3389,8 @@ let write_acceleration_structures_properties_khr arg0 arg1 arg2 arg3 arg4 arg5 a
 
 let cmd_trace_rays_khr_typ = CommandBuffer.t @-> ptr (StridedDeviceAddressRegionKHR.t) @-> ptr (StridedDeviceAddressRegionKHR.t) @-> ptr (StridedDeviceAddressRegionKHR.t) @-> ptr (StridedDeviceAddressRegionKHR.t) @-> Vk_base.uint32 @-> Vk_base.uint32 @-> Vk_base.uint32 @-> returning (Ctypes.void)
 let cmd_trace_rays_khr_ref = ref (bind cmd_trace_rays_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdTraceRaysKHR.html}[vkCmdTraceRaysKHR]} *)
 let cmd_trace_rays_khr arg0 arg1 arg2 arg3 arg4 arg5 arg6 arg7 =
   match !cmd_trace_rays_khr_ref with
   | Some f -> f arg0 arg1 arg2 arg3 arg4 arg5 arg6 arg7
@@ -2648,6 +3398,8 @@ let cmd_trace_rays_khr arg0 arg1 arg2 arg3 arg4 arg5 arg6 arg7 =
 
 let cmd_trace_rays_nv_typ = CommandBuffer.t @-> Buffer.t @-> Vk_base.device_size @-> Buffer.t @-> Vk_base.device_size @-> Vk_base.device_size @-> Buffer.t @-> Vk_base.device_size @-> Vk_base.device_size @-> Buffer.t @-> Vk_base.device_size @-> Vk_base.device_size @-> Vk_base.uint32 @-> Vk_base.uint32 @-> Vk_base.uint32 @-> returning (Ctypes.void)
 let cmd_trace_rays_nv_ref = ref (bind cmd_trace_rays_nv_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdTraceRaysNV.html}[vkCmdTraceRaysNV]} *)
 let cmd_trace_rays_nv arg0 arg1 arg2 arg3 arg4 arg5 arg6 arg7 arg8 arg9 arg10 arg11 arg12 arg13 arg14 =
   match !cmd_trace_rays_nv_ref with
   | Some f -> f arg0 arg1 arg2 arg3 arg4 arg5 arg6 arg7 arg8 arg9 arg10 arg11 arg12 arg13 arg14
@@ -2655,6 +3407,8 @@ let cmd_trace_rays_nv arg0 arg1 arg2 arg3 arg4 arg5 arg6 arg7 arg8 arg9 arg10 ar
 
 let get_ray_tracing_shader_group_handles_khr_typ = Device.t @-> Pipeline.t @-> Vk_base.uint32 @-> Vk_base.uint32 @-> Vk_base.size_t @-> ptr (Ctypes.void) @-> returning (Result.t)
 let get_ray_tracing_shader_group_handles_khr_ref = ref (bind get_ray_tracing_shader_group_handles_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetRayTracingShaderGroupHandlesKHR.html}[vkGetRayTracingShaderGroupHandlesKHR]} *)
 let get_ray_tracing_shader_group_handles_khr arg0 arg1 arg2 arg3 arg4 arg5 =
   match !get_ray_tracing_shader_group_handles_khr_ref with
   | Some f -> f arg0 arg1 arg2 arg3 arg4 arg5
@@ -2662,6 +3416,8 @@ let get_ray_tracing_shader_group_handles_khr arg0 arg1 arg2 arg3 arg4 arg5 =
 
 let get_ray_tracing_capture_replay_shader_group_handles_khr_typ = Device.t @-> Pipeline.t @-> Vk_base.uint32 @-> Vk_base.uint32 @-> Vk_base.size_t @-> ptr (Ctypes.void) @-> returning (Result.t)
 let get_ray_tracing_capture_replay_shader_group_handles_khr_ref = ref (bind get_ray_tracing_capture_replay_shader_group_handles_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetRayTracingCaptureReplayShaderGroupHandlesKHR.html}[vkGetRayTracingCaptureReplayShaderGroupHandlesKHR]} *)
 let get_ray_tracing_capture_replay_shader_group_handles_khr arg0 arg1 arg2 arg3 arg4 arg5 =
   match !get_ray_tracing_capture_replay_shader_group_handles_khr_ref with
   | Some f -> f arg0 arg1 arg2 arg3 arg4 arg5
@@ -2669,6 +3425,8 @@ let get_ray_tracing_capture_replay_shader_group_handles_khr arg0 arg1 arg2 arg3 
 
 let get_acceleration_structure_handle_nv_typ = Device.t @-> AccelerationStructureNV.t @-> Vk_base.size_t @-> ptr (Ctypes.void) @-> returning (Result.t)
 let get_acceleration_structure_handle_nv_ref = ref (bind get_acceleration_structure_handle_nv_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetAccelerationStructureHandleNV.html}[vkGetAccelerationStructureHandleNV]} *)
 let get_acceleration_structure_handle_nv arg0 arg1 arg2 arg3 =
   match !get_acceleration_structure_handle_nv_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -2676,6 +3434,8 @@ let get_acceleration_structure_handle_nv arg0 arg1 arg2 arg3 =
 
 let create_ray_tracing_pipelines_nv_typ = Device.t @-> PipelineCache.t @-> Vk_base.uint32 @-> ptr (RayTracingPipelineCreateInfoNV.t) @-> ptr (AllocationCallbacks.t) @-> ptr (Pipeline.t) @-> returning (Result.t)
 let create_ray_tracing_pipelines_nv_ref = ref (bind create_ray_tracing_pipelines_nv_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateRayTracingPipelinesNV.html}[vkCreateRayTracingPipelinesNV]} *)
 let create_ray_tracing_pipelines_nv arg0 arg1 arg2 arg3 arg4 arg5 =
   match !create_ray_tracing_pipelines_nv_ref with
   | Some f -> f arg0 arg1 arg2 arg3 arg4 arg5
@@ -2683,6 +3443,8 @@ let create_ray_tracing_pipelines_nv arg0 arg1 arg2 arg3 arg4 arg5 =
 
 let create_ray_tracing_pipelines_khr_typ = Device.t @-> DeferredOperationKHR.t @-> PipelineCache.t @-> Vk_base.uint32 @-> ptr (RayTracingPipelineCreateInfoKHR.t) @-> ptr (AllocationCallbacks.t) @-> ptr (Pipeline.t) @-> returning (Result.t)
 let create_ray_tracing_pipelines_khr_ref = ref (bind create_ray_tracing_pipelines_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateRayTracingPipelinesKHR.html}[vkCreateRayTracingPipelinesKHR]} *)
 let create_ray_tracing_pipelines_khr arg0 arg1 arg2 arg3 arg4 arg5 arg6 =
   match !create_ray_tracing_pipelines_khr_ref with
   | Some f -> f arg0 arg1 arg2 arg3 arg4 arg5 arg6
@@ -2690,6 +3452,8 @@ let create_ray_tracing_pipelines_khr arg0 arg1 arg2 arg3 arg4 arg5 arg6 =
 
 let get_physical_device_cooperative_matrix_properties_nv_typ = PhysicalDevice.t @-> ptr (Vk_base.uint32) @-> ptr (CooperativeMatrixPropertiesNV.t) @-> returning (Result.t)
 let get_physical_device_cooperative_matrix_properties_nv_ref = ref (bind get_physical_device_cooperative_matrix_properties_nv_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPhysicalDeviceCooperativeMatrixPropertiesNV.html}[vkGetPhysicalDeviceCooperativeMatrixPropertiesNV]} *)
 let get_physical_device_cooperative_matrix_properties_nv arg0 arg1 arg2 =
   match !get_physical_device_cooperative_matrix_properties_nv_ref with
   | Some f -> f arg0 arg1 arg2
@@ -2697,6 +3461,8 @@ let get_physical_device_cooperative_matrix_properties_nv arg0 arg1 arg2 =
 
 let cmd_trace_rays_indirect_khr_typ = CommandBuffer.t @-> ptr (StridedDeviceAddressRegionKHR.t) @-> ptr (StridedDeviceAddressRegionKHR.t) @-> ptr (StridedDeviceAddressRegionKHR.t) @-> ptr (StridedDeviceAddressRegionKHR.t) @-> Vk_base.device_address @-> returning (Ctypes.void)
 let cmd_trace_rays_indirect_khr_ref = ref (bind cmd_trace_rays_indirect_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdTraceRaysIndirectKHR.html}[vkCmdTraceRaysIndirectKHR]} *)
 let cmd_trace_rays_indirect_khr arg0 arg1 arg2 arg3 arg4 arg5 =
   match !cmd_trace_rays_indirect_khr_ref with
   | Some f -> f arg0 arg1 arg2 arg3 arg4 arg5
@@ -2704,6 +3470,8 @@ let cmd_trace_rays_indirect_khr arg0 arg1 arg2 arg3 arg4 arg5 =
 
 let cmd_trace_rays_indirect_2_khr_typ = CommandBuffer.t @-> Vk_base.device_address @-> returning (Ctypes.void)
 let cmd_trace_rays_indirect_2_khr_ref = ref (bind cmd_trace_rays_indirect_2_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdTraceRaysIndirect2KHR.html}[vkCmdTraceRaysIndirect2KHR]} *)
 let cmd_trace_rays_indirect_2_khr arg0 arg1 =
   match !cmd_trace_rays_indirect_2_khr_ref with
   | Some f -> f arg0 arg1
@@ -2711,6 +3479,8 @@ let cmd_trace_rays_indirect_2_khr arg0 arg1 =
 
 let get_cluster_acceleration_structure_build_sizes_nv_typ = Device.t @-> ptr (ClusterAccelerationStructureInputInfoNV.t) @-> ptr (AccelerationStructureBuildSizesInfoKHR.t) @-> returning (Ctypes.void)
 let get_cluster_acceleration_structure_build_sizes_nv_ref = ref (bind get_cluster_acceleration_structure_build_sizes_nv_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetClusterAccelerationStructureBuildSizesNV.html}[vkGetClusterAccelerationStructureBuildSizesNV]} *)
 let get_cluster_acceleration_structure_build_sizes_nv arg0 arg1 arg2 =
   match !get_cluster_acceleration_structure_build_sizes_nv_ref with
   | Some f -> f arg0 arg1 arg2
@@ -2718,6 +3488,8 @@ let get_cluster_acceleration_structure_build_sizes_nv arg0 arg1 arg2 =
 
 let cmd_build_cluster_acceleration_structure_indirect_nv_typ = CommandBuffer.t @-> ptr (ClusterAccelerationStructureCommandsInfoNV.t) @-> returning (Ctypes.void)
 let cmd_build_cluster_acceleration_structure_indirect_nv_ref = ref (bind cmd_build_cluster_acceleration_structure_indirect_nv_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdBuildClusterAccelerationStructureIndirectNV.html}[vkCmdBuildClusterAccelerationStructureIndirectNV]} *)
 let cmd_build_cluster_acceleration_structure_indirect_nv arg0 arg1 =
   match !cmd_build_cluster_acceleration_structure_indirect_nv_ref with
   | Some f -> f arg0 arg1
@@ -2725,6 +3497,8 @@ let cmd_build_cluster_acceleration_structure_indirect_nv arg0 arg1 =
 
 let get_device_acceleration_structure_compatibility_khr_typ = Device.t @-> ptr (AccelerationStructureVersionInfoKHR.t) @-> ptr (AccelerationStructureCompatibilityKHR.t) @-> returning (Ctypes.void)
 let get_device_acceleration_structure_compatibility_khr_ref = ref (bind get_device_acceleration_structure_compatibility_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetDeviceAccelerationStructureCompatibilityKHR.html}[vkGetDeviceAccelerationStructureCompatibilityKHR]} *)
 let get_device_acceleration_structure_compatibility_khr arg0 arg1 arg2 =
   match !get_device_acceleration_structure_compatibility_khr_ref with
   | Some f -> f arg0 arg1 arg2
@@ -2732,6 +3506,8 @@ let get_device_acceleration_structure_compatibility_khr arg0 arg1 arg2 =
 
 let get_ray_tracing_shader_group_stack_size_khr_typ = Device.t @-> Pipeline.t @-> Vk_base.uint32 @-> ShaderGroupShaderKHR.t @-> returning (Vk_base.device_size)
 let get_ray_tracing_shader_group_stack_size_khr_ref = ref (bind get_ray_tracing_shader_group_stack_size_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetRayTracingShaderGroupStackSizeKHR.html}[vkGetRayTracingShaderGroupStackSizeKHR]} *)
 let get_ray_tracing_shader_group_stack_size_khr arg0 arg1 arg2 arg3 =
   match !get_ray_tracing_shader_group_stack_size_khr_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -2739,6 +3515,8 @@ let get_ray_tracing_shader_group_stack_size_khr arg0 arg1 arg2 arg3 =
 
 let cmd_set_ray_tracing_pipeline_stack_size_khr_typ = CommandBuffer.t @-> Vk_base.uint32 @-> returning (Ctypes.void)
 let cmd_set_ray_tracing_pipeline_stack_size_khr_ref = ref (bind cmd_set_ray_tracing_pipeline_stack_size_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetRayTracingPipelineStackSizeKHR.html}[vkCmdSetRayTracingPipelineStackSizeKHR]} *)
 let cmd_set_ray_tracing_pipeline_stack_size_khr arg0 arg1 =
   match !cmd_set_ray_tracing_pipeline_stack_size_khr_ref with
   | Some f -> f arg0 arg1
@@ -2746,6 +3524,8 @@ let cmd_set_ray_tracing_pipeline_stack_size_khr arg0 arg1 =
 
 let get_image_view_handle_nvx_typ = Device.t @-> ptr (ImageViewHandleInfoNVX.t) @-> returning (Vk_base.uint32)
 let get_image_view_handle_nvx_ref = ref (bind get_image_view_handle_nvx_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetImageViewHandleNVX.html}[vkGetImageViewHandleNVX]} *)
 let get_image_view_handle_nvx arg0 arg1 =
   match !get_image_view_handle_nvx_ref with
   | Some f -> f arg0 arg1
@@ -2753,6 +3533,8 @@ let get_image_view_handle_nvx arg0 arg1 =
 
 let get_image_view_handle_64_nvx_typ = Device.t @-> ptr (ImageViewHandleInfoNVX.t) @-> returning (Vk_base.uint64)
 let get_image_view_handle_64_nvx_ref = ref (bind get_image_view_handle_64_nvx_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetImageViewHandle64NVX.html}[vkGetImageViewHandle64NVX]} *)
 let get_image_view_handle_64_nvx arg0 arg1 =
   match !get_image_view_handle_64_nvx_ref with
   | Some f -> f arg0 arg1
@@ -2760,6 +3542,8 @@ let get_image_view_handle_64_nvx arg0 arg1 =
 
 let get_image_view_address_nvx_typ = Device.t @-> ImageView.t @-> ptr (ImageViewAddressPropertiesNVX.t) @-> returning (Result.t)
 let get_image_view_address_nvx_ref = ref (bind get_image_view_address_nvx_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetImageViewAddressNVX.html}[vkGetImageViewAddressNVX]} *)
 let get_image_view_address_nvx arg0 arg1 arg2 =
   match !get_image_view_address_nvx_ref with
   | Some f -> f arg0 arg1 arg2
@@ -2767,6 +3551,8 @@ let get_image_view_address_nvx arg0 arg1 arg2 =
 
 let get_device_combined_image_sampler_index_nvx_typ = Device.t @-> Vk_base.uint64 @-> Vk_base.uint64 @-> returning (Vk_base.uint64)
 let get_device_combined_image_sampler_index_nvx_ref = ref (bind get_device_combined_image_sampler_index_nvx_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetDeviceCombinedImageSamplerIndexNVX.html}[vkGetDeviceCombinedImageSamplerIndexNVX]} *)
 let get_device_combined_image_sampler_index_nvx arg0 arg1 arg2 =
   match !get_device_combined_image_sampler_index_nvx_ref with
   | Some f -> f arg0 arg1 arg2
@@ -2774,6 +3560,8 @@ let get_device_combined_image_sampler_index_nvx arg0 arg1 arg2 =
 
 let get_physical_device_surface_present_modes_2_ext_typ = PhysicalDevice.t @-> ptr (PhysicalDeviceSurfaceInfo2KHR.t) @-> ptr (Vk_base.uint32) @-> ptr (PresentModeKHR.t) @-> returning (Result.t)
 let get_physical_device_surface_present_modes_2_ext_ref = ref (bind get_physical_device_surface_present_modes_2_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPhysicalDeviceSurfacePresentModes2EXT.html}[vkGetPhysicalDeviceSurfacePresentModes2EXT]} *)
 let get_physical_device_surface_present_modes_2_ext arg0 arg1 arg2 arg3 =
   match !get_physical_device_surface_present_modes_2_ext_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -2781,6 +3569,8 @@ let get_physical_device_surface_present_modes_2_ext arg0 arg1 arg2 arg3 =
 
 let get_device_group_surface_present_modes_2_ext_typ = Device.t @-> ptr (PhysicalDeviceSurfaceInfo2KHR.t) @-> ptr (DeviceGroupPresentModeFlagsKHR.t) @-> returning (Result.t)
 let get_device_group_surface_present_modes_2_ext_ref = ref (bind get_device_group_surface_present_modes_2_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetDeviceGroupSurfacePresentModes2EXT.html}[vkGetDeviceGroupSurfacePresentModes2EXT]} *)
 let get_device_group_surface_present_modes_2_ext arg0 arg1 arg2 =
   match !get_device_group_surface_present_modes_2_ext_ref with
   | Some f -> f arg0 arg1 arg2
@@ -2788,6 +3578,8 @@ let get_device_group_surface_present_modes_2_ext arg0 arg1 arg2 =
 
 let acquire_full_screen_exclusive_mode_ext_typ = Device.t @-> SwapchainKHR.t @-> returning (Result.t)
 let acquire_full_screen_exclusive_mode_ext_ref = ref (bind acquire_full_screen_exclusive_mode_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkAcquireFullScreenExclusiveModeEXT.html}[vkAcquireFullScreenExclusiveModeEXT]} *)
 let acquire_full_screen_exclusive_mode_ext arg0 arg1 =
   match !acquire_full_screen_exclusive_mode_ext_ref with
   | Some f -> f arg0 arg1
@@ -2795,6 +3587,8 @@ let acquire_full_screen_exclusive_mode_ext arg0 arg1 =
 
 let release_full_screen_exclusive_mode_ext_typ = Device.t @-> SwapchainKHR.t @-> returning (Result.t)
 let release_full_screen_exclusive_mode_ext_ref = ref (bind release_full_screen_exclusive_mode_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkReleaseFullScreenExclusiveModeEXT.html}[vkReleaseFullScreenExclusiveModeEXT]} *)
 let release_full_screen_exclusive_mode_ext arg0 arg1 =
   match !release_full_screen_exclusive_mode_ext_ref with
   | Some f -> f arg0 arg1
@@ -2802,6 +3596,8 @@ let release_full_screen_exclusive_mode_ext arg0 arg1 =
 
 let enumerate_physical_device_queue_family_performance_query_counters_khr_typ = PhysicalDevice.t @-> Vk_base.uint32 @-> ptr (Vk_base.uint32) @-> ptr (PerformanceCounterKHR.t) @-> ptr (PerformanceCounterDescriptionKHR.t) @-> returning (Result.t)
 let enumerate_physical_device_queue_family_performance_query_counters_khr_ref = ref (bind enumerate_physical_device_queue_family_performance_query_counters_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkEnumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR.html}[vkEnumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR]} *)
 let enumerate_physical_device_queue_family_performance_query_counters_khr arg0 arg1 arg2 arg3 arg4 =
   match !enumerate_physical_device_queue_family_performance_query_counters_khr_ref with
   | Some f -> f arg0 arg1 arg2 arg3 arg4
@@ -2809,6 +3605,8 @@ let enumerate_physical_device_queue_family_performance_query_counters_khr arg0 a
 
 let get_physical_device_queue_family_performance_query_passes_khr_typ = PhysicalDevice.t @-> ptr (QueryPoolPerformanceCreateInfoKHR.t) @-> ptr (Vk_base.uint32) @-> returning (Ctypes.void)
 let get_physical_device_queue_family_performance_query_passes_khr_ref = ref (bind get_physical_device_queue_family_performance_query_passes_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPhysicalDeviceQueueFamilyPerformanceQueryPassesKHR.html}[vkGetPhysicalDeviceQueueFamilyPerformanceQueryPassesKHR]} *)
 let get_physical_device_queue_family_performance_query_passes_khr arg0 arg1 arg2 =
   match !get_physical_device_queue_family_performance_query_passes_khr_ref with
   | Some f -> f arg0 arg1 arg2
@@ -2816,6 +3614,8 @@ let get_physical_device_queue_family_performance_query_passes_khr arg0 arg1 arg2
 
 let acquire_profiling_lock_khr_typ = Device.t @-> ptr (AcquireProfilingLockInfoKHR.t) @-> returning (Result.t)
 let acquire_profiling_lock_khr_ref = ref (bind acquire_profiling_lock_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkAcquireProfilingLockKHR.html}[vkAcquireProfilingLockKHR]} *)
 let acquire_profiling_lock_khr arg0 arg1 =
   match !acquire_profiling_lock_khr_ref with
   | Some f -> f arg0 arg1
@@ -2823,6 +3623,8 @@ let acquire_profiling_lock_khr arg0 arg1 =
 
 let release_profiling_lock_khr_typ = Device.t @-> returning (Ctypes.void)
 let release_profiling_lock_khr_ref = ref (bind release_profiling_lock_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkReleaseProfilingLockKHR.html}[vkReleaseProfilingLockKHR]} *)
 let release_profiling_lock_khr arg0 =
   match !release_profiling_lock_khr_ref with
   | Some f -> f arg0
@@ -2830,6 +3632,8 @@ let release_profiling_lock_khr arg0 =
 
 let get_image_drm_format_modifier_properties_ext_typ = Device.t @-> Image.t @-> ptr (ImageDrmFormatModifierPropertiesEXT.t) @-> returning (Result.t)
 let get_image_drm_format_modifier_properties_ext_ref = ref (bind get_image_drm_format_modifier_properties_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetImageDrmFormatModifierPropertiesEXT.html}[vkGetImageDrmFormatModifierPropertiesEXT]} *)
 let get_image_drm_format_modifier_properties_ext arg0 arg1 arg2 =
   match !get_image_drm_format_modifier_properties_ext_ref with
   | Some f -> f arg0 arg1 arg2
@@ -2837,6 +3641,8 @@ let get_image_drm_format_modifier_properties_ext arg0 arg1 arg2 =
 
 let get_buffer_opaque_capture_address_typ = Device.t @-> ptr (BufferDeviceAddressInfo.t) @-> returning (Vk_base.uint64)
 let get_buffer_opaque_capture_address_ref = ref (bind get_buffer_opaque_capture_address_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetBufferOpaqueCaptureAddress.html}[vkGetBufferOpaqueCaptureAddress]} *)
 let get_buffer_opaque_capture_address arg0 arg1 =
   match !get_buffer_opaque_capture_address_ref with
   | Some f -> f arg0 arg1
@@ -2844,6 +3650,8 @@ let get_buffer_opaque_capture_address arg0 arg1 =
 
 let get_buffer_device_address_typ = Device.t @-> ptr (BufferDeviceAddressInfo.t) @-> returning (Vk_base.device_address)
 let get_buffer_device_address_ref = ref (bind get_buffer_device_address_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetBufferDeviceAddress.html}[vkGetBufferDeviceAddress]} *)
 let get_buffer_device_address arg0 arg1 =
   match !get_buffer_device_address_ref with
   | Some f -> f arg0 arg1
@@ -2851,6 +3659,8 @@ let get_buffer_device_address arg0 arg1 =
 
 let create_headless_surface_ext_typ = Instance.t @-> ptr (HeadlessSurfaceCreateInfoEXT.t) @-> ptr (AllocationCallbacks.t) @-> ptr (SurfaceKHR.t) @-> returning (Result.t)
 let create_headless_surface_ext_ref = ref (bind create_headless_surface_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateHeadlessSurfaceEXT.html}[vkCreateHeadlessSurfaceEXT]} *)
 let create_headless_surface_ext arg0 arg1 arg2 arg3 =
   match !create_headless_surface_ext_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -2858,6 +3668,8 @@ let create_headless_surface_ext arg0 arg1 arg2 arg3 =
 
 let get_physical_device_supported_framebuffer_mixed_samples_combinations_nv_typ = PhysicalDevice.t @-> ptr (Vk_base.uint32) @-> ptr (FramebufferMixedSamplesCombinationNV.t) @-> returning (Result.t)
 let get_physical_device_supported_framebuffer_mixed_samples_combinations_nv_ref = ref (bind get_physical_device_supported_framebuffer_mixed_samples_combinations_nv_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV.html}[vkGetPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV]} *)
 let get_physical_device_supported_framebuffer_mixed_samples_combinations_nv arg0 arg1 arg2 =
   match !get_physical_device_supported_framebuffer_mixed_samples_combinations_nv_ref with
   | Some f -> f arg0 arg1 arg2
@@ -2865,6 +3677,8 @@ let get_physical_device_supported_framebuffer_mixed_samples_combinations_nv arg0
 
 let initialize_performance_api_intel_typ = Device.t @-> ptr (InitializePerformanceApiInfoINTEL.t) @-> returning (Result.t)
 let initialize_performance_api_intel_ref = ref (bind initialize_performance_api_intel_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkInitializePerformanceApiINTEL.html}[vkInitializePerformanceApiINTEL]} *)
 let initialize_performance_api_intel arg0 arg1 =
   match !initialize_performance_api_intel_ref with
   | Some f -> f arg0 arg1
@@ -2872,6 +3686,8 @@ let initialize_performance_api_intel arg0 arg1 =
 
 let uninitialize_performance_api_intel_typ = Device.t @-> returning (Ctypes.void)
 let uninitialize_performance_api_intel_ref = ref (bind uninitialize_performance_api_intel_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkUninitializePerformanceApiINTEL.html}[vkUninitializePerformanceApiINTEL]} *)
 let uninitialize_performance_api_intel arg0 =
   match !uninitialize_performance_api_intel_ref with
   | Some f -> f arg0
@@ -2879,6 +3695,8 @@ let uninitialize_performance_api_intel arg0 =
 
 let cmd_set_performance_marker_intel_typ = CommandBuffer.t @-> ptr (PerformanceMarkerInfoINTEL.t) @-> returning (Result.t)
 let cmd_set_performance_marker_intel_ref = ref (bind cmd_set_performance_marker_intel_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetPerformanceMarkerINTEL.html}[vkCmdSetPerformanceMarkerINTEL]} *)
 let cmd_set_performance_marker_intel arg0 arg1 =
   match !cmd_set_performance_marker_intel_ref with
   | Some f -> f arg0 arg1
@@ -2886,6 +3704,8 @@ let cmd_set_performance_marker_intel arg0 arg1 =
 
 let cmd_set_performance_stream_marker_intel_typ = CommandBuffer.t @-> ptr (PerformanceStreamMarkerInfoINTEL.t) @-> returning (Result.t)
 let cmd_set_performance_stream_marker_intel_ref = ref (bind cmd_set_performance_stream_marker_intel_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetPerformanceStreamMarkerINTEL.html}[vkCmdSetPerformanceStreamMarkerINTEL]} *)
 let cmd_set_performance_stream_marker_intel arg0 arg1 =
   match !cmd_set_performance_stream_marker_intel_ref with
   | Some f -> f arg0 arg1
@@ -2893,6 +3713,8 @@ let cmd_set_performance_stream_marker_intel arg0 arg1 =
 
 let cmd_set_performance_override_intel_typ = CommandBuffer.t @-> ptr (PerformanceOverrideInfoINTEL.t) @-> returning (Result.t)
 let cmd_set_performance_override_intel_ref = ref (bind cmd_set_performance_override_intel_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetPerformanceOverrideINTEL.html}[vkCmdSetPerformanceOverrideINTEL]} *)
 let cmd_set_performance_override_intel arg0 arg1 =
   match !cmd_set_performance_override_intel_ref with
   | Some f -> f arg0 arg1
@@ -2900,6 +3722,8 @@ let cmd_set_performance_override_intel arg0 arg1 =
 
 let acquire_performance_configuration_intel_typ = Device.t @-> ptr (PerformanceConfigurationAcquireInfoINTEL.t) @-> ptr (PerformanceConfigurationINTEL.t) @-> returning (Result.t)
 let acquire_performance_configuration_intel_ref = ref (bind acquire_performance_configuration_intel_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkAcquirePerformanceConfigurationINTEL.html}[vkAcquirePerformanceConfigurationINTEL]} *)
 let acquire_performance_configuration_intel arg0 arg1 arg2 =
   match !acquire_performance_configuration_intel_ref with
   | Some f -> f arg0 arg1 arg2
@@ -2907,6 +3731,8 @@ let acquire_performance_configuration_intel arg0 arg1 arg2 =
 
 let release_performance_configuration_intel_typ = Device.t @-> PerformanceConfigurationINTEL.t @-> returning (Result.t)
 let release_performance_configuration_intel_ref = ref (bind release_performance_configuration_intel_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkReleasePerformanceConfigurationINTEL.html}[vkReleasePerformanceConfigurationINTEL]} *)
 let release_performance_configuration_intel arg0 arg1 =
   match !release_performance_configuration_intel_ref with
   | Some f -> f arg0 arg1
@@ -2914,6 +3740,8 @@ let release_performance_configuration_intel arg0 arg1 =
 
 let queue_set_performance_configuration_intel_typ = Queue.t @-> PerformanceConfigurationINTEL.t @-> returning (Result.t)
 let queue_set_performance_configuration_intel_ref = ref (bind queue_set_performance_configuration_intel_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkQueueSetPerformanceConfigurationINTEL.html}[vkQueueSetPerformanceConfigurationINTEL]} *)
 let queue_set_performance_configuration_intel arg0 arg1 =
   match !queue_set_performance_configuration_intel_ref with
   | Some f -> f arg0 arg1
@@ -2921,6 +3749,8 @@ let queue_set_performance_configuration_intel arg0 arg1 =
 
 let get_performance_parameter_intel_typ = Device.t @-> PerformanceParameterTypeINTEL.t @-> ptr (PerformanceValueINTEL.t) @-> returning (Result.t)
 let get_performance_parameter_intel_ref = ref (bind get_performance_parameter_intel_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPerformanceParameterINTEL.html}[vkGetPerformanceParameterINTEL]} *)
 let get_performance_parameter_intel arg0 arg1 arg2 =
   match !get_performance_parameter_intel_ref with
   | Some f -> f arg0 arg1 arg2
@@ -2928,6 +3758,8 @@ let get_performance_parameter_intel arg0 arg1 arg2 =
 
 let get_device_memory_opaque_capture_address_typ = Device.t @-> ptr (DeviceMemoryOpaqueCaptureAddressInfo.t) @-> returning (Vk_base.uint64)
 let get_device_memory_opaque_capture_address_ref = ref (bind get_device_memory_opaque_capture_address_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetDeviceMemoryOpaqueCaptureAddress.html}[vkGetDeviceMemoryOpaqueCaptureAddress]} *)
 let get_device_memory_opaque_capture_address arg0 arg1 =
   match !get_device_memory_opaque_capture_address_ref with
   | Some f -> f arg0 arg1
@@ -2935,6 +3767,8 @@ let get_device_memory_opaque_capture_address arg0 arg1 =
 
 let get_pipeline_executable_properties_khr_typ = Device.t @-> ptr (PipelineInfoKHR.t) @-> ptr (Vk_base.uint32) @-> ptr (PipelineExecutablePropertiesKHR.t) @-> returning (Result.t)
 let get_pipeline_executable_properties_khr_ref = ref (bind get_pipeline_executable_properties_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPipelineExecutablePropertiesKHR.html}[vkGetPipelineExecutablePropertiesKHR]} *)
 let get_pipeline_executable_properties_khr arg0 arg1 arg2 arg3 =
   match !get_pipeline_executable_properties_khr_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -2942,6 +3776,8 @@ let get_pipeline_executable_properties_khr arg0 arg1 arg2 arg3 =
 
 let get_pipeline_executable_statistics_khr_typ = Device.t @-> ptr (PipelineExecutableInfoKHR.t) @-> ptr (Vk_base.uint32) @-> ptr (PipelineExecutableStatisticKHR.t) @-> returning (Result.t)
 let get_pipeline_executable_statistics_khr_ref = ref (bind get_pipeline_executable_statistics_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPipelineExecutableStatisticsKHR.html}[vkGetPipelineExecutableStatisticsKHR]} *)
 let get_pipeline_executable_statistics_khr arg0 arg1 arg2 arg3 =
   match !get_pipeline_executable_statistics_khr_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -2949,6 +3785,8 @@ let get_pipeline_executable_statistics_khr arg0 arg1 arg2 arg3 =
 
 let get_pipeline_executable_internal_representations_khr_typ = Device.t @-> ptr (PipelineExecutableInfoKHR.t) @-> ptr (Vk_base.uint32) @-> ptr (PipelineExecutableInternalRepresentationKHR.t) @-> returning (Result.t)
 let get_pipeline_executable_internal_representations_khr_ref = ref (bind get_pipeline_executable_internal_representations_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPipelineExecutableInternalRepresentationsKHR.html}[vkGetPipelineExecutableInternalRepresentationsKHR]} *)
 let get_pipeline_executable_internal_representations_khr arg0 arg1 arg2 arg3 =
   match !get_pipeline_executable_internal_representations_khr_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -2956,6 +3794,8 @@ let get_pipeline_executable_internal_representations_khr arg0 arg1 arg2 arg3 =
 
 let cmd_set_line_stipple_typ = CommandBuffer.t @-> Vk_base.uint32 @-> Vk_base.uint16 @-> returning (Ctypes.void)
 let cmd_set_line_stipple_ref = ref (bind cmd_set_line_stipple_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetLineStipple.html}[vkCmdSetLineStipple]} *)
 let cmd_set_line_stipple arg0 arg1 arg2 =
   match !cmd_set_line_stipple_ref with
   | Some f -> f arg0 arg1 arg2
@@ -2963,6 +3803,8 @@ let cmd_set_line_stipple arg0 arg1 arg2 =
 
 let get_physical_device_tool_properties_typ = PhysicalDevice.t @-> ptr (Vk_base.uint32) @-> ptr (PhysicalDeviceToolProperties.t) @-> returning (Result.t)
 let get_physical_device_tool_properties_ref = ref (bind get_physical_device_tool_properties_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPhysicalDeviceToolProperties.html}[vkGetPhysicalDeviceToolProperties]} *)
 let get_physical_device_tool_properties arg0 arg1 arg2 =
   match !get_physical_device_tool_properties_ref with
   | Some f -> f arg0 arg1 arg2
@@ -2970,6 +3812,8 @@ let get_physical_device_tool_properties arg0 arg1 arg2 =
 
 let create_acceleration_structure_khr_typ = Device.t @-> ptr (AccelerationStructureCreateInfoKHR.t) @-> ptr (AllocationCallbacks.t) @-> ptr (AccelerationStructureKHR.t) @-> returning (Result.t)
 let create_acceleration_structure_khr_ref = ref (bind create_acceleration_structure_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateAccelerationStructureKHR.html}[vkCreateAccelerationStructureKHR]} *)
 let create_acceleration_structure_khr arg0 arg1 arg2 arg3 =
   match !create_acceleration_structure_khr_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -2977,6 +3821,8 @@ let create_acceleration_structure_khr arg0 arg1 arg2 arg3 =
 
 let cmd_build_acceleration_structures_khr_typ = CommandBuffer.t @-> Vk_base.uint32 @-> ptr (AccelerationStructureBuildGeometryInfoKHR.t) @-> ptr (ptr (AccelerationStructureBuildRangeInfoKHR.t)) @-> returning (Ctypes.void)
 let cmd_build_acceleration_structures_khr_ref = ref (bind cmd_build_acceleration_structures_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdBuildAccelerationStructuresKHR.html}[vkCmdBuildAccelerationStructuresKHR]} *)
 let cmd_build_acceleration_structures_khr arg0 arg1 arg2 arg3 =
   match !cmd_build_acceleration_structures_khr_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -2984,6 +3830,8 @@ let cmd_build_acceleration_structures_khr arg0 arg1 arg2 arg3 =
 
 let cmd_build_acceleration_structures_indirect_khr_typ = CommandBuffer.t @-> Vk_base.uint32 @-> ptr (AccelerationStructureBuildGeometryInfoKHR.t) @-> ptr (Vk_base.device_address) @-> ptr (Vk_base.uint32) @-> ptr (ptr (Vk_base.uint32)) @-> returning (Ctypes.void)
 let cmd_build_acceleration_structures_indirect_khr_ref = ref (bind cmd_build_acceleration_structures_indirect_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdBuildAccelerationStructuresIndirectKHR.html}[vkCmdBuildAccelerationStructuresIndirectKHR]} *)
 let cmd_build_acceleration_structures_indirect_khr arg0 arg1 arg2 arg3 arg4 arg5 =
   match !cmd_build_acceleration_structures_indirect_khr_ref with
   | Some f -> f arg0 arg1 arg2 arg3 arg4 arg5
@@ -2991,6 +3839,8 @@ let cmd_build_acceleration_structures_indirect_khr arg0 arg1 arg2 arg3 arg4 arg5
 
 let build_acceleration_structures_khr_typ = Device.t @-> DeferredOperationKHR.t @-> Vk_base.uint32 @-> ptr (AccelerationStructureBuildGeometryInfoKHR.t) @-> ptr (ptr (AccelerationStructureBuildRangeInfoKHR.t)) @-> returning (Result.t)
 let build_acceleration_structures_khr_ref = ref (bind build_acceleration_structures_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkBuildAccelerationStructuresKHR.html}[vkBuildAccelerationStructuresKHR]} *)
 let build_acceleration_structures_khr arg0 arg1 arg2 arg3 arg4 =
   match !build_acceleration_structures_khr_ref with
   | Some f -> f arg0 arg1 arg2 arg3 arg4
@@ -2998,6 +3848,8 @@ let build_acceleration_structures_khr arg0 arg1 arg2 arg3 arg4 =
 
 let get_acceleration_structure_device_address_khr_typ = Device.t @-> ptr (AccelerationStructureDeviceAddressInfoKHR.t) @-> returning (Vk_base.device_address)
 let get_acceleration_structure_device_address_khr_ref = ref (bind get_acceleration_structure_device_address_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetAccelerationStructureDeviceAddressKHR.html}[vkGetAccelerationStructureDeviceAddressKHR]} *)
 let get_acceleration_structure_device_address_khr arg0 arg1 =
   match !get_acceleration_structure_device_address_khr_ref with
   | Some f -> f arg0 arg1
@@ -3005,6 +3857,8 @@ let get_acceleration_structure_device_address_khr arg0 arg1 =
 
 let create_deferred_operation_khr_typ = Device.t @-> ptr (AllocationCallbacks.t) @-> ptr (DeferredOperationKHR.t) @-> returning (Result.t)
 let create_deferred_operation_khr_ref = ref (bind create_deferred_operation_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateDeferredOperationKHR.html}[vkCreateDeferredOperationKHR]} *)
 let create_deferred_operation_khr arg0 arg1 arg2 =
   match !create_deferred_operation_khr_ref with
   | Some f -> f arg0 arg1 arg2
@@ -3012,6 +3866,8 @@ let create_deferred_operation_khr arg0 arg1 arg2 =
 
 let destroy_deferred_operation_khr_typ = Device.t @-> DeferredOperationKHR.t @-> ptr (AllocationCallbacks.t) @-> returning (Ctypes.void)
 let destroy_deferred_operation_khr_ref = ref (bind destroy_deferred_operation_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkDestroyDeferredOperationKHR.html}[vkDestroyDeferredOperationKHR]} *)
 let destroy_deferred_operation_khr arg0 arg1 arg2 =
   match !destroy_deferred_operation_khr_ref with
   | Some f -> f arg0 arg1 arg2
@@ -3019,6 +3875,8 @@ let destroy_deferred_operation_khr arg0 arg1 arg2 =
 
 let get_deferred_operation_max_concurrency_khr_typ = Device.t @-> DeferredOperationKHR.t @-> returning (Vk_base.uint32)
 let get_deferred_operation_max_concurrency_khr_ref = ref (bind get_deferred_operation_max_concurrency_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetDeferredOperationMaxConcurrencyKHR.html}[vkGetDeferredOperationMaxConcurrencyKHR]} *)
 let get_deferred_operation_max_concurrency_khr arg0 arg1 =
   match !get_deferred_operation_max_concurrency_khr_ref with
   | Some f -> f arg0 arg1
@@ -3026,6 +3884,8 @@ let get_deferred_operation_max_concurrency_khr arg0 arg1 =
 
 let get_deferred_operation_result_khr_typ = Device.t @-> DeferredOperationKHR.t @-> returning (Result.t)
 let get_deferred_operation_result_khr_ref = ref (bind get_deferred_operation_result_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetDeferredOperationResultKHR.html}[vkGetDeferredOperationResultKHR]} *)
 let get_deferred_operation_result_khr arg0 arg1 =
   match !get_deferred_operation_result_khr_ref with
   | Some f -> f arg0 arg1
@@ -3033,6 +3893,8 @@ let get_deferred_operation_result_khr arg0 arg1 =
 
 let deferred_operation_join_khr_typ = Device.t @-> DeferredOperationKHR.t @-> returning (Result.t)
 let deferred_operation_join_khr_ref = ref (bind deferred_operation_join_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkDeferredOperationJoinKHR.html}[vkDeferredOperationJoinKHR]} *)
 let deferred_operation_join_khr arg0 arg1 =
   match !deferred_operation_join_khr_ref with
   | Some f -> f arg0 arg1
@@ -3040,6 +3902,8 @@ let deferred_operation_join_khr arg0 arg1 =
 
 let get_pipeline_indirect_memory_requirements_nv_typ = Device.t @-> ptr (ComputePipelineCreateInfo.t) @-> ptr (MemoryRequirements2.t) @-> returning (Ctypes.void)
 let get_pipeline_indirect_memory_requirements_nv_ref = ref (bind get_pipeline_indirect_memory_requirements_nv_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPipelineIndirectMemoryRequirementsNV.html}[vkGetPipelineIndirectMemoryRequirementsNV]} *)
 let get_pipeline_indirect_memory_requirements_nv arg0 arg1 arg2 =
   match !get_pipeline_indirect_memory_requirements_nv_ref with
   | Some f -> f arg0 arg1 arg2
@@ -3047,6 +3911,8 @@ let get_pipeline_indirect_memory_requirements_nv arg0 arg1 arg2 =
 
 let get_pipeline_indirect_device_address_nv_typ = Device.t @-> ptr (PipelineIndirectDeviceAddressInfoNV.t) @-> returning (Vk_base.device_address)
 let get_pipeline_indirect_device_address_nv_ref = ref (bind get_pipeline_indirect_device_address_nv_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPipelineIndirectDeviceAddressNV.html}[vkGetPipelineIndirectDeviceAddressNV]} *)
 let get_pipeline_indirect_device_address_nv arg0 arg1 =
   match !get_pipeline_indirect_device_address_nv_ref with
   | Some f -> f arg0 arg1
@@ -3054,6 +3920,8 @@ let get_pipeline_indirect_device_address_nv arg0 arg1 =
 
 let anti_lag_update_amd_typ = Device.t @-> ptr (AntiLagDataAMD.t) @-> returning (Ctypes.void)
 let anti_lag_update_amd_ref = ref (bind anti_lag_update_amd_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkAntiLagUpdateAMD.html}[vkAntiLagUpdateAMD]} *)
 let anti_lag_update_amd arg0 arg1 =
   match !anti_lag_update_amd_ref with
   | Some f -> f arg0 arg1
@@ -3061,6 +3929,8 @@ let anti_lag_update_amd arg0 arg1 =
 
 let cmd_set_cull_mode_typ = CommandBuffer.t @-> CullModeFlags.t @-> returning (Ctypes.void)
 let cmd_set_cull_mode_ref = ref (bind cmd_set_cull_mode_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetCullMode.html}[vkCmdSetCullMode]} *)
 let cmd_set_cull_mode arg0 arg1 =
   match !cmd_set_cull_mode_ref with
   | Some f -> f arg0 arg1
@@ -3068,6 +3938,8 @@ let cmd_set_cull_mode arg0 arg1 =
 
 let cmd_set_front_face_typ = CommandBuffer.t @-> FrontFace.t @-> returning (Ctypes.void)
 let cmd_set_front_face_ref = ref (bind cmd_set_front_face_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetFrontFace.html}[vkCmdSetFrontFace]} *)
 let cmd_set_front_face arg0 arg1 =
   match !cmd_set_front_face_ref with
   | Some f -> f arg0 arg1
@@ -3075,6 +3947,8 @@ let cmd_set_front_face arg0 arg1 =
 
 let cmd_set_primitive_topology_typ = CommandBuffer.t @-> PrimitiveTopology.t @-> returning (Ctypes.void)
 let cmd_set_primitive_topology_ref = ref (bind cmd_set_primitive_topology_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetPrimitiveTopology.html}[vkCmdSetPrimitiveTopology]} *)
 let cmd_set_primitive_topology arg0 arg1 =
   match !cmd_set_primitive_topology_ref with
   | Some f -> f arg0 arg1
@@ -3082,6 +3956,8 @@ let cmd_set_primitive_topology arg0 arg1 =
 
 let cmd_set_viewport_with_count_typ = CommandBuffer.t @-> Vk_base.uint32 @-> ptr (Viewport.t) @-> returning (Ctypes.void)
 let cmd_set_viewport_with_count_ref = ref (bind cmd_set_viewport_with_count_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetViewportWithCount.html}[vkCmdSetViewportWithCount]} *)
 let cmd_set_viewport_with_count arg0 arg1 arg2 =
   match !cmd_set_viewport_with_count_ref with
   | Some f -> f arg0 arg1 arg2
@@ -3089,6 +3965,8 @@ let cmd_set_viewport_with_count arg0 arg1 arg2 =
 
 let cmd_set_scissor_with_count_typ = CommandBuffer.t @-> Vk_base.uint32 @-> ptr (Rect2D.t) @-> returning (Ctypes.void)
 let cmd_set_scissor_with_count_ref = ref (bind cmd_set_scissor_with_count_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetScissorWithCount.html}[vkCmdSetScissorWithCount]} *)
 let cmd_set_scissor_with_count arg0 arg1 arg2 =
   match !cmd_set_scissor_with_count_ref with
   | Some f -> f arg0 arg1 arg2
@@ -3096,6 +3974,8 @@ let cmd_set_scissor_with_count arg0 arg1 arg2 =
 
 let cmd_bind_index_buffer_2_typ = CommandBuffer.t @-> Buffer.t @-> Vk_base.device_size @-> Vk_base.device_size @-> IndexType.t @-> returning (Ctypes.void)
 let cmd_bind_index_buffer_2_ref = ref (bind cmd_bind_index_buffer_2_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdBindIndexBuffer2.html}[vkCmdBindIndexBuffer2]} *)
 let cmd_bind_index_buffer_2 arg0 arg1 arg2 arg3 arg4 =
   match !cmd_bind_index_buffer_2_ref with
   | Some f -> f arg0 arg1 arg2 arg3 arg4
@@ -3103,6 +3983,8 @@ let cmd_bind_index_buffer_2 arg0 arg1 arg2 arg3 arg4 =
 
 let cmd_bind_vertex_buffers_2_typ = CommandBuffer.t @-> Vk_base.uint32 @-> Vk_base.uint32 @-> ptr (Buffer.t) @-> ptr (Vk_base.device_size) @-> ptr (Vk_base.device_size) @-> ptr (Vk_base.device_size) @-> returning (Ctypes.void)
 let cmd_bind_vertex_buffers_2_ref = ref (bind cmd_bind_vertex_buffers_2_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdBindVertexBuffers2.html}[vkCmdBindVertexBuffers2]} *)
 let cmd_bind_vertex_buffers_2 arg0 arg1 arg2 arg3 arg4 arg5 arg6 =
   match !cmd_bind_vertex_buffers_2_ref with
   | Some f -> f arg0 arg1 arg2 arg3 arg4 arg5 arg6
@@ -3110,6 +3992,8 @@ let cmd_bind_vertex_buffers_2 arg0 arg1 arg2 arg3 arg4 arg5 arg6 =
 
 let cmd_set_depth_test_enable_typ = CommandBuffer.t @-> Vk_base.bool32 @-> returning (Ctypes.void)
 let cmd_set_depth_test_enable_ref = ref (bind cmd_set_depth_test_enable_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetDepthTestEnable.html}[vkCmdSetDepthTestEnable]} *)
 let cmd_set_depth_test_enable arg0 arg1 =
   match !cmd_set_depth_test_enable_ref with
   | Some f -> f arg0 arg1
@@ -3117,6 +4001,8 @@ let cmd_set_depth_test_enable arg0 arg1 =
 
 let cmd_set_depth_write_enable_typ = CommandBuffer.t @-> Vk_base.bool32 @-> returning (Ctypes.void)
 let cmd_set_depth_write_enable_ref = ref (bind cmd_set_depth_write_enable_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetDepthWriteEnable.html}[vkCmdSetDepthWriteEnable]} *)
 let cmd_set_depth_write_enable arg0 arg1 =
   match !cmd_set_depth_write_enable_ref with
   | Some f -> f arg0 arg1
@@ -3124,6 +4010,8 @@ let cmd_set_depth_write_enable arg0 arg1 =
 
 let cmd_set_depth_compare_op_typ = CommandBuffer.t @-> CompareOp.t @-> returning (Ctypes.void)
 let cmd_set_depth_compare_op_ref = ref (bind cmd_set_depth_compare_op_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetDepthCompareOp.html}[vkCmdSetDepthCompareOp]} *)
 let cmd_set_depth_compare_op arg0 arg1 =
   match !cmd_set_depth_compare_op_ref with
   | Some f -> f arg0 arg1
@@ -3131,6 +4019,8 @@ let cmd_set_depth_compare_op arg0 arg1 =
 
 let cmd_set_depth_bounds_test_enable_typ = CommandBuffer.t @-> Vk_base.bool32 @-> returning (Ctypes.void)
 let cmd_set_depth_bounds_test_enable_ref = ref (bind cmd_set_depth_bounds_test_enable_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetDepthBoundsTestEnable.html}[vkCmdSetDepthBoundsTestEnable]} *)
 let cmd_set_depth_bounds_test_enable arg0 arg1 =
   match !cmd_set_depth_bounds_test_enable_ref with
   | Some f -> f arg0 arg1
@@ -3138,6 +4028,8 @@ let cmd_set_depth_bounds_test_enable arg0 arg1 =
 
 let cmd_set_stencil_test_enable_typ = CommandBuffer.t @-> Vk_base.bool32 @-> returning (Ctypes.void)
 let cmd_set_stencil_test_enable_ref = ref (bind cmd_set_stencil_test_enable_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetStencilTestEnable.html}[vkCmdSetStencilTestEnable]} *)
 let cmd_set_stencil_test_enable arg0 arg1 =
   match !cmd_set_stencil_test_enable_ref with
   | Some f -> f arg0 arg1
@@ -3145,6 +4037,8 @@ let cmd_set_stencil_test_enable arg0 arg1 =
 
 let cmd_set_stencil_op_typ = CommandBuffer.t @-> StencilFaceFlags.t @-> StencilOp.t @-> StencilOp.t @-> StencilOp.t @-> CompareOp.t @-> returning (Ctypes.void)
 let cmd_set_stencil_op_ref = ref (bind cmd_set_stencil_op_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetStencilOp.html}[vkCmdSetStencilOp]} *)
 let cmd_set_stencil_op arg0 arg1 arg2 arg3 arg4 arg5 =
   match !cmd_set_stencil_op_ref with
   | Some f -> f arg0 arg1 arg2 arg3 arg4 arg5
@@ -3152,6 +4046,8 @@ let cmd_set_stencil_op arg0 arg1 arg2 arg3 arg4 arg5 =
 
 let cmd_set_patch_control_points_ext_typ = CommandBuffer.t @-> Vk_base.uint32 @-> returning (Ctypes.void)
 let cmd_set_patch_control_points_ext_ref = ref (bind cmd_set_patch_control_points_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetPatchControlPointsEXT.html}[vkCmdSetPatchControlPointsEXT]} *)
 let cmd_set_patch_control_points_ext arg0 arg1 =
   match !cmd_set_patch_control_points_ext_ref with
   | Some f -> f arg0 arg1
@@ -3159,6 +4055,8 @@ let cmd_set_patch_control_points_ext arg0 arg1 =
 
 let cmd_set_rasterizer_discard_enable_typ = CommandBuffer.t @-> Vk_base.bool32 @-> returning (Ctypes.void)
 let cmd_set_rasterizer_discard_enable_ref = ref (bind cmd_set_rasterizer_discard_enable_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetRasterizerDiscardEnable.html}[vkCmdSetRasterizerDiscardEnable]} *)
 let cmd_set_rasterizer_discard_enable arg0 arg1 =
   match !cmd_set_rasterizer_discard_enable_ref with
   | Some f -> f arg0 arg1
@@ -3166,6 +4064,8 @@ let cmd_set_rasterizer_discard_enable arg0 arg1 =
 
 let cmd_set_depth_bias_enable_typ = CommandBuffer.t @-> Vk_base.bool32 @-> returning (Ctypes.void)
 let cmd_set_depth_bias_enable_ref = ref (bind cmd_set_depth_bias_enable_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetDepthBiasEnable.html}[vkCmdSetDepthBiasEnable]} *)
 let cmd_set_depth_bias_enable arg0 arg1 =
   match !cmd_set_depth_bias_enable_ref with
   | Some f -> f arg0 arg1
@@ -3173,6 +4073,8 @@ let cmd_set_depth_bias_enable arg0 arg1 =
 
 let cmd_set_logic_op_ext_typ = CommandBuffer.t @-> LogicOp.t @-> returning (Ctypes.void)
 let cmd_set_logic_op_ext_ref = ref (bind cmd_set_logic_op_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetLogicOpEXT.html}[vkCmdSetLogicOpEXT]} *)
 let cmd_set_logic_op_ext arg0 arg1 =
   match !cmd_set_logic_op_ext_ref with
   | Some f -> f arg0 arg1
@@ -3180,6 +4082,8 @@ let cmd_set_logic_op_ext arg0 arg1 =
 
 let cmd_set_primitive_restart_enable_typ = CommandBuffer.t @-> Vk_base.bool32 @-> returning (Ctypes.void)
 let cmd_set_primitive_restart_enable_ref = ref (bind cmd_set_primitive_restart_enable_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetPrimitiveRestartEnable.html}[vkCmdSetPrimitiveRestartEnable]} *)
 let cmd_set_primitive_restart_enable arg0 arg1 =
   match !cmd_set_primitive_restart_enable_ref with
   | Some f -> f arg0 arg1
@@ -3187,6 +4091,8 @@ let cmd_set_primitive_restart_enable arg0 arg1 =
 
 let cmd_set_tessellation_domain_origin_ext_typ = CommandBuffer.t @-> TessellationDomainOrigin.t @-> returning (Ctypes.void)
 let cmd_set_tessellation_domain_origin_ext_ref = ref (bind cmd_set_tessellation_domain_origin_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetTessellationDomainOriginEXT.html}[vkCmdSetTessellationDomainOriginEXT]} *)
 let cmd_set_tessellation_domain_origin_ext arg0 arg1 =
   match !cmd_set_tessellation_domain_origin_ext_ref with
   | Some f -> f arg0 arg1
@@ -3194,6 +4100,8 @@ let cmd_set_tessellation_domain_origin_ext arg0 arg1 =
 
 let cmd_set_depth_clamp_enable_ext_typ = CommandBuffer.t @-> Vk_base.bool32 @-> returning (Ctypes.void)
 let cmd_set_depth_clamp_enable_ext_ref = ref (bind cmd_set_depth_clamp_enable_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetDepthClampEnableEXT.html}[vkCmdSetDepthClampEnableEXT]} *)
 let cmd_set_depth_clamp_enable_ext arg0 arg1 =
   match !cmd_set_depth_clamp_enable_ext_ref with
   | Some f -> f arg0 arg1
@@ -3201,6 +4109,8 @@ let cmd_set_depth_clamp_enable_ext arg0 arg1 =
 
 let cmd_set_polygon_mode_ext_typ = CommandBuffer.t @-> PolygonMode.t @-> returning (Ctypes.void)
 let cmd_set_polygon_mode_ext_ref = ref (bind cmd_set_polygon_mode_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetPolygonModeEXT.html}[vkCmdSetPolygonModeEXT]} *)
 let cmd_set_polygon_mode_ext arg0 arg1 =
   match !cmd_set_polygon_mode_ext_ref with
   | Some f -> f arg0 arg1
@@ -3208,6 +4118,8 @@ let cmd_set_polygon_mode_ext arg0 arg1 =
 
 let cmd_set_rasterization_samples_ext_typ = CommandBuffer.t @-> SampleCountFlags.t @-> returning (Ctypes.void)
 let cmd_set_rasterization_samples_ext_ref = ref (bind cmd_set_rasterization_samples_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetRasterizationSamplesEXT.html}[vkCmdSetRasterizationSamplesEXT]} *)
 let cmd_set_rasterization_samples_ext arg0 arg1 =
   match !cmd_set_rasterization_samples_ext_ref with
   | Some f -> f arg0 arg1
@@ -3215,6 +4127,8 @@ let cmd_set_rasterization_samples_ext arg0 arg1 =
 
 let cmd_set_sample_mask_ext_typ = CommandBuffer.t @-> SampleCountFlags.t @-> ptr (Vk_base.uint32) @-> returning (Ctypes.void)
 let cmd_set_sample_mask_ext_ref = ref (bind cmd_set_sample_mask_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetSampleMaskEXT.html}[vkCmdSetSampleMaskEXT]} *)
 let cmd_set_sample_mask_ext arg0 arg1 arg2 =
   match !cmd_set_sample_mask_ext_ref with
   | Some f -> f arg0 arg1 arg2
@@ -3222,6 +4136,8 @@ let cmd_set_sample_mask_ext arg0 arg1 arg2 =
 
 let cmd_set_alpha_to_coverage_enable_ext_typ = CommandBuffer.t @-> Vk_base.bool32 @-> returning (Ctypes.void)
 let cmd_set_alpha_to_coverage_enable_ext_ref = ref (bind cmd_set_alpha_to_coverage_enable_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetAlphaToCoverageEnableEXT.html}[vkCmdSetAlphaToCoverageEnableEXT]} *)
 let cmd_set_alpha_to_coverage_enable_ext arg0 arg1 =
   match !cmd_set_alpha_to_coverage_enable_ext_ref with
   | Some f -> f arg0 arg1
@@ -3229,6 +4145,8 @@ let cmd_set_alpha_to_coverage_enable_ext arg0 arg1 =
 
 let cmd_set_alpha_to_one_enable_ext_typ = CommandBuffer.t @-> Vk_base.bool32 @-> returning (Ctypes.void)
 let cmd_set_alpha_to_one_enable_ext_ref = ref (bind cmd_set_alpha_to_one_enable_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetAlphaToOneEnableEXT.html}[vkCmdSetAlphaToOneEnableEXT]} *)
 let cmd_set_alpha_to_one_enable_ext arg0 arg1 =
   match !cmd_set_alpha_to_one_enable_ext_ref with
   | Some f -> f arg0 arg1
@@ -3236,6 +4154,8 @@ let cmd_set_alpha_to_one_enable_ext arg0 arg1 =
 
 let cmd_set_logic_op_enable_ext_typ = CommandBuffer.t @-> Vk_base.bool32 @-> returning (Ctypes.void)
 let cmd_set_logic_op_enable_ext_ref = ref (bind cmd_set_logic_op_enable_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetLogicOpEnableEXT.html}[vkCmdSetLogicOpEnableEXT]} *)
 let cmd_set_logic_op_enable_ext arg0 arg1 =
   match !cmd_set_logic_op_enable_ext_ref with
   | Some f -> f arg0 arg1
@@ -3243,6 +4163,8 @@ let cmd_set_logic_op_enable_ext arg0 arg1 =
 
 let cmd_set_color_blend_enable_ext_typ = CommandBuffer.t @-> Vk_base.uint32 @-> Vk_base.uint32 @-> ptr (Vk_base.bool32) @-> returning (Ctypes.void)
 let cmd_set_color_blend_enable_ext_ref = ref (bind cmd_set_color_blend_enable_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetColorBlendEnableEXT.html}[vkCmdSetColorBlendEnableEXT]} *)
 let cmd_set_color_blend_enable_ext arg0 arg1 arg2 arg3 =
   match !cmd_set_color_blend_enable_ext_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -3250,6 +4172,8 @@ let cmd_set_color_blend_enable_ext arg0 arg1 arg2 arg3 =
 
 let cmd_set_color_blend_equation_ext_typ = CommandBuffer.t @-> Vk_base.uint32 @-> Vk_base.uint32 @-> ptr (ColorBlendEquationEXT.t) @-> returning (Ctypes.void)
 let cmd_set_color_blend_equation_ext_ref = ref (bind cmd_set_color_blend_equation_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetColorBlendEquationEXT.html}[vkCmdSetColorBlendEquationEXT]} *)
 let cmd_set_color_blend_equation_ext arg0 arg1 arg2 arg3 =
   match !cmd_set_color_blend_equation_ext_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -3257,6 +4181,8 @@ let cmd_set_color_blend_equation_ext arg0 arg1 arg2 arg3 =
 
 let cmd_set_color_write_mask_ext_typ = CommandBuffer.t @-> Vk_base.uint32 @-> Vk_base.uint32 @-> ptr (ColorComponentFlags.t) @-> returning (Ctypes.void)
 let cmd_set_color_write_mask_ext_ref = ref (bind cmd_set_color_write_mask_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetColorWriteMaskEXT.html}[vkCmdSetColorWriteMaskEXT]} *)
 let cmd_set_color_write_mask_ext arg0 arg1 arg2 arg3 =
   match !cmd_set_color_write_mask_ext_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -3264,6 +4190,8 @@ let cmd_set_color_write_mask_ext arg0 arg1 arg2 arg3 =
 
 let cmd_set_rasterization_stream_ext_typ = CommandBuffer.t @-> Vk_base.uint32 @-> returning (Ctypes.void)
 let cmd_set_rasterization_stream_ext_ref = ref (bind cmd_set_rasterization_stream_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetRasterizationStreamEXT.html}[vkCmdSetRasterizationStreamEXT]} *)
 let cmd_set_rasterization_stream_ext arg0 arg1 =
   match !cmd_set_rasterization_stream_ext_ref with
   | Some f -> f arg0 arg1
@@ -3271,6 +4199,8 @@ let cmd_set_rasterization_stream_ext arg0 arg1 =
 
 let cmd_set_conservative_rasterization_mode_ext_typ = CommandBuffer.t @-> ConservativeRasterizationModeEXT.t @-> returning (Ctypes.void)
 let cmd_set_conservative_rasterization_mode_ext_ref = ref (bind cmd_set_conservative_rasterization_mode_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetConservativeRasterizationModeEXT.html}[vkCmdSetConservativeRasterizationModeEXT]} *)
 let cmd_set_conservative_rasterization_mode_ext arg0 arg1 =
   match !cmd_set_conservative_rasterization_mode_ext_ref with
   | Some f -> f arg0 arg1
@@ -3278,6 +4208,8 @@ let cmd_set_conservative_rasterization_mode_ext arg0 arg1 =
 
 let cmd_set_extra_primitive_overestimation_size_ext_typ = CommandBuffer.t @-> Ctypes.float @-> returning (Ctypes.void)
 let cmd_set_extra_primitive_overestimation_size_ext_ref = ref (bind cmd_set_extra_primitive_overestimation_size_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetExtraPrimitiveOverestimationSizeEXT.html}[vkCmdSetExtraPrimitiveOverestimationSizeEXT]} *)
 let cmd_set_extra_primitive_overestimation_size_ext arg0 arg1 =
   match !cmd_set_extra_primitive_overestimation_size_ext_ref with
   | Some f -> f arg0 arg1
@@ -3285,6 +4217,8 @@ let cmd_set_extra_primitive_overestimation_size_ext arg0 arg1 =
 
 let cmd_set_depth_clip_enable_ext_typ = CommandBuffer.t @-> Vk_base.bool32 @-> returning (Ctypes.void)
 let cmd_set_depth_clip_enable_ext_ref = ref (bind cmd_set_depth_clip_enable_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetDepthClipEnableEXT.html}[vkCmdSetDepthClipEnableEXT]} *)
 let cmd_set_depth_clip_enable_ext arg0 arg1 =
   match !cmd_set_depth_clip_enable_ext_ref with
   | Some f -> f arg0 arg1
@@ -3292,6 +4226,8 @@ let cmd_set_depth_clip_enable_ext arg0 arg1 =
 
 let cmd_set_sample_locations_enable_ext_typ = CommandBuffer.t @-> Vk_base.bool32 @-> returning (Ctypes.void)
 let cmd_set_sample_locations_enable_ext_ref = ref (bind cmd_set_sample_locations_enable_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetSampleLocationsEnableEXT.html}[vkCmdSetSampleLocationsEnableEXT]} *)
 let cmd_set_sample_locations_enable_ext arg0 arg1 =
   match !cmd_set_sample_locations_enable_ext_ref with
   | Some f -> f arg0 arg1
@@ -3299,6 +4235,8 @@ let cmd_set_sample_locations_enable_ext arg0 arg1 =
 
 let cmd_set_color_blend_advanced_ext_typ = CommandBuffer.t @-> Vk_base.uint32 @-> Vk_base.uint32 @-> ptr (ColorBlendAdvancedEXT.t) @-> returning (Ctypes.void)
 let cmd_set_color_blend_advanced_ext_ref = ref (bind cmd_set_color_blend_advanced_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetColorBlendAdvancedEXT.html}[vkCmdSetColorBlendAdvancedEXT]} *)
 let cmd_set_color_blend_advanced_ext arg0 arg1 arg2 arg3 =
   match !cmd_set_color_blend_advanced_ext_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -3306,6 +4244,8 @@ let cmd_set_color_blend_advanced_ext arg0 arg1 arg2 arg3 =
 
 let cmd_set_provoking_vertex_mode_ext_typ = CommandBuffer.t @-> ProvokingVertexModeEXT.t @-> returning (Ctypes.void)
 let cmd_set_provoking_vertex_mode_ext_ref = ref (bind cmd_set_provoking_vertex_mode_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetProvokingVertexModeEXT.html}[vkCmdSetProvokingVertexModeEXT]} *)
 let cmd_set_provoking_vertex_mode_ext arg0 arg1 =
   match !cmd_set_provoking_vertex_mode_ext_ref with
   | Some f -> f arg0 arg1
@@ -3313,6 +4253,8 @@ let cmd_set_provoking_vertex_mode_ext arg0 arg1 =
 
 let cmd_set_line_rasterization_mode_ext_typ = CommandBuffer.t @-> LineRasterizationMode.t @-> returning (Ctypes.void)
 let cmd_set_line_rasterization_mode_ext_ref = ref (bind cmd_set_line_rasterization_mode_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetLineRasterizationModeEXT.html}[vkCmdSetLineRasterizationModeEXT]} *)
 let cmd_set_line_rasterization_mode_ext arg0 arg1 =
   match !cmd_set_line_rasterization_mode_ext_ref with
   | Some f -> f arg0 arg1
@@ -3320,6 +4262,8 @@ let cmd_set_line_rasterization_mode_ext arg0 arg1 =
 
 let cmd_set_line_stipple_enable_ext_typ = CommandBuffer.t @-> Vk_base.bool32 @-> returning (Ctypes.void)
 let cmd_set_line_stipple_enable_ext_ref = ref (bind cmd_set_line_stipple_enable_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetLineStippleEnableEXT.html}[vkCmdSetLineStippleEnableEXT]} *)
 let cmd_set_line_stipple_enable_ext arg0 arg1 =
   match !cmd_set_line_stipple_enable_ext_ref with
   | Some f -> f arg0 arg1
@@ -3327,6 +4271,8 @@ let cmd_set_line_stipple_enable_ext arg0 arg1 =
 
 let cmd_set_depth_clip_negative_one_to_one_ext_typ = CommandBuffer.t @-> Vk_base.bool32 @-> returning (Ctypes.void)
 let cmd_set_depth_clip_negative_one_to_one_ext_ref = ref (bind cmd_set_depth_clip_negative_one_to_one_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetDepthClipNegativeOneToOneEXT.html}[vkCmdSetDepthClipNegativeOneToOneEXT]} *)
 let cmd_set_depth_clip_negative_one_to_one_ext arg0 arg1 =
   match !cmd_set_depth_clip_negative_one_to_one_ext_ref with
   | Some f -> f arg0 arg1
@@ -3334,6 +4280,8 @@ let cmd_set_depth_clip_negative_one_to_one_ext arg0 arg1 =
 
 let cmd_set_viewport_w_scaling_enable_nv_typ = CommandBuffer.t @-> Vk_base.bool32 @-> returning (Ctypes.void)
 let cmd_set_viewport_w_scaling_enable_nv_ref = ref (bind cmd_set_viewport_w_scaling_enable_nv_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetViewportWScalingEnableNV.html}[vkCmdSetViewportWScalingEnableNV]} *)
 let cmd_set_viewport_w_scaling_enable_nv arg0 arg1 =
   match !cmd_set_viewport_w_scaling_enable_nv_ref with
   | Some f -> f arg0 arg1
@@ -3341,6 +4289,8 @@ let cmd_set_viewport_w_scaling_enable_nv arg0 arg1 =
 
 let cmd_set_viewport_swizzle_nv_typ = CommandBuffer.t @-> Vk_base.uint32 @-> Vk_base.uint32 @-> ptr (ViewportSwizzleNV.t) @-> returning (Ctypes.void)
 let cmd_set_viewport_swizzle_nv_ref = ref (bind cmd_set_viewport_swizzle_nv_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetViewportSwizzleNV.html}[vkCmdSetViewportSwizzleNV]} *)
 let cmd_set_viewport_swizzle_nv arg0 arg1 arg2 arg3 =
   match !cmd_set_viewport_swizzle_nv_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -3348,6 +4298,8 @@ let cmd_set_viewport_swizzle_nv arg0 arg1 arg2 arg3 =
 
 let cmd_set_coverage_to_color_enable_nv_typ = CommandBuffer.t @-> Vk_base.bool32 @-> returning (Ctypes.void)
 let cmd_set_coverage_to_color_enable_nv_ref = ref (bind cmd_set_coverage_to_color_enable_nv_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetCoverageToColorEnableNV.html}[vkCmdSetCoverageToColorEnableNV]} *)
 let cmd_set_coverage_to_color_enable_nv arg0 arg1 =
   match !cmd_set_coverage_to_color_enable_nv_ref with
   | Some f -> f arg0 arg1
@@ -3355,6 +4307,8 @@ let cmd_set_coverage_to_color_enable_nv arg0 arg1 =
 
 let cmd_set_coverage_to_color_location_nv_typ = CommandBuffer.t @-> Vk_base.uint32 @-> returning (Ctypes.void)
 let cmd_set_coverage_to_color_location_nv_ref = ref (bind cmd_set_coverage_to_color_location_nv_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetCoverageToColorLocationNV.html}[vkCmdSetCoverageToColorLocationNV]} *)
 let cmd_set_coverage_to_color_location_nv arg0 arg1 =
   match !cmd_set_coverage_to_color_location_nv_ref with
   | Some f -> f arg0 arg1
@@ -3362,6 +4316,8 @@ let cmd_set_coverage_to_color_location_nv arg0 arg1 =
 
 let cmd_set_coverage_modulation_mode_nv_typ = CommandBuffer.t @-> CoverageModulationModeNV.t @-> returning (Ctypes.void)
 let cmd_set_coverage_modulation_mode_nv_ref = ref (bind cmd_set_coverage_modulation_mode_nv_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetCoverageModulationModeNV.html}[vkCmdSetCoverageModulationModeNV]} *)
 let cmd_set_coverage_modulation_mode_nv arg0 arg1 =
   match !cmd_set_coverage_modulation_mode_nv_ref with
   | Some f -> f arg0 arg1
@@ -3369,6 +4325,8 @@ let cmd_set_coverage_modulation_mode_nv arg0 arg1 =
 
 let cmd_set_coverage_modulation_table_enable_nv_typ = CommandBuffer.t @-> Vk_base.bool32 @-> returning (Ctypes.void)
 let cmd_set_coverage_modulation_table_enable_nv_ref = ref (bind cmd_set_coverage_modulation_table_enable_nv_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetCoverageModulationTableEnableNV.html}[vkCmdSetCoverageModulationTableEnableNV]} *)
 let cmd_set_coverage_modulation_table_enable_nv arg0 arg1 =
   match !cmd_set_coverage_modulation_table_enable_nv_ref with
   | Some f -> f arg0 arg1
@@ -3376,6 +4334,8 @@ let cmd_set_coverage_modulation_table_enable_nv arg0 arg1 =
 
 let cmd_set_coverage_modulation_table_nv_typ = CommandBuffer.t @-> Vk_base.uint32 @-> ptr (Ctypes.float) @-> returning (Ctypes.void)
 let cmd_set_coverage_modulation_table_nv_ref = ref (bind cmd_set_coverage_modulation_table_nv_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetCoverageModulationTableNV.html}[vkCmdSetCoverageModulationTableNV]} *)
 let cmd_set_coverage_modulation_table_nv arg0 arg1 arg2 =
   match !cmd_set_coverage_modulation_table_nv_ref with
   | Some f -> f arg0 arg1 arg2
@@ -3383,6 +4343,8 @@ let cmd_set_coverage_modulation_table_nv arg0 arg1 arg2 =
 
 let cmd_set_shading_rate_image_enable_nv_typ = CommandBuffer.t @-> Vk_base.bool32 @-> returning (Ctypes.void)
 let cmd_set_shading_rate_image_enable_nv_ref = ref (bind cmd_set_shading_rate_image_enable_nv_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetShadingRateImageEnableNV.html}[vkCmdSetShadingRateImageEnableNV]} *)
 let cmd_set_shading_rate_image_enable_nv arg0 arg1 =
   match !cmd_set_shading_rate_image_enable_nv_ref with
   | Some f -> f arg0 arg1
@@ -3390,6 +4352,8 @@ let cmd_set_shading_rate_image_enable_nv arg0 arg1 =
 
 let cmd_set_coverage_reduction_mode_nv_typ = CommandBuffer.t @-> CoverageReductionModeNV.t @-> returning (Ctypes.void)
 let cmd_set_coverage_reduction_mode_nv_ref = ref (bind cmd_set_coverage_reduction_mode_nv_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetCoverageReductionModeNV.html}[vkCmdSetCoverageReductionModeNV]} *)
 let cmd_set_coverage_reduction_mode_nv arg0 arg1 =
   match !cmd_set_coverage_reduction_mode_nv_ref with
   | Some f -> f arg0 arg1
@@ -3397,6 +4361,8 @@ let cmd_set_coverage_reduction_mode_nv arg0 arg1 =
 
 let cmd_set_representative_fragment_test_enable_nv_typ = CommandBuffer.t @-> Vk_base.bool32 @-> returning (Ctypes.void)
 let cmd_set_representative_fragment_test_enable_nv_ref = ref (bind cmd_set_representative_fragment_test_enable_nv_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetRepresentativeFragmentTestEnableNV.html}[vkCmdSetRepresentativeFragmentTestEnableNV]} *)
 let cmd_set_representative_fragment_test_enable_nv arg0 arg1 =
   match !cmd_set_representative_fragment_test_enable_nv_ref with
   | Some f -> f arg0 arg1
@@ -3404,6 +4370,8 @@ let cmd_set_representative_fragment_test_enable_nv arg0 arg1 =
 
 let create_private_data_slot_typ = Device.t @-> ptr (PrivateDataSlotCreateInfo.t) @-> ptr (AllocationCallbacks.t) @-> ptr (PrivateDataSlot.t) @-> returning (Result.t)
 let create_private_data_slot_ref = ref (bind create_private_data_slot_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreatePrivateDataSlot.html}[vkCreatePrivateDataSlot]} *)
 let create_private_data_slot arg0 arg1 arg2 arg3 =
   match !create_private_data_slot_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -3411,6 +4379,8 @@ let create_private_data_slot arg0 arg1 arg2 arg3 =
 
 let destroy_private_data_slot_typ = Device.t @-> PrivateDataSlot.t @-> ptr (AllocationCallbacks.t) @-> returning (Ctypes.void)
 let destroy_private_data_slot_ref = ref (bind destroy_private_data_slot_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkDestroyPrivateDataSlot.html}[vkDestroyPrivateDataSlot]} *)
 let destroy_private_data_slot arg0 arg1 arg2 =
   match !destroy_private_data_slot_ref with
   | Some f -> f arg0 arg1 arg2
@@ -3418,6 +4388,8 @@ let destroy_private_data_slot arg0 arg1 arg2 =
 
 let set_private_data_typ = Device.t @-> ObjectType.t @-> Vk_base.uint64 @-> PrivateDataSlot.t @-> Vk_base.uint64 @-> returning (Result.t)
 let set_private_data_ref = ref (bind set_private_data_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkSetPrivateData.html}[vkSetPrivateData]} *)
 let set_private_data arg0 arg1 arg2 arg3 arg4 =
   match !set_private_data_ref with
   | Some f -> f arg0 arg1 arg2 arg3 arg4
@@ -3425,6 +4397,8 @@ let set_private_data arg0 arg1 arg2 arg3 arg4 =
 
 let get_private_data_typ = Device.t @-> ObjectType.t @-> Vk_base.uint64 @-> PrivateDataSlot.t @-> ptr (Vk_base.uint64) @-> returning (Ctypes.void)
 let get_private_data_ref = ref (bind get_private_data_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPrivateData.html}[vkGetPrivateData]} *)
 let get_private_data arg0 arg1 arg2 arg3 arg4 =
   match !get_private_data_ref with
   | Some f -> f arg0 arg1 arg2 arg3 arg4
@@ -3432,6 +4406,8 @@ let get_private_data arg0 arg1 arg2 arg3 arg4 =
 
 let cmd_copy_buffer_2_typ = CommandBuffer.t @-> ptr (CopyBufferInfo2.t) @-> returning (Ctypes.void)
 let cmd_copy_buffer_2_ref = ref (bind cmd_copy_buffer_2_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdCopyBuffer2.html}[vkCmdCopyBuffer2]} *)
 let cmd_copy_buffer_2 arg0 arg1 =
   match !cmd_copy_buffer_2_ref with
   | Some f -> f arg0 arg1
@@ -3439,6 +4415,8 @@ let cmd_copy_buffer_2 arg0 arg1 =
 
 let cmd_copy_image_2_typ = CommandBuffer.t @-> ptr (CopyImageInfo2.t) @-> returning (Ctypes.void)
 let cmd_copy_image_2_ref = ref (bind cmd_copy_image_2_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdCopyImage2.html}[vkCmdCopyImage2]} *)
 let cmd_copy_image_2 arg0 arg1 =
   match !cmd_copy_image_2_ref with
   | Some f -> f arg0 arg1
@@ -3446,6 +4424,8 @@ let cmd_copy_image_2 arg0 arg1 =
 
 let cmd_blit_image_2_typ = CommandBuffer.t @-> ptr (BlitImageInfo2.t) @-> returning (Ctypes.void)
 let cmd_blit_image_2_ref = ref (bind cmd_blit_image_2_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdBlitImage2.html}[vkCmdBlitImage2]} *)
 let cmd_blit_image_2 arg0 arg1 =
   match !cmd_blit_image_2_ref with
   | Some f -> f arg0 arg1
@@ -3453,6 +4433,8 @@ let cmd_blit_image_2 arg0 arg1 =
 
 let cmd_copy_buffer_to_image_2_typ = CommandBuffer.t @-> ptr (CopyBufferToImageInfo2.t) @-> returning (Ctypes.void)
 let cmd_copy_buffer_to_image_2_ref = ref (bind cmd_copy_buffer_to_image_2_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdCopyBufferToImage2.html}[vkCmdCopyBufferToImage2]} *)
 let cmd_copy_buffer_to_image_2 arg0 arg1 =
   match !cmd_copy_buffer_to_image_2_ref with
   | Some f -> f arg0 arg1
@@ -3460,6 +4442,8 @@ let cmd_copy_buffer_to_image_2 arg0 arg1 =
 
 let cmd_copy_image_to_buffer_2_typ = CommandBuffer.t @-> ptr (CopyImageToBufferInfo2.t) @-> returning (Ctypes.void)
 let cmd_copy_image_to_buffer_2_ref = ref (bind cmd_copy_image_to_buffer_2_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdCopyImageToBuffer2.html}[vkCmdCopyImageToBuffer2]} *)
 let cmd_copy_image_to_buffer_2 arg0 arg1 =
   match !cmd_copy_image_to_buffer_2_ref with
   | Some f -> f arg0 arg1
@@ -3467,6 +4451,8 @@ let cmd_copy_image_to_buffer_2 arg0 arg1 =
 
 let cmd_resolve_image_2_typ = CommandBuffer.t @-> ptr (ResolveImageInfo2.t) @-> returning (Ctypes.void)
 let cmd_resolve_image_2_ref = ref (bind cmd_resolve_image_2_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdResolveImage2.html}[vkCmdResolveImage2]} *)
 let cmd_resolve_image_2 arg0 arg1 =
   match !cmd_resolve_image_2_ref with
   | Some f -> f arg0 arg1
@@ -3474,6 +4460,8 @@ let cmd_resolve_image_2 arg0 arg1 =
 
 let cmd_set_fragment_shading_rate_khr_typ = CommandBuffer.t @-> ptr (Extent2D.t) @-> ptr (FragmentShadingRateCombinerOpKHR.t) @-> returning (Ctypes.void)
 let cmd_set_fragment_shading_rate_khr_ref = ref (bind cmd_set_fragment_shading_rate_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetFragmentShadingRateKHR.html}[vkCmdSetFragmentShadingRateKHR]} *)
 let cmd_set_fragment_shading_rate_khr arg0 arg1 arg2 =
   match !cmd_set_fragment_shading_rate_khr_ref with
   | Some f -> f arg0 arg1 arg2
@@ -3481,6 +4469,8 @@ let cmd_set_fragment_shading_rate_khr arg0 arg1 arg2 =
 
 let get_physical_device_fragment_shading_rates_khr_typ = PhysicalDevice.t @-> ptr (Vk_base.uint32) @-> ptr (PhysicalDeviceFragmentShadingRateKHR.t) @-> returning (Result.t)
 let get_physical_device_fragment_shading_rates_khr_ref = ref (bind get_physical_device_fragment_shading_rates_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPhysicalDeviceFragmentShadingRatesKHR.html}[vkGetPhysicalDeviceFragmentShadingRatesKHR]} *)
 let get_physical_device_fragment_shading_rates_khr arg0 arg1 arg2 =
   match !get_physical_device_fragment_shading_rates_khr_ref with
   | Some f -> f arg0 arg1 arg2
@@ -3488,6 +4478,8 @@ let get_physical_device_fragment_shading_rates_khr arg0 arg1 arg2 =
 
 let cmd_set_fragment_shading_rate_enum_nv_typ = CommandBuffer.t @-> FragmentShadingRateNV.t @-> ptr (FragmentShadingRateCombinerOpKHR.t) @-> returning (Ctypes.void)
 let cmd_set_fragment_shading_rate_enum_nv_ref = ref (bind cmd_set_fragment_shading_rate_enum_nv_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetFragmentShadingRateEnumNV.html}[vkCmdSetFragmentShadingRateEnumNV]} *)
 let cmd_set_fragment_shading_rate_enum_nv arg0 arg1 arg2 =
   match !cmd_set_fragment_shading_rate_enum_nv_ref with
   | Some f -> f arg0 arg1 arg2
@@ -3495,6 +4487,8 @@ let cmd_set_fragment_shading_rate_enum_nv arg0 arg1 arg2 =
 
 let get_acceleration_structure_build_sizes_khr_typ = Device.t @-> AccelerationStructureBuildTypeKHR.t @-> ptr (AccelerationStructureBuildGeometryInfoKHR.t) @-> ptr (Vk_base.uint32) @-> ptr (AccelerationStructureBuildSizesInfoKHR.t) @-> returning (Ctypes.void)
 let get_acceleration_structure_build_sizes_khr_ref = ref (bind get_acceleration_structure_build_sizes_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetAccelerationStructureBuildSizesKHR.html}[vkGetAccelerationStructureBuildSizesKHR]} *)
 let get_acceleration_structure_build_sizes_khr arg0 arg1 arg2 arg3 arg4 =
   match !get_acceleration_structure_build_sizes_khr_ref with
   | Some f -> f arg0 arg1 arg2 arg3 arg4
@@ -3502,6 +4496,8 @@ let get_acceleration_structure_build_sizes_khr arg0 arg1 arg2 arg3 arg4 =
 
 let cmd_set_vertex_input_ext_typ = CommandBuffer.t @-> Vk_base.uint32 @-> ptr (VertexInputBindingDescription2EXT.t) @-> Vk_base.uint32 @-> ptr (VertexInputAttributeDescription2EXT.t) @-> returning (Ctypes.void)
 let cmd_set_vertex_input_ext_ref = ref (bind cmd_set_vertex_input_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetVertexInputEXT.html}[vkCmdSetVertexInputEXT]} *)
 let cmd_set_vertex_input_ext arg0 arg1 arg2 arg3 arg4 =
   match !cmd_set_vertex_input_ext_ref with
   | Some f -> f arg0 arg1 arg2 arg3 arg4
@@ -3509,6 +4505,8 @@ let cmd_set_vertex_input_ext arg0 arg1 arg2 arg3 arg4 =
 
 let cmd_set_color_write_enable_ext_typ = CommandBuffer.t @-> Vk_base.uint32 @-> ptr (Vk_base.bool32) @-> returning (Ctypes.void)
 let cmd_set_color_write_enable_ext_ref = ref (bind cmd_set_color_write_enable_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetColorWriteEnableEXT.html}[vkCmdSetColorWriteEnableEXT]} *)
 let cmd_set_color_write_enable_ext arg0 arg1 arg2 =
   match !cmd_set_color_write_enable_ext_ref with
   | Some f -> f arg0 arg1 arg2
@@ -3516,6 +4514,8 @@ let cmd_set_color_write_enable_ext arg0 arg1 arg2 =
 
 let cmd_set_event_2_typ = CommandBuffer.t @-> Event.t @-> ptr (DependencyInfo.t) @-> returning (Ctypes.void)
 let cmd_set_event_2_ref = ref (bind cmd_set_event_2_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetEvent2.html}[vkCmdSetEvent2]} *)
 let cmd_set_event_2 arg0 arg1 arg2 =
   match !cmd_set_event_2_ref with
   | Some f -> f arg0 arg1 arg2
@@ -3523,6 +4523,8 @@ let cmd_set_event_2 arg0 arg1 arg2 =
 
 let cmd_reset_event_2_typ = CommandBuffer.t @-> Event.t @-> PipelineStageFlags2.t @-> returning (Ctypes.void)
 let cmd_reset_event_2_ref = ref (bind cmd_reset_event_2_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdResetEvent2.html}[vkCmdResetEvent2]} *)
 let cmd_reset_event_2 arg0 arg1 arg2 =
   match !cmd_reset_event_2_ref with
   | Some f -> f arg0 arg1 arg2
@@ -3530,6 +4532,8 @@ let cmd_reset_event_2 arg0 arg1 arg2 =
 
 let cmd_wait_events_2_typ = CommandBuffer.t @-> Vk_base.uint32 @-> ptr (Event.t) @-> ptr (DependencyInfo.t) @-> returning (Ctypes.void)
 let cmd_wait_events_2_ref = ref (bind cmd_wait_events_2_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdWaitEvents2.html}[vkCmdWaitEvents2]} *)
 let cmd_wait_events_2 arg0 arg1 arg2 arg3 =
   match !cmd_wait_events_2_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -3537,6 +4541,8 @@ let cmd_wait_events_2 arg0 arg1 arg2 arg3 =
 
 let cmd_pipeline_barrier_2_typ = CommandBuffer.t @-> ptr (DependencyInfo.t) @-> returning (Ctypes.void)
 let cmd_pipeline_barrier_2_ref = ref (bind cmd_pipeline_barrier_2_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdPipelineBarrier2.html}[vkCmdPipelineBarrier2]} *)
 let cmd_pipeline_barrier_2 arg0 arg1 =
   match !cmd_pipeline_barrier_2_ref with
   | Some f -> f arg0 arg1
@@ -3544,6 +4550,8 @@ let cmd_pipeline_barrier_2 arg0 arg1 =
 
 let queue_submit_2_typ = Queue.t @-> Vk_base.uint32 @-> ptr (SubmitInfo2.t) @-> Fence.t @-> returning (Result.t)
 let queue_submit_2_ref = ref (bind queue_submit_2_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkQueueSubmit2.html}[vkQueueSubmit2]} *)
 let queue_submit_2 arg0 arg1 arg2 arg3 =
   match !queue_submit_2_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -3551,6 +4559,8 @@ let queue_submit_2 arg0 arg1 arg2 arg3 =
 
 let cmd_write_timestamp_2_typ = CommandBuffer.t @-> PipelineStageFlags2.t @-> QueryPool.t @-> Vk_base.uint32 @-> returning (Ctypes.void)
 let cmd_write_timestamp_2_ref = ref (bind cmd_write_timestamp_2_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdWriteTimestamp2.html}[vkCmdWriteTimestamp2]} *)
 let cmd_write_timestamp_2 arg0 arg1 arg2 arg3 =
   match !cmd_write_timestamp_2_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -3558,6 +4568,8 @@ let cmd_write_timestamp_2 arg0 arg1 arg2 arg3 =
 
 let cmd_write_buffer_marker_2_amd_typ = CommandBuffer.t @-> PipelineStageFlags2.t @-> Buffer.t @-> Vk_base.device_size @-> Vk_base.uint32 @-> returning (Ctypes.void)
 let cmd_write_buffer_marker_2_amd_ref = ref (bind cmd_write_buffer_marker_2_amd_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdWriteBufferMarker2AMD.html}[vkCmdWriteBufferMarker2AMD]} *)
 let cmd_write_buffer_marker_2_amd arg0 arg1 arg2 arg3 arg4 =
   match !cmd_write_buffer_marker_2_amd_ref with
   | Some f -> f arg0 arg1 arg2 arg3 arg4
@@ -3565,6 +4577,8 @@ let cmd_write_buffer_marker_2_amd arg0 arg1 arg2 arg3 arg4 =
 
 let get_queue_checkpoint_data_2_nv_typ = Queue.t @-> ptr (Vk_base.uint32) @-> ptr (CheckpointData2NV.t) @-> returning (Ctypes.void)
 let get_queue_checkpoint_data_2_nv_ref = ref (bind get_queue_checkpoint_data_2_nv_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetQueueCheckpointData2NV.html}[vkGetQueueCheckpointData2NV]} *)
 let get_queue_checkpoint_data_2_nv arg0 arg1 arg2 =
   match !get_queue_checkpoint_data_2_nv_ref with
   | Some f -> f arg0 arg1 arg2
@@ -3572,6 +4586,8 @@ let get_queue_checkpoint_data_2_nv arg0 arg1 arg2 =
 
 let copy_memory_to_image_typ = Device.t @-> ptr (CopyMemoryToImageInfo.t) @-> returning (Result.t)
 let copy_memory_to_image_ref = ref (bind copy_memory_to_image_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCopyMemoryToImage.html}[vkCopyMemoryToImage]} *)
 let copy_memory_to_image arg0 arg1 =
   match !copy_memory_to_image_ref with
   | Some f -> f arg0 arg1
@@ -3579,6 +4595,8 @@ let copy_memory_to_image arg0 arg1 =
 
 let copy_image_to_memory_typ = Device.t @-> ptr (CopyImageToMemoryInfo.t) @-> returning (Result.t)
 let copy_image_to_memory_ref = ref (bind copy_image_to_memory_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCopyImageToMemory.html}[vkCopyImageToMemory]} *)
 let copy_image_to_memory arg0 arg1 =
   match !copy_image_to_memory_ref with
   | Some f -> f arg0 arg1
@@ -3586,6 +4604,8 @@ let copy_image_to_memory arg0 arg1 =
 
 let copy_image_to_image_typ = Device.t @-> ptr (CopyImageToImageInfo.t) @-> returning (Result.t)
 let copy_image_to_image_ref = ref (bind copy_image_to_image_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCopyImageToImage.html}[vkCopyImageToImage]} *)
 let copy_image_to_image arg0 arg1 =
   match !copy_image_to_image_ref with
   | Some f -> f arg0 arg1
@@ -3593,6 +4613,8 @@ let copy_image_to_image arg0 arg1 =
 
 let transition_image_layout_typ = Device.t @-> Vk_base.uint32 @-> ptr (HostImageLayoutTransitionInfo.t) @-> returning (Result.t)
 let transition_image_layout_ref = ref (bind transition_image_layout_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkTransitionImageLayout.html}[vkTransitionImageLayout]} *)
 let transition_image_layout arg0 arg1 arg2 =
   match !transition_image_layout_ref with
   | Some f -> f arg0 arg1 arg2
@@ -3600,6 +4622,8 @@ let transition_image_layout arg0 arg1 arg2 =
 
 let get_physical_device_video_capabilities_khr_typ = PhysicalDevice.t @-> ptr (VideoProfileInfoKHR.t) @-> ptr (VideoCapabilitiesKHR.t) @-> returning (Result.t)
 let get_physical_device_video_capabilities_khr_ref = ref (bind get_physical_device_video_capabilities_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPhysicalDeviceVideoCapabilitiesKHR.html}[vkGetPhysicalDeviceVideoCapabilitiesKHR]} *)
 let get_physical_device_video_capabilities_khr arg0 arg1 arg2 =
   match !get_physical_device_video_capabilities_khr_ref with
   | Some f -> f arg0 arg1 arg2
@@ -3607,6 +4631,8 @@ let get_physical_device_video_capabilities_khr arg0 arg1 arg2 =
 
 let get_physical_device_video_format_properties_khr_typ = PhysicalDevice.t @-> ptr (PhysicalDeviceVideoFormatInfoKHR.t) @-> ptr (Vk_base.uint32) @-> ptr (VideoFormatPropertiesKHR.t) @-> returning (Result.t)
 let get_physical_device_video_format_properties_khr_ref = ref (bind get_physical_device_video_format_properties_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPhysicalDeviceVideoFormatPropertiesKHR.html}[vkGetPhysicalDeviceVideoFormatPropertiesKHR]} *)
 let get_physical_device_video_format_properties_khr arg0 arg1 arg2 arg3 =
   match !get_physical_device_video_format_properties_khr_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -3614,6 +4640,8 @@ let get_physical_device_video_format_properties_khr arg0 arg1 arg2 arg3 =
 
 let get_physical_device_video_encode_quality_level_properties_khr_typ = PhysicalDevice.t @-> ptr (PhysicalDeviceVideoEncodeQualityLevelInfoKHR.t) @-> ptr (VideoEncodeQualityLevelPropertiesKHR.t) @-> returning (Result.t)
 let get_physical_device_video_encode_quality_level_properties_khr_ref = ref (bind get_physical_device_video_encode_quality_level_properties_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPhysicalDeviceVideoEncodeQualityLevelPropertiesKHR.html}[vkGetPhysicalDeviceVideoEncodeQualityLevelPropertiesKHR]} *)
 let get_physical_device_video_encode_quality_level_properties_khr arg0 arg1 arg2 =
   match !get_physical_device_video_encode_quality_level_properties_khr_ref with
   | Some f -> f arg0 arg1 arg2
@@ -3621,6 +4649,8 @@ let get_physical_device_video_encode_quality_level_properties_khr arg0 arg1 arg2
 
 let create_video_session_khr_typ = Device.t @-> ptr (VideoSessionCreateInfoKHR.t) @-> ptr (AllocationCallbacks.t) @-> ptr (VideoSessionKHR.t) @-> returning (Result.t)
 let create_video_session_khr_ref = ref (bind create_video_session_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateVideoSessionKHR.html}[vkCreateVideoSessionKHR]} *)
 let create_video_session_khr arg0 arg1 arg2 arg3 =
   match !create_video_session_khr_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -3628,6 +4658,8 @@ let create_video_session_khr arg0 arg1 arg2 arg3 =
 
 let destroy_video_session_khr_typ = Device.t @-> VideoSessionKHR.t @-> ptr (AllocationCallbacks.t) @-> returning (Ctypes.void)
 let destroy_video_session_khr_ref = ref (bind destroy_video_session_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkDestroyVideoSessionKHR.html}[vkDestroyVideoSessionKHR]} *)
 let destroy_video_session_khr arg0 arg1 arg2 =
   match !destroy_video_session_khr_ref with
   | Some f -> f arg0 arg1 arg2
@@ -3635,6 +4667,8 @@ let destroy_video_session_khr arg0 arg1 arg2 =
 
 let create_video_session_parameters_khr_typ = Device.t @-> ptr (VideoSessionParametersCreateInfoKHR.t) @-> ptr (AllocationCallbacks.t) @-> ptr (VideoSessionParametersKHR.t) @-> returning (Result.t)
 let create_video_session_parameters_khr_ref = ref (bind create_video_session_parameters_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateVideoSessionParametersKHR.html}[vkCreateVideoSessionParametersKHR]} *)
 let create_video_session_parameters_khr arg0 arg1 arg2 arg3 =
   match !create_video_session_parameters_khr_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -3642,6 +4676,8 @@ let create_video_session_parameters_khr arg0 arg1 arg2 arg3 =
 
 let update_video_session_parameters_khr_typ = Device.t @-> VideoSessionParametersKHR.t @-> ptr (VideoSessionParametersUpdateInfoKHR.t) @-> returning (Result.t)
 let update_video_session_parameters_khr_ref = ref (bind update_video_session_parameters_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkUpdateVideoSessionParametersKHR.html}[vkUpdateVideoSessionParametersKHR]} *)
 let update_video_session_parameters_khr arg0 arg1 arg2 =
   match !update_video_session_parameters_khr_ref with
   | Some f -> f arg0 arg1 arg2
@@ -3649,6 +4685,8 @@ let update_video_session_parameters_khr arg0 arg1 arg2 =
 
 let get_encoded_video_session_parameters_khr_typ = Device.t @-> ptr (VideoEncodeSessionParametersGetInfoKHR.t) @-> ptr (VideoEncodeSessionParametersFeedbackInfoKHR.t) @-> ptr (Vk_base.size_t) @-> ptr (Ctypes.void) @-> returning (Result.t)
 let get_encoded_video_session_parameters_khr_ref = ref (bind get_encoded_video_session_parameters_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetEncodedVideoSessionParametersKHR.html}[vkGetEncodedVideoSessionParametersKHR]} *)
 let get_encoded_video_session_parameters_khr arg0 arg1 arg2 arg3 arg4 =
   match !get_encoded_video_session_parameters_khr_ref with
   | Some f -> f arg0 arg1 arg2 arg3 arg4
@@ -3656,6 +4694,8 @@ let get_encoded_video_session_parameters_khr arg0 arg1 arg2 arg3 arg4 =
 
 let destroy_video_session_parameters_khr_typ = Device.t @-> VideoSessionParametersKHR.t @-> ptr (AllocationCallbacks.t) @-> returning (Ctypes.void)
 let destroy_video_session_parameters_khr_ref = ref (bind destroy_video_session_parameters_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkDestroyVideoSessionParametersKHR.html}[vkDestroyVideoSessionParametersKHR]} *)
 let destroy_video_session_parameters_khr arg0 arg1 arg2 =
   match !destroy_video_session_parameters_khr_ref with
   | Some f -> f arg0 arg1 arg2
@@ -3663,6 +4703,8 @@ let destroy_video_session_parameters_khr arg0 arg1 arg2 =
 
 let get_video_session_memory_requirements_khr_typ = Device.t @-> VideoSessionKHR.t @-> ptr (Vk_base.uint32) @-> ptr (VideoSessionMemoryRequirementsKHR.t) @-> returning (Result.t)
 let get_video_session_memory_requirements_khr_ref = ref (bind get_video_session_memory_requirements_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetVideoSessionMemoryRequirementsKHR.html}[vkGetVideoSessionMemoryRequirementsKHR]} *)
 let get_video_session_memory_requirements_khr arg0 arg1 arg2 arg3 =
   match !get_video_session_memory_requirements_khr_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -3670,6 +4712,8 @@ let get_video_session_memory_requirements_khr arg0 arg1 arg2 arg3 =
 
 let bind_video_session_memory_khr_typ = Device.t @-> VideoSessionKHR.t @-> Vk_base.uint32 @-> ptr (BindVideoSessionMemoryInfoKHR.t) @-> returning (Result.t)
 let bind_video_session_memory_khr_ref = ref (bind bind_video_session_memory_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkBindVideoSessionMemoryKHR.html}[vkBindVideoSessionMemoryKHR]} *)
 let bind_video_session_memory_khr arg0 arg1 arg2 arg3 =
   match !bind_video_session_memory_khr_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -3677,6 +4721,8 @@ let bind_video_session_memory_khr arg0 arg1 arg2 arg3 =
 
 let cmd_decode_video_khr_typ = CommandBuffer.t @-> ptr (VideoDecodeInfoKHR.t) @-> returning (Ctypes.void)
 let cmd_decode_video_khr_ref = ref (bind cmd_decode_video_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdDecodeVideoKHR.html}[vkCmdDecodeVideoKHR]} *)
 let cmd_decode_video_khr arg0 arg1 =
   match !cmd_decode_video_khr_ref with
   | Some f -> f arg0 arg1
@@ -3684,6 +4730,8 @@ let cmd_decode_video_khr arg0 arg1 =
 
 let cmd_begin_video_coding_khr_typ = CommandBuffer.t @-> ptr (VideoBeginCodingInfoKHR.t) @-> returning (Ctypes.void)
 let cmd_begin_video_coding_khr_ref = ref (bind cmd_begin_video_coding_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdBeginVideoCodingKHR.html}[vkCmdBeginVideoCodingKHR]} *)
 let cmd_begin_video_coding_khr arg0 arg1 =
   match !cmd_begin_video_coding_khr_ref with
   | Some f -> f arg0 arg1
@@ -3691,6 +4739,8 @@ let cmd_begin_video_coding_khr arg0 arg1 =
 
 let cmd_control_video_coding_khr_typ = CommandBuffer.t @-> ptr (VideoCodingControlInfoKHR.t) @-> returning (Ctypes.void)
 let cmd_control_video_coding_khr_ref = ref (bind cmd_control_video_coding_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdControlVideoCodingKHR.html}[vkCmdControlVideoCodingKHR]} *)
 let cmd_control_video_coding_khr arg0 arg1 =
   match !cmd_control_video_coding_khr_ref with
   | Some f -> f arg0 arg1
@@ -3698,6 +4748,8 @@ let cmd_control_video_coding_khr arg0 arg1 =
 
 let cmd_end_video_coding_khr_typ = CommandBuffer.t @-> ptr (VideoEndCodingInfoKHR.t) @-> returning (Ctypes.void)
 let cmd_end_video_coding_khr_ref = ref (bind cmd_end_video_coding_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdEndVideoCodingKHR.html}[vkCmdEndVideoCodingKHR]} *)
 let cmd_end_video_coding_khr arg0 arg1 =
   match !cmd_end_video_coding_khr_ref with
   | Some f -> f arg0 arg1
@@ -3705,6 +4757,8 @@ let cmd_end_video_coding_khr arg0 arg1 =
 
 let cmd_encode_video_khr_typ = CommandBuffer.t @-> ptr (VideoEncodeInfoKHR.t) @-> returning (Ctypes.void)
 let cmd_encode_video_khr_ref = ref (bind cmd_encode_video_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdEncodeVideoKHR.html}[vkCmdEncodeVideoKHR]} *)
 let cmd_encode_video_khr arg0 arg1 =
   match !cmd_encode_video_khr_ref with
   | Some f -> f arg0 arg1
@@ -3712,6 +4766,8 @@ let cmd_encode_video_khr arg0 arg1 =
 
 let cmd_decompress_memory_nv_typ = CommandBuffer.t @-> Vk_base.uint32 @-> ptr (DecompressMemoryRegionNV.t) @-> returning (Ctypes.void)
 let cmd_decompress_memory_nv_ref = ref (bind cmd_decompress_memory_nv_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdDecompressMemoryNV.html}[vkCmdDecompressMemoryNV]} *)
 let cmd_decompress_memory_nv arg0 arg1 arg2 =
   match !cmd_decompress_memory_nv_ref with
   | Some f -> f arg0 arg1 arg2
@@ -3719,6 +4775,8 @@ let cmd_decompress_memory_nv arg0 arg1 arg2 =
 
 let cmd_decompress_memory_indirect_count_nv_typ = CommandBuffer.t @-> Vk_base.device_address @-> Vk_base.device_address @-> Vk_base.uint32 @-> returning (Ctypes.void)
 let cmd_decompress_memory_indirect_count_nv_ref = ref (bind cmd_decompress_memory_indirect_count_nv_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdDecompressMemoryIndirectCountNV.html}[vkCmdDecompressMemoryIndirectCountNV]} *)
 let cmd_decompress_memory_indirect_count_nv arg0 arg1 arg2 arg3 =
   match !cmd_decompress_memory_indirect_count_nv_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -3726,6 +4784,8 @@ let cmd_decompress_memory_indirect_count_nv arg0 arg1 arg2 arg3 =
 
 let get_partitioned_acceleration_structures_build_sizes_nv_typ = Device.t @-> ptr (PartitionedAccelerationStructureInstancesInputNV.t) @-> ptr (AccelerationStructureBuildSizesInfoKHR.t) @-> returning (Ctypes.void)
 let get_partitioned_acceleration_structures_build_sizes_nv_ref = ref (bind get_partitioned_acceleration_structures_build_sizes_nv_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPartitionedAccelerationStructuresBuildSizesNV.html}[vkGetPartitionedAccelerationStructuresBuildSizesNV]} *)
 let get_partitioned_acceleration_structures_build_sizes_nv arg0 arg1 arg2 =
   match !get_partitioned_acceleration_structures_build_sizes_nv_ref with
   | Some f -> f arg0 arg1 arg2
@@ -3733,6 +4793,8 @@ let get_partitioned_acceleration_structures_build_sizes_nv arg0 arg1 arg2 =
 
 let cmd_build_partitioned_acceleration_structures_nv_typ = CommandBuffer.t @-> ptr (BuildPartitionedAccelerationStructureInfoNV.t) @-> returning (Ctypes.void)
 let cmd_build_partitioned_acceleration_structures_nv_ref = ref (bind cmd_build_partitioned_acceleration_structures_nv_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdBuildPartitionedAccelerationStructuresNV.html}[vkCmdBuildPartitionedAccelerationStructuresNV]} *)
 let cmd_build_partitioned_acceleration_structures_nv arg0 arg1 =
   match !cmd_build_partitioned_acceleration_structures_nv_ref with
   | Some f -> f arg0 arg1
@@ -3740,6 +4802,8 @@ let cmd_build_partitioned_acceleration_structures_nv arg0 arg1 =
 
 let cmd_decompress_memory_ext_typ = CommandBuffer.t @-> ptr (DecompressMemoryInfoEXT.t) @-> returning (Ctypes.void)
 let cmd_decompress_memory_ext_ref = ref (bind cmd_decompress_memory_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdDecompressMemoryEXT.html}[vkCmdDecompressMemoryEXT]} *)
 let cmd_decompress_memory_ext arg0 arg1 =
   match !cmd_decompress_memory_ext_ref with
   | Some f -> f arg0 arg1
@@ -3747,6 +4811,8 @@ let cmd_decompress_memory_ext arg0 arg1 =
 
 let cmd_decompress_memory_indirect_count_ext_typ = CommandBuffer.t @-> MemoryDecompressionMethodFlagsEXT.t @-> Vk_base.device_address @-> Vk_base.device_address @-> Vk_base.uint32 @-> Vk_base.uint32 @-> returning (Ctypes.void)
 let cmd_decompress_memory_indirect_count_ext_ref = ref (bind cmd_decompress_memory_indirect_count_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdDecompressMemoryIndirectCountEXT.html}[vkCmdDecompressMemoryIndirectCountEXT]} *)
 let cmd_decompress_memory_indirect_count_ext arg0 arg1 arg2 arg3 arg4 arg5 =
   match !cmd_decompress_memory_indirect_count_ext_ref with
   | Some f -> f arg0 arg1 arg2 arg3 arg4 arg5
@@ -3754,6 +4820,8 @@ let cmd_decompress_memory_indirect_count_ext arg0 arg1 arg2 arg3 arg4 arg5 =
 
 let create_cu_module_nvx_typ = Device.t @-> ptr (CuModuleCreateInfoNVX.t) @-> ptr (AllocationCallbacks.t) @-> ptr (CuModuleNVX.t) @-> returning (Result.t)
 let create_cu_module_nvx_ref = ref (bind create_cu_module_nvx_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateCuModuleNVX.html}[vkCreateCuModuleNVX]} *)
 let create_cu_module_nvx arg0 arg1 arg2 arg3 =
   match !create_cu_module_nvx_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -3761,6 +4829,8 @@ let create_cu_module_nvx arg0 arg1 arg2 arg3 =
 
 let create_cu_function_nvx_typ = Device.t @-> ptr (CuFunctionCreateInfoNVX.t) @-> ptr (AllocationCallbacks.t) @-> ptr (CuFunctionNVX.t) @-> returning (Result.t)
 let create_cu_function_nvx_ref = ref (bind create_cu_function_nvx_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateCuFunctionNVX.html}[vkCreateCuFunctionNVX]} *)
 let create_cu_function_nvx arg0 arg1 arg2 arg3 =
   match !create_cu_function_nvx_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -3768,6 +4838,8 @@ let create_cu_function_nvx arg0 arg1 arg2 arg3 =
 
 let destroy_cu_module_nvx_typ = Device.t @-> CuModuleNVX.t @-> ptr (AllocationCallbacks.t) @-> returning (Ctypes.void)
 let destroy_cu_module_nvx_ref = ref (bind destroy_cu_module_nvx_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkDestroyCuModuleNVX.html}[vkDestroyCuModuleNVX]} *)
 let destroy_cu_module_nvx arg0 arg1 arg2 =
   match !destroy_cu_module_nvx_ref with
   | Some f -> f arg0 arg1 arg2
@@ -3775,6 +4847,8 @@ let destroy_cu_module_nvx arg0 arg1 arg2 =
 
 let destroy_cu_function_nvx_typ = Device.t @-> CuFunctionNVX.t @-> ptr (AllocationCallbacks.t) @-> returning (Ctypes.void)
 let destroy_cu_function_nvx_ref = ref (bind destroy_cu_function_nvx_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkDestroyCuFunctionNVX.html}[vkDestroyCuFunctionNVX]} *)
 let destroy_cu_function_nvx arg0 arg1 arg2 =
   match !destroy_cu_function_nvx_ref with
   | Some f -> f arg0 arg1 arg2
@@ -3782,6 +4856,8 @@ let destroy_cu_function_nvx arg0 arg1 arg2 =
 
 let cmd_cu_launch_kernel_nvx_typ = CommandBuffer.t @-> ptr (CuLaunchInfoNVX.t) @-> returning (Ctypes.void)
 let cmd_cu_launch_kernel_nvx_ref = ref (bind cmd_cu_launch_kernel_nvx_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdCuLaunchKernelNVX.html}[vkCmdCuLaunchKernelNVX]} *)
 let cmd_cu_launch_kernel_nvx arg0 arg1 =
   match !cmd_cu_launch_kernel_nvx_ref with
   | Some f -> f arg0 arg1
@@ -3789,6 +4865,8 @@ let cmd_cu_launch_kernel_nvx arg0 arg1 =
 
 let get_descriptor_set_layout_size_ext_typ = Device.t @-> DescriptorSetLayout.t @-> ptr (Vk_base.device_size) @-> returning (Ctypes.void)
 let get_descriptor_set_layout_size_ext_ref = ref (bind get_descriptor_set_layout_size_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetDescriptorSetLayoutSizeEXT.html}[vkGetDescriptorSetLayoutSizeEXT]} *)
 let get_descriptor_set_layout_size_ext arg0 arg1 arg2 =
   match !get_descriptor_set_layout_size_ext_ref with
   | Some f -> f arg0 arg1 arg2
@@ -3796,6 +4874,8 @@ let get_descriptor_set_layout_size_ext arg0 arg1 arg2 =
 
 let get_descriptor_set_layout_binding_offset_ext_typ = Device.t @-> DescriptorSetLayout.t @-> Vk_base.uint32 @-> ptr (Vk_base.device_size) @-> returning (Ctypes.void)
 let get_descriptor_set_layout_binding_offset_ext_ref = ref (bind get_descriptor_set_layout_binding_offset_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetDescriptorSetLayoutBindingOffsetEXT.html}[vkGetDescriptorSetLayoutBindingOffsetEXT]} *)
 let get_descriptor_set_layout_binding_offset_ext arg0 arg1 arg2 arg3 =
   match !get_descriptor_set_layout_binding_offset_ext_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -3803,6 +4883,8 @@ let get_descriptor_set_layout_binding_offset_ext arg0 arg1 arg2 arg3 =
 
 let get_descriptor_ext_typ = Device.t @-> ptr (DescriptorGetInfoEXT.t) @-> Vk_base.size_t @-> ptr (Ctypes.void) @-> returning (Ctypes.void)
 let get_descriptor_ext_ref = ref (bind get_descriptor_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetDescriptorEXT.html}[vkGetDescriptorEXT]} *)
 let get_descriptor_ext arg0 arg1 arg2 arg3 =
   match !get_descriptor_ext_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -3810,6 +4892,8 @@ let get_descriptor_ext arg0 arg1 arg2 arg3 =
 
 let cmd_bind_descriptor_buffers_ext_typ = CommandBuffer.t @-> Vk_base.uint32 @-> ptr (DescriptorBufferBindingInfoEXT.t) @-> returning (Ctypes.void)
 let cmd_bind_descriptor_buffers_ext_ref = ref (bind cmd_bind_descriptor_buffers_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdBindDescriptorBuffersEXT.html}[vkCmdBindDescriptorBuffersEXT]} *)
 let cmd_bind_descriptor_buffers_ext arg0 arg1 arg2 =
   match !cmd_bind_descriptor_buffers_ext_ref with
   | Some f -> f arg0 arg1 arg2
@@ -3817,6 +4901,8 @@ let cmd_bind_descriptor_buffers_ext arg0 arg1 arg2 =
 
 let cmd_set_descriptor_buffer_offsets_ext_typ = CommandBuffer.t @-> PipelineBindPoint.t @-> PipelineLayout.t @-> Vk_base.uint32 @-> Vk_base.uint32 @-> ptr (Vk_base.uint32) @-> ptr (Vk_base.device_size) @-> returning (Ctypes.void)
 let cmd_set_descriptor_buffer_offsets_ext_ref = ref (bind cmd_set_descriptor_buffer_offsets_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetDescriptorBufferOffsetsEXT.html}[vkCmdSetDescriptorBufferOffsetsEXT]} *)
 let cmd_set_descriptor_buffer_offsets_ext arg0 arg1 arg2 arg3 arg4 arg5 arg6 =
   match !cmd_set_descriptor_buffer_offsets_ext_ref with
   | Some f -> f arg0 arg1 arg2 arg3 arg4 arg5 arg6
@@ -3824,6 +4910,8 @@ let cmd_set_descriptor_buffer_offsets_ext arg0 arg1 arg2 arg3 arg4 arg5 arg6 =
 
 let cmd_bind_descriptor_buffer_embedded_samplers_ext_typ = CommandBuffer.t @-> PipelineBindPoint.t @-> PipelineLayout.t @-> Vk_base.uint32 @-> returning (Ctypes.void)
 let cmd_bind_descriptor_buffer_embedded_samplers_ext_ref = ref (bind cmd_bind_descriptor_buffer_embedded_samplers_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdBindDescriptorBufferEmbeddedSamplersEXT.html}[vkCmdBindDescriptorBufferEmbeddedSamplersEXT]} *)
 let cmd_bind_descriptor_buffer_embedded_samplers_ext arg0 arg1 arg2 arg3 =
   match !cmd_bind_descriptor_buffer_embedded_samplers_ext_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -3831,6 +4919,8 @@ let cmd_bind_descriptor_buffer_embedded_samplers_ext arg0 arg1 arg2 arg3 =
 
 let get_buffer_opaque_capture_descriptor_data_ext_typ = Device.t @-> ptr (BufferCaptureDescriptorDataInfoEXT.t) @-> ptr (Ctypes.void) @-> returning (Result.t)
 let get_buffer_opaque_capture_descriptor_data_ext_ref = ref (bind get_buffer_opaque_capture_descriptor_data_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetBufferOpaqueCaptureDescriptorDataEXT.html}[vkGetBufferOpaqueCaptureDescriptorDataEXT]} *)
 let get_buffer_opaque_capture_descriptor_data_ext arg0 arg1 arg2 =
   match !get_buffer_opaque_capture_descriptor_data_ext_ref with
   | Some f -> f arg0 arg1 arg2
@@ -3838,6 +4928,8 @@ let get_buffer_opaque_capture_descriptor_data_ext arg0 arg1 arg2 =
 
 let get_image_opaque_capture_descriptor_data_ext_typ = Device.t @-> ptr (ImageCaptureDescriptorDataInfoEXT.t) @-> ptr (Ctypes.void) @-> returning (Result.t)
 let get_image_opaque_capture_descriptor_data_ext_ref = ref (bind get_image_opaque_capture_descriptor_data_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetImageOpaqueCaptureDescriptorDataEXT.html}[vkGetImageOpaqueCaptureDescriptorDataEXT]} *)
 let get_image_opaque_capture_descriptor_data_ext arg0 arg1 arg2 =
   match !get_image_opaque_capture_descriptor_data_ext_ref with
   | Some f -> f arg0 arg1 arg2
@@ -3845,6 +4937,8 @@ let get_image_opaque_capture_descriptor_data_ext arg0 arg1 arg2 =
 
 let get_image_view_opaque_capture_descriptor_data_ext_typ = Device.t @-> ptr (ImageViewCaptureDescriptorDataInfoEXT.t) @-> ptr (Ctypes.void) @-> returning (Result.t)
 let get_image_view_opaque_capture_descriptor_data_ext_ref = ref (bind get_image_view_opaque_capture_descriptor_data_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetImageViewOpaqueCaptureDescriptorDataEXT.html}[vkGetImageViewOpaqueCaptureDescriptorDataEXT]} *)
 let get_image_view_opaque_capture_descriptor_data_ext arg0 arg1 arg2 =
   match !get_image_view_opaque_capture_descriptor_data_ext_ref with
   | Some f -> f arg0 arg1 arg2
@@ -3852,6 +4946,8 @@ let get_image_view_opaque_capture_descriptor_data_ext arg0 arg1 arg2 =
 
 let get_sampler_opaque_capture_descriptor_data_ext_typ = Device.t @-> ptr (SamplerCaptureDescriptorDataInfoEXT.t) @-> ptr (Ctypes.void) @-> returning (Result.t)
 let get_sampler_opaque_capture_descriptor_data_ext_ref = ref (bind get_sampler_opaque_capture_descriptor_data_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetSamplerOpaqueCaptureDescriptorDataEXT.html}[vkGetSamplerOpaqueCaptureDescriptorDataEXT]} *)
 let get_sampler_opaque_capture_descriptor_data_ext arg0 arg1 arg2 =
   match !get_sampler_opaque_capture_descriptor_data_ext_ref with
   | Some f -> f arg0 arg1 arg2
@@ -3859,6 +4955,8 @@ let get_sampler_opaque_capture_descriptor_data_ext arg0 arg1 arg2 =
 
 let get_acceleration_structure_opaque_capture_descriptor_data_ext_typ = Device.t @-> ptr (AccelerationStructureCaptureDescriptorDataInfoEXT.t) @-> ptr (Ctypes.void) @-> returning (Result.t)
 let get_acceleration_structure_opaque_capture_descriptor_data_ext_ref = ref (bind get_acceleration_structure_opaque_capture_descriptor_data_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetAccelerationStructureOpaqueCaptureDescriptorDataEXT.html}[vkGetAccelerationStructureOpaqueCaptureDescriptorDataEXT]} *)
 let get_acceleration_structure_opaque_capture_descriptor_data_ext arg0 arg1 arg2 =
   match !get_acceleration_structure_opaque_capture_descriptor_data_ext_ref with
   | Some f -> f arg0 arg1 arg2
@@ -3866,6 +4964,8 @@ let get_acceleration_structure_opaque_capture_descriptor_data_ext arg0 arg1 arg2
 
 let set_device_memory_priority_ext_typ = Device.t @-> DeviceMemory.t @-> Ctypes.float @-> returning (Ctypes.void)
 let set_device_memory_priority_ext_ref = ref (bind set_device_memory_priority_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkSetDeviceMemoryPriorityEXT.html}[vkSetDeviceMemoryPriorityEXT]} *)
 let set_device_memory_priority_ext arg0 arg1 arg2 =
   match !set_device_memory_priority_ext_ref with
   | Some f -> f arg0 arg1 arg2
@@ -3873,6 +4973,8 @@ let set_device_memory_priority_ext arg0 arg1 arg2 =
 
 let acquire_drm_display_ext_typ = PhysicalDevice.t @-> Vk_base.int32 @-> DisplayKHR.t @-> returning (Result.t)
 let acquire_drm_display_ext_ref = ref (bind acquire_drm_display_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkAcquireDrmDisplayEXT.html}[vkAcquireDrmDisplayEXT]} *)
 let acquire_drm_display_ext arg0 arg1 arg2 =
   match !acquire_drm_display_ext_ref with
   | Some f -> f arg0 arg1 arg2
@@ -3880,6 +4982,8 @@ let acquire_drm_display_ext arg0 arg1 arg2 =
 
 let get_drm_display_ext_typ = PhysicalDevice.t @-> Vk_base.int32 @-> Vk_base.uint32 @-> ptr (DisplayKHR.t) @-> returning (Result.t)
 let get_drm_display_ext_ref = ref (bind get_drm_display_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetDrmDisplayEXT.html}[vkGetDrmDisplayEXT]} *)
 let get_drm_display_ext arg0 arg1 arg2 arg3 =
   match !get_drm_display_ext_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -3887,6 +4991,8 @@ let get_drm_display_ext arg0 arg1 arg2 arg3 =
 
 let wait_for_present_2_khr_typ = Device.t @-> SwapchainKHR.t @-> ptr (PresentWait2InfoKHR.t) @-> returning (Result.t)
 let wait_for_present_2_khr_ref = ref (bind wait_for_present_2_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkWaitForPresent2KHR.html}[vkWaitForPresent2KHR]} *)
 let wait_for_present_2_khr arg0 arg1 arg2 =
   match !wait_for_present_2_khr_ref with
   | Some f -> f arg0 arg1 arg2
@@ -3894,6 +5000,8 @@ let wait_for_present_2_khr arg0 arg1 arg2 =
 
 let wait_for_present_khr_typ = Device.t @-> SwapchainKHR.t @-> Vk_base.uint64 @-> Vk_base.uint64 @-> returning (Result.t)
 let wait_for_present_khr_ref = ref (bind wait_for_present_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkWaitForPresentKHR.html}[vkWaitForPresentKHR]} *)
 let wait_for_present_khr arg0 arg1 arg2 arg3 =
   match !wait_for_present_khr_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -3901,6 +5009,8 @@ let wait_for_present_khr arg0 arg1 arg2 arg3 =
 
 let create_buffer_collection_fuchsia_typ = Device.t @-> ptr (BufferCollectionCreateInfoFUCHSIA.t) @-> ptr (AllocationCallbacks.t) @-> ptr (BufferCollectionFUCHSIA.t) @-> returning (Result.t)
 let create_buffer_collection_fuchsia_ref = ref (bind create_buffer_collection_fuchsia_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateBufferCollectionFUCHSIA.html}[vkCreateBufferCollectionFUCHSIA]} *)
 let create_buffer_collection_fuchsia arg0 arg1 arg2 arg3 =
   match !create_buffer_collection_fuchsia_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -3908,6 +5018,8 @@ let create_buffer_collection_fuchsia arg0 arg1 arg2 arg3 =
 
 let set_buffer_collection_buffer_constraints_fuchsia_typ = Device.t @-> BufferCollectionFUCHSIA.t @-> ptr (BufferConstraintsInfoFUCHSIA.t) @-> returning (Result.t)
 let set_buffer_collection_buffer_constraints_fuchsia_ref = ref (bind set_buffer_collection_buffer_constraints_fuchsia_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkSetBufferCollectionBufferConstraintsFUCHSIA.html}[vkSetBufferCollectionBufferConstraintsFUCHSIA]} *)
 let set_buffer_collection_buffer_constraints_fuchsia arg0 arg1 arg2 =
   match !set_buffer_collection_buffer_constraints_fuchsia_ref with
   | Some f -> f arg0 arg1 arg2
@@ -3915,6 +5027,8 @@ let set_buffer_collection_buffer_constraints_fuchsia arg0 arg1 arg2 =
 
 let set_buffer_collection_image_constraints_fuchsia_typ = Device.t @-> BufferCollectionFUCHSIA.t @-> ptr (ImageConstraintsInfoFUCHSIA.t) @-> returning (Result.t)
 let set_buffer_collection_image_constraints_fuchsia_ref = ref (bind set_buffer_collection_image_constraints_fuchsia_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkSetBufferCollectionImageConstraintsFUCHSIA.html}[vkSetBufferCollectionImageConstraintsFUCHSIA]} *)
 let set_buffer_collection_image_constraints_fuchsia arg0 arg1 arg2 =
   match !set_buffer_collection_image_constraints_fuchsia_ref with
   | Some f -> f arg0 arg1 arg2
@@ -3922,6 +5036,8 @@ let set_buffer_collection_image_constraints_fuchsia arg0 arg1 arg2 =
 
 let destroy_buffer_collection_fuchsia_typ = Device.t @-> BufferCollectionFUCHSIA.t @-> ptr (AllocationCallbacks.t) @-> returning (Ctypes.void)
 let destroy_buffer_collection_fuchsia_ref = ref (bind destroy_buffer_collection_fuchsia_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkDestroyBufferCollectionFUCHSIA.html}[vkDestroyBufferCollectionFUCHSIA]} *)
 let destroy_buffer_collection_fuchsia arg0 arg1 arg2 =
   match !destroy_buffer_collection_fuchsia_ref with
   | Some f -> f arg0 arg1 arg2
@@ -3929,6 +5045,8 @@ let destroy_buffer_collection_fuchsia arg0 arg1 arg2 =
 
 let get_buffer_collection_properties_fuchsia_typ = Device.t @-> BufferCollectionFUCHSIA.t @-> ptr (BufferCollectionPropertiesFUCHSIA.t) @-> returning (Result.t)
 let get_buffer_collection_properties_fuchsia_ref = ref (bind get_buffer_collection_properties_fuchsia_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetBufferCollectionPropertiesFUCHSIA.html}[vkGetBufferCollectionPropertiesFUCHSIA]} *)
 let get_buffer_collection_properties_fuchsia arg0 arg1 arg2 =
   match !get_buffer_collection_properties_fuchsia_ref with
   | Some f -> f arg0 arg1 arg2
@@ -3936,6 +5054,8 @@ let get_buffer_collection_properties_fuchsia arg0 arg1 arg2 =
 
 let create_cuda_module_nv_typ = Device.t @-> ptr (CudaModuleCreateInfoNV.t) @-> ptr (AllocationCallbacks.t) @-> ptr (CudaModuleNV.t) @-> returning (Result.t)
 let create_cuda_module_nv_ref = ref (bind create_cuda_module_nv_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateCudaModuleNV.html}[vkCreateCudaModuleNV]} *)
 let create_cuda_module_nv arg0 arg1 arg2 arg3 =
   match !create_cuda_module_nv_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -3943,6 +5063,8 @@ let create_cuda_module_nv arg0 arg1 arg2 arg3 =
 
 let get_cuda_module_cache_nv_typ = Device.t @-> CudaModuleNV.t @-> ptr (Vk_base.size_t) @-> ptr (Ctypes.void) @-> returning (Result.t)
 let get_cuda_module_cache_nv_ref = ref (bind get_cuda_module_cache_nv_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetCudaModuleCacheNV.html}[vkGetCudaModuleCacheNV]} *)
 let get_cuda_module_cache_nv arg0 arg1 arg2 arg3 =
   match !get_cuda_module_cache_nv_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -3950,6 +5072,8 @@ let get_cuda_module_cache_nv arg0 arg1 arg2 arg3 =
 
 let create_cuda_function_nv_typ = Device.t @-> ptr (CudaFunctionCreateInfoNV.t) @-> ptr (AllocationCallbacks.t) @-> ptr (CudaFunctionNV.t) @-> returning (Result.t)
 let create_cuda_function_nv_ref = ref (bind create_cuda_function_nv_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateCudaFunctionNV.html}[vkCreateCudaFunctionNV]} *)
 let create_cuda_function_nv arg0 arg1 arg2 arg3 =
   match !create_cuda_function_nv_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -3957,6 +5081,8 @@ let create_cuda_function_nv arg0 arg1 arg2 arg3 =
 
 let destroy_cuda_module_nv_typ = Device.t @-> CudaModuleNV.t @-> ptr (AllocationCallbacks.t) @-> returning (Ctypes.void)
 let destroy_cuda_module_nv_ref = ref (bind destroy_cuda_module_nv_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkDestroyCudaModuleNV.html}[vkDestroyCudaModuleNV]} *)
 let destroy_cuda_module_nv arg0 arg1 arg2 =
   match !destroy_cuda_module_nv_ref with
   | Some f -> f arg0 arg1 arg2
@@ -3964,6 +5090,8 @@ let destroy_cuda_module_nv arg0 arg1 arg2 =
 
 let destroy_cuda_function_nv_typ = Device.t @-> CudaFunctionNV.t @-> ptr (AllocationCallbacks.t) @-> returning (Ctypes.void)
 let destroy_cuda_function_nv_ref = ref (bind destroy_cuda_function_nv_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkDestroyCudaFunctionNV.html}[vkDestroyCudaFunctionNV]} *)
 let destroy_cuda_function_nv arg0 arg1 arg2 =
   match !destroy_cuda_function_nv_ref with
   | Some f -> f arg0 arg1 arg2
@@ -3971,6 +5099,8 @@ let destroy_cuda_function_nv arg0 arg1 arg2 =
 
 let cmd_cuda_launch_kernel_nv_typ = CommandBuffer.t @-> ptr (CudaLaunchInfoNV.t) @-> returning (Ctypes.void)
 let cmd_cuda_launch_kernel_nv_ref = ref (bind cmd_cuda_launch_kernel_nv_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdCudaLaunchKernelNV.html}[vkCmdCudaLaunchKernelNV]} *)
 let cmd_cuda_launch_kernel_nv arg0 arg1 =
   match !cmd_cuda_launch_kernel_nv_ref with
   | Some f -> f arg0 arg1
@@ -3978,6 +5108,8 @@ let cmd_cuda_launch_kernel_nv arg0 arg1 =
 
 let cmd_begin_rendering_typ = CommandBuffer.t @-> ptr (RenderingInfo.t) @-> returning (Ctypes.void)
 let cmd_begin_rendering_ref = ref (bind cmd_begin_rendering_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdBeginRendering.html}[vkCmdBeginRendering]} *)
 let cmd_begin_rendering arg0 arg1 =
   match !cmd_begin_rendering_ref with
   | Some f -> f arg0 arg1
@@ -3985,6 +5117,8 @@ let cmd_begin_rendering arg0 arg1 =
 
 let cmd_end_rendering_typ = CommandBuffer.t @-> returning (Ctypes.void)
 let cmd_end_rendering_ref = ref (bind cmd_end_rendering_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdEndRendering.html}[vkCmdEndRendering]} *)
 let cmd_end_rendering arg0 =
   match !cmd_end_rendering_ref with
   | Some f -> f arg0
@@ -3992,6 +5126,8 @@ let cmd_end_rendering arg0 =
 
 let cmd_end_rendering_2_khr_typ = CommandBuffer.t @-> ptr (RenderingEndInfoKHR.t) @-> returning (Ctypes.void)
 let cmd_end_rendering_2_khr_ref = ref (bind cmd_end_rendering_2_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdEndRendering2KHR.html}[vkCmdEndRendering2KHR]} *)
 let cmd_end_rendering_2_khr arg0 arg1 =
   match !cmd_end_rendering_2_khr_ref with
   | Some f -> f arg0 arg1
@@ -3999,6 +5135,8 @@ let cmd_end_rendering_2_khr arg0 arg1 =
 
 let get_descriptor_set_layout_host_mapping_info_valve_typ = Device.t @-> ptr (DescriptorSetBindingReferenceVALVE.t) @-> ptr (DescriptorSetLayoutHostMappingInfoVALVE.t) @-> returning (Ctypes.void)
 let get_descriptor_set_layout_host_mapping_info_valve_ref = ref (bind get_descriptor_set_layout_host_mapping_info_valve_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetDescriptorSetLayoutHostMappingInfoVALVE.html}[vkGetDescriptorSetLayoutHostMappingInfoVALVE]} *)
 let get_descriptor_set_layout_host_mapping_info_valve arg0 arg1 arg2 =
   match !get_descriptor_set_layout_host_mapping_info_valve_ref with
   | Some f -> f arg0 arg1 arg2
@@ -4006,6 +5144,8 @@ let get_descriptor_set_layout_host_mapping_info_valve arg0 arg1 arg2 =
 
 let get_descriptor_set_host_mapping_valve_typ = Device.t @-> DescriptorSet.t @-> ptr (ptr (Ctypes.void)) @-> returning (Ctypes.void)
 let get_descriptor_set_host_mapping_valve_ref = ref (bind get_descriptor_set_host_mapping_valve_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetDescriptorSetHostMappingVALVE.html}[vkGetDescriptorSetHostMappingVALVE]} *)
 let get_descriptor_set_host_mapping_valve arg0 arg1 arg2 =
   match !get_descriptor_set_host_mapping_valve_ref with
   | Some f -> f arg0 arg1 arg2
@@ -4013,6 +5153,8 @@ let get_descriptor_set_host_mapping_valve arg0 arg1 arg2 =
 
 let create_micromap_ext_typ = Device.t @-> ptr (MicromapCreateInfoEXT.t) @-> ptr (AllocationCallbacks.t) @-> ptr (MicromapEXT.t) @-> returning (Result.t)
 let create_micromap_ext_ref = ref (bind create_micromap_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateMicromapEXT.html}[vkCreateMicromapEXT]} *)
 let create_micromap_ext arg0 arg1 arg2 arg3 =
   match !create_micromap_ext_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -4020,6 +5162,8 @@ let create_micromap_ext arg0 arg1 arg2 arg3 =
 
 let cmd_build_micromaps_ext_typ = CommandBuffer.t @-> Vk_base.uint32 @-> ptr (MicromapBuildInfoEXT.t) @-> returning (Ctypes.void)
 let cmd_build_micromaps_ext_ref = ref (bind cmd_build_micromaps_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdBuildMicromapsEXT.html}[vkCmdBuildMicromapsEXT]} *)
 let cmd_build_micromaps_ext arg0 arg1 arg2 =
   match !cmd_build_micromaps_ext_ref with
   | Some f -> f arg0 arg1 arg2
@@ -4027,6 +5171,8 @@ let cmd_build_micromaps_ext arg0 arg1 arg2 =
 
 let build_micromaps_ext_typ = Device.t @-> DeferredOperationKHR.t @-> Vk_base.uint32 @-> ptr (MicromapBuildInfoEXT.t) @-> returning (Result.t)
 let build_micromaps_ext_ref = ref (bind build_micromaps_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkBuildMicromapsEXT.html}[vkBuildMicromapsEXT]} *)
 let build_micromaps_ext arg0 arg1 arg2 arg3 =
   match !build_micromaps_ext_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -4034,6 +5180,8 @@ let build_micromaps_ext arg0 arg1 arg2 arg3 =
 
 let destroy_micromap_ext_typ = Device.t @-> MicromapEXT.t @-> ptr (AllocationCallbacks.t) @-> returning (Ctypes.void)
 let destroy_micromap_ext_ref = ref (bind destroy_micromap_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkDestroyMicromapEXT.html}[vkDestroyMicromapEXT]} *)
 let destroy_micromap_ext arg0 arg1 arg2 =
   match !destroy_micromap_ext_ref with
   | Some f -> f arg0 arg1 arg2
@@ -4041,6 +5189,8 @@ let destroy_micromap_ext arg0 arg1 arg2 =
 
 let cmd_copy_micromap_ext_typ = CommandBuffer.t @-> ptr (CopyMicromapInfoEXT.t) @-> returning (Ctypes.void)
 let cmd_copy_micromap_ext_ref = ref (bind cmd_copy_micromap_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdCopyMicromapEXT.html}[vkCmdCopyMicromapEXT]} *)
 let cmd_copy_micromap_ext arg0 arg1 =
   match !cmd_copy_micromap_ext_ref with
   | Some f -> f arg0 arg1
@@ -4048,6 +5198,8 @@ let cmd_copy_micromap_ext arg0 arg1 =
 
 let copy_micromap_ext_typ = Device.t @-> DeferredOperationKHR.t @-> ptr (CopyMicromapInfoEXT.t) @-> returning (Result.t)
 let copy_micromap_ext_ref = ref (bind copy_micromap_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCopyMicromapEXT.html}[vkCopyMicromapEXT]} *)
 let copy_micromap_ext arg0 arg1 arg2 =
   match !copy_micromap_ext_ref with
   | Some f -> f arg0 arg1 arg2
@@ -4055,6 +5207,8 @@ let copy_micromap_ext arg0 arg1 arg2 =
 
 let cmd_copy_micromap_to_memory_ext_typ = CommandBuffer.t @-> ptr (CopyMicromapToMemoryInfoEXT.t) @-> returning (Ctypes.void)
 let cmd_copy_micromap_to_memory_ext_ref = ref (bind cmd_copy_micromap_to_memory_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdCopyMicromapToMemoryEXT.html}[vkCmdCopyMicromapToMemoryEXT]} *)
 let cmd_copy_micromap_to_memory_ext arg0 arg1 =
   match !cmd_copy_micromap_to_memory_ext_ref with
   | Some f -> f arg0 arg1
@@ -4062,6 +5216,8 @@ let cmd_copy_micromap_to_memory_ext arg0 arg1 =
 
 let copy_micromap_to_memory_ext_typ = Device.t @-> DeferredOperationKHR.t @-> ptr (CopyMicromapToMemoryInfoEXT.t) @-> returning (Result.t)
 let copy_micromap_to_memory_ext_ref = ref (bind copy_micromap_to_memory_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCopyMicromapToMemoryEXT.html}[vkCopyMicromapToMemoryEXT]} *)
 let copy_micromap_to_memory_ext arg0 arg1 arg2 =
   match !copy_micromap_to_memory_ext_ref with
   | Some f -> f arg0 arg1 arg2
@@ -4069,6 +5225,8 @@ let copy_micromap_to_memory_ext arg0 arg1 arg2 =
 
 let cmd_copy_memory_to_micromap_ext_typ = CommandBuffer.t @-> ptr (CopyMemoryToMicromapInfoEXT.t) @-> returning (Ctypes.void)
 let cmd_copy_memory_to_micromap_ext_ref = ref (bind cmd_copy_memory_to_micromap_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdCopyMemoryToMicromapEXT.html}[vkCmdCopyMemoryToMicromapEXT]} *)
 let cmd_copy_memory_to_micromap_ext arg0 arg1 =
   match !cmd_copy_memory_to_micromap_ext_ref with
   | Some f -> f arg0 arg1
@@ -4076,6 +5234,8 @@ let cmd_copy_memory_to_micromap_ext arg0 arg1 =
 
 let copy_memory_to_micromap_ext_typ = Device.t @-> DeferredOperationKHR.t @-> ptr (CopyMemoryToMicromapInfoEXT.t) @-> returning (Result.t)
 let copy_memory_to_micromap_ext_ref = ref (bind copy_memory_to_micromap_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCopyMemoryToMicromapEXT.html}[vkCopyMemoryToMicromapEXT]} *)
 let copy_memory_to_micromap_ext arg0 arg1 arg2 =
   match !copy_memory_to_micromap_ext_ref with
   | Some f -> f arg0 arg1 arg2
@@ -4083,6 +5243,8 @@ let copy_memory_to_micromap_ext arg0 arg1 arg2 =
 
 let cmd_write_micromaps_properties_ext_typ = CommandBuffer.t @-> Vk_base.uint32 @-> ptr (MicromapEXT.t) @-> QueryType.t @-> QueryPool.t @-> Vk_base.uint32 @-> returning (Ctypes.void)
 let cmd_write_micromaps_properties_ext_ref = ref (bind cmd_write_micromaps_properties_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdWriteMicromapsPropertiesEXT.html}[vkCmdWriteMicromapsPropertiesEXT]} *)
 let cmd_write_micromaps_properties_ext arg0 arg1 arg2 arg3 arg4 arg5 =
   match !cmd_write_micromaps_properties_ext_ref with
   | Some f -> f arg0 arg1 arg2 arg3 arg4 arg5
@@ -4090,6 +5252,8 @@ let cmd_write_micromaps_properties_ext arg0 arg1 arg2 arg3 arg4 arg5 =
 
 let write_micromaps_properties_ext_typ = Device.t @-> Vk_base.uint32 @-> ptr (MicromapEXT.t) @-> QueryType.t @-> Vk_base.size_t @-> ptr (Ctypes.void) @-> Vk_base.size_t @-> returning (Result.t)
 let write_micromaps_properties_ext_ref = ref (bind write_micromaps_properties_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkWriteMicromapsPropertiesEXT.html}[vkWriteMicromapsPropertiesEXT]} *)
 let write_micromaps_properties_ext arg0 arg1 arg2 arg3 arg4 arg5 arg6 =
   match !write_micromaps_properties_ext_ref with
   | Some f -> f arg0 arg1 arg2 arg3 arg4 arg5 arg6
@@ -4097,6 +5261,8 @@ let write_micromaps_properties_ext arg0 arg1 arg2 arg3 arg4 arg5 arg6 =
 
 let get_device_micromap_compatibility_ext_typ = Device.t @-> ptr (MicromapVersionInfoEXT.t) @-> ptr (AccelerationStructureCompatibilityKHR.t) @-> returning (Ctypes.void)
 let get_device_micromap_compatibility_ext_ref = ref (bind get_device_micromap_compatibility_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetDeviceMicromapCompatibilityEXT.html}[vkGetDeviceMicromapCompatibilityEXT]} *)
 let get_device_micromap_compatibility_ext arg0 arg1 arg2 =
   match !get_device_micromap_compatibility_ext_ref with
   | Some f -> f arg0 arg1 arg2
@@ -4104,6 +5270,8 @@ let get_device_micromap_compatibility_ext arg0 arg1 arg2 =
 
 let get_micromap_build_sizes_ext_typ = Device.t @-> AccelerationStructureBuildTypeKHR.t @-> ptr (MicromapBuildInfoEXT.t) @-> ptr (MicromapBuildSizesInfoEXT.t) @-> returning (Ctypes.void)
 let get_micromap_build_sizes_ext_ref = ref (bind get_micromap_build_sizes_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetMicromapBuildSizesEXT.html}[vkGetMicromapBuildSizesEXT]} *)
 let get_micromap_build_sizes_ext arg0 arg1 arg2 arg3 =
   match !get_micromap_build_sizes_ext_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -4111,6 +5279,8 @@ let get_micromap_build_sizes_ext arg0 arg1 arg2 arg3 =
 
 let get_shader_module_identifier_ext_typ = Device.t @-> ShaderModule.t @-> ptr (ShaderModuleIdentifierEXT.t) @-> returning (Ctypes.void)
 let get_shader_module_identifier_ext_ref = ref (bind get_shader_module_identifier_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetShaderModuleIdentifierEXT.html}[vkGetShaderModuleIdentifierEXT]} *)
 let get_shader_module_identifier_ext arg0 arg1 arg2 =
   match !get_shader_module_identifier_ext_ref with
   | Some f -> f arg0 arg1 arg2
@@ -4118,6 +5288,8 @@ let get_shader_module_identifier_ext arg0 arg1 arg2 =
 
 let get_shader_module_create_info_identifier_ext_typ = Device.t @-> ptr (ShaderModuleCreateInfo.t) @-> ptr (ShaderModuleIdentifierEXT.t) @-> returning (Ctypes.void)
 let get_shader_module_create_info_identifier_ext_ref = ref (bind get_shader_module_create_info_identifier_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetShaderModuleCreateInfoIdentifierEXT.html}[vkGetShaderModuleCreateInfoIdentifierEXT]} *)
 let get_shader_module_create_info_identifier_ext arg0 arg1 arg2 =
   match !get_shader_module_create_info_identifier_ext_ref with
   | Some f -> f arg0 arg1 arg2
@@ -4125,6 +5297,8 @@ let get_shader_module_create_info_identifier_ext arg0 arg1 arg2 =
 
 let get_image_subresource_layout_2_typ = Device.t @-> Image.t @-> ptr (ImageSubresource2.t) @-> ptr (SubresourceLayout2.t) @-> returning (Ctypes.void)
 let get_image_subresource_layout_2_ref = ref (bind get_image_subresource_layout_2_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetImageSubresourceLayout2.html}[vkGetImageSubresourceLayout2]} *)
 let get_image_subresource_layout_2 arg0 arg1 arg2 arg3 =
   match !get_image_subresource_layout_2_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -4132,6 +5306,8 @@ let get_image_subresource_layout_2 arg0 arg1 arg2 arg3 =
 
 let get_pipeline_properties_ext_typ = Device.t @-> ptr (PipelineInfoKHR.t) @-> ptr (BaseOutStructure.t) @-> returning (Result.t)
 let get_pipeline_properties_ext_ref = ref (bind get_pipeline_properties_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPipelinePropertiesEXT.html}[vkGetPipelinePropertiesEXT]} *)
 let get_pipeline_properties_ext arg0 arg1 arg2 =
   match !get_pipeline_properties_ext_ref with
   | Some f -> f arg0 arg1 arg2
@@ -4139,6 +5315,8 @@ let get_pipeline_properties_ext arg0 arg1 arg2 =
 
 let export_metal_objects_ext_typ = Device.t @-> ptr (ExportMetalObjectsInfoEXT.t) @-> returning (Ctypes.void)
 let export_metal_objects_ext_ref = ref (bind export_metal_objects_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkExportMetalObjectsEXT.html}[vkExportMetalObjectsEXT]} *)
 let export_metal_objects_ext arg0 arg1 =
   match !export_metal_objects_ext_ref with
   | Some f -> f arg0 arg1
@@ -4146,6 +5324,8 @@ let export_metal_objects_ext arg0 arg1 =
 
 let cmd_bind_tile_memory_qcom_typ = CommandBuffer.t @-> ptr (TileMemoryBindInfoQCOM.t) @-> returning (Ctypes.void)
 let cmd_bind_tile_memory_qcom_ref = ref (bind cmd_bind_tile_memory_qcom_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdBindTileMemoryQCOM.html}[vkCmdBindTileMemoryQCOM]} *)
 let cmd_bind_tile_memory_qcom arg0 arg1 =
   match !cmd_bind_tile_memory_qcom_ref with
   | Some f -> f arg0 arg1
@@ -4153,6 +5333,8 @@ let cmd_bind_tile_memory_qcom arg0 arg1 =
 
 let get_framebuffer_tile_properties_qcom_typ = Device.t @-> Framebuffer.t @-> ptr (Vk_base.uint32) @-> ptr (TilePropertiesQCOM.t) @-> returning (Result.t)
 let get_framebuffer_tile_properties_qcom_ref = ref (bind get_framebuffer_tile_properties_qcom_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetFramebufferTilePropertiesQCOM.html}[vkGetFramebufferTilePropertiesQCOM]} *)
 let get_framebuffer_tile_properties_qcom arg0 arg1 arg2 arg3 =
   match !get_framebuffer_tile_properties_qcom_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -4160,6 +5342,8 @@ let get_framebuffer_tile_properties_qcom arg0 arg1 arg2 arg3 =
 
 let get_dynamic_rendering_tile_properties_qcom_typ = Device.t @-> ptr (RenderingInfo.t) @-> ptr (TilePropertiesQCOM.t) @-> returning (Result.t)
 let get_dynamic_rendering_tile_properties_qcom_ref = ref (bind get_dynamic_rendering_tile_properties_qcom_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetDynamicRenderingTilePropertiesQCOM.html}[vkGetDynamicRenderingTilePropertiesQCOM]} *)
 let get_dynamic_rendering_tile_properties_qcom arg0 arg1 arg2 =
   match !get_dynamic_rendering_tile_properties_qcom_ref with
   | Some f -> f arg0 arg1 arg2
@@ -4167,6 +5351,8 @@ let get_dynamic_rendering_tile_properties_qcom arg0 arg1 arg2 =
 
 let get_physical_device_optical_flow_image_formats_nv_typ = PhysicalDevice.t @-> ptr (OpticalFlowImageFormatInfoNV.t) @-> ptr (Vk_base.uint32) @-> ptr (OpticalFlowImageFormatPropertiesNV.t) @-> returning (Result.t)
 let get_physical_device_optical_flow_image_formats_nv_ref = ref (bind get_physical_device_optical_flow_image_formats_nv_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPhysicalDeviceOpticalFlowImageFormatsNV.html}[vkGetPhysicalDeviceOpticalFlowImageFormatsNV]} *)
 let get_physical_device_optical_flow_image_formats_nv arg0 arg1 arg2 arg3 =
   match !get_physical_device_optical_flow_image_formats_nv_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -4174,6 +5360,8 @@ let get_physical_device_optical_flow_image_formats_nv arg0 arg1 arg2 arg3 =
 
 let create_optical_flow_session_nv_typ = Device.t @-> ptr (OpticalFlowSessionCreateInfoNV.t) @-> ptr (AllocationCallbacks.t) @-> ptr (OpticalFlowSessionNV.t) @-> returning (Result.t)
 let create_optical_flow_session_nv_ref = ref (bind create_optical_flow_session_nv_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateOpticalFlowSessionNV.html}[vkCreateOpticalFlowSessionNV]} *)
 let create_optical_flow_session_nv arg0 arg1 arg2 arg3 =
   match !create_optical_flow_session_nv_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -4181,6 +5369,8 @@ let create_optical_flow_session_nv arg0 arg1 arg2 arg3 =
 
 let destroy_optical_flow_session_nv_typ = Device.t @-> OpticalFlowSessionNV.t @-> ptr (AllocationCallbacks.t) @-> returning (Ctypes.void)
 let destroy_optical_flow_session_nv_ref = ref (bind destroy_optical_flow_session_nv_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkDestroyOpticalFlowSessionNV.html}[vkDestroyOpticalFlowSessionNV]} *)
 let destroy_optical_flow_session_nv arg0 arg1 arg2 =
   match !destroy_optical_flow_session_nv_ref with
   | Some f -> f arg0 arg1 arg2
@@ -4188,6 +5378,8 @@ let destroy_optical_flow_session_nv arg0 arg1 arg2 =
 
 let bind_optical_flow_session_image_nv_typ = Device.t @-> OpticalFlowSessionNV.t @-> OpticalFlowSessionBindingPointNV.t @-> ImageView.t @-> ImageLayout.t @-> returning (Result.t)
 let bind_optical_flow_session_image_nv_ref = ref (bind bind_optical_flow_session_image_nv_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkBindOpticalFlowSessionImageNV.html}[vkBindOpticalFlowSessionImageNV]} *)
 let bind_optical_flow_session_image_nv arg0 arg1 arg2 arg3 arg4 =
   match !bind_optical_flow_session_image_nv_ref with
   | Some f -> f arg0 arg1 arg2 arg3 arg4
@@ -4195,6 +5387,8 @@ let bind_optical_flow_session_image_nv arg0 arg1 arg2 arg3 arg4 =
 
 let cmd_optical_flow_execute_nv_typ = CommandBuffer.t @-> OpticalFlowSessionNV.t @-> ptr (OpticalFlowExecuteInfoNV.t) @-> returning (Ctypes.void)
 let cmd_optical_flow_execute_nv_ref = ref (bind cmd_optical_flow_execute_nv_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdOpticalFlowExecuteNV.html}[vkCmdOpticalFlowExecuteNV]} *)
 let cmd_optical_flow_execute_nv arg0 arg1 arg2 =
   match !cmd_optical_flow_execute_nv_ref with
   | Some f -> f arg0 arg1 arg2
@@ -4202,6 +5396,8 @@ let cmd_optical_flow_execute_nv arg0 arg1 arg2 =
 
 let get_device_fault_info_ext_typ = Device.t @-> ptr (DeviceFaultCountsEXT.t) @-> ptr (DeviceFaultInfoEXT.t) @-> returning (Result.t)
 let get_device_fault_info_ext_ref = ref (bind get_device_fault_info_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetDeviceFaultInfoEXT.html}[vkGetDeviceFaultInfoEXT]} *)
 let get_device_fault_info_ext arg0 arg1 arg2 =
   match !get_device_fault_info_ext_ref with
   | Some f -> f arg0 arg1 arg2
@@ -4209,6 +5405,8 @@ let get_device_fault_info_ext arg0 arg1 arg2 =
 
 let get_device_fault_reports_khr_typ = Device.t @-> Vk_base.uint64 @-> ptr (Vk_base.uint32) @-> ptr (DeviceFaultInfoKHR.t) @-> returning (Result.t)
 let get_device_fault_reports_khr_ref = ref (bind get_device_fault_reports_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetDeviceFaultReportsKHR.html}[vkGetDeviceFaultReportsKHR]} *)
 let get_device_fault_reports_khr arg0 arg1 arg2 arg3 =
   match !get_device_fault_reports_khr_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -4216,6 +5414,8 @@ let get_device_fault_reports_khr arg0 arg1 arg2 arg3 =
 
 let get_device_fault_debug_info_khr_typ = Device.t @-> ptr (DeviceFaultDebugInfoKHR.t) @-> returning (Result.t)
 let get_device_fault_debug_info_khr_ref = ref (bind get_device_fault_debug_info_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetDeviceFaultDebugInfoKHR.html}[vkGetDeviceFaultDebugInfoKHR]} *)
 let get_device_fault_debug_info_khr arg0 arg1 =
   match !get_device_fault_debug_info_khr_ref with
   | Some f -> f arg0 arg1
@@ -4223,6 +5423,8 @@ let get_device_fault_debug_info_khr arg0 arg1 =
 
 let cmd_set_depth_bias_2_ext_typ = CommandBuffer.t @-> ptr (DepthBiasInfoEXT.t) @-> returning (Ctypes.void)
 let cmd_set_depth_bias_2_ext_ref = ref (bind cmd_set_depth_bias_2_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetDepthBias2EXT.html}[vkCmdSetDepthBias2EXT]} *)
 let cmd_set_depth_bias_2_ext arg0 arg1 =
   match !cmd_set_depth_bias_2_ext_ref with
   | Some f -> f arg0 arg1
@@ -4230,6 +5432,8 @@ let cmd_set_depth_bias_2_ext arg0 arg1 =
 
 let release_swapchain_images_khr_typ = Device.t @-> ptr (ReleaseSwapchainImagesInfoKHR.t) @-> returning (Result.t)
 let release_swapchain_images_khr_ref = ref (bind release_swapchain_images_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkReleaseSwapchainImagesKHR.html}[vkReleaseSwapchainImagesKHR]} *)
 let release_swapchain_images_khr arg0 arg1 =
   match !release_swapchain_images_khr_ref with
   | Some f -> f arg0 arg1
@@ -4237,6 +5441,8 @@ let release_swapchain_images_khr arg0 arg1 =
 
 let get_device_image_subresource_layout_typ = Device.t @-> ptr (DeviceImageSubresourceInfo.t) @-> ptr (SubresourceLayout2.t) @-> returning (Ctypes.void)
 let get_device_image_subresource_layout_ref = ref (bind get_device_image_subresource_layout_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetDeviceImageSubresourceLayout.html}[vkGetDeviceImageSubresourceLayout]} *)
 let get_device_image_subresource_layout arg0 arg1 arg2 =
   match !get_device_image_subresource_layout_ref with
   | Some f -> f arg0 arg1 arg2
@@ -4244,6 +5450,8 @@ let get_device_image_subresource_layout arg0 arg1 arg2 =
 
 let map_memory_2_typ = Device.t @-> ptr (MemoryMapInfo.t) @-> ptr (ptr (Ctypes.void)) @-> returning (Result.t)
 let map_memory_2_ref = ref (bind map_memory_2_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkMapMemory2.html}[vkMapMemory2]} *)
 let map_memory_2 arg0 arg1 arg2 =
   match !map_memory_2_ref with
   | Some f -> f arg0 arg1 arg2
@@ -4251,6 +5459,8 @@ let map_memory_2 arg0 arg1 arg2 =
 
 let unmap_memory_2_typ = Device.t @-> ptr (MemoryUnmapInfo.t) @-> returning (Result.t)
 let unmap_memory_2_ref = ref (bind unmap_memory_2_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkUnmapMemory2.html}[vkUnmapMemory2]} *)
 let unmap_memory_2 arg0 arg1 =
   match !unmap_memory_2_ref with
   | Some f -> f arg0 arg1
@@ -4258,6 +5468,8 @@ let unmap_memory_2 arg0 arg1 =
 
 let create_shaders_ext_typ = Device.t @-> Vk_base.uint32 @-> ptr (ShaderCreateInfoEXT.t) @-> ptr (AllocationCallbacks.t) @-> ptr (ShaderEXT.t) @-> returning (Result.t)
 let create_shaders_ext_ref = ref (bind create_shaders_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateShadersEXT.html}[vkCreateShadersEXT]} *)
 let create_shaders_ext arg0 arg1 arg2 arg3 arg4 =
   match !create_shaders_ext_ref with
   | Some f -> f arg0 arg1 arg2 arg3 arg4
@@ -4265,6 +5477,8 @@ let create_shaders_ext arg0 arg1 arg2 arg3 arg4 =
 
 let destroy_shader_ext_typ = Device.t @-> ShaderEXT.t @-> ptr (AllocationCallbacks.t) @-> returning (Ctypes.void)
 let destroy_shader_ext_ref = ref (bind destroy_shader_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkDestroyShaderEXT.html}[vkDestroyShaderEXT]} *)
 let destroy_shader_ext arg0 arg1 arg2 =
   match !destroy_shader_ext_ref with
   | Some f -> f arg0 arg1 arg2
@@ -4272,6 +5486,8 @@ let destroy_shader_ext arg0 arg1 arg2 =
 
 let get_shader_binary_data_ext_typ = Device.t @-> ShaderEXT.t @-> ptr (Vk_base.size_t) @-> ptr (Ctypes.void) @-> returning (Result.t)
 let get_shader_binary_data_ext_ref = ref (bind get_shader_binary_data_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetShaderBinaryDataEXT.html}[vkGetShaderBinaryDataEXT]} *)
 let get_shader_binary_data_ext arg0 arg1 arg2 arg3 =
   match !get_shader_binary_data_ext_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -4279,6 +5495,8 @@ let get_shader_binary_data_ext arg0 arg1 arg2 arg3 =
 
 let cmd_bind_shaders_ext_typ = CommandBuffer.t @-> Vk_base.uint32 @-> ptr (ShaderStageFlags.t) @-> ptr (ShaderEXT.t) @-> returning (Ctypes.void)
 let cmd_bind_shaders_ext_ref = ref (bind cmd_bind_shaders_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdBindShadersEXT.html}[vkCmdBindShadersEXT]} *)
 let cmd_bind_shaders_ext arg0 arg1 arg2 arg3 =
   match !cmd_bind_shaders_ext_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -4286,6 +5504,8 @@ let cmd_bind_shaders_ext arg0 arg1 arg2 arg3 =
 
 let set_swapchain_present_timing_queue_size_ext_typ = Device.t @-> SwapchainKHR.t @-> Vk_base.uint32 @-> returning (Result.t)
 let set_swapchain_present_timing_queue_size_ext_ref = ref (bind set_swapchain_present_timing_queue_size_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkSetSwapchainPresentTimingQueueSizeEXT.html}[vkSetSwapchainPresentTimingQueueSizeEXT]} *)
 let set_swapchain_present_timing_queue_size_ext arg0 arg1 arg2 =
   match !set_swapchain_present_timing_queue_size_ext_ref with
   | Some f -> f arg0 arg1 arg2
@@ -4293,6 +5513,8 @@ let set_swapchain_present_timing_queue_size_ext arg0 arg1 arg2 =
 
 let get_swapchain_timing_properties_ext_typ = Device.t @-> SwapchainKHR.t @-> ptr (SwapchainTimingPropertiesEXT.t) @-> ptr (Vk_base.uint64) @-> returning (Result.t)
 let get_swapchain_timing_properties_ext_ref = ref (bind get_swapchain_timing_properties_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetSwapchainTimingPropertiesEXT.html}[vkGetSwapchainTimingPropertiesEXT]} *)
 let get_swapchain_timing_properties_ext arg0 arg1 arg2 arg3 =
   match !get_swapchain_timing_properties_ext_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -4300,6 +5522,8 @@ let get_swapchain_timing_properties_ext arg0 arg1 arg2 arg3 =
 
 let get_swapchain_time_domain_properties_ext_typ = Device.t @-> SwapchainKHR.t @-> ptr (SwapchainTimeDomainPropertiesEXT.t) @-> ptr (Vk_base.uint64) @-> returning (Result.t)
 let get_swapchain_time_domain_properties_ext_ref = ref (bind get_swapchain_time_domain_properties_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetSwapchainTimeDomainPropertiesEXT.html}[vkGetSwapchainTimeDomainPropertiesEXT]} *)
 let get_swapchain_time_domain_properties_ext arg0 arg1 arg2 arg3 =
   match !get_swapchain_time_domain_properties_ext_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -4307,6 +5531,8 @@ let get_swapchain_time_domain_properties_ext arg0 arg1 arg2 arg3 =
 
 let get_past_presentation_timing_ext_typ = Device.t @-> ptr (PastPresentationTimingInfoEXT.t) @-> ptr (PastPresentationTimingPropertiesEXT.t) @-> returning (Result.t)
 let get_past_presentation_timing_ext_ref = ref (bind get_past_presentation_timing_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPastPresentationTimingEXT.html}[vkGetPastPresentationTimingEXT]} *)
 let get_past_presentation_timing_ext arg0 arg1 arg2 =
   match !get_past_presentation_timing_ext_ref with
   | Some f -> f arg0 arg1 arg2
@@ -4314,6 +5540,8 @@ let get_past_presentation_timing_ext arg0 arg1 arg2 =
 
 let get_screen_buffer_properties_qnx_typ = Device.t @-> ptr (void) @-> ptr (ScreenBufferPropertiesQNX.t) @-> returning (Result.t)
 let get_screen_buffer_properties_qnx_ref = ref (bind get_screen_buffer_properties_qnx_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetScreenBufferPropertiesQNX.html}[vkGetScreenBufferPropertiesQNX]} *)
 let get_screen_buffer_properties_qnx arg0 arg1 arg2 =
   match !get_screen_buffer_properties_qnx_ref with
   | Some f -> f arg0 arg1 arg2
@@ -4321,6 +5549,8 @@ let get_screen_buffer_properties_qnx arg0 arg1 arg2 =
 
 let get_physical_device_cooperative_matrix_properties_khr_typ = PhysicalDevice.t @-> ptr (Vk_base.uint32) @-> ptr (CooperativeMatrixPropertiesKHR.t) @-> returning (Result.t)
 let get_physical_device_cooperative_matrix_properties_khr_ref = ref (bind get_physical_device_cooperative_matrix_properties_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPhysicalDeviceCooperativeMatrixPropertiesKHR.html}[vkGetPhysicalDeviceCooperativeMatrixPropertiesKHR]} *)
 let get_physical_device_cooperative_matrix_properties_khr arg0 arg1 arg2 =
   match !get_physical_device_cooperative_matrix_properties_khr_ref with
   | Some f -> f arg0 arg1 arg2
@@ -4328,6 +5558,8 @@ let get_physical_device_cooperative_matrix_properties_khr arg0 arg1 arg2 =
 
 let get_execution_graph_pipeline_scratch_size_amdx_typ = Device.t @-> Pipeline.t @-> ptr (ExecutionGraphPipelineScratchSizeAMDX.t) @-> returning (Result.t)
 let get_execution_graph_pipeline_scratch_size_amdx_ref = ref (bind get_execution_graph_pipeline_scratch_size_amdx_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetExecutionGraphPipelineScratchSizeAMDX.html}[vkGetExecutionGraphPipelineScratchSizeAMDX]} *)
 let get_execution_graph_pipeline_scratch_size_amdx arg0 arg1 arg2 =
   match !get_execution_graph_pipeline_scratch_size_amdx_ref with
   | Some f -> f arg0 arg1 arg2
@@ -4335,6 +5567,8 @@ let get_execution_graph_pipeline_scratch_size_amdx arg0 arg1 arg2 =
 
 let get_execution_graph_pipeline_node_index_amdx_typ = Device.t @-> Pipeline.t @-> ptr (PipelineShaderStageNodeCreateInfoAMDX.t) @-> ptr (Vk_base.uint32) @-> returning (Result.t)
 let get_execution_graph_pipeline_node_index_amdx_ref = ref (bind get_execution_graph_pipeline_node_index_amdx_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetExecutionGraphPipelineNodeIndexAMDX.html}[vkGetExecutionGraphPipelineNodeIndexAMDX]} *)
 let get_execution_graph_pipeline_node_index_amdx arg0 arg1 arg2 arg3 =
   match !get_execution_graph_pipeline_node_index_amdx_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -4342,6 +5576,8 @@ let get_execution_graph_pipeline_node_index_amdx arg0 arg1 arg2 arg3 =
 
 let create_execution_graph_pipelines_amdx_typ = Device.t @-> PipelineCache.t @-> Vk_base.uint32 @-> ptr (ExecutionGraphPipelineCreateInfoAMDX.t) @-> ptr (AllocationCallbacks.t) @-> ptr (Pipeline.t) @-> returning (Result.t)
 let create_execution_graph_pipelines_amdx_ref = ref (bind create_execution_graph_pipelines_amdx_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateExecutionGraphPipelinesAMDX.html}[vkCreateExecutionGraphPipelinesAMDX]} *)
 let create_execution_graph_pipelines_amdx arg0 arg1 arg2 arg3 arg4 arg5 =
   match !create_execution_graph_pipelines_amdx_ref with
   | Some f -> f arg0 arg1 arg2 arg3 arg4 arg5
@@ -4349,6 +5585,8 @@ let create_execution_graph_pipelines_amdx arg0 arg1 arg2 arg3 arg4 arg5 =
 
 let cmd_initialize_graph_scratch_memory_amdx_typ = CommandBuffer.t @-> Pipeline.t @-> Vk_base.device_address @-> Vk_base.device_size @-> returning (Ctypes.void)
 let cmd_initialize_graph_scratch_memory_amdx_ref = ref (bind cmd_initialize_graph_scratch_memory_amdx_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdInitializeGraphScratchMemoryAMDX.html}[vkCmdInitializeGraphScratchMemoryAMDX]} *)
 let cmd_initialize_graph_scratch_memory_amdx arg0 arg1 arg2 arg3 =
   match !cmd_initialize_graph_scratch_memory_amdx_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -4356,6 +5594,8 @@ let cmd_initialize_graph_scratch_memory_amdx arg0 arg1 arg2 arg3 =
 
 let cmd_dispatch_graph_amdx_typ = CommandBuffer.t @-> Vk_base.device_address @-> Vk_base.device_size @-> ptr (DispatchGraphCountInfoAMDX.t) @-> returning (Ctypes.void)
 let cmd_dispatch_graph_amdx_ref = ref (bind cmd_dispatch_graph_amdx_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdDispatchGraphAMDX.html}[vkCmdDispatchGraphAMDX]} *)
 let cmd_dispatch_graph_amdx arg0 arg1 arg2 arg3 =
   match !cmd_dispatch_graph_amdx_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -4363,6 +5603,8 @@ let cmd_dispatch_graph_amdx arg0 arg1 arg2 arg3 =
 
 let cmd_dispatch_graph_indirect_amdx_typ = CommandBuffer.t @-> Vk_base.device_address @-> Vk_base.device_size @-> ptr (DispatchGraphCountInfoAMDX.t) @-> returning (Ctypes.void)
 let cmd_dispatch_graph_indirect_amdx_ref = ref (bind cmd_dispatch_graph_indirect_amdx_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdDispatchGraphIndirectAMDX.html}[vkCmdDispatchGraphIndirectAMDX]} *)
 let cmd_dispatch_graph_indirect_amdx arg0 arg1 arg2 arg3 =
   match !cmd_dispatch_graph_indirect_amdx_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -4370,6 +5612,8 @@ let cmd_dispatch_graph_indirect_amdx arg0 arg1 arg2 arg3 =
 
 let cmd_dispatch_graph_indirect_count_amdx_typ = CommandBuffer.t @-> Vk_base.device_address @-> Vk_base.device_size @-> Vk_base.device_address @-> returning (Ctypes.void)
 let cmd_dispatch_graph_indirect_count_amdx_ref = ref (bind cmd_dispatch_graph_indirect_count_amdx_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdDispatchGraphIndirectCountAMDX.html}[vkCmdDispatchGraphIndirectCountAMDX]} *)
 let cmd_dispatch_graph_indirect_count_amdx arg0 arg1 arg2 arg3 =
   match !cmd_dispatch_graph_indirect_count_amdx_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -4377,6 +5621,8 @@ let cmd_dispatch_graph_indirect_count_amdx arg0 arg1 arg2 arg3 =
 
 let create_gpa_session_amd_typ = Device.t @-> ptr (GpaSessionCreateInfoAMD.t) @-> ptr (AllocationCallbacks.t) @-> ptr (GpaSessionAMD.t) @-> returning (Result.t)
 let create_gpa_session_amd_ref = ref (bind create_gpa_session_amd_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateGpaSessionAMD.html}[vkCreateGpaSessionAMD]} *)
 let create_gpa_session_amd arg0 arg1 arg2 arg3 =
   match !create_gpa_session_amd_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -4384,6 +5630,8 @@ let create_gpa_session_amd arg0 arg1 arg2 arg3 =
 
 let destroy_gpa_session_amd_typ = Device.t @-> GpaSessionAMD.t @-> ptr (AllocationCallbacks.t) @-> returning (Ctypes.void)
 let destroy_gpa_session_amd_ref = ref (bind destroy_gpa_session_amd_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkDestroyGpaSessionAMD.html}[vkDestroyGpaSessionAMD]} *)
 let destroy_gpa_session_amd arg0 arg1 arg2 =
   match !destroy_gpa_session_amd_ref with
   | Some f -> f arg0 arg1 arg2
@@ -4391,6 +5639,8 @@ let destroy_gpa_session_amd arg0 arg1 arg2 =
 
 let set_gpa_device_clock_mode_amd_typ = Device.t @-> ptr (GpaDeviceClockModeInfoAMD.t) @-> returning (Result.t)
 let set_gpa_device_clock_mode_amd_ref = ref (bind set_gpa_device_clock_mode_amd_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkSetGpaDeviceClockModeAMD.html}[vkSetGpaDeviceClockModeAMD]} *)
 let set_gpa_device_clock_mode_amd arg0 arg1 =
   match !set_gpa_device_clock_mode_amd_ref with
   | Some f -> f arg0 arg1
@@ -4398,6 +5648,8 @@ let set_gpa_device_clock_mode_amd arg0 arg1 =
 
 let get_gpa_device_clock_info_amd_typ = Device.t @-> ptr (GpaDeviceGetClockInfoAMD.t) @-> returning (Result.t)
 let get_gpa_device_clock_info_amd_ref = ref (bind get_gpa_device_clock_info_amd_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetGpaDeviceClockInfoAMD.html}[vkGetGpaDeviceClockInfoAMD]} *)
 let get_gpa_device_clock_info_amd arg0 arg1 =
   match !get_gpa_device_clock_info_amd_ref with
   | Some f -> f arg0 arg1
@@ -4405,6 +5657,8 @@ let get_gpa_device_clock_info_amd arg0 arg1 =
 
 let cmd_begin_gpa_session_amd_typ = CommandBuffer.t @-> GpaSessionAMD.t @-> returning (Result.t)
 let cmd_begin_gpa_session_amd_ref = ref (bind cmd_begin_gpa_session_amd_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdBeginGpaSessionAMD.html}[vkCmdBeginGpaSessionAMD]} *)
 let cmd_begin_gpa_session_amd arg0 arg1 =
   match !cmd_begin_gpa_session_amd_ref with
   | Some f -> f arg0 arg1
@@ -4412,6 +5666,8 @@ let cmd_begin_gpa_session_amd arg0 arg1 =
 
 let cmd_end_gpa_session_amd_typ = CommandBuffer.t @-> GpaSessionAMD.t @-> returning (Result.t)
 let cmd_end_gpa_session_amd_ref = ref (bind cmd_end_gpa_session_amd_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdEndGpaSessionAMD.html}[vkCmdEndGpaSessionAMD]} *)
 let cmd_end_gpa_session_amd arg0 arg1 =
   match !cmd_end_gpa_session_amd_ref with
   | Some f -> f arg0 arg1
@@ -4419,6 +5675,8 @@ let cmd_end_gpa_session_amd arg0 arg1 =
 
 let cmd_begin_gpa_sample_amd_typ = CommandBuffer.t @-> GpaSessionAMD.t @-> ptr (GpaSampleBeginInfoAMD.t) @-> ptr (Vk_base.uint32) @-> returning (Result.t)
 let cmd_begin_gpa_sample_amd_ref = ref (bind cmd_begin_gpa_sample_amd_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdBeginGpaSampleAMD.html}[vkCmdBeginGpaSampleAMD]} *)
 let cmd_begin_gpa_sample_amd arg0 arg1 arg2 arg3 =
   match !cmd_begin_gpa_sample_amd_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -4426,6 +5684,8 @@ let cmd_begin_gpa_sample_amd arg0 arg1 arg2 arg3 =
 
 let cmd_end_gpa_sample_amd_typ = CommandBuffer.t @-> GpaSessionAMD.t @-> Vk_base.uint32 @-> returning (Ctypes.void)
 let cmd_end_gpa_sample_amd_ref = ref (bind cmd_end_gpa_sample_amd_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdEndGpaSampleAMD.html}[vkCmdEndGpaSampleAMD]} *)
 let cmd_end_gpa_sample_amd arg0 arg1 arg2 =
   match !cmd_end_gpa_sample_amd_ref with
   | Some f -> f arg0 arg1 arg2
@@ -4433,6 +5693,8 @@ let cmd_end_gpa_sample_amd arg0 arg1 arg2 =
 
 let get_gpa_session_status_amd_typ = Device.t @-> GpaSessionAMD.t @-> returning (Result.t)
 let get_gpa_session_status_amd_ref = ref (bind get_gpa_session_status_amd_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetGpaSessionStatusAMD.html}[vkGetGpaSessionStatusAMD]} *)
 let get_gpa_session_status_amd arg0 arg1 =
   match !get_gpa_session_status_amd_ref with
   | Some f -> f arg0 arg1
@@ -4440,6 +5702,8 @@ let get_gpa_session_status_amd arg0 arg1 =
 
 let get_gpa_session_results_amd_typ = Device.t @-> GpaSessionAMD.t @-> Vk_base.uint32 @-> ptr (Vk_base.size_t) @-> ptr (Ctypes.void) @-> returning (Result.t)
 let get_gpa_session_results_amd_ref = ref (bind get_gpa_session_results_amd_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetGpaSessionResultsAMD.html}[vkGetGpaSessionResultsAMD]} *)
 let get_gpa_session_results_amd arg0 arg1 arg2 arg3 arg4 =
   match !get_gpa_session_results_amd_ref with
   | Some f -> f arg0 arg1 arg2 arg3 arg4
@@ -4447,6 +5711,8 @@ let get_gpa_session_results_amd arg0 arg1 arg2 arg3 arg4 =
 
 let reset_gpa_session_amd_typ = Device.t @-> GpaSessionAMD.t @-> returning (Result.t)
 let reset_gpa_session_amd_ref = ref (bind reset_gpa_session_amd_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkResetGpaSessionAMD.html}[vkResetGpaSessionAMD]} *)
 let reset_gpa_session_amd arg0 arg1 =
   match !reset_gpa_session_amd_ref with
   | Some f -> f arg0 arg1
@@ -4454,6 +5720,8 @@ let reset_gpa_session_amd arg0 arg1 =
 
 let cmd_copy_gpa_session_results_amd_typ = CommandBuffer.t @-> GpaSessionAMD.t @-> returning (Ctypes.void)
 let cmd_copy_gpa_session_results_amd_ref = ref (bind cmd_copy_gpa_session_results_amd_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdCopyGpaSessionResultsAMD.html}[vkCmdCopyGpaSessionResultsAMD]} *)
 let cmd_copy_gpa_session_results_amd arg0 arg1 =
   match !cmd_copy_gpa_session_results_amd_ref with
   | Some f -> f arg0 arg1
@@ -4461,6 +5729,8 @@ let cmd_copy_gpa_session_results_amd arg0 arg1 =
 
 let cmd_bind_descriptor_sets_2_typ = CommandBuffer.t @-> ptr (BindDescriptorSetsInfo.t) @-> returning (Ctypes.void)
 let cmd_bind_descriptor_sets_2_ref = ref (bind cmd_bind_descriptor_sets_2_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdBindDescriptorSets2.html}[vkCmdBindDescriptorSets2]} *)
 let cmd_bind_descriptor_sets_2 arg0 arg1 =
   match !cmd_bind_descriptor_sets_2_ref with
   | Some f -> f arg0 arg1
@@ -4468,6 +5738,8 @@ let cmd_bind_descriptor_sets_2 arg0 arg1 =
 
 let cmd_push_constants_2_typ = CommandBuffer.t @-> ptr (PushConstantsInfo.t) @-> returning (Ctypes.void)
 let cmd_push_constants_2_ref = ref (bind cmd_push_constants_2_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdPushConstants2.html}[vkCmdPushConstants2]} *)
 let cmd_push_constants_2 arg0 arg1 =
   match !cmd_push_constants_2_ref with
   | Some f -> f arg0 arg1
@@ -4475,6 +5747,8 @@ let cmd_push_constants_2 arg0 arg1 =
 
 let cmd_push_descriptor_set_2_typ = CommandBuffer.t @-> ptr (PushDescriptorSetInfo.t) @-> returning (Ctypes.void)
 let cmd_push_descriptor_set_2_ref = ref (bind cmd_push_descriptor_set_2_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdPushDescriptorSet2.html}[vkCmdPushDescriptorSet2]} *)
 let cmd_push_descriptor_set_2 arg0 arg1 =
   match !cmd_push_descriptor_set_2_ref with
   | Some f -> f arg0 arg1
@@ -4482,6 +5756,8 @@ let cmd_push_descriptor_set_2 arg0 arg1 =
 
 let cmd_push_descriptor_set_with_template_2_typ = CommandBuffer.t @-> ptr (PushDescriptorSetWithTemplateInfo.t) @-> returning (Ctypes.void)
 let cmd_push_descriptor_set_with_template_2_ref = ref (bind cmd_push_descriptor_set_with_template_2_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdPushDescriptorSetWithTemplate2.html}[vkCmdPushDescriptorSetWithTemplate2]} *)
 let cmd_push_descriptor_set_with_template_2 arg0 arg1 =
   match !cmd_push_descriptor_set_with_template_2_ref with
   | Some f -> f arg0 arg1
@@ -4489,6 +5765,8 @@ let cmd_push_descriptor_set_with_template_2 arg0 arg1 =
 
 let cmd_set_descriptor_buffer_offsets_2_ext_typ = CommandBuffer.t @-> ptr (SetDescriptorBufferOffsetsInfoEXT.t) @-> returning (Ctypes.void)
 let cmd_set_descriptor_buffer_offsets_2_ext_ref = ref (bind cmd_set_descriptor_buffer_offsets_2_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetDescriptorBufferOffsets2EXT.html}[vkCmdSetDescriptorBufferOffsets2EXT]} *)
 let cmd_set_descriptor_buffer_offsets_2_ext arg0 arg1 =
   match !cmd_set_descriptor_buffer_offsets_2_ext_ref with
   | Some f -> f arg0 arg1
@@ -4496,6 +5774,8 @@ let cmd_set_descriptor_buffer_offsets_2_ext arg0 arg1 =
 
 let cmd_bind_descriptor_buffer_embedded_samplers_2_ext_typ = CommandBuffer.t @-> ptr (BindDescriptorBufferEmbeddedSamplersInfoEXT.t) @-> returning (Ctypes.void)
 let cmd_bind_descriptor_buffer_embedded_samplers_2_ext_ref = ref (bind cmd_bind_descriptor_buffer_embedded_samplers_2_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdBindDescriptorBufferEmbeddedSamplers2EXT.html}[vkCmdBindDescriptorBufferEmbeddedSamplers2EXT]} *)
 let cmd_bind_descriptor_buffer_embedded_samplers_2_ext arg0 arg1 =
   match !cmd_bind_descriptor_buffer_embedded_samplers_2_ext_ref with
   | Some f -> f arg0 arg1
@@ -4503,6 +5783,8 @@ let cmd_bind_descriptor_buffer_embedded_samplers_2_ext arg0 arg1 =
 
 let set_latency_sleep_mode_nv_typ = Device.t @-> SwapchainKHR.t @-> ptr (LatencySleepModeInfoNV.t) @-> returning (Result.t)
 let set_latency_sleep_mode_nv_ref = ref (bind set_latency_sleep_mode_nv_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkSetLatencySleepModeNV.html}[vkSetLatencySleepModeNV]} *)
 let set_latency_sleep_mode_nv arg0 arg1 arg2 =
   match !set_latency_sleep_mode_nv_ref with
   | Some f -> f arg0 arg1 arg2
@@ -4510,6 +5792,8 @@ let set_latency_sleep_mode_nv arg0 arg1 arg2 =
 
 let latency_sleep_nv_typ = Device.t @-> SwapchainKHR.t @-> ptr (LatencySleepInfoNV.t) @-> returning (Result.t)
 let latency_sleep_nv_ref = ref (bind latency_sleep_nv_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkLatencySleepNV.html}[vkLatencySleepNV]} *)
 let latency_sleep_nv arg0 arg1 arg2 =
   match !latency_sleep_nv_ref with
   | Some f -> f arg0 arg1 arg2
@@ -4517,6 +5801,8 @@ let latency_sleep_nv arg0 arg1 arg2 =
 
 let set_latency_marker_nv_typ = Device.t @-> SwapchainKHR.t @-> ptr (SetLatencyMarkerInfoNV.t) @-> returning (Ctypes.void)
 let set_latency_marker_nv_ref = ref (bind set_latency_marker_nv_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkSetLatencyMarkerNV.html}[vkSetLatencyMarkerNV]} *)
 let set_latency_marker_nv arg0 arg1 arg2 =
   match !set_latency_marker_nv_ref with
   | Some f -> f arg0 arg1 arg2
@@ -4524,6 +5810,8 @@ let set_latency_marker_nv arg0 arg1 arg2 =
 
 let get_latency_timings_nv_typ = Device.t @-> SwapchainKHR.t @-> ptr (GetLatencyMarkerInfoNV.t) @-> returning (Ctypes.void)
 let get_latency_timings_nv_ref = ref (bind get_latency_timings_nv_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetLatencyTimingsNV.html}[vkGetLatencyTimingsNV]} *)
 let get_latency_timings_nv arg0 arg1 arg2 =
   match !get_latency_timings_nv_ref with
   | Some f -> f arg0 arg1 arg2
@@ -4531,6 +5819,8 @@ let get_latency_timings_nv arg0 arg1 arg2 =
 
 let queue_notify_out_of_band_nv_typ = Queue.t @-> ptr (OutOfBandQueueTypeInfoNV.t) @-> returning (Ctypes.void)
 let queue_notify_out_of_band_nv_ref = ref (bind queue_notify_out_of_band_nv_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkQueueNotifyOutOfBandNV.html}[vkQueueNotifyOutOfBandNV]} *)
 let queue_notify_out_of_band_nv arg0 arg1 =
   match !queue_notify_out_of_band_nv_ref with
   | Some f -> f arg0 arg1
@@ -4538,6 +5828,8 @@ let queue_notify_out_of_band_nv arg0 arg1 =
 
 let set_latency_sleep_mode_legacy_nv_typ = Device.t @-> Vk_base.bool32 @-> Vk_base.bool32 @-> Vk_base.uint32 @-> returning (Ctypes.void)
 let set_latency_sleep_mode_legacy_nv_ref = ref (bind set_latency_sleep_mode_legacy_nv_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkSetLatencySleepModeLegacyNV.html}[vkSetLatencySleepModeLegacyNV]} *)
 let set_latency_sleep_mode_legacy_nv arg0 arg1 arg2 arg3 =
   match !set_latency_sleep_mode_legacy_nv_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -4545,6 +5837,8 @@ let set_latency_sleep_mode_legacy_nv arg0 arg1 arg2 arg3 =
 
 let latency_sleep_legacy_nv_typ = Device.t @-> Semaphore.t @-> Vk_base.uint64 @-> returning (Ctypes.void)
 let latency_sleep_legacy_nv_ref = ref (bind latency_sleep_legacy_nv_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkLatencySleepLegacyNV.html}[vkLatencySleepLegacyNV]} *)
 let latency_sleep_legacy_nv arg0 arg1 arg2 =
   match !latency_sleep_legacy_nv_ref with
   | Some f -> f arg0 arg1 arg2
@@ -4552,6 +5846,8 @@ let latency_sleep_legacy_nv arg0 arg1 arg2 =
 
 let set_latency_marker_legacy_nv_typ = Device.t @-> Vk_base.uint64 @-> Vk_base.uint32 @-> returning (Ctypes.void)
 let set_latency_marker_legacy_nv_ref = ref (bind set_latency_marker_legacy_nv_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkSetLatencyMarkerLegacyNV.html}[vkSetLatencyMarkerLegacyNV]} *)
 let set_latency_marker_legacy_nv arg0 arg1 arg2 =
   match !set_latency_marker_legacy_nv_ref with
   | Some f -> f arg0 arg1 arg2
@@ -4559,6 +5855,8 @@ let set_latency_marker_legacy_nv arg0 arg1 arg2 =
 
 let get_latency_timings_legacy_nv_typ = Device.t @-> ptr (Ctypes.void) @-> returning (Ctypes.void)
 let get_latency_timings_legacy_nv_ref = ref (bind get_latency_timings_legacy_nv_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetLatencyTimingsLegacyNV.html}[vkGetLatencyTimingsLegacyNV]} *)
 let get_latency_timings_legacy_nv arg0 arg1 =
   match !get_latency_timings_legacy_nv_ref with
   | Some f -> f arg0 arg1
@@ -4566,6 +5864,8 @@ let get_latency_timings_legacy_nv arg0 arg1 =
 
 let queue_notify_out_of_band_legacy_nv_typ = Queue.t @-> Vk_base.uint32 @-> returning (Ctypes.void)
 let queue_notify_out_of_band_legacy_nv_ref = ref (bind queue_notify_out_of_band_legacy_nv_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkQueueNotifyOutOfBandLegacyNV.html}[vkQueueNotifyOutOfBandLegacyNV]} *)
 let queue_notify_out_of_band_legacy_nv arg0 arg1 =
   match !queue_notify_out_of_band_legacy_nv_ref with
   | Some f -> f arg0 arg1
@@ -4573,6 +5873,8 @@ let queue_notify_out_of_band_legacy_nv arg0 arg1 =
 
 let get_sleep_status_legacy_nv_typ = Device.t @-> ptr (Vk_base.bool32) @-> returning (Ctypes.void)
 let get_sleep_status_legacy_nv_ref = ref (bind get_sleep_status_legacy_nv_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetSleepStatusLegacyNV.html}[vkGetSleepStatusLegacyNV]} *)
 let get_sleep_status_legacy_nv arg0 arg1 =
   match !get_sleep_status_legacy_nv_ref with
   | Some f -> f arg0 arg1
@@ -4580,6 +5882,8 @@ let get_sleep_status_legacy_nv arg0 arg1 =
 
 let shutdown_latency_device_legacy_nv_typ = Device.t @-> returning (Ctypes.void)
 let shutdown_latency_device_legacy_nv_ref = ref (bind shutdown_latency_device_legacy_nv_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkShutdownLatencyDeviceLegacyNV.html}[vkShutdownLatencyDeviceLegacyNV]} *)
 let shutdown_latency_device_legacy_nv arg0 =
   match !shutdown_latency_device_legacy_nv_ref with
   | Some f -> f arg0
@@ -4587,6 +5891,8 @@ let shutdown_latency_device_legacy_nv arg0 =
 
 let cmd_set_rendering_attachment_locations_typ = CommandBuffer.t @-> ptr (RenderingAttachmentLocationInfo.t) @-> returning (Ctypes.void)
 let cmd_set_rendering_attachment_locations_ref = ref (bind cmd_set_rendering_attachment_locations_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetRenderingAttachmentLocations.html}[vkCmdSetRenderingAttachmentLocations]} *)
 let cmd_set_rendering_attachment_locations arg0 arg1 =
   match !cmd_set_rendering_attachment_locations_ref with
   | Some f -> f arg0 arg1
@@ -4594,6 +5900,8 @@ let cmd_set_rendering_attachment_locations arg0 arg1 =
 
 let cmd_set_rendering_input_attachment_indices_typ = CommandBuffer.t @-> ptr (RenderingInputAttachmentIndexInfo.t) @-> returning (Ctypes.void)
 let cmd_set_rendering_input_attachment_indices_ref = ref (bind cmd_set_rendering_input_attachment_indices_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetRenderingInputAttachmentIndices.html}[vkCmdSetRenderingInputAttachmentIndices]} *)
 let cmd_set_rendering_input_attachment_indices arg0 arg1 =
   match !cmd_set_rendering_input_attachment_indices_ref with
   | Some f -> f arg0 arg1
@@ -4601,6 +5909,8 @@ let cmd_set_rendering_input_attachment_indices arg0 arg1 =
 
 let cmd_set_depth_clamp_range_ext_typ = CommandBuffer.t @-> DepthClampModeEXT.t @-> ptr (DepthClampRangeEXT.t) @-> returning (Ctypes.void)
 let cmd_set_depth_clamp_range_ext_ref = ref (bind cmd_set_depth_clamp_range_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetDepthClampRangeEXT.html}[vkCmdSetDepthClampRangeEXT]} *)
 let cmd_set_depth_clamp_range_ext arg0 arg1 arg2 =
   match !cmd_set_depth_clamp_range_ext_ref with
   | Some f -> f arg0 arg1 arg2
@@ -4608,6 +5918,8 @@ let cmd_set_depth_clamp_range_ext arg0 arg1 arg2 =
 
 let get_physical_device_cooperative_matrix_flexible_dimensions_properties_nv_typ = PhysicalDevice.t @-> ptr (Vk_base.uint32) @-> ptr (CooperativeMatrixFlexibleDimensionsPropertiesNV.t) @-> returning (Result.t)
 let get_physical_device_cooperative_matrix_flexible_dimensions_properties_nv_ref = ref (bind get_physical_device_cooperative_matrix_flexible_dimensions_properties_nv_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPhysicalDeviceCooperativeMatrixFlexibleDimensionsPropertiesNV.html}[vkGetPhysicalDeviceCooperativeMatrixFlexibleDimensionsPropertiesNV]} *)
 let get_physical_device_cooperative_matrix_flexible_dimensions_properties_nv arg0 arg1 arg2 =
   match !get_physical_device_cooperative_matrix_flexible_dimensions_properties_nv_ref with
   | Some f -> f arg0 arg1 arg2
@@ -4615,6 +5927,8 @@ let get_physical_device_cooperative_matrix_flexible_dimensions_properties_nv arg
 
 let get_memory_metal_handle_ext_typ = Device.t @-> ptr (MemoryGetMetalHandleInfoEXT.t) @-> ptr (ptr (Ctypes.void)) @-> returning (Result.t)
 let get_memory_metal_handle_ext_ref = ref (bind get_memory_metal_handle_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetMemoryMetalHandleEXT.html}[vkGetMemoryMetalHandleEXT]} *)
 let get_memory_metal_handle_ext arg0 arg1 arg2 =
   match !get_memory_metal_handle_ext_ref with
   | Some f -> f arg0 arg1 arg2
@@ -4622,6 +5936,8 @@ let get_memory_metal_handle_ext arg0 arg1 arg2 =
 
 let get_memory_metal_handle_properties_ext_typ = Device.t @-> ExternalMemoryHandleTypeFlags.t @-> ptr (Ctypes.void) @-> ptr (MemoryMetalHandlePropertiesEXT.t) @-> returning (Result.t)
 let get_memory_metal_handle_properties_ext_ref = ref (bind get_memory_metal_handle_properties_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetMemoryMetalHandlePropertiesEXT.html}[vkGetMemoryMetalHandlePropertiesEXT]} *)
 let get_memory_metal_handle_properties_ext arg0 arg1 arg2 arg3 =
   match !get_memory_metal_handle_properties_ext_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -4629,6 +5945,8 @@ let get_memory_metal_handle_properties_ext arg0 arg1 arg2 arg3 =
 
 let get_physical_device_cooperative_vector_properties_nv_typ = PhysicalDevice.t @-> ptr (Vk_base.uint32) @-> ptr (CooperativeVectorPropertiesNV.t) @-> returning (Result.t)
 let get_physical_device_cooperative_vector_properties_nv_ref = ref (bind get_physical_device_cooperative_vector_properties_nv_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPhysicalDeviceCooperativeVectorPropertiesNV.html}[vkGetPhysicalDeviceCooperativeVectorPropertiesNV]} *)
 let get_physical_device_cooperative_vector_properties_nv arg0 arg1 arg2 =
   match !get_physical_device_cooperative_vector_properties_nv_ref with
   | Some f -> f arg0 arg1 arg2
@@ -4636,6 +5954,8 @@ let get_physical_device_cooperative_vector_properties_nv arg0 arg1 arg2 =
 
 let convert_cooperative_vector_matrix_nv_typ = Device.t @-> ptr (ConvertCooperativeVectorMatrixInfoNV.t) @-> returning (Result.t)
 let convert_cooperative_vector_matrix_nv_ref = ref (bind convert_cooperative_vector_matrix_nv_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkConvertCooperativeVectorMatrixNV.html}[vkConvertCooperativeVectorMatrixNV]} *)
 let convert_cooperative_vector_matrix_nv arg0 arg1 =
   match !convert_cooperative_vector_matrix_nv_ref with
   | Some f -> f arg0 arg1
@@ -4643,6 +5963,8 @@ let convert_cooperative_vector_matrix_nv arg0 arg1 =
 
 let cmd_convert_cooperative_vector_matrix_nv_typ = CommandBuffer.t @-> Vk_base.uint32 @-> ptr (ConvertCooperativeVectorMatrixInfoNV.t) @-> returning (Ctypes.void)
 let cmd_convert_cooperative_vector_matrix_nv_ref = ref (bind cmd_convert_cooperative_vector_matrix_nv_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdConvertCooperativeVectorMatrixNV.html}[vkCmdConvertCooperativeVectorMatrixNV]} *)
 let cmd_convert_cooperative_vector_matrix_nv arg0 arg1 arg2 =
   match !cmd_convert_cooperative_vector_matrix_nv_ref with
   | Some f -> f arg0 arg1 arg2
@@ -4650,6 +5972,8 @@ let cmd_convert_cooperative_vector_matrix_nv arg0 arg1 arg2 =
 
 let cmd_dispatch_tile_qcom_typ = CommandBuffer.t @-> ptr (DispatchTileInfoQCOM.t) @-> returning (Ctypes.void)
 let cmd_dispatch_tile_qcom_ref = ref (bind cmd_dispatch_tile_qcom_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdDispatchTileQCOM.html}[vkCmdDispatchTileQCOM]} *)
 let cmd_dispatch_tile_qcom arg0 arg1 =
   match !cmd_dispatch_tile_qcom_ref with
   | Some f -> f arg0 arg1
@@ -4657,6 +5981,8 @@ let cmd_dispatch_tile_qcom arg0 arg1 =
 
 let cmd_begin_per_tile_execution_qcom_typ = CommandBuffer.t @-> ptr (PerTileBeginInfoQCOM.t) @-> returning (Ctypes.void)
 let cmd_begin_per_tile_execution_qcom_ref = ref (bind cmd_begin_per_tile_execution_qcom_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdBeginPerTileExecutionQCOM.html}[vkCmdBeginPerTileExecutionQCOM]} *)
 let cmd_begin_per_tile_execution_qcom arg0 arg1 =
   match !cmd_begin_per_tile_execution_qcom_ref with
   | Some f -> f arg0 arg1
@@ -4664,6 +5990,8 @@ let cmd_begin_per_tile_execution_qcom arg0 arg1 =
 
 let cmd_end_per_tile_execution_qcom_typ = CommandBuffer.t @-> ptr (PerTileEndInfoQCOM.t) @-> returning (Ctypes.void)
 let cmd_end_per_tile_execution_qcom_ref = ref (bind cmd_end_per_tile_execution_qcom_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdEndPerTileExecutionQCOM.html}[vkCmdEndPerTileExecutionQCOM]} *)
 let cmd_end_per_tile_execution_qcom arg0 arg1 =
   match !cmd_end_per_tile_execution_qcom_ref with
   | Some f -> f arg0 arg1
@@ -4671,6 +5999,8 @@ let cmd_end_per_tile_execution_qcom arg0 arg1 =
 
 let create_external_compute_queue_nv_typ = Device.t @-> ptr (ExternalComputeQueueCreateInfoNV.t) @-> ptr (AllocationCallbacks.t) @-> ptr (ExternalComputeQueueNV.t) @-> returning (Result.t)
 let create_external_compute_queue_nv_ref = ref (bind create_external_compute_queue_nv_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateExternalComputeQueueNV.html}[vkCreateExternalComputeQueueNV]} *)
 let create_external_compute_queue_nv arg0 arg1 arg2 arg3 =
   match !create_external_compute_queue_nv_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -4678,6 +6008,8 @@ let create_external_compute_queue_nv arg0 arg1 arg2 arg3 =
 
 let destroy_external_compute_queue_nv_typ = Device.t @-> ExternalComputeQueueNV.t @-> ptr (AllocationCallbacks.t) @-> returning (Ctypes.void)
 let destroy_external_compute_queue_nv_ref = ref (bind destroy_external_compute_queue_nv_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkDestroyExternalComputeQueueNV.html}[vkDestroyExternalComputeQueueNV]} *)
 let destroy_external_compute_queue_nv arg0 arg1 arg2 =
   match !destroy_external_compute_queue_nv_ref with
   | Some f -> f arg0 arg1 arg2
@@ -4685,6 +6017,8 @@ let destroy_external_compute_queue_nv arg0 arg1 arg2 =
 
 let get_external_compute_queue_data_nv_typ = ExternalComputeQueueNV.t @-> ptr (ExternalComputeQueueDataParamsNV.t) @-> ptr (Ctypes.void) @-> returning (Ctypes.void)
 let get_external_compute_queue_data_nv_ref = ref (bind get_external_compute_queue_data_nv_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetExternalComputeQueueDataNV.html}[vkGetExternalComputeQueueDataNV]} *)
 let get_external_compute_queue_data_nv arg0 arg1 arg2 =
   match !get_external_compute_queue_data_nv_ref with
   | Some f -> f arg0 arg1 arg2
@@ -4692,6 +6026,8 @@ let get_external_compute_queue_data_nv arg0 arg1 arg2 =
 
 let enumerate_physical_device_shader_instrumentation_metrics_arm_typ = PhysicalDevice.t @-> ptr (Vk_base.uint32) @-> ptr (ShaderInstrumentationMetricDescriptionARM.t) @-> returning (Result.t)
 let enumerate_physical_device_shader_instrumentation_metrics_arm_ref = ref (bind enumerate_physical_device_shader_instrumentation_metrics_arm_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkEnumeratePhysicalDeviceShaderInstrumentationMetricsARM.html}[vkEnumeratePhysicalDeviceShaderInstrumentationMetricsARM]} *)
 let enumerate_physical_device_shader_instrumentation_metrics_arm arg0 arg1 arg2 =
   match !enumerate_physical_device_shader_instrumentation_metrics_arm_ref with
   | Some f -> f arg0 arg1 arg2
@@ -4699,6 +6035,8 @@ let enumerate_physical_device_shader_instrumentation_metrics_arm arg0 arg1 arg2 
 
 let create_shader_instrumentation_arm_typ = Device.t @-> ptr (ShaderInstrumentationCreateInfoARM.t) @-> ptr (AllocationCallbacks.t) @-> ptr (ShaderInstrumentationARM.t) @-> returning (Result.t)
 let create_shader_instrumentation_arm_ref = ref (bind create_shader_instrumentation_arm_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateShaderInstrumentationARM.html}[vkCreateShaderInstrumentationARM]} *)
 let create_shader_instrumentation_arm arg0 arg1 arg2 arg3 =
   match !create_shader_instrumentation_arm_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -4706,6 +6044,8 @@ let create_shader_instrumentation_arm arg0 arg1 arg2 arg3 =
 
 let destroy_shader_instrumentation_arm_typ = Device.t @-> ShaderInstrumentationARM.t @-> ptr (AllocationCallbacks.t) @-> returning (Ctypes.void)
 let destroy_shader_instrumentation_arm_ref = ref (bind destroy_shader_instrumentation_arm_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkDestroyShaderInstrumentationARM.html}[vkDestroyShaderInstrumentationARM]} *)
 let destroy_shader_instrumentation_arm arg0 arg1 arg2 =
   match !destroy_shader_instrumentation_arm_ref with
   | Some f -> f arg0 arg1 arg2
@@ -4713,6 +6053,8 @@ let destroy_shader_instrumentation_arm arg0 arg1 arg2 =
 
 let cmd_begin_shader_instrumentation_arm_typ = CommandBuffer.t @-> ShaderInstrumentationARM.t @-> returning (Ctypes.void)
 let cmd_begin_shader_instrumentation_arm_ref = ref (bind cmd_begin_shader_instrumentation_arm_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdBeginShaderInstrumentationARM.html}[vkCmdBeginShaderInstrumentationARM]} *)
 let cmd_begin_shader_instrumentation_arm arg0 arg1 =
   match !cmd_begin_shader_instrumentation_arm_ref with
   | Some f -> f arg0 arg1
@@ -4720,6 +6062,8 @@ let cmd_begin_shader_instrumentation_arm arg0 arg1 =
 
 let cmd_end_shader_instrumentation_arm_typ = CommandBuffer.t @-> returning (Ctypes.void)
 let cmd_end_shader_instrumentation_arm_ref = ref (bind cmd_end_shader_instrumentation_arm_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdEndShaderInstrumentationARM.html}[vkCmdEndShaderInstrumentationARM]} *)
 let cmd_end_shader_instrumentation_arm arg0 =
   match !cmd_end_shader_instrumentation_arm_ref with
   | Some f -> f arg0
@@ -4727,6 +6071,8 @@ let cmd_end_shader_instrumentation_arm arg0 =
 
 let get_shader_instrumentation_values_arm_typ = Device.t @-> ShaderInstrumentationARM.t @-> ptr (Vk_base.uint32) @-> ptr (Ctypes.void) @-> ShaderInstrumentationValuesFlagsARM.t @-> returning (Result.t)
 let get_shader_instrumentation_values_arm_ref = ref (bind get_shader_instrumentation_values_arm_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetShaderInstrumentationValuesARM.html}[vkGetShaderInstrumentationValuesARM]} *)
 let get_shader_instrumentation_values_arm arg0 arg1 arg2 arg3 arg4 =
   match !get_shader_instrumentation_values_arm_ref with
   | Some f -> f arg0 arg1 arg2 arg3 arg4
@@ -4734,6 +6080,8 @@ let get_shader_instrumentation_values_arm arg0 arg1 arg2 arg3 arg4 =
 
 let clear_shader_instrumentation_metrics_arm_typ = Device.t @-> ShaderInstrumentationARM.t @-> returning (Ctypes.void)
 let clear_shader_instrumentation_metrics_arm_ref = ref (bind clear_shader_instrumentation_metrics_arm_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkClearShaderInstrumentationMetricsARM.html}[vkClearShaderInstrumentationMetricsARM]} *)
 let clear_shader_instrumentation_metrics_arm arg0 arg1 =
   match !clear_shader_instrumentation_metrics_arm_ref with
   | Some f -> f arg0 arg1
@@ -4741,6 +6089,8 @@ let clear_shader_instrumentation_metrics_arm arg0 arg1 =
 
 let create_tensor_arm_typ = Device.t @-> ptr (TensorCreateInfoARM.t) @-> ptr (AllocationCallbacks.t) @-> ptr (TensorARM.t) @-> returning (Result.t)
 let create_tensor_arm_ref = ref (bind create_tensor_arm_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateTensorARM.html}[vkCreateTensorARM]} *)
 let create_tensor_arm arg0 arg1 arg2 arg3 =
   match !create_tensor_arm_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -4748,6 +6098,8 @@ let create_tensor_arm arg0 arg1 arg2 arg3 =
 
 let destroy_tensor_arm_typ = Device.t @-> TensorARM.t @-> ptr (AllocationCallbacks.t) @-> returning (Ctypes.void)
 let destroy_tensor_arm_ref = ref (bind destroy_tensor_arm_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkDestroyTensorARM.html}[vkDestroyTensorARM]} *)
 let destroy_tensor_arm arg0 arg1 arg2 =
   match !destroy_tensor_arm_ref with
   | Some f -> f arg0 arg1 arg2
@@ -4755,6 +6107,8 @@ let destroy_tensor_arm arg0 arg1 arg2 =
 
 let create_tensor_view_arm_typ = Device.t @-> ptr (TensorViewCreateInfoARM.t) @-> ptr (AllocationCallbacks.t) @-> ptr (TensorViewARM.t) @-> returning (Result.t)
 let create_tensor_view_arm_ref = ref (bind create_tensor_view_arm_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateTensorViewARM.html}[vkCreateTensorViewARM]} *)
 let create_tensor_view_arm arg0 arg1 arg2 arg3 =
   match !create_tensor_view_arm_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -4762,6 +6116,8 @@ let create_tensor_view_arm arg0 arg1 arg2 arg3 =
 
 let destroy_tensor_view_arm_typ = Device.t @-> TensorViewARM.t @-> ptr (AllocationCallbacks.t) @-> returning (Ctypes.void)
 let destroy_tensor_view_arm_ref = ref (bind destroy_tensor_view_arm_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkDestroyTensorViewARM.html}[vkDestroyTensorViewARM]} *)
 let destroy_tensor_view_arm arg0 arg1 arg2 =
   match !destroy_tensor_view_arm_ref with
   | Some f -> f arg0 arg1 arg2
@@ -4769,6 +6125,8 @@ let destroy_tensor_view_arm arg0 arg1 arg2 =
 
 let get_tensor_memory_requirements_arm_typ = Device.t @-> ptr (TensorMemoryRequirementsInfoARM.t) @-> ptr (MemoryRequirements2.t) @-> returning (Ctypes.void)
 let get_tensor_memory_requirements_arm_ref = ref (bind get_tensor_memory_requirements_arm_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetTensorMemoryRequirementsARM.html}[vkGetTensorMemoryRequirementsARM]} *)
 let get_tensor_memory_requirements_arm arg0 arg1 arg2 =
   match !get_tensor_memory_requirements_arm_ref with
   | Some f -> f arg0 arg1 arg2
@@ -4776,6 +6134,8 @@ let get_tensor_memory_requirements_arm arg0 arg1 arg2 =
 
 let bind_tensor_memory_arm_typ = Device.t @-> Vk_base.uint32 @-> ptr (BindTensorMemoryInfoARM.t) @-> returning (Result.t)
 let bind_tensor_memory_arm_ref = ref (bind bind_tensor_memory_arm_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkBindTensorMemoryARM.html}[vkBindTensorMemoryARM]} *)
 let bind_tensor_memory_arm arg0 arg1 arg2 =
   match !bind_tensor_memory_arm_ref with
   | Some f -> f arg0 arg1 arg2
@@ -4783,6 +6143,8 @@ let bind_tensor_memory_arm arg0 arg1 arg2 =
 
 let get_device_tensor_memory_requirements_arm_typ = Device.t @-> ptr (DeviceTensorMemoryRequirementsARM.t) @-> ptr (MemoryRequirements2.t) @-> returning (Ctypes.void)
 let get_device_tensor_memory_requirements_arm_ref = ref (bind get_device_tensor_memory_requirements_arm_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetDeviceTensorMemoryRequirementsARM.html}[vkGetDeviceTensorMemoryRequirementsARM]} *)
 let get_device_tensor_memory_requirements_arm arg0 arg1 arg2 =
   match !get_device_tensor_memory_requirements_arm_ref with
   | Some f -> f arg0 arg1 arg2
@@ -4790,6 +6152,8 @@ let get_device_tensor_memory_requirements_arm arg0 arg1 arg2 =
 
 let cmd_copy_tensor_arm_typ = CommandBuffer.t @-> ptr (CopyTensorInfoARM.t) @-> returning (Ctypes.void)
 let cmd_copy_tensor_arm_ref = ref (bind cmd_copy_tensor_arm_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdCopyTensorARM.html}[vkCmdCopyTensorARM]} *)
 let cmd_copy_tensor_arm arg0 arg1 =
   match !cmd_copy_tensor_arm_ref with
   | Some f -> f arg0 arg1
@@ -4797,6 +6161,8 @@ let cmd_copy_tensor_arm arg0 arg1 =
 
 let get_tensor_opaque_capture_descriptor_data_arm_typ = Device.t @-> ptr (TensorCaptureDescriptorDataInfoARM.t) @-> ptr (Ctypes.void) @-> returning (Result.t)
 let get_tensor_opaque_capture_descriptor_data_arm_ref = ref (bind get_tensor_opaque_capture_descriptor_data_arm_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetTensorOpaqueCaptureDescriptorDataARM.html}[vkGetTensorOpaqueCaptureDescriptorDataARM]} *)
 let get_tensor_opaque_capture_descriptor_data_arm arg0 arg1 arg2 =
   match !get_tensor_opaque_capture_descriptor_data_arm_ref with
   | Some f -> f arg0 arg1 arg2
@@ -4804,6 +6170,8 @@ let get_tensor_opaque_capture_descriptor_data_arm arg0 arg1 arg2 =
 
 let get_tensor_view_opaque_capture_descriptor_data_arm_typ = Device.t @-> ptr (TensorViewCaptureDescriptorDataInfoARM.t) @-> ptr (Ctypes.void) @-> returning (Result.t)
 let get_tensor_view_opaque_capture_descriptor_data_arm_ref = ref (bind get_tensor_view_opaque_capture_descriptor_data_arm_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetTensorViewOpaqueCaptureDescriptorDataARM.html}[vkGetTensorViewOpaqueCaptureDescriptorDataARM]} *)
 let get_tensor_view_opaque_capture_descriptor_data_arm arg0 arg1 arg2 =
   match !get_tensor_view_opaque_capture_descriptor_data_arm_ref with
   | Some f -> f arg0 arg1 arg2
@@ -4811,6 +6179,8 @@ let get_tensor_view_opaque_capture_descriptor_data_arm arg0 arg1 arg2 =
 
 let get_physical_device_external_tensor_properties_arm_typ = PhysicalDevice.t @-> ptr (PhysicalDeviceExternalTensorInfoARM.t) @-> ptr (ExternalTensorPropertiesARM.t) @-> returning (Ctypes.void)
 let get_physical_device_external_tensor_properties_arm_ref = ref (bind get_physical_device_external_tensor_properties_arm_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPhysicalDeviceExternalTensorPropertiesARM.html}[vkGetPhysicalDeviceExternalTensorPropertiesARM]} *)
 let get_physical_device_external_tensor_properties_arm arg0 arg1 arg2 =
   match !get_physical_device_external_tensor_properties_arm_ref with
   | Some f -> f arg0 arg1 arg2
@@ -4818,6 +6188,8 @@ let get_physical_device_external_tensor_properties_arm arg0 arg1 arg2 =
 
 let create_data_graph_pipelines_arm_typ = Device.t @-> DeferredOperationKHR.t @-> PipelineCache.t @-> Vk_base.uint32 @-> ptr (DataGraphPipelineCreateInfoARM.t) @-> ptr (AllocationCallbacks.t) @-> ptr (Pipeline.t) @-> returning (Result.t)
 let create_data_graph_pipelines_arm_ref = ref (bind create_data_graph_pipelines_arm_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateDataGraphPipelinesARM.html}[vkCreateDataGraphPipelinesARM]} *)
 let create_data_graph_pipelines_arm arg0 arg1 arg2 arg3 arg4 arg5 arg6 =
   match !create_data_graph_pipelines_arm_ref with
   | Some f -> f arg0 arg1 arg2 arg3 arg4 arg5 arg6
@@ -4825,6 +6197,8 @@ let create_data_graph_pipelines_arm arg0 arg1 arg2 arg3 arg4 arg5 arg6 =
 
 let create_data_graph_pipeline_session_arm_typ = Device.t @-> ptr (DataGraphPipelineSessionCreateInfoARM.t) @-> ptr (AllocationCallbacks.t) @-> ptr (DataGraphPipelineSessionARM.t) @-> returning (Result.t)
 let create_data_graph_pipeline_session_arm_ref = ref (bind create_data_graph_pipeline_session_arm_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateDataGraphPipelineSessionARM.html}[vkCreateDataGraphPipelineSessionARM]} *)
 let create_data_graph_pipeline_session_arm arg0 arg1 arg2 arg3 =
   match !create_data_graph_pipeline_session_arm_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -4832,6 +6206,8 @@ let create_data_graph_pipeline_session_arm arg0 arg1 arg2 arg3 =
 
 let get_data_graph_pipeline_session_bind_point_requirements_arm_typ = Device.t @-> ptr (DataGraphPipelineSessionBindPointRequirementsInfoARM.t) @-> ptr (Vk_base.uint32) @-> ptr (DataGraphPipelineSessionBindPointRequirementARM.t) @-> returning (Result.t)
 let get_data_graph_pipeline_session_bind_point_requirements_arm_ref = ref (bind get_data_graph_pipeline_session_bind_point_requirements_arm_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetDataGraphPipelineSessionBindPointRequirementsARM.html}[vkGetDataGraphPipelineSessionBindPointRequirementsARM]} *)
 let get_data_graph_pipeline_session_bind_point_requirements_arm arg0 arg1 arg2 arg3 =
   match !get_data_graph_pipeline_session_bind_point_requirements_arm_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -4839,6 +6215,8 @@ let get_data_graph_pipeline_session_bind_point_requirements_arm arg0 arg1 arg2 a
 
 let get_data_graph_pipeline_session_memory_requirements_arm_typ = Device.t @-> ptr (DataGraphPipelineSessionMemoryRequirementsInfoARM.t) @-> ptr (MemoryRequirements2.t) @-> returning (Ctypes.void)
 let get_data_graph_pipeline_session_memory_requirements_arm_ref = ref (bind get_data_graph_pipeline_session_memory_requirements_arm_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetDataGraphPipelineSessionMemoryRequirementsARM.html}[vkGetDataGraphPipelineSessionMemoryRequirementsARM]} *)
 let get_data_graph_pipeline_session_memory_requirements_arm arg0 arg1 arg2 =
   match !get_data_graph_pipeline_session_memory_requirements_arm_ref with
   | Some f -> f arg0 arg1 arg2
@@ -4846,6 +6224,8 @@ let get_data_graph_pipeline_session_memory_requirements_arm arg0 arg1 arg2 =
 
 let bind_data_graph_pipeline_session_memory_arm_typ = Device.t @-> Vk_base.uint32 @-> ptr (BindDataGraphPipelineSessionMemoryInfoARM.t) @-> returning (Result.t)
 let bind_data_graph_pipeline_session_memory_arm_ref = ref (bind bind_data_graph_pipeline_session_memory_arm_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkBindDataGraphPipelineSessionMemoryARM.html}[vkBindDataGraphPipelineSessionMemoryARM]} *)
 let bind_data_graph_pipeline_session_memory_arm arg0 arg1 arg2 =
   match !bind_data_graph_pipeline_session_memory_arm_ref with
   | Some f -> f arg0 arg1 arg2
@@ -4853,6 +6233,8 @@ let bind_data_graph_pipeline_session_memory_arm arg0 arg1 arg2 =
 
 let destroy_data_graph_pipeline_session_arm_typ = Device.t @-> DataGraphPipelineSessionARM.t @-> ptr (AllocationCallbacks.t) @-> returning (Ctypes.void)
 let destroy_data_graph_pipeline_session_arm_ref = ref (bind destroy_data_graph_pipeline_session_arm_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkDestroyDataGraphPipelineSessionARM.html}[vkDestroyDataGraphPipelineSessionARM]} *)
 let destroy_data_graph_pipeline_session_arm arg0 arg1 arg2 =
   match !destroy_data_graph_pipeline_session_arm_ref with
   | Some f -> f arg0 arg1 arg2
@@ -4860,6 +6242,8 @@ let destroy_data_graph_pipeline_session_arm arg0 arg1 arg2 =
 
 let cmd_dispatch_data_graph_arm_typ = CommandBuffer.t @-> DataGraphPipelineSessionARM.t @-> ptr (DataGraphPipelineDispatchInfoARM.t) @-> returning (Ctypes.void)
 let cmd_dispatch_data_graph_arm_ref = ref (bind cmd_dispatch_data_graph_arm_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdDispatchDataGraphARM.html}[vkCmdDispatchDataGraphARM]} *)
 let cmd_dispatch_data_graph_arm arg0 arg1 arg2 =
   match !cmd_dispatch_data_graph_arm_ref with
   | Some f -> f arg0 arg1 arg2
@@ -4867,6 +6251,8 @@ let cmd_dispatch_data_graph_arm arg0 arg1 arg2 =
 
 let get_data_graph_pipeline_available_properties_arm_typ = Device.t @-> ptr (DataGraphPipelineInfoARM.t) @-> ptr (Vk_base.uint32) @-> ptr (DataGraphPipelinePropertyARM.t) @-> returning (Result.t)
 let get_data_graph_pipeline_available_properties_arm_ref = ref (bind get_data_graph_pipeline_available_properties_arm_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetDataGraphPipelineAvailablePropertiesARM.html}[vkGetDataGraphPipelineAvailablePropertiesARM]} *)
 let get_data_graph_pipeline_available_properties_arm arg0 arg1 arg2 arg3 =
   match !get_data_graph_pipeline_available_properties_arm_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -4874,6 +6260,8 @@ let get_data_graph_pipeline_available_properties_arm arg0 arg1 arg2 arg3 =
 
 let get_data_graph_pipeline_properties_arm_typ = Device.t @-> ptr (DataGraphPipelineInfoARM.t) @-> Vk_base.uint32 @-> ptr (DataGraphPipelinePropertyQueryResultARM.t) @-> returning (Result.t)
 let get_data_graph_pipeline_properties_arm_ref = ref (bind get_data_graph_pipeline_properties_arm_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetDataGraphPipelinePropertiesARM.html}[vkGetDataGraphPipelinePropertiesARM]} *)
 let get_data_graph_pipeline_properties_arm arg0 arg1 arg2 arg3 =
   match !get_data_graph_pipeline_properties_arm_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -4881,6 +6269,8 @@ let get_data_graph_pipeline_properties_arm arg0 arg1 arg2 arg3 =
 
 let get_physical_device_queue_family_data_graph_properties_arm_typ = PhysicalDevice.t @-> Vk_base.uint32 @-> ptr (Vk_base.uint32) @-> ptr (QueueFamilyDataGraphPropertiesARM.t) @-> returning (Result.t)
 let get_physical_device_queue_family_data_graph_properties_arm_ref = ref (bind get_physical_device_queue_family_data_graph_properties_arm_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPhysicalDeviceQueueFamilyDataGraphPropertiesARM.html}[vkGetPhysicalDeviceQueueFamilyDataGraphPropertiesARM]} *)
 let get_physical_device_queue_family_data_graph_properties_arm arg0 arg1 arg2 arg3 =
   match !get_physical_device_queue_family_data_graph_properties_arm_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -4888,6 +6278,8 @@ let get_physical_device_queue_family_data_graph_properties_arm arg0 arg1 arg2 ar
 
 let get_physical_device_queue_family_data_graph_processing_engine_properties_arm_typ = PhysicalDevice.t @-> ptr (PhysicalDeviceQueueFamilyDataGraphProcessingEngineInfoARM.t) @-> ptr (QueueFamilyDataGraphProcessingEnginePropertiesARM.t) @-> returning (Ctypes.void)
 let get_physical_device_queue_family_data_graph_processing_engine_properties_arm_ref = ref (bind get_physical_device_queue_family_data_graph_processing_engine_properties_arm_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPhysicalDeviceQueueFamilyDataGraphProcessingEnginePropertiesARM.html}[vkGetPhysicalDeviceQueueFamilyDataGraphProcessingEnginePropertiesARM]} *)
 let get_physical_device_queue_family_data_graph_processing_engine_properties_arm arg0 arg1 arg2 =
   match !get_physical_device_queue_family_data_graph_processing_engine_properties_arm_ref with
   | Some f -> f arg0 arg1 arg2
@@ -4895,6 +6287,8 @@ let get_physical_device_queue_family_data_graph_processing_engine_properties_arm
 
 let get_native_buffer_properties_ohos_typ = Device.t @-> ptr (void) @-> ptr (NativeBufferPropertiesOHOS.t) @-> returning (Result.t)
 let get_native_buffer_properties_ohos_ref = ref (bind get_native_buffer_properties_ohos_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetNativeBufferPropertiesOHOS.html}[vkGetNativeBufferPropertiesOHOS]} *)
 let get_native_buffer_properties_ohos arg0 arg1 arg2 =
   match !get_native_buffer_properties_ohos_ref with
   | Some f -> f arg0 arg1 arg2
@@ -4902,6 +6296,8 @@ let get_native_buffer_properties_ohos arg0 arg1 arg2 =
 
 let get_memory_native_buffer_ohos_typ = Device.t @-> ptr (MemoryGetNativeBufferInfoOHOS.t) @-> ptr (ptr (void)) @-> returning (Result.t)
 let get_memory_native_buffer_ohos_ref = ref (bind get_memory_native_buffer_ohos_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetMemoryNativeBufferOHOS.html}[vkGetMemoryNativeBufferOHOS]} *)
 let get_memory_native_buffer_ohos arg0 arg1 arg2 =
   match !get_memory_native_buffer_ohos_ref with
   | Some f -> f arg0 arg1 arg2
@@ -4909,6 +6305,8 @@ let get_memory_native_buffer_ohos arg0 arg1 arg2 =
 
 let queue_set_perf_hint_qcom_typ = Queue.t @-> ptr (PerfHintInfoQCOM.t) @-> returning (Result.t)
 let queue_set_perf_hint_qcom_ref = ref (bind queue_set_perf_hint_qcom_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkQueueSetPerfHintQCOM.html}[vkQueueSetPerfHintQCOM]} *)
 let queue_set_perf_hint_qcom arg0 arg1 =
   match !queue_set_perf_hint_qcom_ref with
   | Some f -> f arg0 arg1
@@ -4916,6 +6314,8 @@ let queue_set_perf_hint_qcom arg0 arg1 =
 
 let enumerate_physical_device_queue_family_performance_counters_by_region_arm_typ = PhysicalDevice.t @-> Vk_base.uint32 @-> ptr (Vk_base.uint32) @-> ptr (PerformanceCounterARM.t) @-> ptr (PerformanceCounterDescriptionARM.t) @-> returning (Result.t)
 let enumerate_physical_device_queue_family_performance_counters_by_region_arm_ref = ref (bind enumerate_physical_device_queue_family_performance_counters_by_region_arm_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkEnumeratePhysicalDeviceQueueFamilyPerformanceCountersByRegionARM.html}[vkEnumeratePhysicalDeviceQueueFamilyPerformanceCountersByRegionARM]} *)
 let enumerate_physical_device_queue_family_performance_counters_by_region_arm arg0 arg1 arg2 arg3 arg4 =
   match !enumerate_physical_device_queue_family_performance_counters_by_region_arm_ref with
   | Some f -> f arg0 arg1 arg2 arg3 arg4
@@ -4923,6 +6323,8 @@ let enumerate_physical_device_queue_family_performance_counters_by_region_arm ar
 
 let cmd_set_compute_occupancy_priority_nv_typ = CommandBuffer.t @-> ptr (ComputeOccupancyPriorityParametersNV.t) @-> returning (Ctypes.void)
 let cmd_set_compute_occupancy_priority_nv_ref = ref (bind cmd_set_compute_occupancy_priority_nv_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetComputeOccupancyPriorityNV.html}[vkCmdSetComputeOccupancyPriorityNV]} *)
 let cmd_set_compute_occupancy_priority_nv arg0 arg1 =
   match !cmd_set_compute_occupancy_priority_nv_ref with
   | Some f -> f arg0 arg1
@@ -4930,6 +6332,8 @@ let cmd_set_compute_occupancy_priority_nv arg0 arg1 =
 
 let write_sampler_descriptors_ext_typ = Device.t @-> Vk_base.uint32 @-> ptr (SamplerCreateInfo.t) @-> ptr (HostAddressRangeEXT.t) @-> returning (Result.t)
 let write_sampler_descriptors_ext_ref = ref (bind write_sampler_descriptors_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkWriteSamplerDescriptorsEXT.html}[vkWriteSamplerDescriptorsEXT]} *)
 let write_sampler_descriptors_ext arg0 arg1 arg2 arg3 =
   match !write_sampler_descriptors_ext_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -4937,6 +6341,8 @@ let write_sampler_descriptors_ext arg0 arg1 arg2 arg3 =
 
 let write_resource_descriptors_ext_typ = Device.t @-> Vk_base.uint32 @-> ptr (ResourceDescriptorInfoEXT.t) @-> ptr (HostAddressRangeEXT.t) @-> returning (Result.t)
 let write_resource_descriptors_ext_ref = ref (bind write_resource_descriptors_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkWriteResourceDescriptorsEXT.html}[vkWriteResourceDescriptorsEXT]} *)
 let write_resource_descriptors_ext arg0 arg1 arg2 arg3 =
   match !write_resource_descriptors_ext_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -4944,6 +6350,8 @@ let write_resource_descriptors_ext arg0 arg1 arg2 arg3 =
 
 let cmd_bind_sampler_heap_ext_typ = CommandBuffer.t @-> ptr (BindHeapInfoEXT.t) @-> returning (Ctypes.void)
 let cmd_bind_sampler_heap_ext_ref = ref (bind cmd_bind_sampler_heap_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdBindSamplerHeapEXT.html}[vkCmdBindSamplerHeapEXT]} *)
 let cmd_bind_sampler_heap_ext arg0 arg1 =
   match !cmd_bind_sampler_heap_ext_ref with
   | Some f -> f arg0 arg1
@@ -4951,6 +6359,8 @@ let cmd_bind_sampler_heap_ext arg0 arg1 =
 
 let cmd_bind_resource_heap_ext_typ = CommandBuffer.t @-> ptr (BindHeapInfoEXT.t) @-> returning (Ctypes.void)
 let cmd_bind_resource_heap_ext_ref = ref (bind cmd_bind_resource_heap_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdBindResourceHeapEXT.html}[vkCmdBindResourceHeapEXT]} *)
 let cmd_bind_resource_heap_ext arg0 arg1 =
   match !cmd_bind_resource_heap_ext_ref with
   | Some f -> f arg0 arg1
@@ -4958,6 +6368,8 @@ let cmd_bind_resource_heap_ext arg0 arg1 =
 
 let cmd_push_data_ext_typ = CommandBuffer.t @-> ptr (PushDataInfoEXT.t) @-> returning (Ctypes.void)
 let cmd_push_data_ext_ref = ref (bind cmd_push_data_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdPushDataEXT.html}[vkCmdPushDataEXT]} *)
 let cmd_push_data_ext arg0 arg1 =
   match !cmd_push_data_ext_ref with
   | Some f -> f arg0 arg1
@@ -4965,6 +6377,8 @@ let cmd_push_data_ext arg0 arg1 =
 
 let register_custom_border_color_ext_typ = Device.t @-> ptr (SamplerCustomBorderColorCreateInfoEXT.t) @-> Vk_base.bool32 @-> ptr (Vk_base.uint32) @-> returning (Result.t)
 let register_custom_border_color_ext_ref = ref (bind register_custom_border_color_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkRegisterCustomBorderColorEXT.html}[vkRegisterCustomBorderColorEXT]} *)
 let register_custom_border_color_ext arg0 arg1 arg2 arg3 =
   match !register_custom_border_color_ext_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -4972,6 +6386,8 @@ let register_custom_border_color_ext arg0 arg1 arg2 arg3 =
 
 let unregister_custom_border_color_ext_typ = Device.t @-> Vk_base.uint32 @-> returning (Ctypes.void)
 let unregister_custom_border_color_ext_ref = ref (bind unregister_custom_border_color_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkUnregisterCustomBorderColorEXT.html}[vkUnregisterCustomBorderColorEXT]} *)
 let unregister_custom_border_color_ext arg0 arg1 =
   match !unregister_custom_border_color_ext_ref with
   | Some f -> f arg0 arg1
@@ -4979,6 +6395,8 @@ let unregister_custom_border_color_ext arg0 arg1 =
 
 let get_image_opaque_capture_data_ext_typ = Device.t @-> Vk_base.uint32 @-> ptr (Image.t) @-> ptr (HostAddressRangeEXT.t) @-> returning (Result.t)
 let get_image_opaque_capture_data_ext_ref = ref (bind get_image_opaque_capture_data_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetImageOpaqueCaptureDataEXT.html}[vkGetImageOpaqueCaptureDataEXT]} *)
 let get_image_opaque_capture_data_ext arg0 arg1 arg2 arg3 =
   match !get_image_opaque_capture_data_ext_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -4986,6 +6404,8 @@ let get_image_opaque_capture_data_ext arg0 arg1 arg2 arg3 =
 
 let get_physical_device_descriptor_size_ext_typ = PhysicalDevice.t @-> DescriptorType.t @-> returning (Vk_base.device_size)
 let get_physical_device_descriptor_size_ext_ref = ref (bind get_physical_device_descriptor_size_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPhysicalDeviceDescriptorSizeEXT.html}[vkGetPhysicalDeviceDescriptorSizeEXT]} *)
 let get_physical_device_descriptor_size_ext arg0 arg1 =
   match !get_physical_device_descriptor_size_ext_ref with
   | Some f -> f arg0 arg1
@@ -4993,6 +6413,8 @@ let get_physical_device_descriptor_size_ext arg0 arg1 =
 
 let get_tensor_opaque_capture_data_arm_typ = Device.t @-> Vk_base.uint32 @-> ptr (TensorARM.t) @-> ptr (HostAddressRangeEXT.t) @-> returning (Result.t)
 let get_tensor_opaque_capture_data_arm_ref = ref (bind get_tensor_opaque_capture_data_arm_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetTensorOpaqueCaptureDataARM.html}[vkGetTensorOpaqueCaptureDataARM]} *)
 let get_tensor_opaque_capture_data_arm arg0 arg1 arg2 arg3 =
   match !get_tensor_opaque_capture_data_arm_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -5000,6 +6422,8 @@ let get_tensor_opaque_capture_data_arm arg0 arg1 arg2 arg3 =
 
 let cmd_copy_memory_khr_typ = CommandBuffer.t @-> ptr (CopyDeviceMemoryInfoKHR.t) @-> returning (Ctypes.void)
 let cmd_copy_memory_khr_ref = ref (bind cmd_copy_memory_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdCopyMemoryKHR.html}[vkCmdCopyMemoryKHR]} *)
 let cmd_copy_memory_khr arg0 arg1 =
   match !cmd_copy_memory_khr_ref with
   | Some f -> f arg0 arg1
@@ -5007,6 +6431,8 @@ let cmd_copy_memory_khr arg0 arg1 =
 
 let cmd_copy_memory_to_image_khr_typ = CommandBuffer.t @-> ptr (CopyDeviceMemoryImageInfoKHR.t) @-> returning (Ctypes.void)
 let cmd_copy_memory_to_image_khr_ref = ref (bind cmd_copy_memory_to_image_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdCopyMemoryToImageKHR.html}[vkCmdCopyMemoryToImageKHR]} *)
 let cmd_copy_memory_to_image_khr arg0 arg1 =
   match !cmd_copy_memory_to_image_khr_ref with
   | Some f -> f arg0 arg1
@@ -5014,6 +6440,8 @@ let cmd_copy_memory_to_image_khr arg0 arg1 =
 
 let cmd_copy_image_to_memory_khr_typ = CommandBuffer.t @-> ptr (CopyDeviceMemoryImageInfoKHR.t) @-> returning (Ctypes.void)
 let cmd_copy_image_to_memory_khr_ref = ref (bind cmd_copy_image_to_memory_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdCopyImageToMemoryKHR.html}[vkCmdCopyImageToMemoryKHR]} *)
 let cmd_copy_image_to_memory_khr arg0 arg1 =
   match !cmd_copy_image_to_memory_khr_ref with
   | Some f -> f arg0 arg1
@@ -5021,6 +6449,8 @@ let cmd_copy_image_to_memory_khr arg0 arg1 =
 
 let cmd_update_memory_khr_typ = CommandBuffer.t @-> ptr (DeviceAddressRangeKHR.t) @-> AddressCommandFlagsKHR.t @-> Vk_base.device_size @-> ptr (Ctypes.void) @-> returning (Ctypes.void)
 let cmd_update_memory_khr_ref = ref (bind cmd_update_memory_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdUpdateMemoryKHR.html}[vkCmdUpdateMemoryKHR]} *)
 let cmd_update_memory_khr arg0 arg1 arg2 arg3 arg4 =
   match !cmd_update_memory_khr_ref with
   | Some f -> f arg0 arg1 arg2 arg3 arg4
@@ -5028,6 +6458,8 @@ let cmd_update_memory_khr arg0 arg1 arg2 arg3 arg4 =
 
 let cmd_fill_memory_khr_typ = CommandBuffer.t @-> ptr (DeviceAddressRangeKHR.t) @-> AddressCommandFlagsKHR.t @-> Vk_base.uint32 @-> returning (Ctypes.void)
 let cmd_fill_memory_khr_ref = ref (bind cmd_fill_memory_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdFillMemoryKHR.html}[vkCmdFillMemoryKHR]} *)
 let cmd_fill_memory_khr arg0 arg1 arg2 arg3 =
   match !cmd_fill_memory_khr_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -5035,6 +6467,8 @@ let cmd_fill_memory_khr arg0 arg1 arg2 arg3 =
 
 let cmd_copy_query_pool_results_to_memory_khr_typ = CommandBuffer.t @-> QueryPool.t @-> Vk_base.uint32 @-> Vk_base.uint32 @-> ptr (StridedDeviceAddressRangeKHR.t) @-> AddressCommandFlagsKHR.t @-> QueryResultFlags.t @-> returning (Ctypes.void)
 let cmd_copy_query_pool_results_to_memory_khr_ref = ref (bind cmd_copy_query_pool_results_to_memory_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdCopyQueryPoolResultsToMemoryKHR.html}[vkCmdCopyQueryPoolResultsToMemoryKHR]} *)
 let cmd_copy_query_pool_results_to_memory_khr arg0 arg1 arg2 arg3 arg4 arg5 arg6 =
   match !cmd_copy_query_pool_results_to_memory_khr_ref with
   | Some f -> f arg0 arg1 arg2 arg3 arg4 arg5 arg6
@@ -5042,6 +6476,8 @@ let cmd_copy_query_pool_results_to_memory_khr arg0 arg1 arg2 arg3 arg4 arg5 arg6
 
 let cmd_begin_conditional_rendering_2_ext_typ = CommandBuffer.t @-> ptr (ConditionalRenderingBeginInfo2EXT.t) @-> returning (Ctypes.void)
 let cmd_begin_conditional_rendering_2_ext_ref = ref (bind cmd_begin_conditional_rendering_2_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdBeginConditionalRendering2EXT.html}[vkCmdBeginConditionalRendering2EXT]} *)
 let cmd_begin_conditional_rendering_2_ext arg0 arg1 =
   match !cmd_begin_conditional_rendering_2_ext_ref with
   | Some f -> f arg0 arg1
@@ -5049,6 +6485,8 @@ let cmd_begin_conditional_rendering_2_ext arg0 arg1 =
 
 let cmd_bind_transform_feedback_buffers_2_ext_typ = CommandBuffer.t @-> Vk_base.uint32 @-> Vk_base.uint32 @-> ptr (BindTransformFeedbackBuffer2InfoEXT.t) @-> returning (Ctypes.void)
 let cmd_bind_transform_feedback_buffers_2_ext_ref = ref (bind cmd_bind_transform_feedback_buffers_2_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdBindTransformFeedbackBuffers2EXT.html}[vkCmdBindTransformFeedbackBuffers2EXT]} *)
 let cmd_bind_transform_feedback_buffers_2_ext arg0 arg1 arg2 arg3 =
   match !cmd_bind_transform_feedback_buffers_2_ext_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -5056,6 +6494,8 @@ let cmd_bind_transform_feedback_buffers_2_ext arg0 arg1 arg2 arg3 =
 
 let cmd_begin_transform_feedback_2_ext_typ = CommandBuffer.t @-> Vk_base.uint32 @-> Vk_base.uint32 @-> ptr (BindTransformFeedbackBuffer2InfoEXT.t) @-> returning (Ctypes.void)
 let cmd_begin_transform_feedback_2_ext_ref = ref (bind cmd_begin_transform_feedback_2_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdBeginTransformFeedback2EXT.html}[vkCmdBeginTransformFeedback2EXT]} *)
 let cmd_begin_transform_feedback_2_ext arg0 arg1 arg2 arg3 =
   match !cmd_begin_transform_feedback_2_ext_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -5063,6 +6503,8 @@ let cmd_begin_transform_feedback_2_ext arg0 arg1 arg2 arg3 =
 
 let cmd_end_transform_feedback_2_ext_typ = CommandBuffer.t @-> Vk_base.uint32 @-> Vk_base.uint32 @-> ptr (BindTransformFeedbackBuffer2InfoEXT.t) @-> returning (Ctypes.void)
 let cmd_end_transform_feedback_2_ext_ref = ref (bind cmd_end_transform_feedback_2_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdEndTransformFeedback2EXT.html}[vkCmdEndTransformFeedback2EXT]} *)
 let cmd_end_transform_feedback_2_ext arg0 arg1 arg2 arg3 =
   match !cmd_end_transform_feedback_2_ext_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -5070,6 +6512,8 @@ let cmd_end_transform_feedback_2_ext arg0 arg1 arg2 arg3 =
 
 let cmd_draw_indirect_byte_count_2_ext_typ = CommandBuffer.t @-> Vk_base.uint32 @-> Vk_base.uint32 @-> ptr (BindTransformFeedbackBuffer2InfoEXT.t) @-> Vk_base.uint32 @-> Vk_base.uint32 @-> returning (Ctypes.void)
 let cmd_draw_indirect_byte_count_2_ext_ref = ref (bind cmd_draw_indirect_byte_count_2_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdDrawIndirectByteCount2EXT.html}[vkCmdDrawIndirectByteCount2EXT]} *)
 let cmd_draw_indirect_byte_count_2_ext arg0 arg1 arg2 arg3 arg4 arg5 =
   match !cmd_draw_indirect_byte_count_2_ext_ref with
   | Some f -> f arg0 arg1 arg2 arg3 arg4 arg5
@@ -5077,6 +6521,8 @@ let cmd_draw_indirect_byte_count_2_ext arg0 arg1 arg2 arg3 arg4 arg5 =
 
 let cmd_write_marker_to_memory_amd_typ = CommandBuffer.t @-> ptr (MemoryMarkerInfoAMD.t) @-> returning (Ctypes.void)
 let cmd_write_marker_to_memory_amd_ref = ref (bind cmd_write_marker_to_memory_amd_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdWriteMarkerToMemoryAMD.html}[vkCmdWriteMarkerToMemoryAMD]} *)
 let cmd_write_marker_to_memory_amd arg0 arg1 =
   match !cmd_write_marker_to_memory_amd_ref with
   | Some f -> f arg0 arg1
@@ -5084,6 +6530,8 @@ let cmd_write_marker_to_memory_amd arg0 arg1 =
 
 let cmd_bind_index_buffer_3_khr_typ = CommandBuffer.t @-> ptr (BindIndexBuffer3InfoKHR.t) @-> returning (Ctypes.void)
 let cmd_bind_index_buffer_3_khr_ref = ref (bind cmd_bind_index_buffer_3_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdBindIndexBuffer3KHR.html}[vkCmdBindIndexBuffer3KHR]} *)
 let cmd_bind_index_buffer_3_khr arg0 arg1 =
   match !cmd_bind_index_buffer_3_khr_ref with
   | Some f -> f arg0 arg1
@@ -5091,6 +6539,8 @@ let cmd_bind_index_buffer_3_khr arg0 arg1 =
 
 let cmd_bind_vertex_buffers_3_khr_typ = CommandBuffer.t @-> Vk_base.uint32 @-> Vk_base.uint32 @-> ptr (BindVertexBuffer3InfoKHR.t) @-> returning (Ctypes.void)
 let cmd_bind_vertex_buffers_3_khr_ref = ref (bind cmd_bind_vertex_buffers_3_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdBindVertexBuffers3KHR.html}[vkCmdBindVertexBuffers3KHR]} *)
 let cmd_bind_vertex_buffers_3_khr arg0 arg1 arg2 arg3 =
   match !cmd_bind_vertex_buffers_3_khr_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -5098,6 +6548,8 @@ let cmd_bind_vertex_buffers_3_khr arg0 arg1 arg2 arg3 =
 
 let cmd_draw_indirect_2_khr_typ = CommandBuffer.t @-> ptr (DrawIndirect2InfoKHR.t) @-> returning (Ctypes.void)
 let cmd_draw_indirect_2_khr_ref = ref (bind cmd_draw_indirect_2_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdDrawIndirect2KHR.html}[vkCmdDrawIndirect2KHR]} *)
 let cmd_draw_indirect_2_khr arg0 arg1 =
   match !cmd_draw_indirect_2_khr_ref with
   | Some f -> f arg0 arg1
@@ -5105,6 +6557,8 @@ let cmd_draw_indirect_2_khr arg0 arg1 =
 
 let cmd_draw_indexed_indirect_2_khr_typ = CommandBuffer.t @-> ptr (DrawIndirect2InfoKHR.t) @-> returning (Ctypes.void)
 let cmd_draw_indexed_indirect_2_khr_ref = ref (bind cmd_draw_indexed_indirect_2_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdDrawIndexedIndirect2KHR.html}[vkCmdDrawIndexedIndirect2KHR]} *)
 let cmd_draw_indexed_indirect_2_khr arg0 arg1 =
   match !cmd_draw_indexed_indirect_2_khr_ref with
   | Some f -> f arg0 arg1
@@ -5112,6 +6566,8 @@ let cmd_draw_indexed_indirect_2_khr arg0 arg1 =
 
 let cmd_draw_indirect_count_2_khr_typ = CommandBuffer.t @-> ptr (DrawIndirectCount2InfoKHR.t) @-> returning (Ctypes.void)
 let cmd_draw_indirect_count_2_khr_ref = ref (bind cmd_draw_indirect_count_2_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdDrawIndirectCount2KHR.html}[vkCmdDrawIndirectCount2KHR]} *)
 let cmd_draw_indirect_count_2_khr arg0 arg1 =
   match !cmd_draw_indirect_count_2_khr_ref with
   | Some f -> f arg0 arg1
@@ -5119,6 +6575,8 @@ let cmd_draw_indirect_count_2_khr arg0 arg1 =
 
 let cmd_draw_indexed_indirect_count_2_khr_typ = CommandBuffer.t @-> ptr (DrawIndirectCount2InfoKHR.t) @-> returning (Ctypes.void)
 let cmd_draw_indexed_indirect_count_2_khr_ref = ref (bind cmd_draw_indexed_indirect_count_2_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdDrawIndexedIndirectCount2KHR.html}[vkCmdDrawIndexedIndirectCount2KHR]} *)
 let cmd_draw_indexed_indirect_count_2_khr arg0 arg1 =
   match !cmd_draw_indexed_indirect_count_2_khr_ref with
   | Some f -> f arg0 arg1
@@ -5126,6 +6584,8 @@ let cmd_draw_indexed_indirect_count_2_khr arg0 arg1 =
 
 let cmd_draw_mesh_tasks_indirect_2_ext_typ = CommandBuffer.t @-> ptr (DrawIndirect2InfoKHR.t) @-> returning (Ctypes.void)
 let cmd_draw_mesh_tasks_indirect_2_ext_ref = ref (bind cmd_draw_mesh_tasks_indirect_2_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdDrawMeshTasksIndirect2EXT.html}[vkCmdDrawMeshTasksIndirect2EXT]} *)
 let cmd_draw_mesh_tasks_indirect_2_ext arg0 arg1 =
   match !cmd_draw_mesh_tasks_indirect_2_ext_ref with
   | Some f -> f arg0 arg1
@@ -5133,6 +6593,8 @@ let cmd_draw_mesh_tasks_indirect_2_ext arg0 arg1 =
 
 let cmd_draw_mesh_tasks_indirect_count_2_ext_typ = CommandBuffer.t @-> ptr (DrawIndirectCount2InfoKHR.t) @-> returning (Ctypes.void)
 let cmd_draw_mesh_tasks_indirect_count_2_ext_ref = ref (bind cmd_draw_mesh_tasks_indirect_count_2_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdDrawMeshTasksIndirectCount2EXT.html}[vkCmdDrawMeshTasksIndirectCount2EXT]} *)
 let cmd_draw_mesh_tasks_indirect_count_2_ext arg0 arg1 =
   match !cmd_draw_mesh_tasks_indirect_count_2_ext_ref with
   | Some f -> f arg0 arg1
@@ -5140,6 +6602,8 @@ let cmd_draw_mesh_tasks_indirect_count_2_ext arg0 arg1 =
 
 let cmd_dispatch_indirect_2_khr_typ = CommandBuffer.t @-> ptr (DispatchIndirect2InfoKHR.t) @-> returning (Ctypes.void)
 let cmd_dispatch_indirect_2_khr_ref = ref (bind cmd_dispatch_indirect_2_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdDispatchIndirect2KHR.html}[vkCmdDispatchIndirect2KHR]} *)
 let cmd_dispatch_indirect_2_khr arg0 arg1 =
   match !cmd_dispatch_indirect_2_khr_ref with
   | Some f -> f arg0 arg1
@@ -5147,6 +6611,8 @@ let cmd_dispatch_indirect_2_khr arg0 arg1 =
 
 let create_acceleration_structure_2_khr_typ = Device.t @-> ptr (AccelerationStructureCreateInfo2KHR.t) @-> ptr (AllocationCallbacks.t) @-> ptr (AccelerationStructureKHR.t) @-> returning (Result.t)
 let create_acceleration_structure_2_khr_ref = ref (bind create_acceleration_structure_2_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateAccelerationStructure2KHR.html}[vkCreateAccelerationStructure2KHR]} *)
 let create_acceleration_structure_2_khr arg0 arg1 arg2 arg3 =
   match !create_acceleration_structure_2_khr_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -5154,6 +6620,8 @@ let create_acceleration_structure_2_khr arg0 arg1 arg2 arg3 =
 
 let get_physical_device_queue_family_data_graph_engine_operation_properties_arm_typ = PhysicalDevice.t @-> Vk_base.uint32 @-> ptr (QueueFamilyDataGraphPropertiesARM.t) @-> ptr (BaseOutStructure.t) @-> returning (Result.t)
 let get_physical_device_queue_family_data_graph_engine_operation_properties_arm_ref = ref (bind get_physical_device_queue_family_data_graph_engine_operation_properties_arm_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPhysicalDeviceQueueFamilyDataGraphEngineOperationPropertiesARM.html}[vkGetPhysicalDeviceQueueFamilyDataGraphEngineOperationPropertiesARM]} *)
 let get_physical_device_queue_family_data_graph_engine_operation_properties_arm arg0 arg1 arg2 arg3 =
   match !get_physical_device_queue_family_data_graph_engine_operation_properties_arm_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -5161,6 +6629,8 @@ let get_physical_device_queue_family_data_graph_engine_operation_properties_arm 
 
 let cmd_set_dispatch_parameters_arm_typ = CommandBuffer.t @-> ptr (DispatchParametersARM.t) @-> returning (Ctypes.void)
 let cmd_set_dispatch_parameters_arm_ref = ref (bind cmd_set_dispatch_parameters_arm_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetDispatchParametersARM.html}[vkCmdSetDispatchParametersARM]} *)
 let cmd_set_dispatch_parameters_arm arg0 arg1 =
   match !cmd_set_dispatch_parameters_arm_ref with
   | Some f -> f arg0 arg1
@@ -5168,6 +6638,8 @@ let cmd_set_dispatch_parameters_arm arg0 arg1 =
 
 let get_physical_device_queue_family_data_graph_optical_flow_image_formats_arm_typ = PhysicalDevice.t @-> Vk_base.uint32 @-> ptr (QueueFamilyDataGraphPropertiesARM.t) @-> ptr (DataGraphOpticalFlowImageFormatInfoARM.t) @-> ptr (Vk_base.uint32) @-> ptr (DataGraphOpticalFlowImageFormatPropertiesARM.t) @-> returning (Result.t)
 let get_physical_device_queue_family_data_graph_optical_flow_image_formats_arm_ref = ref (bind get_physical_device_queue_family_data_graph_optical_flow_image_formats_arm_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPhysicalDeviceQueueFamilyDataGraphOpticalFlowImageFormatsARM.html}[vkGetPhysicalDeviceQueueFamilyDataGraphOpticalFlowImageFormatsARM]} *)
 let get_physical_device_queue_family_data_graph_optical_flow_image_formats_arm arg0 arg1 arg2 arg3 arg4 arg5 =
   match !get_physical_device_queue_family_data_graph_optical_flow_image_formats_arm_ref with
   | Some f -> f arg0 arg1 arg2 arg3 arg4 arg5
@@ -5175,6 +6647,8 @@ let get_physical_device_queue_family_data_graph_optical_flow_image_formats_arm a
 
 let reset_query_pool_ext_typ = Device.t @-> QueryPool.t @-> Vk_base.uint32 @-> Vk_base.uint32 @-> returning (Ctypes.void)
 let reset_query_pool_ext_ref = ref (bind reset_query_pool_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkResetQueryPoolEXT.html}[vkResetQueryPoolEXT]} *)
 let reset_query_pool_ext arg0 arg1 arg2 arg3 =
   match !reset_query_pool_ext_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -5182,6 +6656,8 @@ let reset_query_pool_ext arg0 arg1 arg2 arg3 =
 
 let get_rendering_area_granularity_khr_typ = Device.t @-> ptr (RenderingAreaInfo.t) @-> ptr (Extent2D.t) @-> returning (Ctypes.void)
 let get_rendering_area_granularity_khr_ref = ref (bind get_rendering_area_granularity_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetRenderingAreaGranularityKHR.html}[vkGetRenderingAreaGranularityKHR]} *)
 let get_rendering_area_granularity_khr arg0 arg1 arg2 =
   match !get_rendering_area_granularity_khr_ref with
   | Some f -> f arg0 arg1 arg2
@@ -5189,6 +6665,8 @@ let get_rendering_area_granularity_khr arg0 arg1 arg2 =
 
 let get_physical_device_features_2_khr_typ = PhysicalDevice.t @-> ptr (PhysicalDeviceFeatures2.t) @-> returning (Ctypes.void)
 let get_physical_device_features_2_khr_ref = ref (bind get_physical_device_features_2_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPhysicalDeviceFeatures2KHR.html}[vkGetPhysicalDeviceFeatures2KHR]} *)
 let get_physical_device_features_2_khr arg0 arg1 =
   match !get_physical_device_features_2_khr_ref with
   | Some f -> f arg0 arg1
@@ -5196,6 +6674,8 @@ let get_physical_device_features_2_khr arg0 arg1 =
 
 let get_physical_device_properties_2_khr_typ = PhysicalDevice.t @-> ptr (PhysicalDeviceProperties2.t) @-> returning (Ctypes.void)
 let get_physical_device_properties_2_khr_ref = ref (bind get_physical_device_properties_2_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPhysicalDeviceProperties2KHR.html}[vkGetPhysicalDeviceProperties2KHR]} *)
 let get_physical_device_properties_2_khr arg0 arg1 =
   match !get_physical_device_properties_2_khr_ref with
   | Some f -> f arg0 arg1
@@ -5203,6 +6683,8 @@ let get_physical_device_properties_2_khr arg0 arg1 =
 
 let get_physical_device_format_properties_2_khr_typ = PhysicalDevice.t @-> Format.t @-> ptr (FormatProperties2.t) @-> returning (Ctypes.void)
 let get_physical_device_format_properties_2_khr_ref = ref (bind get_physical_device_format_properties_2_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPhysicalDeviceFormatProperties2KHR.html}[vkGetPhysicalDeviceFormatProperties2KHR]} *)
 let get_physical_device_format_properties_2_khr arg0 arg1 arg2 =
   match !get_physical_device_format_properties_2_khr_ref with
   | Some f -> f arg0 arg1 arg2
@@ -5210,6 +6692,8 @@ let get_physical_device_format_properties_2_khr arg0 arg1 arg2 =
 
 let get_physical_device_image_format_properties_2_khr_typ = PhysicalDevice.t @-> ptr (PhysicalDeviceImageFormatInfo2.t) @-> ptr (ImageFormatProperties2.t) @-> returning (Result.t)
 let get_physical_device_image_format_properties_2_khr_ref = ref (bind get_physical_device_image_format_properties_2_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPhysicalDeviceImageFormatProperties2KHR.html}[vkGetPhysicalDeviceImageFormatProperties2KHR]} *)
 let get_physical_device_image_format_properties_2_khr arg0 arg1 arg2 =
   match !get_physical_device_image_format_properties_2_khr_ref with
   | Some f -> f arg0 arg1 arg2
@@ -5217,6 +6701,8 @@ let get_physical_device_image_format_properties_2_khr arg0 arg1 arg2 =
 
 let get_physical_device_queue_family_properties_2_khr_typ = PhysicalDevice.t @-> ptr (Vk_base.uint32) @-> ptr (QueueFamilyProperties2.t) @-> returning (Ctypes.void)
 let get_physical_device_queue_family_properties_2_khr_ref = ref (bind get_physical_device_queue_family_properties_2_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPhysicalDeviceQueueFamilyProperties2KHR.html}[vkGetPhysicalDeviceQueueFamilyProperties2KHR]} *)
 let get_physical_device_queue_family_properties_2_khr arg0 arg1 arg2 =
   match !get_physical_device_queue_family_properties_2_khr_ref with
   | Some f -> f arg0 arg1 arg2
@@ -5224,6 +6710,8 @@ let get_physical_device_queue_family_properties_2_khr arg0 arg1 arg2 =
 
 let get_physical_device_memory_properties_2_khr_typ = PhysicalDevice.t @-> ptr (PhysicalDeviceMemoryProperties2.t) @-> returning (Ctypes.void)
 let get_physical_device_memory_properties_2_khr_ref = ref (bind get_physical_device_memory_properties_2_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPhysicalDeviceMemoryProperties2KHR.html}[vkGetPhysicalDeviceMemoryProperties2KHR]} *)
 let get_physical_device_memory_properties_2_khr arg0 arg1 =
   match !get_physical_device_memory_properties_2_khr_ref with
   | Some f -> f arg0 arg1
@@ -5231,6 +6719,8 @@ let get_physical_device_memory_properties_2_khr arg0 arg1 =
 
 let get_physical_device_sparse_image_format_properties_2_khr_typ = PhysicalDevice.t @-> ptr (PhysicalDeviceSparseImageFormatInfo2.t) @-> ptr (Vk_base.uint32) @-> ptr (SparseImageFormatProperties2.t) @-> returning (Ctypes.void)
 let get_physical_device_sparse_image_format_properties_2_khr_ref = ref (bind get_physical_device_sparse_image_format_properties_2_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPhysicalDeviceSparseImageFormatProperties2KHR.html}[vkGetPhysicalDeviceSparseImageFormatProperties2KHR]} *)
 let get_physical_device_sparse_image_format_properties_2_khr arg0 arg1 arg2 arg3 =
   match !get_physical_device_sparse_image_format_properties_2_khr_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -5238,6 +6728,8 @@ let get_physical_device_sparse_image_format_properties_2_khr arg0 arg1 arg2 arg3
 
 let cmd_push_descriptor_set_khr_typ = CommandBuffer.t @-> PipelineBindPoint.t @-> PipelineLayout.t @-> Vk_base.uint32 @-> Vk_base.uint32 @-> ptr (WriteDescriptorSet.t) @-> returning (Ctypes.void)
 let cmd_push_descriptor_set_khr_ref = ref (bind cmd_push_descriptor_set_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdPushDescriptorSetKHR.html}[vkCmdPushDescriptorSetKHR]} *)
 let cmd_push_descriptor_set_khr arg0 arg1 arg2 arg3 arg4 arg5 =
   match !cmd_push_descriptor_set_khr_ref with
   | Some f -> f arg0 arg1 arg2 arg3 arg4 arg5
@@ -5245,6 +6737,8 @@ let cmd_push_descriptor_set_khr arg0 arg1 arg2 arg3 arg4 arg5 =
 
 let trim_command_pool_khr_typ = Device.t @-> CommandPool.t @-> CommandPoolTrimFlags.t @-> returning (Ctypes.void)
 let trim_command_pool_khr_ref = ref (bind trim_command_pool_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkTrimCommandPoolKHR.html}[vkTrimCommandPoolKHR]} *)
 let trim_command_pool_khr arg0 arg1 arg2 =
   match !trim_command_pool_khr_ref with
   | Some f -> f arg0 arg1 arg2
@@ -5252,6 +6746,8 @@ let trim_command_pool_khr arg0 arg1 arg2 =
 
 let get_physical_device_external_buffer_properties_khr_typ = PhysicalDevice.t @-> ptr (PhysicalDeviceExternalBufferInfo.t) @-> ptr (ExternalBufferProperties.t) @-> returning (Ctypes.void)
 let get_physical_device_external_buffer_properties_khr_ref = ref (bind get_physical_device_external_buffer_properties_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPhysicalDeviceExternalBufferPropertiesKHR.html}[vkGetPhysicalDeviceExternalBufferPropertiesKHR]} *)
 let get_physical_device_external_buffer_properties_khr arg0 arg1 arg2 =
   match !get_physical_device_external_buffer_properties_khr_ref with
   | Some f -> f arg0 arg1 arg2
@@ -5259,6 +6755,8 @@ let get_physical_device_external_buffer_properties_khr arg0 arg1 arg2 =
 
 let get_physical_device_external_semaphore_properties_khr_typ = PhysicalDevice.t @-> ptr (PhysicalDeviceExternalSemaphoreInfo.t) @-> ptr (ExternalSemaphoreProperties.t) @-> returning (Ctypes.void)
 let get_physical_device_external_semaphore_properties_khr_ref = ref (bind get_physical_device_external_semaphore_properties_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPhysicalDeviceExternalSemaphorePropertiesKHR.html}[vkGetPhysicalDeviceExternalSemaphorePropertiesKHR]} *)
 let get_physical_device_external_semaphore_properties_khr arg0 arg1 arg2 =
   match !get_physical_device_external_semaphore_properties_khr_ref with
   | Some f -> f arg0 arg1 arg2
@@ -5266,6 +6764,8 @@ let get_physical_device_external_semaphore_properties_khr arg0 arg1 arg2 =
 
 let get_physical_device_external_fence_properties_khr_typ = PhysicalDevice.t @-> ptr (PhysicalDeviceExternalFenceInfo.t) @-> ptr (ExternalFenceProperties.t) @-> returning (Ctypes.void)
 let get_physical_device_external_fence_properties_khr_ref = ref (bind get_physical_device_external_fence_properties_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPhysicalDeviceExternalFencePropertiesKHR.html}[vkGetPhysicalDeviceExternalFencePropertiesKHR]} *)
 let get_physical_device_external_fence_properties_khr arg0 arg1 arg2 =
   match !get_physical_device_external_fence_properties_khr_ref with
   | Some f -> f arg0 arg1 arg2
@@ -5273,6 +6773,8 @@ let get_physical_device_external_fence_properties_khr arg0 arg1 arg2 =
 
 let enumerate_physical_device_groups_khr_typ = Instance.t @-> ptr (Vk_base.uint32) @-> ptr (PhysicalDeviceGroupProperties.t) @-> returning (Result.t)
 let enumerate_physical_device_groups_khr_ref = ref (bind enumerate_physical_device_groups_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkEnumeratePhysicalDeviceGroupsKHR.html}[vkEnumeratePhysicalDeviceGroupsKHR]} *)
 let enumerate_physical_device_groups_khr arg0 arg1 arg2 =
   match !enumerate_physical_device_groups_khr_ref with
   | Some f -> f arg0 arg1 arg2
@@ -5280,6 +6782,8 @@ let enumerate_physical_device_groups_khr arg0 arg1 arg2 =
 
 let get_device_group_peer_memory_features_khr_typ = Device.t @-> Vk_base.uint32 @-> Vk_base.uint32 @-> Vk_base.uint32 @-> ptr (PeerMemoryFeatureFlags.t) @-> returning (Ctypes.void)
 let get_device_group_peer_memory_features_khr_ref = ref (bind get_device_group_peer_memory_features_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetDeviceGroupPeerMemoryFeaturesKHR.html}[vkGetDeviceGroupPeerMemoryFeaturesKHR]} *)
 let get_device_group_peer_memory_features_khr arg0 arg1 arg2 arg3 arg4 =
   match !get_device_group_peer_memory_features_khr_ref with
   | Some f -> f arg0 arg1 arg2 arg3 arg4
@@ -5287,6 +6791,8 @@ let get_device_group_peer_memory_features_khr arg0 arg1 arg2 arg3 arg4 =
 
 let bind_buffer_memory_2_khr_typ = Device.t @-> Vk_base.uint32 @-> ptr (BindBufferMemoryInfo.t) @-> returning (Result.t)
 let bind_buffer_memory_2_khr_ref = ref (bind bind_buffer_memory_2_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkBindBufferMemory2KHR.html}[vkBindBufferMemory2KHR]} *)
 let bind_buffer_memory_2_khr arg0 arg1 arg2 =
   match !bind_buffer_memory_2_khr_ref with
   | Some f -> f arg0 arg1 arg2
@@ -5294,6 +6800,8 @@ let bind_buffer_memory_2_khr arg0 arg1 arg2 =
 
 let bind_image_memory_2_khr_typ = Device.t @-> Vk_base.uint32 @-> ptr (BindImageMemoryInfo.t) @-> returning (Result.t)
 let bind_image_memory_2_khr_ref = ref (bind bind_image_memory_2_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkBindImageMemory2KHR.html}[vkBindImageMemory2KHR]} *)
 let bind_image_memory_2_khr arg0 arg1 arg2 =
   match !bind_image_memory_2_khr_ref with
   | Some f -> f arg0 arg1 arg2
@@ -5301,6 +6809,8 @@ let bind_image_memory_2_khr arg0 arg1 arg2 =
 
 let cmd_set_device_mask_khr_typ = CommandBuffer.t @-> Vk_base.uint32 @-> returning (Ctypes.void)
 let cmd_set_device_mask_khr_ref = ref (bind cmd_set_device_mask_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetDeviceMaskKHR.html}[vkCmdSetDeviceMaskKHR]} *)
 let cmd_set_device_mask_khr arg0 arg1 =
   match !cmd_set_device_mask_khr_ref with
   | Some f -> f arg0 arg1
@@ -5308,6 +6818,8 @@ let cmd_set_device_mask_khr arg0 arg1 =
 
 let cmd_dispatch_base_khr_typ = CommandBuffer.t @-> Vk_base.uint32 @-> Vk_base.uint32 @-> Vk_base.uint32 @-> Vk_base.uint32 @-> Vk_base.uint32 @-> Vk_base.uint32 @-> returning (Ctypes.void)
 let cmd_dispatch_base_khr_ref = ref (bind cmd_dispatch_base_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdDispatchBaseKHR.html}[vkCmdDispatchBaseKHR]} *)
 let cmd_dispatch_base_khr arg0 arg1 arg2 arg3 arg4 arg5 arg6 =
   match !cmd_dispatch_base_khr_ref with
   | Some f -> f arg0 arg1 arg2 arg3 arg4 arg5 arg6
@@ -5315,6 +6827,8 @@ let cmd_dispatch_base_khr arg0 arg1 arg2 arg3 arg4 arg5 arg6 =
 
 let create_descriptor_update_template_khr_typ = Device.t @-> ptr (DescriptorUpdateTemplateCreateInfo.t) @-> ptr (AllocationCallbacks.t) @-> ptr (DescriptorUpdateTemplate.t) @-> returning (Result.t)
 let create_descriptor_update_template_khr_ref = ref (bind create_descriptor_update_template_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateDescriptorUpdateTemplateKHR.html}[vkCreateDescriptorUpdateTemplateKHR]} *)
 let create_descriptor_update_template_khr arg0 arg1 arg2 arg3 =
   match !create_descriptor_update_template_khr_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -5322,6 +6836,8 @@ let create_descriptor_update_template_khr arg0 arg1 arg2 arg3 =
 
 let destroy_descriptor_update_template_khr_typ = Device.t @-> DescriptorUpdateTemplate.t @-> ptr (AllocationCallbacks.t) @-> returning (Ctypes.void)
 let destroy_descriptor_update_template_khr_ref = ref (bind destroy_descriptor_update_template_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkDestroyDescriptorUpdateTemplateKHR.html}[vkDestroyDescriptorUpdateTemplateKHR]} *)
 let destroy_descriptor_update_template_khr arg0 arg1 arg2 =
   match !destroy_descriptor_update_template_khr_ref with
   | Some f -> f arg0 arg1 arg2
@@ -5329,6 +6845,8 @@ let destroy_descriptor_update_template_khr arg0 arg1 arg2 =
 
 let update_descriptor_set_with_template_khr_typ = Device.t @-> DescriptorSet.t @-> DescriptorUpdateTemplate.t @-> ptr (Ctypes.void) @-> returning (Ctypes.void)
 let update_descriptor_set_with_template_khr_ref = ref (bind update_descriptor_set_with_template_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkUpdateDescriptorSetWithTemplateKHR.html}[vkUpdateDescriptorSetWithTemplateKHR]} *)
 let update_descriptor_set_with_template_khr arg0 arg1 arg2 arg3 =
   match !update_descriptor_set_with_template_khr_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -5336,6 +6854,8 @@ let update_descriptor_set_with_template_khr arg0 arg1 arg2 arg3 =
 
 let cmd_push_descriptor_set_with_template_khr_typ = CommandBuffer.t @-> DescriptorUpdateTemplate.t @-> PipelineLayout.t @-> Vk_base.uint32 @-> ptr (Ctypes.void) @-> returning (Ctypes.void)
 let cmd_push_descriptor_set_with_template_khr_ref = ref (bind cmd_push_descriptor_set_with_template_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdPushDescriptorSetWithTemplateKHR.html}[vkCmdPushDescriptorSetWithTemplateKHR]} *)
 let cmd_push_descriptor_set_with_template_khr arg0 arg1 arg2 arg3 arg4 =
   match !cmd_push_descriptor_set_with_template_khr_ref with
   | Some f -> f arg0 arg1 arg2 arg3 arg4
@@ -5343,6 +6863,8 @@ let cmd_push_descriptor_set_with_template_khr arg0 arg1 arg2 arg3 arg4 =
 
 let get_buffer_memory_requirements_2_khr_typ = Device.t @-> ptr (BufferMemoryRequirementsInfo2.t) @-> ptr (MemoryRequirements2.t) @-> returning (Ctypes.void)
 let get_buffer_memory_requirements_2_khr_ref = ref (bind get_buffer_memory_requirements_2_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetBufferMemoryRequirements2KHR.html}[vkGetBufferMemoryRequirements2KHR]} *)
 let get_buffer_memory_requirements_2_khr arg0 arg1 arg2 =
   match !get_buffer_memory_requirements_2_khr_ref with
   | Some f -> f arg0 arg1 arg2
@@ -5350,6 +6872,8 @@ let get_buffer_memory_requirements_2_khr arg0 arg1 arg2 =
 
 let get_image_memory_requirements_2_khr_typ = Device.t @-> ptr (ImageMemoryRequirementsInfo2.t) @-> ptr (MemoryRequirements2.t) @-> returning (Ctypes.void)
 let get_image_memory_requirements_2_khr_ref = ref (bind get_image_memory_requirements_2_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetImageMemoryRequirements2KHR.html}[vkGetImageMemoryRequirements2KHR]} *)
 let get_image_memory_requirements_2_khr arg0 arg1 arg2 =
   match !get_image_memory_requirements_2_khr_ref with
   | Some f -> f arg0 arg1 arg2
@@ -5357,6 +6881,8 @@ let get_image_memory_requirements_2_khr arg0 arg1 arg2 =
 
 let get_image_sparse_memory_requirements_2_khr_typ = Device.t @-> ptr (ImageSparseMemoryRequirementsInfo2.t) @-> ptr (Vk_base.uint32) @-> ptr (SparseImageMemoryRequirements2.t) @-> returning (Ctypes.void)
 let get_image_sparse_memory_requirements_2_khr_ref = ref (bind get_image_sparse_memory_requirements_2_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetImageSparseMemoryRequirements2KHR.html}[vkGetImageSparseMemoryRequirements2KHR]} *)
 let get_image_sparse_memory_requirements_2_khr arg0 arg1 arg2 arg3 =
   match !get_image_sparse_memory_requirements_2_khr_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -5364,6 +6890,8 @@ let get_image_sparse_memory_requirements_2_khr arg0 arg1 arg2 arg3 =
 
 let get_device_buffer_memory_requirements_khr_typ = Device.t @-> ptr (DeviceBufferMemoryRequirements.t) @-> ptr (MemoryRequirements2.t) @-> returning (Ctypes.void)
 let get_device_buffer_memory_requirements_khr_ref = ref (bind get_device_buffer_memory_requirements_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetDeviceBufferMemoryRequirementsKHR.html}[vkGetDeviceBufferMemoryRequirementsKHR]} *)
 let get_device_buffer_memory_requirements_khr arg0 arg1 arg2 =
   match !get_device_buffer_memory_requirements_khr_ref with
   | Some f -> f arg0 arg1 arg2
@@ -5371,6 +6899,8 @@ let get_device_buffer_memory_requirements_khr arg0 arg1 arg2 =
 
 let get_device_image_memory_requirements_khr_typ = Device.t @-> ptr (DeviceImageMemoryRequirements.t) @-> ptr (MemoryRequirements2.t) @-> returning (Ctypes.void)
 let get_device_image_memory_requirements_khr_ref = ref (bind get_device_image_memory_requirements_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetDeviceImageMemoryRequirementsKHR.html}[vkGetDeviceImageMemoryRequirementsKHR]} *)
 let get_device_image_memory_requirements_khr arg0 arg1 arg2 =
   match !get_device_image_memory_requirements_khr_ref with
   | Some f -> f arg0 arg1 arg2
@@ -5378,6 +6908,8 @@ let get_device_image_memory_requirements_khr arg0 arg1 arg2 =
 
 let get_device_image_sparse_memory_requirements_khr_typ = Device.t @-> ptr (DeviceImageMemoryRequirements.t) @-> ptr (Vk_base.uint32) @-> ptr (SparseImageMemoryRequirements2.t) @-> returning (Ctypes.void)
 let get_device_image_sparse_memory_requirements_khr_ref = ref (bind get_device_image_sparse_memory_requirements_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetDeviceImageSparseMemoryRequirementsKHR.html}[vkGetDeviceImageSparseMemoryRequirementsKHR]} *)
 let get_device_image_sparse_memory_requirements_khr arg0 arg1 arg2 arg3 =
   match !get_device_image_sparse_memory_requirements_khr_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -5385,6 +6917,8 @@ let get_device_image_sparse_memory_requirements_khr arg0 arg1 arg2 arg3 =
 
 let create_sampler_ycbcr_conversion_khr_typ = Device.t @-> ptr (SamplerYcbcrConversionCreateInfo.t) @-> ptr (AllocationCallbacks.t) @-> ptr (SamplerYcbcrConversion.t) @-> returning (Result.t)
 let create_sampler_ycbcr_conversion_khr_ref = ref (bind create_sampler_ycbcr_conversion_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateSamplerYcbcrConversionKHR.html}[vkCreateSamplerYcbcrConversionKHR]} *)
 let create_sampler_ycbcr_conversion_khr arg0 arg1 arg2 arg3 =
   match !create_sampler_ycbcr_conversion_khr_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -5392,6 +6926,8 @@ let create_sampler_ycbcr_conversion_khr arg0 arg1 arg2 arg3 =
 
 let destroy_sampler_ycbcr_conversion_khr_typ = Device.t @-> SamplerYcbcrConversion.t @-> ptr (AllocationCallbacks.t) @-> returning (Ctypes.void)
 let destroy_sampler_ycbcr_conversion_khr_ref = ref (bind destroy_sampler_ycbcr_conversion_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkDestroySamplerYcbcrConversionKHR.html}[vkDestroySamplerYcbcrConversionKHR]} *)
 let destroy_sampler_ycbcr_conversion_khr arg0 arg1 arg2 =
   match !destroy_sampler_ycbcr_conversion_khr_ref with
   | Some f -> f arg0 arg1 arg2
@@ -5399,6 +6935,8 @@ let destroy_sampler_ycbcr_conversion_khr arg0 arg1 arg2 =
 
 let get_descriptor_set_layout_support_khr_typ = Device.t @-> ptr (DescriptorSetLayoutCreateInfo.t) @-> ptr (DescriptorSetLayoutSupport.t) @-> returning (Ctypes.void)
 let get_descriptor_set_layout_support_khr_ref = ref (bind get_descriptor_set_layout_support_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetDescriptorSetLayoutSupportKHR.html}[vkGetDescriptorSetLayoutSupportKHR]} *)
 let get_descriptor_set_layout_support_khr arg0 arg1 arg2 =
   match !get_descriptor_set_layout_support_khr_ref with
   | Some f -> f arg0 arg1 arg2
@@ -5406,6 +6944,8 @@ let get_descriptor_set_layout_support_khr arg0 arg1 arg2 =
 
 let get_physical_device_calibrateable_time_domains_ext_typ = PhysicalDevice.t @-> ptr (Vk_base.uint32) @-> ptr (TimeDomainKHR.t) @-> returning (Result.t)
 let get_physical_device_calibrateable_time_domains_ext_ref = ref (bind get_physical_device_calibrateable_time_domains_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPhysicalDeviceCalibrateableTimeDomainsEXT.html}[vkGetPhysicalDeviceCalibrateableTimeDomainsEXT]} *)
 let get_physical_device_calibrateable_time_domains_ext arg0 arg1 arg2 =
   match !get_physical_device_calibrateable_time_domains_ext_ref with
   | Some f -> f arg0 arg1 arg2
@@ -5413,6 +6953,8 @@ let get_physical_device_calibrateable_time_domains_ext arg0 arg1 arg2 =
 
 let get_calibrated_timestamps_ext_typ = Device.t @-> Vk_base.uint32 @-> ptr (CalibratedTimestampInfoKHR.t) @-> ptr (Vk_base.uint64) @-> ptr (Vk_base.uint64) @-> returning (Result.t)
 let get_calibrated_timestamps_ext_ref = ref (bind get_calibrated_timestamps_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetCalibratedTimestampsEXT.html}[vkGetCalibratedTimestampsEXT]} *)
 let get_calibrated_timestamps_ext arg0 arg1 arg2 arg3 arg4 =
   match !get_calibrated_timestamps_ext_ref with
   | Some f -> f arg0 arg1 arg2 arg3 arg4
@@ -5420,6 +6962,8 @@ let get_calibrated_timestamps_ext arg0 arg1 arg2 arg3 arg4 =
 
 let create_render_pass_2_khr_typ = Device.t @-> ptr (RenderPassCreateInfo2.t) @-> ptr (AllocationCallbacks.t) @-> ptr (RenderPass.t) @-> returning (Result.t)
 let create_render_pass_2_khr_ref = ref (bind create_render_pass_2_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreateRenderPass2KHR.html}[vkCreateRenderPass2KHR]} *)
 let create_render_pass_2_khr arg0 arg1 arg2 arg3 =
   match !create_render_pass_2_khr_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -5427,6 +6971,8 @@ let create_render_pass_2_khr arg0 arg1 arg2 arg3 =
 
 let cmd_begin_render_pass_2_khr_typ = CommandBuffer.t @-> ptr (RenderPassBeginInfo.t) @-> ptr (SubpassBeginInfo.t) @-> returning (Ctypes.void)
 let cmd_begin_render_pass_2_khr_ref = ref (bind cmd_begin_render_pass_2_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdBeginRenderPass2KHR.html}[vkCmdBeginRenderPass2KHR]} *)
 let cmd_begin_render_pass_2_khr arg0 arg1 arg2 =
   match !cmd_begin_render_pass_2_khr_ref with
   | Some f -> f arg0 arg1 arg2
@@ -5434,6 +6980,8 @@ let cmd_begin_render_pass_2_khr arg0 arg1 arg2 =
 
 let cmd_next_subpass_2_khr_typ = CommandBuffer.t @-> ptr (SubpassBeginInfo.t) @-> ptr (SubpassEndInfo.t) @-> returning (Ctypes.void)
 let cmd_next_subpass_2_khr_ref = ref (bind cmd_next_subpass_2_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdNextSubpass2KHR.html}[vkCmdNextSubpass2KHR]} *)
 let cmd_next_subpass_2_khr arg0 arg1 arg2 =
   match !cmd_next_subpass_2_khr_ref with
   | Some f -> f arg0 arg1 arg2
@@ -5441,6 +6989,8 @@ let cmd_next_subpass_2_khr arg0 arg1 arg2 =
 
 let cmd_end_render_pass_2_khr_typ = CommandBuffer.t @-> ptr (SubpassEndInfo.t) @-> returning (Ctypes.void)
 let cmd_end_render_pass_2_khr_ref = ref (bind cmd_end_render_pass_2_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdEndRenderPass2KHR.html}[vkCmdEndRenderPass2KHR]} *)
 let cmd_end_render_pass_2_khr arg0 arg1 =
   match !cmd_end_render_pass_2_khr_ref with
   | Some f -> f arg0 arg1
@@ -5448,6 +6998,8 @@ let cmd_end_render_pass_2_khr arg0 arg1 =
 
 let get_semaphore_counter_value_khr_typ = Device.t @-> Semaphore.t @-> ptr (Vk_base.uint64) @-> returning (Result.t)
 let get_semaphore_counter_value_khr_ref = ref (bind get_semaphore_counter_value_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetSemaphoreCounterValueKHR.html}[vkGetSemaphoreCounterValueKHR]} *)
 let get_semaphore_counter_value_khr arg0 arg1 arg2 =
   match !get_semaphore_counter_value_khr_ref with
   | Some f -> f arg0 arg1 arg2
@@ -5455,6 +7007,8 @@ let get_semaphore_counter_value_khr arg0 arg1 arg2 =
 
 let wait_semaphores_khr_typ = Device.t @-> ptr (SemaphoreWaitInfo.t) @-> Vk_base.uint64 @-> returning (Result.t)
 let wait_semaphores_khr_ref = ref (bind wait_semaphores_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkWaitSemaphoresKHR.html}[vkWaitSemaphoresKHR]} *)
 let wait_semaphores_khr arg0 arg1 arg2 =
   match !wait_semaphores_khr_ref with
   | Some f -> f arg0 arg1 arg2
@@ -5462,6 +7016,8 @@ let wait_semaphores_khr arg0 arg1 arg2 =
 
 let signal_semaphore_khr_typ = Device.t @-> ptr (SemaphoreSignalInfo.t) @-> returning (Result.t)
 let signal_semaphore_khr_ref = ref (bind signal_semaphore_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkSignalSemaphoreKHR.html}[vkSignalSemaphoreKHR]} *)
 let signal_semaphore_khr arg0 arg1 =
   match !signal_semaphore_khr_ref with
   | Some f -> f arg0 arg1
@@ -5469,6 +7025,8 @@ let signal_semaphore_khr arg0 arg1 =
 
 let cmd_draw_indirect_count_khr_typ = CommandBuffer.t @-> Buffer.t @-> Vk_base.device_size @-> Buffer.t @-> Vk_base.device_size @-> Vk_base.uint32 @-> Vk_base.uint32 @-> returning (Ctypes.void)
 let cmd_draw_indirect_count_khr_ref = ref (bind cmd_draw_indirect_count_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdDrawIndirectCountKHR.html}[vkCmdDrawIndirectCountKHR]} *)
 let cmd_draw_indirect_count_khr arg0 arg1 arg2 arg3 arg4 arg5 arg6 =
   match !cmd_draw_indirect_count_khr_ref with
   | Some f -> f arg0 arg1 arg2 arg3 arg4 arg5 arg6
@@ -5476,6 +7034,8 @@ let cmd_draw_indirect_count_khr arg0 arg1 arg2 arg3 arg4 arg5 arg6 =
 
 let cmd_draw_indirect_count_amd_typ = CommandBuffer.t @-> Buffer.t @-> Vk_base.device_size @-> Buffer.t @-> Vk_base.device_size @-> Vk_base.uint32 @-> Vk_base.uint32 @-> returning (Ctypes.void)
 let cmd_draw_indirect_count_amd_ref = ref (bind cmd_draw_indirect_count_amd_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdDrawIndirectCountAMD.html}[vkCmdDrawIndirectCountAMD]} *)
 let cmd_draw_indirect_count_amd arg0 arg1 arg2 arg3 arg4 arg5 arg6 =
   match !cmd_draw_indirect_count_amd_ref with
   | Some f -> f arg0 arg1 arg2 arg3 arg4 arg5 arg6
@@ -5483,6 +7043,8 @@ let cmd_draw_indirect_count_amd arg0 arg1 arg2 arg3 arg4 arg5 arg6 =
 
 let cmd_draw_indexed_indirect_count_khr_typ = CommandBuffer.t @-> Buffer.t @-> Vk_base.device_size @-> Buffer.t @-> Vk_base.device_size @-> Vk_base.uint32 @-> Vk_base.uint32 @-> returning (Ctypes.void)
 let cmd_draw_indexed_indirect_count_khr_ref = ref (bind cmd_draw_indexed_indirect_count_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdDrawIndexedIndirectCountKHR.html}[vkCmdDrawIndexedIndirectCountKHR]} *)
 let cmd_draw_indexed_indirect_count_khr arg0 arg1 arg2 arg3 arg4 arg5 arg6 =
   match !cmd_draw_indexed_indirect_count_khr_ref with
   | Some f -> f arg0 arg1 arg2 arg3 arg4 arg5 arg6
@@ -5490,6 +7052,8 @@ let cmd_draw_indexed_indirect_count_khr arg0 arg1 arg2 arg3 arg4 arg5 arg6 =
 
 let cmd_draw_indexed_indirect_count_amd_typ = CommandBuffer.t @-> Buffer.t @-> Vk_base.device_size @-> Buffer.t @-> Vk_base.device_size @-> Vk_base.uint32 @-> Vk_base.uint32 @-> returning (Ctypes.void)
 let cmd_draw_indexed_indirect_count_amd_ref = ref (bind cmd_draw_indexed_indirect_count_amd_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdDrawIndexedIndirectCountAMD.html}[vkCmdDrawIndexedIndirectCountAMD]} *)
 let cmd_draw_indexed_indirect_count_amd arg0 arg1 arg2 arg3 arg4 arg5 arg6 =
   match !cmd_draw_indexed_indirect_count_amd_ref with
   | Some f -> f arg0 arg1 arg2 arg3 arg4 arg5 arg6
@@ -5497,6 +7061,8 @@ let cmd_draw_indexed_indirect_count_amd arg0 arg1 arg2 arg3 arg4 arg5 arg6 =
 
 let get_ray_tracing_shader_group_handles_nv_typ = Device.t @-> Pipeline.t @-> Vk_base.uint32 @-> Vk_base.uint32 @-> Vk_base.size_t @-> ptr (Ctypes.void) @-> returning (Result.t)
 let get_ray_tracing_shader_group_handles_nv_ref = ref (bind get_ray_tracing_shader_group_handles_nv_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetRayTracingShaderGroupHandlesNV.html}[vkGetRayTracingShaderGroupHandlesNV]} *)
 let get_ray_tracing_shader_group_handles_nv arg0 arg1 arg2 arg3 arg4 arg5 =
   match !get_ray_tracing_shader_group_handles_nv_ref with
   | Some f -> f arg0 arg1 arg2 arg3 arg4 arg5
@@ -5504,6 +7070,8 @@ let get_ray_tracing_shader_group_handles_nv arg0 arg1 arg2 arg3 arg4 arg5 =
 
 let get_buffer_opaque_capture_address_khr_typ = Device.t @-> ptr (BufferDeviceAddressInfo.t) @-> returning (Vk_base.uint64)
 let get_buffer_opaque_capture_address_khr_ref = ref (bind get_buffer_opaque_capture_address_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetBufferOpaqueCaptureAddressKHR.html}[vkGetBufferOpaqueCaptureAddressKHR]} *)
 let get_buffer_opaque_capture_address_khr arg0 arg1 =
   match !get_buffer_opaque_capture_address_khr_ref with
   | Some f -> f arg0 arg1
@@ -5511,6 +7079,8 @@ let get_buffer_opaque_capture_address_khr arg0 arg1 =
 
 let get_buffer_device_address_khr_typ = Device.t @-> ptr (BufferDeviceAddressInfo.t) @-> returning (Vk_base.device_address)
 let get_buffer_device_address_khr_ref = ref (bind get_buffer_device_address_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetBufferDeviceAddressKHR.html}[vkGetBufferDeviceAddressKHR]} *)
 let get_buffer_device_address_khr arg0 arg1 =
   match !get_buffer_device_address_khr_ref with
   | Some f -> f arg0 arg1
@@ -5518,6 +7088,8 @@ let get_buffer_device_address_khr arg0 arg1 =
 
 let get_buffer_device_address_ext_typ = Device.t @-> ptr (BufferDeviceAddressInfo.t) @-> returning (Vk_base.device_address)
 let get_buffer_device_address_ext_ref = ref (bind get_buffer_device_address_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetBufferDeviceAddressEXT.html}[vkGetBufferDeviceAddressEXT]} *)
 let get_buffer_device_address_ext arg0 arg1 =
   match !get_buffer_device_address_ext_ref with
   | Some f -> f arg0 arg1
@@ -5525,6 +7097,8 @@ let get_buffer_device_address_ext arg0 arg1 =
 
 let get_device_memory_opaque_capture_address_khr_typ = Device.t @-> ptr (DeviceMemoryOpaqueCaptureAddressInfo.t) @-> returning (Vk_base.uint64)
 let get_device_memory_opaque_capture_address_khr_ref = ref (bind get_device_memory_opaque_capture_address_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetDeviceMemoryOpaqueCaptureAddressKHR.html}[vkGetDeviceMemoryOpaqueCaptureAddressKHR]} *)
 let get_device_memory_opaque_capture_address_khr arg0 arg1 =
   match !get_device_memory_opaque_capture_address_khr_ref with
   | Some f -> f arg0 arg1
@@ -5532,6 +7106,8 @@ let get_device_memory_opaque_capture_address_khr arg0 arg1 =
 
 let cmd_set_line_stipple_khr_typ = CommandBuffer.t @-> Vk_base.uint32 @-> Vk_base.uint16 @-> returning (Ctypes.void)
 let cmd_set_line_stipple_khr_ref = ref (bind cmd_set_line_stipple_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetLineStippleKHR.html}[vkCmdSetLineStippleKHR]} *)
 let cmd_set_line_stipple_khr arg0 arg1 arg2 =
   match !cmd_set_line_stipple_khr_ref with
   | Some f -> f arg0 arg1 arg2
@@ -5539,6 +7115,8 @@ let cmd_set_line_stipple_khr arg0 arg1 arg2 =
 
 let cmd_set_line_stipple_ext_typ = CommandBuffer.t @-> Vk_base.uint32 @-> Vk_base.uint16 @-> returning (Ctypes.void)
 let cmd_set_line_stipple_ext_ref = ref (bind cmd_set_line_stipple_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetLineStippleEXT.html}[vkCmdSetLineStippleEXT]} *)
 let cmd_set_line_stipple_ext arg0 arg1 arg2 =
   match !cmd_set_line_stipple_ext_ref with
   | Some f -> f arg0 arg1 arg2
@@ -5546,6 +7124,8 @@ let cmd_set_line_stipple_ext arg0 arg1 arg2 =
 
 let get_physical_device_tool_properties_ext_typ = PhysicalDevice.t @-> ptr (Vk_base.uint32) @-> ptr (PhysicalDeviceToolProperties.t) @-> returning (Result.t)
 let get_physical_device_tool_properties_ext_ref = ref (bind get_physical_device_tool_properties_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPhysicalDeviceToolPropertiesEXT.html}[vkGetPhysicalDeviceToolPropertiesEXT]} *)
 let get_physical_device_tool_properties_ext arg0 arg1 arg2 =
   match !get_physical_device_tool_properties_ext_ref with
   | Some f -> f arg0 arg1 arg2
@@ -5553,6 +7133,8 @@ let get_physical_device_tool_properties_ext arg0 arg1 arg2 =
 
 let cmd_set_cull_mode_ext_typ = CommandBuffer.t @-> CullModeFlags.t @-> returning (Ctypes.void)
 let cmd_set_cull_mode_ext_ref = ref (bind cmd_set_cull_mode_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetCullModeEXT.html}[vkCmdSetCullModeEXT]} *)
 let cmd_set_cull_mode_ext arg0 arg1 =
   match !cmd_set_cull_mode_ext_ref with
   | Some f -> f arg0 arg1
@@ -5560,6 +7142,8 @@ let cmd_set_cull_mode_ext arg0 arg1 =
 
 let cmd_set_front_face_ext_typ = CommandBuffer.t @-> FrontFace.t @-> returning (Ctypes.void)
 let cmd_set_front_face_ext_ref = ref (bind cmd_set_front_face_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetFrontFaceEXT.html}[vkCmdSetFrontFaceEXT]} *)
 let cmd_set_front_face_ext arg0 arg1 =
   match !cmd_set_front_face_ext_ref with
   | Some f -> f arg0 arg1
@@ -5567,6 +7151,8 @@ let cmd_set_front_face_ext arg0 arg1 =
 
 let cmd_set_primitive_topology_ext_typ = CommandBuffer.t @-> PrimitiveTopology.t @-> returning (Ctypes.void)
 let cmd_set_primitive_topology_ext_ref = ref (bind cmd_set_primitive_topology_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetPrimitiveTopologyEXT.html}[vkCmdSetPrimitiveTopologyEXT]} *)
 let cmd_set_primitive_topology_ext arg0 arg1 =
   match !cmd_set_primitive_topology_ext_ref with
   | Some f -> f arg0 arg1
@@ -5574,6 +7160,8 @@ let cmd_set_primitive_topology_ext arg0 arg1 =
 
 let cmd_set_viewport_with_count_ext_typ = CommandBuffer.t @-> Vk_base.uint32 @-> ptr (Viewport.t) @-> returning (Ctypes.void)
 let cmd_set_viewport_with_count_ext_ref = ref (bind cmd_set_viewport_with_count_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetViewportWithCountEXT.html}[vkCmdSetViewportWithCountEXT]} *)
 let cmd_set_viewport_with_count_ext arg0 arg1 arg2 =
   match !cmd_set_viewport_with_count_ext_ref with
   | Some f -> f arg0 arg1 arg2
@@ -5581,6 +7169,8 @@ let cmd_set_viewport_with_count_ext arg0 arg1 arg2 =
 
 let cmd_set_scissor_with_count_ext_typ = CommandBuffer.t @-> Vk_base.uint32 @-> ptr (Rect2D.t) @-> returning (Ctypes.void)
 let cmd_set_scissor_with_count_ext_ref = ref (bind cmd_set_scissor_with_count_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetScissorWithCountEXT.html}[vkCmdSetScissorWithCountEXT]} *)
 let cmd_set_scissor_with_count_ext arg0 arg1 arg2 =
   match !cmd_set_scissor_with_count_ext_ref with
   | Some f -> f arg0 arg1 arg2
@@ -5588,6 +7178,8 @@ let cmd_set_scissor_with_count_ext arg0 arg1 arg2 =
 
 let cmd_bind_index_buffer_2_khr_typ = CommandBuffer.t @-> Buffer.t @-> Vk_base.device_size @-> Vk_base.device_size @-> IndexType.t @-> returning (Ctypes.void)
 let cmd_bind_index_buffer_2_khr_ref = ref (bind cmd_bind_index_buffer_2_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdBindIndexBuffer2KHR.html}[vkCmdBindIndexBuffer2KHR]} *)
 let cmd_bind_index_buffer_2_khr arg0 arg1 arg2 arg3 arg4 =
   match !cmd_bind_index_buffer_2_khr_ref with
   | Some f -> f arg0 arg1 arg2 arg3 arg4
@@ -5595,6 +7187,8 @@ let cmd_bind_index_buffer_2_khr arg0 arg1 arg2 arg3 arg4 =
 
 let cmd_bind_vertex_buffers_2_ext_typ = CommandBuffer.t @-> Vk_base.uint32 @-> Vk_base.uint32 @-> ptr (Buffer.t) @-> ptr (Vk_base.device_size) @-> ptr (Vk_base.device_size) @-> ptr (Vk_base.device_size) @-> returning (Ctypes.void)
 let cmd_bind_vertex_buffers_2_ext_ref = ref (bind cmd_bind_vertex_buffers_2_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdBindVertexBuffers2EXT.html}[vkCmdBindVertexBuffers2EXT]} *)
 let cmd_bind_vertex_buffers_2_ext arg0 arg1 arg2 arg3 arg4 arg5 arg6 =
   match !cmd_bind_vertex_buffers_2_ext_ref with
   | Some f -> f arg0 arg1 arg2 arg3 arg4 arg5 arg6
@@ -5602,6 +7196,8 @@ let cmd_bind_vertex_buffers_2_ext arg0 arg1 arg2 arg3 arg4 arg5 arg6 =
 
 let cmd_set_depth_test_enable_ext_typ = CommandBuffer.t @-> Vk_base.bool32 @-> returning (Ctypes.void)
 let cmd_set_depth_test_enable_ext_ref = ref (bind cmd_set_depth_test_enable_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetDepthTestEnableEXT.html}[vkCmdSetDepthTestEnableEXT]} *)
 let cmd_set_depth_test_enable_ext arg0 arg1 =
   match !cmd_set_depth_test_enable_ext_ref with
   | Some f -> f arg0 arg1
@@ -5609,6 +7205,8 @@ let cmd_set_depth_test_enable_ext arg0 arg1 =
 
 let cmd_set_depth_write_enable_ext_typ = CommandBuffer.t @-> Vk_base.bool32 @-> returning (Ctypes.void)
 let cmd_set_depth_write_enable_ext_ref = ref (bind cmd_set_depth_write_enable_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetDepthWriteEnableEXT.html}[vkCmdSetDepthWriteEnableEXT]} *)
 let cmd_set_depth_write_enable_ext arg0 arg1 =
   match !cmd_set_depth_write_enable_ext_ref with
   | Some f -> f arg0 arg1
@@ -5616,6 +7214,8 @@ let cmd_set_depth_write_enable_ext arg0 arg1 =
 
 let cmd_set_depth_compare_op_ext_typ = CommandBuffer.t @-> CompareOp.t @-> returning (Ctypes.void)
 let cmd_set_depth_compare_op_ext_ref = ref (bind cmd_set_depth_compare_op_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetDepthCompareOpEXT.html}[vkCmdSetDepthCompareOpEXT]} *)
 let cmd_set_depth_compare_op_ext arg0 arg1 =
   match !cmd_set_depth_compare_op_ext_ref with
   | Some f -> f arg0 arg1
@@ -5623,6 +7223,8 @@ let cmd_set_depth_compare_op_ext arg0 arg1 =
 
 let cmd_set_depth_bounds_test_enable_ext_typ = CommandBuffer.t @-> Vk_base.bool32 @-> returning (Ctypes.void)
 let cmd_set_depth_bounds_test_enable_ext_ref = ref (bind cmd_set_depth_bounds_test_enable_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetDepthBoundsTestEnableEXT.html}[vkCmdSetDepthBoundsTestEnableEXT]} *)
 let cmd_set_depth_bounds_test_enable_ext arg0 arg1 =
   match !cmd_set_depth_bounds_test_enable_ext_ref with
   | Some f -> f arg0 arg1
@@ -5630,6 +7232,8 @@ let cmd_set_depth_bounds_test_enable_ext arg0 arg1 =
 
 let cmd_set_stencil_test_enable_ext_typ = CommandBuffer.t @-> Vk_base.bool32 @-> returning (Ctypes.void)
 let cmd_set_stencil_test_enable_ext_ref = ref (bind cmd_set_stencil_test_enable_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetStencilTestEnableEXT.html}[vkCmdSetStencilTestEnableEXT]} *)
 let cmd_set_stencil_test_enable_ext arg0 arg1 =
   match !cmd_set_stencil_test_enable_ext_ref with
   | Some f -> f arg0 arg1
@@ -5637,6 +7241,8 @@ let cmd_set_stencil_test_enable_ext arg0 arg1 =
 
 let cmd_set_stencil_op_ext_typ = CommandBuffer.t @-> StencilFaceFlags.t @-> StencilOp.t @-> StencilOp.t @-> StencilOp.t @-> CompareOp.t @-> returning (Ctypes.void)
 let cmd_set_stencil_op_ext_ref = ref (bind cmd_set_stencil_op_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetStencilOpEXT.html}[vkCmdSetStencilOpEXT]} *)
 let cmd_set_stencil_op_ext arg0 arg1 arg2 arg3 arg4 arg5 =
   match !cmd_set_stencil_op_ext_ref with
   | Some f -> f arg0 arg1 arg2 arg3 arg4 arg5
@@ -5644,6 +7250,8 @@ let cmd_set_stencil_op_ext arg0 arg1 arg2 arg3 arg4 arg5 =
 
 let cmd_set_rasterizer_discard_enable_ext_typ = CommandBuffer.t @-> Vk_base.bool32 @-> returning (Ctypes.void)
 let cmd_set_rasterizer_discard_enable_ext_ref = ref (bind cmd_set_rasterizer_discard_enable_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetRasterizerDiscardEnableEXT.html}[vkCmdSetRasterizerDiscardEnableEXT]} *)
 let cmd_set_rasterizer_discard_enable_ext arg0 arg1 =
   match !cmd_set_rasterizer_discard_enable_ext_ref with
   | Some f -> f arg0 arg1
@@ -5651,6 +7259,8 @@ let cmd_set_rasterizer_discard_enable_ext arg0 arg1 =
 
 let cmd_set_depth_bias_enable_ext_typ = CommandBuffer.t @-> Vk_base.bool32 @-> returning (Ctypes.void)
 let cmd_set_depth_bias_enable_ext_ref = ref (bind cmd_set_depth_bias_enable_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetDepthBiasEnableEXT.html}[vkCmdSetDepthBiasEnableEXT]} *)
 let cmd_set_depth_bias_enable_ext arg0 arg1 =
   match !cmd_set_depth_bias_enable_ext_ref with
   | Some f -> f arg0 arg1
@@ -5658,6 +7268,8 @@ let cmd_set_depth_bias_enable_ext arg0 arg1 =
 
 let cmd_set_primitive_restart_enable_ext_typ = CommandBuffer.t @-> Vk_base.bool32 @-> returning (Ctypes.void)
 let cmd_set_primitive_restart_enable_ext_ref = ref (bind cmd_set_primitive_restart_enable_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetPrimitiveRestartEnableEXT.html}[vkCmdSetPrimitiveRestartEnableEXT]} *)
 let cmd_set_primitive_restart_enable_ext arg0 arg1 =
   match !cmd_set_primitive_restart_enable_ext_ref with
   | Some f -> f arg0 arg1
@@ -5665,6 +7277,8 @@ let cmd_set_primitive_restart_enable_ext arg0 arg1 =
 
 let create_private_data_slot_ext_typ = Device.t @-> ptr (PrivateDataSlotCreateInfo.t) @-> ptr (AllocationCallbacks.t) @-> ptr (PrivateDataSlot.t) @-> returning (Result.t)
 let create_private_data_slot_ext_ref = ref (bind create_private_data_slot_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCreatePrivateDataSlotEXT.html}[vkCreatePrivateDataSlotEXT]} *)
 let create_private_data_slot_ext arg0 arg1 arg2 arg3 =
   match !create_private_data_slot_ext_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -5672,6 +7286,8 @@ let create_private_data_slot_ext arg0 arg1 arg2 arg3 =
 
 let destroy_private_data_slot_ext_typ = Device.t @-> PrivateDataSlot.t @-> ptr (AllocationCallbacks.t) @-> returning (Ctypes.void)
 let destroy_private_data_slot_ext_ref = ref (bind destroy_private_data_slot_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkDestroyPrivateDataSlotEXT.html}[vkDestroyPrivateDataSlotEXT]} *)
 let destroy_private_data_slot_ext arg0 arg1 arg2 =
   match !destroy_private_data_slot_ext_ref with
   | Some f -> f arg0 arg1 arg2
@@ -5679,6 +7295,8 @@ let destroy_private_data_slot_ext arg0 arg1 arg2 =
 
 let set_private_data_ext_typ = Device.t @-> ObjectType.t @-> Vk_base.uint64 @-> PrivateDataSlot.t @-> Vk_base.uint64 @-> returning (Result.t)
 let set_private_data_ext_ref = ref (bind set_private_data_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkSetPrivateDataEXT.html}[vkSetPrivateDataEXT]} *)
 let set_private_data_ext arg0 arg1 arg2 arg3 arg4 =
   match !set_private_data_ext_ref with
   | Some f -> f arg0 arg1 arg2 arg3 arg4
@@ -5686,6 +7304,8 @@ let set_private_data_ext arg0 arg1 arg2 arg3 arg4 =
 
 let get_private_data_ext_typ = Device.t @-> ObjectType.t @-> Vk_base.uint64 @-> PrivateDataSlot.t @-> ptr (Vk_base.uint64) @-> returning (Ctypes.void)
 let get_private_data_ext_ref = ref (bind get_private_data_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetPrivateDataEXT.html}[vkGetPrivateDataEXT]} *)
 let get_private_data_ext arg0 arg1 arg2 arg3 arg4 =
   match !get_private_data_ext_ref with
   | Some f -> f arg0 arg1 arg2 arg3 arg4
@@ -5693,6 +7313,8 @@ let get_private_data_ext arg0 arg1 arg2 arg3 arg4 =
 
 let cmd_copy_buffer_2_khr_typ = CommandBuffer.t @-> ptr (CopyBufferInfo2.t) @-> returning (Ctypes.void)
 let cmd_copy_buffer_2_khr_ref = ref (bind cmd_copy_buffer_2_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdCopyBuffer2KHR.html}[vkCmdCopyBuffer2KHR]} *)
 let cmd_copy_buffer_2_khr arg0 arg1 =
   match !cmd_copy_buffer_2_khr_ref with
   | Some f -> f arg0 arg1
@@ -5700,6 +7322,8 @@ let cmd_copy_buffer_2_khr arg0 arg1 =
 
 let cmd_copy_image_2_khr_typ = CommandBuffer.t @-> ptr (CopyImageInfo2.t) @-> returning (Ctypes.void)
 let cmd_copy_image_2_khr_ref = ref (bind cmd_copy_image_2_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdCopyImage2KHR.html}[vkCmdCopyImage2KHR]} *)
 let cmd_copy_image_2_khr arg0 arg1 =
   match !cmd_copy_image_2_khr_ref with
   | Some f -> f arg0 arg1
@@ -5707,6 +7331,8 @@ let cmd_copy_image_2_khr arg0 arg1 =
 
 let cmd_blit_image_2_khr_typ = CommandBuffer.t @-> ptr (BlitImageInfo2.t) @-> returning (Ctypes.void)
 let cmd_blit_image_2_khr_ref = ref (bind cmd_blit_image_2_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdBlitImage2KHR.html}[vkCmdBlitImage2KHR]} *)
 let cmd_blit_image_2_khr arg0 arg1 =
   match !cmd_blit_image_2_khr_ref with
   | Some f -> f arg0 arg1
@@ -5714,6 +7340,8 @@ let cmd_blit_image_2_khr arg0 arg1 =
 
 let cmd_copy_buffer_to_image_2_khr_typ = CommandBuffer.t @-> ptr (CopyBufferToImageInfo2.t) @-> returning (Ctypes.void)
 let cmd_copy_buffer_to_image_2_khr_ref = ref (bind cmd_copy_buffer_to_image_2_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdCopyBufferToImage2KHR.html}[vkCmdCopyBufferToImage2KHR]} *)
 let cmd_copy_buffer_to_image_2_khr arg0 arg1 =
   match !cmd_copy_buffer_to_image_2_khr_ref with
   | Some f -> f arg0 arg1
@@ -5721,6 +7349,8 @@ let cmd_copy_buffer_to_image_2_khr arg0 arg1 =
 
 let cmd_copy_image_to_buffer_2_khr_typ = CommandBuffer.t @-> ptr (CopyImageToBufferInfo2.t) @-> returning (Ctypes.void)
 let cmd_copy_image_to_buffer_2_khr_ref = ref (bind cmd_copy_image_to_buffer_2_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdCopyImageToBuffer2KHR.html}[vkCmdCopyImageToBuffer2KHR]} *)
 let cmd_copy_image_to_buffer_2_khr arg0 arg1 =
   match !cmd_copy_image_to_buffer_2_khr_ref with
   | Some f -> f arg0 arg1
@@ -5728,6 +7358,8 @@ let cmd_copy_image_to_buffer_2_khr arg0 arg1 =
 
 let cmd_resolve_image_2_khr_typ = CommandBuffer.t @-> ptr (ResolveImageInfo2.t) @-> returning (Ctypes.void)
 let cmd_resolve_image_2_khr_ref = ref (bind cmd_resolve_image_2_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdResolveImage2KHR.html}[vkCmdResolveImage2KHR]} *)
 let cmd_resolve_image_2_khr arg0 arg1 =
   match !cmd_resolve_image_2_khr_ref with
   | Some f -> f arg0 arg1
@@ -5735,6 +7367,8 @@ let cmd_resolve_image_2_khr arg0 arg1 =
 
 let cmd_set_event_2_khr_typ = CommandBuffer.t @-> Event.t @-> ptr (DependencyInfo.t) @-> returning (Ctypes.void)
 let cmd_set_event_2_khr_ref = ref (bind cmd_set_event_2_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetEvent2KHR.html}[vkCmdSetEvent2KHR]} *)
 let cmd_set_event_2_khr arg0 arg1 arg2 =
   match !cmd_set_event_2_khr_ref with
   | Some f -> f arg0 arg1 arg2
@@ -5742,6 +7376,8 @@ let cmd_set_event_2_khr arg0 arg1 arg2 =
 
 let cmd_reset_event_2_khr_typ = CommandBuffer.t @-> Event.t @-> PipelineStageFlags2.t @-> returning (Ctypes.void)
 let cmd_reset_event_2_khr_ref = ref (bind cmd_reset_event_2_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdResetEvent2KHR.html}[vkCmdResetEvent2KHR]} *)
 let cmd_reset_event_2_khr arg0 arg1 arg2 =
   match !cmd_reset_event_2_khr_ref with
   | Some f -> f arg0 arg1 arg2
@@ -5749,6 +7385,8 @@ let cmd_reset_event_2_khr arg0 arg1 arg2 =
 
 let cmd_wait_events_2_khr_typ = CommandBuffer.t @-> Vk_base.uint32 @-> ptr (Event.t) @-> ptr (DependencyInfo.t) @-> returning (Ctypes.void)
 let cmd_wait_events_2_khr_ref = ref (bind cmd_wait_events_2_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdWaitEvents2KHR.html}[vkCmdWaitEvents2KHR]} *)
 let cmd_wait_events_2_khr arg0 arg1 arg2 arg3 =
   match !cmd_wait_events_2_khr_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -5756,6 +7394,8 @@ let cmd_wait_events_2_khr arg0 arg1 arg2 arg3 =
 
 let cmd_pipeline_barrier_2_khr_typ = CommandBuffer.t @-> ptr (DependencyInfo.t) @-> returning (Ctypes.void)
 let cmd_pipeline_barrier_2_khr_ref = ref (bind cmd_pipeline_barrier_2_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdPipelineBarrier2KHR.html}[vkCmdPipelineBarrier2KHR]} *)
 let cmd_pipeline_barrier_2_khr arg0 arg1 =
   match !cmd_pipeline_barrier_2_khr_ref with
   | Some f -> f arg0 arg1
@@ -5763,6 +7403,8 @@ let cmd_pipeline_barrier_2_khr arg0 arg1 =
 
 let queue_submit_2_khr_typ = Queue.t @-> Vk_base.uint32 @-> ptr (SubmitInfo2.t) @-> Fence.t @-> returning (Result.t)
 let queue_submit_2_khr_ref = ref (bind queue_submit_2_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkQueueSubmit2KHR.html}[vkQueueSubmit2KHR]} *)
 let queue_submit_2_khr arg0 arg1 arg2 arg3 =
   match !queue_submit_2_khr_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -5770,6 +7412,8 @@ let queue_submit_2_khr arg0 arg1 arg2 arg3 =
 
 let cmd_write_timestamp_2_khr_typ = CommandBuffer.t @-> PipelineStageFlags2.t @-> QueryPool.t @-> Vk_base.uint32 @-> returning (Ctypes.void)
 let cmd_write_timestamp_2_khr_ref = ref (bind cmd_write_timestamp_2_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdWriteTimestamp2KHR.html}[vkCmdWriteTimestamp2KHR]} *)
 let cmd_write_timestamp_2_khr arg0 arg1 arg2 arg3 =
   match !cmd_write_timestamp_2_khr_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -5777,6 +7421,8 @@ let cmd_write_timestamp_2_khr arg0 arg1 arg2 arg3 =
 
 let copy_memory_to_image_ext_typ = Device.t @-> ptr (CopyMemoryToImageInfo.t) @-> returning (Result.t)
 let copy_memory_to_image_ext_ref = ref (bind copy_memory_to_image_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCopyMemoryToImageEXT.html}[vkCopyMemoryToImageEXT]} *)
 let copy_memory_to_image_ext arg0 arg1 =
   match !copy_memory_to_image_ext_ref with
   | Some f -> f arg0 arg1
@@ -5784,6 +7430,8 @@ let copy_memory_to_image_ext arg0 arg1 =
 
 let copy_image_to_memory_ext_typ = Device.t @-> ptr (CopyImageToMemoryInfo.t) @-> returning (Result.t)
 let copy_image_to_memory_ext_ref = ref (bind copy_image_to_memory_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCopyImageToMemoryEXT.html}[vkCopyImageToMemoryEXT]} *)
 let copy_image_to_memory_ext arg0 arg1 =
   match !copy_image_to_memory_ext_ref with
   | Some f -> f arg0 arg1
@@ -5791,6 +7439,8 @@ let copy_image_to_memory_ext arg0 arg1 =
 
 let copy_image_to_image_ext_typ = Device.t @-> ptr (CopyImageToImageInfo.t) @-> returning (Result.t)
 let copy_image_to_image_ext_ref = ref (bind copy_image_to_image_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCopyImageToImageEXT.html}[vkCopyImageToImageEXT]} *)
 let copy_image_to_image_ext arg0 arg1 =
   match !copy_image_to_image_ext_ref with
   | Some f -> f arg0 arg1
@@ -5798,6 +7448,8 @@ let copy_image_to_image_ext arg0 arg1 =
 
 let transition_image_layout_ext_typ = Device.t @-> Vk_base.uint32 @-> ptr (HostImageLayoutTransitionInfo.t) @-> returning (Result.t)
 let transition_image_layout_ext_ref = ref (bind transition_image_layout_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkTransitionImageLayoutEXT.html}[vkTransitionImageLayoutEXT]} *)
 let transition_image_layout_ext arg0 arg1 arg2 =
   match !transition_image_layout_ext_ref with
   | Some f -> f arg0 arg1 arg2
@@ -5805,6 +7457,8 @@ let transition_image_layout_ext arg0 arg1 arg2 =
 
 let cmd_begin_rendering_khr_typ = CommandBuffer.t @-> ptr (RenderingInfo.t) @-> returning (Ctypes.void)
 let cmd_begin_rendering_khr_ref = ref (bind cmd_begin_rendering_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdBeginRenderingKHR.html}[vkCmdBeginRenderingKHR]} *)
 let cmd_begin_rendering_khr arg0 arg1 =
   match !cmd_begin_rendering_khr_ref with
   | Some f -> f arg0 arg1
@@ -5812,6 +7466,8 @@ let cmd_begin_rendering_khr arg0 arg1 =
 
 let cmd_end_rendering_2_ext_typ = CommandBuffer.t @-> ptr (RenderingEndInfoKHR.t) @-> returning (Ctypes.void)
 let cmd_end_rendering_2_ext_ref = ref (bind cmd_end_rendering_2_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdEndRendering2EXT.html}[vkCmdEndRendering2EXT]} *)
 let cmd_end_rendering_2_ext arg0 arg1 =
   match !cmd_end_rendering_2_ext_ref with
   | Some f -> f arg0 arg1
@@ -5819,6 +7475,8 @@ let cmd_end_rendering_2_ext arg0 arg1 =
 
 let cmd_end_rendering_khr_typ = CommandBuffer.t @-> returning (Ctypes.void)
 let cmd_end_rendering_khr_ref = ref (bind cmd_end_rendering_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdEndRenderingKHR.html}[vkCmdEndRenderingKHR]} *)
 let cmd_end_rendering_khr arg0 =
   match !cmd_end_rendering_khr_ref with
   | Some f -> f arg0
@@ -5826,6 +7484,8 @@ let cmd_end_rendering_khr arg0 =
 
 let get_image_subresource_layout_2_khr_typ = Device.t @-> Image.t @-> ptr (ImageSubresource2.t) @-> ptr (SubresourceLayout2.t) @-> returning (Ctypes.void)
 let get_image_subresource_layout_2_khr_ref = ref (bind get_image_subresource_layout_2_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetImageSubresourceLayout2KHR.html}[vkGetImageSubresourceLayout2KHR]} *)
 let get_image_subresource_layout_2_khr arg0 arg1 arg2 arg3 =
   match !get_image_subresource_layout_2_khr_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -5833,6 +7493,8 @@ let get_image_subresource_layout_2_khr arg0 arg1 arg2 arg3 =
 
 let get_image_subresource_layout_2_ext_typ = Device.t @-> Image.t @-> ptr (ImageSubresource2.t) @-> ptr (SubresourceLayout2.t) @-> returning (Ctypes.void)
 let get_image_subresource_layout_2_ext_ref = ref (bind get_image_subresource_layout_2_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetImageSubresourceLayout2EXT.html}[vkGetImageSubresourceLayout2EXT]} *)
 let get_image_subresource_layout_2_ext arg0 arg1 arg2 arg3 =
   match !get_image_subresource_layout_2_ext_ref with
   | Some f -> f arg0 arg1 arg2 arg3
@@ -5840,6 +7502,8 @@ let get_image_subresource_layout_2_ext arg0 arg1 arg2 arg3 =
 
 let release_swapchain_images_ext_typ = Device.t @-> ptr (ReleaseSwapchainImagesInfoKHR.t) @-> returning (Result.t)
 let release_swapchain_images_ext_ref = ref (bind release_swapchain_images_ext_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkReleaseSwapchainImagesEXT.html}[vkReleaseSwapchainImagesEXT]} *)
 let release_swapchain_images_ext arg0 arg1 =
   match !release_swapchain_images_ext_ref with
   | Some f -> f arg0 arg1
@@ -5847,6 +7511,8 @@ let release_swapchain_images_ext arg0 arg1 =
 
 let get_device_image_subresource_layout_khr_typ = Device.t @-> ptr (DeviceImageSubresourceInfo.t) @-> ptr (SubresourceLayout2.t) @-> returning (Ctypes.void)
 let get_device_image_subresource_layout_khr_ref = ref (bind get_device_image_subresource_layout_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkGetDeviceImageSubresourceLayoutKHR.html}[vkGetDeviceImageSubresourceLayoutKHR]} *)
 let get_device_image_subresource_layout_khr arg0 arg1 arg2 =
   match !get_device_image_subresource_layout_khr_ref with
   | Some f -> f arg0 arg1 arg2
@@ -5854,6 +7520,8 @@ let get_device_image_subresource_layout_khr arg0 arg1 arg2 =
 
 let map_memory_2_khr_typ = Device.t @-> ptr (MemoryMapInfo.t) @-> ptr (ptr (Ctypes.void)) @-> returning (Result.t)
 let map_memory_2_khr_ref = ref (bind map_memory_2_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkMapMemory2KHR.html}[vkMapMemory2KHR]} *)
 let map_memory_2_khr arg0 arg1 arg2 =
   match !map_memory_2_khr_ref with
   | Some f -> f arg0 arg1 arg2
@@ -5861,6 +7529,8 @@ let map_memory_2_khr arg0 arg1 arg2 =
 
 let unmap_memory_2_khr_typ = Device.t @-> ptr (MemoryUnmapInfo.t) @-> returning (Result.t)
 let unmap_memory_2_khr_ref = ref (bind unmap_memory_2_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkUnmapMemory2KHR.html}[vkUnmapMemory2KHR]} *)
 let unmap_memory_2_khr arg0 arg1 =
   match !unmap_memory_2_khr_ref with
   | Some f -> f arg0 arg1
@@ -5868,6 +7538,8 @@ let unmap_memory_2_khr arg0 arg1 =
 
 let cmd_bind_descriptor_sets_2_khr_typ = CommandBuffer.t @-> ptr (BindDescriptorSetsInfo.t) @-> returning (Ctypes.void)
 let cmd_bind_descriptor_sets_2_khr_ref = ref (bind cmd_bind_descriptor_sets_2_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdBindDescriptorSets2KHR.html}[vkCmdBindDescriptorSets2KHR]} *)
 let cmd_bind_descriptor_sets_2_khr arg0 arg1 =
   match !cmd_bind_descriptor_sets_2_khr_ref with
   | Some f -> f arg0 arg1
@@ -5875,6 +7547,8 @@ let cmd_bind_descriptor_sets_2_khr arg0 arg1 =
 
 let cmd_push_constants_2_khr_typ = CommandBuffer.t @-> ptr (PushConstantsInfo.t) @-> returning (Ctypes.void)
 let cmd_push_constants_2_khr_ref = ref (bind cmd_push_constants_2_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdPushConstants2KHR.html}[vkCmdPushConstants2KHR]} *)
 let cmd_push_constants_2_khr arg0 arg1 =
   match !cmd_push_constants_2_khr_ref with
   | Some f -> f arg0 arg1
@@ -5882,6 +7556,8 @@ let cmd_push_constants_2_khr arg0 arg1 =
 
 let cmd_push_descriptor_set_2_khr_typ = CommandBuffer.t @-> ptr (PushDescriptorSetInfo.t) @-> returning (Ctypes.void)
 let cmd_push_descriptor_set_2_khr_ref = ref (bind cmd_push_descriptor_set_2_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdPushDescriptorSet2KHR.html}[vkCmdPushDescriptorSet2KHR]} *)
 let cmd_push_descriptor_set_2_khr arg0 arg1 =
   match !cmd_push_descriptor_set_2_khr_ref with
   | Some f -> f arg0 arg1
@@ -5889,6 +7565,8 @@ let cmd_push_descriptor_set_2_khr arg0 arg1 =
 
 let cmd_push_descriptor_set_with_template_2_khr_typ = CommandBuffer.t @-> ptr (PushDescriptorSetWithTemplateInfo.t) @-> returning (Ctypes.void)
 let cmd_push_descriptor_set_with_template_2_khr_ref = ref (bind cmd_push_descriptor_set_with_template_2_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdPushDescriptorSetWithTemplate2KHR.html}[vkCmdPushDescriptorSetWithTemplate2KHR]} *)
 let cmd_push_descriptor_set_with_template_2_khr arg0 arg1 =
   match !cmd_push_descriptor_set_with_template_2_khr_ref with
   | Some f -> f arg0 arg1
@@ -5896,6 +7574,8 @@ let cmd_push_descriptor_set_with_template_2_khr arg0 arg1 =
 
 let cmd_set_rendering_attachment_locations_khr_typ = CommandBuffer.t @-> ptr (RenderingAttachmentLocationInfo.t) @-> returning (Ctypes.void)
 let cmd_set_rendering_attachment_locations_khr_ref = ref (bind cmd_set_rendering_attachment_locations_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetRenderingAttachmentLocationsKHR.html}[vkCmdSetRenderingAttachmentLocationsKHR]} *)
 let cmd_set_rendering_attachment_locations_khr arg0 arg1 =
   match !cmd_set_rendering_attachment_locations_khr_ref with
   | Some f -> f arg0 arg1
@@ -5903,6 +7583,8 @@ let cmd_set_rendering_attachment_locations_khr arg0 arg1 =
 
 let cmd_set_rendering_input_attachment_indices_khr_typ = CommandBuffer.t @-> ptr (RenderingInputAttachmentIndexInfo.t) @-> returning (Ctypes.void)
 let cmd_set_rendering_input_attachment_indices_khr_ref = ref (bind cmd_set_rendering_input_attachment_indices_khr_typ Ctypes.null)
+
+(** Raw {{:https://registry.khronos.org/vulkan/specs/latest/man/html/vkCmdSetRenderingInputAttachmentIndicesKHR.html}[vkCmdSetRenderingInputAttachmentIndicesKHR]} *)
 let cmd_set_rendering_input_attachment_indices_khr arg0 arg1 =
   match !cmd_set_rendering_input_attachment_indices_khr_ref with
   | Some f -> f arg0 arg1

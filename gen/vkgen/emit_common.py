@@ -403,6 +403,15 @@ def resolve_enum_values(ctx: "Context", values: list[EnumValue]) -> list[tuple[E
     return out
 
 
+
+SPEC_MAN = "https://registry.khronos.org/vulkan/specs/latest/man/html/"
+
+
+def spec_doc(cname: str, prefix: str = "") -> str:
+    """odoc comment linking a generated item to its Khronos reference page."""
+    return f"(** {prefix}{{{{:{SPEC_MAN}{cname}.html}}[{cname}]}} *)"
+
+
 def ocaml_int(value: int) -> str:
     # OCaml int literals are at most 63 bits on the supported targets.  Render
     # unsigned C spellings through their signed int64 bit pattern.

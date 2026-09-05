@@ -1721,19 +1721,19 @@ module AllocationCallbacks = struct
     setf value _p_user_data (match arg_p_user_data with None -> Vk_base.null_ptr (Ctypes.void) | Some p -> p);
     (match arg_pfn_allocation with
      | None -> setf value _pfn_allocation None
-     | Some callback -> setf value _pfn_allocation (Some callback); Vk_base.retain keep callback);
+     | Some callback -> setf value _pfn_allocation (Some callback); Vk_base.retain keep callback; Vk_base.retain_forever callback);
     (match arg_pfn_reallocation with
      | None -> setf value _pfn_reallocation None
-     | Some callback -> setf value _pfn_reallocation (Some callback); Vk_base.retain keep callback);
+     | Some callback -> setf value _pfn_reallocation (Some callback); Vk_base.retain keep callback; Vk_base.retain_forever callback);
     (match arg_pfn_free with
      | None -> setf value _pfn_free None
-     | Some callback -> setf value _pfn_free (Some callback); Vk_base.retain keep callback);
+     | Some callback -> setf value _pfn_free (Some callback); Vk_base.retain keep callback; Vk_base.retain_forever callback);
     (match arg_pfn_internal_allocation with
      | None -> setf value _pfn_internal_allocation None
-     | Some callback -> setf value _pfn_internal_allocation (Some callback); Vk_base.retain keep callback);
+     | Some callback -> setf value _pfn_internal_allocation (Some callback); Vk_base.retain keep callback; Vk_base.retain_forever callback);
     (match arg_pfn_internal_free with
      | None -> setf value _pfn_internal_free None
-     | Some callback -> setf value _pfn_internal_free (Some callback); Vk_base.retain keep callback);
+     | Some callback -> setf value _pfn_internal_free (Some callback); Vk_base.retain keep callback; Vk_base.retain_forever callback);
     value
 end
 
@@ -2894,7 +2894,7 @@ module DebugReportCallbackCreateInfoEXT = struct
     setf value _flags arg_flags;
     (match arg_pfn_callback with
      | None -> setf value _pfn_callback None
-     | Some callback -> setf value _pfn_callback (Some callback); Vk_base.retain keep callback);
+     | Some callback -> setf value _pfn_callback (Some callback); Vk_base.retain keep callback; Vk_base.retain_forever callback);
     setf value _p_user_data (match arg_p_user_data with None -> Vk_base.null_ptr (Ctypes.void) | Some p -> p);
     value
 end

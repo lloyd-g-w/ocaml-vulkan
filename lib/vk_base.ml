@@ -213,6 +213,23 @@ let make_kept typ =
   in
   value, keep
 let retain keep value = keep := Obj.repr value :: !keep
+
+(* P1-4: a PFN_* struct member's `keep` list (above) only protects the
+   callback closure for as long as the *struct* it was built into is
+   reachable, but that struct is routinely a short-lived create-info value
+   (DebugUtilsMessengerCreateInfoEXT, VkAllocationCallbacks, ...) that goes
+   out of scope the moment the Vulkan object built from it is created, while
+   that Vulkan object (and the driver's raw pointer to the C trampoline)
+   lives on. `retain_forever` pins an arbitrary value in a process-wide list
+   that is never cleared, so the closure is never collected -- and, since
+   ctypes' own `Foreign.funptr`/`funptr_opt` ties the native trampoline's
+   lifetime to the closure's lifetime (`Ctypes_ffi.pointer_of_function`'s
+   `keep_alive funptr ~while_live:f`), the trampoline stays usable too.
+   Documented, deliberate, process-wide leak: negligible for the debug
+   messengers / allocation callbacks this is used for (DESIGN.md §7/§8). *)
+let retained_forever : Obj.t list ref = ref []
+let retain_forever value = retained_forever := Obj.repr value :: !retained_forever
+
 let null_ptr typ = from_voidp typ null
 
 let string_of_char_array chars =
@@ -263,7 +280,60 @@ let whole_size = -1
 exception Not_loaded of string
 let not_loaded name = raise (Not_loaded name)
 
+(* P1-6 support: a small re-entrant mutex. `Stdlib.Mutex` is not re-entrant,
+   but `Loader`'s critical sections legitimately re-enter: `load`'s hook
+   invocation (`Vk_fn.load_global`/`load_instance`/`load_device`) calls back
+   into `get_instance_proc_addr`/`get_device_proc_addr`, which call `ensure`,
+   which calls `load`/wants the very same lock -- all from the same domain,
+   still inside the original call. Textbook implementation on top of
+   `Mutex`+`Condition`: `owner`/`depth` are only ever touched while holding
+   the plain inner mutex, so cross-domain visibility of those fields goes
+   through `Mutex.lock`/`unlock` exactly like any ordinary `Mutex` use. *)
+module Recursive_mutex = struct
+  type t = { inner : Mutex.t; released : Condition.t; mutable owner : Domain.id option; mutable depth : int }
+
+  let create () = { inner = Mutex.create (); released = Condition.create (); owner = None; depth = 0 }
+
+  let lock t =
+    let self = Domain.self () in
+    Mutex.lock t.inner;
+    while (match t.owner with None -> false | Some o -> o <> self) do
+      Condition.wait t.released t.inner
+    done;
+    t.owner <- Some self;
+    t.depth <- t.depth + 1;
+    Mutex.unlock t.inner
+
+  let unlock t =
+    Mutex.lock t.inner;
+    t.depth <- t.depth - 1;
+    if t.depth = 0 then begin
+      t.owner <- None;
+      Condition.signal t.released
+    end;
+    Mutex.unlock t.inner
+
+  let protect t f =
+    lock t;
+    Fun.protect ~finally:(fun () -> unlock t) f
+end
+
 module Loader = struct
+  (* P1-6: dispatch tables are process-global (DESIGN.md §9, volk style) --
+     `library`/`get_instance`/`get_device`/`loaded` and the *_hook refs below
+     are shared mutable state that every domain's `Vk.create_instance`/
+     `Vk.Loader.load_instance`/`load_device`/global command call reads and
+     writes. `mutex` serialises `load`/`ensure` (the one-time dlopen + proc-
+     addr resolution) and every `*_hook` invocation (each one rewrites
+     potentially hundreds of `Vk_fn` command refs in one batch, which must
+     not interleave with another domain's batch) so that two OCaml 5 domains
+     racing Vulkan setup never produce a torn/partial dispatch table. Cheap:
+     uncontended in the common single-domain case, and every critical
+     section here is a handful of ref reads/writes plus (at most) resolving
+     proc addresses. Re-entrant, unlike a plain Stdlib.Mutex, because the
+     hook invocations below legitimately call back into `ensure`/
+     `get_instance_proc_addr`/`get_device_proc_addr` from the same domain. *)
+  let mutex = Recursive_mutex.create ()
   let library : Dl.library option ref = ref None
   let get_instance : (unit ptr -> string -> unit ptr) option ref = ref None
   let get_device : (unit ptr -> string -> unit ptr) option ref = ref None
@@ -279,36 +349,44 @@ module Loader = struct
     | _ -> "libvulkan.so.1"
 
   let load ?library:requested () =
-    if not !loaded then begin
-      let filename =
-        match requested, Sys.getenv_opt "OCAML_VULKAN_LIBRARY" with
-        | Some x, _ -> x
-        | None, Some x -> x
-        | None, None -> default_library ()
-      in
-      let lib = Dl.dlopen ~filename ~flags:Dl.[ RTLD_NOW; RTLD_LOCAL ] in
-      let signature = ptr void @-> string @-> returning (ptr void) in
-      let gipa = Foreign.foreign ~from:lib "vkGetInstanceProcAddr" signature in
-      let gdpa = Foreign.foreign ~from:lib "vkGetDeviceProcAddr" signature in
-      library := Some lib;
-      get_instance := Some gipa;
-      get_device := Some gdpa;
-      loaded := true;
-      !global_hook ()
-    end
+    Recursive_mutex.protect mutex (fun () ->
+        if not !loaded then begin
+          let filename =
+            match requested, Sys.getenv_opt "OCAML_VULKAN_LIBRARY" with
+            | Some x, _ -> x
+            | None, Some x -> x
+            | None, None -> default_library ()
+          in
+          let lib = Dl.dlopen ~filename ~flags:Dl.[ RTLD_NOW; RTLD_LOCAL ] in
+          let signature = ptr void @-> string @-> returning (ptr void) in
+          let gipa = Foreign.foreign ~from:lib "vkGetInstanceProcAddr" signature in
+          let gdpa = Foreign.foreign ~from:lib "vkGetDeviceProcAddr" signature in
+          library := Some lib;
+          get_instance := Some gipa;
+          get_device := Some gdpa;
+          loaded := true;
+          !global_hook ()
+        end)
 
   let ensure () = load ()
 
   let get_instance_proc_addr instance name =
     ensure ();
-    match !get_instance with Some f -> f instance name | None -> assert false
+    let f = Recursive_mutex.protect mutex (fun () -> !get_instance) in
+    match f with Some f -> f instance name | None -> assert false
 
   let get_device_proc_addr device name =
     ensure ();
-    match !get_device with Some f -> f device name | None -> assert false
+    let f = Recursive_mutex.protect mutex (fun () -> !get_device) in
+    match f with Some f -> f device name | None -> assert false
 
-  let load_instance instance = ensure (); !instance_hook instance
-  let load_device device = ensure (); !device_hook device
+  let load_instance instance =
+    ensure ();
+    Recursive_mutex.protect mutex (fun () -> !instance_hook instance)
+
+  let load_device device =
+    ensure ();
+    Recursive_mutex.protect mutex (fun () -> !device_hook device)
 end
 
 module Public = struct

@@ -1874,7 +1874,7 @@ module DeviceDeviceMemoryReportCreateInfoEXT = struct
     setf value _flags arg_flags;
     (match arg_pfn_user_callback with
      | None -> setf value _pfn_user_callback None
-     | Some callback -> setf value _pfn_user_callback (Some callback); Vk_base.retain keep callback);
+     | Some callback -> setf value _pfn_user_callback (Some callback); Vk_base.retain keep callback; Vk_base.retain_forever callback);
     setf value _p_user_data (match arg_p_user_data with None -> Vk_base.null_ptr (Ctypes.void) | Some p -> p);
     value
 end
@@ -2016,7 +2016,7 @@ module DirectDriverLoadingInfoLUNARG = struct
     setf value _flags arg_flags;
     (match arg_pfn_get_instance_proc_addr with
      | None -> setf value _pfn_get_instance_proc_addr None
-     | Some callback -> setf value _pfn_get_instance_proc_addr (Some callback); Vk_base.retain keep callback);
+     | Some callback -> setf value _pfn_get_instance_proc_addr (Some callback); Vk_base.retain keep callback; Vk_base.retain_forever callback);
     value
 end
 
@@ -3550,7 +3550,7 @@ module DebugUtilsMessengerCreateInfoEXT = struct
     setf value _message_type arg_message_type;
     (match arg_pfn_user_callback with
      | None -> setf value _pfn_user_callback None
-     | Some callback -> setf value _pfn_user_callback (Some callback); Vk_base.retain keep callback);
+     | Some callback -> setf value _pfn_user_callback (Some callback); Vk_base.retain keep callback; Vk_base.retain_forever callback);
     setf value _p_user_data (match arg_p_user_data with None -> Vk_base.null_ptr (Ctypes.void) | Some p -> p);
     value
 end

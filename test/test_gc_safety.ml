@@ -1,11 +1,13 @@
 (* test_gc_safety.ml -- regression tests for the independent review's two P0
-   generator keep-alive bugs. Adapted from the reviewer's repro programs
-   under /tmp/vk-review/:
+   generator keep-alive bugs, plus a P1 callback-lifetime regression. Adapted
+   from the reviewer's repro programs under /tmp/vk-review/:
    - repro1_byvalue_uaf.ml      -> test_byvalue_struct_embedding_survives_gc
    - repro2_wrapper_list_uaf.ml -> test_queue_submit_keeps_submit_info_alive
+   - repro7_debug_callback_uaf.ml -> test_debug_messenger_callback_survives_gc
 
    See DESIGN.md §7 (struct-by-value members are retained in the parent's
-   `keep` list) and §9/§10 (every wrapper argument -- the
+   `keep` list; PFN_* members are additionally retained forever via
+   `Vk_base.retain_forever`) and §9/§10 (every wrapper argument -- the
    original list/struct the caller passed in, and any temporary CArray
    `_make_args` derived from it -- is kept reachable past the raw
    `Vk_fn.*` call with `Sys.opaque_identity`).
@@ -158,11 +160,62 @@ let test_queue_submit_keeps_submit_info_alive () =
   V.destroy_debug_utils_messenger_ext instance messenger ();
   V.destroy_instance instance ()
 
+(* ---- P1-4 (gen/vkgen/emit_types.py, PFN_* member callback lifetime) --- *)
+
+let messenger_callback_invoked = ref false
+
+(* Mirrors repro7_debug_callback_uaf.ml: build the messenger inside a helper
+   that returns only the handle, not the create-info struct or the OCaml
+   closure -- so the only thing keeping the callback alive afterwards must be
+   `Vk_base.retain_forever` (its owning create-info struct is unreachable the
+   moment this function returns). *)
+let create_messenger_without_retaining_callback instance =
+  let callback _severity _type_ _data _user_data =
+    messenger_callback_invoked := true;
+    false
+  in
+  V.create_debug_utils_messenger_ext instance
+    (V.DebugUtilsMessengerCreateInfoEXT.make
+       ~message_severity:
+         V.DebugUtilsMessageSeverityFlagsEXT.(verbose_ext lor info_ext lor warning_ext lor error_ext)
+       ~message_type:V.DebugUtilsMessageTypeFlagsEXT.(general_ext lor validation_ext lor performance_ext)
+       ~pfn_user_callback:callback ())
+
+let test_debug_messenger_callback_survives_gc () =
+  messenger_callback_invoked := false;
+  let instance =
+    V.create_instance
+      (V.InstanceCreateInfo.make
+         ~application_info:(V.ApplicationInfo.make ~application_name:"test_gc_safety" ())
+         ~enabled_extension_names:[ V.Ext.ext_debug_utils ] ())
+  in
+  let messenger = create_messenger_without_retaining_callback instance in
+  Gc.full_major ();
+  Gc.full_major ();
+  spray_garbage 200_000 64 (* closures are small heap blocks; spray a range of sizes *);
+  Gc.full_major ();
+  let callback_data =
+    V.DebugUtilsMessengerCallbackDataEXT.make ~message:"test_gc_safety synthetic message" ()
+  in
+  (* Calls back into the (allegedly collected, if the bug were present)
+     OCaml closure via the raw C trampoline the driver/loader still holds. *)
+  V.submit_debug_utils_message_ext instance V.DebugUtilsMessageSeverityFlagsEXT.warning_ext
+    V.DebugUtilsMessageTypeFlagsEXT.general_ext callback_data;
+  Alcotest.(check bool)
+    "the debug messenger's OCaml callback closure, retained forever via \
+     Vk_base.retain_forever, still fires after its owning create-info struct is long gone"
+    true !messenger_callback_invoked;
+  V.destroy_debug_utils_messenger_ext instance messenger ();
+  V.destroy_instance instance ()
+
 let suite : unit Alcotest.test_case list =
   [ Alcotest.test_case "P0-1: struct-by-value embedding (ComputePipelineCreateInfo.stage) \
                         survives Gc.full_major"
       `Quick test_byvalue_struct_embedding_survives_gc;
     Alcotest.test_case "P0-2: Vk.queue_submit keeps its SubmitInfo list alive across \
                         the raw call under GC pressure"
-      `Quick test_queue_submit_keeps_submit_info_alive
+      `Quick test_queue_submit_keeps_submit_info_alive;
+    Alcotest.test_case "P1-4: a debug messenger callback retained via Vk_base.retain_forever \
+                        survives its create-info struct going out of scope"
+      `Quick test_debug_messenger_callback_survives_gc
   ]

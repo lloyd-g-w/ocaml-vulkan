@@ -378,10 +378,23 @@ def _constructor(ctx: Context, comp: Composite, fields: list[PhysicalField]) -> 
             else:
                 lines.extend(_array_setter(ctx, member, binding, f))
         elif kind == "funcpointer" and member.pointer_depth == 0:
+            # P1-4: `keep` only protects the closure for as long as *this*
+            # struct is reachable, but a PFN_* member is typically a
+            # short-lived create-info struct (DebugUtilsMessengerCreateInfoEXT,
+            # AllocationCallbacks, ...) whose Vulkan object (the messenger,
+            # the allocator registration, ...) outlives it, and the C driver
+            # keeps calling the raw trampoline long after that struct -- and
+            # everything in its `keep` list -- has been collected. Also
+            # retain the OCaml closure forever (process-wide): ctypes' own
+            # `Foreign.funptr_opt` ties the native trampoline's lifetime to
+            # the closure's lifetime (see Ctypes_ffi.pointer_of_function's
+            # `keep_alive funptr ~while_live:f`), so keeping the closure
+            # alive forever keeps the trampoline usable forever too --
+            # documented as a deliberate, negligible leak (DESIGN.md §7/§8).
             lines.extend([
                 f"  (match {binding} with",
                 f"   | None -> setf value {f} None",
-                f"   | Some callback -> setf value {f} (Some callback); Vk_base.retain keep callback);",
+                f"   | Some callback -> setf value {f} (Some callback); Vk_base.retain keep callback; Vk_base.retain_forever callback);",
             ])
         elif member.pointer_depth or kind == "pointer":
             if kind == "pointer" and member.pointer_depth == 0:

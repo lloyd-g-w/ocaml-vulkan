@@ -34,6 +34,7 @@ registry/vk.xml         vendored Khronos registry (see registry/VERSION)
 gen/gen.py              generator entry point (python3 gen/gen.py)
 gen/vkgen/*.py          generator package (parse / naming / emit modules)
 gen/layout_check.py     emits a C program printing sizeof/offsetof of all structs
+gen/enum_check.py       emits a C program printing every enum/bitmask constant's value
 lib/dune                (library (name vk) (public_name vulkan)) with
                         (include_subdirs unqualified)
 lib/vk.ml               hand-written main module: includes everything below
@@ -41,6 +42,7 @@ lib/vk_base.ml          hand-written runtime support (views, keep-alive, loader)
 lib/generated/*.ml      generator output — DO NOT EDIT BY HAND
 test/                   alcotest tests (run headless on lavapipe)
 test/layout/*.txt       golden struct layouts produced with real C headers
+test/enum_values/*.txt  golden enum/bitmask constant values produced with real C headers
 examples/               vkinfo, compute, offscreen triangle
 scripts/regen.sh        regenerate lib/generated from registry/vk.xml
 ```
@@ -59,6 +61,7 @@ Generated files (all under `lib/generated/`):
 | `vk_handles.ml` | one module per handle type |
 | `vk_types_NN.ml` | structs, unions and function-pointer types, topologically sorted, chunked (~120 structs per file) |
 | `vk_layout.ml` | `all : (string * int * (string * int) list) list` — (C struct name, ctypes sizeof, [(C member name, ctypes offset)]) for every struct/union |
+| `vk_enum_values.ml` | `all : (string * int) list` — (C enum/bitmask constant name, resolved OCaml value) for every enum constant and bitmask bit |
 | `vk_fn.ml` | module `Fn`: raw commands (`Foreign.funptr_opt` refs) and loaders |
 | `vk_api.ml` | ergonomic wrappers for commands |
 
@@ -73,6 +76,7 @@ include Vk_types_01 ... include Vk_types_NN
 module Fn = Vk_fn
 include Vk_api
 module Layout = Vk_layout
+module Enum_values = Vk_enum_values
 ```
 
 ## 3. Naming rules (implemented in `gen/vkgen/naming.py`)
@@ -163,6 +167,11 @@ val check : Result.t -> unit         (* raise Error when to_int r < 0 *)
 
 `StructureType` (VkStructureType) is generated like any enum.
 
+Every enum constant and bitmask bit (base spec values, extension additions,
+and aliases) is also registered in `vk_enum_values.ml` (`Vk.Enum_values.all
+: (string * int) list`, C name → resolved OCaml value), the enum-value
+counterpart of `vk_layout.ml` — see §12's `test_enum_values.ml`.
+
 ## 6. Handles (`vk_handles.ml`)
 
 ```ocaml
@@ -225,7 +234,7 @@ Rules for `make` (all arguments optional, every field written explicitly,
 | union by value | `X.t Ctypes.union` |
 | `const T* p` (single, no `len`) for struct/union T | `?x:T.t Ctypes.structure` → stores `addr`, kept alive |
 | `const char* p` (`len="null-terminated"`) | `?x:string` |
-| `T* p` + `uint32_t xCount` (`len="xCount"`) | `?xs:elem list` → allocates a `CArray`, sets count = length, keeps array **and** original structures alive |
+| `T* p` + `uint32_t xCount` (`len="xCount"`) | `?xs:elem list` → allocates a `CArray`, sets count = length (or the longest of several lists sharing one count, or an explicit `?x_count:int` override when every array sharing the count is independently optional — see §10's expansion of this row), keeps array **and** original structures alive |
 | `const char* const* pp` + count | `?xs:string list` |
 | `const void* pData` + `size_t dataSize` (`len="dataSize"`) | `?data:string` (raw bytes) — sets size |
 | `const uint32_t* pCode` + `size_t codeSize` (`len="codeSize / 4"`) | `?code:string` (SPIR-V bytes; copied into a 4-byte aligned buffer, sets code_size) |
@@ -345,9 +354,47 @@ alias of the raw function when a shape is not recognised — never omit a comman
   wrapper returns `T list` (structs: `T.t structure list`, with `sType` filled
   when applicable; handles/ints/enums: their OCaml type). Handles
   `VK_INCOMPLETE` by retrying.
+* An output array whose `len` is **not** an in/out `pCount` (so not the
+  two-call idiom above) but derives from another input instead becomes a
+  returned OCaml list, allocated and filled by the wrapper:
+  * `len` equal to a plain (by value) input count that also sizes an input
+    array — `vkCreateGraphicsPipelines`/`vkCreateComputePipelines`/
+    `vkCreateRayTracingPipelinesKHR`/`vkCreateRayTracingPipelinesNV`/
+    `vkCreateShadersEXT`/`vkCreateSharedSwapchainsKHR`/... (`pPipelines` len
+    = `createInfoCount`, the same count that sizes `pCreateInfos`): the
+    output list is exactly as long as the input list sharing its count, e.g.
+    `create_graphics_pipelines device cache infos : Result.t * Pipeline.t
+    list` (the result is kept because `VK_PIPELINE_COMPILE_REQUIRED_EXT` is a
+    success code — per the `VkResult` rule below).
+  * `len` of the form `param->field` — `vkAllocateCommandBuffers`
+    (`pCommandBuffers` len = `pAllocateInfo->commandBufferCount`) and
+    `vkAllocateDescriptorSets` (`pDescriptorSets` len =
+    `pAllocateInfo->descriptorSetCount`): the count is read from the input
+    struct (`Ctypes.getf info X.command_buffer_count`), e.g.
+    `allocate_command_buffers device info : CommandBuffer.t list` (no extra
+    success codes here, so no `Result.t`).
+  * Anything else with a `len` that isn't recognised by one of the shapes
+    above (`vkGetQueryPoolResults`'s byte-sized `pData`, the two-call
+    `vkGetImageSparseMemoryRequirements`, ...) is unaffected and keeps its
+    existing wrapper shape; `Vk.Fn` always keeps the raw pointer-based
+    signature regardless.
 * Input `count + const T*` pairs become `elem list` arguments (temporary
   CArrays live for the duration of the call). Structs → `T.t structure list`,
   handles/enums/ints/floats → their OCaml types, `const char* const*` → `string list`.
+  The same rule applies one level down, inside `X.make` (§7): when a count
+  member is shared by more than one array member (e.g.
+  `VkSubpassDescription.colorAttachmentCount` sizes both `pColorAttachments`
+  and the optional, parallel `pResolveAttachments`; `VkWriteDescriptorSet.
+  descriptorCount` sizes whichever one of `pImageInfo`/`pBufferInfo`/
+  `pTexelBufferView` applies to `descriptorType`), the count is derived from
+  the **longest** list actually supplied (not an arbitrary single member),
+  and supplying two of those lists with different non-zero lengths is an
+  `Invalid_argument`. When *every* array sharing a count is independently
+  optional (registry `optional="true"` on the pointer, e.g.
+  `VkDescriptorSetLayoutBinding.descriptorCount`/`pImmutableSamplers`, where
+  a binding can declare any `descriptorCount` with no immutable samplers at
+  all), `make` also accepts the count as a plain, independent
+  `?xxx_count:int` argument that overrides the derived length.
 * Single `const T* pInfo` input struct → `T.t structure` (passed by `addr`).
 * `const void*` + size pairs stay raw (`unit ptr` + `int`).
 * `Vk.create_instance` additionally calls `Loader.load_instance` on success.
@@ -392,6 +439,12 @@ used to force `lvp_icd.json`)
 * `test_layout.ml`: `Vk.Layout.all` vs `test/layout/x86_64-linux-gnu.txt` (golden file
   generated by `gen/layout_check.py` + real headers; the test skips with a
   message if the golden file for the platform is missing).
+* `test_enum_values.ml`: `Vk.Enum_values.all` vs
+  `test/enum_values/x86_64-linux-gnu.txt` (golden file generated by
+  `gen/enum_check.py` + `scripts/gen_enum_values.sh` + real headers, same
+  "compare only what's present on both sides, fail listing the first 20
+  mismatches" pattern as `test_layout.ml`; skips with a message if the
+  golden file for the platform is missing).
 * `test_structs.ml`: `make` sets `sType`, counts, arrays; keep-alive survives
   `Gc.full_major`.
 * `test_instance.ml`: create instance, enumerate devices/extensions/layers,
@@ -410,3 +463,12 @@ used to force `lvp_icd.json`)
 * Output files start with `(* Generated by gen/gen.py from registry/vk.xml — do not edit *)`
   and disable noisy warnings: `[@@@warning "-32-33-34-37-39-60"]`.
 * The generator is the single source of truth: never hand-edit `lib/generated`.
+* `gen/layout_check.py`/`scripts/gen_layout.sh` and `gen/enum_check.py`/
+  `scripts/gen_enum_values.sh` are the golden-file generators for
+  `test/layout/*.txt`/`test/enum_values/*.txt`: both emit a C11 probe against
+  the real `<vulkan/vulkan.h>` (`VK_ENABLE_BETA_EXTENSIONS` defined, no
+  `VK_USE_PLATFORM_*` macro) so the compiler, not this generator, is the
+  ground truth for what the pinned Vulkan-Headers release actually declares;
+  `gen/gen.py` never invokes either (they only run through their `scripts/`
+  wrapper, which needs a real `gcc` + `$VULKAN_HEADERS`, unlike the
+  stdlib-only `python3 gen/gen.py`).

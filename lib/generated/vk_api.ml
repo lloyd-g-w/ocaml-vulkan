@@ -450,19 +450,23 @@ let release_captured_pipeline_data_khr ?allocator:arg_allocator arg_device arg_i
   check result;
   ()
 
-let create_graphics_pipelines ?allocator:arg_allocator arg_device arg_pipeline_cache arg_create_infos arg_pipelines =
+let create_graphics_pipelines ?allocator:arg_allocator arg_device arg_pipeline_cache arg_create_infos =
   let array_create_infos = CArray.of_list (GraphicsPipelineCreateInfo.t) arg_create_infos in
   let pointer_create_infos = if arg_create_infos = [] then Vk_base.null_ptr (GraphicsPipelineCreateInfo.t) else CArray.start array_create_infos in
-  let result = Vk_fn.create_graphics_pipelines (arg_device) (arg_pipeline_cache) (List.length arg_create_infos) (pointer_create_infos) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (arg_pipelines) in
+  let output_count = List.length arg_create_infos in
+  let storage = CArray.make (Pipeline.t) output_count in
+  let result = Vk_fn.create_graphics_pipelines (arg_device) (arg_pipeline_cache) (List.length arg_create_infos) (pointer_create_infos) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (CArray.start storage) in
   check result;
-  result
+  (result, (CArray.to_list storage))
 
-let create_compute_pipelines ?allocator:arg_allocator arg_device arg_pipeline_cache arg_create_infos arg_pipelines =
+let create_compute_pipelines ?allocator:arg_allocator arg_device arg_pipeline_cache arg_create_infos =
   let array_create_infos = CArray.of_list (ComputePipelineCreateInfo.t) arg_create_infos in
   let pointer_create_infos = if arg_create_infos = [] then Vk_base.null_ptr (ComputePipelineCreateInfo.t) else CArray.start array_create_infos in
-  let result = Vk_fn.create_compute_pipelines (arg_device) (arg_pipeline_cache) (List.length arg_create_infos) (pointer_create_infos) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (arg_pipelines) in
+  let output_count = List.length arg_create_infos in
+  let storage = CArray.make (Pipeline.t) output_count in
+  let result = Vk_fn.create_compute_pipelines (arg_device) (arg_pipeline_cache) (List.length arg_create_infos) (pointer_create_infos) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (CArray.start storage) in
   check result;
-  result
+  (result, (CArray.to_list storage))
 
 let get_device_subpass_shading_max_workgroup_size_huawei arg_device arg_renderpass arg_max_workgroup_size =
   let result = Vk_fn.get_device_subpass_shading_max_workgroup_size_huawei (arg_device) (arg_renderpass) (arg_max_workgroup_size) in
@@ -513,10 +517,12 @@ let reset_descriptor_pool arg_device arg_descriptor_pool arg_flags =
   check result;
   ()
 
-let allocate_descriptor_sets arg_device arg_allocate_info arg_descriptor_sets =
-  let result = Vk_fn.allocate_descriptor_sets (arg_device) (addr arg_allocate_info) (arg_descriptor_sets) in
+let allocate_descriptor_sets arg_device arg_allocate_info =
+  let output_count = Ctypes.getf arg_allocate_info DescriptorSetAllocateInfo.descriptor_set_count in
+  let storage = CArray.make (DescriptorSet.t) output_count in
+  let result = Vk_fn.allocate_descriptor_sets (arg_device) (addr arg_allocate_info) (CArray.start storage) in
   check result;
-  ()
+  (CArray.to_list storage)
 
 let free_descriptor_sets arg_device arg_descriptor_pool arg_descriptor_sets =
   let array_descriptor_sets = CArray.of_list (DescriptorSet.t) arg_descriptor_sets in
@@ -574,10 +580,12 @@ let reset_command_pool arg_device arg_command_pool arg_flags =
   check result;
   ()
 
-let allocate_command_buffers arg_device arg_allocate_info arg_command_buffers =
-  let result = Vk_fn.allocate_command_buffers (arg_device) (addr arg_allocate_info) (arg_command_buffers) in
+let allocate_command_buffers arg_device arg_allocate_info =
+  let output_count = Ctypes.getf arg_allocate_info CommandBufferAllocateInfo.command_buffer_count in
+  let storage = CArray.make (CommandBuffer.t) output_count in
+  let result = Vk_fn.allocate_command_buffers (arg_device) (addr arg_allocate_info) (CArray.start storage) in
   check result;
-  ()
+  (CArray.to_list storage)
 
 let free_command_buffers arg_device arg_command_pool arg_command_buffers =
   let array_command_buffers = CArray.of_list (CommandBuffer.t) arg_command_buffers in
@@ -925,12 +933,14 @@ let create_display_plane_surface_khr ?allocator:arg_allocator arg_instance arg_c
   check result;
   !@ output
 
-let create_shared_swapchains_khr ?allocator:arg_allocator arg_device arg_create_infos arg_swapchains =
+let create_shared_swapchains_khr ?allocator:arg_allocator arg_device arg_create_infos =
   let array_create_infos = CArray.of_list (SwapchainCreateInfoKHR.t) arg_create_infos in
   let pointer_create_infos = if arg_create_infos = [] then Vk_base.null_ptr (SwapchainCreateInfoKHR.t) else CArray.start array_create_infos in
-  let result = Vk_fn.create_shared_swapchains_khr (arg_device) (List.length arg_create_infos) (pointer_create_infos) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (arg_swapchains) in
+  let output_count = List.length arg_create_infos in
+  let storage = CArray.make (SwapchainKHR.t) output_count in
+  let result = Vk_fn.create_shared_swapchains_khr (arg_device) (List.length arg_create_infos) (pointer_create_infos) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (CArray.start storage) in
   check result;
-  ()
+  (CArray.to_list storage)
 
 let destroy_surface_khr arg_instance arg_surface ?allocator:arg_allocator () =
   Vk_fn.destroy_surface_khr (arg_instance) (arg_surface) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x))
@@ -1823,13 +1833,14 @@ let get_physical_device_calibrateable_time_domains_khr arg_physical_device =
   in
   fetch ()
 
-let get_calibrated_timestamps_khr arg_device arg_timestamp_infos arg_timestamps =
+let get_calibrated_timestamps_khr arg_device arg_timestamp_infos arg_max_deviation =
   let array_timestamp_infos = CArray.of_list (CalibratedTimestampInfoKHR.t) arg_timestamp_infos in
   let pointer_timestamp_infos = if arg_timestamp_infos = [] then Vk_base.null_ptr (CalibratedTimestampInfoKHR.t) else CArray.start array_timestamp_infos in
-  let output = allocate (Vk_base.uint64) (0) in
-  let result = Vk_fn.get_calibrated_timestamps_khr (arg_device) (List.length arg_timestamp_infos) (pointer_timestamp_infos) (arg_timestamps) (output) in
+  let output_count = List.length arg_timestamp_infos in
+  let storage = CArray.make (Vk_base.uint64) output_count in
+  let result = Vk_fn.get_calibrated_timestamps_khr (arg_device) (List.length arg_timestamp_infos) (pointer_timestamp_infos) (CArray.start storage) (arg_max_deviation) in
   check result;
-  !@ output
+  (CArray.to_list storage)
 
 let set_debug_utils_object_name_ext arg_device arg_name_info =
   let result = Vk_fn.set_debug_utils_object_name_ext (arg_device) (addr arg_name_info) in
@@ -2117,19 +2128,23 @@ let get_acceleration_structure_handle_nv arg_device arg_acceleration_structure a
   check result;
   ()
 
-let create_ray_tracing_pipelines_nv ?allocator:arg_allocator arg_device arg_pipeline_cache arg_create_infos arg_pipelines =
+let create_ray_tracing_pipelines_nv ?allocator:arg_allocator arg_device arg_pipeline_cache arg_create_infos =
   let array_create_infos = CArray.of_list (RayTracingPipelineCreateInfoNV.t) arg_create_infos in
   let pointer_create_infos = if arg_create_infos = [] then Vk_base.null_ptr (RayTracingPipelineCreateInfoNV.t) else CArray.start array_create_infos in
-  let result = Vk_fn.create_ray_tracing_pipelines_nv (arg_device) (arg_pipeline_cache) (List.length arg_create_infos) (pointer_create_infos) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (arg_pipelines) in
+  let output_count = List.length arg_create_infos in
+  let storage = CArray.make (Pipeline.t) output_count in
+  let result = Vk_fn.create_ray_tracing_pipelines_nv (arg_device) (arg_pipeline_cache) (List.length arg_create_infos) (pointer_create_infos) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (CArray.start storage) in
   check result;
-  result
+  (result, (CArray.to_list storage))
 
-let create_ray_tracing_pipelines_khr ?allocator:arg_allocator arg_device arg_deferred_operation arg_pipeline_cache arg_create_infos arg_pipelines =
+let create_ray_tracing_pipelines_khr ?allocator:arg_allocator arg_device arg_deferred_operation arg_pipeline_cache arg_create_infos =
   let array_create_infos = CArray.of_list (RayTracingPipelineCreateInfoKHR.t) arg_create_infos in
   let pointer_create_infos = if arg_create_infos = [] then Vk_base.null_ptr (RayTracingPipelineCreateInfoKHR.t) else CArray.start array_create_infos in
-  let result = Vk_fn.create_ray_tracing_pipelines_khr (arg_device) (arg_deferred_operation) (arg_pipeline_cache) (List.length arg_create_infos) (pointer_create_infos) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (arg_pipelines) in
+  let output_count = List.length arg_create_infos in
+  let storage = CArray.make (Pipeline.t) output_count in
+  let result = Vk_fn.create_ray_tracing_pipelines_khr (arg_device) (arg_deferred_operation) (arg_pipeline_cache) (List.length arg_create_infos) (pointer_create_infos) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (CArray.start storage) in
   check result;
-  result
+  (result, (CArray.to_list storage))
 
 let get_physical_device_cooperative_matrix_properties_nv arg_physical_device =
   let count = allocate Vk_base.uint32 0 in
@@ -3270,12 +3285,14 @@ let unmap_memory_2 arg_device arg_memory_unmap_info =
   check result;
   ()
 
-let create_shaders_ext ?allocator:arg_allocator arg_device arg_create_infos arg_shaders =
+let create_shaders_ext ?allocator:arg_allocator arg_device arg_create_infos =
   let array_create_infos = CArray.of_list (ShaderCreateInfoEXT.t) arg_create_infos in
   let pointer_create_infos = if arg_create_infos = [] then Vk_base.null_ptr (ShaderCreateInfoEXT.t) else CArray.start array_create_infos in
-  let result = Vk_fn.create_shaders_ext (arg_device) (List.length arg_create_infos) (pointer_create_infos) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (arg_shaders) in
+  let output_count = List.length arg_create_infos in
+  let storage = CArray.make (ShaderEXT.t) output_count in
+  let result = Vk_fn.create_shaders_ext (arg_device) (List.length arg_create_infos) (pointer_create_infos) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (CArray.start storage) in
   check result;
-  result
+  (result, (CArray.to_list storage))
 
 let destroy_shader_ext arg_device arg_shader ?allocator:arg_allocator () =
   Vk_fn.destroy_shader_ext (arg_device) (arg_shader) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x))
@@ -3347,12 +3364,14 @@ let get_execution_graph_pipeline_node_index_amdx arg_device arg_execution_graph 
   check result;
   !@ output
 
-let create_execution_graph_pipelines_amdx ?allocator:arg_allocator arg_device arg_pipeline_cache arg_create_infos arg_pipelines =
+let create_execution_graph_pipelines_amdx ?allocator:arg_allocator arg_device arg_pipeline_cache arg_create_infos =
   let array_create_infos = CArray.of_list (ExecutionGraphPipelineCreateInfoAMDX.t) arg_create_infos in
   let pointer_create_infos = if arg_create_infos = [] then Vk_base.null_ptr (ExecutionGraphPipelineCreateInfoAMDX.t) else CArray.start array_create_infos in
-  let result = Vk_fn.create_execution_graph_pipelines_amdx (arg_device) (arg_pipeline_cache) (List.length arg_create_infos) (pointer_create_infos) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (arg_pipelines) in
+  let output_count = List.length arg_create_infos in
+  let storage = CArray.make (Pipeline.t) output_count in
+  let result = Vk_fn.create_execution_graph_pipelines_amdx (arg_device) (arg_pipeline_cache) (List.length arg_create_infos) (pointer_create_infos) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (CArray.start storage) in
   check result;
-  result
+  (result, (CArray.to_list storage))
 
 let cmd_initialize_graph_scratch_memory_amdx arg_command_buffer arg_execution_graph arg_scratch arg_scratch_size =
   Vk_fn.cmd_initialize_graph_scratch_memory_amdx (arg_command_buffer) (arg_execution_graph) (arg_scratch) (arg_scratch_size)
@@ -3651,12 +3670,14 @@ let get_tensor_view_opaque_capture_descriptor_data_arm arg_device arg_info arg_d
 let get_physical_device_external_tensor_properties_arm arg_physical_device arg_external_tensor_info arg_external_tensor_properties =
   Vk_fn.get_physical_device_external_tensor_properties_arm (arg_physical_device) (addr arg_external_tensor_info) (addr arg_external_tensor_properties)
 
-let create_data_graph_pipelines_arm ?allocator:arg_allocator arg_device arg_deferred_operation arg_pipeline_cache arg_create_infos arg_pipelines =
+let create_data_graph_pipelines_arm ?allocator:arg_allocator arg_device arg_deferred_operation arg_pipeline_cache arg_create_infos =
   let array_create_infos = CArray.of_list (DataGraphPipelineCreateInfoARM.t) arg_create_infos in
   let pointer_create_infos = if arg_create_infos = [] then Vk_base.null_ptr (DataGraphPipelineCreateInfoARM.t) else CArray.start array_create_infos in
-  let result = Vk_fn.create_data_graph_pipelines_arm (arg_device) (arg_deferred_operation) (arg_pipeline_cache) (List.length arg_create_infos) (pointer_create_infos) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (arg_pipelines) in
+  let output_count = List.length arg_create_infos in
+  let storage = CArray.make (Pipeline.t) output_count in
+  let result = Vk_fn.create_data_graph_pipelines_arm (arg_device) (arg_deferred_operation) (arg_pipeline_cache) (List.length arg_create_infos) (pointer_create_infos) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (CArray.start storage) in
   check result;
-  result
+  (result, (CArray.to_list storage))
 
 let create_data_graph_pipeline_session_arm ?allocator:arg_allocator arg_device arg_create_info =
   let output = allocate (DataGraphPipelineSessionARM.t) (DataGraphPipelineSessionARM.null) in
@@ -3827,22 +3848,26 @@ let register_custom_border_color_ext arg_device arg_border_color arg_request_ind
 let unregister_custom_border_color_ext arg_device arg_index =
   Vk_fn.unregister_custom_border_color_ext (arg_device) (arg_index)
 
-let get_image_opaque_capture_data_ext arg_device arg_images arg_datas =
+let get_image_opaque_capture_data_ext arg_device arg_images =
   let array_images = CArray.of_list (Image.t) arg_images in
   let pointer_images = if arg_images = [] then Vk_base.null_ptr (Image.t) else CArray.start array_images in
-  let result = Vk_fn.get_image_opaque_capture_data_ext (arg_device) (List.length arg_images) (pointer_images) (arg_datas) in
+  let output_count = List.length arg_images in
+  let storage = CArray.make (HostAddressRangeEXT.t) output_count in
+  let result = Vk_fn.get_image_opaque_capture_data_ext (arg_device) (List.length arg_images) (pointer_images) (CArray.start storage) in
   check result;
-  ()
+  (CArray.to_list storage)
 
 let get_physical_device_descriptor_size_ext arg_physical_device arg_descriptor_type =
   Vk_fn.get_physical_device_descriptor_size_ext (arg_physical_device) (arg_descriptor_type)
 
-let get_tensor_opaque_capture_data_arm arg_device arg_tensors arg_datas =
+let get_tensor_opaque_capture_data_arm arg_device arg_tensors =
   let array_tensors = CArray.of_list (TensorARM.t) arg_tensors in
   let pointer_tensors = if arg_tensors = [] then Vk_base.null_ptr (TensorARM.t) else CArray.start array_tensors in
-  let result = Vk_fn.get_tensor_opaque_capture_data_arm (arg_device) (List.length arg_tensors) (pointer_tensors) (arg_datas) in
+  let output_count = List.length arg_tensors in
+  let storage = CArray.make (HostAddressRangeEXT.t) output_count in
+  let result = Vk_fn.get_tensor_opaque_capture_data_arm (arg_device) (List.length arg_tensors) (pointer_tensors) (CArray.start storage) in
   check result;
-  ()
+  (CArray.to_list storage)
 
 let cmd_copy_memory_khr arg_command_buffer arg_copy_memory_info =
   Vk_fn.cmd_copy_memory_khr (arg_command_buffer) (addr arg_copy_memory_info)
@@ -4131,13 +4156,14 @@ let get_physical_device_calibrateable_time_domains_ext arg_physical_device =
   in
   fetch ()
 
-let get_calibrated_timestamps_ext arg_device arg_timestamp_infos arg_timestamps =
+let get_calibrated_timestamps_ext arg_device arg_timestamp_infos arg_max_deviation =
   let array_timestamp_infos = CArray.of_list (CalibratedTimestampInfoKHR.t) arg_timestamp_infos in
   let pointer_timestamp_infos = if arg_timestamp_infos = [] then Vk_base.null_ptr (CalibratedTimestampInfoKHR.t) else CArray.start array_timestamp_infos in
-  let output = allocate (Vk_base.uint64) (0) in
-  let result = Vk_fn.get_calibrated_timestamps_ext (arg_device) (List.length arg_timestamp_infos) (pointer_timestamp_infos) (arg_timestamps) (output) in
+  let output_count = List.length arg_timestamp_infos in
+  let storage = CArray.make (Vk_base.uint64) output_count in
+  let result = Vk_fn.get_calibrated_timestamps_ext (arg_device) (List.length arg_timestamp_infos) (pointer_timestamp_infos) (CArray.start storage) (arg_max_deviation) in
   check result;
-  !@ output
+  (CArray.to_list storage)
 
 let create_render_pass_2_khr ?allocator:arg_allocator arg_device arg_create_info =
   let output = allocate (RenderPass.t) (RenderPass.null) in

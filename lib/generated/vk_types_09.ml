@@ -339,7 +339,10 @@ module SemaphoreWaitInfo = struct
      | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
      | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
     setf value _flags arg_flags;
-    setf value _semaphore_count (List.length arg_values);
+    let semaphore_count_n = List.fold_left max 0 [List.length arg_semaphores; List.length arg_values] in
+    if arg_semaphores <> [] && List.length arg_semaphores <> semaphore_count_n then invalid_arg "VkSemaphoreWaitInfo.pSemaphores: length does not match semaphoreCount";
+    if arg_values <> [] && List.length arg_values <> semaphore_count_n then invalid_arg "VkSemaphoreWaitInfo.pValues: length does not match semaphoreCount";
+    setf value _semaphore_count semaphore_count_n;
     if arg_semaphores = [] then setf value _p_semaphores (Vk_base.null_ptr (Semaphore.t)) else begin
       let items = CArray.of_list (Semaphore.t) arg_semaphores in
       setf value _p_semaphores (CArray.start items);
@@ -384,7 +387,10 @@ module SetDescriptorBufferOffsetsInfoEXT = struct
     setf value _stage_flags arg_stage_flags;
     setf value _layout arg_layout;
     setf value _first_set arg_first_set;
-    setf value _set_count (List.length arg_offsets);
+    let set_count_n = List.fold_left max 0 [List.length arg_buffer_indices; List.length arg_offsets] in
+    if arg_buffer_indices <> [] && List.length arg_buffer_indices <> set_count_n then invalid_arg "VkSetDescriptorBufferOffsetsInfoEXT.pBufferIndices: length does not match setCount";
+    if arg_offsets <> [] && List.length arg_offsets <> set_count_n then invalid_arg "VkSetDescriptorBufferOffsetsInfoEXT.pOffsets: length does not match setCount";
+    setf value _set_count set_count_n;
     if arg_buffer_indices = [] then setf value _p_buffer_indices (Vk_base.null_ptr (Vk_base.uint32)) else begin
       let items = CArray.of_list (Vk_base.uint32) arg_buffer_indices in
       setf value _p_buffer_indices (CArray.start items);
@@ -644,7 +650,9 @@ module ShadingRatePaletteNV = struct
     let make ?shading_rate_palette_entries:(arg_shading_rate_palette_entries=[]) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
-    setf value _shading_rate_palette_entry_count (List.length arg_shading_rate_palette_entries);
+    let shading_rate_palette_entry_count_n = List.length arg_shading_rate_palette_entries in
+    if arg_shading_rate_palette_entries <> [] && List.length arg_shading_rate_palette_entries <> shading_rate_palette_entry_count_n then invalid_arg "VkShadingRatePaletteNV.pShadingRatePaletteEntries: length does not match shadingRatePaletteEntryCount";
+    setf value _shading_rate_palette_entry_count shading_rate_palette_entry_count_n;
     if arg_shading_rate_palette_entries = [] then setf value _p_shading_rate_palette_entries (Vk_base.null_ptr (ShadingRatePaletteEntryNV.t)) else begin
       let items = CArray.of_list (ShadingRatePaletteEntryNV.t) arg_shading_rate_palette_entries in
       setf value _p_shading_rate_palette_entries (CArray.start items);
@@ -885,7 +893,10 @@ module SubmitInfo = struct
     (match arg_next with
      | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
      | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    setf value _wait_semaphore_count (List.length arg_wait_dst_stage_mask);
+    let wait_semaphore_count_n = List.fold_left max 0 [List.length arg_wait_semaphores; List.length arg_wait_dst_stage_mask] in
+    if arg_wait_semaphores <> [] && List.length arg_wait_semaphores <> wait_semaphore_count_n then invalid_arg "VkSubmitInfo.pWaitSemaphores: length does not match waitSemaphoreCount";
+    if arg_wait_dst_stage_mask <> [] && List.length arg_wait_dst_stage_mask <> wait_semaphore_count_n then invalid_arg "VkSubmitInfo.pWaitDstStageMask: length does not match waitSemaphoreCount";
+    setf value _wait_semaphore_count wait_semaphore_count_n;
     if arg_wait_semaphores = [] then setf value _p_wait_semaphores (Vk_base.null_ptr (Semaphore.t)) else begin
       let items = CArray.of_list (Semaphore.t) arg_wait_semaphores in
       setf value _p_wait_semaphores (CArray.start items);
@@ -896,13 +907,17 @@ module SubmitInfo = struct
       setf value _p_wait_dst_stage_mask (CArray.start items);
       Vk_base.retain keep items; Vk_base.retain keep arg_wait_dst_stage_mask
     end;
-    setf value _command_buffer_count (List.length arg_command_buffers);
+    let command_buffer_count_n = List.length arg_command_buffers in
+    if arg_command_buffers <> [] && List.length arg_command_buffers <> command_buffer_count_n then invalid_arg "VkSubmitInfo.pCommandBuffers: length does not match commandBufferCount";
+    setf value _command_buffer_count command_buffer_count_n;
     if arg_command_buffers = [] then setf value _p_command_buffers (Vk_base.null_ptr (CommandBuffer.t)) else begin
       let items = CArray.of_list (CommandBuffer.t) arg_command_buffers in
       setf value _p_command_buffers (CArray.start items);
       Vk_base.retain keep items; Vk_base.retain keep arg_command_buffers
     end;
-    setf value _signal_semaphore_count (List.length arg_signal_semaphores);
+    let signal_semaphore_count_n = List.length arg_signal_semaphores in
+    if arg_signal_semaphores <> [] && List.length arg_signal_semaphores <> signal_semaphore_count_n then invalid_arg "VkSubmitInfo.pSignalSemaphores: length does not match signalSemaphoreCount";
+    setf value _signal_semaphore_count signal_semaphore_count_n;
     if arg_signal_semaphores = [] then setf value _p_signal_semaphores (Vk_base.null_ptr (Semaphore.t)) else begin
       let items = CArray.of_list (Semaphore.t) arg_signal_semaphores in
       setf value _p_signal_semaphores (CArray.start items);
@@ -1581,7 +1596,9 @@ module SwapchainPresentFenceInfoKHR = struct
     (match arg_next with
      | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
      | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    setf value _swapchain_count (List.length arg_fences);
+    let swapchain_count_n = List.length arg_fences in
+    if arg_fences <> [] && List.length arg_fences <> swapchain_count_n then invalid_arg "VkSwapchainPresentFenceInfoKHR.pFences: length does not match swapchainCount";
+    setf value _swapchain_count swapchain_count_n;
     if arg_fences = [] then setf value _p_fences (Vk_base.null_ptr (Fence.t)) else begin
       let items = CArray.of_list (Fence.t) arg_fences in
       setf value _p_fences (CArray.start items);
@@ -1610,7 +1627,9 @@ module SwapchainPresentModeInfoKHR = struct
     (match arg_next with
      | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
      | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    setf value _swapchain_count (List.length arg_present_modes);
+    let swapchain_count_n = List.length arg_present_modes in
+    if arg_present_modes <> [] && List.length arg_present_modes <> swapchain_count_n then invalid_arg "VkSwapchainPresentModeInfoKHR.pPresentModes: length does not match swapchainCount";
+    setf value _swapchain_count swapchain_count_n;
     if arg_present_modes = [] then setf value _p_present_modes (Vk_base.null_ptr (PresentModeKHR.t)) else begin
       let items = CArray.of_list (PresentModeKHR.t) arg_present_modes in
       setf value _p_present_modes (CArray.start items);
@@ -1639,7 +1658,9 @@ module SwapchainPresentModesCreateInfoKHR = struct
     (match arg_next with
      | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
      | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    setf value _present_mode_count (List.length arg_present_modes);
+    let present_mode_count_n = List.length arg_present_modes in
+    if arg_present_modes <> [] && List.length arg_present_modes <> present_mode_count_n then invalid_arg "VkSwapchainPresentModesCreateInfoKHR.pPresentModes: length does not match presentModeCount";
+    setf value _present_mode_count present_mode_count_n;
     if arg_present_modes = [] then setf value _p_present_modes (Vk_base.null_ptr (PresentModeKHR.t)) else begin
       let items = CArray.of_list (PresentModeKHR.t) arg_present_modes in
       setf value _p_present_modes (CArray.start items);
@@ -1785,14 +1806,18 @@ module TensorCopyARM = struct
   let p_extent = _p_extent
   let () = seal t
   let structure_type : StructureType.t option = Some StructureType.tensor_copy_arm
-    let make ?next:arg_next ?src_offset:(arg_src_offset=[]) ?dst_offset:(arg_dst_offset=[]) ?extent:(arg_extent=[]) () =
+    let make ?next:arg_next ?dimension_count:arg_dimension_count ?src_offset:(arg_src_offset=[]) ?dst_offset:(arg_dst_offset=[]) ?extent:(arg_extent=[]) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
     setf value _s_type StructureType.tensor_copy_arm;
     (match arg_next with
      | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
      | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    setf value _dimension_count (List.length arg_extent);
+    let dimension_count_n = (match arg_dimension_count with Some n -> n | None -> List.fold_left max 0 [List.length arg_src_offset; List.length arg_dst_offset; List.length arg_extent]) in
+    if arg_src_offset <> [] && List.length arg_src_offset <> dimension_count_n then invalid_arg "VkTensorCopyARM.pSrcOffset: length does not match dimensionCount";
+    if arg_dst_offset <> [] && List.length arg_dst_offset <> dimension_count_n then invalid_arg "VkTensorCopyARM.pDstOffset: length does not match dimensionCount";
+    if arg_extent <> [] && List.length arg_extent <> dimension_count_n then invalid_arg "VkTensorCopyARM.pExtent: length does not match dimensionCount";
+    setf value _dimension_count dimension_count_n;
     if arg_src_offset = [] then setf value _p_src_offset (Vk_base.null_ptr (Vk_base.uint64)) else begin
       let items = CArray.of_list (Vk_base.uint64) arg_src_offset in
       setf value _p_src_offset (CArray.start items);
@@ -1841,7 +1866,10 @@ module TensorDescriptionARM = struct
      | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
     setf value _tiling arg_tiling;
     setf value _format arg_format;
-    setf value _dimension_count (List.length arg_strides);
+    let dimension_count_n = List.fold_left max 0 [List.length arg_dimensions; List.length arg_strides] in
+    if arg_dimensions <> [] && List.length arg_dimensions <> dimension_count_n then invalid_arg "VkTensorDescriptionARM.pDimensions: length does not match dimensionCount";
+    if arg_strides <> [] && List.length arg_strides <> dimension_count_n then invalid_arg "VkTensorDescriptionARM.pStrides: length does not match dimensionCount";
+    setf value _dimension_count dimension_count_n;
     if arg_dimensions = [] then setf value _p_dimensions (Vk_base.null_ptr (Vk_base.int64)) else begin
       let items = CArray.of_list (Vk_base.int64) arg_dimensions in
       setf value _p_dimensions (CArray.start items);
@@ -2173,20 +2201,24 @@ module TimelineSemaphoreSubmitInfo = struct
   let p_signal_semaphore_values = _p_signal_semaphore_values
   let () = seal t
   let structure_type : StructureType.t option = Some StructureType.timeline_semaphore_submit_info
-    let make ?next:arg_next ?wait_semaphore_values:(arg_wait_semaphore_values=[]) ?signal_semaphore_values:(arg_signal_semaphore_values=[]) () =
+    let make ?next:arg_next ?wait_semaphore_value_count:arg_wait_semaphore_value_count ?wait_semaphore_values:(arg_wait_semaphore_values=[]) ?signal_semaphore_value_count:arg_signal_semaphore_value_count ?signal_semaphore_values:(arg_signal_semaphore_values=[]) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
     setf value _s_type StructureType.timeline_semaphore_submit_info;
     (match arg_next with
      | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
      | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    setf value _wait_semaphore_value_count (List.length arg_wait_semaphore_values);
+    let wait_semaphore_value_count_n = (match arg_wait_semaphore_value_count with Some n -> n | None -> List.length arg_wait_semaphore_values) in
+    if arg_wait_semaphore_values <> [] && List.length arg_wait_semaphore_values <> wait_semaphore_value_count_n then invalid_arg "VkTimelineSemaphoreSubmitInfo.pWaitSemaphoreValues: length does not match waitSemaphoreValueCount";
+    setf value _wait_semaphore_value_count wait_semaphore_value_count_n;
     if arg_wait_semaphore_values = [] then setf value _p_wait_semaphore_values (Vk_base.null_ptr (Vk_base.uint64)) else begin
       let items = CArray.of_list (Vk_base.uint64) arg_wait_semaphore_values in
       setf value _p_wait_semaphore_values (CArray.start items);
       Vk_base.retain keep items; Vk_base.retain keep arg_wait_semaphore_values
     end;
-    setf value _signal_semaphore_value_count (List.length arg_signal_semaphore_values);
+    let signal_semaphore_value_count_n = (match arg_signal_semaphore_value_count with Some n -> n | None -> List.length arg_signal_semaphore_values) in
+    if arg_signal_semaphore_values <> [] && List.length arg_signal_semaphore_values <> signal_semaphore_value_count_n then invalid_arg "VkTimelineSemaphoreSubmitInfo.pSignalSemaphoreValues: length does not match signalSemaphoreValueCount";
+    setf value _signal_semaphore_value_count signal_semaphore_value_count_n;
     if arg_signal_semaphore_values = [] then setf value _p_signal_semaphore_values (Vk_base.null_ptr (Vk_base.uint64)) else begin
       let items = CArray.of_list (Vk_base.uint64) arg_signal_semaphore_values in
       setf value _p_signal_semaphore_values (CArray.start items);
@@ -2367,13 +2399,17 @@ module ValidationFeaturesEXT = struct
     (match arg_next with
      | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
      | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    setf value _enabled_validation_feature_count (List.length arg_enabled_validation_features);
+    let enabled_validation_feature_count_n = List.length arg_enabled_validation_features in
+    if arg_enabled_validation_features <> [] && List.length arg_enabled_validation_features <> enabled_validation_feature_count_n then invalid_arg "VkValidationFeaturesEXT.pEnabledValidationFeatures: length does not match enabledValidationFeatureCount";
+    setf value _enabled_validation_feature_count enabled_validation_feature_count_n;
     if arg_enabled_validation_features = [] then setf value _p_enabled_validation_features (Vk_base.null_ptr (ValidationFeatureEnableEXT.t)) else begin
       let items = CArray.of_list (ValidationFeatureEnableEXT.t) arg_enabled_validation_features in
       setf value _p_enabled_validation_features (CArray.start items);
       Vk_base.retain keep items; Vk_base.retain keep arg_enabled_validation_features
     end;
-    setf value _disabled_validation_feature_count (List.length arg_disabled_validation_features);
+    let disabled_validation_feature_count_n = List.length arg_disabled_validation_features in
+    if arg_disabled_validation_features <> [] && List.length arg_disabled_validation_features <> disabled_validation_feature_count_n then invalid_arg "VkValidationFeaturesEXT.pDisabledValidationFeatures: length does not match disabledValidationFeatureCount";
+    setf value _disabled_validation_feature_count disabled_validation_feature_count_n;
     if arg_disabled_validation_features = [] then setf value _p_disabled_validation_features (Vk_base.null_ptr (ValidationFeatureDisableEXT.t)) else begin
       let items = CArray.of_list (ValidationFeatureDisableEXT.t) arg_disabled_validation_features in
       setf value _p_disabled_validation_features (CArray.start items);
@@ -2402,7 +2438,9 @@ module ValidationFlagsEXT = struct
     (match arg_next with
      | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
      | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    setf value _disabled_validation_check_count (List.length arg_disabled_validation_checks);
+    let disabled_validation_check_count_n = List.length arg_disabled_validation_checks in
+    if arg_disabled_validation_checks <> [] && List.length arg_disabled_validation_checks <> disabled_validation_check_count_n then invalid_arg "VkValidationFlagsEXT.pDisabledValidationChecks: length does not match disabledValidationCheckCount";
+    setf value _disabled_validation_check_count disabled_validation_check_count_n;
     if arg_disabled_validation_checks = [] then setf value _p_disabled_validation_checks (Vk_base.null_ptr (ValidationCheckEXT.t)) else begin
       let items = CArray.of_list (ValidationCheckEXT.t) arg_disabled_validation_checks in
       setf value _p_disabled_validation_checks (CArray.start items);
@@ -2678,7 +2716,10 @@ module VideoDecodeAV1PictureInfoKHR = struct
     let destination = getf value _reference_name_slot_indices in
     List.iteri (fun i x -> CArray.set (destination) (i mod 7) x) arg_reference_name_slot_indices;
     setf value _frame_header_offset arg_frame_header_offset;
-    setf value _tile_count (List.length arg_tile_sizes);
+    let tile_count_n = List.fold_left max 0 [List.length arg_tile_offsets; List.length arg_tile_sizes] in
+    if arg_tile_offsets <> [] && List.length arg_tile_offsets <> tile_count_n then invalid_arg "VkVideoDecodeAV1PictureInfoKHR.pTileOffsets: length does not match tileCount";
+    if arg_tile_sizes <> [] && List.length arg_tile_sizes <> tile_count_n then invalid_arg "VkVideoDecodeAV1PictureInfoKHR.pTileSizes: length does not match tileCount";
+    setf value _tile_count tile_count_n;
     if arg_tile_offsets = [] then setf value _p_tile_offsets (Vk_base.null_ptr (Vk_base.uint32)) else begin
       let items = CArray.of_list (Vk_base.uint32) arg_tile_offsets in
       setf value _p_tile_offsets (CArray.start items);
@@ -2830,7 +2871,9 @@ module VideoDecodeH264PictureInfoKHR = struct
      | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
      | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
     setf value _p_std_picture_info (match arg_std_picture_info with None -> Vk_base.null_ptr (void) | Some p -> p);
-    setf value _slice_count (List.length arg_slice_offsets);
+    let slice_count_n = List.length arg_slice_offsets in
+    if arg_slice_offsets <> [] && List.length arg_slice_offsets <> slice_count_n then invalid_arg "VkVideoDecodeH264PictureInfoKHR.pSliceOffsets: length does not match sliceCount";
+    setf value _slice_count slice_count_n;
     if arg_slice_offsets = [] then setf value _p_slice_offsets (Vk_base.null_ptr (Vk_base.uint32)) else begin
       let items = CArray.of_list (Vk_base.uint32) arg_slice_offsets in
       setf value _p_slice_offsets (CArray.start items);
@@ -2888,13 +2931,17 @@ module VideoDecodeH264SessionParametersAddInfoKHR = struct
     (match arg_next with
      | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
      | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    setf value _std_sps_count (List.length arg_std_sp_ss);
+    let std_sps_count_n = List.length arg_std_sp_ss in
+    if arg_std_sp_ss <> [] && List.length arg_std_sp_ss <> std_sps_count_n then invalid_arg "VkVideoDecodeH264SessionParametersAddInfoKHR.pStdSPSs: length does not match stdSPSCount";
+    setf value _std_sps_count std_sps_count_n;
     if arg_std_sp_ss = [] then setf value _p_std_sp_ss (Vk_base.null_ptr (void)) else begin
       let items = CArray.of_list (void) arg_std_sp_ss in
       setf value _p_std_sp_ss (CArray.start items);
       Vk_base.retain keep items; Vk_base.retain keep arg_std_sp_ss
     end;
-    setf value _std_pps_count (List.length arg_std_pp_ss);
+    let std_pps_count_n = List.length arg_std_pp_ss in
+    if arg_std_pp_ss <> [] && List.length arg_std_pp_ss <> std_pps_count_n then invalid_arg "VkVideoDecodeH264SessionParametersAddInfoKHR.pStdPPSs: length does not match stdPPSCount";
+    setf value _std_pps_count std_pps_count_n;
     if arg_std_pp_ss = [] then setf value _p_std_pp_ss (Vk_base.null_ptr (void)) else begin
       let items = CArray.of_list (void) arg_std_pp_ss in
       setf value _p_std_pp_ss (CArray.start items);
@@ -2997,7 +3044,9 @@ module VideoDecodeH265PictureInfoKHR = struct
      | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
      | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
     setf value _p_std_picture_info (match arg_std_picture_info with None -> Vk_base.null_ptr (void) | Some p -> p);
-    setf value _slice_segment_count (List.length arg_slice_segment_offsets);
+    let slice_segment_count_n = List.length arg_slice_segment_offsets in
+    if arg_slice_segment_offsets <> [] && List.length arg_slice_segment_offsets <> slice_segment_count_n then invalid_arg "VkVideoDecodeH265PictureInfoKHR.pSliceSegmentOffsets: length does not match sliceSegmentCount";
+    setf value _slice_segment_count slice_segment_count_n;
     if arg_slice_segment_offsets = [] then setf value _p_slice_segment_offsets (Vk_base.null_ptr (Vk_base.uint32)) else begin
       let items = CArray.of_list (Vk_base.uint32) arg_slice_segment_offsets in
       setf value _p_slice_segment_offsets (CArray.start items);
@@ -3056,19 +3105,25 @@ module VideoDecodeH265SessionParametersAddInfoKHR = struct
     (match arg_next with
      | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
      | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    setf value _std_vps_count (List.length arg_std_vp_ss);
+    let std_vps_count_n = List.length arg_std_vp_ss in
+    if arg_std_vp_ss <> [] && List.length arg_std_vp_ss <> std_vps_count_n then invalid_arg "VkVideoDecodeH265SessionParametersAddInfoKHR.pStdVPSs: length does not match stdVPSCount";
+    setf value _std_vps_count std_vps_count_n;
     if arg_std_vp_ss = [] then setf value _p_std_vp_ss (Vk_base.null_ptr (void)) else begin
       let items = CArray.of_list (void) arg_std_vp_ss in
       setf value _p_std_vp_ss (CArray.start items);
       Vk_base.retain keep items; Vk_base.retain keep arg_std_vp_ss
     end;
-    setf value _std_sps_count (List.length arg_std_sp_ss);
+    let std_sps_count_n = List.length arg_std_sp_ss in
+    if arg_std_sp_ss <> [] && List.length arg_std_sp_ss <> std_sps_count_n then invalid_arg "VkVideoDecodeH265SessionParametersAddInfoKHR.pStdSPSs: length does not match stdSPSCount";
+    setf value _std_sps_count std_sps_count_n;
     if arg_std_sp_ss = [] then setf value _p_std_sp_ss (Vk_base.null_ptr (void)) else begin
       let items = CArray.of_list (void) arg_std_sp_ss in
       setf value _p_std_sp_ss (CArray.start items);
       Vk_base.retain keep items; Vk_base.retain keep arg_std_sp_ss
     end;
-    setf value _std_pps_count (List.length arg_std_pp_ss);
+    let std_pps_count_n = List.length arg_std_pp_ss in
+    if arg_std_pp_ss <> [] && List.length arg_std_pp_ss <> std_pps_count_n then invalid_arg "VkVideoDecodeH265SessionParametersAddInfoKHR.pStdPPSs: length does not match stdPPSCount";
+    setf value _std_pps_count std_pps_count_n;
     if arg_std_pp_ss = [] then setf value _p_std_pp_ss (Vk_base.null_ptr (void)) else begin
       let items = CArray.of_list (void) arg_std_pp_ss in
       setf value _p_std_pp_ss (CArray.start items);

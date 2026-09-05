@@ -73,7 +73,9 @@ module CopyMemoryToImageIndirectInfoKHR = struct
      | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
      | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
     setf value _src_copy_flags arg_src_copy_flags;
-    setf value _copy_count (List.length arg_image_subresources);
+    let copy_count_n = List.length arg_image_subresources in
+    if arg_image_subresources <> [] && List.length arg_image_subresources <> copy_count_n then invalid_arg "VkCopyMemoryToImageIndirectInfoKHR.pImageSubresources: length does not match copyCount";
+    setf value _copy_count copy_count_n;
     (match arg_copy_address_range with None -> () | Some x -> setf value _copy_address_range x);
     setf value _dst_image arg_dst_image;
     setf value _dst_image_layout arg_dst_image_layout;
@@ -167,7 +169,9 @@ module CopyTensorInfoARM = struct
      | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
     setf value _src_tensor arg_src_tensor;
     setf value _dst_tensor arg_dst_tensor;
-    setf value _region_count (List.length arg_regions);
+    let region_count_n = List.length arg_regions in
+    if arg_regions <> [] && List.length arg_regions <> region_count_n then invalid_arg "VkCopyTensorInfoARM.pRegions: length does not match regionCount";
+    setf value _region_count region_count_n;
     if arg_regions = [] then setf value _p_regions (Vk_base.null_ptr (TensorCopyARM.t)) else begin
       let items = CArray.of_list (TensorCopyARM.t) arg_regions in
       setf value _p_regions (CArray.start items);
@@ -226,7 +230,9 @@ module DataGraphPipelineCreateInfoARM = struct
      | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
     setf value _flags arg_flags;
     setf value _layout arg_layout;
-    setf value _resource_info_count (List.length arg_resource_infos);
+    let resource_info_count_n = List.length arg_resource_infos in
+    if arg_resource_infos <> [] && List.length arg_resource_infos <> resource_info_count_n then invalid_arg "VkDataGraphPipelineCreateInfoARM.pResourceInfos: length does not match resourceInfoCount";
+    setf value _resource_info_count resource_info_count_n;
     if arg_resource_infos = [] then setf value _p_resource_infos (Vk_base.null_ptr (DataGraphPipelineResourceInfoARM.t)) else begin
       let items = CArray.of_list (DataGraphPipelineResourceInfoARM.t) arg_resource_infos in
       setf value _p_resource_infos (CArray.start items);
@@ -258,7 +264,9 @@ module DataGraphPipelineSingleNodeCreateInfoARM = struct
      | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
      | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
     setf value _node_type arg_node_type;
-    setf value _connection_count (List.length arg_connections);
+    let connection_count_n = List.length arg_connections in
+    if arg_connections <> [] && List.length arg_connections <> connection_count_n then invalid_arg "VkDataGraphPipelineSingleNodeCreateInfoARM.pConnections: length does not match connectionCount";
+    setf value _connection_count connection_count_n;
     if arg_connections = [] then setf value _p_connections (Vk_base.null_ptr (DataGraphPipelineSingleNodeConnectionARM.t)) else begin
       let items = CArray.of_list (DataGraphPipelineSingleNodeConnectionARM.t) arg_connections in
       setf value _p_connections (CArray.start items);
@@ -368,19 +376,25 @@ module DebugUtilsMessengerCallbackDataEXT = struct
      | None -> setf value _p_message (Vk_base.null_ptr (Ctypes.char))
      | Some text -> let text = CArray.of_string text in
          setf value _p_message (CArray.start text); Vk_base.retain keep text);
-    setf value _queue_label_count (List.length arg_queue_labels);
+    let queue_label_count_n = List.length arg_queue_labels in
+    if arg_queue_labels <> [] && List.length arg_queue_labels <> queue_label_count_n then invalid_arg "VkDebugUtilsMessengerCallbackDataEXT.pQueueLabels: length does not match queueLabelCount";
+    setf value _queue_label_count queue_label_count_n;
     if arg_queue_labels = [] then setf value _p_queue_labels (Vk_base.null_ptr (DebugUtilsLabelEXT.t)) else begin
       let items = CArray.of_list (DebugUtilsLabelEXT.t) arg_queue_labels in
       setf value _p_queue_labels (CArray.start items);
       Vk_base.retain keep items; Vk_base.retain keep arg_queue_labels
     end;
-    setf value _cmd_buf_label_count (List.length arg_cmd_buf_labels);
+    let cmd_buf_label_count_n = List.length arg_cmd_buf_labels in
+    if arg_cmd_buf_labels <> [] && List.length arg_cmd_buf_labels <> cmd_buf_label_count_n then invalid_arg "VkDebugUtilsMessengerCallbackDataEXT.pCmdBufLabels: length does not match cmdBufLabelCount";
+    setf value _cmd_buf_label_count cmd_buf_label_count_n;
     if arg_cmd_buf_labels = [] then setf value _p_cmd_buf_labels (Vk_base.null_ptr (DebugUtilsLabelEXT.t)) else begin
       let items = CArray.of_list (DebugUtilsLabelEXT.t) arg_cmd_buf_labels in
       setf value _p_cmd_buf_labels (CArray.start items);
       Vk_base.retain keep items; Vk_base.retain keep arg_cmd_buf_labels
     end;
-    setf value _object_count (List.length arg_objects);
+    let object_count_n = List.length arg_objects in
+    if arg_objects <> [] && List.length arg_objects <> object_count_n then invalid_arg "VkDebugUtilsMessengerCallbackDataEXT.pObjects: length does not match objectCount";
+    setf value _object_count object_count_n;
     if arg_objects = [] then setf value _p_objects (Vk_base.null_ptr (DebugUtilsObjectNameInfoEXT.t)) else begin
       let items = CArray.of_list (DebugUtilsObjectNameInfoEXT.t) arg_objects in
       setf value _p_objects (CArray.start items);
@@ -412,7 +426,9 @@ module DecompressMemoryInfoEXT = struct
      | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
      | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
     setf value _decompression_method arg_decompression_method;
-    setf value _region_count (List.length arg_regions);
+    let region_count_n = List.length arg_regions in
+    if arg_regions <> [] && List.length arg_regions <> region_count_n then invalid_arg "VkDecompressMemoryInfoEXT.pRegions: length does not match regionCount";
+    setf value _region_count region_count_n;
     if arg_regions = [] then setf value _p_regions (Vk_base.null_ptr (DecompressMemoryRegionEXT.t)) else begin
       let items = CArray.of_list (DecompressMemoryRegionEXT.t) arg_regions in
       setf value _p_regions (CArray.start items);
@@ -689,7 +705,9 @@ module DescriptorPoolCreateInfo = struct
      | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
     setf value _flags arg_flags;
     setf value _max_sets arg_max_sets;
-    setf value _pool_size_count (List.length arg_pool_sizes);
+    let pool_size_count_n = List.length arg_pool_sizes in
+    if arg_pool_sizes <> [] && List.length arg_pool_sizes <> pool_size_count_n then invalid_arg "VkDescriptorPoolCreateInfo.pPoolSizes: length does not match poolSizeCount";
+    setf value _pool_size_count pool_size_count_n;
     if arg_pool_sizes = [] then setf value _p_pool_sizes (Vk_base.null_ptr (DescriptorPoolSize.t)) else begin
       let items = CArray.of_list (DescriptorPoolSize.t) arg_pool_sizes in
       setf value _p_pool_sizes (CArray.start items);
@@ -721,7 +739,9 @@ module DescriptorSetLayoutCreateInfo = struct
      | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
      | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
     setf value _flags arg_flags;
-    setf value _binding_count (List.length arg_bindings);
+    let binding_count_n = List.length arg_bindings in
+    if arg_bindings <> [] && List.length arg_bindings <> binding_count_n then invalid_arg "VkDescriptorSetLayoutCreateInfo.pBindings: length does not match bindingCount";
+    setf value _binding_count binding_count_n;
     if arg_bindings = [] then setf value _p_bindings (Vk_base.null_ptr (DescriptorSetLayoutBinding.t)) else begin
       let items = CArray.of_list (DescriptorSetLayoutBinding.t) arg_bindings in
       setf value _p_bindings (CArray.start items);
@@ -763,7 +783,9 @@ module DescriptorUpdateTemplateCreateInfo = struct
      | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
      | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
     setf value _flags arg_flags;
-    setf value _descriptor_update_entry_count (List.length arg_descriptor_update_entries);
+    let descriptor_update_entry_count_n = List.length arg_descriptor_update_entries in
+    if arg_descriptor_update_entries <> [] && List.length arg_descriptor_update_entries <> descriptor_update_entry_count_n then invalid_arg "VkDescriptorUpdateTemplateCreateInfo.pDescriptorUpdateEntries: length does not match descriptorUpdateEntryCount";
+    setf value _descriptor_update_entry_count descriptor_update_entry_count_n;
     if arg_descriptor_update_entries = [] then setf value _p_descriptor_update_entries (Vk_base.null_ptr (DescriptorUpdateTemplateEntry.t)) else begin
       let items = CArray.of_list (DescriptorUpdateTemplateEntry.t) arg_descriptor_update_entries in
       setf value _p_descriptor_update_entries (CArray.start items);
@@ -834,19 +856,25 @@ module DeviceCreateInfo = struct
      | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
      | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
     setf value _flags arg_flags;
-    setf value _queue_create_info_count (List.length arg_queue_create_infos);
+    let queue_create_info_count_n = List.length arg_queue_create_infos in
+    if arg_queue_create_infos <> [] && List.length arg_queue_create_infos <> queue_create_info_count_n then invalid_arg "VkDeviceCreateInfo.pQueueCreateInfos: length does not match queueCreateInfoCount";
+    setf value _queue_create_info_count queue_create_info_count_n;
     if arg_queue_create_infos = [] then setf value _p_queue_create_infos (Vk_base.null_ptr (DeviceQueueCreateInfo.t)) else begin
       let items = CArray.of_list (DeviceQueueCreateInfo.t) arg_queue_create_infos in
       setf value _p_queue_create_infos (CArray.start items);
       Vk_base.retain keep items; Vk_base.retain keep arg_queue_create_infos
     end;
-    setf value _enabled_layer_count (List.length arg_enabled_layer_names);
+    let enabled_layer_count_n = List.length arg_enabled_layer_names in
+    if arg_enabled_layer_names <> [] && List.length arg_enabled_layer_names <> enabled_layer_count_n then invalid_arg "VkDeviceCreateInfo.ppEnabledLayerNames: length does not match enabledLayerCount";
+    setf value _enabled_layer_count enabled_layer_count_n;
     if arg_enabled_layer_names = [] then setf value _pp_enabled_layer_names (Vk_base.null_ptr (ptr (Ctypes.char))) else begin
       let strings, pointers = Vk_base.carray_of_strings arg_enabled_layer_names in
       setf value _pp_enabled_layer_names (CArray.start pointers);
       Vk_base.retain keep strings; Vk_base.retain keep pointers
     end;
-    setf value _enabled_extension_count (List.length arg_enabled_extension_names);
+    let enabled_extension_count_n = List.length arg_enabled_extension_names in
+    if arg_enabled_extension_names <> [] && List.length arg_enabled_extension_names <> enabled_extension_count_n then invalid_arg "VkDeviceCreateInfo.ppEnabledExtensionNames: length does not match enabledExtensionCount";
+    setf value _enabled_extension_count enabled_extension_count_n;
     if arg_enabled_extension_names = [] then setf value _pp_enabled_extension_names (Vk_base.null_ptr (ptr (Ctypes.char))) else begin
       let strings, pointers = Vk_base.carray_of_strings arg_enabled_extension_names in
       setf value _pp_enabled_extension_names (CArray.start pointers);
@@ -1090,13 +1118,17 @@ module DeviceObjectReservationCreateInfo = struct
     (match arg_next with
      | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
      | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    setf value _pipeline_cache_create_info_count (List.length arg_pipeline_cache_create_infos);
+    let pipeline_cache_create_info_count_n = List.length arg_pipeline_cache_create_infos in
+    if arg_pipeline_cache_create_infos <> [] && List.length arg_pipeline_cache_create_infos <> pipeline_cache_create_info_count_n then invalid_arg "VkDeviceObjectReservationCreateInfo.pPipelineCacheCreateInfos: length does not match pipelineCacheCreateInfoCount";
+    setf value _pipeline_cache_create_info_count pipeline_cache_create_info_count_n;
     if arg_pipeline_cache_create_infos = [] then setf value _p_pipeline_cache_create_infos (Vk_base.null_ptr (PipelineCacheCreateInfo.t)) else begin
       let items = CArray.of_list (PipelineCacheCreateInfo.t) arg_pipeline_cache_create_infos in
       setf value _p_pipeline_cache_create_infos (CArray.start items);
       Vk_base.retain keep items; Vk_base.retain keep arg_pipeline_cache_create_infos
     end;
-    setf value _pipeline_pool_size_count (List.length arg_pipeline_pool_sizes);
+    let pipeline_pool_size_count_n = List.length arg_pipeline_pool_sizes in
+    if arg_pipeline_pool_sizes <> [] && List.length arg_pipeline_pool_sizes <> pipeline_pool_size_count_n then invalid_arg "VkDeviceObjectReservationCreateInfo.pPipelinePoolSizes: length does not match pipelinePoolSizeCount";
+    setf value _pipeline_pool_size_count pipeline_pool_size_count_n;
     if arg_pipeline_pool_sizes = [] then setf value _p_pipeline_pool_sizes (Vk_base.null_ptr (PipelinePoolSize.t)) else begin
       let items = CArray.of_list (PipelinePoolSize.t) arg_pipeline_pool_sizes in
       setf value _p_pipeline_pool_sizes (CArray.start items);
@@ -1585,7 +1617,9 @@ module FramebufferAttachmentsCreateInfo = struct
     (match arg_next with
      | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
      | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    setf value _attachment_image_info_count (List.length arg_attachment_image_infos);
+    let attachment_image_info_count_n = List.length arg_attachment_image_infos in
+    if arg_attachment_image_infos <> [] && List.length arg_attachment_image_infos <> attachment_image_info_count_n then invalid_arg "VkFramebufferAttachmentsCreateInfo.pAttachmentImageInfos: length does not match attachmentImageInfoCount";
+    setf value _attachment_image_info_count attachment_image_info_count_n;
     if arg_attachment_image_infos = [] then setf value _p_attachment_image_infos (Vk_base.null_ptr (FramebufferAttachmentImageInfo.t)) else begin
       let items = CArray.of_list (FramebufferAttachmentImageInfo.t) arg_attachment_image_infos in
       setf value _p_attachment_image_infos (CArray.start items);
@@ -1639,7 +1673,9 @@ module GeneratedCommandsInfoNV = struct
     setf value _pipeline_bind_point arg_pipeline_bind_point;
     setf value _pipeline arg_pipeline;
     setf value _indirect_commands_layout arg_indirect_commands_layout;
-    setf value _stream_count (List.length arg_streams);
+    let stream_count_n = List.length arg_streams in
+    if arg_streams <> [] && List.length arg_streams <> stream_count_n then invalid_arg "VkGeneratedCommandsInfoNV.pStreams: length does not match streamCount";
+    setf value _stream_count stream_count_n;
     if arg_streams = [] then setf value _p_streams (Vk_base.null_ptr (IndirectCommandsStreamNV.t)) else begin
       let items = CArray.of_list (IndirectCommandsStreamNV.t) arg_streams in
       setf value _p_streams (CArray.start items);
@@ -1747,7 +1783,9 @@ module GpaSampleBeginInfoAMD = struct
     setf value _cache_flush_on_counter_collection arg_cache_flush_on_counter_collection;
     setf value _sq_shader_mask_enable arg_sq_shader_mask_enable;
     setf value _sq_shader_mask arg_sq_shader_mask;
-    setf value _perf_counter_count (List.length arg_perf_counters);
+    let perf_counter_count_n = List.length arg_perf_counters in
+    if arg_perf_counters <> [] && List.length arg_perf_counters <> perf_counter_count_n then invalid_arg "VkGpaSampleBeginInfoAMD.pPerfCounters: length does not match perfCounterCount";
+    setf value _perf_counter_count perf_counter_count_n;
     if arg_perf_counters = [] then setf value _p_perf_counters (Vk_base.null_ptr (GpaPerfCounterAMD.t)) else begin
       let items = CArray.of_list (GpaPerfCounterAMD.t) arg_perf_counters in
       setf value _p_perf_counters (CArray.start items);
@@ -2011,7 +2049,9 @@ module ImageCreateInfo = struct
     setf value _tiling arg_tiling;
     setf value _usage arg_usage;
     setf value _sharing_mode arg_sharing_mode;
-    setf value _queue_family_index_count (List.length arg_queue_family_indices);
+    let queue_family_index_count_n = List.length arg_queue_family_indices in
+    if arg_queue_family_indices <> [] && List.length arg_queue_family_indices <> queue_family_index_count_n then invalid_arg "VkImageCreateInfo.pQueueFamilyIndices: length does not match queueFamilyIndexCount";
+    setf value _queue_family_index_count queue_family_index_count_n;
     if arg_queue_family_indices = [] then setf value _p_queue_family_indices (Vk_base.null_ptr (Vk_base.uint32)) else begin
       let items = CArray.of_list (Vk_base.uint32) arg_queue_family_indices in
       setf value _p_queue_family_indices (CArray.start items);
@@ -2044,7 +2084,9 @@ module ImageDrmFormatModifierExplicitCreateInfoEXT = struct
      | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
      | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
     setf value _drm_format_modifier arg_drm_format_modifier;
-    setf value _drm_format_modifier_plane_count (List.length arg_plane_layouts);
+    let drm_format_modifier_plane_count_n = List.length arg_plane_layouts in
+    if arg_plane_layouts <> [] && List.length arg_plane_layouts <> drm_format_modifier_plane_count_n then invalid_arg "VkImageDrmFormatModifierExplicitCreateInfoEXT.pPlaneLayouts: length does not match drmFormatModifierPlaneCount";
+    setf value _drm_format_modifier_plane_count drm_format_modifier_plane_count_n;
     if arg_plane_layouts = [] then setf value _p_plane_layouts (Vk_base.null_ptr (SubresourceLayout.t)) else begin
       let items = CArray.of_list (SubresourceLayout.t) arg_plane_layouts in
       setf value _p_plane_layouts (CArray.start items);
@@ -2380,13 +2422,17 @@ module IndirectCommandsLayoutCreateInfoNV = struct
      | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
     setf value _flags arg_flags;
     setf value _pipeline_bind_point arg_pipeline_bind_point;
-    setf value _token_count (List.length arg_tokens);
+    let token_count_n = List.length arg_tokens in
+    if arg_tokens <> [] && List.length arg_tokens <> token_count_n then invalid_arg "VkIndirectCommandsLayoutCreateInfoNV.pTokens: length does not match tokenCount";
+    setf value _token_count token_count_n;
     if arg_tokens = [] then setf value _p_tokens (Vk_base.null_ptr (IndirectCommandsLayoutTokenNV.t)) else begin
       let items = CArray.of_list (IndirectCommandsLayoutTokenNV.t) arg_tokens in
       setf value _p_tokens (CArray.start items);
       Vk_base.retain keep items; Vk_base.retain keep arg_tokens
     end;
-    setf value _stream_count (List.length arg_stream_strides);
+    let stream_count_n = List.length arg_stream_strides in
+    if arg_stream_strides <> [] && List.length arg_stream_strides <> stream_count_n then invalid_arg "VkIndirectCommandsLayoutCreateInfoNV.pStreamStrides: length does not match streamCount";
+    setf value _stream_count stream_count_n;
     if arg_stream_strides = [] then setf value _p_stream_strides (Vk_base.null_ptr (Vk_base.uint32)) else begin
       let items = CArray.of_list (Vk_base.uint32) arg_stream_strides in
       setf value _p_stream_strides (CArray.start items);
@@ -2437,7 +2483,10 @@ module IndirectExecutionSetShaderInfoEXT = struct
     (match arg_next with
      | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
      | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    setf value _shader_count (List.length arg_set_layout_infos);
+    let shader_count_n = List.fold_left max 0 [List.length arg_initial_shaders; List.length arg_set_layout_infos] in
+    if arg_initial_shaders <> [] && List.length arg_initial_shaders <> shader_count_n then invalid_arg "VkIndirectExecutionSetShaderInfoEXT.pInitialShaders: length does not match shaderCount";
+    if arg_set_layout_infos <> [] && List.length arg_set_layout_infos <> shader_count_n then invalid_arg "VkIndirectExecutionSetShaderInfoEXT.pSetLayoutInfos: length does not match shaderCount";
+    setf value _shader_count shader_count_n;
     if arg_initial_shaders = [] then setf value _p_initial_shaders (Vk_base.null_ptr (ShaderEXT.t)) else begin
       let items = CArray.of_list (ShaderEXT.t) arg_initial_shaders in
       setf value _p_initial_shaders (CArray.start items);
@@ -2449,7 +2498,9 @@ module IndirectExecutionSetShaderInfoEXT = struct
       Vk_base.retain keep items; Vk_base.retain keep arg_set_layout_infos
     end;
     setf value _max_shader_count arg_max_shader_count;
-    setf value _push_constant_range_count (List.length arg_push_constant_ranges);
+    let push_constant_range_count_n = List.length arg_push_constant_ranges in
+    if arg_push_constant_ranges <> [] && List.length arg_push_constant_ranges <> push_constant_range_count_n then invalid_arg "VkIndirectExecutionSetShaderInfoEXT.pPushConstantRanges: length does not match pushConstantRangeCount";
+    setf value _push_constant_range_count push_constant_range_count_n;
     if arg_push_constant_ranges = [] then setf value _p_push_constant_ranges (Vk_base.null_ptr (PushConstantRange.t)) else begin
       let items = CArray.of_list (PushConstantRange.t) arg_push_constant_ranges in
       setf value _p_push_constant_ranges (CArray.start items);
@@ -2490,13 +2541,17 @@ module InstanceCreateInfo = struct
     (match arg_application_info with
      | None -> setf value _p_application_info (Vk_base.null_ptr (ApplicationInfo.t))
      | Some pointed -> setf value _p_application_info (addr pointed); Vk_base.retain keep pointed);
-    setf value _enabled_layer_count (List.length arg_enabled_layer_names);
+    let enabled_layer_count_n = List.length arg_enabled_layer_names in
+    if arg_enabled_layer_names <> [] && List.length arg_enabled_layer_names <> enabled_layer_count_n then invalid_arg "VkInstanceCreateInfo.ppEnabledLayerNames: length does not match enabledLayerCount";
+    setf value _enabled_layer_count enabled_layer_count_n;
     if arg_enabled_layer_names = [] then setf value _pp_enabled_layer_names (Vk_base.null_ptr (ptr (Ctypes.char))) else begin
       let strings, pointers = Vk_base.carray_of_strings arg_enabled_layer_names in
       setf value _pp_enabled_layer_names (CArray.start pointers);
       Vk_base.retain keep strings; Vk_base.retain keep pointers
     end;
-    setf value _enabled_extension_count (List.length arg_enabled_extension_names);
+    let enabled_extension_count_n = List.length arg_enabled_extension_names in
+    if arg_enabled_extension_names <> [] && List.length arg_enabled_extension_names <> enabled_extension_count_n then invalid_arg "VkInstanceCreateInfo.ppEnabledExtensionNames: length does not match enabledExtensionCount";
+    setf value _enabled_extension_count enabled_extension_count_n;
     if arg_enabled_extension_names = [] then setf value _pp_enabled_extension_names (Vk_base.null_ptr (ptr (Ctypes.char))) else begin
       let strings, pointers = Vk_base.carray_of_strings arg_enabled_extension_names in
       setf value _pp_enabled_extension_names (CArray.start pointers);
@@ -2525,7 +2580,9 @@ module LayerSettingsCreateInfoEXT = struct
     (match arg_next with
      | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
      | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    setf value _setting_count (List.length arg_settings);
+    let setting_count_n = List.length arg_settings in
+    if arg_settings <> [] && List.length arg_settings <> setting_count_n then invalid_arg "VkLayerSettingsCreateInfoEXT.pSettings: length does not match settingCount";
+    setf value _setting_count setting_count_n;
     if arg_settings = [] then setf value _p_settings (Vk_base.null_ptr (LayerSettingEXT.t)) else begin
       let items = CArray.of_list (LayerSettingEXT.t) arg_settings in
       setf value _p_settings (CArray.start items);
@@ -2697,7 +2754,7 @@ module MicromapBuildInfoEXT = struct
   let triangle_array_stride = _triangle_array_stride
   let () = seal t
   let structure_type : StructureType.t option = Some StructureType.micromap_build_info_ext
-    let make ?next:arg_next ?type_:(arg_type_=MicromapTypeEXT.of_int 0) ?flags:(arg_flags=BuildMicromapFlagsEXT.of_int 0) ?mode:(arg_mode=BuildMicromapModeEXT.of_int 0) ?dst_micromap:(arg_dst_micromap=MicromapEXT.null) ?usage_counts:(arg_usage_counts=[]) ?usage_counts_2:arg_usage_counts_2 ?data:arg_data ?scratch_data:arg_scratch_data ?triangle_array:arg_triangle_array ?triangle_array_stride:(arg_triangle_array_stride=0) () =
+    let make ?next:arg_next ?type_:(arg_type_=MicromapTypeEXT.of_int 0) ?flags:(arg_flags=BuildMicromapFlagsEXT.of_int 0) ?mode:(arg_mode=BuildMicromapModeEXT.of_int 0) ?dst_micromap:(arg_dst_micromap=MicromapEXT.null) ?usage_counts_count:arg_usage_counts_count ?usage_counts:(arg_usage_counts=[]) ?usage_counts_2:arg_usage_counts_2 ?data:arg_data ?scratch_data:arg_scratch_data ?triangle_array:arg_triangle_array ?triangle_array_stride:(arg_triangle_array_stride=0) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
     setf value _s_type StructureType.micromap_build_info_ext;
@@ -2708,7 +2765,9 @@ module MicromapBuildInfoEXT = struct
     setf value _flags arg_flags;
     setf value _mode arg_mode;
     setf value _dst_micromap arg_dst_micromap;
-    setf value _usage_counts_count (List.length arg_usage_counts);
+    let usage_counts_count_n = (match arg_usage_counts_count with Some n -> n | None -> List.length arg_usage_counts) in
+    if arg_usage_counts <> [] && List.length arg_usage_counts <> usage_counts_count_n then invalid_arg "VkMicromapBuildInfoEXT.pUsageCounts: length does not match usageCountsCount";
+    setf value _usage_counts_count usage_counts_count_n;
     if arg_usage_counts = [] then setf value _p_usage_counts (Vk_base.null_ptr (MicromapUsageEXT.t)) else begin
       let items = CArray.of_list (MicromapUsageEXT.t) arg_usage_counts in
       setf value _p_usage_counts (CArray.start items);
@@ -2763,7 +2822,9 @@ module MutableDescriptorTypeCreateInfoEXT = struct
     (match arg_next with
      | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
      | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    setf value _mutable_descriptor_type_list_count (List.length arg_mutable_descriptor_type_lists);
+    let mutable_descriptor_type_list_count_n = List.length arg_mutable_descriptor_type_lists in
+    if arg_mutable_descriptor_type_lists <> [] && List.length arg_mutable_descriptor_type_lists <> mutable_descriptor_type_list_count_n then invalid_arg "VkMutableDescriptorTypeCreateInfoEXT.pMutableDescriptorTypeLists: length does not match mutableDescriptorTypeListCount";
+    setf value _mutable_descriptor_type_list_count mutable_descriptor_type_list_count_n;
     if arg_mutable_descriptor_type_lists = [] then setf value _p_mutable_descriptor_type_lists (Vk_base.null_ptr (MutableDescriptorTypeListEXT.t)) else begin
       let items = CArray.of_list (MutableDescriptorTypeListEXT.t) arg_mutable_descriptor_type_lists in
       setf value _p_mutable_descriptor_type_lists (CArray.start items);
@@ -3606,7 +3667,10 @@ module PipelineBinaryKeysAndDataKHR = struct
     let make ?pipeline_binary_keys:(arg_pipeline_binary_keys=[]) ?pipeline_binary_data:(arg_pipeline_binary_data=[]) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
-    setf value _binary_count (List.length arg_pipeline_binary_data);
+    let binary_count_n = List.fold_left max 0 [List.length arg_pipeline_binary_keys; List.length arg_pipeline_binary_data] in
+    if arg_pipeline_binary_keys <> [] && List.length arg_pipeline_binary_keys <> binary_count_n then invalid_arg "VkPipelineBinaryKeysAndDataKHR.pPipelineBinaryKeys: length does not match binaryCount";
+    if arg_pipeline_binary_data <> [] && List.length arg_pipeline_binary_data <> binary_count_n then invalid_arg "VkPipelineBinaryKeysAndDataKHR.pPipelineBinaryData: length does not match binaryCount";
+    setf value _binary_count binary_count_n;
     if arg_pipeline_binary_keys = [] then setf value _p_pipeline_binary_keys (Vk_base.null_ptr (PipelineBinaryKeyKHR.t)) else begin
       let items = CArray.of_list (PipelineBinaryKeyKHR.t) arg_pipeline_binary_keys in
       setf value _p_pipeline_binary_keys (CArray.start items);
@@ -3670,7 +3734,7 @@ module PipelineColorBlendStateCreateInfo = struct
   let blend_constants = _blend_constants
   let () = seal t
   let structure_type : StructureType.t option = Some StructureType.pipeline_color_blend_state_create_info
-    let make ?next:arg_next ?flags:(arg_flags=PipelineColorBlendStateCreateFlags.of_int 0) ?logic_op_enable:(arg_logic_op_enable=false) ?logic_op:(arg_logic_op=LogicOp.of_int 0) ?attachments:(arg_attachments=[]) ?blend_constants:(arg_blend_constants=[]) () =
+    let make ?next:arg_next ?flags:(arg_flags=PipelineColorBlendStateCreateFlags.of_int 0) ?logic_op_enable:(arg_logic_op_enable=false) ?logic_op:(arg_logic_op=LogicOp.of_int 0) ?attachment_count:arg_attachment_count ?attachments:(arg_attachments=[]) ?blend_constants:(arg_blend_constants=[]) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
     setf value _s_type StructureType.pipeline_color_blend_state_create_info;
@@ -3680,7 +3744,9 @@ module PipelineColorBlendStateCreateInfo = struct
     setf value _flags arg_flags;
     setf value _logic_op_enable arg_logic_op_enable;
     setf value _logic_op arg_logic_op;
-    setf value _attachment_count (List.length arg_attachments);
+    let attachment_count_n = (match arg_attachment_count with Some n -> n | None -> List.length arg_attachments) in
+    if arg_attachments <> [] && List.length arg_attachments <> attachment_count_n then invalid_arg "VkPipelineColorBlendStateCreateInfo.pAttachments: length does not match attachmentCount";
+    setf value _attachment_count attachment_count_n;
     if arg_attachments = [] then setf value _p_attachments (Vk_base.null_ptr (PipelineColorBlendAttachmentState.t)) else begin
       let items = CArray.of_list (PipelineColorBlendAttachmentState.t) arg_attachments in
       setf value _p_attachments (CArray.start items);
@@ -3852,13 +3918,17 @@ module PipelineLayoutCreateInfo = struct
      | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
      | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
     setf value _flags arg_flags;
-    setf value _set_layout_count (List.length arg_set_layouts);
+    let set_layout_count_n = List.length arg_set_layouts in
+    if arg_set_layouts <> [] && List.length arg_set_layouts <> set_layout_count_n then invalid_arg "VkPipelineLayoutCreateInfo.pSetLayouts: length does not match setLayoutCount";
+    setf value _set_layout_count set_layout_count_n;
     if arg_set_layouts = [] then setf value _p_set_layouts (Vk_base.null_ptr (DescriptorSetLayout.t)) else begin
       let items = CArray.of_list (DescriptorSetLayout.t) arg_set_layouts in
       setf value _p_set_layouts (CArray.start items);
       Vk_base.retain keep items; Vk_base.retain keep arg_set_layouts
     end;
-    setf value _push_constant_range_count (List.length arg_push_constant_ranges);
+    let push_constant_range_count_n = List.length arg_push_constant_ranges in
+    if arg_push_constant_ranges <> [] && List.length arg_push_constant_ranges <> push_constant_range_count_n then invalid_arg "VkPipelineLayoutCreateInfo.pPushConstantRanges: length does not match pushConstantRangeCount";
+    setf value _push_constant_range_count push_constant_range_count_n;
     if arg_push_constant_ranges = [] then setf value _p_push_constant_ranges (Vk_base.null_ptr (PushConstantRange.t)) else begin
       let items = CArray.of_list (PushConstantRange.t) arg_push_constant_ranges in
       setf value _p_push_constant_ranges (CArray.start items);
@@ -3887,7 +3957,9 @@ module PipelineVertexInputDivisorStateCreateInfo = struct
     (match arg_next with
      | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
      | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    setf value _vertex_binding_divisor_count (List.length arg_vertex_binding_divisors);
+    let vertex_binding_divisor_count_n = List.length arg_vertex_binding_divisors in
+    if arg_vertex_binding_divisors <> [] && List.length arg_vertex_binding_divisors <> vertex_binding_divisor_count_n then invalid_arg "VkPipelineVertexInputDivisorStateCreateInfo.pVertexBindingDivisors: length does not match vertexBindingDivisorCount";
+    setf value _vertex_binding_divisor_count vertex_binding_divisor_count_n;
     if arg_vertex_binding_divisors = [] then setf value _p_vertex_binding_divisors (Vk_base.null_ptr (VertexInputBindingDivisorDescription.t)) else begin
       let items = CArray.of_list (VertexInputBindingDivisorDescription.t) arg_vertex_binding_divisors in
       setf value _p_vertex_binding_divisors (CArray.start items);
@@ -3923,13 +3995,17 @@ module PipelineVertexInputStateCreateInfo = struct
      | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
      | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
     setf value _flags arg_flags;
-    setf value _vertex_binding_description_count (List.length arg_vertex_binding_descriptions);
+    let vertex_binding_description_count_n = List.length arg_vertex_binding_descriptions in
+    if arg_vertex_binding_descriptions <> [] && List.length arg_vertex_binding_descriptions <> vertex_binding_description_count_n then invalid_arg "VkPipelineVertexInputStateCreateInfo.pVertexBindingDescriptions: length does not match vertexBindingDescriptionCount";
+    setf value _vertex_binding_description_count vertex_binding_description_count_n;
     if arg_vertex_binding_descriptions = [] then setf value _p_vertex_binding_descriptions (Vk_base.null_ptr (VertexInputBindingDescription.t)) else begin
       let items = CArray.of_list (VertexInputBindingDescription.t) arg_vertex_binding_descriptions in
       setf value _p_vertex_binding_descriptions (CArray.start items);
       Vk_base.retain keep items; Vk_base.retain keep arg_vertex_binding_descriptions
     end;
-    setf value _vertex_attribute_description_count (List.length arg_vertex_attribute_descriptions);
+    let vertex_attribute_description_count_n = List.length arg_vertex_attribute_descriptions in
+    if arg_vertex_attribute_descriptions <> [] && List.length arg_vertex_attribute_descriptions <> vertex_attribute_description_count_n then invalid_arg "VkPipelineVertexInputStateCreateInfo.pVertexAttributeDescriptions: length does not match vertexAttributeDescriptionCount";
+    setf value _vertex_attribute_description_count vertex_attribute_description_count_n;
     if arg_vertex_attribute_descriptions = [] then setf value _p_vertex_attribute_descriptions (Vk_base.null_ptr (VertexInputAttributeDescription.t)) else begin
       let items = CArray.of_list (VertexInputAttributeDescription.t) arg_vertex_attribute_descriptions in
       setf value _p_vertex_attribute_descriptions (CArray.start items);
@@ -3988,7 +4064,9 @@ module PipelineViewportShadingRateImageStateCreateInfoNV = struct
      | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
      | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
     setf value _shading_rate_image_enable arg_shading_rate_image_enable;
-    setf value _viewport_count (List.length arg_shading_rate_palettes);
+    let viewport_count_n = List.length arg_shading_rate_palettes in
+    if arg_shading_rate_palettes <> [] && List.length arg_shading_rate_palettes <> viewport_count_n then invalid_arg "VkPipelineViewportShadingRateImageStateCreateInfoNV.pShadingRatePalettes: length does not match viewportCount";
+    setf value _viewport_count viewport_count_n;
     if arg_shading_rate_palettes = [] then setf value _p_shading_rate_palettes (Vk_base.null_ptr (ShadingRatePaletteNV.t)) else begin
       let items = CArray.of_list (ShadingRatePaletteNV.t) arg_shading_rate_palettes in
       setf value _p_shading_rate_palettes (CArray.start items);
@@ -4020,7 +4098,9 @@ module PipelineViewportSwizzleStateCreateInfoNV = struct
      | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
      | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
     setf value _flags arg_flags;
-    setf value _viewport_count (List.length arg_viewport_swizzles);
+    let viewport_count_n = List.length arg_viewport_swizzles in
+    if arg_viewport_swizzles <> [] && List.length arg_viewport_swizzles <> viewport_count_n then invalid_arg "VkPipelineViewportSwizzleStateCreateInfoNV.pViewportSwizzles: length does not match viewportCount";
+    setf value _viewport_count viewport_count_n;
     if arg_viewport_swizzles = [] then setf value _p_viewport_swizzles (Vk_base.null_ptr (ViewportSwizzleNV.t)) else begin
       let items = CArray.of_list (ViewportSwizzleNV.t) arg_viewport_swizzles in
       setf value _p_viewport_swizzles (CArray.start items);
@@ -4044,7 +4124,7 @@ module PipelineViewportWScalingStateCreateInfoNV = struct
   let p_viewport_w_scalings = _p_viewport_w_scalings
   let () = seal t
   let structure_type : StructureType.t option = Some StructureType.pipeline_viewport_w_scaling_state_create_info_nv
-    let make ?next:arg_next ?viewport_w_scaling_enable:(arg_viewport_w_scaling_enable=false) ?viewport_w_scalings:(arg_viewport_w_scalings=[]) () =
+    let make ?next:arg_next ?viewport_w_scaling_enable:(arg_viewport_w_scaling_enable=false) ?viewport_count:arg_viewport_count ?viewport_w_scalings:(arg_viewport_w_scalings=[]) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
     setf value _s_type StructureType.pipeline_viewport_w_scaling_state_create_info_nv;
@@ -4052,7 +4132,9 @@ module PipelineViewportWScalingStateCreateInfoNV = struct
      | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
      | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
     setf value _viewport_w_scaling_enable arg_viewport_w_scaling_enable;
-    setf value _viewport_count (List.length arg_viewport_w_scalings);
+    let viewport_count_n = (match arg_viewport_count with Some n -> n | None -> List.length arg_viewport_w_scalings) in
+    if arg_viewport_w_scalings <> [] && List.length arg_viewport_w_scalings <> viewport_count_n then invalid_arg "VkPipelineViewportWScalingStateCreateInfoNV.pViewportWScalings: length does not match viewportCount";
+    setf value _viewport_count viewport_count_n;
     if arg_viewport_w_scalings = [] then setf value _p_viewport_w_scalings (Vk_base.null_ptr (ViewportWScalingNV.t)) else begin
       let items = CArray.of_list (ViewportWScalingNV.t) arg_viewport_w_scalings in
       setf value _p_viewport_w_scalings (CArray.start items);
@@ -4074,14 +4156,16 @@ module PresentTimesInfoGOOGLE = struct
   let p_times = _p_times
   let () = seal t
   let structure_type : StructureType.t option = Some StructureType.present_times_info_google
-    let make ?next:arg_next ?times:(arg_times=[]) () =
+    let make ?next:arg_next ?swapchain_count:arg_swapchain_count ?times:(arg_times=[]) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
     setf value _s_type StructureType.present_times_info_google;
     (match arg_next with
      | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
      | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    setf value _swapchain_count (List.length arg_times);
+    let swapchain_count_n = (match arg_swapchain_count with Some n -> n | None -> List.length arg_times) in
+    if arg_times <> [] && List.length arg_times <> swapchain_count_n then invalid_arg "VkPresentTimesInfoGOOGLE.pTimes: length does not match swapchainCount";
+    setf value _swapchain_count swapchain_count_n;
     if arg_times = [] then setf value _p_times (Vk_base.null_ptr (PresentTimeGOOGLE.t)) else begin
       let items = CArray.of_list (PresentTimeGOOGLE.t) arg_times in
       setf value _p_times (CArray.start items);

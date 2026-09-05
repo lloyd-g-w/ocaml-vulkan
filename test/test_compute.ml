@@ -4,25 +4,17 @@
    read back and check every element doubled. See DESIGN.md §12 and
    shaders/double.comp.
 
-   TODO(integration lane) -- cannot compile yet (no lib/vk.ml content).
-   Written directly against DESIGN.md; assumptions beyond test_instance.ml's:
-   - `VkPipelineShaderStageCreateInfo.module` and `VkDescriptorPoolSize.type`
-     collide with the OCaml keywords `module`/`type`. DESIGN §3 documents
-     exactly this "append `_`" escape for enum *values* but not for struct
-     *members*; we assume the same convention applies (`~module_`, `~type_`,
-     raw fields `module_`/`type_`). This is the single riskiest guess in this
-     file -- please fix the two call sites tagged FIXME below first if the
-     real generator picked a different name (e.g. `shader_module`/`kind`).
-   - Handle-returning batch-create commands (`vkCreateComputePipelines`,
-     `vkAllocateDescriptorSets`, `vkAllocateCommandBuffers`) are assumed to
-     take the plain list/struct input and return a `list` of the created
-     handles, by analogy with DESIGN §10's two-call-enumeration and
-     count+array input rules (none of these three commands are spelled out
-     verbatim in DESIGN, since they don't fit either rule exactly: the output
-     count is implied by an input list length / struct field rather than a
-     separate `pCount` in/out parameter).
-   - `Vk.create_compute_pipelines device Vk.PipelineCache.null [info]`
-     (pipeline cache positional, `Vk.PipelineCache.null` for "no cache").
+   Verified against the real generated API (integration lane):
+   - `VkPipelineShaderStageCreateInfo.module`/`VkDescriptorPoolSize.type` do
+     collide with the OCaml keywords `module`/`type` and are escaped exactly
+     like enum values (DESIGN §3): raw fields/labels `module_`/`type_`.
+   - `vkCreateComputePipelines`/`vkAllocateDescriptorSets`/
+     `vkAllocateCommandBuffers` are the "output array length derived from
+     inputs" wrapper shape (DESIGN §10): `create_compute_pipelines device
+     cache infos : Result.t * Pipeline.t list` (the result is kept because
+     VK_PIPELINE_COMPILE_REQUIRED_EXT is a success code);
+     `allocate_descriptor_sets`/`allocate_command_buffers device info`
+     return a plain `list` (no extra success codes, so no `Result.t`).
    - `Vk.wait_for_fences device fences wait_all timeout` positional, matching
      DESIGN §10's "successcodes contains anything other than VK_SUCCESS"
      rule (VK_TIMEOUT is a successcode) by returning `Result.t`. *)
@@ -115,14 +107,17 @@ let test_compute_doubles_buffer () =
   in
   let pipeline =
     let stage =
-      (* FIXME(integration lane): confirm the renamed `module` field/label
-         (assumed `module_` -- see the TODO block at the top of this file). *)
       V.PipelineShaderStageCreateInfo.make ~stage:V.ShaderStageFlags.compute
         ~module_:shader_module ~name:"main" ()
     in
-    List.hd
-      (V.create_compute_pipelines device V.PipelineCache.null
-         [ V.ComputePipelineCreateInfo.make ~stage ~layout:pipeline_layout () ])
+    (* create_compute_pipelines returns (Result.t * Pipeline.t list): the
+       result is kept because VK_PIPELINE_COMPILE_REQUIRED_EXT is a success
+       code (DESIGN.md §10). *)
+    let _, pipelines =
+      V.create_compute_pipelines device V.PipelineCache.null
+        [ V.ComputePipelineCreateInfo.make ~stage ~layout:pipeline_layout () ]
+    in
+    List.hd pipelines
   in
 
   (* -- descriptor pool/set, bound to the buffer -- *)
@@ -130,10 +125,7 @@ let test_compute_doubles_buffer () =
     V.create_descriptor_pool device
       (V.DescriptorPoolCreateInfo.make ~max_sets:1
          ~pool_sizes:
-           [ (* FIXME(integration lane): confirm the renamed `type` field/label
-                (assumed `type_` -- see the TODO block at the top of this file). *)
-             V.DescriptorPoolSize.make ~type_:V.DescriptorType.storage_buffer ~descriptor_count:1 ()
-           ]
+           [ V.DescriptorPoolSize.make ~type_:V.DescriptorType.storage_buffer ~descriptor_count:1 () ]
          ())
   in
   let descriptor_set =

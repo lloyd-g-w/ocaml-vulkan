@@ -31,3 +31,4 @@ module Loader = struct
       (Ctypes.ptr_of_raw_address (Device.to_nativeint device)) name
 end
 module Layout = Vk_layout
+module Enum_values = Vk_enum_values

@@ -810,7 +810,9 @@ module AttachmentSampleCountInfoAMD = struct
     (match arg_next with
      | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
      | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    setf value _color_attachment_count (List.length arg_color_attachment_samples);
+    let color_attachment_count_n = List.length arg_color_attachment_samples in
+    if arg_color_attachment_samples <> [] && List.length arg_color_attachment_samples <> color_attachment_count_n then invalid_arg "VkAttachmentSampleCountInfoAMD.pColorAttachmentSamples: length does not match colorAttachmentCount";
+    setf value _color_attachment_count color_attachment_count_n;
     if arg_color_attachment_samples = [] then setf value _p_color_attachment_samples (Vk_base.null_ptr (SampleCountFlags.t)) else begin
       let items = CArray.of_list (SampleCountFlags.t) arg_color_attachment_samples in
       setf value _p_color_attachment_samples (CArray.start items);
@@ -906,7 +908,9 @@ module BindAccelerationStructureMemoryInfoNV = struct
     setf value _acceleration_structure arg_acceleration_structure;
     setf value _memory arg_memory;
     setf value _memory_offset arg_memory_offset;
-    setf value _device_index_count (List.length arg_device_indices);
+    let device_index_count_n = List.length arg_device_indices in
+    if arg_device_indices <> [] && List.length arg_device_indices <> device_index_count_n then invalid_arg "VkBindAccelerationStructureMemoryInfoNV.pDeviceIndices: length does not match deviceIndexCount";
+    setf value _device_index_count device_index_count_n;
     if arg_device_indices = [] then setf value _p_device_indices (Vk_base.null_ptr (Vk_base.uint32)) else begin
       let items = CArray.of_list (Vk_base.uint32) arg_device_indices in
       setf value _p_device_indices (CArray.start items);
@@ -935,7 +939,9 @@ module BindBufferMemoryDeviceGroupInfo = struct
     (match arg_next with
      | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
      | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    setf value _device_index_count (List.length arg_device_indices);
+    let device_index_count_n = List.length arg_device_indices in
+    if arg_device_indices <> [] && List.length arg_device_indices <> device_index_count_n then invalid_arg "VkBindBufferMemoryDeviceGroupInfo.pDeviceIndices: length does not match deviceIndexCount";
+    setf value _device_index_count device_index_count_n;
     if arg_device_indices = [] then setf value _p_device_indices (Vk_base.null_ptr (Vk_base.uint32)) else begin
       let items = CArray.of_list (Vk_base.uint32) arg_device_indices in
       setf value _p_device_indices (CArray.start items);
@@ -1057,7 +1063,7 @@ module BindDescriptorSetsInfo = struct
   let p_dynamic_offsets = _p_dynamic_offsets
   let () = seal t
   let structure_type : StructureType.t option = Some StructureType.bind_descriptor_sets_info
-    let make ?next:arg_next ?stage_flags:(arg_stage_flags=ShaderStageFlags.of_int 0) ?layout:(arg_layout=PipelineLayout.null) ?first_set:(arg_first_set=0) ?descriptor_sets:(arg_descriptor_sets=[]) ?dynamic_offsets:(arg_dynamic_offsets=[]) () =
+    let make ?next:arg_next ?stage_flags:(arg_stage_flags=ShaderStageFlags.of_int 0) ?layout:(arg_layout=PipelineLayout.null) ?first_set:(arg_first_set=0) ?descriptor_sets:(arg_descriptor_sets=[]) ?dynamic_offset_count:arg_dynamic_offset_count ?dynamic_offsets:(arg_dynamic_offsets=[]) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
     setf value _s_type StructureType.bind_descriptor_sets_info;
@@ -1067,13 +1073,17 @@ module BindDescriptorSetsInfo = struct
     setf value _stage_flags arg_stage_flags;
     setf value _layout arg_layout;
     setf value _first_set arg_first_set;
-    setf value _descriptor_set_count (List.length arg_descriptor_sets);
+    let descriptor_set_count_n = List.length arg_descriptor_sets in
+    if arg_descriptor_sets <> [] && List.length arg_descriptor_sets <> descriptor_set_count_n then invalid_arg "VkBindDescriptorSetsInfo.pDescriptorSets: length does not match descriptorSetCount";
+    setf value _descriptor_set_count descriptor_set_count_n;
     if arg_descriptor_sets = [] then setf value _p_descriptor_sets (Vk_base.null_ptr (DescriptorSet.t)) else begin
       let items = CArray.of_list (DescriptorSet.t) arg_descriptor_sets in
       setf value _p_descriptor_sets (CArray.start items);
       Vk_base.retain keep items; Vk_base.retain keep arg_descriptor_sets
     end;
-    setf value _dynamic_offset_count (List.length arg_dynamic_offsets);
+    let dynamic_offset_count_n = (match arg_dynamic_offset_count with Some n -> n | None -> List.length arg_dynamic_offsets) in
+    if arg_dynamic_offsets <> [] && List.length arg_dynamic_offsets <> dynamic_offset_count_n then invalid_arg "VkBindDescriptorSetsInfo.pDynamicOffsets: length does not match dynamicOffsetCount";
+    setf value _dynamic_offset_count dynamic_offset_count_n;
     if arg_dynamic_offsets = [] then setf value _p_dynamic_offsets (Vk_base.null_ptr (Vk_base.uint32)) else begin
       let items = CArray.of_list (Vk_base.uint32) arg_dynamic_offsets in
       setf value _p_dynamic_offsets (CArray.start items);
@@ -1576,7 +1586,9 @@ module BufferCreateInfo = struct
     setf value _size arg_size;
     setf value _usage arg_usage;
     setf value _sharing_mode arg_sharing_mode;
-    setf value _queue_family_index_count (List.length arg_queue_family_indices);
+    let queue_family_index_count_n = List.length arg_queue_family_indices in
+    if arg_queue_family_indices <> [] && List.length arg_queue_family_indices <> queue_family_index_count_n then invalid_arg "VkBufferCreateInfo.pQueueFamilyIndices: length does not match queueFamilyIndexCount";
+    setf value _queue_family_index_count queue_family_index_count_n;
     if arg_queue_family_indices = [] then setf value _p_queue_family_indices (Vk_base.null_ptr (Vk_base.uint32)) else begin
       let items = CArray.of_list (Vk_base.uint32) arg_queue_family_indices in
       setf value _p_queue_family_indices (CArray.start items);
@@ -2282,7 +2294,9 @@ module CommandBufferInheritanceRenderingInfo = struct
      | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
     setf value _flags arg_flags;
     setf value _view_mask arg_view_mask;
-    setf value _color_attachment_count (List.length arg_color_attachment_formats);
+    let color_attachment_count_n = List.length arg_color_attachment_formats in
+    if arg_color_attachment_formats <> [] && List.length arg_color_attachment_formats <> color_attachment_count_n then invalid_arg "VkCommandBufferInheritanceRenderingInfo.pColorAttachmentFormats: length does not match colorAttachmentCount";
+    setf value _color_attachment_count color_attachment_count_n;
     if arg_color_attachment_formats = [] then setf value _p_color_attachment_formats (Vk_base.null_ptr (Format.t)) else begin
       let items = CArray.of_list (Format.t) arg_color_attachment_formats in
       setf value _p_color_attachment_formats (CArray.start items);
@@ -3078,7 +3092,9 @@ module CustomResolveCreateInfoEXT = struct
      | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
      | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
     setf value _custom_resolve arg_custom_resolve;
-    setf value _color_attachment_count (List.length arg_color_attachment_formats);
+    let color_attachment_count_n = List.length arg_color_attachment_formats in
+    if arg_color_attachment_formats <> [] && List.length arg_color_attachment_formats <> color_attachment_count_n then invalid_arg "VkCustomResolveCreateInfoEXT.pColorAttachmentFormats: length does not match colorAttachmentCount";
+    setf value _color_attachment_count color_attachment_count_n;
     if arg_color_attachment_formats = [] then setf value _p_color_attachment_formats (Vk_base.null_ptr (Format.t)) else begin
       let items = CArray.of_list (Format.t) arg_color_attachment_formats in
       setf value _p_color_attachment_formats (CArray.start items);
@@ -3106,20 +3122,24 @@ module D3D12FenceSubmitInfoKHR = struct
   let p_signal_semaphore_values = _p_signal_semaphore_values
   let () = seal t
   let structure_type : StructureType.t option = Some StructureType.d3d12_fence_submit_info_khr
-    let make ?next:arg_next ?wait_semaphore_values:(arg_wait_semaphore_values=[]) ?signal_semaphore_values:(arg_signal_semaphore_values=[]) () =
+    let make ?next:arg_next ?wait_semaphore_values_count:arg_wait_semaphore_values_count ?wait_semaphore_values:(arg_wait_semaphore_values=[]) ?signal_semaphore_values_count:arg_signal_semaphore_values_count ?signal_semaphore_values:(arg_signal_semaphore_values=[]) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
     setf value _s_type StructureType.d3d12_fence_submit_info_khr;
     (match arg_next with
      | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
      | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    setf value _wait_semaphore_values_count (List.length arg_wait_semaphore_values);
+    let wait_semaphore_values_count_n = (match arg_wait_semaphore_values_count with Some n -> n | None -> List.length arg_wait_semaphore_values) in
+    if arg_wait_semaphore_values <> [] && List.length arg_wait_semaphore_values <> wait_semaphore_values_count_n then invalid_arg "VkD3D12FenceSubmitInfoKHR.pWaitSemaphoreValues: length does not match waitSemaphoreValuesCount";
+    setf value _wait_semaphore_values_count wait_semaphore_values_count_n;
     if arg_wait_semaphore_values = [] then setf value _p_wait_semaphore_values (Vk_base.null_ptr (Vk_base.uint64)) else begin
       let items = CArray.of_list (Vk_base.uint64) arg_wait_semaphore_values in
       setf value _p_wait_semaphore_values (CArray.start items);
       Vk_base.retain keep items; Vk_base.retain keep arg_wait_semaphore_values
     end;
-    setf value _signal_semaphore_values_count (List.length arg_signal_semaphore_values);
+    let signal_semaphore_values_count_n = (match arg_signal_semaphore_values_count with Some n -> n | None -> List.length arg_signal_semaphore_values) in
+    if arg_signal_semaphore_values <> [] && List.length arg_signal_semaphore_values <> signal_semaphore_values_count_n then invalid_arg "VkD3D12FenceSubmitInfoKHR.pSignalSemaphoreValues: length does not match signalSemaphoreValuesCount";
+    setf value _signal_semaphore_values_count signal_semaphore_values_count_n;
     if arg_signal_semaphore_values = [] then setf value _p_signal_semaphore_values (Vk_base.null_ptr (Vk_base.uint64)) else begin
       let items = CArray.of_list (Vk_base.uint64) arg_signal_semaphore_values in
       setf value _p_signal_semaphore_values (CArray.start items);

@@ -3006,7 +3006,9 @@ module PhysicalDeviceImageDrmFormatModifierInfoEXT = struct
      | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
     setf value _drm_format_modifier arg_drm_format_modifier;
     setf value _sharing_mode arg_sharing_mode;
-    setf value _queue_family_index_count (List.length arg_queue_family_indices);
+    let queue_family_index_count_n = List.length arg_queue_family_indices in
+    if arg_queue_family_indices <> [] && List.length arg_queue_family_indices <> queue_family_index_count_n then invalid_arg "VkPhysicalDeviceImageDrmFormatModifierInfoEXT.pQueueFamilyIndices: length does not match queueFamilyIndexCount";
+    setf value _queue_family_index_count queue_family_index_count_n;
     if arg_queue_family_indices = [] then setf value _p_queue_family_indices (Vk_base.null_ptr (Vk_base.uint32)) else begin
       let items = CArray.of_list (Vk_base.uint32) arg_queue_family_indices in
       setf value _p_queue_family_indices (CArray.start items);

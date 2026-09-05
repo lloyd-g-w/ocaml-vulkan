@@ -328,7 +328,7 @@ module VideoEncodeAV1SessionParametersCreateInfoKHR = struct
   let p_std_operating_points = _p_std_operating_points
   let () = seal t
   let structure_type : StructureType.t option = Some StructureType.video_encode_av1_session_parameters_create_info_khr
-    let make ?next:arg_next ?std_sequence_header:arg_std_sequence_header ?std_decoder_model_info:arg_std_decoder_model_info ?std_operating_points:(arg_std_operating_points=[]) () =
+    let make ?next:arg_next ?std_sequence_header:arg_std_sequence_header ?std_decoder_model_info:arg_std_decoder_model_info ?std_operating_point_count:arg_std_operating_point_count ?std_operating_points:(arg_std_operating_points=[]) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
     setf value _s_type StructureType.video_encode_av1_session_parameters_create_info_khr;
@@ -337,7 +337,9 @@ module VideoEncodeAV1SessionParametersCreateInfoKHR = struct
      | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
     setf value _p_std_sequence_header (match arg_std_sequence_header with None -> Vk_base.null_ptr (void) | Some p -> p);
     setf value _p_std_decoder_model_info (match arg_std_decoder_model_info with None -> Vk_base.null_ptr (void) | Some p -> p);
-    setf value _std_operating_point_count (List.length arg_std_operating_points);
+    let std_operating_point_count_n = (match arg_std_operating_point_count with Some n -> n | None -> List.length arg_std_operating_points) in
+    if arg_std_operating_points <> [] && List.length arg_std_operating_points <> std_operating_point_count_n then invalid_arg "VkVideoEncodeAV1SessionParametersCreateInfoKHR.pStdOperatingPoints: length does not match stdOperatingPointCount";
+    setf value _std_operating_point_count std_operating_point_count_n;
     if arg_std_operating_points = [] then setf value _p_std_operating_points (Vk_base.null_ptr (void)) else begin
       let items = CArray.of_list (void) arg_std_operating_points in
       setf value _p_std_operating_points (CArray.start items);
@@ -655,20 +657,24 @@ module VideoEncodeH264SessionParametersAddInfoKHR = struct
   let p_std_pp_ss = _p_std_pp_ss
   let () = seal t
   let structure_type : StructureType.t option = Some StructureType.video_encode_h264_session_parameters_add_info_khr
-    let make ?next:arg_next ?std_sp_ss:(arg_std_sp_ss=[]) ?std_pp_ss:(arg_std_pp_ss=[]) () =
+    let make ?next:arg_next ?std_sps_count:arg_std_sps_count ?std_sp_ss:(arg_std_sp_ss=[]) ?std_pps_count:arg_std_pps_count ?std_pp_ss:(arg_std_pp_ss=[]) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
     setf value _s_type StructureType.video_encode_h264_session_parameters_add_info_khr;
     (match arg_next with
      | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
      | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    setf value _std_sps_count (List.length arg_std_sp_ss);
+    let std_sps_count_n = (match arg_std_sps_count with Some n -> n | None -> List.length arg_std_sp_ss) in
+    if arg_std_sp_ss <> [] && List.length arg_std_sp_ss <> std_sps_count_n then invalid_arg "VkVideoEncodeH264SessionParametersAddInfoKHR.pStdSPSs: length does not match stdSPSCount";
+    setf value _std_sps_count std_sps_count_n;
     if arg_std_sp_ss = [] then setf value _p_std_sp_ss (Vk_base.null_ptr (void)) else begin
       let items = CArray.of_list (void) arg_std_sp_ss in
       setf value _p_std_sp_ss (CArray.start items);
       Vk_base.retain keep items; Vk_base.retain keep arg_std_sp_ss
     end;
-    setf value _std_pps_count (List.length arg_std_pp_ss);
+    let std_pps_count_n = (match arg_std_pps_count with Some n -> n | None -> List.length arg_std_pp_ss) in
+    if arg_std_pp_ss <> [] && List.length arg_std_pp_ss <> std_pps_count_n then invalid_arg "VkVideoEncodeH264SessionParametersAddInfoKHR.pStdPPSs: length does not match stdPPSCount";
+    setf value _std_pps_count std_pps_count_n;
     if arg_std_pp_ss = [] then setf value _p_std_pp_ss (Vk_base.null_ptr (void)) else begin
       let items = CArray.of_list (void) arg_std_pp_ss in
       setf value _p_std_pp_ss (CArray.start items);
@@ -974,26 +980,32 @@ module VideoEncodeH265SessionParametersAddInfoKHR = struct
   let p_std_pp_ss = _p_std_pp_ss
   let () = seal t
   let structure_type : StructureType.t option = Some StructureType.video_encode_h265_session_parameters_add_info_khr
-    let make ?next:arg_next ?std_vp_ss:(arg_std_vp_ss=[]) ?std_sp_ss:(arg_std_sp_ss=[]) ?std_pp_ss:(arg_std_pp_ss=[]) () =
+    let make ?next:arg_next ?std_vps_count:arg_std_vps_count ?std_vp_ss:(arg_std_vp_ss=[]) ?std_sps_count:arg_std_sps_count ?std_sp_ss:(arg_std_sp_ss=[]) ?std_pps_count:arg_std_pps_count ?std_pp_ss:(arg_std_pp_ss=[]) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
     setf value _s_type StructureType.video_encode_h265_session_parameters_add_info_khr;
     (match arg_next with
      | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
      | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    setf value _std_vps_count (List.length arg_std_vp_ss);
+    let std_vps_count_n = (match arg_std_vps_count with Some n -> n | None -> List.length arg_std_vp_ss) in
+    if arg_std_vp_ss <> [] && List.length arg_std_vp_ss <> std_vps_count_n then invalid_arg "VkVideoEncodeH265SessionParametersAddInfoKHR.pStdVPSs: length does not match stdVPSCount";
+    setf value _std_vps_count std_vps_count_n;
     if arg_std_vp_ss = [] then setf value _p_std_vp_ss (Vk_base.null_ptr (void)) else begin
       let items = CArray.of_list (void) arg_std_vp_ss in
       setf value _p_std_vp_ss (CArray.start items);
       Vk_base.retain keep items; Vk_base.retain keep arg_std_vp_ss
     end;
-    setf value _std_sps_count (List.length arg_std_sp_ss);
+    let std_sps_count_n = (match arg_std_sps_count with Some n -> n | None -> List.length arg_std_sp_ss) in
+    if arg_std_sp_ss <> [] && List.length arg_std_sp_ss <> std_sps_count_n then invalid_arg "VkVideoEncodeH265SessionParametersAddInfoKHR.pStdSPSs: length does not match stdSPSCount";
+    setf value _std_sps_count std_sps_count_n;
     if arg_std_sp_ss = [] then setf value _p_std_sp_ss (Vk_base.null_ptr (void)) else begin
       let items = CArray.of_list (void) arg_std_sp_ss in
       setf value _p_std_sp_ss (CArray.start items);
       Vk_base.retain keep items; Vk_base.retain keep arg_std_sp_ss
     end;
-    setf value _std_pps_count (List.length arg_std_pp_ss);
+    let std_pps_count_n = (match arg_std_pps_count with Some n -> n | None -> List.length arg_std_pp_ss) in
+    if arg_std_pp_ss <> [] && List.length arg_std_pp_ss <> std_pps_count_n then invalid_arg "VkVideoEncodeH265SessionParametersAddInfoKHR.pStdPPSs: length does not match stdPPSCount";
+    setf value _std_pps_count std_pps_count_n;
     if arg_std_pp_ss = [] then setf value _p_std_pp_ss (Vk_base.null_ptr (void)) else begin
       let items = CArray.of_list (void) arg_std_pp_ss in
       setf value _p_std_pp_ss (CArray.start items);
@@ -1689,7 +1701,11 @@ module Win32KeyedMutexAcquireReleaseInfoKHR = struct
     (match arg_next with
      | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
      | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    setf value _acquire_count (List.length arg_acquire_timeouts);
+    let acquire_count_n = List.fold_left max 0 [List.length arg_acquire_syncs; List.length arg_acquire_keys; List.length arg_acquire_timeouts] in
+    if arg_acquire_syncs <> [] && List.length arg_acquire_syncs <> acquire_count_n then invalid_arg "VkWin32KeyedMutexAcquireReleaseInfoKHR.pAcquireSyncs: length does not match acquireCount";
+    if arg_acquire_keys <> [] && List.length arg_acquire_keys <> acquire_count_n then invalid_arg "VkWin32KeyedMutexAcquireReleaseInfoKHR.pAcquireKeys: length does not match acquireCount";
+    if arg_acquire_timeouts <> [] && List.length arg_acquire_timeouts <> acquire_count_n then invalid_arg "VkWin32KeyedMutexAcquireReleaseInfoKHR.pAcquireTimeouts: length does not match acquireCount";
+    setf value _acquire_count acquire_count_n;
     if arg_acquire_syncs = [] then setf value _p_acquire_syncs (Vk_base.null_ptr (DeviceMemory.t)) else begin
       let items = CArray.of_list (DeviceMemory.t) arg_acquire_syncs in
       setf value _p_acquire_syncs (CArray.start items);
@@ -1705,7 +1721,10 @@ module Win32KeyedMutexAcquireReleaseInfoKHR = struct
       setf value _p_acquire_timeouts (CArray.start items);
       Vk_base.retain keep items; Vk_base.retain keep arg_acquire_timeouts
     end;
-    setf value _release_count (List.length arg_release_keys);
+    let release_count_n = List.fold_left max 0 [List.length arg_release_syncs; List.length arg_release_keys] in
+    if arg_release_syncs <> [] && List.length arg_release_syncs <> release_count_n then invalid_arg "VkWin32KeyedMutexAcquireReleaseInfoKHR.pReleaseSyncs: length does not match releaseCount";
+    if arg_release_keys <> [] && List.length arg_release_keys <> release_count_n then invalid_arg "VkWin32KeyedMutexAcquireReleaseInfoKHR.pReleaseKeys: length does not match releaseCount";
+    setf value _release_count release_count_n;
     if arg_release_syncs = [] then setf value _p_release_syncs (Vk_base.null_ptr (DeviceMemory.t)) else begin
       let items = CArray.of_list (DeviceMemory.t) arg_release_syncs in
       setf value _p_release_syncs (CArray.start items);
@@ -1749,7 +1768,11 @@ module Win32KeyedMutexAcquireReleaseInfoNV = struct
     (match arg_next with
      | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
      | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    setf value _acquire_count (List.length arg_acquire_timeout_milliseconds);
+    let acquire_count_n = List.fold_left max 0 [List.length arg_acquire_syncs; List.length arg_acquire_keys; List.length arg_acquire_timeout_milliseconds] in
+    if arg_acquire_syncs <> [] && List.length arg_acquire_syncs <> acquire_count_n then invalid_arg "VkWin32KeyedMutexAcquireReleaseInfoNV.pAcquireSyncs: length does not match acquireCount";
+    if arg_acquire_keys <> [] && List.length arg_acquire_keys <> acquire_count_n then invalid_arg "VkWin32KeyedMutexAcquireReleaseInfoNV.pAcquireKeys: length does not match acquireCount";
+    if arg_acquire_timeout_milliseconds <> [] && List.length arg_acquire_timeout_milliseconds <> acquire_count_n then invalid_arg "VkWin32KeyedMutexAcquireReleaseInfoNV.pAcquireTimeoutMilliseconds: length does not match acquireCount";
+    setf value _acquire_count acquire_count_n;
     if arg_acquire_syncs = [] then setf value _p_acquire_syncs (Vk_base.null_ptr (DeviceMemory.t)) else begin
       let items = CArray.of_list (DeviceMemory.t) arg_acquire_syncs in
       setf value _p_acquire_syncs (CArray.start items);
@@ -1765,7 +1788,10 @@ module Win32KeyedMutexAcquireReleaseInfoNV = struct
       setf value _p_acquire_timeout_milliseconds (CArray.start items);
       Vk_base.retain keep items; Vk_base.retain keep arg_acquire_timeout_milliseconds
     end;
-    setf value _release_count (List.length arg_release_keys);
+    let release_count_n = List.fold_left max 0 [List.length arg_release_syncs; List.length arg_release_keys] in
+    if arg_release_syncs <> [] && List.length arg_release_syncs <> release_count_n then invalid_arg "VkWin32KeyedMutexAcquireReleaseInfoNV.pReleaseSyncs: length does not match releaseCount";
+    if arg_release_keys <> [] && List.length arg_release_keys <> release_count_n then invalid_arg "VkWin32KeyedMutexAcquireReleaseInfoNV.pReleaseKeys: length does not match releaseCount";
+    setf value _release_count release_count_n;
     if arg_release_syncs = [] then setf value _p_release_syncs (Vk_base.null_ptr (DeviceMemory.t)) else begin
       let items = CArray.of_list (DeviceMemory.t) arg_release_syncs in
       setf value _p_release_syncs (CArray.start items);
@@ -1827,7 +1853,9 @@ module WriteDescriptorSetAccelerationStructureKHR = struct
     (match arg_next with
      | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
      | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    setf value _acceleration_structure_count (List.length arg_acceleration_structures);
+    let acceleration_structure_count_n = List.length arg_acceleration_structures in
+    if arg_acceleration_structures <> [] && List.length arg_acceleration_structures <> acceleration_structure_count_n then invalid_arg "VkWriteDescriptorSetAccelerationStructureKHR.pAccelerationStructures: length does not match accelerationStructureCount";
+    setf value _acceleration_structure_count acceleration_structure_count_n;
     if arg_acceleration_structures = [] then setf value _p_acceleration_structures (Vk_base.null_ptr (AccelerationStructureKHR.t)) else begin
       let items = CArray.of_list (AccelerationStructureKHR.t) arg_acceleration_structures in
       setf value _p_acceleration_structures (CArray.start items);
@@ -1856,7 +1884,9 @@ module WriteDescriptorSetAccelerationStructureNV = struct
     (match arg_next with
      | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
      | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    setf value _acceleration_structure_count (List.length arg_acceleration_structures);
+    let acceleration_structure_count_n = List.length arg_acceleration_structures in
+    if arg_acceleration_structures <> [] && List.length arg_acceleration_structures <> acceleration_structure_count_n then invalid_arg "VkWriteDescriptorSetAccelerationStructureNV.pAccelerationStructures: length does not match accelerationStructureCount";
+    setf value _acceleration_structure_count acceleration_structure_count_n;
     if arg_acceleration_structures = [] then setf value _p_acceleration_structures (Vk_base.null_ptr (AccelerationStructureNV.t)) else begin
       let items = CArray.of_list (AccelerationStructureNV.t) arg_acceleration_structures in
       setf value _p_acceleration_structures (CArray.start items);
@@ -1913,7 +1943,9 @@ module WriteDescriptorSetPartitionedAccelerationStructureNV = struct
     (match arg_next with
      | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
      | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    setf value _acceleration_structure_count (List.length arg_acceleration_structures);
+    let acceleration_structure_count_n = List.length arg_acceleration_structures in
+    if arg_acceleration_structures <> [] && List.length arg_acceleration_structures <> acceleration_structure_count_n then invalid_arg "VkWriteDescriptorSetPartitionedAccelerationStructureNV.pAccelerationStructures: length does not match accelerationStructureCount";
+    setf value _acceleration_structure_count acceleration_structure_count_n;
     if arg_acceleration_structures = [] then setf value _p_acceleration_structures (Vk_base.null_ptr (Vk_base.device_address)) else begin
       let items = CArray.of_list (Vk_base.device_address) arg_acceleration_structures in
       setf value _p_acceleration_structures (CArray.start items);
@@ -1942,7 +1974,9 @@ module WriteDescriptorSetTensorARM = struct
     (match arg_next with
      | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
      | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    setf value _tensor_view_count (List.length arg_tensor_views);
+    let tensor_view_count_n = List.length arg_tensor_views in
+    if arg_tensor_views <> [] && List.length arg_tensor_views <> tensor_view_count_n then invalid_arg "VkWriteDescriptorSetTensorARM.pTensorViews: length does not match tensorViewCount";
+    setf value _tensor_view_count tensor_view_count_n;
     if arg_tensor_views = [] then setf value _p_tensor_views (Vk_base.null_ptr (TensorViewARM.t)) else begin
       let items = CArray.of_list (TensorViewARM.t) arg_tensor_views in
       setf value _p_tensor_views (CArray.start items);
@@ -2289,14 +2323,16 @@ module AccelerationStructureGeometryMicromapDataKHR = struct
   let triangle_array_stride = _triangle_array_stride
   let () = seal t
   let structure_type : StructureType.t option = Some StructureType.acceleration_structure_geometry_micromap_data_khr
-    let make ?next:arg_next ?usage_counts:(arg_usage_counts=[]) ?usage_counts_2:arg_usage_counts_2 ?data:(arg_data=0) ?triangle_array:(arg_triangle_array=0) ?triangle_array_stride:(arg_triangle_array_stride=0) () =
+    let make ?next:arg_next ?usage_counts_count:arg_usage_counts_count ?usage_counts:(arg_usage_counts=[]) ?usage_counts_2:arg_usage_counts_2 ?data:(arg_data=0) ?triangle_array:(arg_triangle_array=0) ?triangle_array_stride:(arg_triangle_array_stride=0) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
     setf value _s_type StructureType.acceleration_structure_geometry_micromap_data_khr;
     (match arg_next with
      | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
      | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    setf value _usage_counts_count (List.length arg_usage_counts);
+    let usage_counts_count_n = (match arg_usage_counts_count with Some n -> n | None -> List.length arg_usage_counts) in
+    if arg_usage_counts <> [] && List.length arg_usage_counts <> usage_counts_count_n then invalid_arg "VkAccelerationStructureGeometryMicromapDataKHR.pUsageCounts: length does not match usageCountsCount";
+    setf value _usage_counts_count usage_counts_count_n;
     if arg_usage_counts = [] then setf value _p_usage_counts (Vk_base.null_ptr (MicromapUsageKHR.t)) else begin
       let items = CArray.of_list (MicromapUsageKHR.t) arg_usage_counts in
       setf value _p_usage_counts (CArray.start items);
@@ -2533,7 +2569,7 @@ module AccelerationStructureTrianglesDisplacementMicromapNV = struct
   let micromap = _micromap
   let () = seal t
   let structure_type : StructureType.t option = None
-    let make ?next:arg_next ?displacement_bias_and_scale_format:(arg_displacement_bias_and_scale_format=Format.of_int 0) ?displacement_vector_format:(arg_displacement_vector_format=Format.of_int 0) ?displacement_bias_and_scale_buffer:arg_displacement_bias_and_scale_buffer ?displacement_bias_and_scale_stride:(arg_displacement_bias_and_scale_stride=0) ?displacement_vector_buffer:arg_displacement_vector_buffer ?displacement_vector_stride:(arg_displacement_vector_stride=0) ?displaced_micromap_primitive_flags:arg_displaced_micromap_primitive_flags ?displaced_micromap_primitive_flags_stride:(arg_displaced_micromap_primitive_flags_stride=0) ?index_type:(arg_index_type=IndexType.of_int 0) ?index_buffer:arg_index_buffer ?index_stride:(arg_index_stride=0) ?base_triangle:(arg_base_triangle=0) ?usage_counts:(arg_usage_counts=[]) ?usage_counts_2:arg_usage_counts_2 ?micromap:(arg_micromap=MicromapEXT.null) () =
+    let make ?next:arg_next ?displacement_bias_and_scale_format:(arg_displacement_bias_and_scale_format=Format.of_int 0) ?displacement_vector_format:(arg_displacement_vector_format=Format.of_int 0) ?displacement_bias_and_scale_buffer:arg_displacement_bias_and_scale_buffer ?displacement_bias_and_scale_stride:(arg_displacement_bias_and_scale_stride=0) ?displacement_vector_buffer:arg_displacement_vector_buffer ?displacement_vector_stride:(arg_displacement_vector_stride=0) ?displaced_micromap_primitive_flags:arg_displaced_micromap_primitive_flags ?displaced_micromap_primitive_flags_stride:(arg_displaced_micromap_primitive_flags_stride=0) ?index_type:(arg_index_type=IndexType.of_int 0) ?index_buffer:arg_index_buffer ?index_stride:(arg_index_stride=0) ?base_triangle:(arg_base_triangle=0) ?usage_counts_count:arg_usage_counts_count ?usage_counts:(arg_usage_counts=[]) ?usage_counts_2:arg_usage_counts_2 ?micromap:(arg_micromap=MicromapEXT.null) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
     setf value _s_type (StructureType.of_int 0);
@@ -2552,7 +2588,9 @@ module AccelerationStructureTrianglesDisplacementMicromapNV = struct
     (match arg_index_buffer with None -> () | Some x -> setf value _index_buffer x);
     setf value _index_stride arg_index_stride;
     setf value _base_triangle arg_base_triangle;
-    setf value _usage_counts_count (List.length arg_usage_counts);
+    let usage_counts_count_n = (match arg_usage_counts_count with Some n -> n | None -> List.length arg_usage_counts) in
+    if arg_usage_counts <> [] && List.length arg_usage_counts <> usage_counts_count_n then invalid_arg "VkAccelerationStructureTrianglesDisplacementMicromapNV.pUsageCounts: length does not match usageCountsCount";
+    setf value _usage_counts_count usage_counts_count_n;
     if arg_usage_counts = [] then setf value _p_usage_counts (Vk_base.null_ptr (MicromapUsageEXT.t)) else begin
       let items = CArray.of_list (MicromapUsageEXT.t) arg_usage_counts in
       setf value _p_usage_counts (CArray.start items);
@@ -2588,7 +2626,7 @@ module AccelerationStructureTrianglesOpacityMicromapEXT = struct
   let micromap = _micromap
   let () = seal t
   let structure_type : StructureType.t option = Some StructureType.acceleration_structure_triangles_opacity_micromap_ext
-    let make ?next:arg_next ?index_type:(arg_index_type=IndexType.of_int 0) ?index_buffer:arg_index_buffer ?index_stride:(arg_index_stride=0) ?base_triangle:(arg_base_triangle=0) ?usage_counts:(arg_usage_counts=[]) ?usage_counts_2:arg_usage_counts_2 ?micromap:(arg_micromap=MicromapEXT.null) () =
+    let make ?next:arg_next ?index_type:(arg_index_type=IndexType.of_int 0) ?index_buffer:arg_index_buffer ?index_stride:(arg_index_stride=0) ?base_triangle:(arg_base_triangle=0) ?usage_counts_count:arg_usage_counts_count ?usage_counts:(arg_usage_counts=[]) ?usage_counts_2:arg_usage_counts_2 ?micromap:(arg_micromap=MicromapEXT.null) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
     setf value _s_type StructureType.acceleration_structure_triangles_opacity_micromap_ext;
@@ -2599,7 +2637,9 @@ module AccelerationStructureTrianglesOpacityMicromapEXT = struct
     (match arg_index_buffer with None -> () | Some x -> setf value _index_buffer x);
     setf value _index_stride arg_index_stride;
     setf value _base_triangle arg_base_triangle;
-    setf value _usage_counts_count (List.length arg_usage_counts);
+    let usage_counts_count_n = (match arg_usage_counts_count with Some n -> n | None -> List.length arg_usage_counts) in
+    if arg_usage_counts <> [] && List.length arg_usage_counts <> usage_counts_count_n then invalid_arg "VkAccelerationStructureTrianglesOpacityMicromapEXT.pUsageCounts: length does not match usageCountsCount";
+    setf value _usage_counts_count usage_counts_count_n;
     if arg_usage_counts = [] then setf value _p_usage_counts (Vk_base.null_ptr (MicromapUsageEXT.t)) else begin
       let items = CArray.of_list (MicromapUsageEXT.t) arg_usage_counts in
       setf value _p_usage_counts (CArray.start items);
@@ -3221,7 +3261,9 @@ module CoarseSampleOrderCustomNV = struct
     ignore keep;
     setf value _shading_rate arg_shading_rate;
     setf value _sample_count arg_sample_count;
-    setf value _sample_location_count (List.length arg_sample_locations);
+    let sample_location_count_n = List.length arg_sample_locations in
+    if arg_sample_locations <> [] && List.length arg_sample_locations <> sample_location_count_n then invalid_arg "VkCoarseSampleOrderCustomNV.pSampleLocations: length does not match sampleLocationCount";
+    setf value _sample_location_count sample_location_count_n;
     if arg_sample_locations = [] then setf value _p_sample_locations (Vk_base.null_ptr (CoarseSampleLocationNV.t)) else begin
       let items = CArray.of_list (CoarseSampleLocationNV.t) arg_sample_locations in
       setf value _p_sample_locations (CArray.start items);
@@ -3424,7 +3466,9 @@ module CopyBufferInfo2 = struct
      | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
     setf value _src_buffer arg_src_buffer;
     setf value _dst_buffer arg_dst_buffer;
-    setf value _region_count (List.length arg_regions);
+    let region_count_n = List.length arg_regions in
+    if arg_regions <> [] && List.length arg_regions <> region_count_n then invalid_arg "VkCopyBufferInfo2.pRegions: length does not match regionCount";
+    setf value _region_count region_count_n;
     if arg_regions = [] then setf value _p_regions (Vk_base.null_ptr (BufferCopy2.t)) else begin
       let items = CArray.of_list (BufferCopy2.t) arg_regions in
       setf value _p_regions (CArray.start items);

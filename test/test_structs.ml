@@ -3,36 +3,32 @@
    Gc.full_major, bitfield packing. See DESIGN.md §7 (structs/unions) and §12
    (test_structs.ml).
 
-   TODO(integration lane) -- cannot compile yet (no lib/vk.ml content).
-   Written directly against DESIGN.md. Assumptions:
-   - `X.make` signatures follow DESIGN §7's table exactly: a `const char* p`
-     with `len="null-terminated"` becomes `?x:string`; a `T* p` + count pair
+   Verified against the real generated API (integration lane):
+   - `X.make` signatures follow DESIGN §7's table: a `const char* p` with
+     `len="null-terminated"` becomes `?x:string`; a `T* p` + count pair
      becomes `?xs:elem list` (count is derived, not passed separately).
    - `X.structure_type : StructureType.t option` and `make` sets `sType` from
      it automatically (DESIGN §7).
    - Every raw ctypes field is reachable as `X.field_name` per the
      `InstanceCreateInfo` example in DESIGN §7 (`s_type`, `p_application_name`,
      `enabled_layer_count`, ...).
-   - `module`/`type` are OCaml keywords, so the generator must rename the C
-     `module` field of `VkPipelineShaderStageCreateInfo` and the C `type`
-     field of `VkDescriptorPoolSize` -- assumed renamed to `module_`/`type_`
-     by the same "append `_`" rule DESIGN §3 documents for enum values
-     (DESIGN doesn't spell this out for struct members explicitly, so this
-     needs confirming against the real generator output). Not exercised in
-     this file; noted here since test_compute.ml relies on it.
+   - `module`/`type` are OCaml keywords; the generator renames the C `module`
+     field of `VkPipelineShaderStageCreateInfo` and the C `type` field of
+     `VkDescriptorPoolSize` to `module_`/`type_`, the same "append `_`" rule
+     DESIGN §3 documents for enum values. Not exercised in this file; noted
+     here since test_compute.ml relies on it.
    - Bitfield members are merged into one raw field per contiguous run,
      named `<first_member>_bits`, per DESIGN §7. For
      `VkAccelerationStructureInstanceKHR` that means two 32-bit runs:
      `instance_custom_index_bits` (instanceCustomIndex:24 | mask:8) and
      `instance_shader_binding_table_record_offset_bits`
      (instanceShaderBindingTableRecordOffset:24 | flags:8), each packed
-     LSB-first (low bitfield in the low bits). `make` is assumed to expose
-     each original bitfield as its own plain `int` labelled argument
-     (`~instance_custom_index`, `~mask`, ...), including the one bitfield
-     whose C type is a flags type (`flags`) -- DESIGN doesn't state whether
-     that one keeps its flags type or becomes a plain int in `make`; we
-     assume plain `int` for simplicity (see DESIGN §7's "packs LSB-first"
-     wording, which reads as raw-integer packing). *)
+     LSB-first (low bitfield in the low bits). `make` exposes each original
+     bitfield as its own labelled argument, typed like any other member of
+     its C type (DESIGN §4/§7: "enum / flags -> module type"), so the plain
+     `instance_custom_index`/`mask`/`instance_shader_binding_table_record_offset`
+     bitfields take a plain `int` but `flags` (C type `VkGeometryInstanceFlagsKHR`)
+     takes `GeometryInstanceFlagsKHR.t`, packed via `to_int`. *)
 
 module V = Vk
 
@@ -87,7 +83,8 @@ let test_bitfield_packing () =
      bitfield-packed members. *)
   let s =
     V.AccelerationStructureInstanceKHR.make ~instance_custom_index ~mask
-      ~instance_shader_binding_table_record_offset:sbt_offset ~flags
+      ~instance_shader_binding_table_record_offset:sbt_offset
+      ~flags:(V.GeometryInstanceFlagsKHR.of_int flags)
       ~acceleration_structure_reference:0x1122_3344_5566_7788 ()
   in
   let word1 = Ctypes.getf s V.AccelerationStructureInstanceKHR.instance_custom_index_bits in

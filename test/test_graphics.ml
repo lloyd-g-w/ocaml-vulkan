@@ -5,10 +5,9 @@
    pixel is non-black and a corner pixel equals the clear colour. See
    DESIGN.md §12 and shaders/triangle.{vert,frag}.
 
-   TODO(integration lane) -- cannot compile yet (no lib/vk.ml content).
-   Written directly against DESIGN.md; same batch-create-returns-a-list and
-   `module`/`type` keyword-escape assumptions as test_compute.ml's TODO block
-   (search FIXME below). Additional assumptions:
+   Verified against the real generated API (integration lane): same
+   batch-create-returns-a-list and `module`/`type` keyword-escape behaviour
+   as test_compute.ml's header comment. Additional notes:
    - `Vk.cmd_pipeline_barrier cb src_stage dst_stage dependency_flags
       memory_barriers buffer_memory_barriers image_memory_barriers` -- three
      independent `count+array` groups become three positional list
@@ -137,9 +136,6 @@ let test_offscreen_triangle () =
   in
   let pipeline_layout = V.create_pipeline_layout device (V.PipelineLayoutCreateInfo.make ()) in
   let pipeline =
-    (* FIXME(integration lane): confirm the renamed `module` field/label on
-       PipelineShaderStageCreateInfo (assumed `module_`, see test_compute.ml's
-       TODO block for the same assumption). *)
     let stages =
       [ V.PipelineShaderStageCreateInfo.make ~stage:V.ShaderStageFlags.vertex
           ~module_:vert_module ~name:"main" ();
@@ -183,12 +179,16 @@ let test_offscreen_triangle () =
           ]
         ()
     in
-    List.hd
-      (V.create_graphics_pipelines device V.PipelineCache.null
-         [ V.GraphicsPipelineCreateInfo.make ~stages ~vertex_input_state ~input_assembly_state
-             ~viewport_state ~rasterization_state ~multisample_state ~color_blend_state
-             ~layout:pipeline_layout ~render_pass ~subpass:0 ()
-         ])
+    (* create_graphics_pipelines : Result.t * Pipeline.t list, see
+       test_compute.ml's header comment. *)
+    let _, pipelines =
+      V.create_graphics_pipelines device V.PipelineCache.null
+        [ V.GraphicsPipelineCreateInfo.make ~stages ~vertex_input_state ~input_assembly_state
+            ~viewport_state ~rasterization_state ~multisample_state ~color_blend_state
+            ~layout:pipeline_layout ~render_pass ~subpass:0 ()
+        ]
+    in
+    List.hd pipelines
   in
 
   (* -- record + submit: clear, draw 3 vertices, transition, copy out -- *)

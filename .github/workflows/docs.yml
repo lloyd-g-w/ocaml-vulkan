@@ -23,11 +23,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Configure GitHub Pages (enables it on first run)
-        uses: actions/configure-pages@v5
-        with:
-          enablement: true
-
       - name: Install system packages
         run: |
           sudo apt-get update
@@ -57,6 +52,13 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
+      # Requires GitHub Pages to be enabled once by a repository admin:
+      # Settings -> Pages -> Build and deployment -> Source: "GitHub Actions".
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+        with:
+          enablement: true
+
       - name: Deploy
         id: deployment
         uses: actions/deploy-pages@v4

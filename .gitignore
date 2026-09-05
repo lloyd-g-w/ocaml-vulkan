@@ -47,3 +47,6 @@ __pycache__/
 
 # `dune build` recreates it from dune-project every time, so it's noise to
 # track until the project decides to commit a stable copy on purpose.
+
+# Output of examples/triangle_offscreen.ml (dune exec examples/triangle_offscreen.exe)
+*.ppm

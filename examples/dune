@@ -5,3 +5,18 @@
 (executable
  (name smoke)
  (libraries vulkan ctypes))
+
+; --- examples/** below are owned by the docs & examples lane. Keep the
+; vkinfo/smoke stanzas above untouched (owned by other lanes' usage). ---
+
+(executable
+ (name compute)
+ (libraries vulkan vk_test_shaders ctypes integers unix))
+
+(executable
+ (name triangle_offscreen)
+ (libraries vulkan vk_test_shaders ctypes integers))
+
+(executable
+ (name debug_utils)
+ (libraries vulkan ctypes))

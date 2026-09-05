@@ -7,8 +7,13 @@ described here, update this file in the same commit.**
 ## 1. Goals
 
 * Complete OCaml bindings to the Vulkan API (core 1.0 → 1.4 plus every
-  extension in `registry/vk.xml`, excluding the `vulkansc` API and
-  `VK_ENABLE_BETA_EXTENSIONS`/provisional-platform-only types where noted).
+  extension in `registry/vk.xml`, excluding the `vulkansc` API and any
+  `supported="disabled"` extension). **Provisional extensions are included
+  fully** (types and enum values alike) — `VK_KHR_portability_subset`
+  (needed by macOS/MoltenVK users), the AMDX/NV provisional ones — even
+  though they sit behind `VK_ENABLE_BETA_EXTENSIONS` in the real C headers;
+  see §13's reachability rule for exactly what "excluding vulkansc/disabled"
+  means in generator terms.
 * Generated from the Khronos XML registry (`registry/vk.xml`, version pinned in
   `registry/VERSION`) by `gen/gen.py` (Python 3, stdlib only). Generated code is
   **committed** so users only need `ctypes` + `ctypes-foreign` to build.
@@ -119,8 +124,22 @@ module Enum_values = Vk_enum_values
 All C integers are exposed as OCaml `int` through ctypes views
 (`Vk_base.uint8/uint16/uint32/uint64/int8/int16/int32/int64/size_t/
  device_size/device_address`). `uint64` uses two's-complement conversion so
-`-1` ⇔ `0xFFFF_FFFF_FFFF_FFFF`; bits 62–63 of unsigned 64-bit values are not
-representable as positive ints (Vulkan does not use them; documented limitation).
+`-1` ⇔ `0xFFFF_FFFF_FFFF_FFFF`. Precise limitation (not merely "large values
+look negative"): the view's `read`/`write` go through `Int64.to_int`/
+`Int64.of_int`, which drop bit 63 of the 64-bit pattern outright (OCaml's
+native `int` has only 63 usable bits). Bit 62 is *not* lost — it becomes the
+OCaml int's own sign bit, so every value below 2^63 still reads back as its
+own distinct (possibly negative-looking) int — but every value at or above
+2^63 reads back **identical to `value - 2^63`**: this is a genuine collision,
+not just a sign/positivity quirk. In particular `2^63-1` and `2^64-1`
+(`UINT64_MAX`, i.e. `VK_WHOLE_SIZE`/`VK_REMAINING_MIP_LEVELS`/...) both read
+back as `-1`. `write` is the exact inverse (`-1` always round-trips to
+`0xFFFF_FFFF_FFFF_FFFF`), so the collision only bites a caller reading an
+arbitrary/adversarial `uint64` whose top bit is meaningful; Vulkan itself
+only uses that range for `UINT64_MAX`-style all-ones sentinels, which are
+exactly the values this collision maps correctly (to `-1`). Behaviour is
+unchanged from before this was documented precisely — this is a description
+fix, not a code fix.
 `VkBool32` ⇔ OCaml `bool` (`Vk_base.bool32`). `float` ⇔ `float`, `double` ⇔ `float`.
 `char*` members are `char ptr` (never the `string` view, which can't hold NULL);
 `char name[N]` members are `char carray` with a generated `get_<name>` helper
@@ -230,8 +249,8 @@ Rules for `make` (all arguments optional, every field written explicitly,
 | `VkBool32` | `bool`, default `false` |
 | enum / flags | module type, default `of_int 0` |
 | handle | handle module type, default `null` |
-| struct by value | `X.t Ctypes.structure` (copied) |
-| union by value | `X.t Ctypes.union` |
+| struct by value | `X.t Ctypes.structure` (byte-copied into the parent *and* retained in `keep`, so the copy's own pointer fields — pName, pNext chain, array arguments — stay valid) |
+| union by value | `X.t Ctypes.union` (same retention as struct-by-value) |
 | `const T* p` (single, no `len`) for struct/union T | `?x:T.t Ctypes.structure` → stores `addr`, kept alive |
 | `const char* p` (`len="null-terminated"`) | `?x:string` |
 | `T* p` + `uint32_t xCount` (`len="xCount"`) | `?xs:elem list` → allocates a `CArray`, sets count = length (or the longest of several lists sharing one count, or an explicit `?x_count:int` override when every array sharing the count is independently optional — see §10's expansion of this row), keeps array **and** original structures alive |
@@ -242,7 +261,7 @@ Rules for `make` (all arguments optional, every field written explicitly,
 | `T x[N]` numeric fixed array | `?x:int list` / `float list` (padded with zeros, error if longer than N) |
 | `char x[N]` | `?x:string` |
 | bitfield members (`:24`, `:8`) | merged into one raw field `<first>_bits` of the declared width; `make` takes each bitfield separately and packs LSB-first |
-| function pointer (`PFN_*`) | the OCaml closure type of the PFN module (see §8), wrapped with `Foreign.funptr_opt`; keeps the closure alive |
+| function pointer (`PFN_*`) | the OCaml closure type of the PFN module (see §8), wrapped with `Foreign.funptr_opt`; keeps the closure alive in `keep` *and* forever (`Vk_base.retain_forever`, see §8) |
 | `T* p` non-const output pointer with no `len` | `?p_x:T ptr` raw (rarely used in make) |
 
 Structs marked `returnedonly="true"` get a `make` that only accepts `?next`
@@ -250,10 +269,32 @@ Structs marked `returnedonly="true"` get a `make` that only accepts `?next`
 
 Keep-alive mechanism: `make` creates `keep : Obj.t list ref`, allocates with
 `Ctypes.make ~finalise:(fun _ -> ignore (Sys.opaque_identity !keep)) t`, and
-pushes every OCaml-side allocation (CArrays, strings, nested structures,
-closures) into `keep`. The GC finaliser closure keeps them reachable exactly as
-long as the struct's memory is. Users who fill pointers with `setf` themselves
-are responsible for lifetimes (documented in README).
+pushes every OCaml-side allocation (CArrays, strings, nested structures **by
+value and by pointer**, closures) into `keep`. The GC finaliser closure keeps
+them reachable exactly as long as the struct's memory is. This specifically
+includes a struct/union embedded **by value** (`setf value field x` copies
+`x`'s bytes into the parent, but `x`'s *own* pointer fields — e.g. a nested
+`PipelineShaderStageCreateInfo.pName` — are only kept alive by retaining `x`
+itself in the parent's `keep`; a plain byte-copy does not know some of those
+bytes are pointers). Users who fill pointers with `setf` themselves are
+responsible for lifetimes (documented in README).
+
+Callback (`PFN_*`) members are additionally retained **forever**
+(`Vk_base.retain_forever`, a process-wide list that is never cleared, §8):
+the create-info struct a callback is registered through
+(`Vk.DebugUtilsMessengerCreateInfoEXT`, `Vk.AllocationCallbacks`, ...) is routinely
+short-lived, but the Vulkan object built from it (the messenger, the
+allocator registration) and the driver's raw pointer to the C trampoline
+outlive it — `keep` alone is not enough. This is a deliberate, documented
+leak, negligible for the debug messengers / allocation callbacks it is used
+for in practice.
+
+Wrapper commands (`vk_api.ml`, §10) have the same problem one level up: a
+`T list` argument is copied into a temporary `CArray` for the raw call, and
+that copy does not extend the lifetime of each element's *own* `keep` list
+either. Every wrapper keeps every argument (and any array/pointer
+`_make_args` derived from it) reachable past the raw call with `ignore
+(Sys.opaque_identity (...))` — see §10.
 
 Unions: `module ClearValue` has `type t`, `t : t Ctypes.union Ctypes.typ`,
 fields, and one constructor per member (`ClearValue.color : ClearColorValue.t
@@ -263,7 +304,10 @@ Ctypes.union`, …).
 Struct aliases (`VkPhysicalDeviceFeatures2KHR` → `VkPhysicalDeviceFeatures2`)
 become `module PhysicalDeviceFeatures2KHR = PhysicalDeviceFeatures2`.
 
-Every struct module is also registered in `vk_layout.ml`.
+Every struct module is also registered in `vk_layout.ml`'s `all` (layout) and
+`structure_types : (string * StructureType.t option) list` (every non-alias
+struct's `structure_type`, used by `test_layout.ml` to assert no struct with
+a resolved `sType` silently defaults to 0 — see §12/§13).
 
 ## 8. Function pointer types
 
@@ -276,13 +320,33 @@ module PfnDebugUtilsMessengerCallbackEXT : sig
   type fn = DebugUtilsMessageSeverityFlagsEXT.t -> DebugUtilsMessageTypeFlagsEXT.t ->
             DebugUtilsMessengerCallbackDataEXT.t Ctypes.structure Ctypes.ptr -> unit Ctypes.ptr -> bool
   val t : fn Ctypes.static_funptr Ctypes.typ  (* raw *)
-  val opt : fn option Ctypes.typ              (* Foreign.funptr_opt ~runtime_lock:true, used in struct fields *)
+  val opt : fn option Ctypes.typ              (* Foreign.funptr_opt, no ~runtime_lock (see below), used in struct fields *)
 end
 ```
 
 `PFN_vkVoidFunction` is `unit ptr`. Function pointers are ordered in the
 same topological sort as structs (they reference structs and are referenced
 by structs).
+
+`opt`/`t` use `Foreign.funptr`/`funptr_opt` with **no** `~runtime_lock`
+argument, i.e. the `ctypes-foreign` default (`~runtime_lock:false`) — not
+`~runtime_lock:true`. This is intentional, not an oversight: every `Vk.Fn.*`
+raw command is itself bound without releasing the runtime lock (`Vk.Fn`'s
+`Foreign.foreign` calls never pass `~release_runtime_lock:true` either,
+since Vulkan calls on this binding's supported drivers do not block for long
+enough to be worth the overhead), so the calling OCaml thread already holds
+the runtime lock for the *entire* duration of any Vulkan call, including
+when a driver/loader invokes a callback synchronously from within it —
+`~runtime_lock:true` (which makes the C-to-OCaml callback trampoline
+re-acquire the lock) would be redundant work for that case, and is actively
+wrong for the one case it would matter: **a callback must only be invoked
+synchronously, on the same thread that made the triggering Vulkan call**
+(validation layers and this binding's own `examples/debug_utils.ml` both do
+this). A driver or layer that invokes a registered callback from a *different*
+thread (some validation layers' asynchronous logging paths can do this) is
+unsupported: that thread would never hold the runtime lock in the first
+place, so calling back into OCaml from it is unsafe regardless of
+`~runtime_lock`. See `docs/GUIDE.md`'s Threading section.
 
 ## 9. Commands (`vk_fn.ml`, module `Vk.Fn`)
 
@@ -334,6 +398,36 @@ Split of responsibilities between hand-written and generated code:
   registers them into the `Vk_base.Loader` hooks at module initialisation.
   Global command stubs call `Vk_base.Loader.ensure ()` before dispatching.
 * `lib/vk.ml` exposes `module Loader` combining both.
+
+**Multi-instance semantics.** Every `_ref` above (`create_instance_ref` and
+every other command ref in `Vk_fn`) is a single, process-global mutable cell
+(volk style, not per-instance dispatch tables): `Vk.create_instance` calls
+`Vk.Loader.load_instance` on success (§10), which **rebinds every
+instance-/device-level command ref to the newest instance**. An application
+that keeps several `VkInstance`s alive concurrently and calls
+instance-/device-level commands against objects from more than one of them
+must call `Vk.Loader.load_instance` again before using objects belonging to
+a *different* instance than the one most recently loaded — otherwise a
+command ref may still point at a proc address resolved through the wrong
+instance (usually harmless for core/widely-supported entry points, which
+resolve to the same driver-level function regardless of instance, but not
+guaranteed for instance-specific extension function pointers).
+`Vk.create_device` intentionally does **not** call `Vk.Loader.load_device`
+for the same reason, one level down (an app with several `VkDevice`s must
+not let one device's `load_device` call silently override the device-level
+commands the others expect to keep dispatching through the instance-level
+trampoline).
+
+Because the dispatch tables are shared, mutable, process-global state,
+`Vk_base.Loader` guards `load`/`ensure` and every `*_hook` invocation
+(`load_global`/`load_instance`/`load_device`, each of which rewrites
+potentially hundreds of `Vk_fn` refs in one batch) with a mutex
+(`Vk_base.Recursive_mutex`, a small re-entrant wrapper around `Stdlib.Mutex`
+— re-entrant because a hook invocation calls back into
+`get_instance_proc_addr`/`get_device_proc_addr`, which call `ensure`, which
+wants the same lock, all on the same domain/thread), so that two OCaml 5
+domains racing instance/device setup can't interleave their writes into a
+torn dispatch table. Cheap: uncontended in the common single-domain case.
 
 ## 10. Ergonomic wrappers (`vk_api.ml`, top-level `Vk.*`)
 
@@ -400,6 +494,29 @@ alias of the raw function when a shape is not recognised — never omit a comman
 * `Vk.create_instance` additionally calls `Loader.load_instance` on success.
   `Vk.create_device` does **not** call `load_device` (multi-device safety).
 * Names are the same as in `Vk.Fn`.
+* **Keep-alive across the raw call.** Every argument the wrapper built — the
+  original value/list the caller passed in, and any temporary `CArray`
+  `_make_args` derived from it (a `T list` argument's `CArray.of_list` copy;
+  a `string list` argument's per-string `CArray`s) — is kept reachable past
+  the raw `Vk_fn.*` call with `ignore (Sys.opaque_identity (...))`. This
+  matters most for `T list` arguments of *structs* (`queue_submit`,
+  `create_graphics_pipelines`, `update_descriptor_sets`,
+  `cmd_pipeline_barrier`, ...): `CArray.of_list` byte-copies each element,
+  which does not extend the lifetime of that element's *own* `keep` list
+  (its sub-allocations — `pCommandBuffers`, `pNext` chains, strings — are
+  otherwise only protected by the original structure remaining reachable);
+  without this, OCaml's precise GC is free to treat the original list/struct
+  as dead as soon as its last syntactic use (the copy) has passed, which can
+  be *before* the raw call has actually finished reading the copy, or during
+  the call if a reentrant callback (e.g. a debug messenger) triggers a GC.
+  Single-struct `addr arg` inputs are included too: by inspection of ctypes'
+  `Ctypes_memory`/`Ctypes_ffi` (`Ctypes.addr` returns the structure's own
+  `Fat.t`, and `Ctypes_ffi`'s call machinery already keeps every marshalled
+  argument value reachable via `Ctypes_memory_stubs.use_value` until after
+  the call returns) this is redundant with what ctypes already guarantees
+  for that one case, but it is applied uniformly to every argument rather
+  than special-cased, per DESIGN's usual bias toward "never omit", and it
+  does not depend on that ctypes internal remaining true across versions.
 
 Examples of intended usage:
 
@@ -452,14 +569,51 @@ used to force `lvp_icd.json`)
 * `test_compute.ml`: compute pipeline doubles an array of ints (SPIR-V embedded).
 * `test_graphics.ml`: offscreen render pass draws a triangle into an image,
   copies to a host buffer, checks pixel colours.
+* `test_gc_safety.ml`: regression tests for two independent-review P0
+  keep-alive bugs plus a P1 callback-lifetime bug, each structured so the
+  "victim" allocation's only surviving reference is whatever the generated
+  code path under test keeps alive, then `Gc.full_major`'d (twice) and
+  heap-sprayed before checking the data is still intact: a struct/union
+  embedded **by value** (§7) survives its parent outliving it;
+  `Vk.queue_submit` keeps a `SubmitInfo.t list` argument (and the command
+  buffer it references) alive across the raw call, exercised end to end
+  against lavapipe with a debug-utils messenger with an allocating callback
+  active; a debug messenger's callback closure (retained via
+  `Vk_base.retain_forever`, §7/§8) survives its owning create-info struct
+  going out of scope.
 
 ## 13. Generator invariants
 
 * `python3 gen/gen.py` must be deterministic (sorted iteration) and fail with
   a clear error on any unknown C type rather than silently emitting `ptr void`.
-* Only `api="vulkan"` (or unspecified) items are generated; `vulkansc`-only
-  items are skipped.
-* Deprecated/promoted aliases are emitted (`module X_KHR = X`).
+* **Reachability.** A composite/handle/bitmask/enum/funcpointer/command is
+  only generated if it is reachable from an enabled `<feature>` (`api`
+  includes `"vulkan"`) or an enabled `<extension>` (`supported` includes
+  `"vulkan"`, and is not `"disabled"`) — `vulkansc`-only and `disabled`
+  items are excluded *entirely* (not just their enum values, which was the
+  P1-3 bug: a struct could be fully generated with a `make` that silently
+  produced `sType = StructureType.of_int 0` because only its enum *value*
+  was being skipped). `gen/vkgen/registry.py`'s `_reachability_roots`
+  collects type/command names directly named by a qualifying `<require>`
+  block (mirroring `gen/layout_check.py`/`gen/enum_check.py`'s real-headers
+  probes, which already worked this way); `_close_reachable_types` then
+  transitively walks struct/union members, funcpointer signatures, reachable
+  commands' params/result, handle parent chains, bitmask↔FlagBits pairings
+  and alias targets, since a handful of external platform types (`Display`,
+  `HWND`, `StdVideo*`...) are used as struct members but never themselves
+  named by a `<require>`. **Provisional extensions are included fully**
+  (§1) — same reachability rule as any other "vulkan" extension, no special
+  case. `Context.validate_types` (called from `Context.make`, so every
+  emitter benefits) additionally fails loudly if any *generated* struct's
+  `sType` member declares an expected `VK_STRUCTURE_TYPE_*` constant that
+  does not resolve to a real `StructureType` value — the P1-3 invariant that
+  catches a reachability/enum-value mismatch even if the two computations
+  above ever drift apart again. (`VkBaseInStructure`/`VkBaseOutStructure`
+  declare no expected constant at all — generic pNext-chain link types with
+  no single fixed `sType` — so they are not part of this check.)
+* Deprecated/promoted aliases are emitted (`module X_KHR = X`) — for a
+  reachable type; an alias whose target is unreachable (vulkansc-only or
+  disabled) is not generated either.
 * Output files start with `(* Generated by gen/gen.py from registry/vk.xml — do not edit *)`
   and disable noisy warnings: `[@@@warning "-32-33-34-37-39-60"]`.
 * The generator is the single source of truth: never hand-edit `lib/generated`.

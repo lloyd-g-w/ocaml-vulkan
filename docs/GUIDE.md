@@ -299,12 +299,34 @@ a raw `int` — `make` calls `to_int` on it internally before packing.
 
 `make` allocates with `Ctypes.make ~finalise:(fun _ -> ignore (Sys.opaque_identity !keep)) t`
 and pushes every OCaml-side allocation the struct's pointers need — `CArray`s
-backing list arguments, copied strings, nested structs passed by pointer,
-`Foreign.funptr_opt` closures for callbacks — onto that struct's private
-`keep : Obj.t list ref`. As long as *the struct itself* is reachable, the GC
-won't collect anything it points to; a `Gc.full_major ()` right after
-building a struct (as `smoke.ml` does after every `make`/create call) is
-therefore safe and won't corrupt anything Vulkan still holds a pointer to.
+backing list arguments, copied strings, nested structs/unions passed **by
+pointer or embedded by value** (e.g. `ComputePipelineCreateInfo.make
+~stage:(PipelineShaderStageCreateInfo.make ...)`: the embedded struct's own
+allocations, like its `pName`, are only safe because the embedded value
+itself is retained here, not just byte-copied), `Foreign.funptr_opt` closures
+for callbacks — onto that struct's private `keep : Obj.t list ref`. As long
+as *the struct itself* is reachable, the GC won't collect anything it points
+to; a `Gc.full_major ()` right after building a struct (as `smoke.ml` does
+after every `make`/create call) is therefore safe and won't corrupt anything
+Vulkan still holds a pointer to.
+
+Callback (`PFN_*`) members go one step further: the closure is *also*
+retained forever, process-wide (`Vk_base.retain_forever`), because the
+create-info struct it's attached to is usually short-lived (one-shot input to
+`vkCreateDebugUtilsMessengerEXT`, say) while the Vulkan object built from it
+(and the driver's raw pointer to the callback's C trampoline) outlives it —
+see [Extensions and function loading](#extensions-and-function-loading).
+
+Wrapper commands go one step further again, in the other direction: a `T
+list` argument (`Vk.queue_submit`'s `~command_buffers`-bearing `SubmitInfo.t
+list`, `Vk.create_compute_pipelines`'s `ComputePipelineCreateInfo.t list`,
+...) is copied into a temporary `CArray` for the raw call, and every wrapper
+keeps the original list/struct argument (and that temporary `CArray`)
+reachable past the raw call, precisely so that building a struct **inline,
+discarding it immediately after the call**, is safe and is in fact the
+intended idiom — this is exactly `DESIGN.md` §10's own example,
+`Vk.queue_submit queue [Vk.SubmitInfo.make ~command_buffers:[cb] ()] fence`.
+`test/test_gc_safety.ml` exercises this under real GC pressure.
 
 What this **does not** cover:
 
@@ -312,10 +334,6 @@ What this **does not** cover:
   after `make` returns — none of the examples in this repository need to do
   this, but if you `setf` a *pointer* field by hand for your own reasons,
   you are responsible for the pointee's lifetime.
-- The struct value itself once nothing references it — e.g. don't build a
-  `Vk.SubmitInfo.t` inline in an expression whose result you discard before
-  the driver has actually read it; bind it to a variable that stays in scope
-  across the call that uses it (all the examples do this).
 - Anything on the *Vulkan* side: destroying a `VkDevice` while buffers/images
   allocated from it are still live, or `vkFreeMemory`-ing memory a buffer is
   still bound to, is a Vulkan-level use-after-free that this binding cannot
@@ -419,6 +437,15 @@ just come back as their plain OCaml type. There's no special ceremony on the
 caller's side — `List.hd`, `List.iter`, `List.length`, etc. all just work, as
 in every example's `find_queue_family`/`enumerate_physical_devices` calls.
 
+> **Limitation.** Each element of a two-call enumeration's struct result is
+> allocated with a plain `X.make ()` (DESIGN.md §10), so there's no way to
+> pass per-element `?next` through the wrapper — you can't chain a `pNext`
+> struct onto an individual `VkSurfaceFormat2KHR` inside the list
+> `get_physical_device_surface_formats_2_khr` returns, for instance. Fall
+> back to `Vk.Fn` and drive the two-call idiom by hand (allocate the `CArray`
+> yourself, `setf`/`Ctypes.addr` each element's `?next` field before the
+> second call) if you need that.
+
 ### Output-array commands
 
 A *single* trailing output pointer (`VkInstance* pInstance`,
@@ -474,6 +501,36 @@ let cb =
 (all four are exercised in `examples/compute.ml` and
 `examples/triangle_offscreen.ml`.)
 
+### Push constants
+
+`vkCmdPushConstants`'s `const void* pValues` + `uint32_t size` pair is a
+"other `len` expression" (DESIGN.md §10's catch-all row): the wrapper keeps
+both as plain, explicit arguments rather than trying to infer one from the
+other, so you build a `Ctypes.CArray.t` of whatever element type your shader
+expects, compute the byte size yourself, and pass `Ctypes.to_voidp
+(CArray.start arr)`:
+
+```ocaml
+val cmd_push_constants :
+  Vk.CommandBuffer.t -> Vk.PipelineLayout.t -> Vk.ShaderStageFlags.t -> int (* offset *) ->
+  int (* size, in bytes *) -> unit Ctypes.ptr (* pValues *) -> unit
+
+let push_data = Ctypes.CArray.of_list Ctypes.float [ 1.0; 0.5; 0.25; 0.0 ] in
+Vk.cmd_push_constants command_buffer pipeline_layout Vk.ShaderStageFlags.compute
+  0 (* offset *)
+  (Ctypes.CArray.length push_data * Ctypes.sizeof Ctypes.float) (* size *)
+  (Ctypes.to_voidp (Ctypes.CArray.start push_data))
+```
+
+The same pattern works for integer push constants (`Ctypes.CArray.of_list
+Ctypes.int32_t [ 1l; 2l; 3l; 4l ]`, `Ctypes.sizeof Ctypes.int32_t` per
+element) or any other ctypes-representable element type; `size` is always
+"number of elements times `Ctypes.sizeof` of one element", exactly as it
+would be in C. `PipelineLayoutCreateInfo`'s `~push_constant_ranges` (a
+`VkPushConstantRange.t list`, DESIGN §7/§10's plain list-argument rule) is
+what declares the `offset`/`size`/`stageFlags` window(s) this call is
+allowed to write into; keep them in sync by hand, the way you would in C.
+
 ## Extensions and function loading
 
 `Vk.create_instance` calls `Vk.Loader.load_instance` for you on success,
@@ -524,6 +581,19 @@ logging.
 > and `~p_user_data`, not `~user_callback`/`~user_data`. Use the real names
 > (as this guide and `examples/debug_utils.ml` do) — `grep lib/generated` if
 > in doubt for any struct.
+
+> **Callback lifetime note.** The OCaml closure passed as
+> `~pfn_user_callback` (or any other `PFN_*` struct member —
+> `Vk.AllocationCallbacks`'s five, for instance) is retained **forever**,
+> process-wide (`Vk_base.retain_forever`, `DESIGN.md` §7/§8): the
+> create-info struct it's attached to is typically a one-shot argument (as
+> above), but the messenger/allocator registration built from it, and the
+> driver's raw pointer to its C trampoline, outlive that struct. This is a
+> deliberate, permanent leak of one closure per callback registered through
+> a struct constructor — negligible for the debug messengers and allocation
+> callbacks this binding is actually used for (an app that churned through
+> thousands of short-lived messengers would accumulate them; nothing in
+> ordinary Vulkan usage does that).
 
 ## Interop with SDL2 (tsdl)
 
@@ -602,27 +672,53 @@ let render_frame () =
 Vulkan itself allows calling into most commands from multiple threads as
 long as you don't mutate the same object concurrently (see the spec's
 "Threading Behavior" appendix) — this binding doesn't add any additional
-restriction on the *Vulkan-call* side. Two OCaml-specific notes:
+restriction on the *Vulkan-call* side. Several OCaml-specific notes:
 
 - OCaml's runtime lock is a single global lock; two threads both calling
   into a `Vk.*`/`Vk.Fn.*` function at the same time serialise on it like any
   other OCaml code would, they don't get true concurrent execution inside
   this binding (the driver-side work Vulkan itself does on your behalf,
   e.g. inside a queue submission, is unaffected — that happens in the
-  driver/kernel, outside OCaml entirely).
+  driver/kernel, outside OCaml entirely). Every `Vk.Fn.*` raw command is
+  bound without `~release_runtime_lock`, so the calling thread holds the
+  runtime lock for the entire duration of any Vulkan call.
 - User-supplied callbacks (right now, just `PfnDebugUtilsMessengerCallbackEXT`
   — see [Extensions and function loading](#extensions-and-function-loading))
-  are wrapped with `Foreign.funptr_opt` with no `~runtime_lock` argument
-  (i.e. the `ctypes-foreign` default), which is a **discrepancy** from
-  `DESIGN.md` §8's claim that this uses `~runtime_lock:true`. In practice
-  this hasn't caused a problem in `examples/debug_utils.ml` because every
-  message observed there (both the loader's own diagnostics and our
-  synthetic `vkSubmitDebugUtilsMessageEXT` one) is delivered synchronously,
-  on the same thread that's already holding the runtime lock inside the
-  triggering Vulkan/OCaml call. A driver or layer that invokes the callback
+  are wrapped with `Foreign.funptr_opt` with **no** `~runtime_lock` argument
+  (the `ctypes-foreign` default, `~runtime_lock:false`) — this now matches
+  `DESIGN.md` §8, which used to (incorrectly) describe the code as passing
+  `~runtime_lock:true`; that was a documentation bug, not a code change.
+  The deliberate design decision behind it: since no `Vk.Fn.*` call ever
+  releases the runtime lock, the calling thread already holds it for the
+  callback's entire potential invocation window, so re-acquiring it would be
+  redundant — **but this only works if the callback is invoked synchronously,
+  on the same thread that made the triggering Vulkan call** (what every
+  validation layer, and `examples/debug_utils.ml`'s messages — both the
+  loader's own diagnostics and our synthetic `vkSubmitDebugUtilsMessageEXT`
+  one — actually do). A driver or layer that invokes a registered callback
   from a separate, non-Vulkan-call thread (some validation layers' async
-  logging paths do this) could behave differently; this hasn't been
-  exercised on this machine (no validation layer installed).
+  logging paths can do this) is **unsupported**: that thread never holds the
+  runtime lock in the first place, so calling back into OCaml from it would
+  be unsafe no matter what `~runtime_lock` said. This hasn't been exercised
+  on this machine (no validation layer installed, only the loader's own
+  synchronous messages).
+- **Multi-instance dispatch is process-global, not per-domain.** `Vk_fn`'s
+  command refs (what `Vk.Fn.*`/`Vk.*` actually call through) are one shared,
+  mutable set for the whole process — `Vk.create_instance` rebinds every
+  instance-/device-level ref to point through *that* instance
+  (`Vk.Loader.load_instance`, called automatically on success). An app that
+  keeps multiple `VkInstance`s alive concurrently (including across OCaml 5
+  domains) and calls instance-/device-level commands against more than one
+  of them must call `Vk.Loader.load_instance` again before switching to
+  objects from a different instance. `Vk.create_device` deliberately never
+  calls `Vk.Loader.load_device` for the same reason (`DESIGN.md` §9). The
+  refs themselves, and the one-time library-load state, are guarded by a
+  small re-entrant mutex in `Vk_base.Loader` so that two domains racing
+  `Vk.create_instance`/`Vk.Loader.load_instance` can't interleave a torn
+  write into the shared dispatch table — but the mutex only protects against
+  *torn writes*, not against the *semantic* multi-instance hazard above
+  (calling a stale, wrong-instance-resolved command ref is still possible
+  and is an application-level bug, not a data race).
 
 ## The 64-bit integer caveat
 
@@ -633,14 +729,20 @@ OCaml `int` through a two's-complement view (`DESIGN.md` §4). This means:
 - `Vk.whole_size = -1` *is* `VK_WHOLE_SIZE` (`UINT64_MAX`); pass it to
   `~range:Vk.whole_size` etc. exactly as the C API expects `VK_WHOLE_SIZE`
   (see `examples/compute.ml`'s `DescriptorBufferInfo.make ~range:Vk.whole_size`).
-- OCaml's native `int` on 64-bit platforms only has 63 usable bits, so the
-  top two bits (62–63) of a genuinely large unsigned 64-bit value are not
-  representable as a positive `int`. Vulkan never actually produces values
-  that use those bits in practice (no real device has e.g. a
-  `VkDeviceSize`-typed limit anywhere near 2⁶²), so this is a real but inert
+- OCaml's native `int` on 64-bit platforms only has 63 usable bits, and the
+  view's `read`/`write` go through `Int64.to_int`/`Int64.of_int`, which drop
+  bit 63 of the pattern outright. This is a **collision**, not merely a
+  positivity/sign quirk: bit 62 becomes the OCaml int's own sign bit (so
+  every value below 2⁶³ still reads back as its own distinct, if
+  possibly-negative-looking, int), but every value *at or above* 2⁶³ reads
+  back identical to `value - 2^63` — in particular `2^63-1` and `2^64-1`
+  (`UINT64_MAX`) both read back as `-1`. Vulkan never actually produces
+  values that use bit 63 in practice except `UINT64_MAX`-style all-ones
+  sentinels (`VK_WHOLE_SIZE`, `VK_REMAINING_MIP_LEVELS`, ...), which this
+  collision maps *correctly* (to `-1`), so this is a real but inert
   limitation — it would only bite a program that tries to round-trip an
-  arbitrary attacker-controlled or synthetic 64-bit value through this
-  binding, not normal Vulkan usage.
+  arbitrary attacker-controlled or synthetic 64-bit value with a meaningful
+  top bit through this binding, not normal Vulkan usage.
 - This library only supports 64-bit platforms in the first place (`x86_64`/
   `aarch64`; `DESIGN.md` §1), so there's no 32-bit-`int` version of this
   problem to worry about.
@@ -687,12 +789,18 @@ agreeing with itself:
   (wrapped by `scripts/gen_layout.sh`). Only struct/union names present on
   *both* sides are compared — a name the generator doesn't implement yet,
   or one the installed headers don't declare, isn't a failure. As of this
-  writing that's **1360** struct/union names, **0** mismatches.
+  writing that's **1360** struct/union names, **0** mismatches. Also checks
+  `Vk.Layout.structure_types` (§7/§13): no struct with a resolved
+  `structure_type` has `StructureType.to_int st = 0` other than
+  `VkApplicationInfo`.
 - **`test_enum_values.ml`** does the same for individual enum/bitmask
   constants: `Vk.Enum_values.all` (`lib/generated/vk_enum_values.ml`)
   against `test/enum_values/x86_64-linux-gnu.txt`, produced by
   `gen/enum_check.py`/`scripts/gen_enum_values.sh`. As of this writing
-  that's **4455** constants, **0** mismatches.
+  that's **4486** constants — **every** golden constant, 100% overlap, since
+  the golden probe already builds with `VK_ENABLE_BETA_EXTENSIONS` and the
+  generator now includes provisional extensions fully too (§1/§13) — **0**
+  mismatches.
 
 Both golden files are committed, so running `dune build @runtest` never
 needs `$VULKAN_HEADERS`/`gcc` — only *regenerating* the golden files does.

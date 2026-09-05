@@ -38,21 +38,22 @@ opam pin (below) rather than a version constraint.
 ## Feature list
 
 Generated from `registry/vk.xml` (Vulkan-Headers tag `vulkan-sdk-1.4.357.0`,
-see `registry/VERSION`), covering core Vulkan 1.0–1.4 and every extension
-in the registry except the `vulkansc` API and provisional/beta-only types
-(`DESIGN.md` §1). Counted directly from the committed
-`lib/generated/` sources (`grep`; see the exact commands in
+see `registry/VERSION`), covering core Vulkan 1.0–1.4 and every extension in
+the registry reachable from an enabled feature/extension, except the
+`vulkansc` API and `supported="disabled"` extensions — **provisional
+extensions are included fully** (`DESIGN.md` §1/§13). Counted directly from
+the committed `lib/generated/` sources (`grep`; see the exact commands in
 [Regeneration](#regeneration) below — these will drift if the registry is
 ever upgraded without updating this paragraph):
 
 | | count |
 |---|---:|
-| structs & unions | 1485 |
-| commands (including deprecated/promoted aliases) | 864 |
-| extensions | 466 |
-| enum & flag types | 406 |
-| handle types | 60 |
-| generated OCaml, total | ~85,000 lines |
+| structs & unions | 1713 |
+| commands (including deprecated/promoted aliases) | 841 |
+| extensions | 471 |
+| enum & flag types | 487 |
+| handle types | 62 |
+| generated OCaml, total | ~85,300 lines |
 
 Both API layers described in [`docs/GUIDE.md`](docs/GUIDE.md) are generated:
 a faithful **raw layer** (`Vk.Fn`, one function per Vulkan command with the
@@ -76,12 +77,32 @@ opam pin add vulkan .
 
 Build-time dependencies are OCaml (>= 4.14; developed against 5.2.0),
 `ctypes` (>= 0.20; developed against 0.24), `ctypes-foreign` (same) and
-`integers` — no Vulkan SDK, no system Vulkan headers, no C compiler plugin.
-`alcotest` (tests) and `odoc` (docs) are optional, opam-filtered
-(`--with-test` / `--with-doc`).
+`integers` — no Vulkan SDK, no system Vulkan headers, and this package
+itself generates no C stubs of its own. `alcotest` (tests) and `odoc`
+(docs) are optional, opam-filtered (`--with-test` / `--with-doc`).
+
+**`ctypes-foreign` itself needs a working native toolchain to build**,
+independent of anything Vulkan-specific: a C compiler, `libffi`'s headers,
+and `pkg-config` to find them (it links against `libffi` to implement
+`Foreign.foreign`/`Foreign.funptr`). On Debian/Ubuntu:
+
+```sh
+sudo apt install build-essential libffi-dev pkg-config
+```
+
+(other distributions: whatever package provides `ffi.h`/`libffi.pc`, e.g.
+`libffi-devel` on Fedora, plus a C compiler and `pkgconf`/`pkg-config`.) If
+`opam install` fails while building `ctypes-foreign`/`conf-libffi`, this is
+almost always the missing piece.
 
 ## Runtime requirements
 
+- `libffi` itself (the shared library, not just the headers above) — the
+  same one `ctypes-foreign` links against at build time; normally already
+  present as a transitive dependency of the rest of the system, but called
+  out here since it's easy to have the `-dev`/headers package at build time
+  on a builder image and only the runtime package (or neither) on a
+  deployment image.
 - A Vulkan loader shared library on the dynamic linker path:
   `libvulkan.so.1` on Linux, `libvulkan.1.dylib` on macOS, `vulkan-1.dll` on
   Windows (`libvulkan1` on Debian/Ubuntu; `libvulkan-dev` also works and
@@ -207,17 +228,18 @@ the one remaining naming quirk found while writing `compute.ml`/
 All tests (`test/`, `alcotest`) and all examples are written against a
 real Vulkan implementation — Mesa's `lavapipe` (`llvmpipe`) software
 rasterizer — so no GPU is required, including in CI. The suite is green
-(14 test cases across 7 suites, `DESIGN.md` §12):
+(18 test cases across 8 suites, `DESIGN.md` §12):
 
 | suite | what it checks |
 |---|---|
 | `test_enums.ml` | enum/flag `of_int`/`to_string` round trips, flag ops, `Result` printing |
-| `test_layout.ml` | every generated struct's `sizeof`/member offsets against **1360** golden values compiled from the real C headers — 0 mismatches |
-| `test_enum_values.ml` | every generated enum/bitmask constant against **4455** golden values compiled from the real C headers — 0 mismatches |
+| `test_layout.ml` | every generated struct's `sizeof`/member offsets against **1360** golden values compiled from the real C headers — 0 mismatches; plus: no struct with a resolved `structure_type` silently defaults its `sType` to 0 |
+| `test_enum_values.ml` | every generated enum/bitmask constant against **4486** golden values compiled from the real C headers — 0 mismatches |
 | `test_structs.ml` | `make` sets `sType`/counts/arrays correctly; keep-alive survives `Gc.full_major` |
 | `test_instance.ml` | instance → physical device properties/queue families → device → buffer + memory → map |
 | `test_compute.ml` | a compute pipeline doubles a 1024-element buffer end to end |
 | `test_graphics.ml` | an offscreen render pass draws a triangle; read-back pixels are checked |
+| `test_gc_safety.ml` | two independent-review P0 generator keep-alive bugs (a struct/union embedded by value; `Vk.queue_submit`'s `SubmitInfo.t list` argument) plus a P1 callback-lifetime bug, each regression-tested under `Gc.full_major` + heap-spraying pressure |
 
 ```sh
 opam install . --deps-only --with-test
@@ -310,16 +332,18 @@ scripts/embed_spv.ml   embed a compiled .spv file as an OCaml string constant
   showing how the pieces (handle-to-`nativeint` conversions,
   `VkSurfaceKHR`/swapchain creation, `vkAcquireNextImageKHR`/
   `vkQueuePresentKHR`) fit together.
-- **64-bit integers only go up to 62 usable bits** through this binding's
-  `int`-based views (documented, inert limitation — see
+- **64-bit integers above `2^63` collide** through this binding's `int`-based
+  views — not merely "lose their sign": `2^63-1` and `2^64-1` both read
+  back as `-1` (documented, inert limitation, unused by real Vulkan values
+  except `UINT64_MAX`-style sentinels, which round-trip correctly — see
   [`docs/GUIDE.md`](docs/GUIDE.md#the-64-bit-integer-caveat)).
 - **One naming exception**: `DebugUtilsMessengerCreateInfoEXT.make`'s
   callback/user-data arguments are `~pfn_user_callback`/`~p_user_data`, not
   the prefix-stripped form the general ergonomic-labelling rule
-  (`DESIGN.md` §3) would suggest, and its `Foreign.funptr_opt` binding
-  doesn't pass `~runtime_lock:true` as `DESIGN.md` §8 describes — see
+  (`DESIGN.md` §3) would suggest — see
   [`docs/GUIDE.md`](docs/GUIDE.md#extensions-and-function-loading) for
-  detail and the threading implications.
+  detail and the threading implications of its (deliberate, no longer a
+  documentation discrepancy) `~runtime_lock:false`.
 - See `CHANGELOG.md` for anything more specific to the current state of a
   given area (generator, tests, this documentation lane).
 

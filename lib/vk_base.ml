@@ -1,7 +1,22 @@
 open Ctypes
 
 (* Vulkan's public scalar values are ordinary OCaml ints.  The uint64 view
-   preserves two's-complement spellings, so -1 is VK_WHOLE_SIZE. *)
+   preserves two's-complement spellings, so -1 is VK_WHOLE_SIZE.
+
+   Precise limitation (DESIGN.md §4; not merely "large values look
+   negative"): `read`/`write` go through `Int64.to_int`/`Int64.of_int`,
+   which drop bit 63 of the 64-bit pattern outright (OCaml's native `int`
+   has only 63 usable bits). Bit 62 is *not* lost -- it becomes the OCaml
+   int's own sign bit, so every value below 2^63 still reads back as its own
+   distinct (possibly negative-looking) int. But every value at or above
+   2^63 reads back identical to `value - 2^63`: this is a genuine collision,
+   not just a sign/positivity quirk. In particular 2^63-1 and 2^64-1
+   (`UINT64_MAX`, i.e. `VK_WHOLE_SIZE`/`VK_REMAINING_MIP_LEVELS`/...) both
+   read back as -1. `write` is the exact inverse (`-1` always round-trips to
+   `0xFFFF_FFFF_FFFF_FFFF`), so the collision only bites a caller reading an
+   arbitrary/adversarial `uint64` whose top bit is meaningful; Vulkan itself
+   only uses that range for UINT64_MAX-style all-ones sentinels, which are
+   exactly the values this collision maps correctly (to -1). *)
 let uint8 = view ~read:Unsigned.UInt8.to_int ~write:Unsigned.UInt8.of_int uint8_t
 let uint16 = view ~read:Unsigned.UInt16.to_int ~write:Unsigned.UInt16.of_int uint16_t
 let uint32 = view ~read:Unsigned.UInt32.to_int ~write:Unsigned.UInt32.of_int uint32_t

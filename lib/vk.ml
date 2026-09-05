@@ -17,4 +17,10 @@ include Vk_types_12
 include Vk_types_13
 include Vk_types_14
 include Vk_types_15
+module Fn = Vk_fn
+module Loader = struct
+  include Vk_base.Loader
+  let load_instance = Vk_fn.load_instance
+  let load_device = Vk_fn.load_device
+end
 module Layout = Vk_layout

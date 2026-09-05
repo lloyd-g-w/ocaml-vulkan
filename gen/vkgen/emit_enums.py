@@ -3,37 +3,9 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from .emit_common import Context, ocaml_int, write_generated
+from .emit_common import Context, ocaml_int, resolve_enum_values, write_generated
 from . import naming
 from .registry import EnumValue
-
-
-def _resolved_values(ctx: Context, values: list[EnumValue]) -> list[tuple[EnumValue, int]]:
-    global_values: dict[str, int] = {}
-    pending: list[EnumValue] = []
-    for enum in ctx.registry.enums.values():
-        for value in enum.values:
-            if isinstance(value.value, int):
-                global_values.setdefault(value.name, value.value)
-            elif value.alias:
-                pending.append(value)
-    changed = True
-    while changed and pending:
-        changed = False
-        rest: list[EnumValue] = []
-        for value in pending:
-            if value.alias in global_values:
-                global_values[value.name] = global_values[value.alias]
-                changed = True
-            else:
-                rest.append(value)
-        pending = rest
-    out = []
-    for value in values:
-        resolved = value.value if isinstance(value.value, int) else global_values.get(value.alias or "")
-        if isinstance(resolved, int):
-            out.append((value, resolved))
-    return out
 
 
 def _module(ctx: Context, ctype: str, module: str, values: list[EnumValue],
@@ -42,7 +14,7 @@ def _module(ctx: Context, ctype: str, module: str, values: list[EnumValue],
     lines = [f"module {module} = struct", f"  include Vk_base.{functor} ()", f"  let () = set_type_name \"{module}\""]
     used: dict[str, int] = {}
     constants: list[tuple[str, str]] = []
-    for value, number in _resolved_values(ctx, values):
+    for value, number in resolve_enum_values(ctx, values):
         identifier = naming.enum_value_name(ctype, value.name, ctx.registry.tags)
         if identifier in used:
             used[identifier] += 1

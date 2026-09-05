@@ -5,14 +5,20 @@
 ; test_compute.ml/test_graphics.ml were originally written blind against
 ; DESIGN.md (each still carries its own assumptions comment block at the
 ; top, now reconciled against the real generated API by the integration
-; lane); test_runner.ml is the thin `Alcotest.run` entry point wiring their
-; suites together.
+; lane); test_enum_values.ml is the enum-value golden check (DESIGN.md
+; §5/§10/§12/§13), added by the integration lane alongside test_layout.ml's
+; struct-layout golden check; test_runner.ml is the thin `Alcotest.run`
+; entry point wiring all of their suites together.
 ;
-; `(deps (source_tree layout))` makes dune mirror test/layout/*.txt into the
-; sandbox test_layout.ml runs from (_build/default/test/layout/...) --
-; without it Sys.file_exists always sees a missing golden file and the test
-; silently skips instead of comparing.
+; `(deps (source_tree layout) (source_tree enum_values))` makes dune mirror
+; test/layout/*.txt and test/enum_values/*.txt into the sandbox
+; test_layout.ml/test_enum_values.ml run from
+; (_build/default/test/{layout,enum_values}/...) -- without it
+; Sys.file_exists always sees a missing golden file and the test silently
+; skips instead of comparing.
 (test
  (name test_runner)
  (libraries vulkan vk_test_shaders alcotest ctypes integers)
- (deps (source_tree layout)))
+ (deps
+  (source_tree layout)
+  (source_tree enum_values)))

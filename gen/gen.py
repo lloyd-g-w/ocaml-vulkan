@@ -8,7 +8,7 @@ import sys
 
 from vkgen.registry import Registry
 from vkgen.emit_common import Context
-from vkgen import emit_api, emit_consts, emit_enums, emit_fn, emit_handles, emit_types
+from vkgen import emit_api, emit_consts, emit_enum_values, emit_enums, emit_fn, emit_handles, emit_types
 
 
 def parse_args() -> argparse.Namespace:
@@ -31,6 +31,7 @@ def main() -> int:
     args.out.mkdir(parents=True, exist_ok=True)
     emit_consts.emit(context, args.out)
     emit_enums.emit(context, args.out)
+    emit_enum_values.emit(context, args.out)
     emit_handles.emit(context, args.out)
     chunks = emit_types.emit(context, args.out, chunk_size=args.chunk_size)
     emit_fn.emit(context, args.out, chunks)

@@ -34,3 +34,8 @@ setup.log
 
 # Local OPAM switch
 _opam/
+
+# opam local switch / editor
+_opam/
+.envrc.local
+*.swp

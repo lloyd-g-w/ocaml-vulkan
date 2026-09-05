@@ -1,2 +1,8 @@
+(include_subdirs unqualified)
+
 (library
- (name ocaml_vulkan))
+ (name vk)
+ (public_name vulkan)
+ (libraries ctypes ctypes-foreign integers)
+ (flags
+  (:standard -w +a-4-9-40-41-42-44-45-70)))

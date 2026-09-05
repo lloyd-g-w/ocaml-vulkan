@@ -1,26 +1,31 @@
-(lang dune 3.24)
+(lang dune 3.10)
 
-(name ocaml_vulkan)
+(name vulkan)
 
 (generate_opam_files true)
 
 (source
- (github username/reponame))
+ (github lloyd-g-w/ocaml-vulkan))
 
-(authors "Author Name <author@example.com>")
+(authors "Lloyd Williams")
 
-(maintainers "Maintainer Name <maintainer@example.com>")
+(maintainers "Lloyd Williams")
 
-(license LICENSE)
+(license MIT)
 
-(documentation https://url/to/documentation)
+(documentation https://github.com/lloyd-g-w/ocaml-vulkan)
 
 (package
- (name ocaml_vulkan)
- (synopsis "A short synopsis")
- (description "A longer description")
- (depends ocaml)
+ (name vulkan)
+ (synopsis "OCaml bindings to the Vulkan graphics and compute API")
+ (description
+  "Complete, generated bindings to Vulkan (core 1.0-1.4 and all registry extensions) built on ctypes. Provides a faithful raw layer plus an ergonomic OCaml layer with labelled struct constructors, lists instead of count/pointer pairs and exceptions for VkResult errors. Loads libvulkan at runtime, no C stubs or headers required.")
+ (depends
+  (ocaml (>= 4.14))
+  (ctypes (>= 0.20))
+  (ctypes-foreign (>= 0.20))
+  integers
+  (alcotest :with-test)
+  (odoc :with-doc))
  (tags
-  ("add topics" "to describe" your project)))
-
-; See the complete stanza docs at https://dune.readthedocs.io/en/stable/reference/dune-project/index.html
+  (vulkan graphics gpu compute bindings ctypes)))

@@ -1,0 +1,36 @@
+; Embeds the committed SPIR-V binaries (compiled from the .comp/.vert/.frag
+; sources in this directory with `glslc`, see scripts/gen_layout.sh's sibling
+; note in README.md for the exact commands) into an OCaml library so tests
+; don't need glslc or any shader compiler at build/test time -- CI only
+; installs the Vulkan loader/driver, not shaderc. See DESIGN.md §12
+; (test_compute.ml, test_graphics.ml) and gen_layout.sh's ownership sibling
+; script scripts/embed_spv.ml.
+(rule
+ (targets vk_test_shaders.ml)
+ (deps
+  ../scripts/embed_spv.ml
+  double.comp.spv
+  triangle.vert.spv
+  triangle.frag.spv)
+ (action
+  (run ocaml %{dep:../scripts/embed_spv.ml} vk_test_shaders.ml
+    double_comp double.comp.spv
+    triangle_vert triangle.vert.spv
+    triangle_frag triangle.frag.spv)))
+
+(library
+ (name vk_test_shaders)
+ (modules vk_test_shaders))
+
+; `dune build -j 2 shaders` / `dune runtest` sanity check: every embedded
+; blob starts with the SPIR-V magic number and has a length divisible by 4.
+(executable
+ (name check_magic)
+ (modules check_magic)
+ (libraries vk_test_shaders))
+
+(rule
+ (alias runtest)
+ (deps check_magic.exe)
+ (action
+  (run ./check_magic.exe)))

@@ -23,6 +23,10 @@ class Arg:
     call: str
     optional: bool = False
     prep: list[str] | None = None
+    # Extra local temporaries (besides `binding` itself) introduced by `prep`
+    # that must also stay reachable past the raw call -- see
+    # `_keep_alive_exprs` (P0-2, DESIGN.md §9/§10).
+    keep_extra: list[str] | None = None
 
 
 def _pointee(ctx: Context, member: Member) -> str:
@@ -168,12 +172,18 @@ def _make_args(ctx: Context, command: Command, hidden: set[str]) -> tuple[list[A
                     f"  ignore strings_{label};",
                     f"  let pointer_{label} = if {binding} = [] then {_null(ctx, p)} else CArray.start array_{label} in",
                 ]
+                # `strings_{label}` (the per-string CArrays) and `array_{label}`
+                # (the pointer-to-each-string array) are fresh allocations that
+                # only `pointer_{label}` (a raw ptr with no back-reference) is
+                # derived from; ctypes' `ignore` above is not a keep-alive.
+                keep_extra = [f"strings_{label}", f"array_{label}"]
             else:
                 prep = [
                     f"  let array_{label} = CArray.of_list ({elem_typ}) {binding} in",
                     f"  let pointer_{label} = if {binding} = [] then {_null(ctx, p)} else CArray.start array_{label} in",
                 ]
-            arg = Arg(p, label, binding, binding, f"pointer_{label}", prep=prep)
+                keep_extra = [f"array_{label}"]
+            arg = Arg(p, label, binding, binding, f"pointer_{label}", prep=prep, keep_extra=keep_extra)
             args.append(arg); by_param[p.name] = arg
             continue
 
@@ -209,6 +219,51 @@ def _make_args(ctx: Context, command: Command, hidden: set[str]) -> tuple[list[A
                             f"List.length {first.binding}")
             by_param[count_name] = synthetic
     return args, by_param
+
+
+def _keep_alive_stmt(args: list[Arg]) -> str | None:
+    """P0-2 (DESIGN.md §9/§10): after the raw `Vk_fn.*` call returns, every
+    argument the wrapper built -- the original OCaml value the caller passed
+    in *and* any temporary CArray/pointer-list `_make_args` derived from it
+    -- must still be reachable, or OCaml's precise GC is free to treat it as
+    dead as soon as its last syntactic use (typically the `CArray.of_list`/
+    `addr`/`CArray.start` call that copied out of it) has passed, which can
+    be *before* the C call it was built for has actually run or returned:
+
+    * List-of-struct arguments (`queue_submit`'s `submits`, `create_graphics_
+      pipelines`'s `infos`, ...) are copied element-by-element into a fresh
+      CArray (`CArray.of_list`); the copy is a raw byte-copy of each struct's
+      fields, including any pointer fields (pCommandBuffers, pNext, ...) --
+      it does not, and cannot, extend the lifetime of the heap allocations
+      those pointers reference, which are otherwise only protected by the
+      *original* structure's own keep-alive list/finaliser (`Vk_base.
+      make_kept`). If the original list argument (and, for a list of
+      strings, the per-string CArrays `Vk_base.carray_of_strings` builds)
+      becomes unreachable and is collected before/during the call, the copy
+      the C function actually reads is left holding dangling pointers.
+    * A single struct passed as `addr arg` is, by inspection of ctypes'
+      `Ctypes_memory`/`Ctypes_ffi` (`Ctypes.addr` returns the structure's own
+      `Fat.t`, and `Ctypes_ffi.write_arg`/`invoke`'s `Call` case already
+      keeps every marshalled argument value reachable via `Ctypes_memory_
+      stubs.use_value` until *after* the underlying C call returns) already
+      protected by ctypes itself for the duration of the call. Retaining it
+      here too is redundant but cheap, uniform, and does not depend on that
+      ctypes internal remaining true across versions -- DESIGN.md §9/§10
+      says to err on the side of keeping everything alive past the call.
+
+    `ignore (Sys.opaque_identity (...))` is the standard way to defeat the
+    compiler's liveness analysis and force a value to stay reachable up to
+    that specific program point (a single-element tuple `(x)` is just `x`,
+    so this reads naturally whether there is one argument or several).
+    """
+    exprs: list[str] = []
+    for arg in args:
+        if arg.binding:
+            exprs.append(arg.binding)
+        exprs.extend(arg.keep_extra or [])
+    if not exprs:
+        return None
+    return f"  ignore (Sys.opaque_identity ({', '.join(exprs)}));"
 
 
 def _function_head(command: Command, args: list[Arg], name: str, *, destructor: bool = False) -> str:
@@ -318,7 +373,11 @@ def _emit_enumeration(ctx: Context, command: Command, pair: tuple[Member, Member
             f"    {second_call};",
             "    CArray.to_list (CArray.from_ptr (CArray.start storage) (!@ count))",
         ])
-    lines.extend(["  in", "  fetch ()"])
+    keep_alive = _keep_alive_stmt(args)
+    if keep_alive:
+        lines.extend(["  in", "  let enumeration_result = fetch () in", keep_alive, "  enumeration_result"])
+    else:
+        lines.extend(["  in", "  fetch ()"])
     return "\n".join(lines)
 
 
@@ -340,6 +399,9 @@ def _emit_output_list(ctx: Context, command: Command, output: Member, count_expr
     lines.append(f"  let storage = CArray.make ({elem_typ}) output_count in")
     call = _call(command, by_param, {output.name: "CArray.start storage"})
     lines.append(f"  let result = {call} in")
+    keep_alive = _keep_alive_stmt(args)
+    if keep_alive:
+        lines.append(keep_alive)
     lines.extend(_result_tail(command, "(CArray.to_list storage)"))
     return "\n".join(lines)
 
@@ -377,17 +439,23 @@ def _emit_regular(ctx: Context, command: Command) -> str:
         lines.extend(allocation)
         overrides[output.name] = call_value
     call = _call(command, by_param, overrides)
+    keep_alive = _keep_alive_stmt(args)
     if _is_result(command):
         lines.append(f"  let result = {call} in")
+        if keep_alive:
+            lines.append(keep_alive)
         lines.extend(_result_tail(command, output_value,
                                   create_instance=command.name == "vkCreateInstance"))
     elif _is_void(command):
-        if output_value:
-            lines.extend([f"  {call};", f"  {output_value}"])
-        else:
-            lines.append(f"  {call}")
+        lines.append(f"  {call};")
+        if keep_alive:
+            lines.append(keep_alive)
+        lines.append(f"  {output_value}" if output_value else "  ()")
     else:
-        lines.append(f"  {call}")
+        lines.append(f"  let call_result = {call} in")
+        if keep_alive:
+            lines.append(keep_alive)
+        lines.append("  call_result")
     return "\n".join(lines)
 
 

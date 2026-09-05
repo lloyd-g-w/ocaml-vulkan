@@ -2154,7 +2154,7 @@ module AccelerationStructureCreateInfo2KHR = struct
      | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
      | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
     setf value _create_flags arg_create_flags;
-    (match arg_address_range with None -> () | Some x -> setf value _address_range x);
+    (match arg_address_range with None -> () | Some x -> setf value _address_range x; Vk_base.retain keep x);
     setf value _address_flags arg_address_flags;
     setf value _type_ arg_type_;
     value
@@ -2190,7 +2190,7 @@ module AccelerationStructureDenseGeometryFormatTrianglesDataAMDX = struct
     (match arg_next with
      | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
      | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    (match arg_compressed_data with None -> () | Some x -> setf value _compressed_data x);
+    (match arg_compressed_data with None -> () | Some x -> setf value _compressed_data x; Vk_base.retain keep x);
     setf value _data_size arg_data_size;
     setf value _num_triangles arg_num_triangles;
     setf value _num_vertices arg_num_vertices;
@@ -2220,7 +2220,7 @@ module AccelerationStructureGeometryAabbsDataKHR = struct
     (match arg_next with
      | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
      | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    (match arg_data with None -> () | Some x -> setf value _data x);
+    (match arg_data with None -> () | Some x -> setf value _data x; Vk_base.retain keep x);
     setf value _stride arg_stride;
     value
 end
@@ -2246,7 +2246,7 @@ module AccelerationStructureGeometryInstancesDataKHR = struct
      | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
      | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
     setf value _array_of_pointers arg_array_of_pointers;
-    (match arg_data with None -> () | Some x -> setf value _data x);
+    (match arg_data with None -> () | Some x -> setf value _data x; Vk_base.retain keep x);
     value
 end
 
@@ -2289,13 +2289,13 @@ module AccelerationStructureGeometryLinearSweptSpheresDataNV = struct
      | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
      | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
     setf value _vertex_format arg_vertex_format;
-    (match arg_vertex_data with None -> () | Some x -> setf value _vertex_data x);
+    (match arg_vertex_data with None -> () | Some x -> setf value _vertex_data x; Vk_base.retain keep x);
     setf value _vertex_stride arg_vertex_stride;
     setf value _radius_format arg_radius_format;
-    (match arg_radius_data with None -> () | Some x -> setf value _radius_data x);
+    (match arg_radius_data with None -> () | Some x -> setf value _radius_data x; Vk_base.retain keep x);
     setf value _radius_stride arg_radius_stride;
     setf value _index_type arg_index_type;
-    (match arg_index_data with None -> () | Some x -> setf value _index_data x);
+    (match arg_index_data with None -> () | Some x -> setf value _index_data x; Vk_base.retain keep x);
     setf value _index_stride arg_index_stride;
     setf value _indexing_mode arg_indexing_mode;
     setf value _end_caps_mode arg_end_caps_mode;
@@ -2363,7 +2363,7 @@ module AccelerationStructureGeometryMotionTrianglesDataNV = struct
     (match arg_next with
      | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
      | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    (match arg_vertex_data with None -> () | Some x -> setf value _vertex_data x);
+    (match arg_vertex_data with None -> () | Some x -> setf value _vertex_data x; Vk_base.retain keep x);
     value
 end
 
@@ -2402,13 +2402,13 @@ module AccelerationStructureGeometrySpheresDataNV = struct
      | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
      | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
     setf value _vertex_format arg_vertex_format;
-    (match arg_vertex_data with None -> () | Some x -> setf value _vertex_data x);
+    (match arg_vertex_data with None -> () | Some x -> setf value _vertex_data x; Vk_base.retain keep x);
     setf value _vertex_stride arg_vertex_stride;
     setf value _radius_format arg_radius_format;
-    (match arg_radius_data with None -> () | Some x -> setf value _radius_data x);
+    (match arg_radius_data with None -> () | Some x -> setf value _radius_data x; Vk_base.retain keep x);
     setf value _radius_stride arg_radius_stride;
     setf value _index_type arg_index_type;
-    (match arg_index_data with None -> () | Some x -> setf value _index_data x);
+    (match arg_index_data with None -> () | Some x -> setf value _index_data x; Vk_base.retain keep x);
     setf value _index_stride arg_index_stride;
     value
 end
@@ -2444,12 +2444,12 @@ module AccelerationStructureGeometryTrianglesDataKHR = struct
      | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
      | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
     setf value _vertex_format arg_vertex_format;
-    (match arg_vertex_data with None -> () | Some x -> setf value _vertex_data x);
+    (match arg_vertex_data with None -> () | Some x -> setf value _vertex_data x; Vk_base.retain keep x);
     setf value _vertex_stride arg_vertex_stride;
     setf value _max_vertex arg_max_vertex;
     setf value _index_type arg_index_type;
-    (match arg_index_data with None -> () | Some x -> setf value _index_data x);
-    (match arg_transform_data with None -> () | Some x -> setf value _transform_data x);
+    (match arg_index_data with None -> () | Some x -> setf value _index_data x; Vk_base.retain keep x);
+    (match arg_transform_data with None -> () | Some x -> setf value _transform_data x; Vk_base.retain keep x);
     value
 end
 
@@ -2469,7 +2469,7 @@ module AccelerationStructureInstanceKHR = struct
     let make ?transform:arg_transform ?instance_custom_index:(arg_instance_custom_index=0) ?mask:(arg_mask=0) ?instance_shader_binding_table_record_offset:(arg_instance_shader_binding_table_record_offset=0) ?flags:(arg_flags=GeometryInstanceFlagsKHR.of_int 0) ?acceleration_structure_reference:(arg_acceleration_structure_reference=0) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
-    (match arg_transform with None -> () | Some x -> setf value _transform x);
+    (match arg_transform with None -> () | Some x -> setf value _transform x; Vk_base.retain keep x);
     setf value _instance_custom_index_bits (((arg_instance_custom_index) land 16777215) lor (((arg_mask) land 255) lsl 24));
     setf value _instance_shader_binding_table_record_offset_bits (((arg_instance_shader_binding_table_record_offset) land 16777215) lor (((GeometryInstanceFlagsKHR.to_int arg_flags) land 255) lsl 24));
     setf value _acceleration_structure_reference arg_acceleration_structure_reference;
@@ -2494,8 +2494,8 @@ module AccelerationStructureMatrixMotionInstanceNV = struct
     let make ?transform_t_0:arg_transform_t_0 ?transform_t_1:arg_transform_t_1 ?instance_custom_index:(arg_instance_custom_index=0) ?mask:(arg_mask=0) ?instance_shader_binding_table_record_offset:(arg_instance_shader_binding_table_record_offset=0) ?flags:(arg_flags=GeometryInstanceFlagsKHR.of_int 0) ?acceleration_structure_reference:(arg_acceleration_structure_reference=0) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
-    (match arg_transform_t_0 with None -> () | Some x -> setf value _transform_t_0 x);
-    (match arg_transform_t_1 with None -> () | Some x -> setf value _transform_t_1 x);
+    (match arg_transform_t_0 with None -> () | Some x -> setf value _transform_t_0 x; Vk_base.retain keep x);
+    (match arg_transform_t_1 with None -> () | Some x -> setf value _transform_t_1 x; Vk_base.retain keep x);
     setf value _instance_custom_index_bits (((arg_instance_custom_index) land 16777215) lor (((arg_mask) land 255) lsl 24));
     setf value _instance_shader_binding_table_record_offset_bits (((arg_instance_shader_binding_table_record_offset) land 16777215) lor (((GeometryInstanceFlagsKHR.to_int arg_flags) land 255) lsl 24));
     setf value _acceleration_structure_reference arg_acceleration_structure_reference;
@@ -2520,8 +2520,8 @@ module AccelerationStructureSRTMotionInstanceNV = struct
     let make ?transform_t_0:arg_transform_t_0 ?transform_t_1:arg_transform_t_1 ?instance_custom_index:(arg_instance_custom_index=0) ?mask:(arg_mask=0) ?instance_shader_binding_table_record_offset:(arg_instance_shader_binding_table_record_offset=0) ?flags:(arg_flags=GeometryInstanceFlagsKHR.of_int 0) ?acceleration_structure_reference:(arg_acceleration_structure_reference=0) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
-    (match arg_transform_t_0 with None -> () | Some x -> setf value _transform_t_0 x);
-    (match arg_transform_t_1 with None -> () | Some x -> setf value _transform_t_1 x);
+    (match arg_transform_t_0 with None -> () | Some x -> setf value _transform_t_0 x; Vk_base.retain keep x);
+    (match arg_transform_t_1 with None -> () | Some x -> setf value _transform_t_1 x; Vk_base.retain keep x);
     setf value _instance_custom_index_bits (((arg_instance_custom_index) land 16777215) lor (((arg_mask) land 255) lsl 24));
     setf value _instance_shader_binding_table_record_offset_bits (((arg_instance_shader_binding_table_record_offset) land 16777215) lor (((GeometryInstanceFlagsKHR.to_int arg_flags) land 255) lsl 24));
     setf value _acceleration_structure_reference arg_acceleration_structure_reference;
@@ -2578,14 +2578,14 @@ module AccelerationStructureTrianglesDisplacementMicromapNV = struct
      | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
     setf value _displacement_bias_and_scale_format arg_displacement_bias_and_scale_format;
     setf value _displacement_vector_format arg_displacement_vector_format;
-    (match arg_displacement_bias_and_scale_buffer with None -> () | Some x -> setf value _displacement_bias_and_scale_buffer x);
+    (match arg_displacement_bias_and_scale_buffer with None -> () | Some x -> setf value _displacement_bias_and_scale_buffer x; Vk_base.retain keep x);
     setf value _displacement_bias_and_scale_stride arg_displacement_bias_and_scale_stride;
-    (match arg_displacement_vector_buffer with None -> () | Some x -> setf value _displacement_vector_buffer x);
+    (match arg_displacement_vector_buffer with None -> () | Some x -> setf value _displacement_vector_buffer x; Vk_base.retain keep x);
     setf value _displacement_vector_stride arg_displacement_vector_stride;
-    (match arg_displaced_micromap_primitive_flags with None -> () | Some x -> setf value _displaced_micromap_primitive_flags x);
+    (match arg_displaced_micromap_primitive_flags with None -> () | Some x -> setf value _displaced_micromap_primitive_flags x; Vk_base.retain keep x);
     setf value _displaced_micromap_primitive_flags_stride arg_displaced_micromap_primitive_flags_stride;
     setf value _index_type arg_index_type;
-    (match arg_index_buffer with None -> () | Some x -> setf value _index_buffer x);
+    (match arg_index_buffer with None -> () | Some x -> setf value _index_buffer x; Vk_base.retain keep x);
     setf value _index_stride arg_index_stride;
     setf value _base_triangle arg_base_triangle;
     let usage_counts_count_n = (match arg_usage_counts_count with Some n -> n | None -> List.length arg_usage_counts) in
@@ -2634,7 +2634,7 @@ module AccelerationStructureTrianglesOpacityMicromapEXT = struct
      | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
      | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
     setf value _index_type arg_index_type;
-    (match arg_index_buffer with None -> () | Some x -> setf value _index_buffer x);
+    (match arg_index_buffer with None -> () | Some x -> setf value _index_buffer x; Vk_base.retain keep x);
     setf value _index_stride arg_index_stride;
     setf value _base_triangle arg_base_triangle;
     let usage_counts_count_n = (match arg_usage_counts_count with Some n -> n | None -> List.length arg_usage_counts) in
@@ -2811,7 +2811,7 @@ module BindHeapInfoEXT = struct
     (match arg_next with
      | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
      | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    (match arg_heap_range with None -> () | Some x -> setf value _heap_range x);
+    (match arg_heap_range with None -> () | Some x -> setf value _heap_range x; Vk_base.retain keep x);
     setf value _reserved_range_offset arg_reserved_range_offset;
     setf value _reserved_range_size arg_reserved_range_size;
     value
@@ -2839,7 +2839,7 @@ module BindIndexBuffer3InfoKHR = struct
     (match arg_next with
      | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
      | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    (match arg_address_range with None -> () | Some x -> setf value _address_range x);
+    (match arg_address_range with None -> () | Some x -> setf value _address_range x; Vk_base.retain keep x);
     setf value _address_flags arg_address_flags;
     setf value _index_type arg_index_type;
     value
@@ -2865,7 +2865,7 @@ module BindTransformFeedbackBuffer2InfoEXT = struct
     (match arg_next with
      | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
      | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    (match arg_address_range with None -> () | Some x -> setf value _address_range x);
+    (match arg_address_range with None -> () | Some x -> setf value _address_range x; Vk_base.retain keep x);
     setf value _address_flags arg_address_flags;
     value
 end
@@ -2893,7 +2893,7 @@ module BindVertexBuffer3InfoKHR = struct
      | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
      | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
     setf value _set_stride arg_set_stride;
-    (match arg_address_range with None -> () | Some x -> setf value _address_range x);
+    (match arg_address_range with None -> () | Some x -> setf value _address_range x; Vk_base.retain keep x);
     setf value _address_flags arg_address_flags;
     value
 end
@@ -2961,9 +2961,9 @@ module BufferConstraintsInfoFUCHSIA = struct
     (match arg_next with
      | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
      | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    (match arg_create_info with None -> () | Some x -> setf value _create_info x);
+    (match arg_create_info with None -> () | Some x -> setf value _create_info x; Vk_base.retain keep x);
     setf value _required_format_features arg_required_format_features;
-    (match arg_buffer_collection_constraints with None -> () | Some x -> setf value _buffer_collection_constraints x);
+    (match arg_buffer_collection_constraints with None -> () | Some x -> setf value _buffer_collection_constraints x; Vk_base.retain keep x);
     value
 end
 
@@ -2990,9 +2990,9 @@ module BufferImageCopy = struct
     setf value _buffer_offset arg_buffer_offset;
     setf value _buffer_row_length arg_buffer_row_length;
     setf value _buffer_image_height arg_buffer_image_height;
-    (match arg_image_subresource with None -> () | Some x -> setf value _image_subresource x);
-    (match arg_image_offset with None -> () | Some x -> setf value _image_offset x);
-    (match arg_image_extent with None -> () | Some x -> setf value _image_extent x);
+    (match arg_image_subresource with None -> () | Some x -> setf value _image_subresource x; Vk_base.retain keep x);
+    (match arg_image_offset with None -> () | Some x -> setf value _image_offset x; Vk_base.retain keep x);
+    (match arg_image_extent with None -> () | Some x -> setf value _image_extent x; Vk_base.retain keep x);
     value
 end
 
@@ -3027,9 +3027,9 @@ module BufferImageCopy2 = struct
     setf value _buffer_offset arg_buffer_offset;
     setf value _buffer_row_length arg_buffer_row_length;
     setf value _buffer_image_height arg_buffer_image_height;
-    (match arg_image_subresource with None -> () | Some x -> setf value _image_subresource x);
-    (match arg_image_offset with None -> () | Some x -> setf value _image_offset x);
-    (match arg_image_extent with None -> () | Some x -> setf value _image_extent x);
+    (match arg_image_subresource with None -> () | Some x -> setf value _image_subresource x; Vk_base.retain keep x);
+    (match arg_image_offset with None -> () | Some x -> setf value _image_offset x; Vk_base.retain keep x);
+    (match arg_image_extent with None -> () | Some x -> setf value _image_extent x; Vk_base.retain keep x);
     value
 end
 
@@ -3049,7 +3049,7 @@ module BuildPartitionedAccelerationStructureIndirectCommandNV = struct
     ignore keep;
     setf value _op_type arg_op_type;
     setf value _arg_count arg_arg_count;
-    (match arg_arg_data with None -> () | Some x -> setf value _arg_data x);
+    (match arg_arg_data with None -> () | Some x -> setf value _arg_data x; Vk_base.retain keep x);
     value
 end
 
@@ -3081,7 +3081,7 @@ module BuildPartitionedAccelerationStructureInfoNV = struct
     (match arg_next with
      | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
      | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    (match arg_input with None -> () | Some x -> setf value _input x);
+    (match arg_input with None -> () | Some x -> setf value _input x; Vk_base.retain keep x);
     setf value _src_acceleration_structure_data arg_src_acceleration_structure_data;
     setf value _dst_acceleration_structure_data arg_dst_acceleration_structure_data;
     setf value _scratch_data arg_scratch_data;
@@ -3139,7 +3139,7 @@ module ClusterAccelerationStructureBuildTriangleClusterInfoNV = struct
     setf value _cluster_id arg_cluster_id;
     setf value _cluster_flags arg_cluster_flags;
     setf value _triangle_count_bits (((arg_triangle_count) land 511) lor (((arg_vertex_count) land 511) lsl 9) lor (((arg_position_truncate_bit_count) land 63) lsl 18) lor (((arg_index_type) land 15) lsl 24) lor (((arg_opacity_micromap_index_type) land 15) lsl 28));
-    (match arg_base_geometry_index_and_geometry_flags with None -> () | Some x -> setf value _base_geometry_index_and_geometry_flags x);
+    (match arg_base_geometry_index_and_geometry_flags with None -> () | Some x -> setf value _base_geometry_index_and_geometry_flags x; Vk_base.retain keep x);
     setf value _index_buffer_stride arg_index_buffer_stride;
     setf value _vertex_buffer_stride arg_vertex_buffer_stride;
     setf value _geometry_index_and_flags_buffer_stride arg_geometry_index_and_flags_buffer_stride;
@@ -3191,7 +3191,7 @@ module ClusterAccelerationStructureBuildTriangleClusterTemplateInfoNV = struct
     setf value _cluster_id arg_cluster_id;
     setf value _cluster_flags arg_cluster_flags;
     setf value _triangle_count_bits (((arg_triangle_count) land 511) lor (((arg_vertex_count) land 511) lsl 9) lor (((arg_position_truncate_bit_count) land 63) lsl 18) lor (((arg_index_type) land 15) lsl 24) lor (((arg_opacity_micromap_index_type) land 15) lsl 28));
-    (match arg_base_geometry_index_and_geometry_flags with None -> () | Some x -> setf value _base_geometry_index_and_geometry_flags x);
+    (match arg_base_geometry_index_and_geometry_flags with None -> () | Some x -> setf value _base_geometry_index_and_geometry_flags x; Vk_base.retain keep x);
     setf value _index_buffer_stride arg_index_buffer_stride;
     setf value _vertex_buffer_stride arg_vertex_buffer_stride;
     setf value _geometry_index_and_flags_buffer_stride arg_geometry_index_and_flags_buffer_stride;
@@ -3224,7 +3224,7 @@ module ClusterAccelerationStructureInstantiateClusterInfoNV = struct
     setf value _cluster_id_offset arg_cluster_id_offset;
     setf value _geometry_index_offset_bits (((arg_geometry_index_offset) land 16777215) lor (((arg_reserved) land 255) lsl 24));
     setf value _cluster_template_address arg_cluster_template_address;
-    (match arg_vertex_buffer with None -> () | Some x -> setf value _vertex_buffer x);
+    (match arg_vertex_buffer with None -> () | Some x -> setf value _vertex_buffer x; Vk_base.retain keep x);
     value
 end
 
@@ -3351,7 +3351,7 @@ module ConditionalRenderingBeginInfo2EXT = struct
     (match arg_next with
      | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
      | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    (match arg_address_range with None -> () | Some x -> setf value _address_range x);
+    (match arg_address_range with None -> () | Some x -> setf value _address_range x; Vk_base.retain keep x);
     setf value _address_flags arg_address_flags;
     setf value _flags arg_flags;
     value
@@ -3398,9 +3398,9 @@ module ConvertCooperativeVectorMatrixInfoNV = struct
      | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
      | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
     setf value _src_size arg_src_size;
-    (match arg_src_data with None -> () | Some x -> setf value _src_data x);
+    (match arg_src_data with None -> () | Some x -> setf value _src_data x; Vk_base.retain keep x);
     setf value _p_dst_size (match arg_p_dst_size with None -> Vk_base.null_ptr (Vk_base.size_t) | Some p -> p);
-    (match arg_dst_data with None -> () | Some x -> setf value _dst_data x);
+    (match arg_dst_data with None -> () | Some x -> setf value _dst_data x; Vk_base.retain keep x);
     setf value _src_component_type arg_src_component_type;
     setf value _dst_component_type arg_dst_component_type;
     setf value _num_rows arg_num_rows;
@@ -3435,7 +3435,7 @@ module CopyAccelerationStructureToMemoryInfoKHR = struct
      | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
      | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
     setf value _src arg_src;
-    (match arg_dst with None -> () | Some x -> setf value _dst x);
+    (match arg_dst with None -> () | Some x -> setf value _dst x; Vk_base.retain keep x);
     setf value _mode arg_mode;
     value
 end
@@ -3504,7 +3504,7 @@ module CopyMemoryIndirectInfoKHR = struct
     setf value _src_copy_flags arg_src_copy_flags;
     setf value _dst_copy_flags arg_dst_copy_flags;
     setf value _copy_count arg_copy_count;
-    (match arg_copy_address_range with None -> () | Some x -> setf value _copy_address_range x);
+    (match arg_copy_address_range with None -> () | Some x -> setf value _copy_address_range x; Vk_base.retain keep x);
     value
 end
 
@@ -3530,7 +3530,7 @@ module CopyMemoryToAccelerationStructureInfoKHR = struct
     (match arg_next with
      | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
      | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    (match arg_src with None -> () | Some x -> setf value _src x);
+    (match arg_src with None -> () | Some x -> setf value _src x; Vk_base.retain keep x);
     setf value _dst arg_dst;
     setf value _mode arg_mode;
     value

@@ -38,9 +38,9 @@ module CopyMemoryToImageIndirectCommandKHR = struct
     setf value _src_address arg_src_address;
     setf value _buffer_row_length arg_buffer_row_length;
     setf value _buffer_image_height arg_buffer_image_height;
-    (match arg_image_subresource with None -> () | Some x -> setf value _image_subresource x);
-    (match arg_image_offset with None -> () | Some x -> setf value _image_offset x);
-    (match arg_image_extent with None -> () | Some x -> setf value _image_extent x);
+    (match arg_image_subresource with None -> () | Some x -> setf value _image_subresource x; Vk_base.retain keep x);
+    (match arg_image_offset with None -> () | Some x -> setf value _image_offset x; Vk_base.retain keep x);
+    (match arg_image_extent with None -> () | Some x -> setf value _image_extent x; Vk_base.retain keep x);
     value
 end
 
@@ -76,7 +76,7 @@ module CopyMemoryToImageIndirectInfoKHR = struct
     let copy_count_n = List.length arg_image_subresources in
     if arg_image_subresources <> [] && List.length arg_image_subresources <> copy_count_n then invalid_arg "VkCopyMemoryToImageIndirectInfoKHR.pImageSubresources: length does not match copyCount";
     setf value _copy_count copy_count_n;
-    (match arg_copy_address_range with None -> () | Some x -> setf value _copy_address_range x);
+    (match arg_copy_address_range with None -> () | Some x -> setf value _copy_address_range x; Vk_base.retain keep x);
     setf value _dst_image arg_dst_image;
     setf value _dst_image_layout arg_dst_image_layout;
     if arg_image_subresources = [] then setf value _p_image_subresources (Vk_base.null_ptr (ImageSubresourceLayers.t)) else begin
@@ -109,7 +109,7 @@ module CopyMemoryToMicromapInfoEXT = struct
     (match arg_next with
      | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
      | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    (match arg_src with None -> () | Some x -> setf value _src x);
+    (match arg_src with None -> () | Some x -> setf value _src x; Vk_base.retain keep x);
     setf value _dst arg_dst;
     setf value _mode arg_mode;
     value
@@ -138,7 +138,7 @@ module CopyMicromapToMemoryInfoEXT = struct
      | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
      | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
     setf value _src arg_src;
-    (match arg_dst with None -> () | Some x -> setf value _dst x);
+    (match arg_dst with None -> () | Some x -> setf value _dst x; Vk_base.retain keep x);
     setf value _mode arg_mode;
     value
 end
@@ -970,9 +970,9 @@ module DeviceMemoryCopyKHR = struct
     (match arg_next with
      | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
      | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    (match arg_src_range with None -> () | Some x -> setf value _src_range x);
+    (match arg_src_range with None -> () | Some x -> setf value _src_range x; Vk_base.retain keep x);
     setf value _src_flags arg_src_flags;
-    (match arg_dst_range with None -> () | Some x -> setf value _dst_range x);
+    (match arg_dst_range with None -> () | Some x -> setf value _dst_range x; Vk_base.retain keep x);
     setf value _dst_flags arg_dst_flags;
     value
 end
@@ -1009,14 +1009,14 @@ module DeviceMemoryImageCopyKHR = struct
     (match arg_next with
      | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
      | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    (match arg_address_range with None -> () | Some x -> setf value _address_range x);
+    (match arg_address_range with None -> () | Some x -> setf value _address_range x; Vk_base.retain keep x);
     setf value _address_flags arg_address_flags;
     setf value _address_row_length arg_address_row_length;
     setf value _address_image_height arg_address_image_height;
-    (match arg_image_subresource with None -> () | Some x -> setf value _image_subresource x);
+    (match arg_image_subresource with None -> () | Some x -> setf value _image_subresource x; Vk_base.retain keep x);
     setf value _image_layout arg_image_layout;
-    (match arg_image_offset with None -> () | Some x -> setf value _image_offset x);
-    (match arg_image_extent with None -> () | Some x -> setf value _image_extent x);
+    (match arg_image_offset with None -> () | Some x -> setf value _image_offset x; Vk_base.retain keep x);
+    (match arg_image_extent with None -> () | Some x -> setf value _image_extent x; Vk_base.retain keep x);
     value
 end
 
@@ -1189,7 +1189,7 @@ module DispatchGraphCountInfoAMDX = struct
     let value, keep = Vk_base.make_kept t in
     ignore keep;
     setf value _count arg_count;
-    (match arg_infos with None -> () | Some x -> setf value _infos x);
+    (match arg_infos with None -> () | Some x -> setf value _infos x; Vk_base.retain keep x);
     setf value _stride arg_stride;
     value
 end
@@ -1212,7 +1212,7 @@ module DispatchGraphInfoAMDX = struct
     ignore keep;
     setf value _node_index arg_node_index;
     setf value _payload_count arg_payload_count;
-    (match arg_payloads with None -> () | Some x -> setf value _payloads x);
+    (match arg_payloads with None -> () | Some x -> setf value _payloads x; Vk_base.retain keep x);
     setf value _payload_stride arg_payload_stride;
     value
 end
@@ -1237,7 +1237,7 @@ module DispatchIndirect2InfoKHR = struct
     (match arg_next with
      | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
      | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    (match arg_address_range with None -> () | Some x -> setf value _address_range x);
+    (match arg_address_range with None -> () | Some x -> setf value _address_range x; Vk_base.retain keep x);
     setf value _address_flags arg_address_flags;
     value
 end
@@ -1254,7 +1254,7 @@ module DisplayModeParametersKHR = struct
     let make ?visible_region:arg_visible_region ?refresh_rate:(arg_refresh_rate=0) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
-    (match arg_visible_region with None -> () | Some x -> setf value _visible_region x);
+    (match arg_visible_region with None -> () | Some x -> setf value _visible_region x; Vk_base.retain keep x);
     setf value _refresh_rate arg_refresh_rate;
     value
 end
@@ -1373,7 +1373,7 @@ module DisplaySurfaceCreateInfoKHR = struct
     setf value _transform arg_transform;
     setf value _global_alpha arg_global_alpha;
     setf value _alpha_mode arg_alpha_mode;
-    (match arg_image_extent with None -> () | Some x -> setf value _image_extent x);
+    (match arg_image_extent with None -> () | Some x -> setf value _image_extent x; Vk_base.retain keep x);
     value
 end
 
@@ -1399,7 +1399,7 @@ module DrawIndirect2InfoKHR = struct
     (match arg_next with
      | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
      | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    (match arg_address_range with None -> () | Some x -> setf value _address_range x);
+    (match arg_address_range with None -> () | Some x -> setf value _address_range x; Vk_base.retain keep x);
     setf value _address_flags arg_address_flags;
     setf value _draw_count arg_draw_count;
     value
@@ -1431,9 +1431,9 @@ module DrawIndirectCount2InfoKHR = struct
     (match arg_next with
      | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
      | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    (match arg_address_range with None -> () | Some x -> setf value _address_range x);
+    (match arg_address_range with None -> () | Some x -> setf value _address_range x; Vk_base.retain keep x);
     setf value _address_flags arg_address_flags;
-    (match arg_count_address_range with None -> () | Some x -> setf value _count_address_range x);
+    (match arg_count_address_range with None -> () | Some x -> setf value _count_address_range x; Vk_base.retain keep x);
     setf value _count_address_flags arg_count_address_flags;
     setf value _max_draw_count arg_max_draw_count;
     value
@@ -1545,7 +1545,7 @@ module ExternalTensorPropertiesARM = struct
     (match arg_next with
      | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
      | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    (match arg_external_memory_properties with None -> () | Some x -> setf value _external_memory_properties x);
+    (match arg_external_memory_properties with None -> () | Some x -> setf value _external_memory_properties x; Vk_base.retain keep x);
     value
 end
 
@@ -1593,7 +1593,7 @@ module FragmentShadingRateAttachmentInfoKHR = struct
     (match arg_fragment_shading_rate_attachment with
      | None -> setf value _p_fragment_shading_rate_attachment (Vk_base.null_ptr (AttachmentReference2.t))
      | Some pointed -> setf value _p_fragment_shading_rate_attachment (addr pointed); Vk_base.retain keep pointed);
-    (match arg_shading_rate_attachment_texel_size with None -> () | Some x -> setf value _shading_rate_attachment_texel_size x);
+    (match arg_shading_rate_attachment_texel_size with None -> () | Some x -> setf value _shading_rate_attachment_texel_size x; Vk_base.retain keep x);
     value
 end
 
@@ -1704,8 +1704,8 @@ module GeometryDataNV = struct
     let make ?triangles:arg_triangles ?aabbs:arg_aabbs () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
-    (match arg_triangles with None -> () | Some x -> setf value _triangles x);
-    (match arg_aabbs with None -> () | Some x -> setf value _aabbs x);
+    (match arg_triangles with None -> () | Some x -> setf value _triangles x; Vk_base.retain keep x);
+    (match arg_aabbs with None -> () | Some x -> setf value _aabbs x; Vk_base.retain keep x);
     value
 end
 
@@ -1833,10 +1833,10 @@ module HdrMetadataEXT = struct
     (match arg_next with
      | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
      | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    (match arg_display_primary_red with None -> () | Some x -> setf value _display_primary_red x);
-    (match arg_display_primary_green with None -> () | Some x -> setf value _display_primary_green x);
-    (match arg_display_primary_blue with None -> () | Some x -> setf value _display_primary_blue x);
-    (match arg_white_point with None -> () | Some x -> setf value _white_point x);
+    (match arg_display_primary_red with None -> () | Some x -> setf value _display_primary_red x; Vk_base.retain keep x);
+    (match arg_display_primary_green with None -> () | Some x -> setf value _display_primary_green x; Vk_base.retain keep x);
+    (match arg_display_primary_blue with None -> () | Some x -> setf value _display_primary_blue x; Vk_base.retain keep x);
+    (match arg_white_point with None -> () | Some x -> setf value _white_point x; Vk_base.retain keep x);
     setf value _max_luminance arg_max_luminance;
     setf value _min_luminance arg_min_luminance;
     setf value _max_content_light_level arg_max_content_light_level;
@@ -1871,7 +1871,7 @@ module HostImageLayoutTransitionInfo = struct
     setf value _image arg_image;
     setf value _old_layout arg_old_layout;
     setf value _new_layout arg_new_layout;
-    (match arg_subresource_range with None -> () | Some x -> setf value _subresource_range x);
+    (match arg_subresource_range with None -> () | Some x -> setf value _subresource_range x; Vk_base.retain keep x);
     value
 end
 
@@ -1891,11 +1891,11 @@ module ImageBlit = struct
     let make ?src_subresource:arg_src_subresource ?src_offsets:(arg_src_offsets=[]) ?dst_subresource:arg_dst_subresource ?dst_offsets:(arg_dst_offsets=[]) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
-    (match arg_src_subresource with None -> () | Some x -> setf value _src_subresource x);
+    (match arg_src_subresource with None -> () | Some x -> setf value _src_subresource x; Vk_base.retain keep x);
     if List.length arg_src_offsets > 2 then invalid_arg "srcOffsets: too many elements";
     let destination = getf value _src_offsets in
     List.iteri (fun i x -> CArray.set (destination) (i mod 2) x) arg_src_offsets;
-    (match arg_dst_subresource with None -> () | Some x -> setf value _dst_subresource x);
+    (match arg_dst_subresource with None -> () | Some x -> setf value _dst_subresource x; Vk_base.retain keep x);
     if List.length arg_dst_offsets > 2 then invalid_arg "dstOffsets: too many elements";
     let destination = getf value _dst_offsets in
     List.iteri (fun i x -> CArray.set (destination) (i mod 2) x) arg_dst_offsets;
@@ -1926,11 +1926,11 @@ module ImageBlit2 = struct
     (match arg_next with
      | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
      | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    (match arg_src_subresource with None -> () | Some x -> setf value _src_subresource x);
+    (match arg_src_subresource with None -> () | Some x -> setf value _src_subresource x; Vk_base.retain keep x);
     if List.length arg_src_offsets > 2 then invalid_arg "srcOffsets: too many elements";
     let destination = getf value _src_offsets in
     List.iteri (fun i x -> CArray.set (destination) (i mod 2) x) arg_src_offsets;
-    (match arg_dst_subresource with None -> () | Some x -> setf value _dst_subresource x);
+    (match arg_dst_subresource with None -> () | Some x -> setf value _dst_subresource x; Vk_base.retain keep x);
     if List.length arg_dst_offsets > 2 then invalid_arg "dstOffsets: too many elements";
     let destination = getf value _dst_offsets in
     List.iteri (fun i x -> CArray.set (destination) (i mod 2) x) arg_dst_offsets;
@@ -1955,11 +1955,11 @@ module ImageCopy = struct
     let make ?src_subresource:arg_src_subresource ?src_offset:arg_src_offset ?dst_subresource:arg_dst_subresource ?dst_offset:arg_dst_offset ?extent:arg_extent () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
-    (match arg_src_subresource with None -> () | Some x -> setf value _src_subresource x);
-    (match arg_src_offset with None -> () | Some x -> setf value _src_offset x);
-    (match arg_dst_subresource with None -> () | Some x -> setf value _dst_subresource x);
-    (match arg_dst_offset with None -> () | Some x -> setf value _dst_offset x);
-    (match arg_extent with None -> () | Some x -> setf value _extent x);
+    (match arg_src_subresource with None -> () | Some x -> setf value _src_subresource x; Vk_base.retain keep x);
+    (match arg_src_offset with None -> () | Some x -> setf value _src_offset x; Vk_base.retain keep x);
+    (match arg_dst_subresource with None -> () | Some x -> setf value _dst_subresource x; Vk_base.retain keep x);
+    (match arg_dst_offset with None -> () | Some x -> setf value _dst_offset x; Vk_base.retain keep x);
+    (match arg_extent with None -> () | Some x -> setf value _extent x; Vk_base.retain keep x);
     value
 end
 
@@ -1989,11 +1989,11 @@ module ImageCopy2 = struct
     (match arg_next with
      | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
      | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    (match arg_src_subresource with None -> () | Some x -> setf value _src_subresource x);
-    (match arg_src_offset with None -> () | Some x -> setf value _src_offset x);
-    (match arg_dst_subresource with None -> () | Some x -> setf value _dst_subresource x);
-    (match arg_dst_offset with None -> () | Some x -> setf value _dst_offset x);
-    (match arg_extent with None -> () | Some x -> setf value _extent x);
+    (match arg_src_subresource with None -> () | Some x -> setf value _src_subresource x; Vk_base.retain keep x);
+    (match arg_src_offset with None -> () | Some x -> setf value _src_offset x; Vk_base.retain keep x);
+    (match arg_dst_subresource with None -> () | Some x -> setf value _dst_subresource x; Vk_base.retain keep x);
+    (match arg_dst_offset with None -> () | Some x -> setf value _dst_offset x; Vk_base.retain keep x);
+    (match arg_extent with None -> () | Some x -> setf value _extent x; Vk_base.retain keep x);
     value
 end
 
@@ -2042,7 +2042,7 @@ module ImageCreateInfo = struct
     setf value _flags arg_flags;
     setf value _image_type arg_image_type;
     setf value _format arg_format;
-    (match arg_extent with None -> () | Some x -> setf value _extent x);
+    (match arg_extent with None -> () | Some x -> setf value _extent x; Vk_base.retain keep x);
     setf value _mip_levels arg_mip_levels;
     setf value _array_layers arg_array_layers;
     setf value _samples arg_samples;
@@ -2155,7 +2155,7 @@ module ImageMemoryBarrier = struct
     setf value _src_queue_family_index arg_src_queue_family_index;
     setf value _dst_queue_family_index arg_dst_queue_family_index;
     setf value _image arg_image;
-    (match arg_subresource_range with None -> () | Some x -> setf value _subresource_range x);
+    (match arg_subresource_range with None -> () | Some x -> setf value _subresource_range x; Vk_base.retain keep x);
     value
 end
 
@@ -2204,7 +2204,7 @@ module ImageMemoryBarrier2 = struct
     setf value _src_queue_family_index arg_src_queue_family_index;
     setf value _dst_queue_family_index arg_dst_queue_family_index;
     setf value _image arg_image;
-    (match arg_subresource_range with None -> () | Some x -> setf value _subresource_range x);
+    (match arg_subresource_range with None -> () | Some x -> setf value _subresource_range x; Vk_base.retain keep x);
     value
 end
 
@@ -2226,11 +2226,11 @@ module ImageResolve = struct
     let make ?src_subresource:arg_src_subresource ?src_offset:arg_src_offset ?dst_subresource:arg_dst_subresource ?dst_offset:arg_dst_offset ?extent:arg_extent () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
-    (match arg_src_subresource with None -> () | Some x -> setf value _src_subresource x);
-    (match arg_src_offset with None -> () | Some x -> setf value _src_offset x);
-    (match arg_dst_subresource with None -> () | Some x -> setf value _dst_subresource x);
-    (match arg_dst_offset with None -> () | Some x -> setf value _dst_offset x);
-    (match arg_extent with None -> () | Some x -> setf value _extent x);
+    (match arg_src_subresource with None -> () | Some x -> setf value _src_subresource x; Vk_base.retain keep x);
+    (match arg_src_offset with None -> () | Some x -> setf value _src_offset x; Vk_base.retain keep x);
+    (match arg_dst_subresource with None -> () | Some x -> setf value _dst_subresource x; Vk_base.retain keep x);
+    (match arg_dst_offset with None -> () | Some x -> setf value _dst_offset x; Vk_base.retain keep x);
+    (match arg_extent with None -> () | Some x -> setf value _extent x; Vk_base.retain keep x);
     value
 end
 
@@ -2260,11 +2260,11 @@ module ImageResolve2 = struct
     (match arg_next with
      | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
      | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    (match arg_src_subresource with None -> () | Some x -> setf value _src_subresource x);
-    (match arg_src_offset with None -> () | Some x -> setf value _src_offset x);
-    (match arg_dst_subresource with None -> () | Some x -> setf value _dst_subresource x);
-    (match arg_dst_offset with None -> () | Some x -> setf value _dst_offset x);
-    (match arg_extent with None -> () | Some x -> setf value _extent x);
+    (match arg_src_subresource with None -> () | Some x -> setf value _src_subresource x; Vk_base.retain keep x);
+    (match arg_src_offset with None -> () | Some x -> setf value _src_offset x; Vk_base.retain keep x);
+    (match arg_dst_subresource with None -> () | Some x -> setf value _dst_subresource x; Vk_base.retain keep x);
+    (match arg_dst_offset with None -> () | Some x -> setf value _dst_offset x; Vk_base.retain keep x);
+    (match arg_extent with None -> () | Some x -> setf value _extent x; Vk_base.retain keep x);
     value
 end
 
@@ -2286,7 +2286,7 @@ module ImageSubresource2 = struct
     (match arg_next with
      | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
      | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    (match arg_image_subresource with None -> () | Some x -> setf value _image_subresource x);
+    (match arg_image_subresource with None -> () | Some x -> setf value _image_subresource x; Vk_base.retain keep x);
     value
 end
 
@@ -2321,9 +2321,9 @@ module ImageToMemoryCopy = struct
     setf value _p_host_pointer (match arg_p_host_pointer with None -> Vk_base.null_ptr (Ctypes.void) | Some p -> p);
     setf value _memory_row_length arg_memory_row_length;
     setf value _memory_image_height arg_memory_image_height;
-    (match arg_image_subresource with None -> () | Some x -> setf value _image_subresource x);
-    (match arg_image_offset with None -> () | Some x -> setf value _image_offset x);
-    (match arg_image_extent with None -> () | Some x -> setf value _image_extent x);
+    (match arg_image_subresource with None -> () | Some x -> setf value _image_subresource x; Vk_base.retain keep x);
+    (match arg_image_offset with None -> () | Some x -> setf value _image_offset x; Vk_base.retain keep x);
+    (match arg_image_extent with None -> () | Some x -> setf value _image_extent x; Vk_base.retain keep x);
     value
 end
 
@@ -2359,8 +2359,8 @@ module ImageViewCreateInfo = struct
     setf value _image arg_image;
     setf value _view_type arg_view_type;
     setf value _format arg_format;
-    (match arg_components with None -> () | Some x -> setf value _components x);
-    (match arg_subresource_range with None -> () | Some x -> setf value _subresource_range x);
+    (match arg_components with None -> () | Some x -> setf value _components x; Vk_base.retain keep x);
+    (match arg_subresource_range with None -> () | Some x -> setf value _subresource_range x; Vk_base.retain keep x);
     value
 end
 
@@ -2386,8 +2386,8 @@ module ImageViewSampleWeightCreateInfoQCOM = struct
     (match arg_next with
      | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
      | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    (match arg_filter_center with None -> () | Some x -> setf value _filter_center x);
-    (match arg_filter_size with None -> () | Some x -> setf value _filter_size x);
+    (match arg_filter_center with None -> () | Some x -> setf value _filter_center x; Vk_base.retain keep x);
+    (match arg_filter_size with None -> () | Some x -> setf value _filter_size x; Vk_base.retain keep x);
     setf value _num_phases arg_num_phases;
     value
 end
@@ -2451,7 +2451,7 @@ module IndirectCommandsPushConstantTokenEXT = struct
     let make ?update_range:arg_update_range () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
-    (match arg_update_range with None -> () | Some x -> setf value _update_range x);
+    (match arg_update_range with None -> () | Some x -> setf value _update_range x; Vk_base.retain keep x);
     value
 end
 
@@ -2616,7 +2616,7 @@ module MemoryMarkerInfoAMD = struct
      | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
      | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
     setf value _stage arg_stage;
-    (match arg_dst_range with None -> () | Some x -> setf value _dst_range x);
+    (match arg_dst_range with None -> () | Some x -> setf value _dst_range x; Vk_base.retain keep x);
     setf value _dst_flags arg_dst_flags;
     setf value _marker arg_marker;
     value
@@ -2660,7 +2660,7 @@ module MemoryRangeBarrierKHR = struct
     setf value _dst_access_mask arg_dst_access_mask;
     setf value _src_queue_family_index arg_src_queue_family_index;
     setf value _dst_queue_family_index arg_dst_queue_family_index;
-    (match arg_address_range with None -> () | Some x -> setf value _address_range x);
+    (match arg_address_range with None -> () | Some x -> setf value _address_range x; Vk_base.retain keep x);
     setf value _address_flags arg_address_flags;
     value
 end
@@ -2717,9 +2717,9 @@ module MemoryToImageCopy = struct
     setf value _p_host_pointer (match arg_host_pointer with None -> Vk_base.null_ptr (Ctypes.void) | Some p -> p);
     setf value _memory_row_length arg_memory_row_length;
     setf value _memory_image_height arg_memory_image_height;
-    (match arg_image_subresource with None -> () | Some x -> setf value _image_subresource x);
-    (match arg_image_offset with None -> () | Some x -> setf value _image_offset x);
-    (match arg_image_extent with None -> () | Some x -> setf value _image_extent x);
+    (match arg_image_subresource with None -> () | Some x -> setf value _image_subresource x; Vk_base.retain keep x);
+    (match arg_image_offset with None -> () | Some x -> setf value _image_offset x; Vk_base.retain keep x);
+    (match arg_image_extent with None -> () | Some x -> setf value _image_extent x; Vk_base.retain keep x);
     value
 end
 
@@ -2774,9 +2774,9 @@ module MicromapBuildInfoEXT = struct
       Vk_base.retain keep items; Vk_base.retain keep arg_usage_counts
     end;
     setf value _pp_usage_counts (match arg_usage_counts_2 with None -> Vk_base.null_ptr (ptr (MicromapUsageEXT.t)) | Some p -> p);
-    (match arg_data with None -> () | Some x -> setf value _data x);
-    (match arg_scratch_data with None -> () | Some x -> setf value _scratch_data x);
-    (match arg_triangle_array with None -> () | Some x -> setf value _triangle_array x);
+    (match arg_data with None -> () | Some x -> setf value _data x; Vk_base.retain keep x);
+    (match arg_scratch_data with None -> () | Some x -> setf value _scratch_data x; Vk_base.retain keep x);
+    (match arg_triangle_array with None -> () | Some x -> setf value _triangle_array x; Vk_base.retain keep x);
     setf value _triangle_array_stride arg_triangle_array_stride;
     value
 end
@@ -2863,7 +2863,7 @@ module NativeBufferANDROID = struct
     setf value _stride arg_stride;
     setf value _format arg_format;
     setf value _usage arg_usage;
-    (match arg_usage_2 with None -> () | Some x -> setf value _usage_2 x);
+    (match arg_usage_2 with None -> () | Some x -> setf value _usage_2 x; Vk_base.retain keep x);
     value
 end
 
@@ -2952,7 +2952,7 @@ module PartitionedAccelerationStructureWriteInstanceDataNV = struct
     let make ?transform:arg_transform ?explicit_aabb:(arg_explicit_aabb=[]) ?instance_id:(arg_instance_id=0) ?instance_mask:(arg_instance_mask=0) ?instance_contribution_to_hit_group_index:(arg_instance_contribution_to_hit_group_index=0) ?instance_flags:(arg_instance_flags=PartitionedAccelerationStructureInstanceFlagsNV.of_int 0) ?instance_index:(arg_instance_index=0) ?partition_index:(arg_partition_index=0) ?acceleration_structure:(arg_acceleration_structure=0) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
-    (match arg_transform with None -> () | Some x -> setf value _transform x);
+    (match arg_transform with None -> () | Some x -> setf value _transform x; Vk_base.retain keep x);
     if List.length arg_explicit_aabb > 6 then invalid_arg "explicitAABB: too many elements";
     let destination = getf value _explicit_aabb in
     List.iteri (fun i x -> CArray.set (destination) (i mod 6) x) arg_explicit_aabb;
@@ -3091,7 +3091,7 @@ module PhysicalDeviceFeatures2 = struct
     (match arg_next with
      | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
      | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    (match arg_features with None -> () | Some x -> setf value _features x);
+    (match arg_features with None -> () | Some x -> setf value _features x; Vk_base.retain keep x);
     value
 end
 
@@ -3704,7 +3704,7 @@ module PipelineCacheHeaderVersionSafetyCriticalOne = struct
     let make ?header_version_one:arg_header_version_one ?validation_version:(arg_validation_version=PipelineCacheValidationVersion.of_int 0) ?implementation_data:(arg_implementation_data=0) ?pipeline_index_count:(arg_pipeline_index_count=0) ?pipeline_index_stride:(arg_pipeline_index_stride=0) ?pipeline_index_offset:(arg_pipeline_index_offset=0) () =
     let value, keep = Vk_base.make_kept t in
     ignore keep;
-    (match arg_header_version_one with None -> () | Some x -> setf value _header_version_one x);
+    (match arg_header_version_one with None -> () | Some x -> setf value _header_version_one x; Vk_base.retain keep x);
     setf value _validation_version arg_validation_version;
     setf value _implementation_data arg_implementation_data;
     setf value _pipeline_index_count arg_pipeline_index_count;
@@ -3828,8 +3828,8 @@ module PipelineDepthStencilStateCreateInfo = struct
     setf value _depth_compare_op arg_depth_compare_op;
     setf value _depth_bounds_test_enable arg_depth_bounds_test_enable;
     setf value _stencil_test_enable arg_stencil_test_enable;
-    (match arg_front with None -> () | Some x -> setf value _front x);
-    (match arg_back with None -> () | Some x -> setf value _back x);
+    (match arg_front with None -> () | Some x -> setf value _front x; Vk_base.retain keep x);
+    (match arg_back with None -> () | Some x -> setf value _back x; Vk_base.retain keep x);
     setf value _min_depth_bounds arg_min_depth_bounds;
     setf value _max_depth_bounds arg_max_depth_bounds;
     value
@@ -3884,7 +3884,7 @@ module PipelineFragmentShadingRateStateCreateInfoKHR = struct
     (match arg_next with
      | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
      | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    (match arg_fragment_size with None -> () | Some x -> setf value _fragment_size x);
+    (match arg_fragment_size with None -> () | Some x -> setf value _fragment_size x; Vk_base.retain keep x);
     if List.length arg_combiner_ops > 2 then invalid_arg "combinerOps: too many elements";
     let destination = getf value _combiner_ops in
     List.iteri (fun i x -> CArray.set (destination) (i mod 2) x) arg_combiner_ops;

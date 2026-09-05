@@ -402,7 +402,18 @@ def _constructor(ctx: Context, comp: Composite, fields: list[PhysicalField]) -> 
             else:
                 lines.append(f"  setf value {f} (match {binding} with None -> {_null_pointer(ctx, member, comp.name)} | Some p -> p);")
         elif kind in {"struct", "union"}:
-            lines.append(f"  (match {binding} with None -> () | Some x -> setf value {f} x);")
+            # Bug fix (P0-1): `setf` byte-copies `x` into the parent's memory but
+            # that copy is bytes-only -- it does not know that some of those
+            # bytes are pointers into `x`'s own heap allocations (its pName
+            # string, pNext chain, array arguments, ...), which are otherwise
+            # protected only by `x`'s own keep-alive finaliser. Without also
+            # retaining `x` here, `x` (and everything it owns) can become
+            # unreachable -- and be collected -- the moment nothing else in
+            # the caller's program still references it, even while the
+            # parent struct is alive and the copied pointers are still in use
+            # (mirrors the pointer-to-struct branch above; applies to unions
+            # embedded by value too, e.g. VkClearAttachment.clearValue).
+            lines.append(f"  (match {binding} with None -> () | Some x -> setf value {f} x; Vk_base.retain keep x);")
         else:
             lines.append(f"  setf value {f} {binding};")
     lines.append("  value")

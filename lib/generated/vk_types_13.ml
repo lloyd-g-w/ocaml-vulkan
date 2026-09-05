@@ -75,7 +75,7 @@ module PipelineSampleLocationsStateCreateInfoEXT = struct
      | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
      | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
     setf value _sample_locations_enable arg_sample_locations_enable;
-    (match arg_sample_locations_info with None -> () | Some x -> setf value _sample_locations_info x);
+    (match arg_sample_locations_info with None -> () | Some x -> setf value _sample_locations_info x; Vk_base.retain keep x);
     value
 end
 
@@ -341,7 +341,7 @@ module RenderPassBeginInfo = struct
      | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
     setf value _render_pass arg_render_pass;
     setf value _framebuffer arg_framebuffer;
-    (match arg_render_area with None -> () | Some x -> setf value _render_area x);
+    (match arg_render_area with None -> () | Some x -> setf value _render_area x; Vk_base.retain keep x);
     let clear_value_count_n = List.length arg_clear_values in
     if arg_clear_values <> [] && List.length arg_clear_values <> clear_value_count_n then invalid_arg "VkRenderPassBeginInfo.pClearValues: length does not match clearValueCount";
     setf value _clear_value_count clear_value_count_n;
@@ -499,7 +499,7 @@ module RenderPassStripeInfoARM = struct
     (match arg_next with
      | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
      | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    (match arg_stripe_area with None -> () | Some x -> setf value _stripe_area x);
+    (match arg_stripe_area with None -> () | Some x -> setf value _stripe_area x; Vk_base.retain keep x);
     value
 end
 
@@ -542,7 +542,7 @@ module RenderingAttachmentInfo = struct
     setf value _resolve_image_layout arg_resolve_image_layout;
     setf value _load_op arg_load_op;
     setf value _store_op arg_store_op;
-    (match arg_clear_value with None -> () | Some x -> setf value _clear_value x);
+    (match arg_clear_value with None -> () | Some x -> setf value _clear_value x; Vk_base.retain keep x);
     value
 end
 
@@ -745,7 +745,7 @@ module SubpassSampleLocationsEXT = struct
     let value, keep = Vk_base.make_kept t in
     ignore keep;
     setf value _subpass_index arg_subpass_index;
-    (match arg_sample_locations_info with None -> () | Some x -> setf value _sample_locations_info x);
+    (match arg_sample_locations_info with None -> () | Some x -> setf value _sample_locations_info x; Vk_base.retain keep x);
     value
 end
 
@@ -820,7 +820,7 @@ module AccelerationStructureGeometryKHR = struct
      | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
      | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
     setf value _geometry_type arg_geometry_type;
-    (match arg_geometry with None -> () | Some x -> setf value _geometry x);
+    (match arg_geometry with None -> () | Some x -> setf value _geometry x; Vk_base.retain keep x);
     setf value _flags arg_flags;
     value
 end
@@ -881,7 +881,7 @@ module AccelerationStructureMotionInstanceNV = struct
     ignore keep;
     setf value _type_ arg_type_;
     setf value _flags arg_flags;
-    (match arg_data with None -> () | Some x -> setf value _data x);
+    (match arg_data with None -> () | Some x -> setf value _data x; Vk_base.retain keep x);
     value
 end
 
@@ -996,12 +996,12 @@ module ClusterAccelerationStructureCommandsInfoNV = struct
     (match arg_next with
      | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
      | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
-    (match arg_input with None -> () | Some x -> setf value _input x);
+    (match arg_input with None -> () | Some x -> setf value _input x; Vk_base.retain keep x);
     setf value _dst_implicit_data arg_dst_implicit_data;
     setf value _scratch_data arg_scratch_data;
-    (match arg_dst_addresses_array with None -> () | Some x -> setf value _dst_addresses_array x);
-    (match arg_dst_sizes_array with None -> () | Some x -> setf value _dst_sizes_array x);
-    (match arg_src_infos_array with None -> () | Some x -> setf value _src_infos_array x);
+    (match arg_dst_addresses_array with None -> () | Some x -> setf value _dst_addresses_array x; Vk_base.retain keep x);
+    (match arg_dst_sizes_array with None -> () | Some x -> setf value _dst_sizes_array x; Vk_base.retain keep x);
+    (match arg_src_infos_array with None -> () | Some x -> setf value _src_infos_array x; Vk_base.retain keep x);
     setf value _src_infos_count arg_src_infos_count;
     setf value _address_resolution_flags arg_address_resolution_flags;
     value
@@ -1034,7 +1034,7 @@ module ComputePipelineCreateInfo = struct
      | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
      | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
     setf value _flags arg_flags;
-    (match arg_stage with None -> () | Some x -> setf value _stage x);
+    (match arg_stage with None -> () | Some x -> setf value _stage x; Vk_base.retain keep x);
     setf value _layout arg_layout;
     setf value _base_pipeline_handle arg_base_pipeline_handle;
     setf value _base_pipeline_index arg_base_pipeline_index;
@@ -1110,7 +1110,7 @@ module DescriptorSetAndBindingMappingEXT = struct
     setf value _binding_count arg_binding_count;
     setf value _resource_mask arg_resource_mask;
     setf value _source arg_source;
-    (match arg_source_data with None -> () | Some x -> setf value _source_data x);
+    (match arg_source_data with None -> () | Some x -> setf value _source_data x; Vk_base.retain keep x);
     value
 end
 
@@ -1384,7 +1384,7 @@ module ImageConstraintsInfoFUCHSIA = struct
       setf value _p_format_constraints (CArray.start items);
       Vk_base.retain keep items; Vk_base.retain keep arg_format_constraints
     end;
-    (match arg_buffer_collection_constraints with None -> () | Some x -> setf value _buffer_collection_constraints x);
+    (match arg_buffer_collection_constraints with None -> () | Some x -> setf value _buffer_collection_constraints x; Vk_base.retain keep x);
     setf value _flags arg_flags;
     value
 end
@@ -1412,7 +1412,7 @@ module IndirectCommandsLayoutTokenEXT = struct
      | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
      | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
     setf value _type_ arg_type_;
-    (match arg_data with None -> () | Some x -> setf value _data x);
+    (match arg_data with None -> () | Some x -> setf value _data x; Vk_base.retain keep x);
     setf value _offset arg_offset;
     value
 end
@@ -1438,7 +1438,7 @@ module IndirectExecutionSetCreateInfoEXT = struct
      | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
      | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
     setf value _type_ arg_type_;
-    (match arg_info with None -> () | Some x -> setf value _info x);
+    (match arg_info with None -> () | Some x -> setf value _info x; Vk_base.retain keep x);
     value
 end
 
@@ -1732,7 +1732,7 @@ module RenderingInfo = struct
      | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
      | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
     setf value _flags arg_flags;
-    (match arg_render_area with None -> () | Some x -> setf value _render_area x);
+    (match arg_render_area with None -> () | Some x -> setf value _render_area x; Vk_base.retain keep x);
     setf value _layer_count arg_layer_count;
     setf value _view_mask arg_view_mask;
     let color_attachment_count_n = List.length arg_color_attachments in
@@ -1867,7 +1867,7 @@ module VideoDecodeInfoKHR = struct
     setf value _src_buffer arg_src_buffer;
     setf value _src_buffer_offset arg_src_buffer_offset;
     setf value _src_buffer_range arg_src_buffer_range;
-    (match arg_dst_picture_resource with None -> () | Some x -> setf value _dst_picture_resource x);
+    (match arg_dst_picture_resource with None -> () | Some x -> setf value _dst_picture_resource x; Vk_base.retain keep x);
     (match arg_setup_reference_slot with
      | None -> setf value _p_setup_reference_slot (Vk_base.null_ptr (VideoReferenceSlotInfoKHR.t))
      | Some pointed -> setf value _p_setup_reference_slot (addr pointed); Vk_base.retain keep pointed);
@@ -1920,7 +1920,7 @@ module VideoEncodeInfoKHR = struct
     setf value _dst_buffer arg_dst_buffer;
     setf value _dst_buffer_offset arg_dst_buffer_offset;
     setf value _dst_buffer_range arg_dst_buffer_range;
-    (match arg_src_picture_resource with None -> () | Some x -> setf value _src_picture_resource x);
+    (match arg_src_picture_resource with None -> () | Some x -> setf value _src_picture_resource x; Vk_base.retain keep x);
     (match arg_setup_reference_slot with
      | None -> setf value _p_setup_reference_slot (Vk_base.null_ptr (VideoReferenceSlotInfoKHR.t))
      | Some pointed -> setf value _p_setup_reference_slot (addr pointed); Vk_base.retain keep pointed);
@@ -1984,7 +1984,7 @@ module AccelerationStructureBuildGeometryInfoKHR = struct
       Vk_base.retain keep items; Vk_base.retain keep arg_geometries
     end;
     setf value _pp_geometries (match arg_geometries_2 with None -> Vk_base.null_ptr (ptr (AccelerationStructureGeometryKHR.t)) | Some p -> p);
-    (match arg_scratch_data with None -> () | Some x -> setf value _scratch_data x);
+    (match arg_scratch_data with None -> () | Some x -> setf value _scratch_data x; Vk_base.retain keep x);
     value
 end
 
@@ -2009,7 +2009,7 @@ module AccelerationStructureCreateInfoNV = struct
      | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
      | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
     setf value _compacted_size arg_compacted_size;
-    (match arg_info with None -> () | Some x -> setf value _info x);
+    (match arg_info with None -> () | Some x -> setf value _info x; Vk_base.retain keep x);
     value
 end
 
@@ -2120,7 +2120,7 @@ module ResourceDescriptorInfoEXT = struct
      | None -> setf value _p_next (Vk_base.null_ptr (Ctypes.void))
      | Some chain -> setf value _p_next (from_voidp (Ctypes.void) (Vk_base.next_pointer chain)); Vk_base.retain keep chain);
     setf value _type_ arg_type_;
-    (match arg_data with None -> () | Some x -> setf value _data x);
+    (match arg_data with None -> () | Some x -> setf value _data x; Vk_base.retain keep x);
     value
 end
 

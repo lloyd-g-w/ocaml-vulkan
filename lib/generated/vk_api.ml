@@ -22,12 +22,15 @@ open Vk_types_15
 let create_instance ?allocator:arg_allocator arg_create_info =
   let output = allocate (Instance.t) (Instance.null) in
   let result = Vk_fn.create_instance (addr arg_create_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
+  ignore (Sys.opaque_identity (arg_create_info, arg_allocator));
   check result;
   Vk_fn.load_instance !@ output;
   !@ output
 
 let destroy_instance arg_instance ?allocator:arg_allocator () =
-  Vk_fn.destroy_instance (arg_instance) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x))
+  Vk_fn.destroy_instance (arg_instance) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x));
+  ignore (Sys.opaque_identity (arg_instance, arg_allocator));
+  ()
 
 let enumerate_physical_devices arg_instance =
   let count = allocate Vk_base.uint32 0 in
@@ -43,17 +46,24 @@ let enumerate_physical_devices arg_instance =
       CArray.to_list (CArray.from_ptr (CArray.start storage) (!@ count))
     end
   in
-  fetch ()
+  let enumeration_result = fetch () in
+  ignore (Sys.opaque_identity (arg_instance));
+  enumeration_result
 
 let get_device_proc_addr arg_device arg_name =
-  Vk_fn.get_device_proc_addr (arg_device) (arg_name)
+  let call_result = Vk_fn.get_device_proc_addr (arg_device) (arg_name) in
+  ignore (Sys.opaque_identity (arg_device, arg_name));
+  call_result
 
 let get_instance_proc_addr arg_instance arg_name =
-  Vk_fn.get_instance_proc_addr (arg_instance) (arg_name)
+  let call_result = Vk_fn.get_instance_proc_addr (arg_instance) (arg_name) in
+  ignore (Sys.opaque_identity (arg_instance, arg_name));
+  call_result
 
 let get_physical_device_properties arg_physical_device =
   let output = PhysicalDeviceProperties.make () in
   Vk_fn.get_physical_device_properties (arg_physical_device) (addr output);
+  ignore (Sys.opaque_identity (arg_physical_device));
   output
 
 let get_physical_device_queue_family_properties arg_physical_device =
@@ -66,37 +76,46 @@ let get_physical_device_queue_family_properties arg_physical_device =
     Vk_fn.get_physical_device_queue_family_properties (arg_physical_device) (count) (CArray.start storage);
     CArray.to_list (CArray.from_ptr (CArray.start storage) (!@ count))
   in
-  fetch ()
+  let enumeration_result = fetch () in
+  ignore (Sys.opaque_identity (arg_physical_device));
+  enumeration_result
 
 let get_physical_device_memory_properties arg_physical_device =
   let output = PhysicalDeviceMemoryProperties.make () in
   Vk_fn.get_physical_device_memory_properties (arg_physical_device) (addr output);
+  ignore (Sys.opaque_identity (arg_physical_device));
   output
 
 let get_physical_device_features arg_physical_device =
   let output = PhysicalDeviceFeatures.make () in
   Vk_fn.get_physical_device_features (arg_physical_device) (addr output);
+  ignore (Sys.opaque_identity (arg_physical_device));
   output
 
 let get_physical_device_format_properties arg_physical_device arg_format =
   let output = FormatProperties.make () in
   Vk_fn.get_physical_device_format_properties (arg_physical_device) (arg_format) (addr output);
+  ignore (Sys.opaque_identity (arg_physical_device, arg_format));
   output
 
 let get_physical_device_image_format_properties arg_physical_device arg_format arg_type_ arg_tiling arg_usage arg_flags =
   let output = ImageFormatProperties.make () in
   let result = Vk_fn.get_physical_device_image_format_properties (arg_physical_device) (arg_format) (arg_type_) (arg_tiling) (arg_usage) (arg_flags) (addr output) in
+  ignore (Sys.opaque_identity (arg_physical_device, arg_format, arg_type_, arg_tiling, arg_usage, arg_flags));
   check result;
   output
 
 let create_device ?allocator:arg_allocator arg_physical_device arg_create_info =
   let output = allocate (Device.t) (Device.null) in
   let result = Vk_fn.create_device (arg_physical_device) (addr arg_create_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
+  ignore (Sys.opaque_identity (arg_physical_device, arg_create_info, arg_allocator));
   check result;
   !@ output
 
 let destroy_device arg_device ?allocator:arg_allocator () =
-  Vk_fn.destroy_device (arg_device) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x))
+  Vk_fn.destroy_device (arg_device) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x));
+  ignore (Sys.opaque_identity (arg_device, arg_allocator));
+  ()
 
 let enumerate_instance_version () =
   let output = allocate (Vk_base.uint32) (0) in
@@ -134,7 +153,9 @@ let enumerate_instance_extension_properties ?layer_name:arg_layer_name () =
       CArray.to_list (CArray.from_ptr (CArray.start storage) (!@ count))
     end
   in
-  fetch ()
+  let enumeration_result = fetch () in
+  ignore (Sys.opaque_identity (arg_layer_name));
+  enumeration_result
 
 let enumerate_device_layer_properties arg_physical_device =
   let count = allocate Vk_base.uint32 0 in
@@ -150,7 +171,9 @@ let enumerate_device_layer_properties arg_physical_device =
       CArray.to_list (CArray.from_ptr (CArray.start storage) (!@ count))
     end
   in
-  fetch ()
+  let enumeration_result = fetch () in
+  ignore (Sys.opaque_identity (arg_physical_device));
+  enumeration_result
 
 let enumerate_device_extension_properties ?layer_name:arg_layer_name arg_physical_device =
   let count = allocate Vk_base.uint32 0 in
@@ -166,52 +189,65 @@ let enumerate_device_extension_properties ?layer_name:arg_layer_name arg_physica
       CArray.to_list (CArray.from_ptr (CArray.start storage) (!@ count))
     end
   in
-  fetch ()
+  let enumeration_result = fetch () in
+  ignore (Sys.opaque_identity (arg_physical_device, arg_layer_name));
+  enumeration_result
 
 let get_device_queue arg_device arg_queue_family_index arg_queue_index =
   let output = allocate (Queue.t) (Queue.null) in
   Vk_fn.get_device_queue (arg_device) (arg_queue_family_index) (arg_queue_index) (output);
+  ignore (Sys.opaque_identity (arg_device, arg_queue_family_index, arg_queue_index));
   !@ output
 
 let queue_submit arg_queue arg_submits arg_fence =
   let array_submits = CArray.of_list (SubmitInfo.t) arg_submits in
   let pointer_submits = if arg_submits = [] then Vk_base.null_ptr (SubmitInfo.t) else CArray.start array_submits in
   let result = Vk_fn.queue_submit (arg_queue) (List.length arg_submits) (pointer_submits) (arg_fence) in
+  ignore (Sys.opaque_identity (arg_queue, arg_submits, array_submits, arg_fence));
   check result;
   ()
 
 let queue_wait_idle arg_queue =
   let result = Vk_fn.queue_wait_idle (arg_queue) in
+  ignore (Sys.opaque_identity (arg_queue));
   check result;
   ()
 
 let device_wait_idle arg_device =
   let result = Vk_fn.device_wait_idle (arg_device) in
+  ignore (Sys.opaque_identity (arg_device));
   check result;
   ()
 
 let allocate_memory ?allocator:arg_allocator arg_device arg_allocate_info =
   let output = allocate (DeviceMemory.t) (DeviceMemory.null) in
   let result = Vk_fn.allocate_memory (arg_device) (addr arg_allocate_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
+  ignore (Sys.opaque_identity (arg_device, arg_allocate_info, arg_allocator));
   check result;
   !@ output
 
 let free_memory arg_device arg_memory ?allocator:arg_allocator () =
-  Vk_fn.free_memory (arg_device) (arg_memory) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x))
+  Vk_fn.free_memory (arg_device) (arg_memory) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x));
+  ignore (Sys.opaque_identity (arg_device, arg_memory, arg_allocator));
+  ()
 
 let map_memory arg_device arg_memory arg_offset arg_size arg_flags =
   let output = allocate (ptr (Ctypes.void)) (Vk_base.null_ptr (Ctypes.void)) in
   let result = Vk_fn.map_memory (arg_device) (arg_memory) (arg_offset) (arg_size) (arg_flags) (output) in
+  ignore (Sys.opaque_identity (arg_device, arg_memory, arg_offset, arg_size, arg_flags));
   check result;
   !@ output
 
 let unmap_memory arg_device arg_memory =
-  Vk_fn.unmap_memory (arg_device) (arg_memory)
+  Vk_fn.unmap_memory (arg_device) (arg_memory);
+  ignore (Sys.opaque_identity (arg_device, arg_memory));
+  ()
 
 let flush_mapped_memory_ranges arg_device arg_memory_ranges =
   let array_memory_ranges = CArray.of_list (MappedMemoryRange.t) arg_memory_ranges in
   let pointer_memory_ranges = if arg_memory_ranges = [] then Vk_base.null_ptr (MappedMemoryRange.t) else CArray.start array_memory_ranges in
   let result = Vk_fn.flush_mapped_memory_ranges (arg_device) (List.length arg_memory_ranges) (pointer_memory_ranges) in
+  ignore (Sys.opaque_identity (arg_device, arg_memory_ranges, array_memory_ranges));
   check result;
   ()
 
@@ -219,31 +255,37 @@ let invalidate_mapped_memory_ranges arg_device arg_memory_ranges =
   let array_memory_ranges = CArray.of_list (MappedMemoryRange.t) arg_memory_ranges in
   let pointer_memory_ranges = if arg_memory_ranges = [] then Vk_base.null_ptr (MappedMemoryRange.t) else CArray.start array_memory_ranges in
   let result = Vk_fn.invalidate_mapped_memory_ranges (arg_device) (List.length arg_memory_ranges) (pointer_memory_ranges) in
+  ignore (Sys.opaque_identity (arg_device, arg_memory_ranges, array_memory_ranges));
   check result;
   ()
 
 let get_device_memory_commitment arg_device arg_memory =
   let output = allocate (Vk_base.device_size) (0) in
   Vk_fn.get_device_memory_commitment (arg_device) (arg_memory) (output);
+  ignore (Sys.opaque_identity (arg_device, arg_memory));
   !@ output
 
 let get_buffer_memory_requirements arg_device arg_buffer =
   let output = MemoryRequirements.make () in
   Vk_fn.get_buffer_memory_requirements (arg_device) (arg_buffer) (addr output);
+  ignore (Sys.opaque_identity (arg_device, arg_buffer));
   output
 
 let bind_buffer_memory arg_device arg_buffer arg_memory arg_memory_offset =
   let result = Vk_fn.bind_buffer_memory (arg_device) (arg_buffer) (arg_memory) (arg_memory_offset) in
+  ignore (Sys.opaque_identity (arg_device, arg_buffer, arg_memory, arg_memory_offset));
   check result;
   ()
 
 let get_image_memory_requirements arg_device arg_image =
   let output = MemoryRequirements.make () in
   Vk_fn.get_image_memory_requirements (arg_device) (arg_image) (addr output);
+  ignore (Sys.opaque_identity (arg_device, arg_image));
   output
 
 let bind_image_memory arg_device arg_image arg_memory arg_memory_offset =
   let result = Vk_fn.bind_image_memory (arg_device) (arg_image) (arg_memory) (arg_memory_offset) in
+  ignore (Sys.opaque_identity (arg_device, arg_image, arg_memory, arg_memory_offset));
   check result;
   ()
 
@@ -257,7 +299,9 @@ let get_image_sparse_memory_requirements arg_device arg_image =
     Vk_fn.get_image_sparse_memory_requirements (arg_device) (arg_image) (count) (CArray.start storage);
     CArray.to_list (CArray.from_ptr (CArray.start storage) (!@ count))
   in
-  fetch ()
+  let enumeration_result = fetch () in
+  ignore (Sys.opaque_identity (arg_device, arg_image));
+  enumeration_result
 
 let get_physical_device_sparse_image_format_properties arg_physical_device arg_format arg_type_ arg_samples arg_usage arg_tiling =
   let count = allocate Vk_base.uint32 0 in
@@ -269,33 +313,41 @@ let get_physical_device_sparse_image_format_properties arg_physical_device arg_f
     Vk_fn.get_physical_device_sparse_image_format_properties (arg_physical_device) (arg_format) (arg_type_) (arg_samples) (arg_usage) (arg_tiling) (count) (CArray.start storage);
     CArray.to_list (CArray.from_ptr (CArray.start storage) (!@ count))
   in
-  fetch ()
+  let enumeration_result = fetch () in
+  ignore (Sys.opaque_identity (arg_physical_device, arg_format, arg_type_, arg_samples, arg_usage, arg_tiling));
+  enumeration_result
 
 let queue_bind_sparse arg_queue arg_bind_info arg_fence =
   let array_bind_info = CArray.of_list (BindSparseInfo.t) arg_bind_info in
   let pointer_bind_info = if arg_bind_info = [] then Vk_base.null_ptr (BindSparseInfo.t) else CArray.start array_bind_info in
   let result = Vk_fn.queue_bind_sparse (arg_queue) (List.length arg_bind_info) (pointer_bind_info) (arg_fence) in
+  ignore (Sys.opaque_identity (arg_queue, arg_bind_info, array_bind_info, arg_fence));
   check result;
   ()
 
 let create_fence ?allocator:arg_allocator arg_device arg_create_info =
   let output = allocate (Fence.t) (Fence.null) in
   let result = Vk_fn.create_fence (arg_device) (addr arg_create_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
+  ignore (Sys.opaque_identity (arg_device, arg_create_info, arg_allocator));
   check result;
   !@ output
 
 let destroy_fence arg_device arg_fence ?allocator:arg_allocator () =
-  Vk_fn.destroy_fence (arg_device) (arg_fence) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x))
+  Vk_fn.destroy_fence (arg_device) (arg_fence) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x));
+  ignore (Sys.opaque_identity (arg_device, arg_fence, arg_allocator));
+  ()
 
 let reset_fences arg_device arg_fences =
   let array_fences = CArray.of_list (Fence.t) arg_fences in
   let pointer_fences = if arg_fences = [] then Vk_base.null_ptr (Fence.t) else CArray.start array_fences in
   let result = Vk_fn.reset_fences (arg_device) (List.length arg_fences) (pointer_fences) in
+  ignore (Sys.opaque_identity (arg_device, arg_fences, array_fences));
   check result;
   ()
 
 let get_fence_status arg_device arg_fence =
   let result = Vk_fn.get_fence_status (arg_device) (arg_fence) in
+  ignore (Sys.opaque_identity (arg_device, arg_fence));
   check result;
   result
 
@@ -303,120 +355,156 @@ let wait_for_fences arg_device arg_fences arg_wait_all arg_timeout =
   let array_fences = CArray.of_list (Fence.t) arg_fences in
   let pointer_fences = if arg_fences = [] then Vk_base.null_ptr (Fence.t) else CArray.start array_fences in
   let result = Vk_fn.wait_for_fences (arg_device) (List.length arg_fences) (pointer_fences) (arg_wait_all) (arg_timeout) in
+  ignore (Sys.opaque_identity (arg_device, arg_fences, array_fences, arg_wait_all, arg_timeout));
   check result;
   result
 
 let create_semaphore ?allocator:arg_allocator arg_device arg_create_info =
   let output = allocate (Semaphore.t) (Semaphore.null) in
   let result = Vk_fn.create_semaphore (arg_device) (addr arg_create_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
+  ignore (Sys.opaque_identity (arg_device, arg_create_info, arg_allocator));
   check result;
   !@ output
 
 let destroy_semaphore arg_device arg_semaphore ?allocator:arg_allocator () =
-  Vk_fn.destroy_semaphore (arg_device) (arg_semaphore) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x))
+  Vk_fn.destroy_semaphore (arg_device) (arg_semaphore) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x));
+  ignore (Sys.opaque_identity (arg_device, arg_semaphore, arg_allocator));
+  ()
 
 let create_event ?allocator:arg_allocator arg_device arg_create_info =
   let output = allocate (Event.t) (Event.null) in
   let result = Vk_fn.create_event (arg_device) (addr arg_create_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
+  ignore (Sys.opaque_identity (arg_device, arg_create_info, arg_allocator));
   check result;
   !@ output
 
 let destroy_event arg_device arg_event ?allocator:arg_allocator () =
-  Vk_fn.destroy_event (arg_device) (arg_event) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x))
+  Vk_fn.destroy_event (arg_device) (arg_event) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x));
+  ignore (Sys.opaque_identity (arg_device, arg_event, arg_allocator));
+  ()
 
 let get_event_status arg_device arg_event =
   let result = Vk_fn.get_event_status (arg_device) (arg_event) in
+  ignore (Sys.opaque_identity (arg_device, arg_event));
   check result;
   result
 
 let set_event arg_device arg_event =
   let result = Vk_fn.set_event (arg_device) (arg_event) in
+  ignore (Sys.opaque_identity (arg_device, arg_event));
   check result;
   ()
 
 let reset_event arg_device arg_event =
   let result = Vk_fn.reset_event (arg_device) (arg_event) in
+  ignore (Sys.opaque_identity (arg_device, arg_event));
   check result;
   ()
 
 let create_query_pool ?allocator:arg_allocator arg_device arg_create_info =
   let output = allocate (QueryPool.t) (QueryPool.null) in
   let result = Vk_fn.create_query_pool (arg_device) (addr arg_create_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
+  ignore (Sys.opaque_identity (arg_device, arg_create_info, arg_allocator));
   check result;
   !@ output
 
 let destroy_query_pool arg_device arg_query_pool ?allocator:arg_allocator () =
-  Vk_fn.destroy_query_pool (arg_device) (arg_query_pool) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x))
+  Vk_fn.destroy_query_pool (arg_device) (arg_query_pool) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x));
+  ignore (Sys.opaque_identity (arg_device, arg_query_pool, arg_allocator));
+  ()
 
 let get_query_pool_results arg_device arg_query_pool arg_first_query arg_query_count arg_data_size arg_data arg_stride arg_flags =
   let result = Vk_fn.get_query_pool_results (arg_device) (arg_query_pool) (arg_first_query) (arg_query_count) (arg_data_size) (arg_data) (arg_stride) (arg_flags) in
+  ignore (Sys.opaque_identity (arg_device, arg_query_pool, arg_first_query, arg_query_count, arg_data_size, arg_data, arg_stride, arg_flags));
   check result;
   result
 
 let reset_query_pool arg_device arg_query_pool arg_first_query arg_query_count =
-  Vk_fn.reset_query_pool (arg_device) (arg_query_pool) (arg_first_query) (arg_query_count)
+  Vk_fn.reset_query_pool (arg_device) (arg_query_pool) (arg_first_query) (arg_query_count);
+  ignore (Sys.opaque_identity (arg_device, arg_query_pool, arg_first_query, arg_query_count));
+  ()
 
 let create_buffer ?allocator:arg_allocator arg_device arg_create_info =
   let output = allocate (Buffer.t) (Buffer.null) in
   let result = Vk_fn.create_buffer (arg_device) (addr arg_create_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
+  ignore (Sys.opaque_identity (arg_device, arg_create_info, arg_allocator));
   check result;
   !@ output
 
 let destroy_buffer arg_device arg_buffer ?allocator:arg_allocator () =
-  Vk_fn.destroy_buffer (arg_device) (arg_buffer) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x))
+  Vk_fn.destroy_buffer (arg_device) (arg_buffer) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x));
+  ignore (Sys.opaque_identity (arg_device, arg_buffer, arg_allocator));
+  ()
 
 let create_buffer_view ?allocator:arg_allocator arg_device arg_create_info =
   let output = allocate (BufferView.t) (BufferView.null) in
   let result = Vk_fn.create_buffer_view (arg_device) (addr arg_create_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
+  ignore (Sys.opaque_identity (arg_device, arg_create_info, arg_allocator));
   check result;
   !@ output
 
 let destroy_buffer_view arg_device arg_buffer_view ?allocator:arg_allocator () =
-  Vk_fn.destroy_buffer_view (arg_device) (arg_buffer_view) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x))
+  Vk_fn.destroy_buffer_view (arg_device) (arg_buffer_view) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x));
+  ignore (Sys.opaque_identity (arg_device, arg_buffer_view, arg_allocator));
+  ()
 
 let create_image ?allocator:arg_allocator arg_device arg_create_info =
   let output = allocate (Image.t) (Image.null) in
   let result = Vk_fn.create_image (arg_device) (addr arg_create_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
+  ignore (Sys.opaque_identity (arg_device, arg_create_info, arg_allocator));
   check result;
   !@ output
 
 let destroy_image arg_device arg_image ?allocator:arg_allocator () =
-  Vk_fn.destroy_image (arg_device) (arg_image) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x))
+  Vk_fn.destroy_image (arg_device) (arg_image) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x));
+  ignore (Sys.opaque_identity (arg_device, arg_image, arg_allocator));
+  ()
 
 let get_image_subresource_layout arg_device arg_image arg_subresource =
   let output = SubresourceLayout.make () in
   Vk_fn.get_image_subresource_layout (arg_device) (arg_image) (addr arg_subresource) (addr output);
+  ignore (Sys.opaque_identity (arg_device, arg_image, arg_subresource));
   output
 
 let create_image_view ?allocator:arg_allocator arg_device arg_create_info =
   let output = allocate (ImageView.t) (ImageView.null) in
   let result = Vk_fn.create_image_view (arg_device) (addr arg_create_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
+  ignore (Sys.opaque_identity (arg_device, arg_create_info, arg_allocator));
   check result;
   !@ output
 
 let destroy_image_view arg_device arg_image_view ?allocator:arg_allocator () =
-  Vk_fn.destroy_image_view (arg_device) (arg_image_view) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x))
+  Vk_fn.destroy_image_view (arg_device) (arg_image_view) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x));
+  ignore (Sys.opaque_identity (arg_device, arg_image_view, arg_allocator));
+  ()
 
 let create_shader_module ?allocator:arg_allocator arg_device arg_create_info =
   let output = allocate (ShaderModule.t) (ShaderModule.null) in
   let result = Vk_fn.create_shader_module (arg_device) (addr arg_create_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
+  ignore (Sys.opaque_identity (arg_device, arg_create_info, arg_allocator));
   check result;
   !@ output
 
 let destroy_shader_module arg_device arg_shader_module ?allocator:arg_allocator () =
-  Vk_fn.destroy_shader_module (arg_device) (arg_shader_module) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x))
+  Vk_fn.destroy_shader_module (arg_device) (arg_shader_module) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x));
+  ignore (Sys.opaque_identity (arg_device, arg_shader_module, arg_allocator));
+  ()
 
 let create_pipeline_cache ?allocator:arg_allocator arg_device arg_create_info =
   let output = allocate (PipelineCache.t) (PipelineCache.null) in
   let result = Vk_fn.create_pipeline_cache (arg_device) (addr arg_create_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
+  ignore (Sys.opaque_identity (arg_device, arg_create_info, arg_allocator));
   check result;
   !@ output
 
 let destroy_pipeline_cache arg_device arg_pipeline_cache ?allocator:arg_allocator () =
-  Vk_fn.destroy_pipeline_cache (arg_device) (arg_pipeline_cache) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x))
+  Vk_fn.destroy_pipeline_cache (arg_device) (arg_pipeline_cache) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x));
+  ignore (Sys.opaque_identity (arg_device, arg_pipeline_cache, arg_allocator));
+  ()
 
 let get_pipeline_cache_data arg_device arg_pipeline_cache arg_data_size arg_data =
   let result = Vk_fn.get_pipeline_cache_data (arg_device) (arg_pipeline_cache) (arg_data_size) (arg_data) in
+  ignore (Sys.opaque_identity (arg_device, arg_pipeline_cache, arg_data_size, arg_data));
   check result;
   ()
 
@@ -424,29 +512,36 @@ let merge_pipeline_caches arg_device arg_dst_cache arg_src_caches =
   let array_src_caches = CArray.of_list (PipelineCache.t) arg_src_caches in
   let pointer_src_caches = if arg_src_caches = [] then Vk_base.null_ptr (PipelineCache.t) else CArray.start array_src_caches in
   let result = Vk_fn.merge_pipeline_caches (arg_device) (arg_dst_cache) (List.length arg_src_caches) (pointer_src_caches) in
+  ignore (Sys.opaque_identity (arg_device, arg_dst_cache, arg_src_caches, array_src_caches));
   check result;
   ()
 
 let create_pipeline_binaries_khr ?allocator:arg_allocator arg_device arg_create_info arg_binaries =
   let result = Vk_fn.create_pipeline_binaries_khr (arg_device) (addr arg_create_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (addr arg_binaries) in
+  ignore (Sys.opaque_identity (arg_device, arg_create_info, arg_allocator, arg_binaries));
   check result;
   result
 
 let destroy_pipeline_binary_khr arg_device arg_pipeline_binary ?allocator:arg_allocator () =
-  Vk_fn.destroy_pipeline_binary_khr (arg_device) (arg_pipeline_binary) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x))
+  Vk_fn.destroy_pipeline_binary_khr (arg_device) (arg_pipeline_binary) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x));
+  ignore (Sys.opaque_identity (arg_device, arg_pipeline_binary, arg_allocator));
+  ()
 
 let get_pipeline_key_khr arg_device arg_pipeline_create_info arg_pipeline_key =
   let result = Vk_fn.get_pipeline_key_khr (arg_device) (addr arg_pipeline_create_info) (addr arg_pipeline_key) in
+  ignore (Sys.opaque_identity (arg_device, arg_pipeline_create_info, arg_pipeline_key));
   check result;
   ()
 
 let get_pipeline_binary_data_khr arg_device arg_info arg_pipeline_binary_key arg_pipeline_binary_data_size arg_pipeline_binary_data =
   let result = Vk_fn.get_pipeline_binary_data_khr (arg_device) (addr arg_info) (addr arg_pipeline_binary_key) (arg_pipeline_binary_data_size) (arg_pipeline_binary_data) in
+  ignore (Sys.opaque_identity (arg_device, arg_info, arg_pipeline_binary_key, arg_pipeline_binary_data_size, arg_pipeline_binary_data));
   check result;
   ()
 
 let release_captured_pipeline_data_khr ?allocator:arg_allocator arg_device arg_info =
   let result = Vk_fn.release_captured_pipeline_data_khr (arg_device) (addr arg_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) in
+  ignore (Sys.opaque_identity (arg_device, arg_info, arg_allocator));
   check result;
   ()
 
@@ -456,6 +551,7 @@ let create_graphics_pipelines ?allocator:arg_allocator arg_device arg_pipeline_c
   let output_count = List.length arg_create_infos in
   let storage = CArray.make (Pipeline.t) output_count in
   let result = Vk_fn.create_graphics_pipelines (arg_device) (arg_pipeline_cache) (List.length arg_create_infos) (pointer_create_infos) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (CArray.start storage) in
+  ignore (Sys.opaque_identity (arg_device, arg_pipeline_cache, arg_create_infos, array_create_infos, arg_allocator));
   check result;
   (result, (CArray.to_list storage))
 
@@ -465,55 +561,72 @@ let create_compute_pipelines ?allocator:arg_allocator arg_device arg_pipeline_ca
   let output_count = List.length arg_create_infos in
   let storage = CArray.make (Pipeline.t) output_count in
   let result = Vk_fn.create_compute_pipelines (arg_device) (arg_pipeline_cache) (List.length arg_create_infos) (pointer_create_infos) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (CArray.start storage) in
+  ignore (Sys.opaque_identity (arg_device, arg_pipeline_cache, arg_create_infos, array_create_infos, arg_allocator));
   check result;
   (result, (CArray.to_list storage))
 
 let get_device_subpass_shading_max_workgroup_size_huawei arg_device arg_renderpass arg_max_workgroup_size =
   let result = Vk_fn.get_device_subpass_shading_max_workgroup_size_huawei (arg_device) (arg_renderpass) (arg_max_workgroup_size) in
+  ignore (Sys.opaque_identity (arg_device, arg_renderpass, arg_max_workgroup_size));
   check result;
   ()
 
 let destroy_pipeline arg_device arg_pipeline ?allocator:arg_allocator () =
-  Vk_fn.destroy_pipeline (arg_device) (arg_pipeline) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x))
+  Vk_fn.destroy_pipeline (arg_device) (arg_pipeline) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x));
+  ignore (Sys.opaque_identity (arg_device, arg_pipeline, arg_allocator));
+  ()
 
 let create_pipeline_layout ?allocator:arg_allocator arg_device arg_create_info =
   let output = allocate (PipelineLayout.t) (PipelineLayout.null) in
   let result = Vk_fn.create_pipeline_layout (arg_device) (addr arg_create_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
+  ignore (Sys.opaque_identity (arg_device, arg_create_info, arg_allocator));
   check result;
   !@ output
 
 let destroy_pipeline_layout arg_device arg_pipeline_layout ?allocator:arg_allocator () =
-  Vk_fn.destroy_pipeline_layout (arg_device) (arg_pipeline_layout) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x))
+  Vk_fn.destroy_pipeline_layout (arg_device) (arg_pipeline_layout) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x));
+  ignore (Sys.opaque_identity (arg_device, arg_pipeline_layout, arg_allocator));
+  ()
 
 let create_sampler ?allocator:arg_allocator arg_device arg_create_info =
   let output = allocate (Sampler.t) (Sampler.null) in
   let result = Vk_fn.create_sampler (arg_device) (addr arg_create_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
+  ignore (Sys.opaque_identity (arg_device, arg_create_info, arg_allocator));
   check result;
   !@ output
 
 let destroy_sampler arg_device arg_sampler ?allocator:arg_allocator () =
-  Vk_fn.destroy_sampler (arg_device) (arg_sampler) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x))
+  Vk_fn.destroy_sampler (arg_device) (arg_sampler) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x));
+  ignore (Sys.opaque_identity (arg_device, arg_sampler, arg_allocator));
+  ()
 
 let create_descriptor_set_layout ?allocator:arg_allocator arg_device arg_create_info =
   let output = allocate (DescriptorSetLayout.t) (DescriptorSetLayout.null) in
   let result = Vk_fn.create_descriptor_set_layout (arg_device) (addr arg_create_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
+  ignore (Sys.opaque_identity (arg_device, arg_create_info, arg_allocator));
   check result;
   !@ output
 
 let destroy_descriptor_set_layout arg_device arg_descriptor_set_layout ?allocator:arg_allocator () =
-  Vk_fn.destroy_descriptor_set_layout (arg_device) (arg_descriptor_set_layout) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x))
+  Vk_fn.destroy_descriptor_set_layout (arg_device) (arg_descriptor_set_layout) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x));
+  ignore (Sys.opaque_identity (arg_device, arg_descriptor_set_layout, arg_allocator));
+  ()
 
 let create_descriptor_pool ?allocator:arg_allocator arg_device arg_create_info =
   let output = allocate (DescriptorPool.t) (DescriptorPool.null) in
   let result = Vk_fn.create_descriptor_pool (arg_device) (addr arg_create_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
+  ignore (Sys.opaque_identity (arg_device, arg_create_info, arg_allocator));
   check result;
   !@ output
 
 let destroy_descriptor_pool arg_device arg_descriptor_pool ?allocator:arg_allocator () =
-  Vk_fn.destroy_descriptor_pool (arg_device) (arg_descriptor_pool) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x))
+  Vk_fn.destroy_descriptor_pool (arg_device) (arg_descriptor_pool) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x));
+  ignore (Sys.opaque_identity (arg_device, arg_descriptor_pool, arg_allocator));
+  ()
 
 let reset_descriptor_pool arg_device arg_descriptor_pool arg_flags =
   let result = Vk_fn.reset_descriptor_pool (arg_device) (arg_descriptor_pool) (arg_flags) in
+  ignore (Sys.opaque_identity (arg_device, arg_descriptor_pool, arg_flags));
   check result;
   ()
 
@@ -521,6 +634,7 @@ let allocate_descriptor_sets arg_device arg_allocate_info =
   let output_count = Ctypes.getf arg_allocate_info DescriptorSetAllocateInfo.descriptor_set_count in
   let storage = CArray.make (DescriptorSet.t) output_count in
   let result = Vk_fn.allocate_descriptor_sets (arg_device) (addr arg_allocate_info) (CArray.start storage) in
+  ignore (Sys.opaque_identity (arg_device, arg_allocate_info));
   check result;
   (CArray.to_list storage)
 
@@ -528,6 +642,7 @@ let free_descriptor_sets arg_device arg_descriptor_pool arg_descriptor_sets =
   let array_descriptor_sets = CArray.of_list (DescriptorSet.t) arg_descriptor_sets in
   let pointer_descriptor_sets = if arg_descriptor_sets = [] then Vk_base.null_ptr (DescriptorSet.t) else CArray.start array_descriptor_sets in
   let result = Vk_fn.free_descriptor_sets (arg_device) (arg_descriptor_pool) (List.length arg_descriptor_sets) (pointer_descriptor_sets) in
+  ignore (Sys.opaque_identity (arg_device, arg_descriptor_pool, arg_descriptor_sets, array_descriptor_sets));
   check result;
   ()
 
@@ -536,47 +651,61 @@ let update_descriptor_sets arg_device arg_descriptor_writes arg_descriptor_copie
   let pointer_descriptor_writes = if arg_descriptor_writes = [] then Vk_base.null_ptr (WriteDescriptorSet.t) else CArray.start array_descriptor_writes in
   let array_descriptor_copies = CArray.of_list (CopyDescriptorSet.t) arg_descriptor_copies in
   let pointer_descriptor_copies = if arg_descriptor_copies = [] then Vk_base.null_ptr (CopyDescriptorSet.t) else CArray.start array_descriptor_copies in
-  Vk_fn.update_descriptor_sets (arg_device) (List.length arg_descriptor_writes) (pointer_descriptor_writes) (List.length arg_descriptor_copies) (pointer_descriptor_copies)
+  Vk_fn.update_descriptor_sets (arg_device) (List.length arg_descriptor_writes) (pointer_descriptor_writes) (List.length arg_descriptor_copies) (pointer_descriptor_copies);
+  ignore (Sys.opaque_identity (arg_device, arg_descriptor_writes, array_descriptor_writes, arg_descriptor_copies, array_descriptor_copies));
+  ()
 
 let create_framebuffer ?allocator:arg_allocator arg_device arg_create_info =
   let output = allocate (Framebuffer.t) (Framebuffer.null) in
   let result = Vk_fn.create_framebuffer (arg_device) (addr arg_create_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
+  ignore (Sys.opaque_identity (arg_device, arg_create_info, arg_allocator));
   check result;
   !@ output
 
 let destroy_framebuffer arg_device arg_framebuffer ?allocator:arg_allocator () =
-  Vk_fn.destroy_framebuffer (arg_device) (arg_framebuffer) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x))
+  Vk_fn.destroy_framebuffer (arg_device) (arg_framebuffer) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x));
+  ignore (Sys.opaque_identity (arg_device, arg_framebuffer, arg_allocator));
+  ()
 
 let create_render_pass ?allocator:arg_allocator arg_device arg_create_info =
   let output = allocate (RenderPass.t) (RenderPass.null) in
   let result = Vk_fn.create_render_pass (arg_device) (addr arg_create_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
+  ignore (Sys.opaque_identity (arg_device, arg_create_info, arg_allocator));
   check result;
   !@ output
 
 let destroy_render_pass arg_device arg_render_pass ?allocator:arg_allocator () =
-  Vk_fn.destroy_render_pass (arg_device) (arg_render_pass) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x))
+  Vk_fn.destroy_render_pass (arg_device) (arg_render_pass) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x));
+  ignore (Sys.opaque_identity (arg_device, arg_render_pass, arg_allocator));
+  ()
 
 let get_render_area_granularity arg_device arg_render_pass =
   let output = Extent2D.make () in
   Vk_fn.get_render_area_granularity (arg_device) (arg_render_pass) (addr output);
+  ignore (Sys.opaque_identity (arg_device, arg_render_pass));
   output
 
 let get_rendering_area_granularity arg_device arg_rendering_area_info =
   let output = Extent2D.make () in
   Vk_fn.get_rendering_area_granularity (arg_device) (addr arg_rendering_area_info) (addr output);
+  ignore (Sys.opaque_identity (arg_device, arg_rendering_area_info));
   output
 
 let create_command_pool ?allocator:arg_allocator arg_device arg_create_info =
   let output = allocate (CommandPool.t) (CommandPool.null) in
   let result = Vk_fn.create_command_pool (arg_device) (addr arg_create_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
+  ignore (Sys.opaque_identity (arg_device, arg_create_info, arg_allocator));
   check result;
   !@ output
 
 let destroy_command_pool arg_device arg_command_pool ?allocator:arg_allocator () =
-  Vk_fn.destroy_command_pool (arg_device) (arg_command_pool) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x))
+  Vk_fn.destroy_command_pool (arg_device) (arg_command_pool) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x));
+  ignore (Sys.opaque_identity (arg_device, arg_command_pool, arg_allocator));
+  ()
 
 let reset_command_pool arg_device arg_command_pool arg_flags =
   let result = Vk_fn.reset_command_pool (arg_device) (arg_command_pool) (arg_flags) in
+  ignore (Sys.opaque_identity (arg_device, arg_command_pool, arg_flags));
   check result;
   ()
 
@@ -584,78 +713,112 @@ let allocate_command_buffers arg_device arg_allocate_info =
   let output_count = Ctypes.getf arg_allocate_info CommandBufferAllocateInfo.command_buffer_count in
   let storage = CArray.make (CommandBuffer.t) output_count in
   let result = Vk_fn.allocate_command_buffers (arg_device) (addr arg_allocate_info) (CArray.start storage) in
+  ignore (Sys.opaque_identity (arg_device, arg_allocate_info));
   check result;
   (CArray.to_list storage)
 
 let free_command_buffers arg_device arg_command_pool arg_command_buffers =
   let array_command_buffers = CArray.of_list (CommandBuffer.t) arg_command_buffers in
   let pointer_command_buffers = if arg_command_buffers = [] then Vk_base.null_ptr (CommandBuffer.t) else CArray.start array_command_buffers in
-  Vk_fn.free_command_buffers (arg_device) (arg_command_pool) (List.length arg_command_buffers) (pointer_command_buffers)
+  Vk_fn.free_command_buffers (arg_device) (arg_command_pool) (List.length arg_command_buffers) (pointer_command_buffers);
+  ignore (Sys.opaque_identity (arg_device, arg_command_pool, arg_command_buffers, array_command_buffers));
+  ()
 
 let begin_command_buffer arg_command_buffer arg_begin_info =
   let result = Vk_fn.begin_command_buffer (arg_command_buffer) (addr arg_begin_info) in
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_begin_info));
   check result;
   ()
 
 let end_command_buffer arg_command_buffer =
   let result = Vk_fn.end_command_buffer (arg_command_buffer) in
+  ignore (Sys.opaque_identity (arg_command_buffer));
   check result;
   ()
 
 let reset_command_buffer arg_command_buffer arg_flags =
   let result = Vk_fn.reset_command_buffer (arg_command_buffer) (arg_flags) in
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_flags));
   check result;
   ()
 
 let cmd_bind_pipeline arg_command_buffer arg_pipeline_bind_point arg_pipeline =
-  Vk_fn.cmd_bind_pipeline (arg_command_buffer) (arg_pipeline_bind_point) (arg_pipeline)
+  Vk_fn.cmd_bind_pipeline (arg_command_buffer) (arg_pipeline_bind_point) (arg_pipeline);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_pipeline_bind_point, arg_pipeline));
+  ()
 
 let cmd_set_primitive_restart_index_ext arg_command_buffer arg_primitive_restart_index =
-  Vk_fn.cmd_set_primitive_restart_index_ext (arg_command_buffer) (arg_primitive_restart_index)
+  Vk_fn.cmd_set_primitive_restart_index_ext (arg_command_buffer) (arg_primitive_restart_index);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_primitive_restart_index));
+  ()
 
 let cmd_set_attachment_feedback_loop_enable_ext arg_command_buffer arg_aspect_mask =
-  Vk_fn.cmd_set_attachment_feedback_loop_enable_ext (arg_command_buffer) (arg_aspect_mask)
+  Vk_fn.cmd_set_attachment_feedback_loop_enable_ext (arg_command_buffer) (arg_aspect_mask);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_aspect_mask));
+  ()
 
 let cmd_set_viewport arg_command_buffer arg_first_viewport arg_viewports =
   let array_viewports = CArray.of_list (Viewport.t) arg_viewports in
   let pointer_viewports = if arg_viewports = [] then Vk_base.null_ptr (Viewport.t) else CArray.start array_viewports in
-  Vk_fn.cmd_set_viewport (arg_command_buffer) (arg_first_viewport) (List.length arg_viewports) (pointer_viewports)
+  Vk_fn.cmd_set_viewport (arg_command_buffer) (arg_first_viewport) (List.length arg_viewports) (pointer_viewports);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_first_viewport, arg_viewports, array_viewports));
+  ()
 
 let cmd_set_scissor arg_command_buffer arg_first_scissor arg_scissors =
   let array_scissors = CArray.of_list (Rect2D.t) arg_scissors in
   let pointer_scissors = if arg_scissors = [] then Vk_base.null_ptr (Rect2D.t) else CArray.start array_scissors in
-  Vk_fn.cmd_set_scissor (arg_command_buffer) (arg_first_scissor) (List.length arg_scissors) (pointer_scissors)
+  Vk_fn.cmd_set_scissor (arg_command_buffer) (arg_first_scissor) (List.length arg_scissors) (pointer_scissors);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_first_scissor, arg_scissors, array_scissors));
+  ()
 
 let cmd_set_line_width arg_command_buffer arg_line_width =
-  Vk_fn.cmd_set_line_width (arg_command_buffer) (arg_line_width)
+  Vk_fn.cmd_set_line_width (arg_command_buffer) (arg_line_width);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_line_width));
+  ()
 
 let cmd_set_depth_bias arg_command_buffer arg_depth_bias_constant_factor arg_depth_bias_clamp arg_depth_bias_slope_factor =
-  Vk_fn.cmd_set_depth_bias (arg_command_buffer) (arg_depth_bias_constant_factor) (arg_depth_bias_clamp) (arg_depth_bias_slope_factor)
+  Vk_fn.cmd_set_depth_bias (arg_command_buffer) (arg_depth_bias_constant_factor) (arg_depth_bias_clamp) (arg_depth_bias_slope_factor);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_depth_bias_constant_factor, arg_depth_bias_clamp, arg_depth_bias_slope_factor));
+  ()
 
 let cmd_set_blend_constants arg_command_buffer arg_blend_constants =
-  Vk_fn.cmd_set_blend_constants (arg_command_buffer) (arg_blend_constants)
+  Vk_fn.cmd_set_blend_constants (arg_command_buffer) (arg_blend_constants);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_blend_constants));
+  ()
 
 let cmd_set_depth_bounds arg_command_buffer arg_min_depth_bounds arg_max_depth_bounds =
-  Vk_fn.cmd_set_depth_bounds (arg_command_buffer) (arg_min_depth_bounds) (arg_max_depth_bounds)
+  Vk_fn.cmd_set_depth_bounds (arg_command_buffer) (arg_min_depth_bounds) (arg_max_depth_bounds);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_min_depth_bounds, arg_max_depth_bounds));
+  ()
 
 let cmd_set_stencil_compare_mask arg_command_buffer arg_face_mask arg_compare_mask =
-  Vk_fn.cmd_set_stencil_compare_mask (arg_command_buffer) (arg_face_mask) (arg_compare_mask)
+  Vk_fn.cmd_set_stencil_compare_mask (arg_command_buffer) (arg_face_mask) (arg_compare_mask);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_face_mask, arg_compare_mask));
+  ()
 
 let cmd_set_stencil_write_mask arg_command_buffer arg_face_mask arg_write_mask =
-  Vk_fn.cmd_set_stencil_write_mask (arg_command_buffer) (arg_face_mask) (arg_write_mask)
+  Vk_fn.cmd_set_stencil_write_mask (arg_command_buffer) (arg_face_mask) (arg_write_mask);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_face_mask, arg_write_mask));
+  ()
 
 let cmd_set_stencil_reference arg_command_buffer arg_face_mask arg_reference =
-  Vk_fn.cmd_set_stencil_reference (arg_command_buffer) (arg_face_mask) (arg_reference)
+  Vk_fn.cmd_set_stencil_reference (arg_command_buffer) (arg_face_mask) (arg_reference);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_face_mask, arg_reference));
+  ()
 
 let cmd_bind_descriptor_sets arg_command_buffer arg_pipeline_bind_point arg_layout arg_first_set arg_descriptor_sets arg_dynamic_offsets =
   let array_descriptor_sets = CArray.of_list (DescriptorSet.t) arg_descriptor_sets in
   let pointer_descriptor_sets = if arg_descriptor_sets = [] then Vk_base.null_ptr (DescriptorSet.t) else CArray.start array_descriptor_sets in
   let array_dynamic_offsets = CArray.of_list (Vk_base.uint32) arg_dynamic_offsets in
   let pointer_dynamic_offsets = if arg_dynamic_offsets = [] then Vk_base.null_ptr (Vk_base.uint32) else CArray.start array_dynamic_offsets in
-  Vk_fn.cmd_bind_descriptor_sets (arg_command_buffer) (arg_pipeline_bind_point) (arg_layout) (arg_first_set) (List.length arg_descriptor_sets) (pointer_descriptor_sets) (List.length arg_dynamic_offsets) (pointer_dynamic_offsets)
+  Vk_fn.cmd_bind_descriptor_sets (arg_command_buffer) (arg_pipeline_bind_point) (arg_layout) (arg_first_set) (List.length arg_descriptor_sets) (pointer_descriptor_sets) (List.length arg_dynamic_offsets) (pointer_dynamic_offsets);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_pipeline_bind_point, arg_layout, arg_first_set, arg_descriptor_sets, array_descriptor_sets, arg_dynamic_offsets, array_dynamic_offsets));
+  ()
 
 let cmd_bind_index_buffer arg_command_buffer arg_buffer arg_offset arg_index_type =
-  Vk_fn.cmd_bind_index_buffer (arg_command_buffer) (arg_buffer) (arg_offset) (arg_index_type)
+  Vk_fn.cmd_bind_index_buffer (arg_command_buffer) (arg_buffer) (arg_offset) (arg_index_type);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_buffer, arg_offset, arg_index_type));
+  ()
 
 let cmd_bind_vertex_buffers arg_command_buffer arg_first_binding arg_buffers arg_offsets =
   let array_buffers = CArray.of_list (Buffer.t) arg_buffers in
@@ -663,120 +826,180 @@ let cmd_bind_vertex_buffers arg_command_buffer arg_first_binding arg_buffers arg
   if List.length arg_offsets <> List.length arg_buffers then invalid_arg "vkCmdBindVertexBuffers: array lengths differ";
   let array_offsets = CArray.of_list (Vk_base.device_size) arg_offsets in
   let pointer_offsets = if arg_offsets = [] then Vk_base.null_ptr (Vk_base.device_size) else CArray.start array_offsets in
-  Vk_fn.cmd_bind_vertex_buffers (arg_command_buffer) (arg_first_binding) (List.length arg_buffers) (pointer_buffers) (pointer_offsets)
+  Vk_fn.cmd_bind_vertex_buffers (arg_command_buffer) (arg_first_binding) (List.length arg_buffers) (pointer_buffers) (pointer_offsets);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_first_binding, arg_buffers, array_buffers, arg_offsets, array_offsets));
+  ()
 
 let cmd_draw arg_command_buffer arg_vertex_count arg_instance_count arg_first_vertex arg_first_instance =
-  Vk_fn.cmd_draw (arg_command_buffer) (arg_vertex_count) (arg_instance_count) (arg_first_vertex) (arg_first_instance)
+  Vk_fn.cmd_draw (arg_command_buffer) (arg_vertex_count) (arg_instance_count) (arg_first_vertex) (arg_first_instance);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_vertex_count, arg_instance_count, arg_first_vertex, arg_first_instance));
+  ()
 
 let cmd_draw_indexed arg_command_buffer arg_index_count arg_instance_count arg_first_index arg_vertex_offset arg_first_instance =
-  Vk_fn.cmd_draw_indexed (arg_command_buffer) (arg_index_count) (arg_instance_count) (arg_first_index) (arg_vertex_offset) (arg_first_instance)
+  Vk_fn.cmd_draw_indexed (arg_command_buffer) (arg_index_count) (arg_instance_count) (arg_first_index) (arg_vertex_offset) (arg_first_instance);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_index_count, arg_instance_count, arg_first_index, arg_vertex_offset, arg_first_instance));
+  ()
 
 let cmd_draw_multi_ext arg_command_buffer arg_vertex_info arg_instance_count arg_first_instance arg_stride =
   let array_vertex_info = CArray.of_list (MultiDrawInfoEXT.t) arg_vertex_info in
   let pointer_vertex_info = if arg_vertex_info = [] then Vk_base.null_ptr (MultiDrawInfoEXT.t) else CArray.start array_vertex_info in
-  Vk_fn.cmd_draw_multi_ext (arg_command_buffer) (List.length arg_vertex_info) (pointer_vertex_info) (arg_instance_count) (arg_first_instance) (arg_stride)
+  Vk_fn.cmd_draw_multi_ext (arg_command_buffer) (List.length arg_vertex_info) (pointer_vertex_info) (arg_instance_count) (arg_first_instance) (arg_stride);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_vertex_info, array_vertex_info, arg_instance_count, arg_first_instance, arg_stride));
+  ()
 
 let cmd_draw_multi_indexed_ext arg_command_buffer arg_index_info arg_instance_count arg_first_instance arg_stride arg_vertex_offset =
   let array_index_info = CArray.of_list (MultiDrawIndexedInfoEXT.t) arg_index_info in
   let pointer_index_info = if arg_index_info = [] then Vk_base.null_ptr (MultiDrawIndexedInfoEXT.t) else CArray.start array_index_info in
-  Vk_fn.cmd_draw_multi_indexed_ext (arg_command_buffer) (List.length arg_index_info) (pointer_index_info) (arg_instance_count) (arg_first_instance) (arg_stride) (arg_vertex_offset)
+  Vk_fn.cmd_draw_multi_indexed_ext (arg_command_buffer) (List.length arg_index_info) (pointer_index_info) (arg_instance_count) (arg_first_instance) (arg_stride) (arg_vertex_offset);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_index_info, array_index_info, arg_instance_count, arg_first_instance, arg_stride, arg_vertex_offset));
+  ()
 
 let cmd_draw_indirect arg_command_buffer arg_buffer arg_offset arg_draw_count arg_stride =
-  Vk_fn.cmd_draw_indirect (arg_command_buffer) (arg_buffer) (arg_offset) (arg_draw_count) (arg_stride)
+  Vk_fn.cmd_draw_indirect (arg_command_buffer) (arg_buffer) (arg_offset) (arg_draw_count) (arg_stride);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_buffer, arg_offset, arg_draw_count, arg_stride));
+  ()
 
 let cmd_draw_indexed_indirect arg_command_buffer arg_buffer arg_offset arg_draw_count arg_stride =
-  Vk_fn.cmd_draw_indexed_indirect (arg_command_buffer) (arg_buffer) (arg_offset) (arg_draw_count) (arg_stride)
+  Vk_fn.cmd_draw_indexed_indirect (arg_command_buffer) (arg_buffer) (arg_offset) (arg_draw_count) (arg_stride);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_buffer, arg_offset, arg_draw_count, arg_stride));
+  ()
 
 let cmd_dispatch arg_command_buffer arg_group_count_x arg_group_count_y arg_group_count_z =
-  Vk_fn.cmd_dispatch (arg_command_buffer) (arg_group_count_x) (arg_group_count_y) (arg_group_count_z)
+  Vk_fn.cmd_dispatch (arg_command_buffer) (arg_group_count_x) (arg_group_count_y) (arg_group_count_z);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_group_count_x, arg_group_count_y, arg_group_count_z));
+  ()
 
 let cmd_dispatch_indirect arg_command_buffer arg_buffer arg_offset =
-  Vk_fn.cmd_dispatch_indirect (arg_command_buffer) (arg_buffer) (arg_offset)
+  Vk_fn.cmd_dispatch_indirect (arg_command_buffer) (arg_buffer) (arg_offset);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_buffer, arg_offset));
+  ()
 
 let cmd_subpass_shading_huawei arg_command_buffer =
-  Vk_fn.cmd_subpass_shading_huawei (arg_command_buffer)
+  Vk_fn.cmd_subpass_shading_huawei (arg_command_buffer);
+  ignore (Sys.opaque_identity (arg_command_buffer));
+  ()
 
 let cmd_draw_cluster_huawei arg_command_buffer arg_group_count_x arg_group_count_y arg_group_count_z =
-  Vk_fn.cmd_draw_cluster_huawei (arg_command_buffer) (arg_group_count_x) (arg_group_count_y) (arg_group_count_z)
+  Vk_fn.cmd_draw_cluster_huawei (arg_command_buffer) (arg_group_count_x) (arg_group_count_y) (arg_group_count_z);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_group_count_x, arg_group_count_y, arg_group_count_z));
+  ()
 
 let cmd_draw_cluster_indirect_huawei arg_command_buffer arg_buffer arg_offset =
-  Vk_fn.cmd_draw_cluster_indirect_huawei (arg_command_buffer) (arg_buffer) (arg_offset)
+  Vk_fn.cmd_draw_cluster_indirect_huawei (arg_command_buffer) (arg_buffer) (arg_offset);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_buffer, arg_offset));
+  ()
 
 let cmd_update_pipeline_indirect_buffer_nv arg_command_buffer arg_pipeline_bind_point arg_pipeline =
-  Vk_fn.cmd_update_pipeline_indirect_buffer_nv (arg_command_buffer) (arg_pipeline_bind_point) (arg_pipeline)
+  Vk_fn.cmd_update_pipeline_indirect_buffer_nv (arg_command_buffer) (arg_pipeline_bind_point) (arg_pipeline);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_pipeline_bind_point, arg_pipeline));
+  ()
 
 let cmd_copy_buffer arg_command_buffer arg_src_buffer arg_dst_buffer arg_regions =
   let array_regions = CArray.of_list (BufferCopy.t) arg_regions in
   let pointer_regions = if arg_regions = [] then Vk_base.null_ptr (BufferCopy.t) else CArray.start array_regions in
-  Vk_fn.cmd_copy_buffer (arg_command_buffer) (arg_src_buffer) (arg_dst_buffer) (List.length arg_regions) (pointer_regions)
+  Vk_fn.cmd_copy_buffer (arg_command_buffer) (arg_src_buffer) (arg_dst_buffer) (List.length arg_regions) (pointer_regions);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_src_buffer, arg_dst_buffer, arg_regions, array_regions));
+  ()
 
 let cmd_copy_image arg_command_buffer arg_src_image arg_src_image_layout arg_dst_image arg_dst_image_layout arg_regions =
   let array_regions = CArray.of_list (ImageCopy.t) arg_regions in
   let pointer_regions = if arg_regions = [] then Vk_base.null_ptr (ImageCopy.t) else CArray.start array_regions in
-  Vk_fn.cmd_copy_image (arg_command_buffer) (arg_src_image) (arg_src_image_layout) (arg_dst_image) (arg_dst_image_layout) (List.length arg_regions) (pointer_regions)
+  Vk_fn.cmd_copy_image (arg_command_buffer) (arg_src_image) (arg_src_image_layout) (arg_dst_image) (arg_dst_image_layout) (List.length arg_regions) (pointer_regions);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_src_image, arg_src_image_layout, arg_dst_image, arg_dst_image_layout, arg_regions, array_regions));
+  ()
 
 let cmd_blit_image arg_command_buffer arg_src_image arg_src_image_layout arg_dst_image arg_dst_image_layout arg_regions arg_filter =
   let array_regions = CArray.of_list (ImageBlit.t) arg_regions in
   let pointer_regions = if arg_regions = [] then Vk_base.null_ptr (ImageBlit.t) else CArray.start array_regions in
-  Vk_fn.cmd_blit_image (arg_command_buffer) (arg_src_image) (arg_src_image_layout) (arg_dst_image) (arg_dst_image_layout) (List.length arg_regions) (pointer_regions) (arg_filter)
+  Vk_fn.cmd_blit_image (arg_command_buffer) (arg_src_image) (arg_src_image_layout) (arg_dst_image) (arg_dst_image_layout) (List.length arg_regions) (pointer_regions) (arg_filter);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_src_image, arg_src_image_layout, arg_dst_image, arg_dst_image_layout, arg_regions, array_regions, arg_filter));
+  ()
 
 let cmd_copy_buffer_to_image arg_command_buffer arg_src_buffer arg_dst_image arg_dst_image_layout arg_regions =
   let array_regions = CArray.of_list (BufferImageCopy.t) arg_regions in
   let pointer_regions = if arg_regions = [] then Vk_base.null_ptr (BufferImageCopy.t) else CArray.start array_regions in
-  Vk_fn.cmd_copy_buffer_to_image (arg_command_buffer) (arg_src_buffer) (arg_dst_image) (arg_dst_image_layout) (List.length arg_regions) (pointer_regions)
+  Vk_fn.cmd_copy_buffer_to_image (arg_command_buffer) (arg_src_buffer) (arg_dst_image) (arg_dst_image_layout) (List.length arg_regions) (pointer_regions);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_src_buffer, arg_dst_image, arg_dst_image_layout, arg_regions, array_regions));
+  ()
 
 let cmd_copy_image_to_buffer arg_command_buffer arg_src_image arg_src_image_layout arg_dst_buffer arg_regions =
   let array_regions = CArray.of_list (BufferImageCopy.t) arg_regions in
   let pointer_regions = if arg_regions = [] then Vk_base.null_ptr (BufferImageCopy.t) else CArray.start array_regions in
-  Vk_fn.cmd_copy_image_to_buffer (arg_command_buffer) (arg_src_image) (arg_src_image_layout) (arg_dst_buffer) (List.length arg_regions) (pointer_regions)
+  Vk_fn.cmd_copy_image_to_buffer (arg_command_buffer) (arg_src_image) (arg_src_image_layout) (arg_dst_buffer) (List.length arg_regions) (pointer_regions);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_src_image, arg_src_image_layout, arg_dst_buffer, arg_regions, array_regions));
+  ()
 
 let cmd_copy_memory_indirect_nv arg_command_buffer arg_copy_buffer_address arg_copy_count arg_stride =
-  Vk_fn.cmd_copy_memory_indirect_nv (arg_command_buffer) (arg_copy_buffer_address) (arg_copy_count) (arg_stride)
+  Vk_fn.cmd_copy_memory_indirect_nv (arg_command_buffer) (arg_copy_buffer_address) (arg_copy_count) (arg_stride);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_copy_buffer_address, arg_copy_count, arg_stride));
+  ()
 
 let cmd_copy_memory_indirect_khr arg_command_buffer arg_copy_memory_indirect_info =
-  Vk_fn.cmd_copy_memory_indirect_khr (arg_command_buffer) (addr arg_copy_memory_indirect_info)
+  Vk_fn.cmd_copy_memory_indirect_khr (arg_command_buffer) (addr arg_copy_memory_indirect_info);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_copy_memory_indirect_info));
+  ()
 
 let cmd_copy_memory_to_image_indirect_nv arg_command_buffer arg_copy_buffer_address arg_stride arg_dst_image arg_dst_image_layout arg_image_subresources =
   let array_image_subresources = CArray.of_list (ImageSubresourceLayers.t) arg_image_subresources in
   let pointer_image_subresources = if arg_image_subresources = [] then Vk_base.null_ptr (ImageSubresourceLayers.t) else CArray.start array_image_subresources in
-  Vk_fn.cmd_copy_memory_to_image_indirect_nv (arg_command_buffer) (arg_copy_buffer_address) (List.length arg_image_subresources) (arg_stride) (arg_dst_image) (arg_dst_image_layout) (pointer_image_subresources)
+  Vk_fn.cmd_copy_memory_to_image_indirect_nv (arg_command_buffer) (arg_copy_buffer_address) (List.length arg_image_subresources) (arg_stride) (arg_dst_image) (arg_dst_image_layout) (pointer_image_subresources);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_copy_buffer_address, arg_stride, arg_dst_image, arg_dst_image_layout, arg_image_subresources, array_image_subresources));
+  ()
 
 let cmd_copy_memory_to_image_indirect_khr arg_command_buffer arg_copy_memory_to_image_indirect_info =
-  Vk_fn.cmd_copy_memory_to_image_indirect_khr (arg_command_buffer) (addr arg_copy_memory_to_image_indirect_info)
+  Vk_fn.cmd_copy_memory_to_image_indirect_khr (arg_command_buffer) (addr arg_copy_memory_to_image_indirect_info);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_copy_memory_to_image_indirect_info));
+  ()
 
 let cmd_update_buffer arg_command_buffer arg_dst_buffer arg_dst_offset arg_data_size arg_data =
-  Vk_fn.cmd_update_buffer (arg_command_buffer) (arg_dst_buffer) (arg_dst_offset) (arg_data_size) (arg_data)
+  Vk_fn.cmd_update_buffer (arg_command_buffer) (arg_dst_buffer) (arg_dst_offset) (arg_data_size) (arg_data);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_dst_buffer, arg_dst_offset, arg_data_size, arg_data));
+  ()
 
 let cmd_fill_buffer arg_command_buffer arg_dst_buffer arg_dst_offset arg_size arg_data =
-  Vk_fn.cmd_fill_buffer (arg_command_buffer) (arg_dst_buffer) (arg_dst_offset) (arg_size) (arg_data)
+  Vk_fn.cmd_fill_buffer (arg_command_buffer) (arg_dst_buffer) (arg_dst_offset) (arg_size) (arg_data);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_dst_buffer, arg_dst_offset, arg_size, arg_data));
+  ()
 
 let cmd_clear_color_image arg_command_buffer arg_image arg_image_layout arg_color arg_ranges =
   let array_ranges = CArray.of_list (ImageSubresourceRange.t) arg_ranges in
   let pointer_ranges = if arg_ranges = [] then Vk_base.null_ptr (ImageSubresourceRange.t) else CArray.start array_ranges in
-  Vk_fn.cmd_clear_color_image (arg_command_buffer) (arg_image) (arg_image_layout) (addr arg_color) (List.length arg_ranges) (pointer_ranges)
+  Vk_fn.cmd_clear_color_image (arg_command_buffer) (arg_image) (arg_image_layout) (addr arg_color) (List.length arg_ranges) (pointer_ranges);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_image, arg_image_layout, arg_color, arg_ranges, array_ranges));
+  ()
 
 let cmd_clear_depth_stencil_image arg_command_buffer arg_image arg_image_layout arg_depth_stencil arg_ranges =
   let array_ranges = CArray.of_list (ImageSubresourceRange.t) arg_ranges in
   let pointer_ranges = if arg_ranges = [] then Vk_base.null_ptr (ImageSubresourceRange.t) else CArray.start array_ranges in
-  Vk_fn.cmd_clear_depth_stencil_image (arg_command_buffer) (arg_image) (arg_image_layout) (addr arg_depth_stencil) (List.length arg_ranges) (pointer_ranges)
+  Vk_fn.cmd_clear_depth_stencil_image (arg_command_buffer) (arg_image) (arg_image_layout) (addr arg_depth_stencil) (List.length arg_ranges) (pointer_ranges);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_image, arg_image_layout, arg_depth_stencil, arg_ranges, array_ranges));
+  ()
 
 let cmd_clear_attachments arg_command_buffer arg_attachments arg_rects =
   let array_attachments = CArray.of_list (ClearAttachment.t) arg_attachments in
   let pointer_attachments = if arg_attachments = [] then Vk_base.null_ptr (ClearAttachment.t) else CArray.start array_attachments in
   let array_rects = CArray.of_list (ClearRect.t) arg_rects in
   let pointer_rects = if arg_rects = [] then Vk_base.null_ptr (ClearRect.t) else CArray.start array_rects in
-  Vk_fn.cmd_clear_attachments (arg_command_buffer) (List.length arg_attachments) (pointer_attachments) (List.length arg_rects) (pointer_rects)
+  Vk_fn.cmd_clear_attachments (arg_command_buffer) (List.length arg_attachments) (pointer_attachments) (List.length arg_rects) (pointer_rects);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_attachments, array_attachments, arg_rects, array_rects));
+  ()
 
 let cmd_resolve_image arg_command_buffer arg_src_image arg_src_image_layout arg_dst_image arg_dst_image_layout arg_regions =
   let array_regions = CArray.of_list (ImageResolve.t) arg_regions in
   let pointer_regions = if arg_regions = [] then Vk_base.null_ptr (ImageResolve.t) else CArray.start array_regions in
-  Vk_fn.cmd_resolve_image (arg_command_buffer) (arg_src_image) (arg_src_image_layout) (arg_dst_image) (arg_dst_image_layout) (List.length arg_regions) (pointer_regions)
+  Vk_fn.cmd_resolve_image (arg_command_buffer) (arg_src_image) (arg_src_image_layout) (arg_dst_image) (arg_dst_image_layout) (List.length arg_regions) (pointer_regions);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_src_image, arg_src_image_layout, arg_dst_image, arg_dst_image_layout, arg_regions, array_regions));
+  ()
 
 let cmd_set_event arg_command_buffer arg_event arg_stage_mask =
-  Vk_fn.cmd_set_event (arg_command_buffer) (arg_event) (arg_stage_mask)
+  Vk_fn.cmd_set_event (arg_command_buffer) (arg_event) (arg_stage_mask);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_event, arg_stage_mask));
+  ()
 
 let cmd_reset_event arg_command_buffer arg_event arg_stage_mask =
-  Vk_fn.cmd_reset_event (arg_command_buffer) (arg_event) (arg_stage_mask)
+  Vk_fn.cmd_reset_event (arg_command_buffer) (arg_event) (arg_stage_mask);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_event, arg_stage_mask));
+  ()
 
 let cmd_wait_events arg_command_buffer arg_events arg_src_stage_mask arg_dst_stage_mask arg_memory_barriers arg_buffer_memory_barriers arg_image_memory_barriers =
   let array_events = CArray.of_list (Event.t) arg_events in
@@ -787,7 +1010,9 @@ let cmd_wait_events arg_command_buffer arg_events arg_src_stage_mask arg_dst_sta
   let pointer_buffer_memory_barriers = if arg_buffer_memory_barriers = [] then Vk_base.null_ptr (BufferMemoryBarrier.t) else CArray.start array_buffer_memory_barriers in
   let array_image_memory_barriers = CArray.of_list (ImageMemoryBarrier.t) arg_image_memory_barriers in
   let pointer_image_memory_barriers = if arg_image_memory_barriers = [] then Vk_base.null_ptr (ImageMemoryBarrier.t) else CArray.start array_image_memory_barriers in
-  Vk_fn.cmd_wait_events (arg_command_buffer) (List.length arg_events) (pointer_events) (arg_src_stage_mask) (arg_dst_stage_mask) (List.length arg_memory_barriers) (pointer_memory_barriers) (List.length arg_buffer_memory_barriers) (pointer_buffer_memory_barriers) (List.length arg_image_memory_barriers) (pointer_image_memory_barriers)
+  Vk_fn.cmd_wait_events (arg_command_buffer) (List.length arg_events) (pointer_events) (arg_src_stage_mask) (arg_dst_stage_mask) (List.length arg_memory_barriers) (pointer_memory_barriers) (List.length arg_buffer_memory_barriers) (pointer_buffer_memory_barriers) (List.length arg_image_memory_barriers) (pointer_image_memory_barriers);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_events, array_events, arg_src_stage_mask, arg_dst_stage_mask, arg_memory_barriers, array_memory_barriers, arg_buffer_memory_barriers, array_buffer_memory_barriers, arg_image_memory_barriers, array_image_memory_barriers));
+  ()
 
 let cmd_pipeline_barrier arg_command_buffer arg_src_stage_mask arg_dst_stage_mask arg_dependency_flags arg_memory_barriers arg_buffer_memory_barriers arg_image_memory_barriers =
   let array_memory_barriers = CArray.of_list (MemoryBarrier.t) arg_memory_barriers in
@@ -796,58 +1021,88 @@ let cmd_pipeline_barrier arg_command_buffer arg_src_stage_mask arg_dst_stage_mas
   let pointer_buffer_memory_barriers = if arg_buffer_memory_barriers = [] then Vk_base.null_ptr (BufferMemoryBarrier.t) else CArray.start array_buffer_memory_barriers in
   let array_image_memory_barriers = CArray.of_list (ImageMemoryBarrier.t) arg_image_memory_barriers in
   let pointer_image_memory_barriers = if arg_image_memory_barriers = [] then Vk_base.null_ptr (ImageMemoryBarrier.t) else CArray.start array_image_memory_barriers in
-  Vk_fn.cmd_pipeline_barrier (arg_command_buffer) (arg_src_stage_mask) (arg_dst_stage_mask) (arg_dependency_flags) (List.length arg_memory_barriers) (pointer_memory_barriers) (List.length arg_buffer_memory_barriers) (pointer_buffer_memory_barriers) (List.length arg_image_memory_barriers) (pointer_image_memory_barriers)
+  Vk_fn.cmd_pipeline_barrier (arg_command_buffer) (arg_src_stage_mask) (arg_dst_stage_mask) (arg_dependency_flags) (List.length arg_memory_barriers) (pointer_memory_barriers) (List.length arg_buffer_memory_barriers) (pointer_buffer_memory_barriers) (List.length arg_image_memory_barriers) (pointer_image_memory_barriers);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_src_stage_mask, arg_dst_stage_mask, arg_dependency_flags, arg_memory_barriers, array_memory_barriers, arg_buffer_memory_barriers, array_buffer_memory_barriers, arg_image_memory_barriers, array_image_memory_barriers));
+  ()
 
 let cmd_begin_query arg_command_buffer arg_query_pool arg_query arg_flags =
-  Vk_fn.cmd_begin_query (arg_command_buffer) (arg_query_pool) (arg_query) (arg_flags)
+  Vk_fn.cmd_begin_query (arg_command_buffer) (arg_query_pool) (arg_query) (arg_flags);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_query_pool, arg_query, arg_flags));
+  ()
 
 let cmd_end_query arg_command_buffer arg_query_pool arg_query =
-  Vk_fn.cmd_end_query (arg_command_buffer) (arg_query_pool) (arg_query)
+  Vk_fn.cmd_end_query (arg_command_buffer) (arg_query_pool) (arg_query);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_query_pool, arg_query));
+  ()
 
 let cmd_begin_conditional_rendering_ext arg_command_buffer arg_conditional_rendering_begin =
-  Vk_fn.cmd_begin_conditional_rendering_ext (arg_command_buffer) (addr arg_conditional_rendering_begin)
+  Vk_fn.cmd_begin_conditional_rendering_ext (arg_command_buffer) (addr arg_conditional_rendering_begin);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_conditional_rendering_begin));
+  ()
 
 let cmd_end_conditional_rendering_ext arg_command_buffer =
-  Vk_fn.cmd_end_conditional_rendering_ext (arg_command_buffer)
+  Vk_fn.cmd_end_conditional_rendering_ext (arg_command_buffer);
+  ignore (Sys.opaque_identity (arg_command_buffer));
+  ()
 
 let cmd_begin_custom_resolve_ext arg_command_buffer arg_begin_custom_resolve_info =
-  Vk_fn.cmd_begin_custom_resolve_ext (arg_command_buffer) (addr arg_begin_custom_resolve_info)
+  Vk_fn.cmd_begin_custom_resolve_ext (arg_command_buffer) (addr arg_begin_custom_resolve_info);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_begin_custom_resolve_info));
+  ()
 
 let cmd_reset_query_pool arg_command_buffer arg_query_pool arg_first_query arg_query_count =
-  Vk_fn.cmd_reset_query_pool (arg_command_buffer) (arg_query_pool) (arg_first_query) (arg_query_count)
+  Vk_fn.cmd_reset_query_pool (arg_command_buffer) (arg_query_pool) (arg_first_query) (arg_query_count);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_query_pool, arg_first_query, arg_query_count));
+  ()
 
 let cmd_write_timestamp arg_command_buffer arg_pipeline_stage arg_query_pool arg_query =
-  Vk_fn.cmd_write_timestamp (arg_command_buffer) (arg_pipeline_stage) (arg_query_pool) (arg_query)
+  Vk_fn.cmd_write_timestamp (arg_command_buffer) (arg_pipeline_stage) (arg_query_pool) (arg_query);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_pipeline_stage, arg_query_pool, arg_query));
+  ()
 
 let cmd_copy_query_pool_results arg_command_buffer arg_query_pool arg_first_query arg_query_count arg_dst_buffer arg_dst_offset arg_stride arg_flags =
-  Vk_fn.cmd_copy_query_pool_results (arg_command_buffer) (arg_query_pool) (arg_first_query) (arg_query_count) (arg_dst_buffer) (arg_dst_offset) (arg_stride) (arg_flags)
+  Vk_fn.cmd_copy_query_pool_results (arg_command_buffer) (arg_query_pool) (arg_first_query) (arg_query_count) (arg_dst_buffer) (arg_dst_offset) (arg_stride) (arg_flags);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_query_pool, arg_first_query, arg_query_count, arg_dst_buffer, arg_dst_offset, arg_stride, arg_flags));
+  ()
 
 let cmd_push_constants arg_command_buffer arg_layout arg_stage_flags arg_offset arg_size arg_values =
-  Vk_fn.cmd_push_constants (arg_command_buffer) (arg_layout) (arg_stage_flags) (arg_offset) (arg_size) (arg_values)
+  Vk_fn.cmd_push_constants (arg_command_buffer) (arg_layout) (arg_stage_flags) (arg_offset) (arg_size) (arg_values);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_layout, arg_stage_flags, arg_offset, arg_size, arg_values));
+  ()
 
 let cmd_begin_render_pass arg_command_buffer arg_render_pass_begin arg_contents =
-  Vk_fn.cmd_begin_render_pass (arg_command_buffer) (addr arg_render_pass_begin) (arg_contents)
+  Vk_fn.cmd_begin_render_pass (arg_command_buffer) (addr arg_render_pass_begin) (arg_contents);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_render_pass_begin, arg_contents));
+  ()
 
 let cmd_next_subpass arg_command_buffer arg_contents =
-  Vk_fn.cmd_next_subpass (arg_command_buffer) (arg_contents)
+  Vk_fn.cmd_next_subpass (arg_command_buffer) (arg_contents);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_contents));
+  ()
 
 let cmd_end_render_pass arg_command_buffer =
-  Vk_fn.cmd_end_render_pass (arg_command_buffer)
+  Vk_fn.cmd_end_render_pass (arg_command_buffer);
+  ignore (Sys.opaque_identity (arg_command_buffer));
+  ()
 
 let cmd_execute_commands arg_command_buffer arg_command_buffers =
   let array_command_buffers = CArray.of_list (CommandBuffer.t) arg_command_buffers in
   let pointer_command_buffers = if arg_command_buffers = [] then Vk_base.null_ptr (CommandBuffer.t) else CArray.start array_command_buffers in
-  Vk_fn.cmd_execute_commands (arg_command_buffer) (List.length arg_command_buffers) (pointer_command_buffers)
+  Vk_fn.cmd_execute_commands (arg_command_buffer) (List.length arg_command_buffers) (pointer_command_buffers);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_command_buffers, array_command_buffers));
+  ()
 
 let create_android_surface_khr ?allocator:arg_allocator arg_instance arg_create_info =
   let output = allocate (SurfaceKHR.t) (SurfaceKHR.null) in
   let result = Vk_fn.create_android_surface_khr (arg_instance) (addr arg_create_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
+  ignore (Sys.opaque_identity (arg_instance, arg_create_info, arg_allocator));
   check result;
   !@ output
 
 let create_surface_ohos ?allocator:arg_allocator arg_instance arg_create_info =
   let output = allocate (SurfaceKHR.t) (SurfaceKHR.null) in
   let result = Vk_fn.create_surface_ohos (arg_instance) (addr arg_create_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
+  ignore (Sys.opaque_identity (arg_instance, arg_create_info, arg_allocator));
   check result;
   !@ output
 
@@ -865,7 +1120,9 @@ let get_physical_device_display_properties_khr arg_physical_device =
       CArray.to_list (CArray.from_ptr (CArray.start storage) (!@ count))
     end
   in
-  fetch ()
+  let enumeration_result = fetch () in
+  ignore (Sys.opaque_identity (arg_physical_device));
+  enumeration_result
 
 let get_physical_device_display_plane_properties_khr arg_physical_device =
   let count = allocate Vk_base.uint32 0 in
@@ -881,7 +1138,9 @@ let get_physical_device_display_plane_properties_khr arg_physical_device =
       CArray.to_list (CArray.from_ptr (CArray.start storage) (!@ count))
     end
   in
-  fetch ()
+  let enumeration_result = fetch () in
+  ignore (Sys.opaque_identity (arg_physical_device));
+  enumeration_result
 
 let get_display_plane_supported_displays_khr arg_physical_device arg_plane_index =
   let count = allocate Vk_base.uint32 0 in
@@ -897,7 +1156,9 @@ let get_display_plane_supported_displays_khr arg_physical_device arg_plane_index
       CArray.to_list (CArray.from_ptr (CArray.start storage) (!@ count))
     end
   in
-  fetch ()
+  let enumeration_result = fetch () in
+  ignore (Sys.opaque_identity (arg_physical_device, arg_plane_index));
+  enumeration_result
 
 let get_display_mode_properties_khr arg_physical_device arg_display =
   let count = allocate Vk_base.uint32 0 in
@@ -913,23 +1174,28 @@ let get_display_mode_properties_khr arg_physical_device arg_display =
       CArray.to_list (CArray.from_ptr (CArray.start storage) (!@ count))
     end
   in
-  fetch ()
+  let enumeration_result = fetch () in
+  ignore (Sys.opaque_identity (arg_physical_device, arg_display));
+  enumeration_result
 
 let create_display_mode_khr ?allocator:arg_allocator arg_physical_device arg_display arg_create_info =
   let output = allocate (DisplayModeKHR.t) (DisplayModeKHR.null) in
   let result = Vk_fn.create_display_mode_khr (arg_physical_device) (arg_display) (addr arg_create_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
+  ignore (Sys.opaque_identity (arg_physical_device, arg_display, arg_create_info, arg_allocator));
   check result;
   !@ output
 
 let get_display_plane_capabilities_khr arg_physical_device arg_mode arg_plane_index =
   let output = DisplayPlaneCapabilitiesKHR.make () in
   let result = Vk_fn.get_display_plane_capabilities_khr (arg_physical_device) (arg_mode) (arg_plane_index) (addr output) in
+  ignore (Sys.opaque_identity (arg_physical_device, arg_mode, arg_plane_index));
   check result;
   output
 
 let create_display_plane_surface_khr ?allocator:arg_allocator arg_instance arg_create_info =
   let output = allocate (SurfaceKHR.t) (SurfaceKHR.null) in
   let result = Vk_fn.create_display_plane_surface_khr (arg_instance) (addr arg_create_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
+  ignore (Sys.opaque_identity (arg_instance, arg_create_info, arg_allocator));
   check result;
   !@ output
 
@@ -939,21 +1205,26 @@ let create_shared_swapchains_khr ?allocator:arg_allocator arg_device arg_create_
   let output_count = List.length arg_create_infos in
   let storage = CArray.make (SwapchainKHR.t) output_count in
   let result = Vk_fn.create_shared_swapchains_khr (arg_device) (List.length arg_create_infos) (pointer_create_infos) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (CArray.start storage) in
+  ignore (Sys.opaque_identity (arg_device, arg_create_infos, array_create_infos, arg_allocator));
   check result;
   (CArray.to_list storage)
 
 let destroy_surface_khr arg_instance arg_surface ?allocator:arg_allocator () =
-  Vk_fn.destroy_surface_khr (arg_instance) (arg_surface) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x))
+  Vk_fn.destroy_surface_khr (arg_instance) (arg_surface) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x));
+  ignore (Sys.opaque_identity (arg_instance, arg_surface, arg_allocator));
+  ()
 
 let get_physical_device_surface_support_khr arg_physical_device arg_queue_family_index arg_surface =
   let output = allocate (Vk_base.bool32) (false) in
   let result = Vk_fn.get_physical_device_surface_support_khr (arg_physical_device) (arg_queue_family_index) (arg_surface) (output) in
+  ignore (Sys.opaque_identity (arg_physical_device, arg_queue_family_index, arg_surface));
   check result;
   !@ output
 
 let get_physical_device_surface_capabilities_khr arg_physical_device arg_surface =
   let output = SurfaceCapabilitiesKHR.make () in
   let result = Vk_fn.get_physical_device_surface_capabilities_khr (arg_physical_device) (arg_surface) (addr output) in
+  ignore (Sys.opaque_identity (arg_physical_device, arg_surface));
   check result;
   output
 
@@ -971,7 +1242,9 @@ let get_physical_device_surface_formats_khr arg_physical_device arg_surface =
       CArray.to_list (CArray.from_ptr (CArray.start storage) (!@ count))
     end
   in
-  fetch ()
+  let enumeration_result = fetch () in
+  ignore (Sys.opaque_identity (arg_physical_device, arg_surface));
+  enumeration_result
 
 let get_physical_device_surface_present_modes_khr arg_physical_device arg_surface =
   let count = allocate Vk_base.uint32 0 in
@@ -987,16 +1260,21 @@ let get_physical_device_surface_present_modes_khr arg_physical_device arg_surfac
       CArray.to_list (CArray.from_ptr (CArray.start storage) (!@ count))
     end
   in
-  fetch ()
+  let enumeration_result = fetch () in
+  ignore (Sys.opaque_identity (arg_physical_device, arg_surface));
+  enumeration_result
 
 let create_swapchain_khr ?allocator:arg_allocator arg_device arg_create_info =
   let output = allocate (SwapchainKHR.t) (SwapchainKHR.null) in
   let result = Vk_fn.create_swapchain_khr (arg_device) (addr arg_create_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
+  ignore (Sys.opaque_identity (arg_device, arg_create_info, arg_allocator));
   check result;
   !@ output
 
 let destroy_swapchain_khr arg_device arg_swapchain ?allocator:arg_allocator () =
-  Vk_fn.destroy_swapchain_khr (arg_device) (arg_swapchain) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x))
+  Vk_fn.destroy_swapchain_khr (arg_device) (arg_swapchain) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x));
+  ignore (Sys.opaque_identity (arg_device, arg_swapchain, arg_allocator));
+  ()
 
 let get_swapchain_images_khr arg_device arg_swapchain =
   let count = allocate Vk_base.uint32 0 in
@@ -1012,212 +1290,289 @@ let get_swapchain_images_khr arg_device arg_swapchain =
       CArray.to_list (CArray.from_ptr (CArray.start storage) (!@ count))
     end
   in
-  fetch ()
+  let enumeration_result = fetch () in
+  ignore (Sys.opaque_identity (arg_device, arg_swapchain));
+  enumeration_result
 
 let acquire_next_image_khr arg_device arg_swapchain arg_timeout arg_semaphore arg_fence =
   let output = allocate (Vk_base.uint32) (0) in
   let result = Vk_fn.acquire_next_image_khr (arg_device) (arg_swapchain) (arg_timeout) (arg_semaphore) (arg_fence) (output) in
+  ignore (Sys.opaque_identity (arg_device, arg_swapchain, arg_timeout, arg_semaphore, arg_fence));
   check result;
   (result, !@ output)
 
 let queue_present_khr arg_queue arg_present_info =
   let result = Vk_fn.queue_present_khr (arg_queue) (addr arg_present_info) in
+  ignore (Sys.opaque_identity (arg_queue, arg_present_info));
   check result;
   result
 
 let create_vi_surface_nn ?allocator:arg_allocator arg_instance arg_create_info =
   let output = allocate (SurfaceKHR.t) (SurfaceKHR.null) in
   let result = Vk_fn.create_vi_surface_nn (arg_instance) (addr arg_create_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
+  ignore (Sys.opaque_identity (arg_instance, arg_create_info, arg_allocator));
   check result;
   !@ output
 
 let create_wayland_surface_khr ?allocator:arg_allocator arg_instance arg_create_info =
   let output = allocate (SurfaceKHR.t) (SurfaceKHR.null) in
   let result = Vk_fn.create_wayland_surface_khr (arg_instance) (addr arg_create_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
+  ignore (Sys.opaque_identity (arg_instance, arg_create_info, arg_allocator));
   check result;
   !@ output
 
 let get_physical_device_wayland_presentation_support_khr arg_physical_device arg_queue_family_index arg_display =
-  Vk_fn.get_physical_device_wayland_presentation_support_khr (arg_physical_device) (arg_queue_family_index) (arg_display)
+  let call_result = Vk_fn.get_physical_device_wayland_presentation_support_khr (arg_physical_device) (arg_queue_family_index) (arg_display) in
+  ignore (Sys.opaque_identity (arg_physical_device, arg_queue_family_index, arg_display));
+  call_result
 
 let create_ubm_surface_sec ?allocator:arg_allocator arg_instance arg_create_info =
   let output = allocate (SurfaceKHR.t) (SurfaceKHR.null) in
   let result = Vk_fn.create_ubm_surface_sec (arg_instance) (addr arg_create_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
+  ignore (Sys.opaque_identity (arg_instance, arg_create_info, arg_allocator));
   check result;
   !@ output
 
 let get_physical_device_ubm_presentation_support_sec arg_physical_device arg_queue_family_index arg_device =
-  Vk_fn.get_physical_device_ubm_presentation_support_sec (arg_physical_device) (arg_queue_family_index) (arg_device)
+  let call_result = Vk_fn.get_physical_device_ubm_presentation_support_sec (arg_physical_device) (arg_queue_family_index) (arg_device) in
+  ignore (Sys.opaque_identity (arg_physical_device, arg_queue_family_index, arg_device));
+  call_result
 
 let create_win_32_surface_khr ?allocator:arg_allocator arg_instance arg_create_info =
   let output = allocate (SurfaceKHR.t) (SurfaceKHR.null) in
   let result = Vk_fn.create_win_32_surface_khr (arg_instance) (addr arg_create_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
+  ignore (Sys.opaque_identity (arg_instance, arg_create_info, arg_allocator));
   check result;
   !@ output
 
 let get_physical_device_win_32_presentation_support_khr arg_physical_device arg_queue_family_index =
-  Vk_fn.get_physical_device_win_32_presentation_support_khr (arg_physical_device) (arg_queue_family_index)
+  let call_result = Vk_fn.get_physical_device_win_32_presentation_support_khr (arg_physical_device) (arg_queue_family_index) in
+  ignore (Sys.opaque_identity (arg_physical_device, arg_queue_family_index));
+  call_result
 
 let create_xlib_surface_khr ?allocator:arg_allocator arg_instance arg_create_info =
   let output = allocate (SurfaceKHR.t) (SurfaceKHR.null) in
   let result = Vk_fn.create_xlib_surface_khr (arg_instance) (addr arg_create_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
+  ignore (Sys.opaque_identity (arg_instance, arg_create_info, arg_allocator));
   check result;
   !@ output
 
 let get_physical_device_xlib_presentation_support_khr arg_physical_device arg_queue_family_index arg_dpy arg_visual_id =
-  Vk_fn.get_physical_device_xlib_presentation_support_khr (arg_physical_device) (arg_queue_family_index) (arg_dpy) (arg_visual_id)
+  let call_result = Vk_fn.get_physical_device_xlib_presentation_support_khr (arg_physical_device) (arg_queue_family_index) (arg_dpy) (arg_visual_id) in
+  ignore (Sys.opaque_identity (arg_physical_device, arg_queue_family_index, arg_dpy, arg_visual_id));
+  call_result
 
 let create_xcb_surface_khr ?allocator:arg_allocator arg_instance arg_create_info =
   let output = allocate (SurfaceKHR.t) (SurfaceKHR.null) in
   let result = Vk_fn.create_xcb_surface_khr (arg_instance) (addr arg_create_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
+  ignore (Sys.opaque_identity (arg_instance, arg_create_info, arg_allocator));
   check result;
   !@ output
 
 let get_physical_device_xcb_presentation_support_khr arg_physical_device arg_queue_family_index arg_connection arg_visual_id =
-  Vk_fn.get_physical_device_xcb_presentation_support_khr (arg_physical_device) (arg_queue_family_index) (arg_connection) (arg_visual_id)
+  let call_result = Vk_fn.get_physical_device_xcb_presentation_support_khr (arg_physical_device) (arg_queue_family_index) (arg_connection) (arg_visual_id) in
+  ignore (Sys.opaque_identity (arg_physical_device, arg_queue_family_index, arg_connection, arg_visual_id));
+  call_result
 
 let create_direct_fb_surface_ext ?allocator:arg_allocator arg_instance arg_create_info =
   let output = allocate (SurfaceKHR.t) (SurfaceKHR.null) in
   let result = Vk_fn.create_direct_fb_surface_ext (arg_instance) (addr arg_create_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
+  ignore (Sys.opaque_identity (arg_instance, arg_create_info, arg_allocator));
   check result;
   !@ output
 
 let get_physical_device_direct_fb_presentation_support_ext arg_physical_device arg_queue_family_index arg_dfb =
-  Vk_fn.get_physical_device_direct_fb_presentation_support_ext (arg_physical_device) (arg_queue_family_index) (arg_dfb)
+  let call_result = Vk_fn.get_physical_device_direct_fb_presentation_support_ext (arg_physical_device) (arg_queue_family_index) (arg_dfb) in
+  ignore (Sys.opaque_identity (arg_physical_device, arg_queue_family_index, arg_dfb));
+  call_result
 
 let create_image_pipe_surface_fuchsia ?allocator:arg_allocator arg_instance arg_create_info =
   let output = allocate (SurfaceKHR.t) (SurfaceKHR.null) in
   let result = Vk_fn.create_image_pipe_surface_fuchsia (arg_instance) (addr arg_create_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
+  ignore (Sys.opaque_identity (arg_instance, arg_create_info, arg_allocator));
   check result;
   !@ output
 
 let create_stream_descriptor_surface_ggp ?allocator:arg_allocator arg_instance arg_create_info =
   let output = allocate (SurfaceKHR.t) (SurfaceKHR.null) in
   let result = Vk_fn.create_stream_descriptor_surface_ggp (arg_instance) (addr arg_create_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
+  ignore (Sys.opaque_identity (arg_instance, arg_create_info, arg_allocator));
   check result;
   !@ output
 
 let create_screen_surface_qnx ?allocator:arg_allocator arg_instance arg_create_info =
   let output = allocate (SurfaceKHR.t) (SurfaceKHR.null) in
   let result = Vk_fn.create_screen_surface_qnx (arg_instance) (addr arg_create_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
+  ignore (Sys.opaque_identity (arg_instance, arg_create_info, arg_allocator));
   check result;
   !@ output
 
 let get_physical_device_screen_presentation_support_qnx arg_physical_device arg_queue_family_index arg_window =
-  Vk_fn.get_physical_device_screen_presentation_support_qnx (arg_physical_device) (arg_queue_family_index) (arg_window)
+  let call_result = Vk_fn.get_physical_device_screen_presentation_support_qnx (arg_physical_device) (arg_queue_family_index) (arg_window) in
+  ignore (Sys.opaque_identity (arg_physical_device, arg_queue_family_index, arg_window));
+  call_result
 
 let create_debug_report_callback_ext ?allocator:arg_allocator arg_instance arg_create_info =
   let output = allocate (DebugReportCallbackEXT.t) (DebugReportCallbackEXT.null) in
   let result = Vk_fn.create_debug_report_callback_ext (arg_instance) (addr arg_create_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
+  ignore (Sys.opaque_identity (arg_instance, arg_create_info, arg_allocator));
   check result;
   !@ output
 
 let destroy_debug_report_callback_ext arg_instance arg_callback ?allocator:arg_allocator () =
-  Vk_fn.destroy_debug_report_callback_ext (arg_instance) (arg_callback) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x))
+  Vk_fn.destroy_debug_report_callback_ext (arg_instance) (arg_callback) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x));
+  ignore (Sys.opaque_identity (arg_instance, arg_callback, arg_allocator));
+  ()
 
 let debug_report_message_ext arg_instance arg_flags arg_object_type arg_object_ arg_location arg_message_code arg_layer_prefix arg_message =
-  Vk_fn.debug_report_message_ext (arg_instance) (arg_flags) (arg_object_type) (arg_object_) (arg_location) (arg_message_code) (arg_layer_prefix) (arg_message)
+  Vk_fn.debug_report_message_ext (arg_instance) (arg_flags) (arg_object_type) (arg_object_) (arg_location) (arg_message_code) (arg_layer_prefix) (arg_message);
+  ignore (Sys.opaque_identity (arg_instance, arg_flags, arg_object_type, arg_object_, arg_location, arg_message_code, arg_layer_prefix, arg_message));
+  ()
 
 let debug_marker_set_object_name_ext arg_device arg_name_info =
   let result = Vk_fn.debug_marker_set_object_name_ext (arg_device) (addr arg_name_info) in
+  ignore (Sys.opaque_identity (arg_device, arg_name_info));
   check result;
   ()
 
 let debug_marker_set_object_tag_ext arg_device arg_tag_info =
   let result = Vk_fn.debug_marker_set_object_tag_ext (arg_device) (addr arg_tag_info) in
+  ignore (Sys.opaque_identity (arg_device, arg_tag_info));
   check result;
   ()
 
 let cmd_debug_marker_begin_ext arg_command_buffer arg_marker_info =
-  Vk_fn.cmd_debug_marker_begin_ext (arg_command_buffer) (addr arg_marker_info)
+  Vk_fn.cmd_debug_marker_begin_ext (arg_command_buffer) (addr arg_marker_info);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_marker_info));
+  ()
 
 let cmd_debug_marker_end_ext arg_command_buffer =
-  Vk_fn.cmd_debug_marker_end_ext (arg_command_buffer)
+  Vk_fn.cmd_debug_marker_end_ext (arg_command_buffer);
+  ignore (Sys.opaque_identity (arg_command_buffer));
+  ()
 
 let cmd_debug_marker_insert_ext arg_command_buffer arg_marker_info =
-  Vk_fn.cmd_debug_marker_insert_ext (arg_command_buffer) (addr arg_marker_info)
+  Vk_fn.cmd_debug_marker_insert_ext (arg_command_buffer) (addr arg_marker_info);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_marker_info));
+  ()
 
 let get_physical_device_external_image_format_properties_nv arg_physical_device arg_format arg_type_ arg_tiling arg_usage arg_flags arg_external_handle_type =
   let output = ExternalImageFormatPropertiesNV.make () in
   let result = Vk_fn.get_physical_device_external_image_format_properties_nv (arg_physical_device) (arg_format) (arg_type_) (arg_tiling) (arg_usage) (arg_flags) (arg_external_handle_type) (addr output) in
+  ignore (Sys.opaque_identity (arg_physical_device, arg_format, arg_type_, arg_tiling, arg_usage, arg_flags, arg_external_handle_type));
   check result;
   output
 
 let get_memory_win_32_handle_nv arg_device arg_memory arg_handle_type =
   let output = allocate (ptr void) (Ctypes.null) in
   let result = Vk_fn.get_memory_win_32_handle_nv (arg_device) (arg_memory) (arg_handle_type) (output) in
+  ignore (Sys.opaque_identity (arg_device, arg_memory, arg_handle_type));
   check result;
   !@ output
 
 let cmd_execute_generated_commands_nv arg_command_buffer arg_is_preprocessed arg_generated_commands_info =
-  Vk_fn.cmd_execute_generated_commands_nv (arg_command_buffer) (arg_is_preprocessed) (addr arg_generated_commands_info)
+  Vk_fn.cmd_execute_generated_commands_nv (arg_command_buffer) (arg_is_preprocessed) (addr arg_generated_commands_info);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_is_preprocessed, arg_generated_commands_info));
+  ()
 
 let cmd_preprocess_generated_commands_nv arg_command_buffer arg_generated_commands_info =
-  Vk_fn.cmd_preprocess_generated_commands_nv (arg_command_buffer) (addr arg_generated_commands_info)
+  Vk_fn.cmd_preprocess_generated_commands_nv (arg_command_buffer) (addr arg_generated_commands_info);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_generated_commands_info));
+  ()
 
 let cmd_bind_pipeline_shader_group_nv arg_command_buffer arg_pipeline_bind_point arg_pipeline arg_group_index =
-  Vk_fn.cmd_bind_pipeline_shader_group_nv (arg_command_buffer) (arg_pipeline_bind_point) (arg_pipeline) (arg_group_index)
+  Vk_fn.cmd_bind_pipeline_shader_group_nv (arg_command_buffer) (arg_pipeline_bind_point) (arg_pipeline) (arg_group_index);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_pipeline_bind_point, arg_pipeline, arg_group_index));
+  ()
 
 let get_generated_commands_memory_requirements_nv arg_device arg_info arg_memory_requirements =
-  Vk_fn.get_generated_commands_memory_requirements_nv (arg_device) (addr arg_info) (addr arg_memory_requirements)
+  Vk_fn.get_generated_commands_memory_requirements_nv (arg_device) (addr arg_info) (addr arg_memory_requirements);
+  ignore (Sys.opaque_identity (arg_device, arg_info, arg_memory_requirements));
+  ()
 
 let create_indirect_commands_layout_nv ?allocator:arg_allocator arg_device arg_create_info =
   let output = allocate (IndirectCommandsLayoutNV.t) (IndirectCommandsLayoutNV.null) in
   let result = Vk_fn.create_indirect_commands_layout_nv (arg_device) (addr arg_create_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
+  ignore (Sys.opaque_identity (arg_device, arg_create_info, arg_allocator));
   check result;
   !@ output
 
 let destroy_indirect_commands_layout_nv arg_device arg_indirect_commands_layout ?allocator:arg_allocator () =
-  Vk_fn.destroy_indirect_commands_layout_nv (arg_device) (arg_indirect_commands_layout) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x))
+  Vk_fn.destroy_indirect_commands_layout_nv (arg_device) (arg_indirect_commands_layout) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x));
+  ignore (Sys.opaque_identity (arg_device, arg_indirect_commands_layout, arg_allocator));
+  ()
 
 let cmd_execute_generated_commands_ext arg_command_buffer arg_is_preprocessed arg_generated_commands_info =
-  Vk_fn.cmd_execute_generated_commands_ext (arg_command_buffer) (arg_is_preprocessed) (addr arg_generated_commands_info)
+  Vk_fn.cmd_execute_generated_commands_ext (arg_command_buffer) (arg_is_preprocessed) (addr arg_generated_commands_info);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_is_preprocessed, arg_generated_commands_info));
+  ()
 
 let cmd_preprocess_generated_commands_ext arg_command_buffer arg_generated_commands_info arg_state_command_buffer =
-  Vk_fn.cmd_preprocess_generated_commands_ext (arg_command_buffer) (addr arg_generated_commands_info) (arg_state_command_buffer)
+  Vk_fn.cmd_preprocess_generated_commands_ext (arg_command_buffer) (addr arg_generated_commands_info) (arg_state_command_buffer);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_generated_commands_info, arg_state_command_buffer));
+  ()
 
 let get_generated_commands_memory_requirements_ext arg_device arg_info arg_memory_requirements =
-  Vk_fn.get_generated_commands_memory_requirements_ext (arg_device) (addr arg_info) (addr arg_memory_requirements)
+  Vk_fn.get_generated_commands_memory_requirements_ext (arg_device) (addr arg_info) (addr arg_memory_requirements);
+  ignore (Sys.opaque_identity (arg_device, arg_info, arg_memory_requirements));
+  ()
 
 let create_indirect_commands_layout_ext ?allocator:arg_allocator arg_device arg_create_info =
   let output = allocate (IndirectCommandsLayoutEXT.t) (IndirectCommandsLayoutEXT.null) in
   let result = Vk_fn.create_indirect_commands_layout_ext (arg_device) (addr arg_create_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
+  ignore (Sys.opaque_identity (arg_device, arg_create_info, arg_allocator));
   check result;
   !@ output
 
 let destroy_indirect_commands_layout_ext arg_device arg_indirect_commands_layout ?allocator:arg_allocator () =
-  Vk_fn.destroy_indirect_commands_layout_ext (arg_device) (arg_indirect_commands_layout) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x))
+  Vk_fn.destroy_indirect_commands_layout_ext (arg_device) (arg_indirect_commands_layout) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x));
+  ignore (Sys.opaque_identity (arg_device, arg_indirect_commands_layout, arg_allocator));
+  ()
 
 let create_indirect_execution_set_ext ?allocator:arg_allocator arg_device arg_create_info =
   let output = allocate (IndirectExecutionSetEXT.t) (IndirectExecutionSetEXT.null) in
   let result = Vk_fn.create_indirect_execution_set_ext (arg_device) (addr arg_create_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
+  ignore (Sys.opaque_identity (arg_device, arg_create_info, arg_allocator));
   check result;
   !@ output
 
 let destroy_indirect_execution_set_ext arg_device arg_indirect_execution_set ?allocator:arg_allocator () =
-  Vk_fn.destroy_indirect_execution_set_ext (arg_device) (arg_indirect_execution_set) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x))
+  Vk_fn.destroy_indirect_execution_set_ext (arg_device) (arg_indirect_execution_set) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x));
+  ignore (Sys.opaque_identity (arg_device, arg_indirect_execution_set, arg_allocator));
+  ()
 
 let update_indirect_execution_set_pipeline_ext arg_device arg_indirect_execution_set arg_execution_set_writes =
   let array_execution_set_writes = CArray.of_list (WriteIndirectExecutionSetPipelineEXT.t) arg_execution_set_writes in
   let pointer_execution_set_writes = if arg_execution_set_writes = [] then Vk_base.null_ptr (WriteIndirectExecutionSetPipelineEXT.t) else CArray.start array_execution_set_writes in
-  Vk_fn.update_indirect_execution_set_pipeline_ext (arg_device) (arg_indirect_execution_set) (List.length arg_execution_set_writes) (pointer_execution_set_writes)
+  Vk_fn.update_indirect_execution_set_pipeline_ext (arg_device) (arg_indirect_execution_set) (List.length arg_execution_set_writes) (pointer_execution_set_writes);
+  ignore (Sys.opaque_identity (arg_device, arg_indirect_execution_set, arg_execution_set_writes, array_execution_set_writes));
+  ()
 
 let update_indirect_execution_set_shader_ext arg_device arg_indirect_execution_set arg_execution_set_writes =
   let array_execution_set_writes = CArray.of_list (WriteIndirectExecutionSetShaderEXT.t) arg_execution_set_writes in
   let pointer_execution_set_writes = if arg_execution_set_writes = [] then Vk_base.null_ptr (WriteIndirectExecutionSetShaderEXT.t) else CArray.start array_execution_set_writes in
-  Vk_fn.update_indirect_execution_set_shader_ext (arg_device) (arg_indirect_execution_set) (List.length arg_execution_set_writes) (pointer_execution_set_writes)
+  Vk_fn.update_indirect_execution_set_shader_ext (arg_device) (arg_indirect_execution_set) (List.length arg_execution_set_writes) (pointer_execution_set_writes);
+  ignore (Sys.opaque_identity (arg_device, arg_indirect_execution_set, arg_execution_set_writes, array_execution_set_writes));
+  ()
 
 let get_physical_device_features_2 arg_physical_device arg_features =
-  Vk_fn.get_physical_device_features_2 (arg_physical_device) (addr arg_features)
+  Vk_fn.get_physical_device_features_2 (arg_physical_device) (addr arg_features);
+  ignore (Sys.opaque_identity (arg_physical_device, arg_features));
+  ()
 
 let get_physical_device_properties_2 arg_physical_device arg_properties =
-  Vk_fn.get_physical_device_properties_2 (arg_physical_device) (addr arg_properties)
+  Vk_fn.get_physical_device_properties_2 (arg_physical_device) (addr arg_properties);
+  ignore (Sys.opaque_identity (arg_physical_device, arg_properties));
+  ()
 
 let get_physical_device_format_properties_2 arg_physical_device arg_format arg_format_properties =
-  Vk_fn.get_physical_device_format_properties_2 (arg_physical_device) (arg_format) (addr arg_format_properties)
+  Vk_fn.get_physical_device_format_properties_2 (arg_physical_device) (arg_format) (addr arg_format_properties);
+  ignore (Sys.opaque_identity (arg_physical_device, arg_format, arg_format_properties));
+  ()
 
 let get_physical_device_image_format_properties_2 arg_physical_device arg_image_format_info arg_image_format_properties =
   let result = Vk_fn.get_physical_device_image_format_properties_2 (arg_physical_device) (addr arg_image_format_info) (addr arg_image_format_properties) in
+  ignore (Sys.opaque_identity (arg_physical_device, arg_image_format_info, arg_image_format_properties));
   check result;
   ()
 
@@ -1231,10 +1586,14 @@ let get_physical_device_queue_family_properties_2 arg_physical_device =
     Vk_fn.get_physical_device_queue_family_properties_2 (arg_physical_device) (count) (CArray.start storage);
     CArray.to_list (CArray.from_ptr (CArray.start storage) (!@ count))
   in
-  fetch ()
+  let enumeration_result = fetch () in
+  ignore (Sys.opaque_identity (arg_physical_device));
+  enumeration_result
 
 let get_physical_device_memory_properties_2 arg_physical_device arg_memory_properties =
-  Vk_fn.get_physical_device_memory_properties_2 (arg_physical_device) (addr arg_memory_properties)
+  Vk_fn.get_physical_device_memory_properties_2 (arg_physical_device) (addr arg_memory_properties);
+  ignore (Sys.opaque_identity (arg_physical_device, arg_memory_properties));
+  ()
 
 let get_physical_device_sparse_image_format_properties_2 arg_physical_device arg_format_info =
   let count = allocate Vk_base.uint32 0 in
@@ -1246,231 +1605,283 @@ let get_physical_device_sparse_image_format_properties_2 arg_physical_device arg
     Vk_fn.get_physical_device_sparse_image_format_properties_2 (arg_physical_device) (addr arg_format_info) (count) (CArray.start storage);
     CArray.to_list (CArray.from_ptr (CArray.start storage) (!@ count))
   in
-  fetch ()
+  let enumeration_result = fetch () in
+  ignore (Sys.opaque_identity (arg_physical_device, arg_format_info));
+  enumeration_result
 
 let cmd_push_descriptor_set arg_command_buffer arg_pipeline_bind_point arg_layout arg_set arg_descriptor_writes =
   let array_descriptor_writes = CArray.of_list (WriteDescriptorSet.t) arg_descriptor_writes in
   let pointer_descriptor_writes = if arg_descriptor_writes = [] then Vk_base.null_ptr (WriteDescriptorSet.t) else CArray.start array_descriptor_writes in
-  Vk_fn.cmd_push_descriptor_set (arg_command_buffer) (arg_pipeline_bind_point) (arg_layout) (arg_set) (List.length arg_descriptor_writes) (pointer_descriptor_writes)
+  Vk_fn.cmd_push_descriptor_set (arg_command_buffer) (arg_pipeline_bind_point) (arg_layout) (arg_set) (List.length arg_descriptor_writes) (pointer_descriptor_writes);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_pipeline_bind_point, arg_layout, arg_set, arg_descriptor_writes, array_descriptor_writes));
+  ()
 
 let trim_command_pool arg_device arg_command_pool arg_flags =
-  Vk_fn.trim_command_pool (arg_device) (arg_command_pool) (arg_flags)
+  Vk_fn.trim_command_pool (arg_device) (arg_command_pool) (arg_flags);
+  ignore (Sys.opaque_identity (arg_device, arg_command_pool, arg_flags));
+  ()
 
 let get_physical_device_external_buffer_properties arg_physical_device arg_external_buffer_info arg_external_buffer_properties =
-  Vk_fn.get_physical_device_external_buffer_properties (arg_physical_device) (addr arg_external_buffer_info) (addr arg_external_buffer_properties)
+  Vk_fn.get_physical_device_external_buffer_properties (arg_physical_device) (addr arg_external_buffer_info) (addr arg_external_buffer_properties);
+  ignore (Sys.opaque_identity (arg_physical_device, arg_external_buffer_info, arg_external_buffer_properties));
+  ()
 
 let get_memory_win_32_handle_khr arg_device arg_get_win_32_handle_info =
   let output = allocate (ptr void) (Ctypes.null) in
   let result = Vk_fn.get_memory_win_32_handle_khr (arg_device) (addr arg_get_win_32_handle_info) (output) in
+  ignore (Sys.opaque_identity (arg_device, arg_get_win_32_handle_info));
   check result;
   !@ output
 
 let get_memory_win_32_handle_properties_khr arg_device arg_handle_type arg_handle arg_memory_win_32_handle_properties =
   let result = Vk_fn.get_memory_win_32_handle_properties_khr (arg_device) (arg_handle_type) (arg_handle) (addr arg_memory_win_32_handle_properties) in
+  ignore (Sys.opaque_identity (arg_device, arg_handle_type, arg_handle, arg_memory_win_32_handle_properties));
   check result;
   ()
 
 let get_memory_fd_khr arg_device arg_get_fd_info =
   let output = allocate (Ctypes.int) (0) in
   let result = Vk_fn.get_memory_fd_khr (arg_device) (addr arg_get_fd_info) (output) in
+  ignore (Sys.opaque_identity (arg_device, arg_get_fd_info));
   check result;
   !@ output
 
 let get_memory_fd_properties_khr arg_device arg_handle_type arg_fd arg_memory_fd_properties =
   let result = Vk_fn.get_memory_fd_properties_khr (arg_device) (arg_handle_type) (arg_fd) (addr arg_memory_fd_properties) in
+  ignore (Sys.opaque_identity (arg_device, arg_handle_type, arg_fd, arg_memory_fd_properties));
   check result;
   ()
 
 let get_memory_zircon_handle_fuchsia arg_device arg_get_zircon_handle_info =
   let output = allocate (Vk_base.uint32) (0) in
   let result = Vk_fn.get_memory_zircon_handle_fuchsia (arg_device) (addr arg_get_zircon_handle_info) (output) in
+  ignore (Sys.opaque_identity (arg_device, arg_get_zircon_handle_info));
   check result;
   !@ output
 
 let get_memory_zircon_handle_properties_fuchsia arg_device arg_handle_type arg_zircon_handle arg_memory_zircon_handle_properties =
   let result = Vk_fn.get_memory_zircon_handle_properties_fuchsia (arg_device) (arg_handle_type) (arg_zircon_handle) (addr arg_memory_zircon_handle_properties) in
+  ignore (Sys.opaque_identity (arg_device, arg_handle_type, arg_zircon_handle, arg_memory_zircon_handle_properties));
   check result;
   ()
 
 let get_memory_remote_address_nv arg_device arg_memory_get_remote_address_info =
   let output = allocate (ptr void) (Ctypes.null) in
   let result = Vk_fn.get_memory_remote_address_nv (arg_device) (addr arg_memory_get_remote_address_info) (output) in
+  ignore (Sys.opaque_identity (arg_device, arg_memory_get_remote_address_info));
   check result;
   !@ output
 
 let get_memory_sci_buf_nv arg_device arg_get_sci_buf_info =
   let output = allocate (ptr void) (Ctypes.null) in
   let result = Vk_fn.get_memory_sci_buf_nv (arg_device) (addr arg_get_sci_buf_info) (output) in
+  ignore (Sys.opaque_identity (arg_device, arg_get_sci_buf_info));
   check result;
   !@ output
 
 let get_physical_device_external_memory_sci_buf_properties_nv arg_physical_device arg_handle_type arg_handle arg_memory_sci_buf_properties =
   let result = Vk_fn.get_physical_device_external_memory_sci_buf_properties_nv (arg_physical_device) (arg_handle_type) (arg_handle) (addr arg_memory_sci_buf_properties) in
+  ignore (Sys.opaque_identity (arg_physical_device, arg_handle_type, arg_handle, arg_memory_sci_buf_properties));
   check result;
   ()
 
 let get_physical_device_sci_buf_attributes_nv arg_physical_device arg_p_attributes =
   let result = Vk_fn.get_physical_device_sci_buf_attributes_nv (arg_physical_device) (arg_p_attributes) in
+  ignore (Sys.opaque_identity (arg_physical_device, arg_p_attributes));
   check result;
   ()
 
 let get_physical_device_external_semaphore_properties arg_physical_device arg_external_semaphore_info arg_external_semaphore_properties =
-  Vk_fn.get_physical_device_external_semaphore_properties (arg_physical_device) (addr arg_external_semaphore_info) (addr arg_external_semaphore_properties)
+  Vk_fn.get_physical_device_external_semaphore_properties (arg_physical_device) (addr arg_external_semaphore_info) (addr arg_external_semaphore_properties);
+  ignore (Sys.opaque_identity (arg_physical_device, arg_external_semaphore_info, arg_external_semaphore_properties));
+  ()
 
 let get_semaphore_win_32_handle_khr arg_device arg_get_win_32_handle_info =
   let output = allocate (ptr void) (Ctypes.null) in
   let result = Vk_fn.get_semaphore_win_32_handle_khr (arg_device) (addr arg_get_win_32_handle_info) (output) in
+  ignore (Sys.opaque_identity (arg_device, arg_get_win_32_handle_info));
   check result;
   !@ output
 
 let import_semaphore_win_32_handle_khr arg_device arg_import_semaphore_win_32_handle_info =
   let result = Vk_fn.import_semaphore_win_32_handle_khr (arg_device) (addr arg_import_semaphore_win_32_handle_info) in
+  ignore (Sys.opaque_identity (arg_device, arg_import_semaphore_win_32_handle_info));
   check result;
   ()
 
 let get_semaphore_fd_khr arg_device arg_get_fd_info =
   let output = allocate (Ctypes.int) (0) in
   let result = Vk_fn.get_semaphore_fd_khr (arg_device) (addr arg_get_fd_info) (output) in
+  ignore (Sys.opaque_identity (arg_device, arg_get_fd_info));
   check result;
   !@ output
 
 let import_semaphore_fd_khr arg_device arg_import_semaphore_fd_info =
   let result = Vk_fn.import_semaphore_fd_khr (arg_device) (addr arg_import_semaphore_fd_info) in
+  ignore (Sys.opaque_identity (arg_device, arg_import_semaphore_fd_info));
   check result;
   ()
 
 let get_semaphore_zircon_handle_fuchsia arg_device arg_get_zircon_handle_info =
   let output = allocate (Vk_base.uint32) (0) in
   let result = Vk_fn.get_semaphore_zircon_handle_fuchsia (arg_device) (addr arg_get_zircon_handle_info) (output) in
+  ignore (Sys.opaque_identity (arg_device, arg_get_zircon_handle_info));
   check result;
   !@ output
 
 let import_semaphore_zircon_handle_fuchsia arg_device arg_import_semaphore_zircon_handle_info =
   let result = Vk_fn.import_semaphore_zircon_handle_fuchsia (arg_device) (addr arg_import_semaphore_zircon_handle_info) in
+  ignore (Sys.opaque_identity (arg_device, arg_import_semaphore_zircon_handle_info));
   check result;
   ()
 
 let get_physical_device_external_fence_properties arg_physical_device arg_external_fence_info arg_external_fence_properties =
-  Vk_fn.get_physical_device_external_fence_properties (arg_physical_device) (addr arg_external_fence_info) (addr arg_external_fence_properties)
+  Vk_fn.get_physical_device_external_fence_properties (arg_physical_device) (addr arg_external_fence_info) (addr arg_external_fence_properties);
+  ignore (Sys.opaque_identity (arg_physical_device, arg_external_fence_info, arg_external_fence_properties));
+  ()
 
 let get_fence_win_32_handle_khr arg_device arg_get_win_32_handle_info =
   let output = allocate (ptr void) (Ctypes.null) in
   let result = Vk_fn.get_fence_win_32_handle_khr (arg_device) (addr arg_get_win_32_handle_info) (output) in
+  ignore (Sys.opaque_identity (arg_device, arg_get_win_32_handle_info));
   check result;
   !@ output
 
 let import_fence_win_32_handle_khr arg_device arg_import_fence_win_32_handle_info =
   let result = Vk_fn.import_fence_win_32_handle_khr (arg_device) (addr arg_import_fence_win_32_handle_info) in
+  ignore (Sys.opaque_identity (arg_device, arg_import_fence_win_32_handle_info));
   check result;
   ()
 
 let get_fence_fd_khr arg_device arg_get_fd_info =
   let output = allocate (Ctypes.int) (0) in
   let result = Vk_fn.get_fence_fd_khr (arg_device) (addr arg_get_fd_info) (output) in
+  ignore (Sys.opaque_identity (arg_device, arg_get_fd_info));
   check result;
   !@ output
 
 let import_fence_fd_khr arg_device arg_import_fence_fd_info =
   let result = Vk_fn.import_fence_fd_khr (arg_device) (addr arg_import_fence_fd_info) in
+  ignore (Sys.opaque_identity (arg_device, arg_import_fence_fd_info));
   check result;
   ()
 
 let get_fence_sci_sync_fence_nv arg_device arg_get_sci_sync_handle_info arg_handle =
   let result = Vk_fn.get_fence_sci_sync_fence_nv (arg_device) (addr arg_get_sci_sync_handle_info) (arg_handle) in
+  ignore (Sys.opaque_identity (arg_device, arg_get_sci_sync_handle_info, arg_handle));
   check result;
   ()
 
 let get_fence_sci_sync_obj_nv arg_device arg_get_sci_sync_handle_info arg_handle =
   let result = Vk_fn.get_fence_sci_sync_obj_nv (arg_device) (addr arg_get_sci_sync_handle_info) (arg_handle) in
+  ignore (Sys.opaque_identity (arg_device, arg_get_sci_sync_handle_info, arg_handle));
   check result;
   ()
 
 let import_fence_sci_sync_fence_nv arg_device arg_import_fence_sci_sync_info =
   let result = Vk_fn.import_fence_sci_sync_fence_nv (arg_device) (addr arg_import_fence_sci_sync_info) in
+  ignore (Sys.opaque_identity (arg_device, arg_import_fence_sci_sync_info));
   check result;
   ()
 
 let import_fence_sci_sync_obj_nv arg_device arg_import_fence_sci_sync_info =
   let result = Vk_fn.import_fence_sci_sync_obj_nv (arg_device) (addr arg_import_fence_sci_sync_info) in
+  ignore (Sys.opaque_identity (arg_device, arg_import_fence_sci_sync_info));
   check result;
   ()
 
 let get_semaphore_sci_sync_obj_nv arg_device arg_get_sci_sync_info arg_handle =
   let result = Vk_fn.get_semaphore_sci_sync_obj_nv (arg_device) (addr arg_get_sci_sync_info) (arg_handle) in
+  ignore (Sys.opaque_identity (arg_device, arg_get_sci_sync_info, arg_handle));
   check result;
   ()
 
 let import_semaphore_sci_sync_obj_nv arg_device arg_import_semaphore_sci_sync_info =
   let result = Vk_fn.import_semaphore_sci_sync_obj_nv (arg_device) (addr arg_import_semaphore_sci_sync_info) in
+  ignore (Sys.opaque_identity (arg_device, arg_import_semaphore_sci_sync_info));
   check result;
   ()
 
 let get_physical_device_sci_sync_attributes_nv arg_physical_device arg_sci_sync_attributes_info arg_p_attributes =
   let result = Vk_fn.get_physical_device_sci_sync_attributes_nv (arg_physical_device) (addr arg_sci_sync_attributes_info) (arg_p_attributes) in
+  ignore (Sys.opaque_identity (arg_physical_device, arg_sci_sync_attributes_info, arg_p_attributes));
   check result;
   ()
 
 let create_semaphore_sci_sync_pool_nv ?allocator:arg_allocator arg_device arg_create_info =
   let output = allocate (SemaphoreSciSyncPoolNV.t) (SemaphoreSciSyncPoolNV.null) in
   let result = Vk_fn.create_semaphore_sci_sync_pool_nv (arg_device) (addr arg_create_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
+  ignore (Sys.opaque_identity (arg_device, arg_create_info, arg_allocator));
   check result;
   !@ output
 
 let destroy_semaphore_sci_sync_pool_nv arg_device arg_semaphore_pool ?allocator:arg_allocator () =
-  Vk_fn.destroy_semaphore_sci_sync_pool_nv (arg_device) (arg_semaphore_pool) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x))
+  Vk_fn.destroy_semaphore_sci_sync_pool_nv (arg_device) (arg_semaphore_pool) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x));
+  ignore (Sys.opaque_identity (arg_device, arg_semaphore_pool, arg_allocator));
+  ()
 
 let release_display_ext arg_physical_device arg_display =
   let result = Vk_fn.release_display_ext (arg_physical_device) (arg_display) in
+  ignore (Sys.opaque_identity (arg_physical_device, arg_display));
   check result;
   ()
 
 let acquire_xlib_display_ext arg_physical_device arg_dpy arg_display =
   let result = Vk_fn.acquire_xlib_display_ext (arg_physical_device) (arg_dpy) (arg_display) in
+  ignore (Sys.opaque_identity (arg_physical_device, arg_dpy, arg_display));
   check result;
   ()
 
 let get_rand_r_output_display_ext arg_physical_device arg_dpy arg_rr_output =
   let output = allocate (DisplayKHR.t) (DisplayKHR.null) in
   let result = Vk_fn.get_rand_r_output_display_ext (arg_physical_device) (arg_dpy) (arg_rr_output) (output) in
+  ignore (Sys.opaque_identity (arg_physical_device, arg_dpy, arg_rr_output));
   check result;
   !@ output
 
 let acquire_winrt_display_nv arg_physical_device arg_display =
   let result = Vk_fn.acquire_winrt_display_nv (arg_physical_device) (arg_display) in
+  ignore (Sys.opaque_identity (arg_physical_device, arg_display));
   check result;
   ()
 
 let get_winrt_display_nv arg_physical_device arg_device_relative_id =
   let output = allocate (DisplayKHR.t) (DisplayKHR.null) in
   let result = Vk_fn.get_winrt_display_nv (arg_physical_device) (arg_device_relative_id) (output) in
+  ignore (Sys.opaque_identity (arg_physical_device, arg_device_relative_id));
   check result;
   !@ output
 
 let display_power_control_ext arg_device arg_display arg_display_power_info =
   let result = Vk_fn.display_power_control_ext (arg_device) (arg_display) (addr arg_display_power_info) in
+  ignore (Sys.opaque_identity (arg_device, arg_display, arg_display_power_info));
   check result;
   ()
 
 let register_device_event_ext ?allocator:arg_allocator arg_device arg_device_event_info =
   let output = allocate (Fence.t) (Fence.null) in
   let result = Vk_fn.register_device_event_ext (arg_device) (addr arg_device_event_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
+  ignore (Sys.opaque_identity (arg_device, arg_device_event_info, arg_allocator));
   check result;
   !@ output
 
 let register_display_event_ext ?allocator:arg_allocator arg_device arg_display arg_display_event_info =
   let output = allocate (Fence.t) (Fence.null) in
   let result = Vk_fn.register_display_event_ext (arg_device) (arg_display) (addr arg_display_event_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
+  ignore (Sys.opaque_identity (arg_device, arg_display, arg_display_event_info, arg_allocator));
   check result;
   !@ output
 
 let get_swapchain_counter_ext arg_device arg_swapchain arg_counter =
   let output = allocate (Vk_base.uint64) (0) in
   let result = Vk_fn.get_swapchain_counter_ext (arg_device) (arg_swapchain) (arg_counter) (output) in
+  ignore (Sys.opaque_identity (arg_device, arg_swapchain, arg_counter));
   check result;
   !@ output
 
 let get_physical_device_surface_capabilities_2_ext arg_physical_device arg_surface arg_surface_capabilities =
   let result = Vk_fn.get_physical_device_surface_capabilities_2_ext (arg_physical_device) (arg_surface) (addr arg_surface_capabilities) in
+  ignore (Sys.opaque_identity (arg_physical_device, arg_surface, arg_surface_capabilities));
   check result;
   ()
 
@@ -1488,17 +1899,21 @@ let enumerate_physical_device_groups arg_instance =
       CArray.to_list (CArray.from_ptr (CArray.start storage) (!@ count))
     end
   in
-  fetch ()
+  let enumeration_result = fetch () in
+  ignore (Sys.opaque_identity (arg_instance));
+  enumeration_result
 
 let get_device_group_peer_memory_features arg_device arg_heap_index arg_local_device_index arg_remote_device_index =
   let output = allocate (PeerMemoryFeatureFlags.t) (PeerMemoryFeatureFlags.of_int 0) in
   Vk_fn.get_device_group_peer_memory_features (arg_device) (arg_heap_index) (arg_local_device_index) (arg_remote_device_index) (output);
+  ignore (Sys.opaque_identity (arg_device, arg_heap_index, arg_local_device_index, arg_remote_device_index));
   !@ output
 
 let bind_buffer_memory_2 arg_device arg_bind_infos =
   let array_bind_infos = CArray.of_list (BindBufferMemoryInfo.t) arg_bind_infos in
   let pointer_bind_infos = if arg_bind_infos = [] then Vk_base.null_ptr (BindBufferMemoryInfo.t) else CArray.start array_bind_infos in
   let result = Vk_fn.bind_buffer_memory_2 (arg_device) (List.length arg_bind_infos) (pointer_bind_infos) in
+  ignore (Sys.opaque_identity (arg_device, arg_bind_infos, array_bind_infos));
   check result;
   ()
 
@@ -1506,31 +1921,39 @@ let bind_image_memory_2 arg_device arg_bind_infos =
   let array_bind_infos = CArray.of_list (BindImageMemoryInfo.t) arg_bind_infos in
   let pointer_bind_infos = if arg_bind_infos = [] then Vk_base.null_ptr (BindImageMemoryInfo.t) else CArray.start array_bind_infos in
   let result = Vk_fn.bind_image_memory_2 (arg_device) (List.length arg_bind_infos) (pointer_bind_infos) in
+  ignore (Sys.opaque_identity (arg_device, arg_bind_infos, array_bind_infos));
   check result;
   ()
 
 let cmd_set_device_mask arg_command_buffer arg_device_mask =
-  Vk_fn.cmd_set_device_mask (arg_command_buffer) (arg_device_mask)
+  Vk_fn.cmd_set_device_mask (arg_command_buffer) (arg_device_mask);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_device_mask));
+  ()
 
 let get_device_group_present_capabilities_khr arg_device arg_device_group_present_capabilities =
   let result = Vk_fn.get_device_group_present_capabilities_khr (arg_device) (addr arg_device_group_present_capabilities) in
+  ignore (Sys.opaque_identity (arg_device, arg_device_group_present_capabilities));
   check result;
   ()
 
 let get_device_group_surface_present_modes_khr arg_device arg_surface =
   let output = allocate (DeviceGroupPresentModeFlagsKHR.t) (DeviceGroupPresentModeFlagsKHR.of_int 0) in
   let result = Vk_fn.get_device_group_surface_present_modes_khr (arg_device) (arg_surface) (output) in
+  ignore (Sys.opaque_identity (arg_device, arg_surface));
   check result;
   !@ output
 
 let acquire_next_image_2_khr arg_device arg_acquire_info =
   let output = allocate (Vk_base.uint32) (0) in
   let result = Vk_fn.acquire_next_image_2_khr (arg_device) (addr arg_acquire_info) (output) in
+  ignore (Sys.opaque_identity (arg_device, arg_acquire_info));
   check result;
   (result, !@ output)
 
 let cmd_dispatch_base arg_command_buffer arg_base_group_x arg_base_group_y arg_base_group_z arg_group_count_x arg_group_count_y arg_group_count_z =
-  Vk_fn.cmd_dispatch_base (arg_command_buffer) (arg_base_group_x) (arg_base_group_y) (arg_base_group_z) (arg_group_count_x) (arg_group_count_y) (arg_group_count_z)
+  Vk_fn.cmd_dispatch_base (arg_command_buffer) (arg_base_group_x) (arg_base_group_y) (arg_base_group_z) (arg_group_count_x) (arg_group_count_y) (arg_group_count_z);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_base_group_x, arg_base_group_y, arg_base_group_z, arg_group_count_x, arg_group_count_y, arg_group_count_z));
+  ()
 
 let get_physical_device_present_rectangles_khr arg_physical_device arg_surface =
   let count = allocate Vk_base.uint32 0 in
@@ -1546,22 +1969,31 @@ let get_physical_device_present_rectangles_khr arg_physical_device arg_surface =
       CArray.to_list (CArray.from_ptr (CArray.start storage) (!@ count))
     end
   in
-  fetch ()
+  let enumeration_result = fetch () in
+  ignore (Sys.opaque_identity (arg_physical_device, arg_surface));
+  enumeration_result
 
 let create_descriptor_update_template ?allocator:arg_allocator arg_device arg_create_info =
   let output = allocate (DescriptorUpdateTemplate.t) (DescriptorUpdateTemplate.null) in
   let result = Vk_fn.create_descriptor_update_template (arg_device) (addr arg_create_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
+  ignore (Sys.opaque_identity (arg_device, arg_create_info, arg_allocator));
   check result;
   !@ output
 
 let destroy_descriptor_update_template arg_device arg_descriptor_update_template ?allocator:arg_allocator () =
-  Vk_fn.destroy_descriptor_update_template (arg_device) (arg_descriptor_update_template) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x))
+  Vk_fn.destroy_descriptor_update_template (arg_device) (arg_descriptor_update_template) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x));
+  ignore (Sys.opaque_identity (arg_device, arg_descriptor_update_template, arg_allocator));
+  ()
 
 let update_descriptor_set_with_template arg_device arg_descriptor_set arg_descriptor_update_template arg_data =
-  Vk_fn.update_descriptor_set_with_template (arg_device) (arg_descriptor_set) (arg_descriptor_update_template) (arg_data)
+  Vk_fn.update_descriptor_set_with_template (arg_device) (arg_descriptor_set) (arg_descriptor_update_template) (arg_data);
+  ignore (Sys.opaque_identity (arg_device, arg_descriptor_set, arg_descriptor_update_template, arg_data));
+  ()
 
 let cmd_push_descriptor_set_with_template arg_command_buffer arg_descriptor_update_template arg_layout arg_set arg_data =
-  Vk_fn.cmd_push_descriptor_set_with_template (arg_command_buffer) (arg_descriptor_update_template) (arg_layout) (arg_set) (arg_data)
+  Vk_fn.cmd_push_descriptor_set_with_template (arg_command_buffer) (arg_descriptor_update_template) (arg_layout) (arg_set) (arg_data);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_descriptor_update_template, arg_layout, arg_set, arg_data));
+  ()
 
 let set_hdr_metadata_ext arg_device arg_swapchains arg_metadata =
   let array_swapchains = CArray.of_list (SwapchainKHR.t) arg_swapchains in
@@ -1569,16 +2001,20 @@ let set_hdr_metadata_ext arg_device arg_swapchains arg_metadata =
   if List.length arg_metadata <> List.length arg_swapchains then invalid_arg "vkSetHdrMetadataEXT: array lengths differ";
   let array_metadata = CArray.of_list (HdrMetadataEXT.t) arg_metadata in
   let pointer_metadata = if arg_metadata = [] then Vk_base.null_ptr (HdrMetadataEXT.t) else CArray.start array_metadata in
-  Vk_fn.set_hdr_metadata_ext (arg_device) (List.length arg_swapchains) (pointer_swapchains) (pointer_metadata)
+  Vk_fn.set_hdr_metadata_ext (arg_device) (List.length arg_swapchains) (pointer_swapchains) (pointer_metadata);
+  ignore (Sys.opaque_identity (arg_device, arg_swapchains, array_swapchains, arg_metadata, array_metadata));
+  ()
 
 let get_swapchain_status_khr arg_device arg_swapchain =
   let result = Vk_fn.get_swapchain_status_khr (arg_device) (arg_swapchain) in
+  ignore (Sys.opaque_identity (arg_device, arg_swapchain));
   check result;
   result
 
 let get_refresh_cycle_duration_google arg_device arg_swapchain =
   let output = RefreshCycleDurationGOOGLE.make () in
   let result = Vk_fn.get_refresh_cycle_duration_google (arg_device) (arg_swapchain) (addr output) in
+  ignore (Sys.opaque_identity (arg_device, arg_swapchain));
   check result;
   output
 
@@ -1596,50 +2032,68 @@ let get_past_presentation_timing_google arg_device arg_swapchain =
       CArray.to_list (CArray.from_ptr (CArray.start storage) (!@ count))
     end
   in
-  fetch ()
+  let enumeration_result = fetch () in
+  ignore (Sys.opaque_identity (arg_device, arg_swapchain));
+  enumeration_result
 
 let create_ios_surface_mvk ?allocator:arg_allocator arg_instance arg_create_info =
   let output = allocate (SurfaceKHR.t) (SurfaceKHR.null) in
   let result = Vk_fn.create_ios_surface_mvk (arg_instance) (addr arg_create_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
+  ignore (Sys.opaque_identity (arg_instance, arg_create_info, arg_allocator));
   check result;
   !@ output
 
 let create_mac_os_surface_mvk ?allocator:arg_allocator arg_instance arg_create_info =
   let output = allocate (SurfaceKHR.t) (SurfaceKHR.null) in
   let result = Vk_fn.create_mac_os_surface_mvk (arg_instance) (addr arg_create_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
+  ignore (Sys.opaque_identity (arg_instance, arg_create_info, arg_allocator));
   check result;
   !@ output
 
 let create_metal_surface_ext ?allocator:arg_allocator arg_instance arg_create_info =
   let output = allocate (SurfaceKHR.t) (SurfaceKHR.null) in
   let result = Vk_fn.create_metal_surface_ext (arg_instance) (addr arg_create_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
+  ignore (Sys.opaque_identity (arg_instance, arg_create_info, arg_allocator));
   check result;
   !@ output
 
 let cmd_set_viewport_w_scaling_nv arg_command_buffer arg_first_viewport arg_viewport_w_scalings =
   let array_viewport_w_scalings = CArray.of_list (ViewportWScalingNV.t) arg_viewport_w_scalings in
   let pointer_viewport_w_scalings = if arg_viewport_w_scalings = [] then Vk_base.null_ptr (ViewportWScalingNV.t) else CArray.start array_viewport_w_scalings in
-  Vk_fn.cmd_set_viewport_w_scaling_nv (arg_command_buffer) (arg_first_viewport) (List.length arg_viewport_w_scalings) (pointer_viewport_w_scalings)
+  Vk_fn.cmd_set_viewport_w_scaling_nv (arg_command_buffer) (arg_first_viewport) (List.length arg_viewport_w_scalings) (pointer_viewport_w_scalings);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_first_viewport, arg_viewport_w_scalings, array_viewport_w_scalings));
+  ()
 
 let cmd_set_discard_rectangle_ext arg_command_buffer arg_first_discard_rectangle arg_discard_rectangles =
   let array_discard_rectangles = CArray.of_list (Rect2D.t) arg_discard_rectangles in
   let pointer_discard_rectangles = if arg_discard_rectangles = [] then Vk_base.null_ptr (Rect2D.t) else CArray.start array_discard_rectangles in
-  Vk_fn.cmd_set_discard_rectangle_ext (arg_command_buffer) (arg_first_discard_rectangle) (List.length arg_discard_rectangles) (pointer_discard_rectangles)
+  Vk_fn.cmd_set_discard_rectangle_ext (arg_command_buffer) (arg_first_discard_rectangle) (List.length arg_discard_rectangles) (pointer_discard_rectangles);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_first_discard_rectangle, arg_discard_rectangles, array_discard_rectangles));
+  ()
 
 let cmd_set_discard_rectangle_enable_ext arg_command_buffer arg_discard_rectangle_enable =
-  Vk_fn.cmd_set_discard_rectangle_enable_ext (arg_command_buffer) (arg_discard_rectangle_enable)
+  Vk_fn.cmd_set_discard_rectangle_enable_ext (arg_command_buffer) (arg_discard_rectangle_enable);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_discard_rectangle_enable));
+  ()
 
 let cmd_set_discard_rectangle_mode_ext arg_command_buffer arg_discard_rectangle_mode =
-  Vk_fn.cmd_set_discard_rectangle_mode_ext (arg_command_buffer) (arg_discard_rectangle_mode)
+  Vk_fn.cmd_set_discard_rectangle_mode_ext (arg_command_buffer) (arg_discard_rectangle_mode);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_discard_rectangle_mode));
+  ()
 
 let cmd_set_sample_locations_ext arg_command_buffer arg_sample_locations_info =
-  Vk_fn.cmd_set_sample_locations_ext (arg_command_buffer) (addr arg_sample_locations_info)
+  Vk_fn.cmd_set_sample_locations_ext (arg_command_buffer) (addr arg_sample_locations_info);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_sample_locations_info));
+  ()
 
 let get_physical_device_multisample_properties_ext arg_physical_device arg_samples arg_multisample_properties =
-  Vk_fn.get_physical_device_multisample_properties_ext (arg_physical_device) (arg_samples) (addr arg_multisample_properties)
+  Vk_fn.get_physical_device_multisample_properties_ext (arg_physical_device) (arg_samples) (addr arg_multisample_properties);
+  ignore (Sys.opaque_identity (arg_physical_device, arg_samples, arg_multisample_properties));
+  ()
 
 let get_physical_device_surface_capabilities_2_khr arg_physical_device arg_surface_info arg_surface_capabilities =
   let result = Vk_fn.get_physical_device_surface_capabilities_2_khr (arg_physical_device) (addr arg_surface_info) (addr arg_surface_capabilities) in
+  ignore (Sys.opaque_identity (arg_physical_device, arg_surface_info, arg_surface_capabilities));
   check result;
   ()
 
@@ -1657,7 +2111,9 @@ let get_physical_device_surface_formats_2_khr arg_physical_device arg_surface_in
       CArray.to_list (CArray.from_ptr (CArray.start storage) (!@ count))
     end
   in
-  fetch ()
+  let enumeration_result = fetch () in
+  ignore (Sys.opaque_identity (arg_physical_device, arg_surface_info));
+  enumeration_result
 
 let get_physical_device_display_properties_2_khr arg_physical_device =
   let count = allocate Vk_base.uint32 0 in
@@ -1673,7 +2129,9 @@ let get_physical_device_display_properties_2_khr arg_physical_device =
       CArray.to_list (CArray.from_ptr (CArray.start storage) (!@ count))
     end
   in
-  fetch ()
+  let enumeration_result = fetch () in
+  ignore (Sys.opaque_identity (arg_physical_device));
+  enumeration_result
 
 let get_physical_device_display_plane_properties_2_khr arg_physical_device =
   let count = allocate Vk_base.uint32 0 in
@@ -1689,7 +2147,9 @@ let get_physical_device_display_plane_properties_2_khr arg_physical_device =
       CArray.to_list (CArray.from_ptr (CArray.start storage) (!@ count))
     end
   in
-  fetch ()
+  let enumeration_result = fetch () in
+  ignore (Sys.opaque_identity (arg_physical_device));
+  enumeration_result
 
 let get_display_mode_properties_2_khr arg_physical_device arg_display =
   let count = allocate Vk_base.uint32 0 in
@@ -1705,18 +2165,25 @@ let get_display_mode_properties_2_khr arg_physical_device arg_display =
       CArray.to_list (CArray.from_ptr (CArray.start storage) (!@ count))
     end
   in
-  fetch ()
+  let enumeration_result = fetch () in
+  ignore (Sys.opaque_identity (arg_physical_device, arg_display));
+  enumeration_result
 
 let get_display_plane_capabilities_2_khr arg_physical_device arg_display_plane_info arg_capabilities =
   let result = Vk_fn.get_display_plane_capabilities_2_khr (arg_physical_device) (addr arg_display_plane_info) (addr arg_capabilities) in
+  ignore (Sys.opaque_identity (arg_physical_device, arg_display_plane_info, arg_capabilities));
   check result;
   ()
 
 let get_buffer_memory_requirements_2 arg_device arg_info arg_memory_requirements =
-  Vk_fn.get_buffer_memory_requirements_2 (arg_device) (addr arg_info) (addr arg_memory_requirements)
+  Vk_fn.get_buffer_memory_requirements_2 (arg_device) (addr arg_info) (addr arg_memory_requirements);
+  ignore (Sys.opaque_identity (arg_device, arg_info, arg_memory_requirements));
+  ()
 
 let get_image_memory_requirements_2 arg_device arg_info arg_memory_requirements =
-  Vk_fn.get_image_memory_requirements_2 (arg_device) (addr arg_info) (addr arg_memory_requirements)
+  Vk_fn.get_image_memory_requirements_2 (arg_device) (addr arg_info) (addr arg_memory_requirements);
+  ignore (Sys.opaque_identity (arg_device, arg_info, arg_memory_requirements));
+  ()
 
 let get_image_sparse_memory_requirements_2 arg_device arg_info =
   let count = allocate Vk_base.uint32 0 in
@@ -1728,13 +2195,19 @@ let get_image_sparse_memory_requirements_2 arg_device arg_info =
     Vk_fn.get_image_sparse_memory_requirements_2 (arg_device) (addr arg_info) (count) (CArray.start storage);
     CArray.to_list (CArray.from_ptr (CArray.start storage) (!@ count))
   in
-  fetch ()
+  let enumeration_result = fetch () in
+  ignore (Sys.opaque_identity (arg_device, arg_info));
+  enumeration_result
 
 let get_device_buffer_memory_requirements arg_device arg_info arg_memory_requirements =
-  Vk_fn.get_device_buffer_memory_requirements (arg_device) (addr arg_info) (addr arg_memory_requirements)
+  Vk_fn.get_device_buffer_memory_requirements (arg_device) (addr arg_info) (addr arg_memory_requirements);
+  ignore (Sys.opaque_identity (arg_device, arg_info, arg_memory_requirements));
+  ()
 
 let get_device_image_memory_requirements arg_device arg_info arg_memory_requirements =
-  Vk_fn.get_device_image_memory_requirements (arg_device) (addr arg_info) (addr arg_memory_requirements)
+  Vk_fn.get_device_image_memory_requirements (arg_device) (addr arg_info) (addr arg_memory_requirements);
+  ignore (Sys.opaque_identity (arg_device, arg_info, arg_memory_requirements));
+  ()
 
 let get_device_image_sparse_memory_requirements arg_device arg_info =
   let count = allocate Vk_base.uint32 0 in
@@ -1746,33 +2219,43 @@ let get_device_image_sparse_memory_requirements arg_device arg_info =
     Vk_fn.get_device_image_sparse_memory_requirements (arg_device) (addr arg_info) (count) (CArray.start storage);
     CArray.to_list (CArray.from_ptr (CArray.start storage) (!@ count))
   in
-  fetch ()
+  let enumeration_result = fetch () in
+  ignore (Sys.opaque_identity (arg_device, arg_info));
+  enumeration_result
 
 let create_sampler_ycbcr_conversion ?allocator:arg_allocator arg_device arg_create_info =
   let output = allocate (SamplerYcbcrConversion.t) (SamplerYcbcrConversion.null) in
   let result = Vk_fn.create_sampler_ycbcr_conversion (arg_device) (addr arg_create_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
+  ignore (Sys.opaque_identity (arg_device, arg_create_info, arg_allocator));
   check result;
   !@ output
 
 let destroy_sampler_ycbcr_conversion arg_device arg_ycbcr_conversion ?allocator:arg_allocator () =
-  Vk_fn.destroy_sampler_ycbcr_conversion (arg_device) (arg_ycbcr_conversion) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x))
+  Vk_fn.destroy_sampler_ycbcr_conversion (arg_device) (arg_ycbcr_conversion) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x));
+  ignore (Sys.opaque_identity (arg_device, arg_ycbcr_conversion, arg_allocator));
+  ()
 
 let get_device_queue_2 arg_device arg_queue_info =
   let output = allocate (Queue.t) (Queue.null) in
   Vk_fn.get_device_queue_2 (arg_device) (addr arg_queue_info) (output);
+  ignore (Sys.opaque_identity (arg_device, arg_queue_info));
   !@ output
 
 let create_validation_cache_ext ?allocator:arg_allocator arg_device arg_create_info =
   let output = allocate (ValidationCacheEXT.t) (ValidationCacheEXT.null) in
   let result = Vk_fn.create_validation_cache_ext (arg_device) (addr arg_create_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
+  ignore (Sys.opaque_identity (arg_device, arg_create_info, arg_allocator));
   check result;
   !@ output
 
 let destroy_validation_cache_ext arg_device arg_validation_cache ?allocator:arg_allocator () =
-  Vk_fn.destroy_validation_cache_ext (arg_device) (arg_validation_cache) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x))
+  Vk_fn.destroy_validation_cache_ext (arg_device) (arg_validation_cache) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x));
+  ignore (Sys.opaque_identity (arg_device, arg_validation_cache, arg_allocator));
+  ()
 
 let get_validation_cache_data_ext arg_device arg_validation_cache arg_data_size arg_data =
   let result = Vk_fn.get_validation_cache_data_ext (arg_device) (arg_validation_cache) (arg_data_size) (arg_data) in
+  ignore (Sys.opaque_identity (arg_device, arg_validation_cache, arg_data_size, arg_data));
   check result;
   ()
 
@@ -1780,24 +2263,30 @@ let merge_validation_caches_ext arg_device arg_dst_cache arg_src_caches =
   let array_src_caches = CArray.of_list (ValidationCacheEXT.t) arg_src_caches in
   let pointer_src_caches = if arg_src_caches = [] then Vk_base.null_ptr (ValidationCacheEXT.t) else CArray.start array_src_caches in
   let result = Vk_fn.merge_validation_caches_ext (arg_device) (arg_dst_cache) (List.length arg_src_caches) (pointer_src_caches) in
+  ignore (Sys.opaque_identity (arg_device, arg_dst_cache, arg_src_caches, array_src_caches));
   check result;
   ()
 
 let get_descriptor_set_layout_support arg_device arg_create_info arg_support =
-  Vk_fn.get_descriptor_set_layout_support (arg_device) (addr arg_create_info) (addr arg_support)
+  Vk_fn.get_descriptor_set_layout_support (arg_device) (addr arg_create_info) (addr arg_support);
+  ignore (Sys.opaque_identity (arg_device, arg_create_info, arg_support));
+  ()
 
 let get_swapchain_gralloc_usage_android arg_device arg_format arg_image_usage arg_gralloc_usage =
   let result = Vk_fn.get_swapchain_gralloc_usage_android (arg_device) (arg_format) (arg_image_usage) (arg_gralloc_usage) in
+  ignore (Sys.opaque_identity (arg_device, arg_format, arg_image_usage, arg_gralloc_usage));
   check result;
   ()
 
 let get_swapchain_gralloc_usage_2_android arg_device arg_format arg_image_usage arg_swapchain_image_usage arg_gralloc_consumer_usage arg_gralloc_producer_usage =
   let result = Vk_fn.get_swapchain_gralloc_usage_2_android (arg_device) (arg_format) (arg_image_usage) (arg_swapchain_image_usage) (arg_gralloc_consumer_usage) (arg_gralloc_producer_usage) in
+  ignore (Sys.opaque_identity (arg_device, arg_format, arg_image_usage, arg_swapchain_image_usage, arg_gralloc_consumer_usage, arg_gralloc_producer_usage));
   check result;
   ()
 
 let acquire_image_android arg_device arg_image arg_native_fence_fd arg_semaphore arg_fence =
   let result = Vk_fn.acquire_image_android (arg_device) (arg_image) (arg_native_fence_fd) (arg_semaphore) (arg_fence) in
+  ignore (Sys.opaque_identity (arg_device, arg_image, arg_native_fence_fd, arg_semaphore, arg_fence));
   check result;
   ()
 
@@ -1806,16 +2295,20 @@ let queue_signal_release_image_android arg_queue arg_wait_semaphores arg_image =
   let pointer_wait_semaphores = if arg_wait_semaphores = [] then Vk_base.null_ptr (Semaphore.t) else CArray.start array_wait_semaphores in
   let output = allocate (Ctypes.int) (0) in
   let result = Vk_fn.queue_signal_release_image_android (arg_queue) (List.length arg_wait_semaphores) (pointer_wait_semaphores) (arg_image) (output) in
+  ignore (Sys.opaque_identity (arg_queue, arg_wait_semaphores, array_wait_semaphores, arg_image));
   check result;
   !@ output
 
 let get_shader_info_amd arg_device arg_pipeline arg_shader_stage arg_info_type arg_info_size arg_info =
   let result = Vk_fn.get_shader_info_amd (arg_device) (arg_pipeline) (arg_shader_stage) (arg_info_type) (arg_info_size) (arg_info) in
+  ignore (Sys.opaque_identity (arg_device, arg_pipeline, arg_shader_stage, arg_info_type, arg_info_size, arg_info));
   check result;
   ()
 
 let set_local_dimming_amd arg_device arg_swap_chain arg_local_dimming_enable =
-  Vk_fn.set_local_dimming_amd (arg_device) (arg_swap_chain) (arg_local_dimming_enable)
+  Vk_fn.set_local_dimming_amd (arg_device) (arg_swap_chain) (arg_local_dimming_enable);
+  ignore (Sys.opaque_identity (arg_device, arg_swap_chain, arg_local_dimming_enable));
+  ()
 
 let get_physical_device_calibrateable_time_domains_khr arg_physical_device =
   let count = allocate Vk_base.uint32 0 in
@@ -1831,7 +2324,9 @@ let get_physical_device_calibrateable_time_domains_khr arg_physical_device =
       CArray.to_list (CArray.from_ptr (CArray.start storage) (!@ count))
     end
   in
-  fetch ()
+  let enumeration_result = fetch () in
+  ignore (Sys.opaque_identity (arg_physical_device));
+  enumeration_result
 
 let get_calibrated_timestamps_khr arg_device arg_timestamp_infos arg_max_deviation =
   let array_timestamp_infos = CArray.of_list (CalibratedTimestampInfoKHR.t) arg_timestamp_infos in
@@ -1839,107 +2334,148 @@ let get_calibrated_timestamps_khr arg_device arg_timestamp_infos arg_max_deviati
   let output_count = List.length arg_timestamp_infos in
   let storage = CArray.make (Vk_base.uint64) output_count in
   let result = Vk_fn.get_calibrated_timestamps_khr (arg_device) (List.length arg_timestamp_infos) (pointer_timestamp_infos) (CArray.start storage) (arg_max_deviation) in
+  ignore (Sys.opaque_identity (arg_device, arg_timestamp_infos, array_timestamp_infos, arg_max_deviation));
   check result;
   (CArray.to_list storage)
 
 let set_debug_utils_object_name_ext arg_device arg_name_info =
   let result = Vk_fn.set_debug_utils_object_name_ext (arg_device) (addr arg_name_info) in
+  ignore (Sys.opaque_identity (arg_device, arg_name_info));
   check result;
   ()
 
 let set_debug_utils_object_tag_ext arg_device arg_tag_info =
   let result = Vk_fn.set_debug_utils_object_tag_ext (arg_device) (addr arg_tag_info) in
+  ignore (Sys.opaque_identity (arg_device, arg_tag_info));
   check result;
   ()
 
 let queue_begin_debug_utils_label_ext arg_queue arg_label_info =
-  Vk_fn.queue_begin_debug_utils_label_ext (arg_queue) (addr arg_label_info)
+  Vk_fn.queue_begin_debug_utils_label_ext (arg_queue) (addr arg_label_info);
+  ignore (Sys.opaque_identity (arg_queue, arg_label_info));
+  ()
 
 let queue_end_debug_utils_label_ext arg_queue =
-  Vk_fn.queue_end_debug_utils_label_ext (arg_queue)
+  Vk_fn.queue_end_debug_utils_label_ext (arg_queue);
+  ignore (Sys.opaque_identity (arg_queue));
+  ()
 
 let queue_insert_debug_utils_label_ext arg_queue arg_label_info =
-  Vk_fn.queue_insert_debug_utils_label_ext (arg_queue) (addr arg_label_info)
+  Vk_fn.queue_insert_debug_utils_label_ext (arg_queue) (addr arg_label_info);
+  ignore (Sys.opaque_identity (arg_queue, arg_label_info));
+  ()
 
 let cmd_begin_debug_utils_label_ext arg_command_buffer arg_label_info =
-  Vk_fn.cmd_begin_debug_utils_label_ext (arg_command_buffer) (addr arg_label_info)
+  Vk_fn.cmd_begin_debug_utils_label_ext (arg_command_buffer) (addr arg_label_info);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_label_info));
+  ()
 
 let cmd_end_debug_utils_label_ext arg_command_buffer =
-  Vk_fn.cmd_end_debug_utils_label_ext (arg_command_buffer)
+  Vk_fn.cmd_end_debug_utils_label_ext (arg_command_buffer);
+  ignore (Sys.opaque_identity (arg_command_buffer));
+  ()
 
 let cmd_insert_debug_utils_label_ext arg_command_buffer arg_label_info =
-  Vk_fn.cmd_insert_debug_utils_label_ext (arg_command_buffer) (addr arg_label_info)
+  Vk_fn.cmd_insert_debug_utils_label_ext (arg_command_buffer) (addr arg_label_info);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_label_info));
+  ()
 
 let create_debug_utils_messenger_ext ?allocator:arg_allocator arg_instance arg_create_info =
   let output = allocate (DebugUtilsMessengerEXT.t) (DebugUtilsMessengerEXT.null) in
   let result = Vk_fn.create_debug_utils_messenger_ext (arg_instance) (addr arg_create_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
+  ignore (Sys.opaque_identity (arg_instance, arg_create_info, arg_allocator));
   check result;
   !@ output
 
 let destroy_debug_utils_messenger_ext arg_instance arg_messenger ?allocator:arg_allocator () =
-  Vk_fn.destroy_debug_utils_messenger_ext (arg_instance) (arg_messenger) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x))
+  Vk_fn.destroy_debug_utils_messenger_ext (arg_instance) (arg_messenger) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x));
+  ignore (Sys.opaque_identity (arg_instance, arg_messenger, arg_allocator));
+  ()
 
 let submit_debug_utils_message_ext arg_instance arg_message_severity arg_message_types arg_callback_data =
-  Vk_fn.submit_debug_utils_message_ext (arg_instance) (arg_message_severity) (arg_message_types) (addr arg_callback_data)
+  Vk_fn.submit_debug_utils_message_ext (arg_instance) (arg_message_severity) (arg_message_types) (addr arg_callback_data);
+  ignore (Sys.opaque_identity (arg_instance, arg_message_severity, arg_message_types, arg_callback_data));
+  ()
 
 let get_memory_host_pointer_properties_ext arg_device arg_handle_type arg_host_pointer arg_memory_host_pointer_properties =
   let result = Vk_fn.get_memory_host_pointer_properties_ext (arg_device) (arg_handle_type) (arg_host_pointer) (addr arg_memory_host_pointer_properties) in
+  ignore (Sys.opaque_identity (arg_device, arg_handle_type, arg_host_pointer, arg_memory_host_pointer_properties));
   check result;
   ()
 
 let cmd_write_buffer_marker_amd arg_command_buffer arg_pipeline_stage arg_dst_buffer arg_dst_offset arg_marker =
-  Vk_fn.cmd_write_buffer_marker_amd (arg_command_buffer) (arg_pipeline_stage) (arg_dst_buffer) (arg_dst_offset) (arg_marker)
+  Vk_fn.cmd_write_buffer_marker_amd (arg_command_buffer) (arg_pipeline_stage) (arg_dst_buffer) (arg_dst_offset) (arg_marker);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_pipeline_stage, arg_dst_buffer, arg_dst_offset, arg_marker));
+  ()
 
 let create_render_pass_2 ?allocator:arg_allocator arg_device arg_create_info =
   let output = allocate (RenderPass.t) (RenderPass.null) in
   let result = Vk_fn.create_render_pass_2 (arg_device) (addr arg_create_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
+  ignore (Sys.opaque_identity (arg_device, arg_create_info, arg_allocator));
   check result;
   !@ output
 
 let cmd_begin_render_pass_2 arg_command_buffer arg_render_pass_begin arg_subpass_begin_info =
-  Vk_fn.cmd_begin_render_pass_2 (arg_command_buffer) (addr arg_render_pass_begin) (addr arg_subpass_begin_info)
+  Vk_fn.cmd_begin_render_pass_2 (arg_command_buffer) (addr arg_render_pass_begin) (addr arg_subpass_begin_info);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_render_pass_begin, arg_subpass_begin_info));
+  ()
 
 let cmd_next_subpass_2 arg_command_buffer arg_subpass_begin_info arg_subpass_end_info =
-  Vk_fn.cmd_next_subpass_2 (arg_command_buffer) (addr arg_subpass_begin_info) (addr arg_subpass_end_info)
+  Vk_fn.cmd_next_subpass_2 (arg_command_buffer) (addr arg_subpass_begin_info) (addr arg_subpass_end_info);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_subpass_begin_info, arg_subpass_end_info));
+  ()
 
 let cmd_end_render_pass_2 arg_command_buffer arg_subpass_end_info =
-  Vk_fn.cmd_end_render_pass_2 (arg_command_buffer) (addr arg_subpass_end_info)
+  Vk_fn.cmd_end_render_pass_2 (arg_command_buffer) (addr arg_subpass_end_info);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_subpass_end_info));
+  ()
 
 let get_semaphore_counter_value arg_device arg_semaphore =
   let output = allocate (Vk_base.uint64) (0) in
   let result = Vk_fn.get_semaphore_counter_value (arg_device) (arg_semaphore) (output) in
+  ignore (Sys.opaque_identity (arg_device, arg_semaphore));
   check result;
   !@ output
 
 let wait_semaphores arg_device arg_wait_info arg_timeout =
   let result = Vk_fn.wait_semaphores (arg_device) (addr arg_wait_info) (arg_timeout) in
+  ignore (Sys.opaque_identity (arg_device, arg_wait_info, arg_timeout));
   check result;
   result
 
 let signal_semaphore arg_device arg_signal_info =
   let result = Vk_fn.signal_semaphore (arg_device) (addr arg_signal_info) in
+  ignore (Sys.opaque_identity (arg_device, arg_signal_info));
   check result;
   ()
 
 let get_android_hardware_buffer_properties_android arg_device arg_buffer arg_properties =
   let result = Vk_fn.get_android_hardware_buffer_properties_android (arg_device) (arg_buffer) (addr arg_properties) in
+  ignore (Sys.opaque_identity (arg_device, arg_buffer, arg_properties));
   check result;
   ()
 
 let get_memory_android_hardware_buffer_android arg_device arg_info =
   let output = allocate (ptr (void)) (Vk_base.null_ptr (void)) in
   let result = Vk_fn.get_memory_android_hardware_buffer_android (arg_device) (addr arg_info) (output) in
+  ignore (Sys.opaque_identity (arg_device, arg_info));
   check result;
   !@ output
 
 let cmd_draw_indirect_count arg_command_buffer arg_buffer arg_offset arg_count_buffer arg_count_buffer_offset arg_max_draw_count arg_stride =
-  Vk_fn.cmd_draw_indirect_count (arg_command_buffer) (arg_buffer) (arg_offset) (arg_count_buffer) (arg_count_buffer_offset) (arg_max_draw_count) (arg_stride)
+  Vk_fn.cmd_draw_indirect_count (arg_command_buffer) (arg_buffer) (arg_offset) (arg_count_buffer) (arg_count_buffer_offset) (arg_max_draw_count) (arg_stride);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_buffer, arg_offset, arg_count_buffer, arg_count_buffer_offset, arg_max_draw_count, arg_stride));
+  ()
 
 let cmd_draw_indexed_indirect_count arg_command_buffer arg_buffer arg_offset arg_count_buffer arg_count_buffer_offset arg_max_draw_count arg_stride =
-  Vk_fn.cmd_draw_indexed_indirect_count (arg_command_buffer) (arg_buffer) (arg_offset) (arg_count_buffer) (arg_count_buffer_offset) (arg_max_draw_count) (arg_stride)
+  Vk_fn.cmd_draw_indexed_indirect_count (arg_command_buffer) (arg_buffer) (arg_offset) (arg_count_buffer) (arg_count_buffer_offset) (arg_max_draw_count) (arg_stride);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_buffer, arg_offset, arg_count_buffer, arg_count_buffer_offset, arg_max_draw_count, arg_stride));
+  ()
 
 let cmd_set_checkpoint_nv arg_command_buffer arg_checkpoint_marker =
-  Vk_fn.cmd_set_checkpoint_nv (arg_command_buffer) (arg_checkpoint_marker)
+  Vk_fn.cmd_set_checkpoint_nv (arg_command_buffer) (arg_checkpoint_marker);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_checkpoint_marker));
+  ()
 
 let get_queue_checkpoint_data_nv arg_queue =
   let count = allocate Vk_base.uint32 0 in
@@ -1951,7 +2487,9 @@ let get_queue_checkpoint_data_nv arg_queue =
     Vk_fn.get_queue_checkpoint_data_nv (arg_queue) (count) (CArray.start storage);
     CArray.to_list (CArray.from_ptr (CArray.start storage) (!@ count))
   in
-  fetch ()
+  let enumeration_result = fetch () in
+  ignore (Sys.opaque_identity (arg_queue));
+  enumeration_result
 
 let cmd_bind_transform_feedback_buffers_ext arg_command_buffer arg_first_binding arg_buffers arg_offsets arg_sizes =
   let array_buffers = CArray.of_list (Buffer.t) arg_buffers in
@@ -1962,7 +2500,9 @@ let cmd_bind_transform_feedback_buffers_ext arg_command_buffer arg_first_binding
   let pointer_offsets = if arg_offsets = [] then Vk_base.null_ptr (Vk_base.device_size) else CArray.start array_offsets in
   let array_sizes = CArray.of_list (Vk_base.device_size) arg_sizes in
   let pointer_sizes = if arg_sizes = [] then Vk_base.null_ptr (Vk_base.device_size) else CArray.start array_sizes in
-  Vk_fn.cmd_bind_transform_feedback_buffers_ext (arg_command_buffer) (arg_first_binding) (List.length arg_buffers) (pointer_buffers) (pointer_offsets) (pointer_sizes)
+  Vk_fn.cmd_bind_transform_feedback_buffers_ext (arg_command_buffer) (arg_first_binding) (List.length arg_buffers) (pointer_buffers) (pointer_offsets) (pointer_sizes);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_first_binding, arg_buffers, array_buffers, arg_offsets, array_offsets, arg_sizes, array_sizes));
+  ()
 
 let cmd_begin_transform_feedback_ext arg_command_buffer arg_first_counter_buffer arg_counter_buffers arg_counter_buffer_offsets =
   let array_counter_buffers = CArray.of_list (Buffer.t) arg_counter_buffers in
@@ -1970,7 +2510,9 @@ let cmd_begin_transform_feedback_ext arg_command_buffer arg_first_counter_buffer
   if List.length arg_counter_buffer_offsets <> List.length arg_counter_buffers then invalid_arg "vkCmdBeginTransformFeedbackEXT: array lengths differ";
   let array_counter_buffer_offsets = CArray.of_list (Vk_base.device_size) arg_counter_buffer_offsets in
   let pointer_counter_buffer_offsets = if arg_counter_buffer_offsets = [] then Vk_base.null_ptr (Vk_base.device_size) else CArray.start array_counter_buffer_offsets in
-  Vk_fn.cmd_begin_transform_feedback_ext (arg_command_buffer) (arg_first_counter_buffer) (List.length arg_counter_buffers) (pointer_counter_buffers) (pointer_counter_buffer_offsets)
+  Vk_fn.cmd_begin_transform_feedback_ext (arg_command_buffer) (arg_first_counter_buffer) (List.length arg_counter_buffers) (pointer_counter_buffers) (pointer_counter_buffer_offsets);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_first_counter_buffer, arg_counter_buffers, array_counter_buffers, arg_counter_buffer_offsets, array_counter_buffer_offsets));
+  ()
 
 let cmd_end_transform_feedback_ext arg_command_buffer arg_first_counter_buffer arg_counter_buffers arg_counter_buffer_offsets =
   let array_counter_buffers = CArray.of_list (Buffer.t) arg_counter_buffers in
@@ -1978,153 +2520,219 @@ let cmd_end_transform_feedback_ext arg_command_buffer arg_first_counter_buffer a
   if List.length arg_counter_buffer_offsets <> List.length arg_counter_buffers then invalid_arg "vkCmdEndTransformFeedbackEXT: array lengths differ";
   let array_counter_buffer_offsets = CArray.of_list (Vk_base.device_size) arg_counter_buffer_offsets in
   let pointer_counter_buffer_offsets = if arg_counter_buffer_offsets = [] then Vk_base.null_ptr (Vk_base.device_size) else CArray.start array_counter_buffer_offsets in
-  Vk_fn.cmd_end_transform_feedback_ext (arg_command_buffer) (arg_first_counter_buffer) (List.length arg_counter_buffers) (pointer_counter_buffers) (pointer_counter_buffer_offsets)
+  Vk_fn.cmd_end_transform_feedback_ext (arg_command_buffer) (arg_first_counter_buffer) (List.length arg_counter_buffers) (pointer_counter_buffers) (pointer_counter_buffer_offsets);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_first_counter_buffer, arg_counter_buffers, array_counter_buffers, arg_counter_buffer_offsets, array_counter_buffer_offsets));
+  ()
 
 let cmd_begin_query_indexed_ext arg_command_buffer arg_query_pool arg_query arg_flags arg_index =
-  Vk_fn.cmd_begin_query_indexed_ext (arg_command_buffer) (arg_query_pool) (arg_query) (arg_flags) (arg_index)
+  Vk_fn.cmd_begin_query_indexed_ext (arg_command_buffer) (arg_query_pool) (arg_query) (arg_flags) (arg_index);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_query_pool, arg_query, arg_flags, arg_index));
+  ()
 
 let cmd_end_query_indexed_ext arg_command_buffer arg_query_pool arg_query arg_index =
-  Vk_fn.cmd_end_query_indexed_ext (arg_command_buffer) (arg_query_pool) (arg_query) (arg_index)
+  Vk_fn.cmd_end_query_indexed_ext (arg_command_buffer) (arg_query_pool) (arg_query) (arg_index);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_query_pool, arg_query, arg_index));
+  ()
 
 let cmd_draw_indirect_byte_count_ext arg_command_buffer arg_instance_count arg_first_instance arg_counter_buffer arg_counter_buffer_offset arg_counter_offset arg_vertex_stride =
-  Vk_fn.cmd_draw_indirect_byte_count_ext (arg_command_buffer) (arg_instance_count) (arg_first_instance) (arg_counter_buffer) (arg_counter_buffer_offset) (arg_counter_offset) (arg_vertex_stride)
+  Vk_fn.cmd_draw_indirect_byte_count_ext (arg_command_buffer) (arg_instance_count) (arg_first_instance) (arg_counter_buffer) (arg_counter_buffer_offset) (arg_counter_offset) (arg_vertex_stride);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_instance_count, arg_first_instance, arg_counter_buffer, arg_counter_buffer_offset, arg_counter_offset, arg_vertex_stride));
+  ()
 
 let cmd_set_exclusive_scissor_nv arg_command_buffer arg_first_exclusive_scissor arg_exclusive_scissors =
   let array_exclusive_scissors = CArray.of_list (Rect2D.t) arg_exclusive_scissors in
   let pointer_exclusive_scissors = if arg_exclusive_scissors = [] then Vk_base.null_ptr (Rect2D.t) else CArray.start array_exclusive_scissors in
-  Vk_fn.cmd_set_exclusive_scissor_nv (arg_command_buffer) (arg_first_exclusive_scissor) (List.length arg_exclusive_scissors) (pointer_exclusive_scissors)
+  Vk_fn.cmd_set_exclusive_scissor_nv (arg_command_buffer) (arg_first_exclusive_scissor) (List.length arg_exclusive_scissors) (pointer_exclusive_scissors);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_first_exclusive_scissor, arg_exclusive_scissors, array_exclusive_scissors));
+  ()
 
 let cmd_set_exclusive_scissor_enable_nv arg_command_buffer arg_first_exclusive_scissor arg_exclusive_scissor_enables =
   let array_exclusive_scissor_enables = CArray.of_list (Vk_base.bool32) arg_exclusive_scissor_enables in
   let pointer_exclusive_scissor_enables = if arg_exclusive_scissor_enables = [] then Vk_base.null_ptr (Vk_base.bool32) else CArray.start array_exclusive_scissor_enables in
-  Vk_fn.cmd_set_exclusive_scissor_enable_nv (arg_command_buffer) (arg_first_exclusive_scissor) (List.length arg_exclusive_scissor_enables) (pointer_exclusive_scissor_enables)
+  Vk_fn.cmd_set_exclusive_scissor_enable_nv (arg_command_buffer) (arg_first_exclusive_scissor) (List.length arg_exclusive_scissor_enables) (pointer_exclusive_scissor_enables);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_first_exclusive_scissor, arg_exclusive_scissor_enables, array_exclusive_scissor_enables));
+  ()
 
 let cmd_bind_shading_rate_image_nv arg_command_buffer arg_image_view arg_image_layout =
-  Vk_fn.cmd_bind_shading_rate_image_nv (arg_command_buffer) (arg_image_view) (arg_image_layout)
+  Vk_fn.cmd_bind_shading_rate_image_nv (arg_command_buffer) (arg_image_view) (arg_image_layout);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_image_view, arg_image_layout));
+  ()
 
 let cmd_set_viewport_shading_rate_palette_nv arg_command_buffer arg_first_viewport arg_shading_rate_palettes =
   let array_shading_rate_palettes = CArray.of_list (ShadingRatePaletteNV.t) arg_shading_rate_palettes in
   let pointer_shading_rate_palettes = if arg_shading_rate_palettes = [] then Vk_base.null_ptr (ShadingRatePaletteNV.t) else CArray.start array_shading_rate_palettes in
-  Vk_fn.cmd_set_viewport_shading_rate_palette_nv (arg_command_buffer) (arg_first_viewport) (List.length arg_shading_rate_palettes) (pointer_shading_rate_palettes)
+  Vk_fn.cmd_set_viewport_shading_rate_palette_nv (arg_command_buffer) (arg_first_viewport) (List.length arg_shading_rate_palettes) (pointer_shading_rate_palettes);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_first_viewport, arg_shading_rate_palettes, array_shading_rate_palettes));
+  ()
 
 let cmd_set_coarse_sample_order_nv arg_command_buffer arg_sample_order_type arg_custom_sample_orders =
   let array_custom_sample_orders = CArray.of_list (CoarseSampleOrderCustomNV.t) arg_custom_sample_orders in
   let pointer_custom_sample_orders = if arg_custom_sample_orders = [] then Vk_base.null_ptr (CoarseSampleOrderCustomNV.t) else CArray.start array_custom_sample_orders in
-  Vk_fn.cmd_set_coarse_sample_order_nv (arg_command_buffer) (arg_sample_order_type) (List.length arg_custom_sample_orders) (pointer_custom_sample_orders)
+  Vk_fn.cmd_set_coarse_sample_order_nv (arg_command_buffer) (arg_sample_order_type) (List.length arg_custom_sample_orders) (pointer_custom_sample_orders);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_sample_order_type, arg_custom_sample_orders, array_custom_sample_orders));
+  ()
 
 let cmd_draw_mesh_tasks_nv arg_command_buffer arg_task_count arg_first_task =
-  Vk_fn.cmd_draw_mesh_tasks_nv (arg_command_buffer) (arg_task_count) (arg_first_task)
+  Vk_fn.cmd_draw_mesh_tasks_nv (arg_command_buffer) (arg_task_count) (arg_first_task);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_task_count, arg_first_task));
+  ()
 
 let cmd_draw_mesh_tasks_indirect_nv arg_command_buffer arg_buffer arg_offset arg_draw_count arg_stride =
-  Vk_fn.cmd_draw_mesh_tasks_indirect_nv (arg_command_buffer) (arg_buffer) (arg_offset) (arg_draw_count) (arg_stride)
+  Vk_fn.cmd_draw_mesh_tasks_indirect_nv (arg_command_buffer) (arg_buffer) (arg_offset) (arg_draw_count) (arg_stride);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_buffer, arg_offset, arg_draw_count, arg_stride));
+  ()
 
 let cmd_draw_mesh_tasks_indirect_count_nv arg_command_buffer arg_buffer arg_offset arg_count_buffer arg_count_buffer_offset arg_max_draw_count arg_stride =
-  Vk_fn.cmd_draw_mesh_tasks_indirect_count_nv (arg_command_buffer) (arg_buffer) (arg_offset) (arg_count_buffer) (arg_count_buffer_offset) (arg_max_draw_count) (arg_stride)
+  Vk_fn.cmd_draw_mesh_tasks_indirect_count_nv (arg_command_buffer) (arg_buffer) (arg_offset) (arg_count_buffer) (arg_count_buffer_offset) (arg_max_draw_count) (arg_stride);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_buffer, arg_offset, arg_count_buffer, arg_count_buffer_offset, arg_max_draw_count, arg_stride));
+  ()
 
 let cmd_draw_mesh_tasks_ext arg_command_buffer arg_group_count_x arg_group_count_y arg_group_count_z =
-  Vk_fn.cmd_draw_mesh_tasks_ext (arg_command_buffer) (arg_group_count_x) (arg_group_count_y) (arg_group_count_z)
+  Vk_fn.cmd_draw_mesh_tasks_ext (arg_command_buffer) (arg_group_count_x) (arg_group_count_y) (arg_group_count_z);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_group_count_x, arg_group_count_y, arg_group_count_z));
+  ()
 
 let cmd_draw_mesh_tasks_indirect_ext arg_command_buffer arg_buffer arg_offset arg_draw_count arg_stride =
-  Vk_fn.cmd_draw_mesh_tasks_indirect_ext (arg_command_buffer) (arg_buffer) (arg_offset) (arg_draw_count) (arg_stride)
+  Vk_fn.cmd_draw_mesh_tasks_indirect_ext (arg_command_buffer) (arg_buffer) (arg_offset) (arg_draw_count) (arg_stride);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_buffer, arg_offset, arg_draw_count, arg_stride));
+  ()
 
 let cmd_draw_mesh_tasks_indirect_count_ext arg_command_buffer arg_buffer arg_offset arg_count_buffer arg_count_buffer_offset arg_max_draw_count arg_stride =
-  Vk_fn.cmd_draw_mesh_tasks_indirect_count_ext (arg_command_buffer) (arg_buffer) (arg_offset) (arg_count_buffer) (arg_count_buffer_offset) (arg_max_draw_count) (arg_stride)
+  Vk_fn.cmd_draw_mesh_tasks_indirect_count_ext (arg_command_buffer) (arg_buffer) (arg_offset) (arg_count_buffer) (arg_count_buffer_offset) (arg_max_draw_count) (arg_stride);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_buffer, arg_offset, arg_count_buffer, arg_count_buffer_offset, arg_max_draw_count, arg_stride));
+  ()
 
 let compile_deferred_nv arg_device arg_pipeline arg_shader =
   let result = Vk_fn.compile_deferred_nv (arg_device) (arg_pipeline) (arg_shader) in
+  ignore (Sys.opaque_identity (arg_device, arg_pipeline, arg_shader));
   check result;
   ()
 
 let create_acceleration_structure_nv ?allocator:arg_allocator arg_device arg_create_info =
   let output = allocate (AccelerationStructureNV.t) (AccelerationStructureNV.null) in
   let result = Vk_fn.create_acceleration_structure_nv (arg_device) (addr arg_create_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
+  ignore (Sys.opaque_identity (arg_device, arg_create_info, arg_allocator));
   check result;
   !@ output
 
 let cmd_bind_invocation_mask_huawei arg_command_buffer arg_image_view arg_image_layout =
-  Vk_fn.cmd_bind_invocation_mask_huawei (arg_command_buffer) (arg_image_view) (arg_image_layout)
+  Vk_fn.cmd_bind_invocation_mask_huawei (arg_command_buffer) (arg_image_view) (arg_image_layout);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_image_view, arg_image_layout));
+  ()
 
 let destroy_acceleration_structure_khr arg_device arg_acceleration_structure ?allocator:arg_allocator () =
-  Vk_fn.destroy_acceleration_structure_khr (arg_device) (arg_acceleration_structure) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x))
+  Vk_fn.destroy_acceleration_structure_khr (arg_device) (arg_acceleration_structure) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x));
+  ignore (Sys.opaque_identity (arg_device, arg_acceleration_structure, arg_allocator));
+  ()
 
 let destroy_acceleration_structure_nv arg_device arg_acceleration_structure ?allocator:arg_allocator () =
-  Vk_fn.destroy_acceleration_structure_nv (arg_device) (arg_acceleration_structure) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x))
+  Vk_fn.destroy_acceleration_structure_nv (arg_device) (arg_acceleration_structure) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x));
+  ignore (Sys.opaque_identity (arg_device, arg_acceleration_structure, arg_allocator));
+  ()
 
 let get_acceleration_structure_memory_requirements_nv arg_device arg_info arg_memory_requirements =
-  Vk_fn.get_acceleration_structure_memory_requirements_nv (arg_device) (addr arg_info) (addr arg_memory_requirements)
+  Vk_fn.get_acceleration_structure_memory_requirements_nv (arg_device) (addr arg_info) (addr arg_memory_requirements);
+  ignore (Sys.opaque_identity (arg_device, arg_info, arg_memory_requirements));
+  ()
 
 let bind_acceleration_structure_memory_nv arg_device arg_bind_infos =
   let array_bind_infos = CArray.of_list (BindAccelerationStructureMemoryInfoNV.t) arg_bind_infos in
   let pointer_bind_infos = if arg_bind_infos = [] then Vk_base.null_ptr (BindAccelerationStructureMemoryInfoNV.t) else CArray.start array_bind_infos in
   let result = Vk_fn.bind_acceleration_structure_memory_nv (arg_device) (List.length arg_bind_infos) (pointer_bind_infos) in
+  ignore (Sys.opaque_identity (arg_device, arg_bind_infos, array_bind_infos));
   check result;
   ()
 
 let cmd_copy_acceleration_structure_nv arg_command_buffer arg_dst arg_src arg_mode =
-  Vk_fn.cmd_copy_acceleration_structure_nv (arg_command_buffer) (arg_dst) (arg_src) (arg_mode)
+  Vk_fn.cmd_copy_acceleration_structure_nv (arg_command_buffer) (arg_dst) (arg_src) (arg_mode);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_dst, arg_src, arg_mode));
+  ()
 
 let cmd_copy_acceleration_structure_khr arg_command_buffer arg_info =
-  Vk_fn.cmd_copy_acceleration_structure_khr (arg_command_buffer) (addr arg_info)
+  Vk_fn.cmd_copy_acceleration_structure_khr (arg_command_buffer) (addr arg_info);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_info));
+  ()
 
 let copy_acceleration_structure_khr arg_device arg_deferred_operation arg_info =
   let result = Vk_fn.copy_acceleration_structure_khr (arg_device) (arg_deferred_operation) (addr arg_info) in
+  ignore (Sys.opaque_identity (arg_device, arg_deferred_operation, arg_info));
   check result;
   result
 
 let cmd_copy_acceleration_structure_to_memory_khr arg_command_buffer arg_info =
-  Vk_fn.cmd_copy_acceleration_structure_to_memory_khr (arg_command_buffer) (addr arg_info)
+  Vk_fn.cmd_copy_acceleration_structure_to_memory_khr (arg_command_buffer) (addr arg_info);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_info));
+  ()
 
 let copy_acceleration_structure_to_memory_khr arg_device arg_deferred_operation arg_info =
   let result = Vk_fn.copy_acceleration_structure_to_memory_khr (arg_device) (arg_deferred_operation) (addr arg_info) in
+  ignore (Sys.opaque_identity (arg_device, arg_deferred_operation, arg_info));
   check result;
   result
 
 let cmd_copy_memory_to_acceleration_structure_khr arg_command_buffer arg_info =
-  Vk_fn.cmd_copy_memory_to_acceleration_structure_khr (arg_command_buffer) (addr arg_info)
+  Vk_fn.cmd_copy_memory_to_acceleration_structure_khr (arg_command_buffer) (addr arg_info);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_info));
+  ()
 
 let copy_memory_to_acceleration_structure_khr arg_device arg_deferred_operation arg_info =
   let result = Vk_fn.copy_memory_to_acceleration_structure_khr (arg_device) (arg_deferred_operation) (addr arg_info) in
+  ignore (Sys.opaque_identity (arg_device, arg_deferred_operation, arg_info));
   check result;
   result
 
 let cmd_write_acceleration_structures_properties_khr arg_command_buffer arg_acceleration_structures arg_query_type arg_query_pool arg_first_query =
   let array_acceleration_structures = CArray.of_list (AccelerationStructureKHR.t) arg_acceleration_structures in
   let pointer_acceleration_structures = if arg_acceleration_structures = [] then Vk_base.null_ptr (AccelerationStructureKHR.t) else CArray.start array_acceleration_structures in
-  Vk_fn.cmd_write_acceleration_structures_properties_khr (arg_command_buffer) (List.length arg_acceleration_structures) (pointer_acceleration_structures) (arg_query_type) (arg_query_pool) (arg_first_query)
+  Vk_fn.cmd_write_acceleration_structures_properties_khr (arg_command_buffer) (List.length arg_acceleration_structures) (pointer_acceleration_structures) (arg_query_type) (arg_query_pool) (arg_first_query);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_acceleration_structures, array_acceleration_structures, arg_query_type, arg_query_pool, arg_first_query));
+  ()
 
 let cmd_write_acceleration_structures_properties_nv arg_command_buffer arg_acceleration_structures arg_query_type arg_query_pool arg_first_query =
   let array_acceleration_structures = CArray.of_list (AccelerationStructureNV.t) arg_acceleration_structures in
   let pointer_acceleration_structures = if arg_acceleration_structures = [] then Vk_base.null_ptr (AccelerationStructureNV.t) else CArray.start array_acceleration_structures in
-  Vk_fn.cmd_write_acceleration_structures_properties_nv (arg_command_buffer) (List.length arg_acceleration_structures) (pointer_acceleration_structures) (arg_query_type) (arg_query_pool) (arg_first_query)
+  Vk_fn.cmd_write_acceleration_structures_properties_nv (arg_command_buffer) (List.length arg_acceleration_structures) (pointer_acceleration_structures) (arg_query_type) (arg_query_pool) (arg_first_query);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_acceleration_structures, array_acceleration_structures, arg_query_type, arg_query_pool, arg_first_query));
+  ()
 
 let cmd_build_acceleration_structure_nv arg_command_buffer arg_info arg_instance_data arg_instance_offset arg_update arg_dst arg_src arg_scratch arg_scratch_offset =
-  Vk_fn.cmd_build_acceleration_structure_nv (arg_command_buffer) (addr arg_info) (arg_instance_data) (arg_instance_offset) (arg_update) (arg_dst) (arg_src) (arg_scratch) (arg_scratch_offset)
+  Vk_fn.cmd_build_acceleration_structure_nv (arg_command_buffer) (addr arg_info) (arg_instance_data) (arg_instance_offset) (arg_update) (arg_dst) (arg_src) (arg_scratch) (arg_scratch_offset);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_info, arg_instance_data, arg_instance_offset, arg_update, arg_dst, arg_src, arg_scratch, arg_scratch_offset));
+  ()
 
 let write_acceleration_structures_properties_khr arg_device arg_acceleration_structures arg_query_type arg_data_size arg_data arg_stride =
   let array_acceleration_structures = CArray.of_list (AccelerationStructureKHR.t) arg_acceleration_structures in
   let pointer_acceleration_structures = if arg_acceleration_structures = [] then Vk_base.null_ptr (AccelerationStructureKHR.t) else CArray.start array_acceleration_structures in
   let result = Vk_fn.write_acceleration_structures_properties_khr (arg_device) (List.length arg_acceleration_structures) (pointer_acceleration_structures) (arg_query_type) (arg_data_size) (arg_data) (arg_stride) in
+  ignore (Sys.opaque_identity (arg_device, arg_acceleration_structures, array_acceleration_structures, arg_query_type, arg_data_size, arg_data, arg_stride));
   check result;
   ()
 
 let cmd_trace_rays_khr arg_command_buffer arg_raygen_shader_binding_table arg_miss_shader_binding_table arg_hit_shader_binding_table arg_callable_shader_binding_table arg_width arg_height arg_depth =
-  Vk_fn.cmd_trace_rays_khr (arg_command_buffer) (addr arg_raygen_shader_binding_table) (addr arg_miss_shader_binding_table) (addr arg_hit_shader_binding_table) (addr arg_callable_shader_binding_table) (arg_width) (arg_height) (arg_depth)
+  Vk_fn.cmd_trace_rays_khr (arg_command_buffer) (addr arg_raygen_shader_binding_table) (addr arg_miss_shader_binding_table) (addr arg_hit_shader_binding_table) (addr arg_callable_shader_binding_table) (arg_width) (arg_height) (arg_depth);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_raygen_shader_binding_table, arg_miss_shader_binding_table, arg_hit_shader_binding_table, arg_callable_shader_binding_table, arg_width, arg_height, arg_depth));
+  ()
 
 let cmd_trace_rays_nv arg_command_buffer arg_raygen_shader_binding_table_buffer arg_raygen_shader_binding_offset arg_miss_shader_binding_table_buffer arg_miss_shader_binding_offset arg_miss_shader_binding_stride arg_hit_shader_binding_table_buffer arg_hit_shader_binding_offset arg_hit_shader_binding_stride arg_callable_shader_binding_table_buffer arg_callable_shader_binding_offset arg_callable_shader_binding_stride arg_width arg_height arg_depth =
-  Vk_fn.cmd_trace_rays_nv (arg_command_buffer) (arg_raygen_shader_binding_table_buffer) (arg_raygen_shader_binding_offset) (arg_miss_shader_binding_table_buffer) (arg_miss_shader_binding_offset) (arg_miss_shader_binding_stride) (arg_hit_shader_binding_table_buffer) (arg_hit_shader_binding_offset) (arg_hit_shader_binding_stride) (arg_callable_shader_binding_table_buffer) (arg_callable_shader_binding_offset) (arg_callable_shader_binding_stride) (arg_width) (arg_height) (arg_depth)
+  Vk_fn.cmd_trace_rays_nv (arg_command_buffer) (arg_raygen_shader_binding_table_buffer) (arg_raygen_shader_binding_offset) (arg_miss_shader_binding_table_buffer) (arg_miss_shader_binding_offset) (arg_miss_shader_binding_stride) (arg_hit_shader_binding_table_buffer) (arg_hit_shader_binding_offset) (arg_hit_shader_binding_stride) (arg_callable_shader_binding_table_buffer) (arg_callable_shader_binding_offset) (arg_callable_shader_binding_stride) (arg_width) (arg_height) (arg_depth);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_raygen_shader_binding_table_buffer, arg_raygen_shader_binding_offset, arg_miss_shader_binding_table_buffer, arg_miss_shader_binding_offset, arg_miss_shader_binding_stride, arg_hit_shader_binding_table_buffer, arg_hit_shader_binding_offset, arg_hit_shader_binding_stride, arg_callable_shader_binding_table_buffer, arg_callable_shader_binding_offset, arg_callable_shader_binding_stride, arg_width, arg_height, arg_depth));
+  ()
 
 let get_ray_tracing_shader_group_handles_khr arg_device arg_pipeline arg_first_group arg_group_count arg_data_size arg_data =
   let result = Vk_fn.get_ray_tracing_shader_group_handles_khr (arg_device) (arg_pipeline) (arg_first_group) (arg_group_count) (arg_data_size) (arg_data) in
+  ignore (Sys.opaque_identity (arg_device, arg_pipeline, arg_first_group, arg_group_count, arg_data_size, arg_data));
   check result;
   ()
 
 let get_ray_tracing_capture_replay_shader_group_handles_khr arg_device arg_pipeline arg_first_group arg_group_count arg_data_size arg_data =
   let result = Vk_fn.get_ray_tracing_capture_replay_shader_group_handles_khr (arg_device) (arg_pipeline) (arg_first_group) (arg_group_count) (arg_data_size) (arg_data) in
+  ignore (Sys.opaque_identity (arg_device, arg_pipeline, arg_first_group, arg_group_count, arg_data_size, arg_data));
   check result;
   ()
 
 let get_acceleration_structure_handle_nv arg_device arg_acceleration_structure arg_data_size arg_data =
   let result = Vk_fn.get_acceleration_structure_handle_nv (arg_device) (arg_acceleration_structure) (arg_data_size) (arg_data) in
+  ignore (Sys.opaque_identity (arg_device, arg_acceleration_structure, arg_data_size, arg_data));
   check result;
   ()
 
@@ -2134,6 +2742,7 @@ let create_ray_tracing_pipelines_nv ?allocator:arg_allocator arg_device arg_pipe
   let output_count = List.length arg_create_infos in
   let storage = CArray.make (Pipeline.t) output_count in
   let result = Vk_fn.create_ray_tracing_pipelines_nv (arg_device) (arg_pipeline_cache) (List.length arg_create_infos) (pointer_create_infos) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (CArray.start storage) in
+  ignore (Sys.opaque_identity (arg_device, arg_pipeline_cache, arg_create_infos, array_create_infos, arg_allocator));
   check result;
   (result, (CArray.to_list storage))
 
@@ -2143,6 +2752,7 @@ let create_ray_tracing_pipelines_khr ?allocator:arg_allocator arg_device arg_def
   let output_count = List.length arg_create_infos in
   let storage = CArray.make (Pipeline.t) output_count in
   let result = Vk_fn.create_ray_tracing_pipelines_khr (arg_device) (arg_deferred_operation) (arg_pipeline_cache) (List.length arg_create_infos) (pointer_create_infos) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (CArray.start storage) in
+  ignore (Sys.opaque_identity (arg_device, arg_deferred_operation, arg_pipeline_cache, arg_create_infos, array_create_infos, arg_allocator));
   check result;
   (result, (CArray.to_list storage))
 
@@ -2160,44 +2770,66 @@ let get_physical_device_cooperative_matrix_properties_nv arg_physical_device =
       CArray.to_list (CArray.from_ptr (CArray.start storage) (!@ count))
     end
   in
-  fetch ()
+  let enumeration_result = fetch () in
+  ignore (Sys.opaque_identity (arg_physical_device));
+  enumeration_result
 
 let cmd_trace_rays_indirect_khr arg_command_buffer arg_raygen_shader_binding_table arg_miss_shader_binding_table arg_hit_shader_binding_table arg_callable_shader_binding_table arg_indirect_device_address =
-  Vk_fn.cmd_trace_rays_indirect_khr (arg_command_buffer) (addr arg_raygen_shader_binding_table) (addr arg_miss_shader_binding_table) (addr arg_hit_shader_binding_table) (addr arg_callable_shader_binding_table) (arg_indirect_device_address)
+  Vk_fn.cmd_trace_rays_indirect_khr (arg_command_buffer) (addr arg_raygen_shader_binding_table) (addr arg_miss_shader_binding_table) (addr arg_hit_shader_binding_table) (addr arg_callable_shader_binding_table) (arg_indirect_device_address);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_raygen_shader_binding_table, arg_miss_shader_binding_table, arg_hit_shader_binding_table, arg_callable_shader_binding_table, arg_indirect_device_address));
+  ()
 
 let cmd_trace_rays_indirect_2_khr arg_command_buffer arg_indirect_device_address =
-  Vk_fn.cmd_trace_rays_indirect_2_khr (arg_command_buffer) (arg_indirect_device_address)
+  Vk_fn.cmd_trace_rays_indirect_2_khr (arg_command_buffer) (arg_indirect_device_address);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_indirect_device_address));
+  ()
 
 let get_cluster_acceleration_structure_build_sizes_nv arg_device arg_info arg_size_info =
-  Vk_fn.get_cluster_acceleration_structure_build_sizes_nv (arg_device) (addr arg_info) (addr arg_size_info)
+  Vk_fn.get_cluster_acceleration_structure_build_sizes_nv (arg_device) (addr arg_info) (addr arg_size_info);
+  ignore (Sys.opaque_identity (arg_device, arg_info, arg_size_info));
+  ()
 
 let cmd_build_cluster_acceleration_structure_indirect_nv arg_command_buffer arg_command_infos =
-  Vk_fn.cmd_build_cluster_acceleration_structure_indirect_nv (arg_command_buffer) (addr arg_command_infos)
+  Vk_fn.cmd_build_cluster_acceleration_structure_indirect_nv (arg_command_buffer) (addr arg_command_infos);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_command_infos));
+  ()
 
 let get_device_acceleration_structure_compatibility_khr arg_device arg_version_info =
   let output = allocate (AccelerationStructureCompatibilityKHR.t) (AccelerationStructureCompatibilityKHR.of_int 0) in
   Vk_fn.get_device_acceleration_structure_compatibility_khr (arg_device) (addr arg_version_info) (output);
+  ignore (Sys.opaque_identity (arg_device, arg_version_info));
   !@ output
 
 let get_ray_tracing_shader_group_stack_size_khr arg_device arg_pipeline arg_group arg_group_shader =
-  Vk_fn.get_ray_tracing_shader_group_stack_size_khr (arg_device) (arg_pipeline) (arg_group) (arg_group_shader)
+  let call_result = Vk_fn.get_ray_tracing_shader_group_stack_size_khr (arg_device) (arg_pipeline) (arg_group) (arg_group_shader) in
+  ignore (Sys.opaque_identity (arg_device, arg_pipeline, arg_group, arg_group_shader));
+  call_result
 
 let cmd_set_ray_tracing_pipeline_stack_size_khr arg_command_buffer arg_pipeline_stack_size =
-  Vk_fn.cmd_set_ray_tracing_pipeline_stack_size_khr (arg_command_buffer) (arg_pipeline_stack_size)
+  Vk_fn.cmd_set_ray_tracing_pipeline_stack_size_khr (arg_command_buffer) (arg_pipeline_stack_size);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_pipeline_stack_size));
+  ()
 
 let get_image_view_handle_nvx arg_device arg_info =
-  Vk_fn.get_image_view_handle_nvx (arg_device) (addr arg_info)
+  let call_result = Vk_fn.get_image_view_handle_nvx (arg_device) (addr arg_info) in
+  ignore (Sys.opaque_identity (arg_device, arg_info));
+  call_result
 
 let get_image_view_handle_64_nvx arg_device arg_info =
-  Vk_fn.get_image_view_handle_64_nvx (arg_device) (addr arg_info)
+  let call_result = Vk_fn.get_image_view_handle_64_nvx (arg_device) (addr arg_info) in
+  ignore (Sys.opaque_identity (arg_device, arg_info));
+  call_result
 
 let get_image_view_address_nvx arg_device arg_image_view arg_properties =
   let result = Vk_fn.get_image_view_address_nvx (arg_device) (arg_image_view) (addr arg_properties) in
+  ignore (Sys.opaque_identity (arg_device, arg_image_view, arg_properties));
   check result;
   ()
 
 let get_device_combined_image_sampler_index_nvx arg_device arg_image_view_index arg_sampler_index =
-  Vk_fn.get_device_combined_image_sampler_index_nvx (arg_device) (arg_image_view_index) (arg_sampler_index)
+  let call_result = Vk_fn.get_device_combined_image_sampler_index_nvx (arg_device) (arg_image_view_index) (arg_sampler_index) in
+  ignore (Sys.opaque_identity (arg_device, arg_image_view_index, arg_sampler_index));
+  call_result
 
 let get_physical_device_surface_present_modes_2_ext arg_physical_device arg_surface_info =
   let count = allocate Vk_base.uint32 0 in
@@ -2213,21 +2845,26 @@ let get_physical_device_surface_present_modes_2_ext arg_physical_device arg_surf
       CArray.to_list (CArray.from_ptr (CArray.start storage) (!@ count))
     end
   in
-  fetch ()
+  let enumeration_result = fetch () in
+  ignore (Sys.opaque_identity (arg_physical_device, arg_surface_info));
+  enumeration_result
 
 let get_device_group_surface_present_modes_2_ext arg_device arg_surface_info =
   let output = allocate (DeviceGroupPresentModeFlagsKHR.t) (DeviceGroupPresentModeFlagsKHR.of_int 0) in
   let result = Vk_fn.get_device_group_surface_present_modes_2_ext (arg_device) (addr arg_surface_info) (output) in
+  ignore (Sys.opaque_identity (arg_device, arg_surface_info));
   check result;
   !@ output
 
 let acquire_full_screen_exclusive_mode_ext arg_device arg_swapchain =
   let result = Vk_fn.acquire_full_screen_exclusive_mode_ext (arg_device) (arg_swapchain) in
+  ignore (Sys.opaque_identity (arg_device, arg_swapchain));
   check result;
   ()
 
 let release_full_screen_exclusive_mode_ext arg_device arg_swapchain =
   let result = Vk_fn.release_full_screen_exclusive_mode_ext (arg_device) (arg_swapchain) in
+  ignore (Sys.opaque_identity (arg_device, arg_swapchain));
   check result;
   ()
 
@@ -2245,35 +2882,47 @@ let enumerate_physical_device_queue_family_performance_query_counters_khr arg_ph
       CArray.to_list (CArray.from_ptr (CArray.start storage) (!@ count))
     end
   in
-  fetch ()
+  let enumeration_result = fetch () in
+  ignore (Sys.opaque_identity (arg_physical_device, arg_queue_family_index, arg_counter_descriptions));
+  enumeration_result
 
 let get_physical_device_queue_family_performance_query_passes_khr arg_physical_device arg_performance_query_create_info =
   let output = allocate (Vk_base.uint32) (0) in
   Vk_fn.get_physical_device_queue_family_performance_query_passes_khr (arg_physical_device) (addr arg_performance_query_create_info) (output);
+  ignore (Sys.opaque_identity (arg_physical_device, arg_performance_query_create_info));
   !@ output
 
 let acquire_profiling_lock_khr arg_device arg_info =
   let result = Vk_fn.acquire_profiling_lock_khr (arg_device) (addr arg_info) in
+  ignore (Sys.opaque_identity (arg_device, arg_info));
   check result;
   ()
 
 let release_profiling_lock_khr arg_device =
-  Vk_fn.release_profiling_lock_khr (arg_device)
+  Vk_fn.release_profiling_lock_khr (arg_device);
+  ignore (Sys.opaque_identity (arg_device));
+  ()
 
 let get_image_drm_format_modifier_properties_ext arg_device arg_image arg_properties =
   let result = Vk_fn.get_image_drm_format_modifier_properties_ext (arg_device) (arg_image) (addr arg_properties) in
+  ignore (Sys.opaque_identity (arg_device, arg_image, arg_properties));
   check result;
   ()
 
 let get_buffer_opaque_capture_address arg_device arg_info =
-  Vk_fn.get_buffer_opaque_capture_address (arg_device) (addr arg_info)
+  let call_result = Vk_fn.get_buffer_opaque_capture_address (arg_device) (addr arg_info) in
+  ignore (Sys.opaque_identity (arg_device, arg_info));
+  call_result
 
 let get_buffer_device_address arg_device arg_info =
-  Vk_fn.get_buffer_device_address (arg_device) (addr arg_info)
+  let call_result = Vk_fn.get_buffer_device_address (arg_device) (addr arg_info) in
+  ignore (Sys.opaque_identity (arg_device, arg_info));
+  call_result
 
 let create_headless_surface_ext ?allocator:arg_allocator arg_instance arg_create_info =
   let output = allocate (SurfaceKHR.t) (SurfaceKHR.null) in
   let result = Vk_fn.create_headless_surface_ext (arg_instance) (addr arg_create_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
+  ignore (Sys.opaque_identity (arg_instance, arg_create_info, arg_allocator));
   check result;
   !@ output
 
@@ -2291,55 +2940,69 @@ let get_physical_device_supported_framebuffer_mixed_samples_combinations_nv arg_
       CArray.to_list (CArray.from_ptr (CArray.start storage) (!@ count))
     end
   in
-  fetch ()
+  let enumeration_result = fetch () in
+  ignore (Sys.opaque_identity (arg_physical_device));
+  enumeration_result
 
 let initialize_performance_api_intel arg_device arg_initialize_info =
   let result = Vk_fn.initialize_performance_api_intel (arg_device) (addr arg_initialize_info) in
+  ignore (Sys.opaque_identity (arg_device, arg_initialize_info));
   check result;
   ()
 
 let uninitialize_performance_api_intel arg_device =
-  Vk_fn.uninitialize_performance_api_intel (arg_device)
+  Vk_fn.uninitialize_performance_api_intel (arg_device);
+  ignore (Sys.opaque_identity (arg_device));
+  ()
 
 let cmd_set_performance_marker_intel arg_command_buffer arg_marker_info =
   let result = Vk_fn.cmd_set_performance_marker_intel (arg_command_buffer) (addr arg_marker_info) in
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_marker_info));
   check result;
   ()
 
 let cmd_set_performance_stream_marker_intel arg_command_buffer arg_marker_info =
   let result = Vk_fn.cmd_set_performance_stream_marker_intel (arg_command_buffer) (addr arg_marker_info) in
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_marker_info));
   check result;
   ()
 
 let cmd_set_performance_override_intel arg_command_buffer arg_override_info =
   let result = Vk_fn.cmd_set_performance_override_intel (arg_command_buffer) (addr arg_override_info) in
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_override_info));
   check result;
   ()
 
 let acquire_performance_configuration_intel arg_device arg_acquire_info =
   let output = allocate (PerformanceConfigurationINTEL.t) (PerformanceConfigurationINTEL.null) in
   let result = Vk_fn.acquire_performance_configuration_intel (arg_device) (addr arg_acquire_info) (output) in
+  ignore (Sys.opaque_identity (arg_device, arg_acquire_info));
   check result;
   !@ output
 
 let release_performance_configuration_intel arg_device arg_configuration =
   let result = Vk_fn.release_performance_configuration_intel (arg_device) (arg_configuration) in
+  ignore (Sys.opaque_identity (arg_device, arg_configuration));
   check result;
   ()
 
 let queue_set_performance_configuration_intel arg_queue arg_configuration =
   let result = Vk_fn.queue_set_performance_configuration_intel (arg_queue) (arg_configuration) in
+  ignore (Sys.opaque_identity (arg_queue, arg_configuration));
   check result;
   ()
 
 let get_performance_parameter_intel arg_device arg_parameter =
   let output = PerformanceValueINTEL.make () in
   let result = Vk_fn.get_performance_parameter_intel (arg_device) (arg_parameter) (addr output) in
+  ignore (Sys.opaque_identity (arg_device, arg_parameter));
   check result;
   output
 
 let get_device_memory_opaque_capture_address arg_device arg_info =
-  Vk_fn.get_device_memory_opaque_capture_address (arg_device) (addr arg_info)
+  let call_result = Vk_fn.get_device_memory_opaque_capture_address (arg_device) (addr arg_info) in
+  ignore (Sys.opaque_identity (arg_device, arg_info));
+  call_result
 
 let get_pipeline_executable_properties_khr arg_device arg_pipeline_info =
   let count = allocate Vk_base.uint32 0 in
@@ -2355,7 +3018,9 @@ let get_pipeline_executable_properties_khr arg_device arg_pipeline_info =
       CArray.to_list (CArray.from_ptr (CArray.start storage) (!@ count))
     end
   in
-  fetch ()
+  let enumeration_result = fetch () in
+  ignore (Sys.opaque_identity (arg_device, arg_pipeline_info));
+  enumeration_result
 
 let get_pipeline_executable_statistics_khr arg_device arg_executable_info =
   let count = allocate Vk_base.uint32 0 in
@@ -2371,7 +3036,9 @@ let get_pipeline_executable_statistics_khr arg_device arg_executable_info =
       CArray.to_list (CArray.from_ptr (CArray.start storage) (!@ count))
     end
   in
-  fetch ()
+  let enumeration_result = fetch () in
+  ignore (Sys.opaque_identity (arg_device, arg_executable_info));
+  enumeration_result
 
 let get_pipeline_executable_internal_representations_khr arg_device arg_executable_info =
   let count = allocate Vk_base.uint32 0 in
@@ -2387,10 +3054,14 @@ let get_pipeline_executable_internal_representations_khr arg_device arg_executab
       CArray.to_list (CArray.from_ptr (CArray.start storage) (!@ count))
     end
   in
-  fetch ()
+  let enumeration_result = fetch () in
+  ignore (Sys.opaque_identity (arg_device, arg_executable_info));
+  enumeration_result
 
 let cmd_set_line_stipple arg_command_buffer arg_line_stipple_factor arg_line_stipple_pattern =
-  Vk_fn.cmd_set_line_stipple (arg_command_buffer) (arg_line_stipple_factor) (arg_line_stipple_pattern)
+  Vk_fn.cmd_set_line_stipple (arg_command_buffer) (arg_line_stipple_factor) (arg_line_stipple_pattern);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_line_stipple_factor, arg_line_stipple_pattern));
+  ()
 
 let get_fault_data arg_device arg_fault_query_behavior arg_unrecorded_faults =
   let count = allocate Vk_base.uint32 0 in
@@ -2406,7 +3077,9 @@ let get_fault_data arg_device arg_fault_query_behavior arg_unrecorded_faults =
       CArray.to_list (CArray.from_ptr (CArray.start storage) (!@ count))
     end
   in
-  fetch ()
+  let enumeration_result = fetch () in
+  ignore (Sys.opaque_identity (arg_device, arg_fault_query_behavior, arg_unrecorded_faults));
+  enumeration_result
 
 let get_physical_device_tool_properties arg_physical_device =
   let count = allocate Vk_base.uint32 0 in
@@ -2422,18 +3095,23 @@ let get_physical_device_tool_properties arg_physical_device =
       CArray.to_list (CArray.from_ptr (CArray.start storage) (!@ count))
     end
   in
-  fetch ()
+  let enumeration_result = fetch () in
+  ignore (Sys.opaque_identity (arg_physical_device));
+  enumeration_result
 
 let create_acceleration_structure_khr ?allocator:arg_allocator arg_device arg_create_info =
   let output = allocate (AccelerationStructureKHR.t) (AccelerationStructureKHR.null) in
   let result = Vk_fn.create_acceleration_structure_khr (arg_device) (addr arg_create_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
+  ignore (Sys.opaque_identity (arg_device, arg_create_info, arg_allocator));
   check result;
   !@ output
 
 let cmd_build_acceleration_structures_khr arg_command_buffer arg_infos arg_build_range_infos =
   let array_infos = CArray.of_list (AccelerationStructureBuildGeometryInfoKHR.t) arg_infos in
   let pointer_infos = if arg_infos = [] then Vk_base.null_ptr (AccelerationStructureBuildGeometryInfoKHR.t) else CArray.start array_infos in
-  Vk_fn.cmd_build_acceleration_structures_khr (arg_command_buffer) (List.length arg_infos) (pointer_infos) (arg_build_range_infos)
+  Vk_fn.cmd_build_acceleration_structures_khr (arg_command_buffer) (List.length arg_infos) (pointer_infos) (arg_build_range_infos);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_infos, array_infos, arg_build_range_infos));
+  ()
 
 let cmd_build_acceleration_structures_indirect_khr arg_command_buffer arg_infos arg_indirect_device_addresses arg_indirect_strides arg_max_primitive_counts =
   let array_infos = CArray.of_list (AccelerationStructureBuildGeometryInfoKHR.t) arg_infos in
@@ -2444,70 +3122,100 @@ let cmd_build_acceleration_structures_indirect_khr arg_command_buffer arg_infos 
   let pointer_indirect_device_addresses = if arg_indirect_device_addresses = [] then Vk_base.null_ptr (Vk_base.device_address) else CArray.start array_indirect_device_addresses in
   let array_indirect_strides = CArray.of_list (Vk_base.uint32) arg_indirect_strides in
   let pointer_indirect_strides = if arg_indirect_strides = [] then Vk_base.null_ptr (Vk_base.uint32) else CArray.start array_indirect_strides in
-  Vk_fn.cmd_build_acceleration_structures_indirect_khr (arg_command_buffer) (List.length arg_infos) (pointer_infos) (pointer_indirect_device_addresses) (pointer_indirect_strides) (arg_max_primitive_counts)
+  Vk_fn.cmd_build_acceleration_structures_indirect_khr (arg_command_buffer) (List.length arg_infos) (pointer_infos) (pointer_indirect_device_addresses) (pointer_indirect_strides) (arg_max_primitive_counts);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_infos, array_infos, arg_indirect_device_addresses, array_indirect_device_addresses, arg_indirect_strides, array_indirect_strides, arg_max_primitive_counts));
+  ()
 
 let build_acceleration_structures_khr arg_device arg_deferred_operation arg_infos arg_build_range_infos =
   let array_infos = CArray.of_list (AccelerationStructureBuildGeometryInfoKHR.t) arg_infos in
   let pointer_infos = if arg_infos = [] then Vk_base.null_ptr (AccelerationStructureBuildGeometryInfoKHR.t) else CArray.start array_infos in
   let result = Vk_fn.build_acceleration_structures_khr (arg_device) (arg_deferred_operation) (List.length arg_infos) (pointer_infos) (arg_build_range_infos) in
+  ignore (Sys.opaque_identity (arg_device, arg_deferred_operation, arg_infos, array_infos, arg_build_range_infos));
   check result;
   result
 
 let get_acceleration_structure_device_address_khr arg_device arg_info =
-  Vk_fn.get_acceleration_structure_device_address_khr (arg_device) (addr arg_info)
+  let call_result = Vk_fn.get_acceleration_structure_device_address_khr (arg_device) (addr arg_info) in
+  ignore (Sys.opaque_identity (arg_device, arg_info));
+  call_result
 
 let create_deferred_operation_khr ?allocator:arg_allocator arg_device =
   let output = allocate (DeferredOperationKHR.t) (DeferredOperationKHR.null) in
   let result = Vk_fn.create_deferred_operation_khr (arg_device) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
+  ignore (Sys.opaque_identity (arg_device, arg_allocator));
   check result;
   !@ output
 
 let destroy_deferred_operation_khr arg_device arg_operation ?allocator:arg_allocator () =
-  Vk_fn.destroy_deferred_operation_khr (arg_device) (arg_operation) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x))
+  Vk_fn.destroy_deferred_operation_khr (arg_device) (arg_operation) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x));
+  ignore (Sys.opaque_identity (arg_device, arg_operation, arg_allocator));
+  ()
 
 let get_deferred_operation_max_concurrency_khr arg_device arg_operation =
-  Vk_fn.get_deferred_operation_max_concurrency_khr (arg_device) (arg_operation)
+  let call_result = Vk_fn.get_deferred_operation_max_concurrency_khr (arg_device) (arg_operation) in
+  ignore (Sys.opaque_identity (arg_device, arg_operation));
+  call_result
 
 let get_deferred_operation_result_khr arg_device arg_operation =
   let result = Vk_fn.get_deferred_operation_result_khr (arg_device) (arg_operation) in
+  ignore (Sys.opaque_identity (arg_device, arg_operation));
   check result;
   result
 
 let deferred_operation_join_khr arg_device arg_operation =
   let result = Vk_fn.deferred_operation_join_khr (arg_device) (arg_operation) in
+  ignore (Sys.opaque_identity (arg_device, arg_operation));
   check result;
   result
 
 let get_pipeline_indirect_memory_requirements_nv arg_device arg_create_info arg_memory_requirements =
-  Vk_fn.get_pipeline_indirect_memory_requirements_nv (arg_device) (addr arg_create_info) (addr arg_memory_requirements)
+  Vk_fn.get_pipeline_indirect_memory_requirements_nv (arg_device) (addr arg_create_info) (addr arg_memory_requirements);
+  ignore (Sys.opaque_identity (arg_device, arg_create_info, arg_memory_requirements));
+  ()
 
 let get_pipeline_indirect_device_address_nv arg_device arg_info =
-  Vk_fn.get_pipeline_indirect_device_address_nv (arg_device) (addr arg_info)
+  let call_result = Vk_fn.get_pipeline_indirect_device_address_nv (arg_device) (addr arg_info) in
+  ignore (Sys.opaque_identity (arg_device, arg_info));
+  call_result
 
 let anti_lag_update_amd arg_device arg_data =
-  Vk_fn.anti_lag_update_amd (arg_device) (addr arg_data)
+  Vk_fn.anti_lag_update_amd (arg_device) (addr arg_data);
+  ignore (Sys.opaque_identity (arg_device, arg_data));
+  ()
 
 let cmd_set_cull_mode arg_command_buffer arg_cull_mode =
-  Vk_fn.cmd_set_cull_mode (arg_command_buffer) (arg_cull_mode)
+  Vk_fn.cmd_set_cull_mode (arg_command_buffer) (arg_cull_mode);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_cull_mode));
+  ()
 
 let cmd_set_front_face arg_command_buffer arg_front_face =
-  Vk_fn.cmd_set_front_face (arg_command_buffer) (arg_front_face)
+  Vk_fn.cmd_set_front_face (arg_command_buffer) (arg_front_face);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_front_face));
+  ()
 
 let cmd_set_primitive_topology arg_command_buffer arg_primitive_topology =
-  Vk_fn.cmd_set_primitive_topology (arg_command_buffer) (arg_primitive_topology)
+  Vk_fn.cmd_set_primitive_topology (arg_command_buffer) (arg_primitive_topology);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_primitive_topology));
+  ()
 
 let cmd_set_viewport_with_count arg_command_buffer arg_viewports =
   let array_viewports = CArray.of_list (Viewport.t) arg_viewports in
   let pointer_viewports = if arg_viewports = [] then Vk_base.null_ptr (Viewport.t) else CArray.start array_viewports in
-  Vk_fn.cmd_set_viewport_with_count (arg_command_buffer) (List.length arg_viewports) (pointer_viewports)
+  Vk_fn.cmd_set_viewport_with_count (arg_command_buffer) (List.length arg_viewports) (pointer_viewports);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_viewports, array_viewports));
+  ()
 
 let cmd_set_scissor_with_count arg_command_buffer arg_scissors =
   let array_scissors = CArray.of_list (Rect2D.t) arg_scissors in
   let pointer_scissors = if arg_scissors = [] then Vk_base.null_ptr (Rect2D.t) else CArray.start array_scissors in
-  Vk_fn.cmd_set_scissor_with_count (arg_command_buffer) (List.length arg_scissors) (pointer_scissors)
+  Vk_fn.cmd_set_scissor_with_count (arg_command_buffer) (List.length arg_scissors) (pointer_scissors);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_scissors, array_scissors));
+  ()
 
 let cmd_bind_index_buffer_2 arg_command_buffer arg_buffer arg_offset arg_size arg_index_type =
-  Vk_fn.cmd_bind_index_buffer_2 (arg_command_buffer) (arg_buffer) (arg_offset) (arg_size) (arg_index_type)
+  Vk_fn.cmd_bind_index_buffer_2 (arg_command_buffer) (arg_buffer) (arg_offset) (arg_size) (arg_index_type);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_buffer, arg_offset, arg_size, arg_index_type));
+  ()
 
 let cmd_bind_vertex_buffers_2 arg_command_buffer arg_first_binding arg_buffers arg_offsets arg_sizes arg_strides =
   let array_buffers = CArray.of_list (Buffer.t) arg_buffers in
@@ -2521,185 +3229,290 @@ let cmd_bind_vertex_buffers_2 arg_command_buffer arg_first_binding arg_buffers a
   let pointer_sizes = if arg_sizes = [] then Vk_base.null_ptr (Vk_base.device_size) else CArray.start array_sizes in
   let array_strides = CArray.of_list (Vk_base.device_size) arg_strides in
   let pointer_strides = if arg_strides = [] then Vk_base.null_ptr (Vk_base.device_size) else CArray.start array_strides in
-  Vk_fn.cmd_bind_vertex_buffers_2 (arg_command_buffer) (arg_first_binding) (List.length arg_buffers) (pointer_buffers) (pointer_offsets) (pointer_sizes) (pointer_strides)
+  Vk_fn.cmd_bind_vertex_buffers_2 (arg_command_buffer) (arg_first_binding) (List.length arg_buffers) (pointer_buffers) (pointer_offsets) (pointer_sizes) (pointer_strides);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_first_binding, arg_buffers, array_buffers, arg_offsets, array_offsets, arg_sizes, array_sizes, arg_strides, array_strides));
+  ()
 
 let cmd_set_depth_test_enable arg_command_buffer arg_depth_test_enable =
-  Vk_fn.cmd_set_depth_test_enable (arg_command_buffer) (arg_depth_test_enable)
+  Vk_fn.cmd_set_depth_test_enable (arg_command_buffer) (arg_depth_test_enable);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_depth_test_enable));
+  ()
 
 let cmd_set_depth_write_enable arg_command_buffer arg_depth_write_enable =
-  Vk_fn.cmd_set_depth_write_enable (arg_command_buffer) (arg_depth_write_enable)
+  Vk_fn.cmd_set_depth_write_enable (arg_command_buffer) (arg_depth_write_enable);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_depth_write_enable));
+  ()
 
 let cmd_set_depth_compare_op arg_command_buffer arg_depth_compare_op =
-  Vk_fn.cmd_set_depth_compare_op (arg_command_buffer) (arg_depth_compare_op)
+  Vk_fn.cmd_set_depth_compare_op (arg_command_buffer) (arg_depth_compare_op);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_depth_compare_op));
+  ()
 
 let cmd_set_depth_bounds_test_enable arg_command_buffer arg_depth_bounds_test_enable =
-  Vk_fn.cmd_set_depth_bounds_test_enable (arg_command_buffer) (arg_depth_bounds_test_enable)
+  Vk_fn.cmd_set_depth_bounds_test_enable (arg_command_buffer) (arg_depth_bounds_test_enable);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_depth_bounds_test_enable));
+  ()
 
 let cmd_set_stencil_test_enable arg_command_buffer arg_stencil_test_enable =
-  Vk_fn.cmd_set_stencil_test_enable (arg_command_buffer) (arg_stencil_test_enable)
+  Vk_fn.cmd_set_stencil_test_enable (arg_command_buffer) (arg_stencil_test_enable);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_stencil_test_enable));
+  ()
 
 let cmd_set_stencil_op arg_command_buffer arg_face_mask arg_fail_op arg_pass_op arg_depth_fail_op arg_compare_op =
-  Vk_fn.cmd_set_stencil_op (arg_command_buffer) (arg_face_mask) (arg_fail_op) (arg_pass_op) (arg_depth_fail_op) (arg_compare_op)
+  Vk_fn.cmd_set_stencil_op (arg_command_buffer) (arg_face_mask) (arg_fail_op) (arg_pass_op) (arg_depth_fail_op) (arg_compare_op);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_face_mask, arg_fail_op, arg_pass_op, arg_depth_fail_op, arg_compare_op));
+  ()
 
 let cmd_set_patch_control_points_ext arg_command_buffer arg_patch_control_points =
-  Vk_fn.cmd_set_patch_control_points_ext (arg_command_buffer) (arg_patch_control_points)
+  Vk_fn.cmd_set_patch_control_points_ext (arg_command_buffer) (arg_patch_control_points);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_patch_control_points));
+  ()
 
 let cmd_set_rasterizer_discard_enable arg_command_buffer arg_rasterizer_discard_enable =
-  Vk_fn.cmd_set_rasterizer_discard_enable (arg_command_buffer) (arg_rasterizer_discard_enable)
+  Vk_fn.cmd_set_rasterizer_discard_enable (arg_command_buffer) (arg_rasterizer_discard_enable);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_rasterizer_discard_enable));
+  ()
 
 let cmd_set_depth_bias_enable arg_command_buffer arg_depth_bias_enable =
-  Vk_fn.cmd_set_depth_bias_enable (arg_command_buffer) (arg_depth_bias_enable)
+  Vk_fn.cmd_set_depth_bias_enable (arg_command_buffer) (arg_depth_bias_enable);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_depth_bias_enable));
+  ()
 
 let cmd_set_logic_op_ext arg_command_buffer arg_logic_op =
-  Vk_fn.cmd_set_logic_op_ext (arg_command_buffer) (arg_logic_op)
+  Vk_fn.cmd_set_logic_op_ext (arg_command_buffer) (arg_logic_op);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_logic_op));
+  ()
 
 let cmd_set_primitive_restart_enable arg_command_buffer arg_primitive_restart_enable =
-  Vk_fn.cmd_set_primitive_restart_enable (arg_command_buffer) (arg_primitive_restart_enable)
+  Vk_fn.cmd_set_primitive_restart_enable (arg_command_buffer) (arg_primitive_restart_enable);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_primitive_restart_enable));
+  ()
 
 let cmd_set_tessellation_domain_origin_ext arg_command_buffer arg_domain_origin =
-  Vk_fn.cmd_set_tessellation_domain_origin_ext (arg_command_buffer) (arg_domain_origin)
+  Vk_fn.cmd_set_tessellation_domain_origin_ext (arg_command_buffer) (arg_domain_origin);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_domain_origin));
+  ()
 
 let cmd_set_depth_clamp_enable_ext arg_command_buffer arg_depth_clamp_enable =
-  Vk_fn.cmd_set_depth_clamp_enable_ext (arg_command_buffer) (arg_depth_clamp_enable)
+  Vk_fn.cmd_set_depth_clamp_enable_ext (arg_command_buffer) (arg_depth_clamp_enable);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_depth_clamp_enable));
+  ()
 
 let cmd_set_polygon_mode_ext arg_command_buffer arg_polygon_mode =
-  Vk_fn.cmd_set_polygon_mode_ext (arg_command_buffer) (arg_polygon_mode)
+  Vk_fn.cmd_set_polygon_mode_ext (arg_command_buffer) (arg_polygon_mode);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_polygon_mode));
+  ()
 
 let cmd_set_rasterization_samples_ext arg_command_buffer arg_rasterization_samples =
-  Vk_fn.cmd_set_rasterization_samples_ext (arg_command_buffer) (arg_rasterization_samples)
+  Vk_fn.cmd_set_rasterization_samples_ext (arg_command_buffer) (arg_rasterization_samples);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_rasterization_samples));
+  ()
 
 let cmd_set_sample_mask_ext arg_command_buffer arg_samples arg_sample_mask =
-  Vk_fn.cmd_set_sample_mask_ext (arg_command_buffer) (arg_samples) (arg_sample_mask)
+  Vk_fn.cmd_set_sample_mask_ext (arg_command_buffer) (arg_samples) (arg_sample_mask);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_samples, arg_sample_mask));
+  ()
 
 let cmd_set_alpha_to_coverage_enable_ext arg_command_buffer arg_alpha_to_coverage_enable =
-  Vk_fn.cmd_set_alpha_to_coverage_enable_ext (arg_command_buffer) (arg_alpha_to_coverage_enable)
+  Vk_fn.cmd_set_alpha_to_coverage_enable_ext (arg_command_buffer) (arg_alpha_to_coverage_enable);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_alpha_to_coverage_enable));
+  ()
 
 let cmd_set_alpha_to_one_enable_ext arg_command_buffer arg_alpha_to_one_enable =
-  Vk_fn.cmd_set_alpha_to_one_enable_ext (arg_command_buffer) (arg_alpha_to_one_enable)
+  Vk_fn.cmd_set_alpha_to_one_enable_ext (arg_command_buffer) (arg_alpha_to_one_enable);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_alpha_to_one_enable));
+  ()
 
 let cmd_set_logic_op_enable_ext arg_command_buffer arg_logic_op_enable =
-  Vk_fn.cmd_set_logic_op_enable_ext (arg_command_buffer) (arg_logic_op_enable)
+  Vk_fn.cmd_set_logic_op_enable_ext (arg_command_buffer) (arg_logic_op_enable);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_logic_op_enable));
+  ()
 
 let cmd_set_color_blend_enable_ext arg_command_buffer arg_first_attachment arg_color_blend_enables =
   let array_color_blend_enables = CArray.of_list (Vk_base.bool32) arg_color_blend_enables in
   let pointer_color_blend_enables = if arg_color_blend_enables = [] then Vk_base.null_ptr (Vk_base.bool32) else CArray.start array_color_blend_enables in
-  Vk_fn.cmd_set_color_blend_enable_ext (arg_command_buffer) (arg_first_attachment) (List.length arg_color_blend_enables) (pointer_color_blend_enables)
+  Vk_fn.cmd_set_color_blend_enable_ext (arg_command_buffer) (arg_first_attachment) (List.length arg_color_blend_enables) (pointer_color_blend_enables);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_first_attachment, arg_color_blend_enables, array_color_blend_enables));
+  ()
 
 let cmd_set_color_blend_equation_ext arg_command_buffer arg_first_attachment arg_color_blend_equations =
   let array_color_blend_equations = CArray.of_list (ColorBlendEquationEXT.t) arg_color_blend_equations in
   let pointer_color_blend_equations = if arg_color_blend_equations = [] then Vk_base.null_ptr (ColorBlendEquationEXT.t) else CArray.start array_color_blend_equations in
-  Vk_fn.cmd_set_color_blend_equation_ext (arg_command_buffer) (arg_first_attachment) (List.length arg_color_blend_equations) (pointer_color_blend_equations)
+  Vk_fn.cmd_set_color_blend_equation_ext (arg_command_buffer) (arg_first_attachment) (List.length arg_color_blend_equations) (pointer_color_blend_equations);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_first_attachment, arg_color_blend_equations, array_color_blend_equations));
+  ()
 
 let cmd_set_color_write_mask_ext arg_command_buffer arg_first_attachment arg_color_write_masks =
   let array_color_write_masks = CArray.of_list (ColorComponentFlags.t) arg_color_write_masks in
   let pointer_color_write_masks = if arg_color_write_masks = [] then Vk_base.null_ptr (ColorComponentFlags.t) else CArray.start array_color_write_masks in
-  Vk_fn.cmd_set_color_write_mask_ext (arg_command_buffer) (arg_first_attachment) (List.length arg_color_write_masks) (pointer_color_write_masks)
+  Vk_fn.cmd_set_color_write_mask_ext (arg_command_buffer) (arg_first_attachment) (List.length arg_color_write_masks) (pointer_color_write_masks);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_first_attachment, arg_color_write_masks, array_color_write_masks));
+  ()
 
 let cmd_set_rasterization_stream_ext arg_command_buffer arg_rasterization_stream =
-  Vk_fn.cmd_set_rasterization_stream_ext (arg_command_buffer) (arg_rasterization_stream)
+  Vk_fn.cmd_set_rasterization_stream_ext (arg_command_buffer) (arg_rasterization_stream);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_rasterization_stream));
+  ()
 
 let cmd_set_conservative_rasterization_mode_ext arg_command_buffer arg_conservative_rasterization_mode =
-  Vk_fn.cmd_set_conservative_rasterization_mode_ext (arg_command_buffer) (arg_conservative_rasterization_mode)
+  Vk_fn.cmd_set_conservative_rasterization_mode_ext (arg_command_buffer) (arg_conservative_rasterization_mode);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_conservative_rasterization_mode));
+  ()
 
 let cmd_set_extra_primitive_overestimation_size_ext arg_command_buffer arg_extra_primitive_overestimation_size =
-  Vk_fn.cmd_set_extra_primitive_overestimation_size_ext (arg_command_buffer) (arg_extra_primitive_overestimation_size)
+  Vk_fn.cmd_set_extra_primitive_overestimation_size_ext (arg_command_buffer) (arg_extra_primitive_overestimation_size);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_extra_primitive_overestimation_size));
+  ()
 
 let cmd_set_depth_clip_enable_ext arg_command_buffer arg_depth_clip_enable =
-  Vk_fn.cmd_set_depth_clip_enable_ext (arg_command_buffer) (arg_depth_clip_enable)
+  Vk_fn.cmd_set_depth_clip_enable_ext (arg_command_buffer) (arg_depth_clip_enable);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_depth_clip_enable));
+  ()
 
 let cmd_set_sample_locations_enable_ext arg_command_buffer arg_sample_locations_enable =
-  Vk_fn.cmd_set_sample_locations_enable_ext (arg_command_buffer) (arg_sample_locations_enable)
+  Vk_fn.cmd_set_sample_locations_enable_ext (arg_command_buffer) (arg_sample_locations_enable);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_sample_locations_enable));
+  ()
 
 let cmd_set_color_blend_advanced_ext arg_command_buffer arg_first_attachment arg_color_blend_advanced =
   let array_color_blend_advanced = CArray.of_list (ColorBlendAdvancedEXT.t) arg_color_blend_advanced in
   let pointer_color_blend_advanced = if arg_color_blend_advanced = [] then Vk_base.null_ptr (ColorBlendAdvancedEXT.t) else CArray.start array_color_blend_advanced in
-  Vk_fn.cmd_set_color_blend_advanced_ext (arg_command_buffer) (arg_first_attachment) (List.length arg_color_blend_advanced) (pointer_color_blend_advanced)
+  Vk_fn.cmd_set_color_blend_advanced_ext (arg_command_buffer) (arg_first_attachment) (List.length arg_color_blend_advanced) (pointer_color_blend_advanced);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_first_attachment, arg_color_blend_advanced, array_color_blend_advanced));
+  ()
 
 let cmd_set_provoking_vertex_mode_ext arg_command_buffer arg_provoking_vertex_mode =
-  Vk_fn.cmd_set_provoking_vertex_mode_ext (arg_command_buffer) (arg_provoking_vertex_mode)
+  Vk_fn.cmd_set_provoking_vertex_mode_ext (arg_command_buffer) (arg_provoking_vertex_mode);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_provoking_vertex_mode));
+  ()
 
 let cmd_set_line_rasterization_mode_ext arg_command_buffer arg_line_rasterization_mode =
-  Vk_fn.cmd_set_line_rasterization_mode_ext (arg_command_buffer) (arg_line_rasterization_mode)
+  Vk_fn.cmd_set_line_rasterization_mode_ext (arg_command_buffer) (arg_line_rasterization_mode);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_line_rasterization_mode));
+  ()
 
 let cmd_set_line_stipple_enable_ext arg_command_buffer arg_stippled_line_enable =
-  Vk_fn.cmd_set_line_stipple_enable_ext (arg_command_buffer) (arg_stippled_line_enable)
+  Vk_fn.cmd_set_line_stipple_enable_ext (arg_command_buffer) (arg_stippled_line_enable);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_stippled_line_enable));
+  ()
 
 let cmd_set_depth_clip_negative_one_to_one_ext arg_command_buffer arg_negative_one_to_one =
-  Vk_fn.cmd_set_depth_clip_negative_one_to_one_ext (arg_command_buffer) (arg_negative_one_to_one)
+  Vk_fn.cmd_set_depth_clip_negative_one_to_one_ext (arg_command_buffer) (arg_negative_one_to_one);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_negative_one_to_one));
+  ()
 
 let cmd_set_viewport_w_scaling_enable_nv arg_command_buffer arg_viewport_w_scaling_enable =
-  Vk_fn.cmd_set_viewport_w_scaling_enable_nv (arg_command_buffer) (arg_viewport_w_scaling_enable)
+  Vk_fn.cmd_set_viewport_w_scaling_enable_nv (arg_command_buffer) (arg_viewport_w_scaling_enable);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_viewport_w_scaling_enable));
+  ()
 
 let cmd_set_viewport_swizzle_nv arg_command_buffer arg_first_viewport arg_viewport_swizzles =
   let array_viewport_swizzles = CArray.of_list (ViewportSwizzleNV.t) arg_viewport_swizzles in
   let pointer_viewport_swizzles = if arg_viewport_swizzles = [] then Vk_base.null_ptr (ViewportSwizzleNV.t) else CArray.start array_viewport_swizzles in
-  Vk_fn.cmd_set_viewport_swizzle_nv (arg_command_buffer) (arg_first_viewport) (List.length arg_viewport_swizzles) (pointer_viewport_swizzles)
+  Vk_fn.cmd_set_viewport_swizzle_nv (arg_command_buffer) (arg_first_viewport) (List.length arg_viewport_swizzles) (pointer_viewport_swizzles);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_first_viewport, arg_viewport_swizzles, array_viewport_swizzles));
+  ()
 
 let cmd_set_coverage_to_color_enable_nv arg_command_buffer arg_coverage_to_color_enable =
-  Vk_fn.cmd_set_coverage_to_color_enable_nv (arg_command_buffer) (arg_coverage_to_color_enable)
+  Vk_fn.cmd_set_coverage_to_color_enable_nv (arg_command_buffer) (arg_coverage_to_color_enable);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_coverage_to_color_enable));
+  ()
 
 let cmd_set_coverage_to_color_location_nv arg_command_buffer arg_coverage_to_color_location =
-  Vk_fn.cmd_set_coverage_to_color_location_nv (arg_command_buffer) (arg_coverage_to_color_location)
+  Vk_fn.cmd_set_coverage_to_color_location_nv (arg_command_buffer) (arg_coverage_to_color_location);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_coverage_to_color_location));
+  ()
 
 let cmd_set_coverage_modulation_mode_nv arg_command_buffer arg_coverage_modulation_mode =
-  Vk_fn.cmd_set_coverage_modulation_mode_nv (arg_command_buffer) (arg_coverage_modulation_mode)
+  Vk_fn.cmd_set_coverage_modulation_mode_nv (arg_command_buffer) (arg_coverage_modulation_mode);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_coverage_modulation_mode));
+  ()
 
 let cmd_set_coverage_modulation_table_enable_nv arg_command_buffer arg_coverage_modulation_table_enable =
-  Vk_fn.cmd_set_coverage_modulation_table_enable_nv (arg_command_buffer) (arg_coverage_modulation_table_enable)
+  Vk_fn.cmd_set_coverage_modulation_table_enable_nv (arg_command_buffer) (arg_coverage_modulation_table_enable);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_coverage_modulation_table_enable));
+  ()
 
 let cmd_set_coverage_modulation_table_nv arg_command_buffer arg_coverage_modulation_table =
   let array_coverage_modulation_table = CArray.of_list (Ctypes.float) arg_coverage_modulation_table in
   let pointer_coverage_modulation_table = if arg_coverage_modulation_table = [] then Vk_base.null_ptr (Ctypes.float) else CArray.start array_coverage_modulation_table in
-  Vk_fn.cmd_set_coverage_modulation_table_nv (arg_command_buffer) (List.length arg_coverage_modulation_table) (pointer_coverage_modulation_table)
+  Vk_fn.cmd_set_coverage_modulation_table_nv (arg_command_buffer) (List.length arg_coverage_modulation_table) (pointer_coverage_modulation_table);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_coverage_modulation_table, array_coverage_modulation_table));
+  ()
 
 let cmd_set_shading_rate_image_enable_nv arg_command_buffer arg_shading_rate_image_enable =
-  Vk_fn.cmd_set_shading_rate_image_enable_nv (arg_command_buffer) (arg_shading_rate_image_enable)
+  Vk_fn.cmd_set_shading_rate_image_enable_nv (arg_command_buffer) (arg_shading_rate_image_enable);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_shading_rate_image_enable));
+  ()
 
 let cmd_set_coverage_reduction_mode_nv arg_command_buffer arg_coverage_reduction_mode =
-  Vk_fn.cmd_set_coverage_reduction_mode_nv (arg_command_buffer) (arg_coverage_reduction_mode)
+  Vk_fn.cmd_set_coverage_reduction_mode_nv (arg_command_buffer) (arg_coverage_reduction_mode);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_coverage_reduction_mode));
+  ()
 
 let cmd_set_representative_fragment_test_enable_nv arg_command_buffer arg_representative_fragment_test_enable =
-  Vk_fn.cmd_set_representative_fragment_test_enable_nv (arg_command_buffer) (arg_representative_fragment_test_enable)
+  Vk_fn.cmd_set_representative_fragment_test_enable_nv (arg_command_buffer) (arg_representative_fragment_test_enable);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_representative_fragment_test_enable));
+  ()
 
 let create_private_data_slot ?allocator:arg_allocator arg_device arg_create_info =
   let output = allocate (PrivateDataSlot.t) (PrivateDataSlot.null) in
   let result = Vk_fn.create_private_data_slot (arg_device) (addr arg_create_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
+  ignore (Sys.opaque_identity (arg_device, arg_create_info, arg_allocator));
   check result;
   !@ output
 
 let destroy_private_data_slot arg_device arg_private_data_slot ?allocator:arg_allocator () =
-  Vk_fn.destroy_private_data_slot (arg_device) (arg_private_data_slot) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x))
+  Vk_fn.destroy_private_data_slot (arg_device) (arg_private_data_slot) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x));
+  ignore (Sys.opaque_identity (arg_device, arg_private_data_slot, arg_allocator));
+  ()
 
 let set_private_data arg_device arg_object_type arg_object_handle arg_private_data_slot arg_data =
   let result = Vk_fn.set_private_data (arg_device) (arg_object_type) (arg_object_handle) (arg_private_data_slot) (arg_data) in
+  ignore (Sys.opaque_identity (arg_device, arg_object_type, arg_object_handle, arg_private_data_slot, arg_data));
   check result;
   ()
 
 let get_private_data arg_device arg_object_type arg_object_handle arg_private_data_slot =
   let output = allocate (Vk_base.uint64) (0) in
   Vk_fn.get_private_data (arg_device) (arg_object_type) (arg_object_handle) (arg_private_data_slot) (output);
+  ignore (Sys.opaque_identity (arg_device, arg_object_type, arg_object_handle, arg_private_data_slot));
   !@ output
 
 let cmd_copy_buffer_2 arg_command_buffer arg_copy_buffer_info =
-  Vk_fn.cmd_copy_buffer_2 (arg_command_buffer) (addr arg_copy_buffer_info)
+  Vk_fn.cmd_copy_buffer_2 (arg_command_buffer) (addr arg_copy_buffer_info);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_copy_buffer_info));
+  ()
 
 let cmd_copy_image_2 arg_command_buffer arg_copy_image_info =
-  Vk_fn.cmd_copy_image_2 (arg_command_buffer) (addr arg_copy_image_info)
+  Vk_fn.cmd_copy_image_2 (arg_command_buffer) (addr arg_copy_image_info);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_copy_image_info));
+  ()
 
 let cmd_blit_image_2 arg_command_buffer arg_blit_image_info =
-  Vk_fn.cmd_blit_image_2 (arg_command_buffer) (addr arg_blit_image_info)
+  Vk_fn.cmd_blit_image_2 (arg_command_buffer) (addr arg_blit_image_info);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_blit_image_info));
+  ()
 
 let cmd_copy_buffer_to_image_2 arg_command_buffer arg_copy_buffer_to_image_info =
-  Vk_fn.cmd_copy_buffer_to_image_2 (arg_command_buffer) (addr arg_copy_buffer_to_image_info)
+  Vk_fn.cmd_copy_buffer_to_image_2 (arg_command_buffer) (addr arg_copy_buffer_to_image_info);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_copy_buffer_to_image_info));
+  ()
 
 let cmd_copy_image_to_buffer_2 arg_command_buffer arg_copy_image_to_buffer_info =
-  Vk_fn.cmd_copy_image_to_buffer_2 (arg_command_buffer) (addr arg_copy_image_to_buffer_info)
+  Vk_fn.cmd_copy_image_to_buffer_2 (arg_command_buffer) (addr arg_copy_image_to_buffer_info);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_copy_image_to_buffer_info));
+  ()
 
 let cmd_resolve_image_2 arg_command_buffer arg_resolve_image_info =
-  Vk_fn.cmd_resolve_image_2 (arg_command_buffer) (addr arg_resolve_image_info)
+  Vk_fn.cmd_resolve_image_2 (arg_command_buffer) (addr arg_resolve_image_info);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_resolve_image_info));
+  ()
 
 let cmd_refresh_objects_khr arg_command_buffer arg_refresh_objects =
-  Vk_fn.cmd_refresh_objects_khr (arg_command_buffer) (addr arg_refresh_objects)
+  Vk_fn.cmd_refresh_objects_khr (arg_command_buffer) (addr arg_refresh_objects);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_refresh_objects));
+  ()
 
 let get_physical_device_refreshable_object_types_khr arg_physical_device =
   let count = allocate Vk_base.uint32 0 in
@@ -2715,10 +3528,14 @@ let get_physical_device_refreshable_object_types_khr arg_physical_device =
       CArray.to_list (CArray.from_ptr (CArray.start storage) (!@ count))
     end
   in
-  fetch ()
+  let enumeration_result = fetch () in
+  ignore (Sys.opaque_identity (arg_physical_device));
+  enumeration_result
 
 let cmd_set_fragment_shading_rate_khr arg_command_buffer arg_fragment_size arg_combiner_ops =
-  Vk_fn.cmd_set_fragment_shading_rate_khr (arg_command_buffer) (addr arg_fragment_size) (arg_combiner_ops)
+  Vk_fn.cmd_set_fragment_shading_rate_khr (arg_command_buffer) (addr arg_fragment_size) (arg_combiner_ops);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_fragment_size, arg_combiner_ops));
+  ()
 
 let get_physical_device_fragment_shading_rates_khr arg_physical_device =
   let count = allocate Vk_base.uint32 0 in
@@ -2734,31 +3551,45 @@ let get_physical_device_fragment_shading_rates_khr arg_physical_device =
       CArray.to_list (CArray.from_ptr (CArray.start storage) (!@ count))
     end
   in
-  fetch ()
+  let enumeration_result = fetch () in
+  ignore (Sys.opaque_identity (arg_physical_device));
+  enumeration_result
 
 let cmd_set_fragment_shading_rate_enum_nv arg_command_buffer arg_shading_rate arg_combiner_ops =
-  Vk_fn.cmd_set_fragment_shading_rate_enum_nv (arg_command_buffer) (arg_shading_rate) (arg_combiner_ops)
+  Vk_fn.cmd_set_fragment_shading_rate_enum_nv (arg_command_buffer) (arg_shading_rate) (arg_combiner_ops);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_shading_rate, arg_combiner_ops));
+  ()
 
 let get_acceleration_structure_build_sizes_khr arg_device arg_build_type arg_build_info arg_max_primitive_counts arg_size_info =
-  Vk_fn.get_acceleration_structure_build_sizes_khr (arg_device) (arg_build_type) (addr arg_build_info) (arg_max_primitive_counts) (addr arg_size_info)
+  Vk_fn.get_acceleration_structure_build_sizes_khr (arg_device) (arg_build_type) (addr arg_build_info) (arg_max_primitive_counts) (addr arg_size_info);
+  ignore (Sys.opaque_identity (arg_device, arg_build_type, arg_build_info, arg_max_primitive_counts, arg_size_info));
+  ()
 
 let cmd_set_vertex_input_ext arg_command_buffer arg_vertex_binding_descriptions arg_vertex_attribute_descriptions =
   let array_vertex_binding_descriptions = CArray.of_list (VertexInputBindingDescription2EXT.t) arg_vertex_binding_descriptions in
   let pointer_vertex_binding_descriptions = if arg_vertex_binding_descriptions = [] then Vk_base.null_ptr (VertexInputBindingDescription2EXT.t) else CArray.start array_vertex_binding_descriptions in
   let array_vertex_attribute_descriptions = CArray.of_list (VertexInputAttributeDescription2EXT.t) arg_vertex_attribute_descriptions in
   let pointer_vertex_attribute_descriptions = if arg_vertex_attribute_descriptions = [] then Vk_base.null_ptr (VertexInputAttributeDescription2EXT.t) else CArray.start array_vertex_attribute_descriptions in
-  Vk_fn.cmd_set_vertex_input_ext (arg_command_buffer) (List.length arg_vertex_binding_descriptions) (pointer_vertex_binding_descriptions) (List.length arg_vertex_attribute_descriptions) (pointer_vertex_attribute_descriptions)
+  Vk_fn.cmd_set_vertex_input_ext (arg_command_buffer) (List.length arg_vertex_binding_descriptions) (pointer_vertex_binding_descriptions) (List.length arg_vertex_attribute_descriptions) (pointer_vertex_attribute_descriptions);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_vertex_binding_descriptions, array_vertex_binding_descriptions, arg_vertex_attribute_descriptions, array_vertex_attribute_descriptions));
+  ()
 
 let cmd_set_color_write_enable_ext arg_command_buffer arg_color_write_enables =
   let array_color_write_enables = CArray.of_list (Vk_base.bool32) arg_color_write_enables in
   let pointer_color_write_enables = if arg_color_write_enables = [] then Vk_base.null_ptr (Vk_base.bool32) else CArray.start array_color_write_enables in
-  Vk_fn.cmd_set_color_write_enable_ext (arg_command_buffer) (List.length arg_color_write_enables) (pointer_color_write_enables)
+  Vk_fn.cmd_set_color_write_enable_ext (arg_command_buffer) (List.length arg_color_write_enables) (pointer_color_write_enables);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_color_write_enables, array_color_write_enables));
+  ()
 
 let cmd_set_event_2 arg_command_buffer arg_event arg_dependency_info =
-  Vk_fn.cmd_set_event_2 (arg_command_buffer) (arg_event) (addr arg_dependency_info)
+  Vk_fn.cmd_set_event_2 (arg_command_buffer) (arg_event) (addr arg_dependency_info);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_event, arg_dependency_info));
+  ()
 
 let cmd_reset_event_2 arg_command_buffer arg_event arg_stage_mask =
-  Vk_fn.cmd_reset_event_2 (arg_command_buffer) (arg_event) (arg_stage_mask)
+  Vk_fn.cmd_reset_event_2 (arg_command_buffer) (arg_event) (arg_stage_mask);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_event, arg_stage_mask));
+  ()
 
 let cmd_wait_events_2 arg_command_buffer arg_events arg_dependency_infos =
   let array_events = CArray.of_list (Event.t) arg_events in
@@ -2766,23 +3597,32 @@ let cmd_wait_events_2 arg_command_buffer arg_events arg_dependency_infos =
   if List.length arg_dependency_infos <> List.length arg_events then invalid_arg "vkCmdWaitEvents2: array lengths differ";
   let array_dependency_infos = CArray.of_list (DependencyInfo.t) arg_dependency_infos in
   let pointer_dependency_infos = if arg_dependency_infos = [] then Vk_base.null_ptr (DependencyInfo.t) else CArray.start array_dependency_infos in
-  Vk_fn.cmd_wait_events_2 (arg_command_buffer) (List.length arg_events) (pointer_events) (pointer_dependency_infos)
+  Vk_fn.cmd_wait_events_2 (arg_command_buffer) (List.length arg_events) (pointer_events) (pointer_dependency_infos);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_events, array_events, arg_dependency_infos, array_dependency_infos));
+  ()
 
 let cmd_pipeline_barrier_2 arg_command_buffer arg_dependency_info =
-  Vk_fn.cmd_pipeline_barrier_2 (arg_command_buffer) (addr arg_dependency_info)
+  Vk_fn.cmd_pipeline_barrier_2 (arg_command_buffer) (addr arg_dependency_info);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_dependency_info));
+  ()
 
 let queue_submit_2 arg_queue arg_submits arg_fence =
   let array_submits = CArray.of_list (SubmitInfo2.t) arg_submits in
   let pointer_submits = if arg_submits = [] then Vk_base.null_ptr (SubmitInfo2.t) else CArray.start array_submits in
   let result = Vk_fn.queue_submit_2 (arg_queue) (List.length arg_submits) (pointer_submits) (arg_fence) in
+  ignore (Sys.opaque_identity (arg_queue, arg_submits, array_submits, arg_fence));
   check result;
   ()
 
 let cmd_write_timestamp_2 arg_command_buffer arg_stage arg_query_pool arg_query =
-  Vk_fn.cmd_write_timestamp_2 (arg_command_buffer) (arg_stage) (arg_query_pool) (arg_query)
+  Vk_fn.cmd_write_timestamp_2 (arg_command_buffer) (arg_stage) (arg_query_pool) (arg_query);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_stage, arg_query_pool, arg_query));
+  ()
 
 let cmd_write_buffer_marker_2_amd arg_command_buffer arg_stage arg_dst_buffer arg_dst_offset arg_marker =
-  Vk_fn.cmd_write_buffer_marker_2_amd (arg_command_buffer) (arg_stage) (arg_dst_buffer) (arg_dst_offset) (arg_marker)
+  Vk_fn.cmd_write_buffer_marker_2_amd (arg_command_buffer) (arg_stage) (arg_dst_buffer) (arg_dst_offset) (arg_marker);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_stage, arg_dst_buffer, arg_dst_offset, arg_marker));
+  ()
 
 let get_queue_checkpoint_data_2_nv arg_queue =
   let count = allocate Vk_base.uint32 0 in
@@ -2794,20 +3634,25 @@ let get_queue_checkpoint_data_2_nv arg_queue =
     Vk_fn.get_queue_checkpoint_data_2_nv (arg_queue) (count) (CArray.start storage);
     CArray.to_list (CArray.from_ptr (CArray.start storage) (!@ count))
   in
-  fetch ()
+  let enumeration_result = fetch () in
+  ignore (Sys.opaque_identity (arg_queue));
+  enumeration_result
 
 let copy_memory_to_image arg_device arg_copy_memory_to_image_info =
   let result = Vk_fn.copy_memory_to_image (arg_device) (addr arg_copy_memory_to_image_info) in
+  ignore (Sys.opaque_identity (arg_device, arg_copy_memory_to_image_info));
   check result;
   ()
 
 let copy_image_to_memory arg_device arg_copy_image_to_memory_info =
   let result = Vk_fn.copy_image_to_memory (arg_device) (addr arg_copy_image_to_memory_info) in
+  ignore (Sys.opaque_identity (arg_device, arg_copy_image_to_memory_info));
   check result;
   ()
 
 let copy_image_to_image arg_device arg_copy_image_to_image_info =
   let result = Vk_fn.copy_image_to_image (arg_device) (addr arg_copy_image_to_image_info) in
+  ignore (Sys.opaque_identity (arg_device, arg_copy_image_to_image_info));
   check result;
   ()
 
@@ -2815,14 +3660,18 @@ let transition_image_layout arg_device arg_transitions =
   let array_transitions = CArray.of_list (HostImageLayoutTransitionInfo.t) arg_transitions in
   let pointer_transitions = if arg_transitions = [] then Vk_base.null_ptr (HostImageLayoutTransitionInfo.t) else CArray.start array_transitions in
   let result = Vk_fn.transition_image_layout (arg_device) (List.length arg_transitions) (pointer_transitions) in
+  ignore (Sys.opaque_identity (arg_device, arg_transitions, array_transitions));
   check result;
   ()
 
 let get_command_pool_memory_consumption arg_device arg_command_pool arg_command_buffer arg_consumption =
-  Vk_fn.get_command_pool_memory_consumption (arg_device) (arg_command_pool) (arg_command_buffer) (addr arg_consumption)
+  Vk_fn.get_command_pool_memory_consumption (arg_device) (arg_command_pool) (arg_command_buffer) (addr arg_consumption);
+  ignore (Sys.opaque_identity (arg_device, arg_command_pool, arg_command_buffer, arg_consumption));
+  ()
 
 let get_physical_device_video_capabilities_khr arg_physical_device arg_video_profile arg_capabilities =
   let result = Vk_fn.get_physical_device_video_capabilities_khr (arg_physical_device) (addr arg_video_profile) (addr arg_capabilities) in
+  ignore (Sys.opaque_identity (arg_physical_device, arg_video_profile, arg_capabilities));
   check result;
   ()
 
@@ -2840,40 +3689,51 @@ let get_physical_device_video_format_properties_khr arg_physical_device arg_vide
       CArray.to_list (CArray.from_ptr (CArray.start storage) (!@ count))
     end
   in
-  fetch ()
+  let enumeration_result = fetch () in
+  ignore (Sys.opaque_identity (arg_physical_device, arg_video_format_info));
+  enumeration_result
 
 let get_physical_device_video_encode_quality_level_properties_khr arg_physical_device arg_quality_level_info arg_quality_level_properties =
   let result = Vk_fn.get_physical_device_video_encode_quality_level_properties_khr (arg_physical_device) (addr arg_quality_level_info) (addr arg_quality_level_properties) in
+  ignore (Sys.opaque_identity (arg_physical_device, arg_quality_level_info, arg_quality_level_properties));
   check result;
   ()
 
 let create_video_session_khr ?allocator:arg_allocator arg_device arg_create_info =
   let output = allocate (VideoSessionKHR.t) (VideoSessionKHR.null) in
   let result = Vk_fn.create_video_session_khr (arg_device) (addr arg_create_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
+  ignore (Sys.opaque_identity (arg_device, arg_create_info, arg_allocator));
   check result;
   !@ output
 
 let destroy_video_session_khr arg_device arg_video_session ?allocator:arg_allocator () =
-  Vk_fn.destroy_video_session_khr (arg_device) (arg_video_session) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x))
+  Vk_fn.destroy_video_session_khr (arg_device) (arg_video_session) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x));
+  ignore (Sys.opaque_identity (arg_device, arg_video_session, arg_allocator));
+  ()
 
 let create_video_session_parameters_khr ?allocator:arg_allocator arg_device arg_create_info =
   let output = allocate (VideoSessionParametersKHR.t) (VideoSessionParametersKHR.null) in
   let result = Vk_fn.create_video_session_parameters_khr (arg_device) (addr arg_create_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
+  ignore (Sys.opaque_identity (arg_device, arg_create_info, arg_allocator));
   check result;
   !@ output
 
 let update_video_session_parameters_khr arg_device arg_video_session_parameters arg_update_info =
   let result = Vk_fn.update_video_session_parameters_khr (arg_device) (arg_video_session_parameters) (addr arg_update_info) in
+  ignore (Sys.opaque_identity (arg_device, arg_video_session_parameters, arg_update_info));
   check result;
   ()
 
 let get_encoded_video_session_parameters_khr arg_device arg_video_session_parameters_info arg_feedback_info arg_data_size arg_data =
   let result = Vk_fn.get_encoded_video_session_parameters_khr (arg_device) (addr arg_video_session_parameters_info) (addr arg_feedback_info) (arg_data_size) (arg_data) in
+  ignore (Sys.opaque_identity (arg_device, arg_video_session_parameters_info, arg_feedback_info, arg_data_size, arg_data));
   check result;
   ()
 
 let destroy_video_session_parameters_khr arg_device arg_video_session_parameters ?allocator:arg_allocator () =
-  Vk_fn.destroy_video_session_parameters_khr (arg_device) (arg_video_session_parameters) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x))
+  Vk_fn.destroy_video_session_parameters_khr (arg_device) (arg_video_session_parameters) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x));
+  ignore (Sys.opaque_identity (arg_device, arg_video_session_parameters, arg_allocator));
+  ()
 
 let get_video_session_memory_requirements_khr arg_device arg_video_session =
   let count = allocate Vk_base.uint32 0 in
@@ -2889,88 +3749,127 @@ let get_video_session_memory_requirements_khr arg_device arg_video_session =
       CArray.to_list (CArray.from_ptr (CArray.start storage) (!@ count))
     end
   in
-  fetch ()
+  let enumeration_result = fetch () in
+  ignore (Sys.opaque_identity (arg_device, arg_video_session));
+  enumeration_result
 
 let bind_video_session_memory_khr arg_device arg_video_session arg_bind_session_memory_infos =
   let array_bind_session_memory_infos = CArray.of_list (BindVideoSessionMemoryInfoKHR.t) arg_bind_session_memory_infos in
   let pointer_bind_session_memory_infos = if arg_bind_session_memory_infos = [] then Vk_base.null_ptr (BindVideoSessionMemoryInfoKHR.t) else CArray.start array_bind_session_memory_infos in
   let result = Vk_fn.bind_video_session_memory_khr (arg_device) (arg_video_session) (List.length arg_bind_session_memory_infos) (pointer_bind_session_memory_infos) in
+  ignore (Sys.opaque_identity (arg_device, arg_video_session, arg_bind_session_memory_infos, array_bind_session_memory_infos));
   check result;
   ()
 
 let cmd_decode_video_khr arg_command_buffer arg_decode_info =
-  Vk_fn.cmd_decode_video_khr (arg_command_buffer) (addr arg_decode_info)
+  Vk_fn.cmd_decode_video_khr (arg_command_buffer) (addr arg_decode_info);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_decode_info));
+  ()
 
 let cmd_begin_video_coding_khr arg_command_buffer arg_begin_info =
-  Vk_fn.cmd_begin_video_coding_khr (arg_command_buffer) (addr arg_begin_info)
+  Vk_fn.cmd_begin_video_coding_khr (arg_command_buffer) (addr arg_begin_info);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_begin_info));
+  ()
 
 let cmd_control_video_coding_khr arg_command_buffer arg_coding_control_info =
-  Vk_fn.cmd_control_video_coding_khr (arg_command_buffer) (addr arg_coding_control_info)
+  Vk_fn.cmd_control_video_coding_khr (arg_command_buffer) (addr arg_coding_control_info);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_coding_control_info));
+  ()
 
 let cmd_end_video_coding_khr arg_command_buffer arg_end_coding_info =
-  Vk_fn.cmd_end_video_coding_khr (arg_command_buffer) (addr arg_end_coding_info)
+  Vk_fn.cmd_end_video_coding_khr (arg_command_buffer) (addr arg_end_coding_info);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_end_coding_info));
+  ()
 
 let cmd_encode_video_khr arg_command_buffer arg_encode_info =
-  Vk_fn.cmd_encode_video_khr (arg_command_buffer) (addr arg_encode_info)
+  Vk_fn.cmd_encode_video_khr (arg_command_buffer) (addr arg_encode_info);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_encode_info));
+  ()
 
 let cmd_decompress_memory_nv arg_command_buffer arg_decompress_memory_regions =
   let array_decompress_memory_regions = CArray.of_list (DecompressMemoryRegionNV.t) arg_decompress_memory_regions in
   let pointer_decompress_memory_regions = if arg_decompress_memory_regions = [] then Vk_base.null_ptr (DecompressMemoryRegionNV.t) else CArray.start array_decompress_memory_regions in
-  Vk_fn.cmd_decompress_memory_nv (arg_command_buffer) (List.length arg_decompress_memory_regions) (pointer_decompress_memory_regions)
+  Vk_fn.cmd_decompress_memory_nv (arg_command_buffer) (List.length arg_decompress_memory_regions) (pointer_decompress_memory_regions);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_decompress_memory_regions, array_decompress_memory_regions));
+  ()
 
 let cmd_decompress_memory_indirect_count_nv arg_command_buffer arg_indirect_commands_address arg_indirect_commands_count_address arg_stride =
-  Vk_fn.cmd_decompress_memory_indirect_count_nv (arg_command_buffer) (arg_indirect_commands_address) (arg_indirect_commands_count_address) (arg_stride)
+  Vk_fn.cmd_decompress_memory_indirect_count_nv (arg_command_buffer) (arg_indirect_commands_address) (arg_indirect_commands_count_address) (arg_stride);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_indirect_commands_address, arg_indirect_commands_count_address, arg_stride));
+  ()
 
 let get_partitioned_acceleration_structures_build_sizes_nv arg_device arg_info arg_size_info =
-  Vk_fn.get_partitioned_acceleration_structures_build_sizes_nv (arg_device) (addr arg_info) (addr arg_size_info)
+  Vk_fn.get_partitioned_acceleration_structures_build_sizes_nv (arg_device) (addr arg_info) (addr arg_size_info);
+  ignore (Sys.opaque_identity (arg_device, arg_info, arg_size_info));
+  ()
 
 let cmd_build_partitioned_acceleration_structures_nv arg_command_buffer arg_build_info =
-  Vk_fn.cmd_build_partitioned_acceleration_structures_nv (arg_command_buffer) (addr arg_build_info)
+  Vk_fn.cmd_build_partitioned_acceleration_structures_nv (arg_command_buffer) (addr arg_build_info);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_build_info));
+  ()
 
 let cmd_decompress_memory_ext arg_command_buffer arg_decompress_memory_info_ext =
-  Vk_fn.cmd_decompress_memory_ext (arg_command_buffer) (addr arg_decompress_memory_info_ext)
+  Vk_fn.cmd_decompress_memory_ext (arg_command_buffer) (addr arg_decompress_memory_info_ext);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_decompress_memory_info_ext));
+  ()
 
 let cmd_decompress_memory_indirect_count_ext arg_command_buffer arg_decompression_method arg_indirect_commands_address arg_indirect_commands_count_address arg_max_decompression_count arg_stride =
-  Vk_fn.cmd_decompress_memory_indirect_count_ext (arg_command_buffer) (arg_decompression_method) (arg_indirect_commands_address) (arg_indirect_commands_count_address) (arg_max_decompression_count) (arg_stride)
+  Vk_fn.cmd_decompress_memory_indirect_count_ext (arg_command_buffer) (arg_decompression_method) (arg_indirect_commands_address) (arg_indirect_commands_count_address) (arg_max_decompression_count) (arg_stride);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_decompression_method, arg_indirect_commands_address, arg_indirect_commands_count_address, arg_max_decompression_count, arg_stride));
+  ()
 
 let create_cu_module_nvx ?allocator:arg_allocator arg_device arg_create_info =
   let output = allocate (CuModuleNVX.t) (CuModuleNVX.null) in
   let result = Vk_fn.create_cu_module_nvx (arg_device) (addr arg_create_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
+  ignore (Sys.opaque_identity (arg_device, arg_create_info, arg_allocator));
   check result;
   !@ output
 
 let create_cu_function_nvx ?allocator:arg_allocator arg_device arg_create_info =
   let output = allocate (CuFunctionNVX.t) (CuFunctionNVX.null) in
   let result = Vk_fn.create_cu_function_nvx (arg_device) (addr arg_create_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
+  ignore (Sys.opaque_identity (arg_device, arg_create_info, arg_allocator));
   check result;
   !@ output
 
 let destroy_cu_module_nvx arg_device arg_module_ ?allocator:arg_allocator () =
-  Vk_fn.destroy_cu_module_nvx (arg_device) (arg_module_) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x))
+  Vk_fn.destroy_cu_module_nvx (arg_device) (arg_module_) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x));
+  ignore (Sys.opaque_identity (arg_device, arg_module_, arg_allocator));
+  ()
 
 let destroy_cu_function_nvx arg_device arg_function_ ?allocator:arg_allocator () =
-  Vk_fn.destroy_cu_function_nvx (arg_device) (arg_function_) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x))
+  Vk_fn.destroy_cu_function_nvx (arg_device) (arg_function_) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x));
+  ignore (Sys.opaque_identity (arg_device, arg_function_, arg_allocator));
+  ()
 
 let cmd_cu_launch_kernel_nvx arg_command_buffer arg_launch_info =
-  Vk_fn.cmd_cu_launch_kernel_nvx (arg_command_buffer) (addr arg_launch_info)
+  Vk_fn.cmd_cu_launch_kernel_nvx (arg_command_buffer) (addr arg_launch_info);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_launch_info));
+  ()
 
 let get_descriptor_set_layout_size_ext arg_device arg_layout =
   let output = allocate (Vk_base.device_size) (0) in
   Vk_fn.get_descriptor_set_layout_size_ext (arg_device) (arg_layout) (output);
+  ignore (Sys.opaque_identity (arg_device, arg_layout));
   !@ output
 
 let get_descriptor_set_layout_binding_offset_ext arg_device arg_layout arg_binding =
   let output = allocate (Vk_base.device_size) (0) in
   Vk_fn.get_descriptor_set_layout_binding_offset_ext (arg_device) (arg_layout) (arg_binding) (output);
+  ignore (Sys.opaque_identity (arg_device, arg_layout, arg_binding));
   !@ output
 
 let get_descriptor_ext arg_device arg_descriptor_info arg_data_size arg_descriptor =
-  Vk_fn.get_descriptor_ext (arg_device) (addr arg_descriptor_info) (arg_data_size) (arg_descriptor)
+  Vk_fn.get_descriptor_ext (arg_device) (addr arg_descriptor_info) (arg_data_size) (arg_descriptor);
+  ignore (Sys.opaque_identity (arg_device, arg_descriptor_info, arg_data_size, arg_descriptor));
+  ()
 
 let cmd_bind_descriptor_buffers_ext arg_command_buffer arg_binding_infos =
   let array_binding_infos = CArray.of_list (DescriptorBufferBindingInfoEXT.t) arg_binding_infos in
   let pointer_binding_infos = if arg_binding_infos = [] then Vk_base.null_ptr (DescriptorBufferBindingInfoEXT.t) else CArray.start array_binding_infos in
-  Vk_fn.cmd_bind_descriptor_buffers_ext (arg_command_buffer) (List.length arg_binding_infos) (pointer_binding_infos)
+  Vk_fn.cmd_bind_descriptor_buffers_ext (arg_command_buffer) (List.length arg_binding_infos) (pointer_binding_infos);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_binding_infos, array_binding_infos));
+  ()
 
 let cmd_set_descriptor_buffer_offsets_ext arg_command_buffer arg_pipeline_bind_point arg_layout arg_first_set arg_buffer_indices arg_offsets =
   let array_buffer_indices = CArray.of_list (Vk_base.uint32) arg_buffer_indices in
@@ -2978,210 +3877,281 @@ let cmd_set_descriptor_buffer_offsets_ext arg_command_buffer arg_pipeline_bind_p
   if List.length arg_offsets <> List.length arg_buffer_indices then invalid_arg "vkCmdSetDescriptorBufferOffsetsEXT: array lengths differ";
   let array_offsets = CArray.of_list (Vk_base.device_size) arg_offsets in
   let pointer_offsets = if arg_offsets = [] then Vk_base.null_ptr (Vk_base.device_size) else CArray.start array_offsets in
-  Vk_fn.cmd_set_descriptor_buffer_offsets_ext (arg_command_buffer) (arg_pipeline_bind_point) (arg_layout) (arg_first_set) (List.length arg_buffer_indices) (pointer_buffer_indices) (pointer_offsets)
+  Vk_fn.cmd_set_descriptor_buffer_offsets_ext (arg_command_buffer) (arg_pipeline_bind_point) (arg_layout) (arg_first_set) (List.length arg_buffer_indices) (pointer_buffer_indices) (pointer_offsets);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_pipeline_bind_point, arg_layout, arg_first_set, arg_buffer_indices, array_buffer_indices, arg_offsets, array_offsets));
+  ()
 
 let cmd_bind_descriptor_buffer_embedded_samplers_ext arg_command_buffer arg_pipeline_bind_point arg_layout arg_set =
-  Vk_fn.cmd_bind_descriptor_buffer_embedded_samplers_ext (arg_command_buffer) (arg_pipeline_bind_point) (arg_layout) (arg_set)
+  Vk_fn.cmd_bind_descriptor_buffer_embedded_samplers_ext (arg_command_buffer) (arg_pipeline_bind_point) (arg_layout) (arg_set);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_pipeline_bind_point, arg_layout, arg_set));
+  ()
 
 let get_buffer_opaque_capture_descriptor_data_ext arg_device arg_info arg_data =
   let result = Vk_fn.get_buffer_opaque_capture_descriptor_data_ext (arg_device) (addr arg_info) (arg_data) in
+  ignore (Sys.opaque_identity (arg_device, arg_info, arg_data));
   check result;
   ()
 
 let get_image_opaque_capture_descriptor_data_ext arg_device arg_info arg_data =
   let result = Vk_fn.get_image_opaque_capture_descriptor_data_ext (arg_device) (addr arg_info) (arg_data) in
+  ignore (Sys.opaque_identity (arg_device, arg_info, arg_data));
   check result;
   ()
 
 let get_image_view_opaque_capture_descriptor_data_ext arg_device arg_info arg_data =
   let result = Vk_fn.get_image_view_opaque_capture_descriptor_data_ext (arg_device) (addr arg_info) (arg_data) in
+  ignore (Sys.opaque_identity (arg_device, arg_info, arg_data));
   check result;
   ()
 
 let get_sampler_opaque_capture_descriptor_data_ext arg_device arg_info arg_data =
   let result = Vk_fn.get_sampler_opaque_capture_descriptor_data_ext (arg_device) (addr arg_info) (arg_data) in
+  ignore (Sys.opaque_identity (arg_device, arg_info, arg_data));
   check result;
   ()
 
 let get_acceleration_structure_opaque_capture_descriptor_data_ext arg_device arg_info arg_data =
   let result = Vk_fn.get_acceleration_structure_opaque_capture_descriptor_data_ext (arg_device) (addr arg_info) (arg_data) in
+  ignore (Sys.opaque_identity (arg_device, arg_info, arg_data));
   check result;
   ()
 
 let set_device_memory_priority_ext arg_device arg_memory arg_priority =
-  Vk_fn.set_device_memory_priority_ext (arg_device) (arg_memory) (arg_priority)
+  Vk_fn.set_device_memory_priority_ext (arg_device) (arg_memory) (arg_priority);
+  ignore (Sys.opaque_identity (arg_device, arg_memory, arg_priority));
+  ()
 
 let acquire_drm_display_ext arg_physical_device arg_drm_fd arg_display =
   let result = Vk_fn.acquire_drm_display_ext (arg_physical_device) (arg_drm_fd) (arg_display) in
+  ignore (Sys.opaque_identity (arg_physical_device, arg_drm_fd, arg_display));
   check result;
   ()
 
 let get_drm_display_ext arg_physical_device arg_drm_fd arg_connector_id arg_display =
   let result = Vk_fn.get_drm_display_ext (arg_physical_device) (arg_drm_fd) (arg_connector_id) (arg_display) in
+  ignore (Sys.opaque_identity (arg_physical_device, arg_drm_fd, arg_connector_id, arg_display));
   check result;
   ()
 
 let wait_for_present_2_khr arg_device arg_swapchain arg_present_wait_2_info =
   let result = Vk_fn.wait_for_present_2_khr (arg_device) (arg_swapchain) (addr arg_present_wait_2_info) in
+  ignore (Sys.opaque_identity (arg_device, arg_swapchain, arg_present_wait_2_info));
   check result;
   result
 
 let wait_for_present_khr arg_device arg_swapchain arg_present_id arg_timeout =
   let result = Vk_fn.wait_for_present_khr (arg_device) (arg_swapchain) (arg_present_id) (arg_timeout) in
+  ignore (Sys.opaque_identity (arg_device, arg_swapchain, arg_present_id, arg_timeout));
   check result;
   result
 
 let create_buffer_collection_fuchsia ?allocator:arg_allocator arg_device arg_create_info =
   let output = allocate (BufferCollectionFUCHSIA.t) (BufferCollectionFUCHSIA.null) in
   let result = Vk_fn.create_buffer_collection_fuchsia (arg_device) (addr arg_create_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
+  ignore (Sys.opaque_identity (arg_device, arg_create_info, arg_allocator));
   check result;
   !@ output
 
 let set_buffer_collection_buffer_constraints_fuchsia arg_device arg_collection arg_buffer_constraints_info =
   let result = Vk_fn.set_buffer_collection_buffer_constraints_fuchsia (arg_device) (arg_collection) (addr arg_buffer_constraints_info) in
+  ignore (Sys.opaque_identity (arg_device, arg_collection, arg_buffer_constraints_info));
   check result;
   ()
 
 let set_buffer_collection_image_constraints_fuchsia arg_device arg_collection arg_image_constraints_info =
   let result = Vk_fn.set_buffer_collection_image_constraints_fuchsia (arg_device) (arg_collection) (addr arg_image_constraints_info) in
+  ignore (Sys.opaque_identity (arg_device, arg_collection, arg_image_constraints_info));
   check result;
   ()
 
 let destroy_buffer_collection_fuchsia arg_device arg_collection ?allocator:arg_allocator () =
-  Vk_fn.destroy_buffer_collection_fuchsia (arg_device) (arg_collection) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x))
+  Vk_fn.destroy_buffer_collection_fuchsia (arg_device) (arg_collection) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x));
+  ignore (Sys.opaque_identity (arg_device, arg_collection, arg_allocator));
+  ()
 
 let get_buffer_collection_properties_fuchsia arg_device arg_collection arg_properties =
   let result = Vk_fn.get_buffer_collection_properties_fuchsia (arg_device) (arg_collection) (addr arg_properties) in
+  ignore (Sys.opaque_identity (arg_device, arg_collection, arg_properties));
   check result;
   ()
 
 let create_cuda_module_nv ?allocator:arg_allocator arg_device arg_create_info =
   let output = allocate (CudaModuleNV.t) (CudaModuleNV.null) in
   let result = Vk_fn.create_cuda_module_nv (arg_device) (addr arg_create_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
+  ignore (Sys.opaque_identity (arg_device, arg_create_info, arg_allocator));
   check result;
   !@ output
 
 let get_cuda_module_cache_nv arg_device arg_module_ arg_cache_size arg_cache_data =
   let result = Vk_fn.get_cuda_module_cache_nv (arg_device) (arg_module_) (arg_cache_size) (arg_cache_data) in
+  ignore (Sys.opaque_identity (arg_device, arg_module_, arg_cache_size, arg_cache_data));
   check result;
   ()
 
 let create_cuda_function_nv ?allocator:arg_allocator arg_device arg_create_info =
   let output = allocate (CudaFunctionNV.t) (CudaFunctionNV.null) in
   let result = Vk_fn.create_cuda_function_nv (arg_device) (addr arg_create_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
+  ignore (Sys.opaque_identity (arg_device, arg_create_info, arg_allocator));
   check result;
   !@ output
 
 let destroy_cuda_module_nv arg_device arg_module_ ?allocator:arg_allocator () =
-  Vk_fn.destroy_cuda_module_nv (arg_device) (arg_module_) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x))
+  Vk_fn.destroy_cuda_module_nv (arg_device) (arg_module_) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x));
+  ignore (Sys.opaque_identity (arg_device, arg_module_, arg_allocator));
+  ()
 
 let destroy_cuda_function_nv arg_device arg_function_ ?allocator:arg_allocator () =
-  Vk_fn.destroy_cuda_function_nv (arg_device) (arg_function_) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x))
+  Vk_fn.destroy_cuda_function_nv (arg_device) (arg_function_) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x));
+  ignore (Sys.opaque_identity (arg_device, arg_function_, arg_allocator));
+  ()
 
 let cmd_cuda_launch_kernel_nv arg_command_buffer arg_launch_info =
-  Vk_fn.cmd_cuda_launch_kernel_nv (arg_command_buffer) (addr arg_launch_info)
+  Vk_fn.cmd_cuda_launch_kernel_nv (arg_command_buffer) (addr arg_launch_info);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_launch_info));
+  ()
 
 let cmd_begin_rendering arg_command_buffer arg_rendering_info =
-  Vk_fn.cmd_begin_rendering (arg_command_buffer) (addr arg_rendering_info)
+  Vk_fn.cmd_begin_rendering (arg_command_buffer) (addr arg_rendering_info);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_rendering_info));
+  ()
 
 let cmd_end_rendering arg_command_buffer =
-  Vk_fn.cmd_end_rendering (arg_command_buffer)
+  Vk_fn.cmd_end_rendering (arg_command_buffer);
+  ignore (Sys.opaque_identity (arg_command_buffer));
+  ()
 
 let cmd_end_rendering_2_khr arg_command_buffer arg_rendering_end_info =
-  Vk_fn.cmd_end_rendering_2_khr (arg_command_buffer) (addr arg_rendering_end_info)
+  Vk_fn.cmd_end_rendering_2_khr (arg_command_buffer) (addr arg_rendering_end_info);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_rendering_end_info));
+  ()
 
 let get_descriptor_set_layout_host_mapping_info_valve arg_device arg_binding_reference arg_host_mapping =
-  Vk_fn.get_descriptor_set_layout_host_mapping_info_valve (arg_device) (addr arg_binding_reference) (addr arg_host_mapping)
+  Vk_fn.get_descriptor_set_layout_host_mapping_info_valve (arg_device) (addr arg_binding_reference) (addr arg_host_mapping);
+  ignore (Sys.opaque_identity (arg_device, arg_binding_reference, arg_host_mapping));
+  ()
 
 let get_descriptor_set_host_mapping_valve arg_device arg_descriptor_set =
   let output = allocate (ptr (Ctypes.void)) (Vk_base.null_ptr (Ctypes.void)) in
   Vk_fn.get_descriptor_set_host_mapping_valve (arg_device) (arg_descriptor_set) (output);
+  ignore (Sys.opaque_identity (arg_device, arg_descriptor_set));
   !@ output
 
 let create_micromap_ext ?allocator:arg_allocator arg_device arg_create_info =
   let output = allocate (MicromapEXT.t) (MicromapEXT.null) in
   let result = Vk_fn.create_micromap_ext (arg_device) (addr arg_create_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
+  ignore (Sys.opaque_identity (arg_device, arg_create_info, arg_allocator));
   check result;
   !@ output
 
 let cmd_build_micromaps_ext arg_command_buffer arg_infos =
   let array_infos = CArray.of_list (MicromapBuildInfoEXT.t) arg_infos in
   let pointer_infos = if arg_infos = [] then Vk_base.null_ptr (MicromapBuildInfoEXT.t) else CArray.start array_infos in
-  Vk_fn.cmd_build_micromaps_ext (arg_command_buffer) (List.length arg_infos) (pointer_infos)
+  Vk_fn.cmd_build_micromaps_ext (arg_command_buffer) (List.length arg_infos) (pointer_infos);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_infos, array_infos));
+  ()
 
 let build_micromaps_ext arg_device arg_deferred_operation arg_infos =
   let array_infos = CArray.of_list (MicromapBuildInfoEXT.t) arg_infos in
   let pointer_infos = if arg_infos = [] then Vk_base.null_ptr (MicromapBuildInfoEXT.t) else CArray.start array_infos in
   let result = Vk_fn.build_micromaps_ext (arg_device) (arg_deferred_operation) (List.length arg_infos) (pointer_infos) in
+  ignore (Sys.opaque_identity (arg_device, arg_deferred_operation, arg_infos, array_infos));
   check result;
   result
 
 let destroy_micromap_ext arg_device arg_micromap ?allocator:arg_allocator () =
-  Vk_fn.destroy_micromap_ext (arg_device) (arg_micromap) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x))
+  Vk_fn.destroy_micromap_ext (arg_device) (arg_micromap) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x));
+  ignore (Sys.opaque_identity (arg_device, arg_micromap, arg_allocator));
+  ()
 
 let cmd_copy_micromap_ext arg_command_buffer arg_info =
-  Vk_fn.cmd_copy_micromap_ext (arg_command_buffer) (addr arg_info)
+  Vk_fn.cmd_copy_micromap_ext (arg_command_buffer) (addr arg_info);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_info));
+  ()
 
 let copy_micromap_ext arg_device arg_deferred_operation arg_info =
   let result = Vk_fn.copy_micromap_ext (arg_device) (arg_deferred_operation) (addr arg_info) in
+  ignore (Sys.opaque_identity (arg_device, arg_deferred_operation, arg_info));
   check result;
   result
 
 let cmd_copy_micromap_to_memory_ext arg_command_buffer arg_info =
-  Vk_fn.cmd_copy_micromap_to_memory_ext (arg_command_buffer) (addr arg_info)
+  Vk_fn.cmd_copy_micromap_to_memory_ext (arg_command_buffer) (addr arg_info);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_info));
+  ()
 
 let copy_micromap_to_memory_ext arg_device arg_deferred_operation arg_info =
   let result = Vk_fn.copy_micromap_to_memory_ext (arg_device) (arg_deferred_operation) (addr arg_info) in
+  ignore (Sys.opaque_identity (arg_device, arg_deferred_operation, arg_info));
   check result;
   result
 
 let cmd_copy_memory_to_micromap_ext arg_command_buffer arg_info =
-  Vk_fn.cmd_copy_memory_to_micromap_ext (arg_command_buffer) (addr arg_info)
+  Vk_fn.cmd_copy_memory_to_micromap_ext (arg_command_buffer) (addr arg_info);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_info));
+  ()
 
 let copy_memory_to_micromap_ext arg_device arg_deferred_operation arg_info =
   let result = Vk_fn.copy_memory_to_micromap_ext (arg_device) (arg_deferred_operation) (addr arg_info) in
+  ignore (Sys.opaque_identity (arg_device, arg_deferred_operation, arg_info));
   check result;
   result
 
 let cmd_write_micromaps_properties_ext arg_command_buffer arg_micromaps arg_query_type arg_query_pool arg_first_query =
   let array_micromaps = CArray.of_list (MicromapEXT.t) arg_micromaps in
   let pointer_micromaps = if arg_micromaps = [] then Vk_base.null_ptr (MicromapEXT.t) else CArray.start array_micromaps in
-  Vk_fn.cmd_write_micromaps_properties_ext (arg_command_buffer) (List.length arg_micromaps) (pointer_micromaps) (arg_query_type) (arg_query_pool) (arg_first_query)
+  Vk_fn.cmd_write_micromaps_properties_ext (arg_command_buffer) (List.length arg_micromaps) (pointer_micromaps) (arg_query_type) (arg_query_pool) (arg_first_query);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_micromaps, array_micromaps, arg_query_type, arg_query_pool, arg_first_query));
+  ()
 
 let write_micromaps_properties_ext arg_device arg_micromaps arg_query_type arg_data_size arg_data arg_stride =
   let array_micromaps = CArray.of_list (MicromapEXT.t) arg_micromaps in
   let pointer_micromaps = if arg_micromaps = [] then Vk_base.null_ptr (MicromapEXT.t) else CArray.start array_micromaps in
   let result = Vk_fn.write_micromaps_properties_ext (arg_device) (List.length arg_micromaps) (pointer_micromaps) (arg_query_type) (arg_data_size) (arg_data) (arg_stride) in
+  ignore (Sys.opaque_identity (arg_device, arg_micromaps, array_micromaps, arg_query_type, arg_data_size, arg_data, arg_stride));
   check result;
   ()
 
 let get_device_micromap_compatibility_ext arg_device arg_version_info =
   let output = allocate (AccelerationStructureCompatibilityKHR.t) (AccelerationStructureCompatibilityKHR.of_int 0) in
   Vk_fn.get_device_micromap_compatibility_ext (arg_device) (addr arg_version_info) (output);
+  ignore (Sys.opaque_identity (arg_device, arg_version_info));
   !@ output
 
 let get_micromap_build_sizes_ext arg_device arg_build_type arg_build_info arg_size_info =
-  Vk_fn.get_micromap_build_sizes_ext (arg_device) (arg_build_type) (addr arg_build_info) (addr arg_size_info)
+  Vk_fn.get_micromap_build_sizes_ext (arg_device) (arg_build_type) (addr arg_build_info) (addr arg_size_info);
+  ignore (Sys.opaque_identity (arg_device, arg_build_type, arg_build_info, arg_size_info));
+  ()
 
 let get_shader_module_identifier_ext arg_device arg_shader_module arg_identifier =
-  Vk_fn.get_shader_module_identifier_ext (arg_device) (arg_shader_module) (addr arg_identifier)
+  Vk_fn.get_shader_module_identifier_ext (arg_device) (arg_shader_module) (addr arg_identifier);
+  ignore (Sys.opaque_identity (arg_device, arg_shader_module, arg_identifier));
+  ()
 
 let get_shader_module_create_info_identifier_ext arg_device arg_create_info arg_identifier =
-  Vk_fn.get_shader_module_create_info_identifier_ext (arg_device) (addr arg_create_info) (addr arg_identifier)
+  Vk_fn.get_shader_module_create_info_identifier_ext (arg_device) (addr arg_create_info) (addr arg_identifier);
+  ignore (Sys.opaque_identity (arg_device, arg_create_info, arg_identifier));
+  ()
 
 let get_image_subresource_layout_2 arg_device arg_image arg_subresource arg_layout =
-  Vk_fn.get_image_subresource_layout_2 (arg_device) (arg_image) (addr arg_subresource) (addr arg_layout)
+  Vk_fn.get_image_subresource_layout_2 (arg_device) (arg_image) (addr arg_subresource) (addr arg_layout);
+  ignore (Sys.opaque_identity (arg_device, arg_image, arg_subresource, arg_layout));
+  ()
 
 let get_pipeline_properties_ext arg_device arg_pipeline_info arg_pipeline_properties =
   let result = Vk_fn.get_pipeline_properties_ext (arg_device) (addr arg_pipeline_info) (addr arg_pipeline_properties) in
+  ignore (Sys.opaque_identity (arg_device, arg_pipeline_info, arg_pipeline_properties));
   check result;
   ()
 
 let export_metal_objects_ext arg_device arg_metal_objects_info =
-  Vk_fn.export_metal_objects_ext (arg_device) (addr arg_metal_objects_info)
+  Vk_fn.export_metal_objects_ext (arg_device) (addr arg_metal_objects_info);
+  ignore (Sys.opaque_identity (arg_device, arg_metal_objects_info));
+  ()
 
 let cmd_bind_tile_memory_qcom arg_command_buffer arg_tile_memory_bind_info =
-  Vk_fn.cmd_bind_tile_memory_qcom (arg_command_buffer) (addr arg_tile_memory_bind_info)
+  Vk_fn.cmd_bind_tile_memory_qcom (arg_command_buffer) (addr arg_tile_memory_bind_info);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_tile_memory_bind_info));
+  ()
 
 let get_framebuffer_tile_properties_qcom arg_device arg_framebuffer =
   let count = allocate Vk_base.uint32 0 in
@@ -3197,10 +4167,13 @@ let get_framebuffer_tile_properties_qcom arg_device arg_framebuffer =
       CArray.to_list (CArray.from_ptr (CArray.start storage) (!@ count))
     end
   in
-  fetch ()
+  let enumeration_result = fetch () in
+  ignore (Sys.opaque_identity (arg_device, arg_framebuffer));
+  enumeration_result
 
 let get_dynamic_rendering_tile_properties_qcom arg_device arg_rendering_info arg_properties =
   let result = Vk_fn.get_dynamic_rendering_tile_properties_qcom (arg_device) (addr arg_rendering_info) (addr arg_properties) in
+  ignore (Sys.opaque_identity (arg_device, arg_rendering_info, arg_properties));
   check result;
   ()
 
@@ -3218,27 +4191,36 @@ let get_physical_device_optical_flow_image_formats_nv arg_physical_device arg_op
       CArray.to_list (CArray.from_ptr (CArray.start storage) (!@ count))
     end
   in
-  fetch ()
+  let enumeration_result = fetch () in
+  ignore (Sys.opaque_identity (arg_physical_device, arg_optical_flow_image_format_info));
+  enumeration_result
 
 let create_optical_flow_session_nv ?allocator:arg_allocator arg_device arg_create_info =
   let output = allocate (OpticalFlowSessionNV.t) (OpticalFlowSessionNV.null) in
   let result = Vk_fn.create_optical_flow_session_nv (arg_device) (addr arg_create_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
+  ignore (Sys.opaque_identity (arg_device, arg_create_info, arg_allocator));
   check result;
   !@ output
 
 let destroy_optical_flow_session_nv arg_device arg_session ?allocator:arg_allocator () =
-  Vk_fn.destroy_optical_flow_session_nv (arg_device) (arg_session) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x))
+  Vk_fn.destroy_optical_flow_session_nv (arg_device) (arg_session) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x));
+  ignore (Sys.opaque_identity (arg_device, arg_session, arg_allocator));
+  ()
 
 let bind_optical_flow_session_image_nv arg_device arg_session arg_binding_point arg_view arg_layout =
   let result = Vk_fn.bind_optical_flow_session_image_nv (arg_device) (arg_session) (arg_binding_point) (arg_view) (arg_layout) in
+  ignore (Sys.opaque_identity (arg_device, arg_session, arg_binding_point, arg_view, arg_layout));
   check result;
   ()
 
 let cmd_optical_flow_execute_nv arg_command_buffer arg_session arg_execute_info =
-  Vk_fn.cmd_optical_flow_execute_nv (arg_command_buffer) (arg_session) (addr arg_execute_info)
+  Vk_fn.cmd_optical_flow_execute_nv (arg_command_buffer) (arg_session) (addr arg_execute_info);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_session, arg_execute_info));
+  ()
 
 let get_device_fault_info_ext arg_device arg_fault_counts arg_fault_info =
   let result = Vk_fn.get_device_fault_info_ext (arg_device) (addr arg_fault_counts) (addr arg_fault_info) in
+  ignore (Sys.opaque_identity (arg_device, arg_fault_counts, arg_fault_info));
   check result;
   ()
 
@@ -3256,32 +4238,42 @@ let get_device_fault_reports_khr arg_device arg_timeout =
       (result, CArray.to_list (CArray.from_ptr (CArray.start storage) (!@ count)))
     end
   in
-  fetch ()
+  let enumeration_result = fetch () in
+  ignore (Sys.opaque_identity (arg_device, arg_timeout));
+  enumeration_result
 
 let get_device_fault_debug_info_khr arg_device arg_debug_info =
   let result = Vk_fn.get_device_fault_debug_info_khr (arg_device) (addr arg_debug_info) in
+  ignore (Sys.opaque_identity (arg_device, arg_debug_info));
   check result;
   ()
 
 let cmd_set_depth_bias_2_ext arg_command_buffer arg_depth_bias_info =
-  Vk_fn.cmd_set_depth_bias_2_ext (arg_command_buffer) (addr arg_depth_bias_info)
+  Vk_fn.cmd_set_depth_bias_2_ext (arg_command_buffer) (addr arg_depth_bias_info);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_depth_bias_info));
+  ()
 
 let release_swapchain_images_khr arg_device arg_release_info =
   let result = Vk_fn.release_swapchain_images_khr (arg_device) (addr arg_release_info) in
+  ignore (Sys.opaque_identity (arg_device, arg_release_info));
   check result;
   ()
 
 let get_device_image_subresource_layout arg_device arg_info arg_layout =
-  Vk_fn.get_device_image_subresource_layout (arg_device) (addr arg_info) (addr arg_layout)
+  Vk_fn.get_device_image_subresource_layout (arg_device) (addr arg_info) (addr arg_layout);
+  ignore (Sys.opaque_identity (arg_device, arg_info, arg_layout));
+  ()
 
 let map_memory_2 arg_device arg_memory_map_info =
   let output = allocate (ptr (Ctypes.void)) (Vk_base.null_ptr (Ctypes.void)) in
   let result = Vk_fn.map_memory_2 (arg_device) (addr arg_memory_map_info) (output) in
+  ignore (Sys.opaque_identity (arg_device, arg_memory_map_info));
   check result;
   !@ output
 
 let unmap_memory_2 arg_device arg_memory_unmap_info =
   let result = Vk_fn.unmap_memory_2 (arg_device) (addr arg_memory_unmap_info) in
+  ignore (Sys.opaque_identity (arg_device, arg_memory_unmap_info));
   check result;
   ()
 
@@ -3291,14 +4283,18 @@ let create_shaders_ext ?allocator:arg_allocator arg_device arg_create_infos =
   let output_count = List.length arg_create_infos in
   let storage = CArray.make (ShaderEXT.t) output_count in
   let result = Vk_fn.create_shaders_ext (arg_device) (List.length arg_create_infos) (pointer_create_infos) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (CArray.start storage) in
+  ignore (Sys.opaque_identity (arg_device, arg_create_infos, array_create_infos, arg_allocator));
   check result;
   (result, (CArray.to_list storage))
 
 let destroy_shader_ext arg_device arg_shader ?allocator:arg_allocator () =
-  Vk_fn.destroy_shader_ext (arg_device) (arg_shader) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x))
+  Vk_fn.destroy_shader_ext (arg_device) (arg_shader) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x));
+  ignore (Sys.opaque_identity (arg_device, arg_shader, arg_allocator));
+  ()
 
 let get_shader_binary_data_ext arg_device arg_shader arg_data_size arg_data =
   let result = Vk_fn.get_shader_binary_data_ext (arg_device) (arg_shader) (arg_data_size) (arg_data) in
+  ignore (Sys.opaque_identity (arg_device, arg_shader, arg_data_size, arg_data));
   check result;
   ()
 
@@ -3308,32 +4304,39 @@ let cmd_bind_shaders_ext arg_command_buffer arg_stages arg_shaders =
   if List.length arg_shaders <> List.length arg_stages then invalid_arg "vkCmdBindShadersEXT: array lengths differ";
   let array_shaders = CArray.of_list (ShaderEXT.t) arg_shaders in
   let pointer_shaders = if arg_shaders = [] then Vk_base.null_ptr (ShaderEXT.t) else CArray.start array_shaders in
-  Vk_fn.cmd_bind_shaders_ext (arg_command_buffer) (List.length arg_stages) (pointer_stages) (pointer_shaders)
+  Vk_fn.cmd_bind_shaders_ext (arg_command_buffer) (List.length arg_stages) (pointer_stages) (pointer_shaders);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_stages, array_stages, arg_shaders, array_shaders));
+  ()
 
 let set_swapchain_present_timing_queue_size_ext arg_device arg_swapchain arg_size =
   let result = Vk_fn.set_swapchain_present_timing_queue_size_ext (arg_device) (arg_swapchain) (arg_size) in
+  ignore (Sys.opaque_identity (arg_device, arg_swapchain, arg_size));
   check result;
   result
 
 let get_swapchain_timing_properties_ext arg_device arg_swapchain arg_swapchain_timing_properties =
   let output = allocate (Vk_base.uint64) (0) in
   let result = Vk_fn.get_swapchain_timing_properties_ext (arg_device) (arg_swapchain) (addr arg_swapchain_timing_properties) (output) in
+  ignore (Sys.opaque_identity (arg_device, arg_swapchain, arg_swapchain_timing_properties));
   check result;
   (result, !@ output)
 
 let get_swapchain_time_domain_properties_ext arg_device arg_swapchain arg_swapchain_time_domain_properties =
   let output = allocate (Vk_base.uint64) (0) in
   let result = Vk_fn.get_swapchain_time_domain_properties_ext (arg_device) (arg_swapchain) (addr arg_swapchain_time_domain_properties) (output) in
+  ignore (Sys.opaque_identity (arg_device, arg_swapchain, arg_swapchain_time_domain_properties));
   check result;
   !@ output
 
 let get_past_presentation_timing_ext arg_device arg_past_presentation_timing_info arg_past_presentation_timing_properties =
   let result = Vk_fn.get_past_presentation_timing_ext (arg_device) (addr arg_past_presentation_timing_info) (addr arg_past_presentation_timing_properties) in
+  ignore (Sys.opaque_identity (arg_device, arg_past_presentation_timing_info, arg_past_presentation_timing_properties));
   check result;
   ()
 
 let get_screen_buffer_properties_qnx arg_device arg_buffer arg_properties =
   let result = Vk_fn.get_screen_buffer_properties_qnx (arg_device) (arg_buffer) (addr arg_properties) in
+  ignore (Sys.opaque_identity (arg_device, arg_buffer, arg_properties));
   check result;
   ()
 
@@ -3351,16 +4354,20 @@ let get_physical_device_cooperative_matrix_properties_khr arg_physical_device =
       CArray.to_list (CArray.from_ptr (CArray.start storage) (!@ count))
     end
   in
-  fetch ()
+  let enumeration_result = fetch () in
+  ignore (Sys.opaque_identity (arg_physical_device));
+  enumeration_result
 
 let get_execution_graph_pipeline_scratch_size_amdx arg_device arg_execution_graph arg_size_info =
   let result = Vk_fn.get_execution_graph_pipeline_scratch_size_amdx (arg_device) (arg_execution_graph) (addr arg_size_info) in
+  ignore (Sys.opaque_identity (arg_device, arg_execution_graph, arg_size_info));
   check result;
   ()
 
 let get_execution_graph_pipeline_node_index_amdx arg_device arg_execution_graph arg_node_info =
   let output = allocate (Vk_base.uint32) (0) in
   let result = Vk_fn.get_execution_graph_pipeline_node_index_amdx (arg_device) (arg_execution_graph) (addr arg_node_info) (output) in
+  ignore (Sys.opaque_identity (arg_device, arg_execution_graph, arg_node_info));
   check result;
   !@ output
 
@@ -3370,145 +4377,208 @@ let create_execution_graph_pipelines_amdx ?allocator:arg_allocator arg_device ar
   let output_count = List.length arg_create_infos in
   let storage = CArray.make (Pipeline.t) output_count in
   let result = Vk_fn.create_execution_graph_pipelines_amdx (arg_device) (arg_pipeline_cache) (List.length arg_create_infos) (pointer_create_infos) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (CArray.start storage) in
+  ignore (Sys.opaque_identity (arg_device, arg_pipeline_cache, arg_create_infos, array_create_infos, arg_allocator));
   check result;
   (result, (CArray.to_list storage))
 
 let cmd_initialize_graph_scratch_memory_amdx arg_command_buffer arg_execution_graph arg_scratch arg_scratch_size =
-  Vk_fn.cmd_initialize_graph_scratch_memory_amdx (arg_command_buffer) (arg_execution_graph) (arg_scratch) (arg_scratch_size)
+  Vk_fn.cmd_initialize_graph_scratch_memory_amdx (arg_command_buffer) (arg_execution_graph) (arg_scratch) (arg_scratch_size);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_execution_graph, arg_scratch, arg_scratch_size));
+  ()
 
 let cmd_dispatch_graph_amdx arg_command_buffer arg_scratch arg_scratch_size arg_count_info =
-  Vk_fn.cmd_dispatch_graph_amdx (arg_command_buffer) (arg_scratch) (arg_scratch_size) (addr arg_count_info)
+  Vk_fn.cmd_dispatch_graph_amdx (arg_command_buffer) (arg_scratch) (arg_scratch_size) (addr arg_count_info);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_scratch, arg_scratch_size, arg_count_info));
+  ()
 
 let cmd_dispatch_graph_indirect_amdx arg_command_buffer arg_scratch arg_scratch_size arg_count_info =
-  Vk_fn.cmd_dispatch_graph_indirect_amdx (arg_command_buffer) (arg_scratch) (arg_scratch_size) (addr arg_count_info)
+  Vk_fn.cmd_dispatch_graph_indirect_amdx (arg_command_buffer) (arg_scratch) (arg_scratch_size) (addr arg_count_info);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_scratch, arg_scratch_size, arg_count_info));
+  ()
 
 let cmd_dispatch_graph_indirect_count_amdx arg_command_buffer arg_scratch arg_scratch_size arg_count_info =
-  Vk_fn.cmd_dispatch_graph_indirect_count_amdx (arg_command_buffer) (arg_scratch) (arg_scratch_size) (arg_count_info)
+  Vk_fn.cmd_dispatch_graph_indirect_count_amdx (arg_command_buffer) (arg_scratch) (arg_scratch_size) (arg_count_info);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_scratch, arg_scratch_size, arg_count_info));
+  ()
 
 let create_gpa_session_amd ?allocator:arg_allocator arg_device arg_create_info =
   let output = allocate (GpaSessionAMD.t) (GpaSessionAMD.null) in
   let result = Vk_fn.create_gpa_session_amd (arg_device) (addr arg_create_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
+  ignore (Sys.opaque_identity (arg_device, arg_create_info, arg_allocator));
   check result;
   !@ output
 
 let destroy_gpa_session_amd arg_device arg_gpa_session ?allocator:arg_allocator () =
-  Vk_fn.destroy_gpa_session_amd (arg_device) (arg_gpa_session) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x))
+  Vk_fn.destroy_gpa_session_amd (arg_device) (arg_gpa_session) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x));
+  ignore (Sys.opaque_identity (arg_device, arg_gpa_session, arg_allocator));
+  ()
 
 let set_gpa_device_clock_mode_amd arg_device arg_info =
   let result = Vk_fn.set_gpa_device_clock_mode_amd (arg_device) (addr arg_info) in
+  ignore (Sys.opaque_identity (arg_device, arg_info));
   check result;
   ()
 
 let get_gpa_device_clock_info_amd arg_device arg_info =
   let result = Vk_fn.get_gpa_device_clock_info_amd (arg_device) (addr arg_info) in
+  ignore (Sys.opaque_identity (arg_device, arg_info));
   check result;
   ()
 
 let cmd_begin_gpa_session_amd arg_command_buffer arg_gpa_session =
   let result = Vk_fn.cmd_begin_gpa_session_amd (arg_command_buffer) (arg_gpa_session) in
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_gpa_session));
   check result;
   ()
 
 let cmd_end_gpa_session_amd arg_command_buffer arg_gpa_session =
   let result = Vk_fn.cmd_end_gpa_session_amd (arg_command_buffer) (arg_gpa_session) in
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_gpa_session));
   check result;
   ()
 
 let cmd_begin_gpa_sample_amd arg_command_buffer arg_gpa_session arg_gpa_sample_begin_info =
   let output = allocate (Vk_base.uint32) (0) in
   let result = Vk_fn.cmd_begin_gpa_sample_amd (arg_command_buffer) (arg_gpa_session) (addr arg_gpa_sample_begin_info) (output) in
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_gpa_session, arg_gpa_sample_begin_info));
   check result;
   !@ output
 
 let cmd_end_gpa_sample_amd arg_command_buffer arg_gpa_session arg_sample_id =
-  Vk_fn.cmd_end_gpa_sample_amd (arg_command_buffer) (arg_gpa_session) (arg_sample_id)
+  Vk_fn.cmd_end_gpa_sample_amd (arg_command_buffer) (arg_gpa_session) (arg_sample_id);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_gpa_session, arg_sample_id));
+  ()
 
 let get_gpa_session_status_amd arg_device arg_gpa_session =
   let result = Vk_fn.get_gpa_session_status_amd (arg_device) (arg_gpa_session) in
+  ignore (Sys.opaque_identity (arg_device, arg_gpa_session));
   check result;
   ()
 
 let get_gpa_session_results_amd arg_device arg_gpa_session arg_sample_id arg_size_in_bytes arg_data =
   let result = Vk_fn.get_gpa_session_results_amd (arg_device) (arg_gpa_session) (arg_sample_id) (arg_size_in_bytes) (arg_data) in
+  ignore (Sys.opaque_identity (arg_device, arg_gpa_session, arg_sample_id, arg_size_in_bytes, arg_data));
   check result;
   ()
 
 let reset_gpa_session_amd arg_device arg_gpa_session =
   let result = Vk_fn.reset_gpa_session_amd (arg_device) (arg_gpa_session) in
+  ignore (Sys.opaque_identity (arg_device, arg_gpa_session));
   check result;
   ()
 
 let cmd_copy_gpa_session_results_amd arg_command_buffer arg_gpa_session =
-  Vk_fn.cmd_copy_gpa_session_results_amd (arg_command_buffer) (arg_gpa_session)
+  Vk_fn.cmd_copy_gpa_session_results_amd (arg_command_buffer) (arg_gpa_session);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_gpa_session));
+  ()
 
 let cmd_bind_descriptor_sets_2 arg_command_buffer arg_bind_descriptor_sets_info =
-  Vk_fn.cmd_bind_descriptor_sets_2 (arg_command_buffer) (addr arg_bind_descriptor_sets_info)
+  Vk_fn.cmd_bind_descriptor_sets_2 (arg_command_buffer) (addr arg_bind_descriptor_sets_info);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_bind_descriptor_sets_info));
+  ()
 
 let cmd_push_constants_2 arg_command_buffer arg_push_constants_info =
-  Vk_fn.cmd_push_constants_2 (arg_command_buffer) (addr arg_push_constants_info)
+  Vk_fn.cmd_push_constants_2 (arg_command_buffer) (addr arg_push_constants_info);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_push_constants_info));
+  ()
 
 let cmd_push_descriptor_set_2 arg_command_buffer arg_push_descriptor_set_info =
-  Vk_fn.cmd_push_descriptor_set_2 (arg_command_buffer) (addr arg_push_descriptor_set_info)
+  Vk_fn.cmd_push_descriptor_set_2 (arg_command_buffer) (addr arg_push_descriptor_set_info);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_push_descriptor_set_info));
+  ()
 
 let cmd_push_descriptor_set_with_template_2 arg_command_buffer arg_push_descriptor_set_with_template_info =
-  Vk_fn.cmd_push_descriptor_set_with_template_2 (arg_command_buffer) (addr arg_push_descriptor_set_with_template_info)
+  Vk_fn.cmd_push_descriptor_set_with_template_2 (arg_command_buffer) (addr arg_push_descriptor_set_with_template_info);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_push_descriptor_set_with_template_info));
+  ()
 
 let cmd_set_descriptor_buffer_offsets_2_ext arg_command_buffer arg_set_descriptor_buffer_offsets_info =
-  Vk_fn.cmd_set_descriptor_buffer_offsets_2_ext (arg_command_buffer) (addr arg_set_descriptor_buffer_offsets_info)
+  Vk_fn.cmd_set_descriptor_buffer_offsets_2_ext (arg_command_buffer) (addr arg_set_descriptor_buffer_offsets_info);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_set_descriptor_buffer_offsets_info));
+  ()
 
 let cmd_bind_descriptor_buffer_embedded_samplers_2_ext arg_command_buffer arg_bind_descriptor_buffer_embedded_samplers_info =
-  Vk_fn.cmd_bind_descriptor_buffer_embedded_samplers_2_ext (arg_command_buffer) (addr arg_bind_descriptor_buffer_embedded_samplers_info)
+  Vk_fn.cmd_bind_descriptor_buffer_embedded_samplers_2_ext (arg_command_buffer) (addr arg_bind_descriptor_buffer_embedded_samplers_info);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_bind_descriptor_buffer_embedded_samplers_info));
+  ()
 
 let set_latency_sleep_mode_nv arg_device arg_swapchain arg_sleep_mode_info =
   let result = Vk_fn.set_latency_sleep_mode_nv (arg_device) (arg_swapchain) (addr arg_sleep_mode_info) in
+  ignore (Sys.opaque_identity (arg_device, arg_swapchain, arg_sleep_mode_info));
   check result;
   ()
 
 let latency_sleep_nv arg_device arg_swapchain arg_sleep_info =
   let result = Vk_fn.latency_sleep_nv (arg_device) (arg_swapchain) (addr arg_sleep_info) in
+  ignore (Sys.opaque_identity (arg_device, arg_swapchain, arg_sleep_info));
   check result;
   ()
 
 let set_latency_marker_nv arg_device arg_swapchain arg_latency_marker_info =
-  Vk_fn.set_latency_marker_nv (arg_device) (arg_swapchain) (addr arg_latency_marker_info)
+  Vk_fn.set_latency_marker_nv (arg_device) (arg_swapchain) (addr arg_latency_marker_info);
+  ignore (Sys.opaque_identity (arg_device, arg_swapchain, arg_latency_marker_info));
+  ()
 
 let get_latency_timings_nv arg_device arg_swapchain arg_latency_marker_info =
-  Vk_fn.get_latency_timings_nv (arg_device) (arg_swapchain) (addr arg_latency_marker_info)
+  Vk_fn.get_latency_timings_nv (arg_device) (arg_swapchain) (addr arg_latency_marker_info);
+  ignore (Sys.opaque_identity (arg_device, arg_swapchain, arg_latency_marker_info));
+  ()
 
 let queue_notify_out_of_band_nv arg_queue arg_queue_type_info =
-  Vk_fn.queue_notify_out_of_band_nv (arg_queue) (addr arg_queue_type_info)
+  Vk_fn.queue_notify_out_of_band_nv (arg_queue) (addr arg_queue_type_info);
+  ignore (Sys.opaque_identity (arg_queue, arg_queue_type_info));
+  ()
 
 let set_latency_sleep_mode_legacy_nv arg_device arg_low_latency_mode arg_low_latency_boost arg_minimum_interval_us =
-  Vk_fn.set_latency_sleep_mode_legacy_nv (arg_device) (arg_low_latency_mode) (arg_low_latency_boost) (arg_minimum_interval_us)
+  Vk_fn.set_latency_sleep_mode_legacy_nv (arg_device) (arg_low_latency_mode) (arg_low_latency_boost) (arg_minimum_interval_us);
+  ignore (Sys.opaque_identity (arg_device, arg_low_latency_mode, arg_low_latency_boost, arg_minimum_interval_us));
+  ()
 
 let latency_sleep_legacy_nv arg_device arg_signal_semaphore arg_value =
-  Vk_fn.latency_sleep_legacy_nv (arg_device) (arg_signal_semaphore) (arg_value)
+  Vk_fn.latency_sleep_legacy_nv (arg_device) (arg_signal_semaphore) (arg_value);
+  ignore (Sys.opaque_identity (arg_device, arg_signal_semaphore, arg_value));
+  ()
 
 let set_latency_marker_legacy_nv arg_device arg_frame_id arg_marker =
-  Vk_fn.set_latency_marker_legacy_nv (arg_device) (arg_frame_id) (arg_marker)
+  Vk_fn.set_latency_marker_legacy_nv (arg_device) (arg_frame_id) (arg_marker);
+  ignore (Sys.opaque_identity (arg_device, arg_frame_id, arg_marker));
+  ()
 
 let get_latency_timings_legacy_nv arg_device arg_timings =
-  Vk_fn.get_latency_timings_legacy_nv (arg_device) (arg_timings)
+  Vk_fn.get_latency_timings_legacy_nv (arg_device) (arg_timings);
+  ignore (Sys.opaque_identity (arg_device, arg_timings));
+  ()
 
 let queue_notify_out_of_band_legacy_nv arg_queue arg_queue_type =
-  Vk_fn.queue_notify_out_of_band_legacy_nv (arg_queue) (arg_queue_type)
+  Vk_fn.queue_notify_out_of_band_legacy_nv (arg_queue) (arg_queue_type);
+  ignore (Sys.opaque_identity (arg_queue, arg_queue_type));
+  ()
 
 let get_sleep_status_legacy_nv arg_device =
   let output = allocate (Vk_base.bool32) (false) in
   Vk_fn.get_sleep_status_legacy_nv (arg_device) (output);
+  ignore (Sys.opaque_identity (arg_device));
   !@ output
 
 let shutdown_latency_device_legacy_nv arg_device =
-  Vk_fn.shutdown_latency_device_legacy_nv (arg_device)
+  Vk_fn.shutdown_latency_device_legacy_nv (arg_device);
+  ignore (Sys.opaque_identity (arg_device));
+  ()
 
 let cmd_set_rendering_attachment_locations arg_command_buffer arg_location_info =
-  Vk_fn.cmd_set_rendering_attachment_locations (arg_command_buffer) (addr arg_location_info)
+  Vk_fn.cmd_set_rendering_attachment_locations (arg_command_buffer) (addr arg_location_info);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_location_info));
+  ()
 
 let cmd_set_rendering_input_attachment_indices arg_command_buffer arg_input_attachment_index_info =
-  Vk_fn.cmd_set_rendering_input_attachment_indices (arg_command_buffer) (addr arg_input_attachment_index_info)
+  Vk_fn.cmd_set_rendering_input_attachment_indices (arg_command_buffer) (addr arg_input_attachment_index_info);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_input_attachment_index_info));
+  ()
 
 let cmd_set_depth_clamp_range_ext arg_command_buffer arg_depth_clamp_mode arg_depth_clamp_range =
-  Vk_fn.cmd_set_depth_clamp_range_ext (arg_command_buffer) (arg_depth_clamp_mode) (addr arg_depth_clamp_range)
+  Vk_fn.cmd_set_depth_clamp_range_ext (arg_command_buffer) (arg_depth_clamp_mode) (addr arg_depth_clamp_range);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_depth_clamp_mode, arg_depth_clamp_range));
+  ()
 
 let get_physical_device_cooperative_matrix_flexible_dimensions_properties_nv arg_physical_device =
   let count = allocate Vk_base.uint32 0 in
@@ -3524,16 +4594,20 @@ let get_physical_device_cooperative_matrix_flexible_dimensions_properties_nv arg
       CArray.to_list (CArray.from_ptr (CArray.start storage) (!@ count))
     end
   in
-  fetch ()
+  let enumeration_result = fetch () in
+  ignore (Sys.opaque_identity (arg_physical_device));
+  enumeration_result
 
 let get_memory_metal_handle_ext arg_device arg_get_metal_handle_info =
   let output = allocate (ptr (Ctypes.void)) (Vk_base.null_ptr (Ctypes.void)) in
   let result = Vk_fn.get_memory_metal_handle_ext (arg_device) (addr arg_get_metal_handle_info) (output) in
+  ignore (Sys.opaque_identity (arg_device, arg_get_metal_handle_info));
   check result;
   !@ output
 
 let get_memory_metal_handle_properties_ext arg_device arg_handle_type arg_handle arg_memory_metal_handle_properties =
   let result = Vk_fn.get_memory_metal_handle_properties_ext (arg_device) (arg_handle_type) (arg_handle) (addr arg_memory_metal_handle_properties) in
+  ignore (Sys.opaque_identity (arg_device, arg_handle_type, arg_handle, arg_memory_metal_handle_properties));
   check result;
   ()
 
@@ -3551,38 +4625,54 @@ let get_physical_device_cooperative_vector_properties_nv arg_physical_device =
       CArray.to_list (CArray.from_ptr (CArray.start storage) (!@ count))
     end
   in
-  fetch ()
+  let enumeration_result = fetch () in
+  ignore (Sys.opaque_identity (arg_physical_device));
+  enumeration_result
 
 let convert_cooperative_vector_matrix_nv arg_device arg_info =
   let result = Vk_fn.convert_cooperative_vector_matrix_nv (arg_device) (addr arg_info) in
+  ignore (Sys.opaque_identity (arg_device, arg_info));
   check result;
   ()
 
 let cmd_convert_cooperative_vector_matrix_nv arg_command_buffer arg_infos =
   let array_infos = CArray.of_list (ConvertCooperativeVectorMatrixInfoNV.t) arg_infos in
   let pointer_infos = if arg_infos = [] then Vk_base.null_ptr (ConvertCooperativeVectorMatrixInfoNV.t) else CArray.start array_infos in
-  Vk_fn.cmd_convert_cooperative_vector_matrix_nv (arg_command_buffer) (List.length arg_infos) (pointer_infos)
+  Vk_fn.cmd_convert_cooperative_vector_matrix_nv (arg_command_buffer) (List.length arg_infos) (pointer_infos);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_infos, array_infos));
+  ()
 
 let cmd_dispatch_tile_qcom arg_command_buffer arg_dispatch_tile_info =
-  Vk_fn.cmd_dispatch_tile_qcom (arg_command_buffer) (addr arg_dispatch_tile_info)
+  Vk_fn.cmd_dispatch_tile_qcom (arg_command_buffer) (addr arg_dispatch_tile_info);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_dispatch_tile_info));
+  ()
 
 let cmd_begin_per_tile_execution_qcom arg_command_buffer arg_per_tile_begin_info =
-  Vk_fn.cmd_begin_per_tile_execution_qcom (arg_command_buffer) (addr arg_per_tile_begin_info)
+  Vk_fn.cmd_begin_per_tile_execution_qcom (arg_command_buffer) (addr arg_per_tile_begin_info);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_per_tile_begin_info));
+  ()
 
 let cmd_end_per_tile_execution_qcom arg_command_buffer arg_per_tile_end_info =
-  Vk_fn.cmd_end_per_tile_execution_qcom (arg_command_buffer) (addr arg_per_tile_end_info)
+  Vk_fn.cmd_end_per_tile_execution_qcom (arg_command_buffer) (addr arg_per_tile_end_info);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_per_tile_end_info));
+  ()
 
 let create_external_compute_queue_nv ?allocator:arg_allocator arg_device arg_create_info =
   let output = allocate (ExternalComputeQueueNV.t) (ExternalComputeQueueNV.null) in
   let result = Vk_fn.create_external_compute_queue_nv (arg_device) (addr arg_create_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
+  ignore (Sys.opaque_identity (arg_device, arg_create_info, arg_allocator));
   check result;
   !@ output
 
 let destroy_external_compute_queue_nv arg_device arg_external_queue ?allocator:arg_allocator () =
-  Vk_fn.destroy_external_compute_queue_nv (arg_device) (arg_external_queue) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x))
+  Vk_fn.destroy_external_compute_queue_nv (arg_device) (arg_external_queue) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x));
+  ignore (Sys.opaque_identity (arg_device, arg_external_queue, arg_allocator));
+  ()
 
 let get_external_compute_queue_data_nv arg_external_queue arg_params arg_data =
-  Vk_fn.get_external_compute_queue_data_nv (arg_external_queue) (addr arg_params) (arg_data)
+  Vk_fn.get_external_compute_queue_data_nv (arg_external_queue) (addr arg_params) (arg_data);
+  ignore (Sys.opaque_identity (arg_external_queue, arg_params, arg_data));
+  ()
 
 let enumerate_physical_device_shader_instrumentation_metrics_arm arg_physical_device =
   let count = allocate Vk_base.uint32 0 in
@@ -3598,77 +4688,106 @@ let enumerate_physical_device_shader_instrumentation_metrics_arm arg_physical_de
       CArray.to_list (CArray.from_ptr (CArray.start storage) (!@ count))
     end
   in
-  fetch ()
+  let enumeration_result = fetch () in
+  ignore (Sys.opaque_identity (arg_physical_device));
+  enumeration_result
 
 let create_shader_instrumentation_arm ?allocator:arg_allocator arg_device arg_create_info =
   let output = allocate (ShaderInstrumentationARM.t) (ShaderInstrumentationARM.null) in
   let result = Vk_fn.create_shader_instrumentation_arm (arg_device) (addr arg_create_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
+  ignore (Sys.opaque_identity (arg_device, arg_create_info, arg_allocator));
   check result;
   !@ output
 
 let destroy_shader_instrumentation_arm arg_device arg_instrumentation ?allocator:arg_allocator () =
-  Vk_fn.destroy_shader_instrumentation_arm (arg_device) (arg_instrumentation) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x))
+  Vk_fn.destroy_shader_instrumentation_arm (arg_device) (arg_instrumentation) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x));
+  ignore (Sys.opaque_identity (arg_device, arg_instrumentation, arg_allocator));
+  ()
 
 let cmd_begin_shader_instrumentation_arm arg_command_buffer arg_instrumentation =
-  Vk_fn.cmd_begin_shader_instrumentation_arm (arg_command_buffer) (arg_instrumentation)
+  Vk_fn.cmd_begin_shader_instrumentation_arm (arg_command_buffer) (arg_instrumentation);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_instrumentation));
+  ()
 
 let cmd_end_shader_instrumentation_arm arg_command_buffer =
-  Vk_fn.cmd_end_shader_instrumentation_arm (arg_command_buffer)
+  Vk_fn.cmd_end_shader_instrumentation_arm (arg_command_buffer);
+  ignore (Sys.opaque_identity (arg_command_buffer));
+  ()
 
 let get_shader_instrumentation_values_arm arg_device arg_instrumentation arg_metric_block_count arg_metric_values arg_flags =
   let result = Vk_fn.get_shader_instrumentation_values_arm (arg_device) (arg_instrumentation) (arg_metric_block_count) (arg_metric_values) (arg_flags) in
+  ignore (Sys.opaque_identity (arg_device, arg_instrumentation, arg_metric_block_count, arg_metric_values, arg_flags));
   check result;
   ()
 
 let clear_shader_instrumentation_metrics_arm arg_device arg_instrumentation =
-  Vk_fn.clear_shader_instrumentation_metrics_arm (arg_device) (arg_instrumentation)
+  Vk_fn.clear_shader_instrumentation_metrics_arm (arg_device) (arg_instrumentation);
+  ignore (Sys.opaque_identity (arg_device, arg_instrumentation));
+  ()
 
 let create_tensor_arm ?allocator:arg_allocator arg_device arg_create_info =
   let output = allocate (TensorARM.t) (TensorARM.null) in
   let result = Vk_fn.create_tensor_arm (arg_device) (addr arg_create_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
+  ignore (Sys.opaque_identity (arg_device, arg_create_info, arg_allocator));
   check result;
   !@ output
 
 let destroy_tensor_arm arg_device arg_tensor ?allocator:arg_allocator () =
-  Vk_fn.destroy_tensor_arm (arg_device) (arg_tensor) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x))
+  Vk_fn.destroy_tensor_arm (arg_device) (arg_tensor) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x));
+  ignore (Sys.opaque_identity (arg_device, arg_tensor, arg_allocator));
+  ()
 
 let create_tensor_view_arm ?allocator:arg_allocator arg_device arg_create_info =
   let output = allocate (TensorViewARM.t) (TensorViewARM.null) in
   let result = Vk_fn.create_tensor_view_arm (arg_device) (addr arg_create_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
+  ignore (Sys.opaque_identity (arg_device, arg_create_info, arg_allocator));
   check result;
   !@ output
 
 let destroy_tensor_view_arm arg_device arg_tensor_view ?allocator:arg_allocator () =
-  Vk_fn.destroy_tensor_view_arm (arg_device) (arg_tensor_view) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x))
+  Vk_fn.destroy_tensor_view_arm (arg_device) (arg_tensor_view) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x));
+  ignore (Sys.opaque_identity (arg_device, arg_tensor_view, arg_allocator));
+  ()
 
 let get_tensor_memory_requirements_arm arg_device arg_info arg_memory_requirements =
-  Vk_fn.get_tensor_memory_requirements_arm (arg_device) (addr arg_info) (addr arg_memory_requirements)
+  Vk_fn.get_tensor_memory_requirements_arm (arg_device) (addr arg_info) (addr arg_memory_requirements);
+  ignore (Sys.opaque_identity (arg_device, arg_info, arg_memory_requirements));
+  ()
 
 let bind_tensor_memory_arm arg_device arg_bind_infos =
   let array_bind_infos = CArray.of_list (BindTensorMemoryInfoARM.t) arg_bind_infos in
   let pointer_bind_infos = if arg_bind_infos = [] then Vk_base.null_ptr (BindTensorMemoryInfoARM.t) else CArray.start array_bind_infos in
   let result = Vk_fn.bind_tensor_memory_arm (arg_device) (List.length arg_bind_infos) (pointer_bind_infos) in
+  ignore (Sys.opaque_identity (arg_device, arg_bind_infos, array_bind_infos));
   check result;
   ()
 
 let get_device_tensor_memory_requirements_arm arg_device arg_info arg_memory_requirements =
-  Vk_fn.get_device_tensor_memory_requirements_arm (arg_device) (addr arg_info) (addr arg_memory_requirements)
+  Vk_fn.get_device_tensor_memory_requirements_arm (arg_device) (addr arg_info) (addr arg_memory_requirements);
+  ignore (Sys.opaque_identity (arg_device, arg_info, arg_memory_requirements));
+  ()
 
 let cmd_copy_tensor_arm arg_command_buffer arg_copy_tensor_info =
-  Vk_fn.cmd_copy_tensor_arm (arg_command_buffer) (addr arg_copy_tensor_info)
+  Vk_fn.cmd_copy_tensor_arm (arg_command_buffer) (addr arg_copy_tensor_info);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_copy_tensor_info));
+  ()
 
 let get_tensor_opaque_capture_descriptor_data_arm arg_device arg_info arg_data =
   let result = Vk_fn.get_tensor_opaque_capture_descriptor_data_arm (arg_device) (addr arg_info) (arg_data) in
+  ignore (Sys.opaque_identity (arg_device, arg_info, arg_data));
   check result;
   ()
 
 let get_tensor_view_opaque_capture_descriptor_data_arm arg_device arg_info arg_data =
   let result = Vk_fn.get_tensor_view_opaque_capture_descriptor_data_arm (arg_device) (addr arg_info) (arg_data) in
+  ignore (Sys.opaque_identity (arg_device, arg_info, arg_data));
   check result;
   ()
 
 let get_physical_device_external_tensor_properties_arm arg_physical_device arg_external_tensor_info arg_external_tensor_properties =
-  Vk_fn.get_physical_device_external_tensor_properties_arm (arg_physical_device) (addr arg_external_tensor_info) (addr arg_external_tensor_properties)
+  Vk_fn.get_physical_device_external_tensor_properties_arm (arg_physical_device) (addr arg_external_tensor_info) (addr arg_external_tensor_properties);
+  ignore (Sys.opaque_identity (arg_physical_device, arg_external_tensor_info, arg_external_tensor_properties));
+  ()
 
 let create_data_graph_pipelines_arm ?allocator:arg_allocator arg_device arg_deferred_operation arg_pipeline_cache arg_create_infos =
   let array_create_infos = CArray.of_list (DataGraphPipelineCreateInfoARM.t) arg_create_infos in
@@ -3676,12 +4795,14 @@ let create_data_graph_pipelines_arm ?allocator:arg_allocator arg_device arg_defe
   let output_count = List.length arg_create_infos in
   let storage = CArray.make (Pipeline.t) output_count in
   let result = Vk_fn.create_data_graph_pipelines_arm (arg_device) (arg_deferred_operation) (arg_pipeline_cache) (List.length arg_create_infos) (pointer_create_infos) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (CArray.start storage) in
+  ignore (Sys.opaque_identity (arg_device, arg_deferred_operation, arg_pipeline_cache, arg_create_infos, array_create_infos, arg_allocator));
   check result;
   (result, (CArray.to_list storage))
 
 let create_data_graph_pipeline_session_arm ?allocator:arg_allocator arg_device arg_create_info =
   let output = allocate (DataGraphPipelineSessionARM.t) (DataGraphPipelineSessionARM.null) in
   let result = Vk_fn.create_data_graph_pipeline_session_arm (arg_device) (addr arg_create_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
+  ignore (Sys.opaque_identity (arg_device, arg_create_info, arg_allocator));
   check result;
   !@ output
 
@@ -3699,23 +4820,32 @@ let get_data_graph_pipeline_session_bind_point_requirements_arm arg_device arg_i
       CArray.to_list (CArray.from_ptr (CArray.start storage) (!@ count))
     end
   in
-  fetch ()
+  let enumeration_result = fetch () in
+  ignore (Sys.opaque_identity (arg_device, arg_info));
+  enumeration_result
 
 let get_data_graph_pipeline_session_memory_requirements_arm arg_device arg_info arg_memory_requirements =
-  Vk_fn.get_data_graph_pipeline_session_memory_requirements_arm (arg_device) (addr arg_info) (addr arg_memory_requirements)
+  Vk_fn.get_data_graph_pipeline_session_memory_requirements_arm (arg_device) (addr arg_info) (addr arg_memory_requirements);
+  ignore (Sys.opaque_identity (arg_device, arg_info, arg_memory_requirements));
+  ()
 
 let bind_data_graph_pipeline_session_memory_arm arg_device arg_bind_infos =
   let array_bind_infos = CArray.of_list (BindDataGraphPipelineSessionMemoryInfoARM.t) arg_bind_infos in
   let pointer_bind_infos = if arg_bind_infos = [] then Vk_base.null_ptr (BindDataGraphPipelineSessionMemoryInfoARM.t) else CArray.start array_bind_infos in
   let result = Vk_fn.bind_data_graph_pipeline_session_memory_arm (arg_device) (List.length arg_bind_infos) (pointer_bind_infos) in
+  ignore (Sys.opaque_identity (arg_device, arg_bind_infos, array_bind_infos));
   check result;
   ()
 
 let destroy_data_graph_pipeline_session_arm arg_device arg_session ?allocator:arg_allocator () =
-  Vk_fn.destroy_data_graph_pipeline_session_arm (arg_device) (arg_session) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x))
+  Vk_fn.destroy_data_graph_pipeline_session_arm (arg_device) (arg_session) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x));
+  ignore (Sys.opaque_identity (arg_device, arg_session, arg_allocator));
+  ()
 
 let cmd_dispatch_data_graph_arm arg_command_buffer arg_session arg_info =
-  Vk_fn.cmd_dispatch_data_graph_arm (arg_command_buffer) (arg_session) (addr arg_info)
+  Vk_fn.cmd_dispatch_data_graph_arm (arg_command_buffer) (arg_session) (addr arg_info);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_session, arg_info));
+  ()
 
 let get_data_graph_pipeline_available_properties_arm arg_device arg_pipeline_info =
   let count = allocate Vk_base.uint32 0 in
@@ -3731,10 +4861,13 @@ let get_data_graph_pipeline_available_properties_arm arg_device arg_pipeline_inf
       CArray.to_list (CArray.from_ptr (CArray.start storage) (!@ count))
     end
   in
-  fetch ()
+  let enumeration_result = fetch () in
+  ignore (Sys.opaque_identity (arg_device, arg_pipeline_info));
+  enumeration_result
 
 let get_data_graph_pipeline_properties_arm arg_device arg_pipeline_info arg_properties_count arg_properties =
   let result = Vk_fn.get_data_graph_pipeline_properties_arm (arg_device) (addr arg_pipeline_info) (arg_properties_count) (addr arg_properties) in
+  ignore (Sys.opaque_identity (arg_device, arg_pipeline_info, arg_properties_count, arg_properties));
   check result;
   ()
 
@@ -3752,29 +4885,37 @@ let get_physical_device_queue_family_data_graph_properties_arm arg_physical_devi
       CArray.to_list (CArray.from_ptr (CArray.start storage) (!@ count))
     end
   in
-  fetch ()
+  let enumeration_result = fetch () in
+  ignore (Sys.opaque_identity (arg_physical_device, arg_queue_family_index));
+  enumeration_result
 
 let get_physical_device_queue_family_data_graph_processing_engine_properties_arm arg_physical_device arg_queue_family_data_graph_processing_engine_info arg_queue_family_data_graph_processing_engine_properties =
-  Vk_fn.get_physical_device_queue_family_data_graph_processing_engine_properties_arm (arg_physical_device) (addr arg_queue_family_data_graph_processing_engine_info) (addr arg_queue_family_data_graph_processing_engine_properties)
+  Vk_fn.get_physical_device_queue_family_data_graph_processing_engine_properties_arm (arg_physical_device) (addr arg_queue_family_data_graph_processing_engine_info) (addr arg_queue_family_data_graph_processing_engine_properties);
+  ignore (Sys.opaque_identity (arg_physical_device, arg_queue_family_data_graph_processing_engine_info, arg_queue_family_data_graph_processing_engine_properties));
+  ()
 
 let get_native_buffer_properties_ohos arg_device arg_buffer arg_properties =
   let result = Vk_fn.get_native_buffer_properties_ohos (arg_device) (arg_buffer) (addr arg_properties) in
+  ignore (Sys.opaque_identity (arg_device, arg_buffer, arg_properties));
   check result;
   ()
 
 let get_memory_native_buffer_ohos arg_device arg_info =
   let output = allocate (ptr (void)) (Vk_base.null_ptr (void)) in
   let result = Vk_fn.get_memory_native_buffer_ohos (arg_device) (addr arg_info) (output) in
+  ignore (Sys.opaque_identity (arg_device, arg_info));
   check result;
   !@ output
 
 let get_swapchain_gralloc_usage_ohos arg_device arg_format arg_image_usage arg_gralloc_usage =
   let result = Vk_fn.get_swapchain_gralloc_usage_ohos (arg_device) (arg_format) (arg_image_usage) (arg_gralloc_usage) in
+  ignore (Sys.opaque_identity (arg_device, arg_format, arg_image_usage, arg_gralloc_usage));
   check result;
   ()
 
 let acquire_image_ohos arg_device arg_image arg_native_fence_fd arg_semaphore arg_fence =
   let result = Vk_fn.acquire_image_ohos (arg_device) (arg_image) (arg_native_fence_fd) (arg_semaphore) (arg_fence) in
+  ignore (Sys.opaque_identity (arg_device, arg_image, arg_native_fence_fd, arg_semaphore, arg_fence));
   check result;
   ()
 
@@ -3783,11 +4924,13 @@ let queue_signal_release_image_ohos arg_queue arg_wait_semaphores arg_image =
   let pointer_wait_semaphores = if arg_wait_semaphores = [] then Vk_base.null_ptr (Semaphore.t) else CArray.start array_wait_semaphores in
   let output = allocate (Vk_base.int32) (0) in
   let result = Vk_fn.queue_signal_release_image_ohos (arg_queue) (List.length arg_wait_semaphores) (pointer_wait_semaphores) (arg_image) (output) in
+  ignore (Sys.opaque_identity (arg_queue, arg_wait_semaphores, array_wait_semaphores, arg_image));
   check result;
   !@ output
 
 let queue_set_perf_hint_qcom arg_queue arg_perf_hint_info =
   let result = Vk_fn.queue_set_perf_hint_qcom (arg_queue) (addr arg_perf_hint_info) in
+  ignore (Sys.opaque_identity (arg_queue, arg_perf_hint_info));
   check result;
   ()
 
@@ -3805,10 +4948,14 @@ let enumerate_physical_device_queue_family_performance_counters_by_region_arm ar
       CArray.to_list (CArray.from_ptr (CArray.start storage) (!@ count))
     end
   in
-  fetch ()
+  let enumeration_result = fetch () in
+  ignore (Sys.opaque_identity (arg_physical_device, arg_queue_family_index, arg_counter_descriptions));
+  enumeration_result
 
 let cmd_set_compute_occupancy_priority_nv arg_command_buffer arg_parameters =
-  Vk_fn.cmd_set_compute_occupancy_priority_nv (arg_command_buffer) (addr arg_parameters)
+  Vk_fn.cmd_set_compute_occupancy_priority_nv (arg_command_buffer) (addr arg_parameters);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_parameters));
+  ()
 
 let write_sampler_descriptors_ext arg_device arg_samplers arg_descriptors =
   let array_samplers = CArray.of_list (SamplerCreateInfo.t) arg_samplers in
@@ -3817,6 +4964,7 @@ let write_sampler_descriptors_ext arg_device arg_samplers arg_descriptors =
   let array_descriptors = CArray.of_list (HostAddressRangeEXT.t) arg_descriptors in
   let pointer_descriptors = if arg_descriptors = [] then Vk_base.null_ptr (HostAddressRangeEXT.t) else CArray.start array_descriptors in
   let result = Vk_fn.write_sampler_descriptors_ext (arg_device) (List.length arg_samplers) (pointer_samplers) (pointer_descriptors) in
+  ignore (Sys.opaque_identity (arg_device, arg_samplers, array_samplers, arg_descriptors, array_descriptors));
   check result;
   ()
 
@@ -3827,26 +4975,36 @@ let write_resource_descriptors_ext arg_device arg_resources arg_descriptors =
   let array_descriptors = CArray.of_list (HostAddressRangeEXT.t) arg_descriptors in
   let pointer_descriptors = if arg_descriptors = [] then Vk_base.null_ptr (HostAddressRangeEXT.t) else CArray.start array_descriptors in
   let result = Vk_fn.write_resource_descriptors_ext (arg_device) (List.length arg_resources) (pointer_resources) (pointer_descriptors) in
+  ignore (Sys.opaque_identity (arg_device, arg_resources, array_resources, arg_descriptors, array_descriptors));
   check result;
   ()
 
 let cmd_bind_sampler_heap_ext arg_command_buffer arg_bind_info =
-  Vk_fn.cmd_bind_sampler_heap_ext (arg_command_buffer) (addr arg_bind_info)
+  Vk_fn.cmd_bind_sampler_heap_ext (arg_command_buffer) (addr arg_bind_info);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_bind_info));
+  ()
 
 let cmd_bind_resource_heap_ext arg_command_buffer arg_bind_info =
-  Vk_fn.cmd_bind_resource_heap_ext (arg_command_buffer) (addr arg_bind_info)
+  Vk_fn.cmd_bind_resource_heap_ext (arg_command_buffer) (addr arg_bind_info);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_bind_info));
+  ()
 
 let cmd_push_data_ext arg_command_buffer arg_push_data_info =
-  Vk_fn.cmd_push_data_ext (arg_command_buffer) (addr arg_push_data_info)
+  Vk_fn.cmd_push_data_ext (arg_command_buffer) (addr arg_push_data_info);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_push_data_info));
+  ()
 
 let register_custom_border_color_ext arg_device arg_border_color arg_request_index =
   let output = allocate (Vk_base.uint32) (0) in
   let result = Vk_fn.register_custom_border_color_ext (arg_device) (addr arg_border_color) (arg_request_index) (output) in
+  ignore (Sys.opaque_identity (arg_device, arg_border_color, arg_request_index));
   check result;
   !@ output
 
 let unregister_custom_border_color_ext arg_device arg_index =
-  Vk_fn.unregister_custom_border_color_ext (arg_device) (arg_index)
+  Vk_fn.unregister_custom_border_color_ext (arg_device) (arg_index);
+  ignore (Sys.opaque_identity (arg_device, arg_index));
+  ()
 
 let get_image_opaque_capture_data_ext arg_device arg_images =
   let array_images = CArray.of_list (Image.t) arg_images in
@@ -3854,11 +5012,14 @@ let get_image_opaque_capture_data_ext arg_device arg_images =
   let output_count = List.length arg_images in
   let storage = CArray.make (HostAddressRangeEXT.t) output_count in
   let result = Vk_fn.get_image_opaque_capture_data_ext (arg_device) (List.length arg_images) (pointer_images) (CArray.start storage) in
+  ignore (Sys.opaque_identity (arg_device, arg_images, array_images));
   check result;
   (CArray.to_list storage)
 
 let get_physical_device_descriptor_size_ext arg_physical_device arg_descriptor_type =
-  Vk_fn.get_physical_device_descriptor_size_ext (arg_physical_device) (arg_descriptor_type)
+  let call_result = Vk_fn.get_physical_device_descriptor_size_ext (arg_physical_device) (arg_descriptor_type) in
+  ignore (Sys.opaque_identity (arg_physical_device, arg_descriptor_type));
+  call_result
 
 let get_tensor_opaque_capture_data_arm arg_device arg_tensors =
   let array_tensors = CArray.of_list (TensorARM.t) arg_tensors in
@@ -3866,93 +5027,140 @@ let get_tensor_opaque_capture_data_arm arg_device arg_tensors =
   let output_count = List.length arg_tensors in
   let storage = CArray.make (HostAddressRangeEXT.t) output_count in
   let result = Vk_fn.get_tensor_opaque_capture_data_arm (arg_device) (List.length arg_tensors) (pointer_tensors) (CArray.start storage) in
+  ignore (Sys.opaque_identity (arg_device, arg_tensors, array_tensors));
   check result;
   (CArray.to_list storage)
 
 let cmd_copy_memory_khr arg_command_buffer arg_copy_memory_info =
-  Vk_fn.cmd_copy_memory_khr (arg_command_buffer) (addr arg_copy_memory_info)
+  Vk_fn.cmd_copy_memory_khr (arg_command_buffer) (addr arg_copy_memory_info);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_copy_memory_info));
+  ()
 
 let cmd_copy_memory_to_image_khr arg_command_buffer arg_copy_memory_info =
-  Vk_fn.cmd_copy_memory_to_image_khr (arg_command_buffer) (addr arg_copy_memory_info)
+  Vk_fn.cmd_copy_memory_to_image_khr (arg_command_buffer) (addr arg_copy_memory_info);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_copy_memory_info));
+  ()
 
 let cmd_copy_image_to_memory_khr arg_command_buffer arg_copy_memory_info =
-  Vk_fn.cmd_copy_image_to_memory_khr (arg_command_buffer) (addr arg_copy_memory_info)
+  Vk_fn.cmd_copy_image_to_memory_khr (arg_command_buffer) (addr arg_copy_memory_info);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_copy_memory_info));
+  ()
 
 let cmd_update_memory_khr arg_command_buffer arg_dst_range arg_dst_flags arg_data_size arg_data =
-  Vk_fn.cmd_update_memory_khr (arg_command_buffer) (addr arg_dst_range) (arg_dst_flags) (arg_data_size) (arg_data)
+  Vk_fn.cmd_update_memory_khr (arg_command_buffer) (addr arg_dst_range) (arg_dst_flags) (arg_data_size) (arg_data);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_dst_range, arg_dst_flags, arg_data_size, arg_data));
+  ()
 
 let cmd_fill_memory_khr arg_command_buffer arg_dst_range arg_dst_flags arg_data =
-  Vk_fn.cmd_fill_memory_khr (arg_command_buffer) (addr arg_dst_range) (arg_dst_flags) (arg_data)
+  Vk_fn.cmd_fill_memory_khr (arg_command_buffer) (addr arg_dst_range) (arg_dst_flags) (arg_data);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_dst_range, arg_dst_flags, arg_data));
+  ()
 
 let cmd_copy_query_pool_results_to_memory_khr arg_command_buffer arg_query_pool arg_first_query arg_query_count arg_dst_range arg_dst_flags arg_query_result_flags =
-  Vk_fn.cmd_copy_query_pool_results_to_memory_khr (arg_command_buffer) (arg_query_pool) (arg_first_query) (arg_query_count) (addr arg_dst_range) (arg_dst_flags) (arg_query_result_flags)
+  Vk_fn.cmd_copy_query_pool_results_to_memory_khr (arg_command_buffer) (arg_query_pool) (arg_first_query) (arg_query_count) (addr arg_dst_range) (arg_dst_flags) (arg_query_result_flags);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_query_pool, arg_first_query, arg_query_count, arg_dst_range, arg_dst_flags, arg_query_result_flags));
+  ()
 
 let cmd_begin_conditional_rendering_2_ext arg_command_buffer arg_conditional_rendering_begin =
-  Vk_fn.cmd_begin_conditional_rendering_2_ext (arg_command_buffer) (addr arg_conditional_rendering_begin)
+  Vk_fn.cmd_begin_conditional_rendering_2_ext (arg_command_buffer) (addr arg_conditional_rendering_begin);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_conditional_rendering_begin));
+  ()
 
 let cmd_bind_transform_feedback_buffers_2_ext arg_command_buffer arg_first_binding arg_binding_infos =
   let array_binding_infos = CArray.of_list (BindTransformFeedbackBuffer2InfoEXT.t) arg_binding_infos in
   let pointer_binding_infos = if arg_binding_infos = [] then Vk_base.null_ptr (BindTransformFeedbackBuffer2InfoEXT.t) else CArray.start array_binding_infos in
-  Vk_fn.cmd_bind_transform_feedback_buffers_2_ext (arg_command_buffer) (arg_first_binding) (List.length arg_binding_infos) (pointer_binding_infos)
+  Vk_fn.cmd_bind_transform_feedback_buffers_2_ext (arg_command_buffer) (arg_first_binding) (List.length arg_binding_infos) (pointer_binding_infos);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_first_binding, arg_binding_infos, array_binding_infos));
+  ()
 
 let cmd_begin_transform_feedback_2_ext arg_command_buffer arg_first_counter_range arg_counter_infos =
   let array_counter_infos = CArray.of_list (BindTransformFeedbackBuffer2InfoEXT.t) arg_counter_infos in
   let pointer_counter_infos = if arg_counter_infos = [] then Vk_base.null_ptr (BindTransformFeedbackBuffer2InfoEXT.t) else CArray.start array_counter_infos in
-  Vk_fn.cmd_begin_transform_feedback_2_ext (arg_command_buffer) (arg_first_counter_range) (List.length arg_counter_infos) (pointer_counter_infos)
+  Vk_fn.cmd_begin_transform_feedback_2_ext (arg_command_buffer) (arg_first_counter_range) (List.length arg_counter_infos) (pointer_counter_infos);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_first_counter_range, arg_counter_infos, array_counter_infos));
+  ()
 
 let cmd_end_transform_feedback_2_ext arg_command_buffer arg_first_counter_range arg_counter_infos =
   let array_counter_infos = CArray.of_list (BindTransformFeedbackBuffer2InfoEXT.t) arg_counter_infos in
   let pointer_counter_infos = if arg_counter_infos = [] then Vk_base.null_ptr (BindTransformFeedbackBuffer2InfoEXT.t) else CArray.start array_counter_infos in
-  Vk_fn.cmd_end_transform_feedback_2_ext (arg_command_buffer) (arg_first_counter_range) (List.length arg_counter_infos) (pointer_counter_infos)
+  Vk_fn.cmd_end_transform_feedback_2_ext (arg_command_buffer) (arg_first_counter_range) (List.length arg_counter_infos) (pointer_counter_infos);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_first_counter_range, arg_counter_infos, array_counter_infos));
+  ()
 
 let cmd_draw_indirect_byte_count_2_ext arg_command_buffer arg_instance_count arg_first_instance arg_counter_info arg_counter_offset arg_vertex_stride =
-  Vk_fn.cmd_draw_indirect_byte_count_2_ext (arg_command_buffer) (arg_instance_count) (arg_first_instance) (addr arg_counter_info) (arg_counter_offset) (arg_vertex_stride)
+  Vk_fn.cmd_draw_indirect_byte_count_2_ext (arg_command_buffer) (arg_instance_count) (arg_first_instance) (addr arg_counter_info) (arg_counter_offset) (arg_vertex_stride);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_instance_count, arg_first_instance, arg_counter_info, arg_counter_offset, arg_vertex_stride));
+  ()
 
 let cmd_write_marker_to_memory_amd arg_command_buffer arg_info =
-  Vk_fn.cmd_write_marker_to_memory_amd (arg_command_buffer) (addr arg_info)
+  Vk_fn.cmd_write_marker_to_memory_amd (arg_command_buffer) (addr arg_info);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_info));
+  ()
 
 let cmd_bind_index_buffer_3_khr arg_command_buffer arg_info =
-  Vk_fn.cmd_bind_index_buffer_3_khr (arg_command_buffer) (addr arg_info)
+  Vk_fn.cmd_bind_index_buffer_3_khr (arg_command_buffer) (addr arg_info);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_info));
+  ()
 
 let cmd_bind_vertex_buffers_3_khr arg_command_buffer arg_first_binding arg_binding_infos =
   let array_binding_infos = CArray.of_list (BindVertexBuffer3InfoKHR.t) arg_binding_infos in
   let pointer_binding_infos = if arg_binding_infos = [] then Vk_base.null_ptr (BindVertexBuffer3InfoKHR.t) else CArray.start array_binding_infos in
-  Vk_fn.cmd_bind_vertex_buffers_3_khr (arg_command_buffer) (arg_first_binding) (List.length arg_binding_infos) (pointer_binding_infos)
+  Vk_fn.cmd_bind_vertex_buffers_3_khr (arg_command_buffer) (arg_first_binding) (List.length arg_binding_infos) (pointer_binding_infos);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_first_binding, arg_binding_infos, array_binding_infos));
+  ()
 
 let cmd_draw_indirect_2_khr arg_command_buffer arg_info =
-  Vk_fn.cmd_draw_indirect_2_khr (arg_command_buffer) (addr arg_info)
+  Vk_fn.cmd_draw_indirect_2_khr (arg_command_buffer) (addr arg_info);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_info));
+  ()
 
 let cmd_draw_indexed_indirect_2_khr arg_command_buffer arg_info =
-  Vk_fn.cmd_draw_indexed_indirect_2_khr (arg_command_buffer) (addr arg_info)
+  Vk_fn.cmd_draw_indexed_indirect_2_khr (arg_command_buffer) (addr arg_info);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_info));
+  ()
 
 let cmd_draw_indirect_count_2_khr arg_command_buffer arg_info =
-  Vk_fn.cmd_draw_indirect_count_2_khr (arg_command_buffer) (addr arg_info)
+  Vk_fn.cmd_draw_indirect_count_2_khr (arg_command_buffer) (addr arg_info);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_info));
+  ()
 
 let cmd_draw_indexed_indirect_count_2_khr arg_command_buffer arg_info =
-  Vk_fn.cmd_draw_indexed_indirect_count_2_khr (arg_command_buffer) (addr arg_info)
+  Vk_fn.cmd_draw_indexed_indirect_count_2_khr (arg_command_buffer) (addr arg_info);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_info));
+  ()
 
 let cmd_draw_mesh_tasks_indirect_2_ext arg_command_buffer arg_info =
-  Vk_fn.cmd_draw_mesh_tasks_indirect_2_ext (arg_command_buffer) (addr arg_info)
+  Vk_fn.cmd_draw_mesh_tasks_indirect_2_ext (arg_command_buffer) (addr arg_info);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_info));
+  ()
 
 let cmd_draw_mesh_tasks_indirect_count_2_ext arg_command_buffer arg_info =
-  Vk_fn.cmd_draw_mesh_tasks_indirect_count_2_ext (arg_command_buffer) (addr arg_info)
+  Vk_fn.cmd_draw_mesh_tasks_indirect_count_2_ext (arg_command_buffer) (addr arg_info);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_info));
+  ()
 
 let cmd_dispatch_indirect_2_khr arg_command_buffer arg_info =
-  Vk_fn.cmd_dispatch_indirect_2_khr (arg_command_buffer) (addr arg_info)
+  Vk_fn.cmd_dispatch_indirect_2_khr (arg_command_buffer) (addr arg_info);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_info));
+  ()
 
 let create_acceleration_structure_2_khr ?allocator:arg_allocator arg_device arg_create_info =
   let output = allocate (AccelerationStructureKHR.t) (AccelerationStructureKHR.null) in
   let result = Vk_fn.create_acceleration_structure_2_khr (arg_device) (addr arg_create_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
+  ignore (Sys.opaque_identity (arg_device, arg_create_info, arg_allocator));
   check result;
   !@ output
 
 let get_physical_device_queue_family_data_graph_engine_operation_properties_arm arg_physical_device arg_queue_family_index arg_queue_family_data_graph_properties arg_properties =
   let result = Vk_fn.get_physical_device_queue_family_data_graph_engine_operation_properties_arm (arg_physical_device) (arg_queue_family_index) (addr arg_queue_family_data_graph_properties) (addr arg_properties) in
+  ignore (Sys.opaque_identity (arg_physical_device, arg_queue_family_index, arg_queue_family_data_graph_properties, arg_properties));
   check result;
   ()
 
 let cmd_set_dispatch_parameters_arm arg_command_buffer arg_dispatch_parameters =
-  Vk_fn.cmd_set_dispatch_parameters_arm (arg_command_buffer) (addr arg_dispatch_parameters)
+  Vk_fn.cmd_set_dispatch_parameters_arm (arg_command_buffer) (addr arg_dispatch_parameters);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_dispatch_parameters));
+  ()
 
 let get_physical_device_queue_family_data_graph_optical_flow_image_formats_arm arg_physical_device arg_queue_family_index arg_queue_family_data_graph_properties arg_optical_flow_image_format_info =
   let count = allocate Vk_base.uint32 0 in
@@ -3968,27 +5176,39 @@ let get_physical_device_queue_family_data_graph_optical_flow_image_formats_arm a
       CArray.to_list (CArray.from_ptr (CArray.start storage) (!@ count))
     end
   in
-  fetch ()
+  let enumeration_result = fetch () in
+  ignore (Sys.opaque_identity (arg_physical_device, arg_queue_family_index, arg_queue_family_data_graph_properties, arg_optical_flow_image_format_info));
+  enumeration_result
 
 let reset_query_pool_ext arg_device arg_query_pool arg_first_query arg_query_count =
-  Vk_fn.reset_query_pool_ext (arg_device) (arg_query_pool) (arg_first_query) (arg_query_count)
+  Vk_fn.reset_query_pool_ext (arg_device) (arg_query_pool) (arg_first_query) (arg_query_count);
+  ignore (Sys.opaque_identity (arg_device, arg_query_pool, arg_first_query, arg_query_count));
+  ()
 
 let get_rendering_area_granularity_khr arg_device arg_rendering_area_info =
   let output = Extent2D.make () in
   Vk_fn.get_rendering_area_granularity_khr (arg_device) (addr arg_rendering_area_info) (addr output);
+  ignore (Sys.opaque_identity (arg_device, arg_rendering_area_info));
   output
 
 let get_physical_device_features_2_khr arg_physical_device arg_features =
-  Vk_fn.get_physical_device_features_2_khr (arg_physical_device) (addr arg_features)
+  Vk_fn.get_physical_device_features_2_khr (arg_physical_device) (addr arg_features);
+  ignore (Sys.opaque_identity (arg_physical_device, arg_features));
+  ()
 
 let get_physical_device_properties_2_khr arg_physical_device arg_properties =
-  Vk_fn.get_physical_device_properties_2_khr (arg_physical_device) (addr arg_properties)
+  Vk_fn.get_physical_device_properties_2_khr (arg_physical_device) (addr arg_properties);
+  ignore (Sys.opaque_identity (arg_physical_device, arg_properties));
+  ()
 
 let get_physical_device_format_properties_2_khr arg_physical_device arg_format arg_format_properties =
-  Vk_fn.get_physical_device_format_properties_2_khr (arg_physical_device) (arg_format) (addr arg_format_properties)
+  Vk_fn.get_physical_device_format_properties_2_khr (arg_physical_device) (arg_format) (addr arg_format_properties);
+  ignore (Sys.opaque_identity (arg_physical_device, arg_format, arg_format_properties));
+  ()
 
 let get_physical_device_image_format_properties_2_khr arg_physical_device arg_image_format_info arg_image_format_properties =
   let result = Vk_fn.get_physical_device_image_format_properties_2_khr (arg_physical_device) (addr arg_image_format_info) (addr arg_image_format_properties) in
+  ignore (Sys.opaque_identity (arg_physical_device, arg_image_format_info, arg_image_format_properties));
   check result;
   ()
 
@@ -4002,10 +5222,14 @@ let get_physical_device_queue_family_properties_2_khr arg_physical_device =
     Vk_fn.get_physical_device_queue_family_properties_2_khr (arg_physical_device) (count) (CArray.start storage);
     CArray.to_list (CArray.from_ptr (CArray.start storage) (!@ count))
   in
-  fetch ()
+  let enumeration_result = fetch () in
+  ignore (Sys.opaque_identity (arg_physical_device));
+  enumeration_result
 
 let get_physical_device_memory_properties_2_khr arg_physical_device arg_memory_properties =
-  Vk_fn.get_physical_device_memory_properties_2_khr (arg_physical_device) (addr arg_memory_properties)
+  Vk_fn.get_physical_device_memory_properties_2_khr (arg_physical_device) (addr arg_memory_properties);
+  ignore (Sys.opaque_identity (arg_physical_device, arg_memory_properties));
+  ()
 
 let get_physical_device_sparse_image_format_properties_2_khr arg_physical_device arg_format_info =
   let count = allocate Vk_base.uint32 0 in
@@ -4017,24 +5241,36 @@ let get_physical_device_sparse_image_format_properties_2_khr arg_physical_device
     Vk_fn.get_physical_device_sparse_image_format_properties_2_khr (arg_physical_device) (addr arg_format_info) (count) (CArray.start storage);
     CArray.to_list (CArray.from_ptr (CArray.start storage) (!@ count))
   in
-  fetch ()
+  let enumeration_result = fetch () in
+  ignore (Sys.opaque_identity (arg_physical_device, arg_format_info));
+  enumeration_result
 
 let cmd_push_descriptor_set_khr arg_command_buffer arg_pipeline_bind_point arg_layout arg_set arg_descriptor_writes =
   let array_descriptor_writes = CArray.of_list (WriteDescriptorSet.t) arg_descriptor_writes in
   let pointer_descriptor_writes = if arg_descriptor_writes = [] then Vk_base.null_ptr (WriteDescriptorSet.t) else CArray.start array_descriptor_writes in
-  Vk_fn.cmd_push_descriptor_set_khr (arg_command_buffer) (arg_pipeline_bind_point) (arg_layout) (arg_set) (List.length arg_descriptor_writes) (pointer_descriptor_writes)
+  Vk_fn.cmd_push_descriptor_set_khr (arg_command_buffer) (arg_pipeline_bind_point) (arg_layout) (arg_set) (List.length arg_descriptor_writes) (pointer_descriptor_writes);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_pipeline_bind_point, arg_layout, arg_set, arg_descriptor_writes, array_descriptor_writes));
+  ()
 
 let trim_command_pool_khr arg_device arg_command_pool arg_flags =
-  Vk_fn.trim_command_pool_khr (arg_device) (arg_command_pool) (arg_flags)
+  Vk_fn.trim_command_pool_khr (arg_device) (arg_command_pool) (arg_flags);
+  ignore (Sys.opaque_identity (arg_device, arg_command_pool, arg_flags));
+  ()
 
 let get_physical_device_external_buffer_properties_khr arg_physical_device arg_external_buffer_info arg_external_buffer_properties =
-  Vk_fn.get_physical_device_external_buffer_properties_khr (arg_physical_device) (addr arg_external_buffer_info) (addr arg_external_buffer_properties)
+  Vk_fn.get_physical_device_external_buffer_properties_khr (arg_physical_device) (addr arg_external_buffer_info) (addr arg_external_buffer_properties);
+  ignore (Sys.opaque_identity (arg_physical_device, arg_external_buffer_info, arg_external_buffer_properties));
+  ()
 
 let get_physical_device_external_semaphore_properties_khr arg_physical_device arg_external_semaphore_info arg_external_semaphore_properties =
-  Vk_fn.get_physical_device_external_semaphore_properties_khr (arg_physical_device) (addr arg_external_semaphore_info) (addr arg_external_semaphore_properties)
+  Vk_fn.get_physical_device_external_semaphore_properties_khr (arg_physical_device) (addr arg_external_semaphore_info) (addr arg_external_semaphore_properties);
+  ignore (Sys.opaque_identity (arg_physical_device, arg_external_semaphore_info, arg_external_semaphore_properties));
+  ()
 
 let get_physical_device_external_fence_properties_khr arg_physical_device arg_external_fence_info arg_external_fence_properties =
-  Vk_fn.get_physical_device_external_fence_properties_khr (arg_physical_device) (addr arg_external_fence_info) (addr arg_external_fence_properties)
+  Vk_fn.get_physical_device_external_fence_properties_khr (arg_physical_device) (addr arg_external_fence_info) (addr arg_external_fence_properties);
+  ignore (Sys.opaque_identity (arg_physical_device, arg_external_fence_info, arg_external_fence_properties));
+  ()
 
 let enumerate_physical_device_groups_khr arg_instance =
   let count = allocate Vk_base.uint32 0 in
@@ -4050,17 +5286,21 @@ let enumerate_physical_device_groups_khr arg_instance =
       CArray.to_list (CArray.from_ptr (CArray.start storage) (!@ count))
     end
   in
-  fetch ()
+  let enumeration_result = fetch () in
+  ignore (Sys.opaque_identity (arg_instance));
+  enumeration_result
 
 let get_device_group_peer_memory_features_khr arg_device arg_heap_index arg_local_device_index arg_remote_device_index =
   let output = allocate (PeerMemoryFeatureFlags.t) (PeerMemoryFeatureFlags.of_int 0) in
   Vk_fn.get_device_group_peer_memory_features_khr (arg_device) (arg_heap_index) (arg_local_device_index) (arg_remote_device_index) (output);
+  ignore (Sys.opaque_identity (arg_device, arg_heap_index, arg_local_device_index, arg_remote_device_index));
   !@ output
 
 let bind_buffer_memory_2_khr arg_device arg_bind_infos =
   let array_bind_infos = CArray.of_list (BindBufferMemoryInfo.t) arg_bind_infos in
   let pointer_bind_infos = if arg_bind_infos = [] then Vk_base.null_ptr (BindBufferMemoryInfo.t) else CArray.start array_bind_infos in
   let result = Vk_fn.bind_buffer_memory_2_khr (arg_device) (List.length arg_bind_infos) (pointer_bind_infos) in
+  ignore (Sys.opaque_identity (arg_device, arg_bind_infos, array_bind_infos));
   check result;
   ()
 
@@ -4068,35 +5308,51 @@ let bind_image_memory_2_khr arg_device arg_bind_infos =
   let array_bind_infos = CArray.of_list (BindImageMemoryInfo.t) arg_bind_infos in
   let pointer_bind_infos = if arg_bind_infos = [] then Vk_base.null_ptr (BindImageMemoryInfo.t) else CArray.start array_bind_infos in
   let result = Vk_fn.bind_image_memory_2_khr (arg_device) (List.length arg_bind_infos) (pointer_bind_infos) in
+  ignore (Sys.opaque_identity (arg_device, arg_bind_infos, array_bind_infos));
   check result;
   ()
 
 let cmd_set_device_mask_khr arg_command_buffer arg_device_mask =
-  Vk_fn.cmd_set_device_mask_khr (arg_command_buffer) (arg_device_mask)
+  Vk_fn.cmd_set_device_mask_khr (arg_command_buffer) (arg_device_mask);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_device_mask));
+  ()
 
 let cmd_dispatch_base_khr arg_command_buffer arg_base_group_x arg_base_group_y arg_base_group_z arg_group_count_x arg_group_count_y arg_group_count_z =
-  Vk_fn.cmd_dispatch_base_khr (arg_command_buffer) (arg_base_group_x) (arg_base_group_y) (arg_base_group_z) (arg_group_count_x) (arg_group_count_y) (arg_group_count_z)
+  Vk_fn.cmd_dispatch_base_khr (arg_command_buffer) (arg_base_group_x) (arg_base_group_y) (arg_base_group_z) (arg_group_count_x) (arg_group_count_y) (arg_group_count_z);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_base_group_x, arg_base_group_y, arg_base_group_z, arg_group_count_x, arg_group_count_y, arg_group_count_z));
+  ()
 
 let create_descriptor_update_template_khr ?allocator:arg_allocator arg_device arg_create_info =
   let output = allocate (DescriptorUpdateTemplate.t) (DescriptorUpdateTemplate.null) in
   let result = Vk_fn.create_descriptor_update_template_khr (arg_device) (addr arg_create_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
+  ignore (Sys.opaque_identity (arg_device, arg_create_info, arg_allocator));
   check result;
   !@ output
 
 let destroy_descriptor_update_template_khr arg_device arg_descriptor_update_template ?allocator:arg_allocator () =
-  Vk_fn.destroy_descriptor_update_template_khr (arg_device) (arg_descriptor_update_template) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x))
+  Vk_fn.destroy_descriptor_update_template_khr (arg_device) (arg_descriptor_update_template) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x));
+  ignore (Sys.opaque_identity (arg_device, arg_descriptor_update_template, arg_allocator));
+  ()
 
 let update_descriptor_set_with_template_khr arg_device arg_descriptor_set arg_descriptor_update_template arg_data =
-  Vk_fn.update_descriptor_set_with_template_khr (arg_device) (arg_descriptor_set) (arg_descriptor_update_template) (arg_data)
+  Vk_fn.update_descriptor_set_with_template_khr (arg_device) (arg_descriptor_set) (arg_descriptor_update_template) (arg_data);
+  ignore (Sys.opaque_identity (arg_device, arg_descriptor_set, arg_descriptor_update_template, arg_data));
+  ()
 
 let cmd_push_descriptor_set_with_template_khr arg_command_buffer arg_descriptor_update_template arg_layout arg_set arg_data =
-  Vk_fn.cmd_push_descriptor_set_with_template_khr (arg_command_buffer) (arg_descriptor_update_template) (arg_layout) (arg_set) (arg_data)
+  Vk_fn.cmd_push_descriptor_set_with_template_khr (arg_command_buffer) (arg_descriptor_update_template) (arg_layout) (arg_set) (arg_data);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_descriptor_update_template, arg_layout, arg_set, arg_data));
+  ()
 
 let get_buffer_memory_requirements_2_khr arg_device arg_info arg_memory_requirements =
-  Vk_fn.get_buffer_memory_requirements_2_khr (arg_device) (addr arg_info) (addr arg_memory_requirements)
+  Vk_fn.get_buffer_memory_requirements_2_khr (arg_device) (addr arg_info) (addr arg_memory_requirements);
+  ignore (Sys.opaque_identity (arg_device, arg_info, arg_memory_requirements));
+  ()
 
 let get_image_memory_requirements_2_khr arg_device arg_info arg_memory_requirements =
-  Vk_fn.get_image_memory_requirements_2_khr (arg_device) (addr arg_info) (addr arg_memory_requirements)
+  Vk_fn.get_image_memory_requirements_2_khr (arg_device) (addr arg_info) (addr arg_memory_requirements);
+  ignore (Sys.opaque_identity (arg_device, arg_info, arg_memory_requirements));
+  ()
 
 let get_image_sparse_memory_requirements_2_khr arg_device arg_info =
   let count = allocate Vk_base.uint32 0 in
@@ -4108,13 +5364,19 @@ let get_image_sparse_memory_requirements_2_khr arg_device arg_info =
     Vk_fn.get_image_sparse_memory_requirements_2_khr (arg_device) (addr arg_info) (count) (CArray.start storage);
     CArray.to_list (CArray.from_ptr (CArray.start storage) (!@ count))
   in
-  fetch ()
+  let enumeration_result = fetch () in
+  ignore (Sys.opaque_identity (arg_device, arg_info));
+  enumeration_result
 
 let get_device_buffer_memory_requirements_khr arg_device arg_info arg_memory_requirements =
-  Vk_fn.get_device_buffer_memory_requirements_khr (arg_device) (addr arg_info) (addr arg_memory_requirements)
+  Vk_fn.get_device_buffer_memory_requirements_khr (arg_device) (addr arg_info) (addr arg_memory_requirements);
+  ignore (Sys.opaque_identity (arg_device, arg_info, arg_memory_requirements));
+  ()
 
 let get_device_image_memory_requirements_khr arg_device arg_info arg_memory_requirements =
-  Vk_fn.get_device_image_memory_requirements_khr (arg_device) (addr arg_info) (addr arg_memory_requirements)
+  Vk_fn.get_device_image_memory_requirements_khr (arg_device) (addr arg_info) (addr arg_memory_requirements);
+  ignore (Sys.opaque_identity (arg_device, arg_info, arg_memory_requirements));
+  ()
 
 let get_device_image_sparse_memory_requirements_khr arg_device arg_info =
   let count = allocate Vk_base.uint32 0 in
@@ -4126,19 +5388,26 @@ let get_device_image_sparse_memory_requirements_khr arg_device arg_info =
     Vk_fn.get_device_image_sparse_memory_requirements_khr (arg_device) (addr arg_info) (count) (CArray.start storage);
     CArray.to_list (CArray.from_ptr (CArray.start storage) (!@ count))
   in
-  fetch ()
+  let enumeration_result = fetch () in
+  ignore (Sys.opaque_identity (arg_device, arg_info));
+  enumeration_result
 
 let create_sampler_ycbcr_conversion_khr ?allocator:arg_allocator arg_device arg_create_info =
   let output = allocate (SamplerYcbcrConversion.t) (SamplerYcbcrConversion.null) in
   let result = Vk_fn.create_sampler_ycbcr_conversion_khr (arg_device) (addr arg_create_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
+  ignore (Sys.opaque_identity (arg_device, arg_create_info, arg_allocator));
   check result;
   !@ output
 
 let destroy_sampler_ycbcr_conversion_khr arg_device arg_ycbcr_conversion ?allocator:arg_allocator () =
-  Vk_fn.destroy_sampler_ycbcr_conversion_khr (arg_device) (arg_ycbcr_conversion) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x))
+  Vk_fn.destroy_sampler_ycbcr_conversion_khr (arg_device) (arg_ycbcr_conversion) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x));
+  ignore (Sys.opaque_identity (arg_device, arg_ycbcr_conversion, arg_allocator));
+  ()
 
 let get_descriptor_set_layout_support_khr arg_device arg_create_info arg_support =
-  Vk_fn.get_descriptor_set_layout_support_khr (arg_device) (addr arg_create_info) (addr arg_support)
+  Vk_fn.get_descriptor_set_layout_support_khr (arg_device) (addr arg_create_info) (addr arg_support);
+  ignore (Sys.opaque_identity (arg_device, arg_create_info, arg_support));
+  ()
 
 let get_physical_device_calibrateable_time_domains_ext arg_physical_device =
   let count = allocate Vk_base.uint32 0 in
@@ -4154,7 +5423,9 @@ let get_physical_device_calibrateable_time_domains_ext arg_physical_device =
       CArray.to_list (CArray.from_ptr (CArray.start storage) (!@ count))
     end
   in
-  fetch ()
+  let enumeration_result = fetch () in
+  ignore (Sys.opaque_identity (arg_physical_device));
+  enumeration_result
 
 let get_calibrated_timestamps_ext arg_device arg_timestamp_infos arg_max_deviation =
   let array_timestamp_infos = CArray.of_list (CalibratedTimestampInfoKHR.t) arg_timestamp_infos in
@@ -4162,74 +5433,106 @@ let get_calibrated_timestamps_ext arg_device arg_timestamp_infos arg_max_deviati
   let output_count = List.length arg_timestamp_infos in
   let storage = CArray.make (Vk_base.uint64) output_count in
   let result = Vk_fn.get_calibrated_timestamps_ext (arg_device) (List.length arg_timestamp_infos) (pointer_timestamp_infos) (CArray.start storage) (arg_max_deviation) in
+  ignore (Sys.opaque_identity (arg_device, arg_timestamp_infos, array_timestamp_infos, arg_max_deviation));
   check result;
   (CArray.to_list storage)
 
 let create_render_pass_2_khr ?allocator:arg_allocator arg_device arg_create_info =
   let output = allocate (RenderPass.t) (RenderPass.null) in
   let result = Vk_fn.create_render_pass_2_khr (arg_device) (addr arg_create_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
+  ignore (Sys.opaque_identity (arg_device, arg_create_info, arg_allocator));
   check result;
   !@ output
 
 let cmd_begin_render_pass_2_khr arg_command_buffer arg_render_pass_begin arg_subpass_begin_info =
-  Vk_fn.cmd_begin_render_pass_2_khr (arg_command_buffer) (addr arg_render_pass_begin) (addr arg_subpass_begin_info)
+  Vk_fn.cmd_begin_render_pass_2_khr (arg_command_buffer) (addr arg_render_pass_begin) (addr arg_subpass_begin_info);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_render_pass_begin, arg_subpass_begin_info));
+  ()
 
 let cmd_next_subpass_2_khr arg_command_buffer arg_subpass_begin_info arg_subpass_end_info =
-  Vk_fn.cmd_next_subpass_2_khr (arg_command_buffer) (addr arg_subpass_begin_info) (addr arg_subpass_end_info)
+  Vk_fn.cmd_next_subpass_2_khr (arg_command_buffer) (addr arg_subpass_begin_info) (addr arg_subpass_end_info);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_subpass_begin_info, arg_subpass_end_info));
+  ()
 
 let cmd_end_render_pass_2_khr arg_command_buffer arg_subpass_end_info =
-  Vk_fn.cmd_end_render_pass_2_khr (arg_command_buffer) (addr arg_subpass_end_info)
+  Vk_fn.cmd_end_render_pass_2_khr (arg_command_buffer) (addr arg_subpass_end_info);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_subpass_end_info));
+  ()
 
 let get_semaphore_counter_value_khr arg_device arg_semaphore =
   let output = allocate (Vk_base.uint64) (0) in
   let result = Vk_fn.get_semaphore_counter_value_khr (arg_device) (arg_semaphore) (output) in
+  ignore (Sys.opaque_identity (arg_device, arg_semaphore));
   check result;
   !@ output
 
 let wait_semaphores_khr arg_device arg_wait_info arg_timeout =
   let result = Vk_fn.wait_semaphores_khr (arg_device) (addr arg_wait_info) (arg_timeout) in
+  ignore (Sys.opaque_identity (arg_device, arg_wait_info, arg_timeout));
   check result;
   result
 
 let signal_semaphore_khr arg_device arg_signal_info =
   let result = Vk_fn.signal_semaphore_khr (arg_device) (addr arg_signal_info) in
+  ignore (Sys.opaque_identity (arg_device, arg_signal_info));
   check result;
   ()
 
 let cmd_draw_indirect_count_khr arg_command_buffer arg_buffer arg_offset arg_count_buffer arg_count_buffer_offset arg_max_draw_count arg_stride =
-  Vk_fn.cmd_draw_indirect_count_khr (arg_command_buffer) (arg_buffer) (arg_offset) (arg_count_buffer) (arg_count_buffer_offset) (arg_max_draw_count) (arg_stride)
+  Vk_fn.cmd_draw_indirect_count_khr (arg_command_buffer) (arg_buffer) (arg_offset) (arg_count_buffer) (arg_count_buffer_offset) (arg_max_draw_count) (arg_stride);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_buffer, arg_offset, arg_count_buffer, arg_count_buffer_offset, arg_max_draw_count, arg_stride));
+  ()
 
 let cmd_draw_indirect_count_amd arg_command_buffer arg_buffer arg_offset arg_count_buffer arg_count_buffer_offset arg_max_draw_count arg_stride =
-  Vk_fn.cmd_draw_indirect_count_amd (arg_command_buffer) (arg_buffer) (arg_offset) (arg_count_buffer) (arg_count_buffer_offset) (arg_max_draw_count) (arg_stride)
+  Vk_fn.cmd_draw_indirect_count_amd (arg_command_buffer) (arg_buffer) (arg_offset) (arg_count_buffer) (arg_count_buffer_offset) (arg_max_draw_count) (arg_stride);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_buffer, arg_offset, arg_count_buffer, arg_count_buffer_offset, arg_max_draw_count, arg_stride));
+  ()
 
 let cmd_draw_indexed_indirect_count_khr arg_command_buffer arg_buffer arg_offset arg_count_buffer arg_count_buffer_offset arg_max_draw_count arg_stride =
-  Vk_fn.cmd_draw_indexed_indirect_count_khr (arg_command_buffer) (arg_buffer) (arg_offset) (arg_count_buffer) (arg_count_buffer_offset) (arg_max_draw_count) (arg_stride)
+  Vk_fn.cmd_draw_indexed_indirect_count_khr (arg_command_buffer) (arg_buffer) (arg_offset) (arg_count_buffer) (arg_count_buffer_offset) (arg_max_draw_count) (arg_stride);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_buffer, arg_offset, arg_count_buffer, arg_count_buffer_offset, arg_max_draw_count, arg_stride));
+  ()
 
 let cmd_draw_indexed_indirect_count_amd arg_command_buffer arg_buffer arg_offset arg_count_buffer arg_count_buffer_offset arg_max_draw_count arg_stride =
-  Vk_fn.cmd_draw_indexed_indirect_count_amd (arg_command_buffer) (arg_buffer) (arg_offset) (arg_count_buffer) (arg_count_buffer_offset) (arg_max_draw_count) (arg_stride)
+  Vk_fn.cmd_draw_indexed_indirect_count_amd (arg_command_buffer) (arg_buffer) (arg_offset) (arg_count_buffer) (arg_count_buffer_offset) (arg_max_draw_count) (arg_stride);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_buffer, arg_offset, arg_count_buffer, arg_count_buffer_offset, arg_max_draw_count, arg_stride));
+  ()
 
 let get_ray_tracing_shader_group_handles_nv arg_device arg_pipeline arg_first_group arg_group_count arg_data_size arg_data =
   let result = Vk_fn.get_ray_tracing_shader_group_handles_nv (arg_device) (arg_pipeline) (arg_first_group) (arg_group_count) (arg_data_size) (arg_data) in
+  ignore (Sys.opaque_identity (arg_device, arg_pipeline, arg_first_group, arg_group_count, arg_data_size, arg_data));
   check result;
   ()
 
 let get_buffer_opaque_capture_address_khr arg_device arg_info =
-  Vk_fn.get_buffer_opaque_capture_address_khr (arg_device) (addr arg_info)
+  let call_result = Vk_fn.get_buffer_opaque_capture_address_khr (arg_device) (addr arg_info) in
+  ignore (Sys.opaque_identity (arg_device, arg_info));
+  call_result
 
 let get_buffer_device_address_khr arg_device arg_info =
-  Vk_fn.get_buffer_device_address_khr (arg_device) (addr arg_info)
+  let call_result = Vk_fn.get_buffer_device_address_khr (arg_device) (addr arg_info) in
+  ignore (Sys.opaque_identity (arg_device, arg_info));
+  call_result
 
 let get_buffer_device_address_ext arg_device arg_info =
-  Vk_fn.get_buffer_device_address_ext (arg_device) (addr arg_info)
+  let call_result = Vk_fn.get_buffer_device_address_ext (arg_device) (addr arg_info) in
+  ignore (Sys.opaque_identity (arg_device, arg_info));
+  call_result
 
 let get_device_memory_opaque_capture_address_khr arg_device arg_info =
-  Vk_fn.get_device_memory_opaque_capture_address_khr (arg_device) (addr arg_info)
+  let call_result = Vk_fn.get_device_memory_opaque_capture_address_khr (arg_device) (addr arg_info) in
+  ignore (Sys.opaque_identity (arg_device, arg_info));
+  call_result
 
 let cmd_set_line_stipple_khr arg_command_buffer arg_line_stipple_factor arg_line_stipple_pattern =
-  Vk_fn.cmd_set_line_stipple_khr (arg_command_buffer) (arg_line_stipple_factor) (arg_line_stipple_pattern)
+  Vk_fn.cmd_set_line_stipple_khr (arg_command_buffer) (arg_line_stipple_factor) (arg_line_stipple_pattern);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_line_stipple_factor, arg_line_stipple_pattern));
+  ()
 
 let cmd_set_line_stipple_ext arg_command_buffer arg_line_stipple_factor arg_line_stipple_pattern =
-  Vk_fn.cmd_set_line_stipple_ext (arg_command_buffer) (arg_line_stipple_factor) (arg_line_stipple_pattern)
+  Vk_fn.cmd_set_line_stipple_ext (arg_command_buffer) (arg_line_stipple_factor) (arg_line_stipple_pattern);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_line_stipple_factor, arg_line_stipple_pattern));
+  ()
 
 let get_physical_device_tool_properties_ext arg_physical_device =
   let count = allocate Vk_base.uint32 0 in
@@ -4245,29 +5548,43 @@ let get_physical_device_tool_properties_ext arg_physical_device =
       CArray.to_list (CArray.from_ptr (CArray.start storage) (!@ count))
     end
   in
-  fetch ()
+  let enumeration_result = fetch () in
+  ignore (Sys.opaque_identity (arg_physical_device));
+  enumeration_result
 
 let cmd_set_cull_mode_ext arg_command_buffer arg_cull_mode =
-  Vk_fn.cmd_set_cull_mode_ext (arg_command_buffer) (arg_cull_mode)
+  Vk_fn.cmd_set_cull_mode_ext (arg_command_buffer) (arg_cull_mode);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_cull_mode));
+  ()
 
 let cmd_set_front_face_ext arg_command_buffer arg_front_face =
-  Vk_fn.cmd_set_front_face_ext (arg_command_buffer) (arg_front_face)
+  Vk_fn.cmd_set_front_face_ext (arg_command_buffer) (arg_front_face);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_front_face));
+  ()
 
 let cmd_set_primitive_topology_ext arg_command_buffer arg_primitive_topology =
-  Vk_fn.cmd_set_primitive_topology_ext (arg_command_buffer) (arg_primitive_topology)
+  Vk_fn.cmd_set_primitive_topology_ext (arg_command_buffer) (arg_primitive_topology);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_primitive_topology));
+  ()
 
 let cmd_set_viewport_with_count_ext arg_command_buffer arg_viewports =
   let array_viewports = CArray.of_list (Viewport.t) arg_viewports in
   let pointer_viewports = if arg_viewports = [] then Vk_base.null_ptr (Viewport.t) else CArray.start array_viewports in
-  Vk_fn.cmd_set_viewport_with_count_ext (arg_command_buffer) (List.length arg_viewports) (pointer_viewports)
+  Vk_fn.cmd_set_viewport_with_count_ext (arg_command_buffer) (List.length arg_viewports) (pointer_viewports);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_viewports, array_viewports));
+  ()
 
 let cmd_set_scissor_with_count_ext arg_command_buffer arg_scissors =
   let array_scissors = CArray.of_list (Rect2D.t) arg_scissors in
   let pointer_scissors = if arg_scissors = [] then Vk_base.null_ptr (Rect2D.t) else CArray.start array_scissors in
-  Vk_fn.cmd_set_scissor_with_count_ext (arg_command_buffer) (List.length arg_scissors) (pointer_scissors)
+  Vk_fn.cmd_set_scissor_with_count_ext (arg_command_buffer) (List.length arg_scissors) (pointer_scissors);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_scissors, array_scissors));
+  ()
 
 let cmd_bind_index_buffer_2_khr arg_command_buffer arg_buffer arg_offset arg_size arg_index_type =
-  Vk_fn.cmd_bind_index_buffer_2_khr (arg_command_buffer) (arg_buffer) (arg_offset) (arg_size) (arg_index_type)
+  Vk_fn.cmd_bind_index_buffer_2_khr (arg_command_buffer) (arg_buffer) (arg_offset) (arg_size) (arg_index_type);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_buffer, arg_offset, arg_size, arg_index_type));
+  ()
 
 let cmd_bind_vertex_buffers_2_ext arg_command_buffer arg_first_binding arg_buffers arg_offsets arg_sizes arg_strides =
   let array_buffers = CArray.of_list (Buffer.t) arg_buffers in
@@ -4281,77 +5598,118 @@ let cmd_bind_vertex_buffers_2_ext arg_command_buffer arg_first_binding arg_buffe
   let pointer_sizes = if arg_sizes = [] then Vk_base.null_ptr (Vk_base.device_size) else CArray.start array_sizes in
   let array_strides = CArray.of_list (Vk_base.device_size) arg_strides in
   let pointer_strides = if arg_strides = [] then Vk_base.null_ptr (Vk_base.device_size) else CArray.start array_strides in
-  Vk_fn.cmd_bind_vertex_buffers_2_ext (arg_command_buffer) (arg_first_binding) (List.length arg_buffers) (pointer_buffers) (pointer_offsets) (pointer_sizes) (pointer_strides)
+  Vk_fn.cmd_bind_vertex_buffers_2_ext (arg_command_buffer) (arg_first_binding) (List.length arg_buffers) (pointer_buffers) (pointer_offsets) (pointer_sizes) (pointer_strides);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_first_binding, arg_buffers, array_buffers, arg_offsets, array_offsets, arg_sizes, array_sizes, arg_strides, array_strides));
+  ()
 
 let cmd_set_depth_test_enable_ext arg_command_buffer arg_depth_test_enable =
-  Vk_fn.cmd_set_depth_test_enable_ext (arg_command_buffer) (arg_depth_test_enable)
+  Vk_fn.cmd_set_depth_test_enable_ext (arg_command_buffer) (arg_depth_test_enable);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_depth_test_enable));
+  ()
 
 let cmd_set_depth_write_enable_ext arg_command_buffer arg_depth_write_enable =
-  Vk_fn.cmd_set_depth_write_enable_ext (arg_command_buffer) (arg_depth_write_enable)
+  Vk_fn.cmd_set_depth_write_enable_ext (arg_command_buffer) (arg_depth_write_enable);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_depth_write_enable));
+  ()
 
 let cmd_set_depth_compare_op_ext arg_command_buffer arg_depth_compare_op =
-  Vk_fn.cmd_set_depth_compare_op_ext (arg_command_buffer) (arg_depth_compare_op)
+  Vk_fn.cmd_set_depth_compare_op_ext (arg_command_buffer) (arg_depth_compare_op);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_depth_compare_op));
+  ()
 
 let cmd_set_depth_bounds_test_enable_ext arg_command_buffer arg_depth_bounds_test_enable =
-  Vk_fn.cmd_set_depth_bounds_test_enable_ext (arg_command_buffer) (arg_depth_bounds_test_enable)
+  Vk_fn.cmd_set_depth_bounds_test_enable_ext (arg_command_buffer) (arg_depth_bounds_test_enable);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_depth_bounds_test_enable));
+  ()
 
 let cmd_set_stencil_test_enable_ext arg_command_buffer arg_stencil_test_enable =
-  Vk_fn.cmd_set_stencil_test_enable_ext (arg_command_buffer) (arg_stencil_test_enable)
+  Vk_fn.cmd_set_stencil_test_enable_ext (arg_command_buffer) (arg_stencil_test_enable);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_stencil_test_enable));
+  ()
 
 let cmd_set_stencil_op_ext arg_command_buffer arg_face_mask arg_fail_op arg_pass_op arg_depth_fail_op arg_compare_op =
-  Vk_fn.cmd_set_stencil_op_ext (arg_command_buffer) (arg_face_mask) (arg_fail_op) (arg_pass_op) (arg_depth_fail_op) (arg_compare_op)
+  Vk_fn.cmd_set_stencil_op_ext (arg_command_buffer) (arg_face_mask) (arg_fail_op) (arg_pass_op) (arg_depth_fail_op) (arg_compare_op);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_face_mask, arg_fail_op, arg_pass_op, arg_depth_fail_op, arg_compare_op));
+  ()
 
 let cmd_set_rasterizer_discard_enable_ext arg_command_buffer arg_rasterizer_discard_enable =
-  Vk_fn.cmd_set_rasterizer_discard_enable_ext (arg_command_buffer) (arg_rasterizer_discard_enable)
+  Vk_fn.cmd_set_rasterizer_discard_enable_ext (arg_command_buffer) (arg_rasterizer_discard_enable);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_rasterizer_discard_enable));
+  ()
 
 let cmd_set_depth_bias_enable_ext arg_command_buffer arg_depth_bias_enable =
-  Vk_fn.cmd_set_depth_bias_enable_ext (arg_command_buffer) (arg_depth_bias_enable)
+  Vk_fn.cmd_set_depth_bias_enable_ext (arg_command_buffer) (arg_depth_bias_enable);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_depth_bias_enable));
+  ()
 
 let cmd_set_primitive_restart_enable_ext arg_command_buffer arg_primitive_restart_enable =
-  Vk_fn.cmd_set_primitive_restart_enable_ext (arg_command_buffer) (arg_primitive_restart_enable)
+  Vk_fn.cmd_set_primitive_restart_enable_ext (arg_command_buffer) (arg_primitive_restart_enable);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_primitive_restart_enable));
+  ()
 
 let create_private_data_slot_ext ?allocator:arg_allocator arg_device arg_create_info =
   let output = allocate (PrivateDataSlot.t) (PrivateDataSlot.null) in
   let result = Vk_fn.create_private_data_slot_ext (arg_device) (addr arg_create_info) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x)) (output) in
+  ignore (Sys.opaque_identity (arg_device, arg_create_info, arg_allocator));
   check result;
   !@ output
 
 let destroy_private_data_slot_ext arg_device arg_private_data_slot ?allocator:arg_allocator () =
-  Vk_fn.destroy_private_data_slot_ext (arg_device) (arg_private_data_slot) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x))
+  Vk_fn.destroy_private_data_slot_ext (arg_device) (arg_private_data_slot) ((match arg_allocator with None -> Vk_base.null_ptr AllocationCallbacks.t | Some x -> addr x));
+  ignore (Sys.opaque_identity (arg_device, arg_private_data_slot, arg_allocator));
+  ()
 
 let set_private_data_ext arg_device arg_object_type arg_object_handle arg_private_data_slot arg_data =
   let result = Vk_fn.set_private_data_ext (arg_device) (arg_object_type) (arg_object_handle) (arg_private_data_slot) (arg_data) in
+  ignore (Sys.opaque_identity (arg_device, arg_object_type, arg_object_handle, arg_private_data_slot, arg_data));
   check result;
   ()
 
 let get_private_data_ext arg_device arg_object_type arg_object_handle arg_private_data_slot =
   let output = allocate (Vk_base.uint64) (0) in
   Vk_fn.get_private_data_ext (arg_device) (arg_object_type) (arg_object_handle) (arg_private_data_slot) (output);
+  ignore (Sys.opaque_identity (arg_device, arg_object_type, arg_object_handle, arg_private_data_slot));
   !@ output
 
 let cmd_copy_buffer_2_khr arg_command_buffer arg_copy_buffer_info =
-  Vk_fn.cmd_copy_buffer_2_khr (arg_command_buffer) (addr arg_copy_buffer_info)
+  Vk_fn.cmd_copy_buffer_2_khr (arg_command_buffer) (addr arg_copy_buffer_info);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_copy_buffer_info));
+  ()
 
 let cmd_copy_image_2_khr arg_command_buffer arg_copy_image_info =
-  Vk_fn.cmd_copy_image_2_khr (arg_command_buffer) (addr arg_copy_image_info)
+  Vk_fn.cmd_copy_image_2_khr (arg_command_buffer) (addr arg_copy_image_info);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_copy_image_info));
+  ()
 
 let cmd_blit_image_2_khr arg_command_buffer arg_blit_image_info =
-  Vk_fn.cmd_blit_image_2_khr (arg_command_buffer) (addr arg_blit_image_info)
+  Vk_fn.cmd_blit_image_2_khr (arg_command_buffer) (addr arg_blit_image_info);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_blit_image_info));
+  ()
 
 let cmd_copy_buffer_to_image_2_khr arg_command_buffer arg_copy_buffer_to_image_info =
-  Vk_fn.cmd_copy_buffer_to_image_2_khr (arg_command_buffer) (addr arg_copy_buffer_to_image_info)
+  Vk_fn.cmd_copy_buffer_to_image_2_khr (arg_command_buffer) (addr arg_copy_buffer_to_image_info);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_copy_buffer_to_image_info));
+  ()
 
 let cmd_copy_image_to_buffer_2_khr arg_command_buffer arg_copy_image_to_buffer_info =
-  Vk_fn.cmd_copy_image_to_buffer_2_khr (arg_command_buffer) (addr arg_copy_image_to_buffer_info)
+  Vk_fn.cmd_copy_image_to_buffer_2_khr (arg_command_buffer) (addr arg_copy_image_to_buffer_info);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_copy_image_to_buffer_info));
+  ()
 
 let cmd_resolve_image_2_khr arg_command_buffer arg_resolve_image_info =
-  Vk_fn.cmd_resolve_image_2_khr (arg_command_buffer) (addr arg_resolve_image_info)
+  Vk_fn.cmd_resolve_image_2_khr (arg_command_buffer) (addr arg_resolve_image_info);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_resolve_image_info));
+  ()
 
 let cmd_set_event_2_khr arg_command_buffer arg_event arg_dependency_info =
-  Vk_fn.cmd_set_event_2_khr (arg_command_buffer) (arg_event) (addr arg_dependency_info)
+  Vk_fn.cmd_set_event_2_khr (arg_command_buffer) (arg_event) (addr arg_dependency_info);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_event, arg_dependency_info));
+  ()
 
 let cmd_reset_event_2_khr arg_command_buffer arg_event arg_stage_mask =
-  Vk_fn.cmd_reset_event_2_khr (arg_command_buffer) (arg_event) (arg_stage_mask)
+  Vk_fn.cmd_reset_event_2_khr (arg_command_buffer) (arg_event) (arg_stage_mask);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_event, arg_stage_mask));
+  ()
 
 let cmd_wait_events_2_khr arg_command_buffer arg_events arg_dependency_infos =
   let array_events = CArray.of_list (Event.t) arg_events in
@@ -4359,33 +5717,43 @@ let cmd_wait_events_2_khr arg_command_buffer arg_events arg_dependency_infos =
   if List.length arg_dependency_infos <> List.length arg_events then invalid_arg "vkCmdWaitEvents2KHR: array lengths differ";
   let array_dependency_infos = CArray.of_list (DependencyInfo.t) arg_dependency_infos in
   let pointer_dependency_infos = if arg_dependency_infos = [] then Vk_base.null_ptr (DependencyInfo.t) else CArray.start array_dependency_infos in
-  Vk_fn.cmd_wait_events_2_khr (arg_command_buffer) (List.length arg_events) (pointer_events) (pointer_dependency_infos)
+  Vk_fn.cmd_wait_events_2_khr (arg_command_buffer) (List.length arg_events) (pointer_events) (pointer_dependency_infos);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_events, array_events, arg_dependency_infos, array_dependency_infos));
+  ()
 
 let cmd_pipeline_barrier_2_khr arg_command_buffer arg_dependency_info =
-  Vk_fn.cmd_pipeline_barrier_2_khr (arg_command_buffer) (addr arg_dependency_info)
+  Vk_fn.cmd_pipeline_barrier_2_khr (arg_command_buffer) (addr arg_dependency_info);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_dependency_info));
+  ()
 
 let queue_submit_2_khr arg_queue arg_submits arg_fence =
   let array_submits = CArray.of_list (SubmitInfo2.t) arg_submits in
   let pointer_submits = if arg_submits = [] then Vk_base.null_ptr (SubmitInfo2.t) else CArray.start array_submits in
   let result = Vk_fn.queue_submit_2_khr (arg_queue) (List.length arg_submits) (pointer_submits) (arg_fence) in
+  ignore (Sys.opaque_identity (arg_queue, arg_submits, array_submits, arg_fence));
   check result;
   ()
 
 let cmd_write_timestamp_2_khr arg_command_buffer arg_stage arg_query_pool arg_query =
-  Vk_fn.cmd_write_timestamp_2_khr (arg_command_buffer) (arg_stage) (arg_query_pool) (arg_query)
+  Vk_fn.cmd_write_timestamp_2_khr (arg_command_buffer) (arg_stage) (arg_query_pool) (arg_query);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_stage, arg_query_pool, arg_query));
+  ()
 
 let copy_memory_to_image_ext arg_device arg_copy_memory_to_image_info =
   let result = Vk_fn.copy_memory_to_image_ext (arg_device) (addr arg_copy_memory_to_image_info) in
+  ignore (Sys.opaque_identity (arg_device, arg_copy_memory_to_image_info));
   check result;
   ()
 
 let copy_image_to_memory_ext arg_device arg_copy_image_to_memory_info =
   let result = Vk_fn.copy_image_to_memory_ext (arg_device) (addr arg_copy_image_to_memory_info) in
+  ignore (Sys.opaque_identity (arg_device, arg_copy_image_to_memory_info));
   check result;
   ()
 
 let copy_image_to_image_ext arg_device arg_copy_image_to_image_info =
   let result = Vk_fn.copy_image_to_image_ext (arg_device) (addr arg_copy_image_to_image_info) in
+  ignore (Sys.opaque_identity (arg_device, arg_copy_image_to_image_info));
   check result;
   ()
 
@@ -4393,57 +5761,85 @@ let transition_image_layout_ext arg_device arg_transitions =
   let array_transitions = CArray.of_list (HostImageLayoutTransitionInfo.t) arg_transitions in
   let pointer_transitions = if arg_transitions = [] then Vk_base.null_ptr (HostImageLayoutTransitionInfo.t) else CArray.start array_transitions in
   let result = Vk_fn.transition_image_layout_ext (arg_device) (List.length arg_transitions) (pointer_transitions) in
+  ignore (Sys.opaque_identity (arg_device, arg_transitions, array_transitions));
   check result;
   ()
 
 let cmd_begin_rendering_khr arg_command_buffer arg_rendering_info =
-  Vk_fn.cmd_begin_rendering_khr (arg_command_buffer) (addr arg_rendering_info)
+  Vk_fn.cmd_begin_rendering_khr (arg_command_buffer) (addr arg_rendering_info);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_rendering_info));
+  ()
 
 let cmd_end_rendering_2_ext arg_command_buffer arg_rendering_end_info =
-  Vk_fn.cmd_end_rendering_2_ext (arg_command_buffer) (addr arg_rendering_end_info)
+  Vk_fn.cmd_end_rendering_2_ext (arg_command_buffer) (addr arg_rendering_end_info);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_rendering_end_info));
+  ()
 
 let cmd_end_rendering_khr arg_command_buffer =
-  Vk_fn.cmd_end_rendering_khr (arg_command_buffer)
+  Vk_fn.cmd_end_rendering_khr (arg_command_buffer);
+  ignore (Sys.opaque_identity (arg_command_buffer));
+  ()
 
 let get_image_subresource_layout_2_khr arg_device arg_image arg_subresource arg_layout =
-  Vk_fn.get_image_subresource_layout_2_khr (arg_device) (arg_image) (addr arg_subresource) (addr arg_layout)
+  Vk_fn.get_image_subresource_layout_2_khr (arg_device) (arg_image) (addr arg_subresource) (addr arg_layout);
+  ignore (Sys.opaque_identity (arg_device, arg_image, arg_subresource, arg_layout));
+  ()
 
 let get_image_subresource_layout_2_ext arg_device arg_image arg_subresource arg_layout =
-  Vk_fn.get_image_subresource_layout_2_ext (arg_device) (arg_image) (addr arg_subresource) (addr arg_layout)
+  Vk_fn.get_image_subresource_layout_2_ext (arg_device) (arg_image) (addr arg_subresource) (addr arg_layout);
+  ignore (Sys.opaque_identity (arg_device, arg_image, arg_subresource, arg_layout));
+  ()
 
 let release_swapchain_images_ext arg_device arg_release_info =
   let result = Vk_fn.release_swapchain_images_ext (arg_device) (addr arg_release_info) in
+  ignore (Sys.opaque_identity (arg_device, arg_release_info));
   check result;
   ()
 
 let get_device_image_subresource_layout_khr arg_device arg_info arg_layout =
-  Vk_fn.get_device_image_subresource_layout_khr (arg_device) (addr arg_info) (addr arg_layout)
+  Vk_fn.get_device_image_subresource_layout_khr (arg_device) (addr arg_info) (addr arg_layout);
+  ignore (Sys.opaque_identity (arg_device, arg_info, arg_layout));
+  ()
 
 let map_memory_2_khr arg_device arg_memory_map_info =
   let output = allocate (ptr (Ctypes.void)) (Vk_base.null_ptr (Ctypes.void)) in
   let result = Vk_fn.map_memory_2_khr (arg_device) (addr arg_memory_map_info) (output) in
+  ignore (Sys.opaque_identity (arg_device, arg_memory_map_info));
   check result;
   !@ output
 
 let unmap_memory_2_khr arg_device arg_memory_unmap_info =
   let result = Vk_fn.unmap_memory_2_khr (arg_device) (addr arg_memory_unmap_info) in
+  ignore (Sys.opaque_identity (arg_device, arg_memory_unmap_info));
   check result;
   ()
 
 let cmd_bind_descriptor_sets_2_khr arg_command_buffer arg_bind_descriptor_sets_info =
-  Vk_fn.cmd_bind_descriptor_sets_2_khr (arg_command_buffer) (addr arg_bind_descriptor_sets_info)
+  Vk_fn.cmd_bind_descriptor_sets_2_khr (arg_command_buffer) (addr arg_bind_descriptor_sets_info);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_bind_descriptor_sets_info));
+  ()
 
 let cmd_push_constants_2_khr arg_command_buffer arg_push_constants_info =
-  Vk_fn.cmd_push_constants_2_khr (arg_command_buffer) (addr arg_push_constants_info)
+  Vk_fn.cmd_push_constants_2_khr (arg_command_buffer) (addr arg_push_constants_info);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_push_constants_info));
+  ()
 
 let cmd_push_descriptor_set_2_khr arg_command_buffer arg_push_descriptor_set_info =
-  Vk_fn.cmd_push_descriptor_set_2_khr (arg_command_buffer) (addr arg_push_descriptor_set_info)
+  Vk_fn.cmd_push_descriptor_set_2_khr (arg_command_buffer) (addr arg_push_descriptor_set_info);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_push_descriptor_set_info));
+  ()
 
 let cmd_push_descriptor_set_with_template_2_khr arg_command_buffer arg_push_descriptor_set_with_template_info =
-  Vk_fn.cmd_push_descriptor_set_with_template_2_khr (arg_command_buffer) (addr arg_push_descriptor_set_with_template_info)
+  Vk_fn.cmd_push_descriptor_set_with_template_2_khr (arg_command_buffer) (addr arg_push_descriptor_set_with_template_info);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_push_descriptor_set_with_template_info));
+  ()
 
 let cmd_set_rendering_attachment_locations_khr arg_command_buffer arg_location_info =
-  Vk_fn.cmd_set_rendering_attachment_locations_khr (arg_command_buffer) (addr arg_location_info)
+  Vk_fn.cmd_set_rendering_attachment_locations_khr (arg_command_buffer) (addr arg_location_info);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_location_info));
+  ()
 
 let cmd_set_rendering_input_attachment_indices_khr arg_command_buffer arg_input_attachment_index_info =
-  Vk_fn.cmd_set_rendering_input_attachment_indices_khr (arg_command_buffer) (addr arg_input_attachment_index_info)
+  Vk_fn.cmd_set_rendering_input_attachment_indices_khr (arg_command_buffer) (addr arg_input_attachment_index_info);
+  ignore (Sys.opaque_identity (arg_command_buffer, arg_input_attachment_index_info));
+  ()

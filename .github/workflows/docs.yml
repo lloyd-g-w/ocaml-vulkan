@@ -23,6 +23,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Configure GitHub Pages (enables it on first run)
+        uses: actions/configure-pages@v5
+        with:
+          enablement: true
+
       - name: Install system packages
         run: |
           sudo apt-get update

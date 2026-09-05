@@ -7,13 +7,7 @@
    triangle.ppm (binary PPM, P6).
 
    Run with:  dune exec examples/triangle_offscreen.exe
-   Then:      head -c 20 triangle.ppm | xxd | head -2
-
-   This file works around one generator bug (Vk.SubpassDescription.make
-   silently zeroes colorAttachmentCount unless you also pass
-   ~resolve_attachments) and reuses the create_*_pipelines output-pointer
-   workaround from examples/compute.ml. See the handoff report for the
-   precise bug reports (file, symptom, minimal repro). *)
+   Then:      head -c 20 triangle.ppm | xxd | head -2 *)
 
 let get = Ctypes.getf
 
@@ -97,26 +91,13 @@ let () =
          ~components:(Vk.ComponentMapping.make ()) ~subresource_range ())
   in
 
-  (* -- render pass: one colour attachment, one subpass -- *)
+  (* -- render pass: one colour attachment, one subpass. color_attachment_count
+     is derived from the longest of ~color_attachments/~resolve_attachments;
+     there are no resolve attachments here, so it comes out as
+     List.length color_attachments = 1. -- *)
   let color_attachments = [ Vk.AttachmentReference.make ~attachment:0 ~layout:Vk.ImageLayout.color_attachment_optimal () ] in
   let subpass =
-    let s =
-      Vk.SubpassDescription.make ~pipeline_bind_point:Vk.PipelineBindPoint.graphics ~color_attachments ()
-    in
-    (* WORKAROUND (library bug -- see handoff report): Vk.SubpassDescription.make
-       sets colorAttachmentCount from List.length ~resolve_attachments, not
-       ~color_attachments -- VkSubpassDescription has *two* pointer members
-       (pColorAttachments, pResolveAttachments) that both declare
-       len="colorAttachmentCount" in vk.xml, and the generator's
-       "count field <- List.length of the array that names it" rule only
-       keeps the mapping from the last member it processes. Since this
-       example (like almost every render pass without MSAA) has no resolve
-       attachments, ~resolve_attachments defaults to [] and
-       colorAttachmentCount would silently come out as 0 -- meaning the
-       fragment shader would be rendering to no attachments at all. Patch
-       the field by hand to the real ~color_attachments length. *)
-    Ctypes.setf s Vk.SubpassDescription.color_attachment_count (List.length color_attachments);
-    s
+    Vk.SubpassDescription.make ~pipeline_bind_point:Vk.PipelineBindPoint.graphics ~color_attachments ()
   in
   let render_pass =
     Vk.create_render_pass device
@@ -180,17 +161,16 @@ let () =
         ]
       ()
   in
-  (* Same create_*_pipelines output-pointer shape as examples/compute.ml. *)
-  let pipelines = Ctypes.allocate_n Vk.Pipeline.t ~count:1 in
-  let (_ : Vk.Result.t) =
+  (* create_graphics_pipelines : Result.t * Pipeline.t list, see
+     examples/compute.ml. *)
+  let _, pipelines =
     Vk.create_graphics_pipelines device Vk.PipelineCache.null
       [ Vk.GraphicsPipelineCreateInfo.make ~stages ~vertex_input_state ~input_assembly_state ~viewport_state
           ~rasterization_state ~multisample_state ~color_blend_state ~layout:pipeline_layout ~render_pass
           ~subpass:0 ()
       ]
-      pipelines
   in
-  let pipeline = Ctypes.( !@ ) pipelines in
+  let pipeline = List.hd pipelines in
 
   (* -- host-visible readback buffer (tightly packed RGBA8) -- *)
   let readback_size = width * height * 4 in
@@ -213,12 +193,12 @@ let () =
   Vk.bind_buffer_memory device readback_buffer readback_memory 0;
 
   let command_pool = Vk.create_command_pool device (Vk.CommandPoolCreateInfo.make ~queue_family_index ()) in
-  let command_buffers = Ctypes.allocate_n Vk.CommandBuffer.t ~count:1 in
-  Vk.allocate_command_buffers device
-    (Vk.CommandBufferAllocateInfo.make ~command_pool ~level:Vk.CommandBufferLevel.primary
-       ~command_buffer_count:1 ())
-    command_buffers;
-  let cb = Ctypes.( !@ ) command_buffers in
+  let cb =
+    List.hd
+      (Vk.allocate_command_buffers device
+         (Vk.CommandBufferAllocateInfo.make ~command_pool ~level:Vk.CommandBufferLevel.primary
+            ~command_buffer_count:1 ()))
+  in
 
   Vk.begin_command_buffer cb (Vk.CommandBufferBeginInfo.make ());
   let cr, cg, cb_, ca = clear_color in

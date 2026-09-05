@@ -5,15 +5,7 @@
    see shaders/dune) -> dispatch -> fence wait -> read back and verify every
    element was doubled -> print timing.
 
-   Run with:  dune exec examples/compute.exe
-
-   This file works around two generator bugs in the ergonomic layer
-   (Vk.DescriptorSetLayoutBinding.make / Vk.WriteDescriptorSet.make never
-   let you set descriptorCount when you don't also pass an unrelated list
-   argument) and one API-shape gap (Vk.create_compute_pipelines doesn't
-   return the created handle(s) as a list). Every workaround is commented
-   below with WORKAROUND; see the handoff report for the precise bug
-   reports (file, symptom, minimal repro). *)
+   Run with:  dune exec examples/compute.exe *)
 
 let get = Ctypes.getf
 
@@ -93,25 +85,13 @@ let () =
     Ctypes.(words +@ i <-@ Unsigned.UInt32.of_int i)
   done;
 
-  (* -- descriptor set layout: binding 0 = one storage buffer, compute stage.
-
-     WORKAROUND (library bug -- see handoff report): Vk.DescriptorSetLayoutBinding.make
-     has no ~descriptor_count argument at all. VkDescriptorSetLayoutBinding's
-     pImmutableSamplers is the *only* array field with len="descriptorCount"
-     in vk.xml, so the generator (gen/vkgen/emit_types.py, _pair_maps /
-     _constructor) treats descriptorCount as fully derived from
-     List.length immutable_samplers -- but per the Vulkan spec, descriptorCount
-     is its own independent, required field: it is legitimately non-zero
-     while pImmutableSamplers is NULL (the normal case for every descriptor
-     type except SAMPLER/COMBINED_IMAGE_SAMPLER-with-immutable-samplers). Left
-     at the make default, descriptorCount silently comes out as 0. Patch the
-     field by hand before it's copied into the DescriptorSetLayoutCreateInfo
-     array. *)
+  (* -- descriptor set layout: binding 0 = one storage buffer, compute
+     stage. descriptor_count is independent of ~immutable_samplers (which
+     we don't use here), so it's passed explicitly. -- *)
   let binding =
     Vk.DescriptorSetLayoutBinding.make ~binding:0 ~descriptor_type:Vk.DescriptorType.storage_buffer
-      ~stage_flags:Vk.ShaderStageFlags.compute ()
+      ~descriptor_count:1 ~stage_flags:Vk.ShaderStageFlags.compute ()
   in
-  Ctypes.setf binding Vk.DescriptorSetLayoutBinding.descriptor_count 1;
   let descriptor_set_layout =
     Vk.create_descriptor_set_layout device (Vk.DescriptorSetLayoutCreateInfo.make ~bindings:[ binding ] ())
   in
@@ -126,20 +106,15 @@ let () =
       ~name:"main" ()
   in
 
-  (* WORKAROUND (API-shape gap -- see handoff report): unlike two-call
-     enumerations, Vk.create_compute_pipelines does not return the created
-     handle(s) as a list: DESIGN.md §10 only automates a *single* trailing
-     output pointer or a pCount-based two-call enumeration, and "an output
-     array whose length is the *input* createInfoCount" fits neither rule,
-     so the generator fell back to leaving pPipelines a raw output pointer.
-     Allocate it ourselves and dereference the one pipeline we asked for. *)
-  let pipelines = Ctypes.allocate_n Vk.Pipeline.t ~count:1 in
-  let (_ : Vk.Result.t) =
+  (* create_compute_pipelines : Result.t * Pipeline.t list -- the Result.t
+     is kept because VK_PIPELINE_COMPILE_REQUIRED_EXT is a success code
+     (DESIGN.md §10); this example only asked for one pipeline, so take the
+     head of the returned list. *)
+  let _, pipelines =
     Vk.create_compute_pipelines device Vk.PipelineCache.null
       [ Vk.ComputePipelineCreateInfo.make ~stage ~layout:pipeline_layout () ]
-      pipelines
   in
-  let pipeline = Ctypes.( !@ ) pipelines in
+  let pipeline = List.hd pipelines in
 
   (* -- descriptor pool + set, bound to the buffer -- *)
   let pool =
@@ -149,43 +124,31 @@ let () =
            [ Vk.DescriptorPoolSize.make ~type_:Vk.DescriptorType.storage_buffer ~descriptor_count:1 () ]
          ())
   in
-  (* Same output-pointer shape as create_compute_pipelines above: the
-     DescriptorSetAllocateInfo's own descriptor_set_count (derived from
-     ~set_layouts) already tells vkAllocateDescriptorSets how many sets to
-     write, so the wrapper leaves pDescriptorSets a raw pointer we supply. *)
-  let descriptor_sets = Ctypes.allocate_n Vk.DescriptorSet.t ~count:1 in
-  Vk.allocate_descriptor_sets device
-    (Vk.DescriptorSetAllocateInfo.make ~descriptor_pool:pool ~set_layouts:[ descriptor_set_layout ] ())
-    descriptor_sets;
-  let descriptor_set = Ctypes.( !@ ) descriptor_sets in
+  let descriptor_set =
+    List.hd
+      (Vk.allocate_descriptor_sets device
+         (Vk.DescriptorSetAllocateInfo.make ~descriptor_pool:pool ~set_layouts:[ descriptor_set_layout ] ()))
+  in
 
-  (* WORKAROUND (library bug -- see handoff report): Vk.WriteDescriptorSet.make
-     always sets descriptorCount from List.length ~texel_buffer_view,
-     regardless of which of pImageInfo/pBufferInfo/pTexelBufferView you
-     actually populate. All three share one len="descriptorCount" in
-     vk.xml, and the generator's "count field <- List.length of the array
-     that names it in len=" rule only keeps the *last* matching array it
-     processes (pTexelBufferView), silently discarding the fact that
-     ~buffer_info determined the real count. We write a buffer descriptor
-     and never pass ~texel_buffer_view, so descriptor_count defaults to 0;
-     patch it by hand before the update. *)
+  (* descriptor_count is derived automatically from the longest of
+     ~image_info/~buffer_info/~texel_buffer_view -- here that's
+     ~buffer_info, length 1. *)
   let write =
     Vk.WriteDescriptorSet.make ~dst_set:descriptor_set ~dst_binding:0 ~dst_array_element:0
       ~descriptor_type:Vk.DescriptorType.storage_buffer
       ~buffer_info:[ Vk.DescriptorBufferInfo.make ~buffer ~offset:0 ~range:Vk.whole_size () ]
       ()
   in
-  Ctypes.setf write Vk.WriteDescriptorSet.descriptor_count 1;
   Vk.update_descriptor_sets device [ write ] [];
 
   (* -- command buffer: bind, dispatch -- *)
   let command_pool = Vk.create_command_pool device (Vk.CommandPoolCreateInfo.make ~queue_family_index ()) in
-  let command_buffers = Ctypes.allocate_n Vk.CommandBuffer.t ~count:1 in
-  Vk.allocate_command_buffers device
-    (Vk.CommandBufferAllocateInfo.make ~command_pool ~level:Vk.CommandBufferLevel.primary
-       ~command_buffer_count:1 ())
-    command_buffers;
-  let cb = Ctypes.( !@ ) command_buffers in
+  let cb =
+    List.hd
+      (Vk.allocate_command_buffers device
+         (Vk.CommandBufferAllocateInfo.make ~command_pool ~level:Vk.CommandBufferLevel.primary
+            ~command_buffer_count:1 ()))
+  in
   Vk.begin_command_buffer cb (Vk.CommandBufferBeginInfo.make ());
   Vk.cmd_bind_pipeline cb Vk.PipelineBindPoint.compute pipeline;
   Vk.cmd_bind_descriptor_sets cb Vk.PipelineBindPoint.compute pipeline_layout 0 [ descriptor_set ] [];

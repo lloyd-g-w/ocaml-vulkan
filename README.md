@@ -18,8 +18,8 @@ generator, the hand-written runtime, the tests and the examples — read it
 if you're modifying any of those. This file is user-facing documentation,
 checked against the actual generated code as of this writing; see
 [`docs/GUIDE.md`](docs/GUIDE.md) for a much more detailed, example-driven
-walkthrough of the API (including a handful of documented generator quirks
-this README doesn't get into).
+walkthrough of the API (including the struct-layout/enum-value golden
+checks and a couple of naming notes this README doesn't get into).
 
 ## Status
 
@@ -28,7 +28,9 @@ The registry is pinned, the generator is functional, and the full API
 surface below is generated and builds; `examples/vkinfo.ml`,
 `examples/smoke.ml`, `examples/compute.ml`, `examples/triangle_offscreen.ml`
 and `examples/debug_utils.ml` all run against a real Vulkan implementation
-(Mesa's `lavapipe` software rasterizer, headless). See
+(Mesa's `lavapipe` software rasterizer, headless), and the alcotest suite
+(`dune build @runtest`) is green, including golden struct-layout/enum-value
+checks against the real C headers (see [Testing](#testing-lavapipe)). See
 [Status and limitations](#status-and-limitations) below for the known
 rough edges. Until a tagged release exists, use this repository via an
 opam pin (below) rather than a version constraint.
@@ -50,7 +52,7 @@ ever upgraded without updating this paragraph):
 | extensions | 466 |
 | enum & flag types | 406 |
 | handle types | 60 |
-| generated OCaml, total | ~80,000 lines |
+| generated OCaml, total | ~85,000 lines |
 
 Both API layers described in [`docs/GUIDE.md`](docs/GUIDE.md) are generated:
 a faithful **raw layer** (`Vk.Fn`, one function per Vulkan command with the
@@ -195,15 +197,27 @@ dune exec examples/debug_utils.exe
 ```
 
 `docs/GUIDE.md` walks through the same ground in prose, with more, smaller
-snippets, and a section specifically on the handful of ergonomic-layer
-quirks discovered while writing `compute.ml`/`triangle_offscreen.ml`/
-`debug_utils.ml` (see [Status and limitations](#status-and-limitations)).
+snippets, plus a section on the struct-layout/enum-value golden checks and
+the one remaining naming quirk found while writing `compute.ml`/
+`triangle_offscreen.ml`/`debug_utils.ml` (see
+[Status and limitations](#status-and-limitations)).
 
 ## Testing (lavapipe)
 
 All tests (`test/`, `alcotest`) and all examples are written against a
 real Vulkan implementation — Mesa's `lavapipe` (`llvmpipe`) software
-rasterizer — so no GPU is required, including in CI:
+rasterizer — so no GPU is required, including in CI. The suite is green
+(14 test cases across 7 suites, `DESIGN.md` §12):
+
+| suite | what it checks |
+|---|---|
+| `test_enums.ml` | enum/flag `of_int`/`to_string` round trips, flag ops, `Result` printing |
+| `test_layout.ml` | every generated struct's `sizeof`/member offsets against **1360** golden values compiled from the real C headers — 0 mismatches |
+| `test_enum_values.ml` | every generated enum/bitmask constant against **4455** golden values compiled from the real C headers — 0 mismatches |
+| `test_structs.ml` | `make` sets `sType`/counts/arrays correctly; keep-alive survives `Gc.full_major` |
+| `test_instance.ml` | instance → physical device properties/queue families → device → buffer + memory → map |
+| `test_compute.ml` | a compute pipeline doubles a 1024-element buffer end to end |
+| `test_graphics.ml` | an offscreen render pass draws a triangle; read-back pixels are checked |
 
 ```sh
 opam install . --deps-only --with-test
@@ -219,10 +233,12 @@ sudo apt-get install mesa-vulkan-drivers vulkan-tools   # vulkan-tools is option
 find /usr/share/vulkan/icd.d -iname 'lvp_icd*.json'      # confirm the exact filename for your release
 ```
 
-`test_layout.ml` additionally needs a golden struct-layout file for your
-platform under `test/layout/` (see [Regeneration](#regeneration) below); it
-is skipped with a message, not failed, when one isn't available for the
-current target.
+`test_layout.ml`/`test_enum_values.ml` additionally need golden files for
+your platform under `test/layout/`/`test/enum_values/` (see
+[Regeneration](#regeneration) below, and
+[`docs/GUIDE.md`'s "Golden checks"](docs/GUIDE.md#golden-checks-struct-layout-and-enum-values)
+for how they're produced); both are skipped with a message, not failed,
+when the golden file for the current target isn't available.
 
 ## Regeneration
 
@@ -247,14 +263,16 @@ these numbers never risks a stray write to `lib/generated/` — see the exact
 `grep` invocations in this repository's change history if you want to
 reproduce them yourself.)
 
-The C struct-layout golden file(s) under `test/layout/` are produced
-separately, from the real platform C headers rather than the XML registry
-(so they can catch generator/registry mistakes instead of just reproducing
-them):
+The struct-layout and enum-value golden file(s) under `test/layout/` and
+`test/enum_values/` are produced separately, from the real platform C
+headers rather than the XML registry (so they can catch generator/registry
+mistakes instead of just reproducing them — see
+[`docs/GUIDE.md`'s "Golden checks"](docs/GUIDE.md#golden-checks-struct-layout-and-enum-values)):
 
 ```sh
 source /path/to/env-with-VULKAN_HEADERS.sh   # needs $VULKAN_HEADERS/include/vulkan/vulkan.h
 ./scripts/gen_layout.sh                       # writes test/layout/<target-triple>.txt
+./scripts/gen_enum_values.sh                  # writes test/enum_values/<target-triple>.txt
 ```
 
 ## Project layout
@@ -266,47 +284,25 @@ registry/vk.xml        vendored Khronos registry (see registry/VERSION)
 gen/gen.py             generator entry point (python3 gen/gen.py)
 gen/vkgen/*.py         generator package (parse / naming / emit modules)
 gen/layout_check.py    emits a C program printing sizeof/offsetof of all structs
+gen/enum_check.py      emits a C program printing every enum/bitmask constant's value
 lib/dune               (library (name vk) (public_name vulkan))
 lib/vk.ml              hand-written main module: includes everything below
 lib/vk_base.ml         hand-written runtime support (views, keep-alive, loader)
 lib/generated/*.ml     generator output -- do not hand-edit
 test/                  alcotest tests (headless, lavapipe)
 test/layout/*.txt      golden struct layouts produced from real C headers
+test/enum_values/*.txt golden enum/bitmask constant values produced from real C headers
 shaders/               GLSL sources + committed SPIR-V, embedded as vk_test_shaders for test/
 examples/              vkinfo, smoke, compute, triangle_offscreen, debug_utils (this document)
 docs/GUIDE.md          practical API guide (this lane)
 scripts/regen.sh       regenerate lib/generated from registry/vk.xml
 scripts/gen_layout.sh  regenerate test/layout/<target-triple>.txt from real headers
+scripts/gen_enum_values.sh  regenerate test/enum_values/<target-triple>.txt from real headers
 scripts/embed_spv.ml   embed a compiled .spv file as an OCaml string constant
 ```
 
 ## Status and limitations
 
-- **`dune-project` declares `(license MIT)`; the committed [`LICENSE`](./LICENSE)
-  file is the GNU General Public License v3 (GPLv3).** This is a
-  pre-existing inconsistency in the project skeleton (`dune-project`'s
-  `license` field controls what opam metadata/`vulkan.opam` report), not a
-  decision made by this document; it should be reconciled by whoever owns
-  `dune-project` before any release. Until then, treat the `LICENSE` file
-  as authoritative — see [License](#license).
-- **A handful of ergonomic-layer (`Vk.*`) constructors don't expose a count
-  field the underlying C struct actually needs**, because two or more
-  array-typed members happen to share one `len=` count in `vk.xml`
-  (`VkWriteDescriptorSet`, `VkSubpassDescription`, `VkPresentInfoKHR`,
-  `VkSubmitInfo` and others) or because a count is independently meaningful
-  even when its associated array is legitimately `NULL`
-  (`VkDescriptorSetLayoutBinding`). `examples/compute.ml` and
-  `examples/triangle_offscreen.ml` both hit this and work around it with a
-  plain `Ctypes.setf` after `make`; see
-  [`docs/GUIDE.md`'s "Known generator issues"](docs/GUIDE.md#known-generator-issues-as-of-this-writing)
-  for the full list, exact symptoms and the workaround pattern.
-- **Batch-create/-allocate commands** (`vkCreateGraphicsPipelines`,
-  `vkCreateComputePipelines`, `vkAllocateDescriptorSets`,
-  `vkAllocateCommandBuffers`) don't return their created handle(s) as an
-  OCaml list the way two-call enumerations do; you allocate the output
-  array yourself with `Ctypes.allocate_n`. Also documented in
-  [`docs/GUIDE.md`](docs/GUIDE.md#output-array-commands-and-where-the-pattern-breaks-down),
-  with a worked example.
 - **No display/windowing example.** Every example in this repository
   renders offscreen; there's no `tsdl`/SDL2 swapchain example that's
   actually been run (this development machine is headless). `docs/GUIDE.md`
@@ -317,11 +313,18 @@ scripts/embed_spv.ml   embed a compiled .spv file as an OCaml string constant
 - **64-bit integers only go up to 62 usable bits** through this binding's
   `int`-based views (documented, inert limitation — see
   [`docs/GUIDE.md`](docs/GUIDE.md#the-64-bit-integer-caveat)).
+- **One naming exception**: `DebugUtilsMessengerCreateInfoEXT.make`'s
+  callback/user-data arguments are `~pfn_user_callback`/`~p_user_data`, not
+  the prefix-stripped form the general ergonomic-labelling rule
+  (`DESIGN.md` §3) would suggest, and its `Foreign.funptr_opt` binding
+  doesn't pass `~runtime_lock:true` as `DESIGN.md` §8 describes — see
+  [`docs/GUIDE.md`](docs/GUIDE.md#extensions-and-function-loading) for
+  detail and the threading implications.
 - See `CHANGELOG.md` for anything more specific to the current state of a
   given area (generator, tests, this documentation lane).
 
 ## License
 
-The [`LICENSE`](./LICENSE) file in this repository is the GNU General
-Public License v3 (GPLv3) — see [Status and limitations](#status-and-limitations)
-above for the current `dune-project`/`LICENSE` mismatch this inherited.
+This project is licensed under the GNU General Public License v3
+(GPLv3) — see the [`LICENSE`](./LICENSE) file. `dune-project`'s `(license
+GPL-3.0-only)` field (and the generated `vulkan.opam`) agree with it.

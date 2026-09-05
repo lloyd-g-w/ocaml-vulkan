@@ -4,8 +4,10 @@ A practical, example-driven tour of the generated bindings. `DESIGN.md` at
 the repository root is the authoritative *contract*; this guide is a
 reader-friendly walkthrough of the same material with real code, written
 against and checked against the actual generated sources in
-`lib/generated/` (not just the prose in `DESIGN.md` — the two occasionally
-disagree; every such case is called out below with **Gotcha** boxes).
+`lib/generated/`. `DESIGN.md` and the generated code agree almost
+everywhere; the one remaining real discrepancy (a naming exception in
+`DebugUtilsMessengerCreateInfoEXT.make`) is called out inline in
+[Extensions and function loading](#extensions-and-function-loading).
 
 Runnable, more complete versions of most of the patterns below live in
 [`examples/`](../examples/): [`vkinfo.ml`](../examples/vkinfo.ml) (query
@@ -17,11 +19,7 @@ full graphics render pass) and [`debug_utils.ml`](../examples/debug_utils.ml)
 [`README.md`](../README.md) for how to build and run them.
 
 Every snippet on this page was checked against `lib/generated/*.ml` (by
-`grep`, or by compiling it) as it was written; none of it is invented. Where
-that process turned up a discrepancy between `DESIGN.md` and the generated
-code, or an outright bug, it's flagged inline and summarised in
-[Known generator issues](#known-generator-issues-as-of-this-writing) at the
-end.
+`grep`, or by compiling it) as it was written; none of it is invented.
 
 ## Contents
 
@@ -36,7 +34,7 @@ end.
 9. [Threading](#threading)
 10. [The 64-bit integer caveat](#the-64-bit-integer-caveat)
 11. [Regeneration workflow](#regeneration-workflow)
-12. [Known generator issues (as of this writing)](#known-generator-issues-as-of-this-writing)
+12. [Golden checks: struct layout and enum values](#golden-checks-struct-layout-and-enum-values)
 
 ## Loading and versions
 
@@ -164,9 +162,7 @@ Ctypes.getf info Vk.BufferCreateInfo.size          (* read a field back: 4096 *)
 ```
 
 The raw fields are still useful for reading results back (there's no
-`get`-style wrapper — everything goes through `Ctypes.getf`/`setf`), and,
-as shown further down, for working around a couple of generator bugs in
-specific `make` functions.
+`get`-style wrapper — everything goes through `Ctypes.getf`/`setf`).
 
 ### Lists instead of count + pointer
 
@@ -182,17 +178,34 @@ Vk.InstanceCreateInfo.make
   ()
 ```
 
-> **Gotcha — shared counts.** A handful of structs have *two or three*
-> pointer members that all declare the same C member as their `len` (e.g.
-> `VkWriteDescriptorSet`'s `pImageInfo`/`pBufferInfo`/`pTexelBufferView` all
-> share `descriptorCount`; `VkSubpassDescription`'s `pColorAttachments`/
-> `pResolveAttachments` share `colorAttachmentCount`). The generator's `make`
-> only derives the shared count field from *one* of them (the last one it
-> emits, not necessarily the one you actually populate), so the count can
-> silently come out as `0` or otherwise wrong. See
-> [Known generator issues](#known-generator-issues-as-of-this-writing) for
-> the full list and the `Ctypes.setf ... ()` workaround used in
-> `examples/compute.ml` and `examples/triangle_offscreen.ml`.
+**Shared counts.** A handful of structs have *two or three* pointer members
+that all declare the same C member as their `len` (e.g.
+`VkWriteDescriptorSet`'s `pImageInfo`/`pBufferInfo`/`pTexelBufferView` all
+share `descriptorCount`; `VkSubpassDescription`'s `pColorAttachments`/
+`pResolveAttachments` share `colorAttachmentCount`). `make` derives the
+count from the *longest* of the lists you actually supply, and raises
+`Invalid_argument` if two of them are supplied with different non-zero
+lengths:
+
+```ocaml
+Vk.SubpassDescription.make ~pipeline_bind_point:Vk.PipelineBindPoint.graphics
+  ~color_attachments:[ attachment_ref ] ()   (* colorAttachmentCount = 1, no resolve attachments needed *)
+```
+
+When *every* array sharing a count is independently optional (registry
+`optional="true"` on the pointer — e.g. `VkDescriptorSetLayoutBinding`'s
+`pImmutableSamplers`, where a binding can declare any `descriptorCount` with
+no immutable samplers at all), `make` also accepts the count directly as a
+plain `?xxx_count:int`, overriding the derived length:
+
+```ocaml
+Vk.DescriptorSetLayoutBinding.make ~binding:0
+  ~descriptor_type:Vk.DescriptorType.storage_buffer ~descriptor_count:1
+  ~stage_flags:Vk.ShaderStageFlags.compute ()   (* no ~immutable_samplers at all *)
+```
+
+(both used in `examples/compute.ml`; see `examples/triangle_offscreen.ml`
+for the `~color_attachments`-only case above).
 
 ### Strings
 
@@ -296,11 +309,9 @@ therefore safe and won't corrupt anything Vulkan still holds a pointer to.
 What this **does not** cover:
 
 - Anything you write into a struct's raw fields yourself with `Ctypes.setf`
-  after `make` returns (used deliberately for the workarounds in
-  [Known generator issues](#known-generator-issues-as-of-this-writing) below
-  — those only ever write plain integers, never pointers, so there's nothing
-  extra to keep alive). If you `setf` a *pointer* field by hand, you are
-  responsible for the pointee's lifetime.
+  after `make` returns — none of the examples in this repository need to do
+  this, but if you `setf` a *pointer* field by hand for your own reasons,
+  you are responsible for the pointee's lifetime.
 - The struct value itself once nothing references it — e.g. don't build a
   `Vk.SubmitInfo.t` inline in an expression whose result you discard before
   the driver has actually read it; bind it to a variable that stays in scope
@@ -408,7 +419,7 @@ just come back as their plain OCaml type. There's no special ceremony on the
 caller's side — `List.hd`, `List.iter`, `List.length`, etc. all just work, as
 in every example's `find_queue_family`/`enumerate_physical_devices` calls.
 
-### Output-array commands (and where the pattern breaks down)
+### Output-array commands
 
 A *single* trailing output pointer (`VkInstance* pInstance`,
 `VkMemoryRequirements* pMemoryRequirements`) is allocated by the wrapper and
@@ -419,29 +430,49 @@ val create_instance : Vk.InstanceCreateInfo.t Ctypes.structure -> Vk.Instance.t
 val get_buffer_memory_requirements : Vk.Device.t -> Vk.Buffer.t -> Vk.MemoryRequirements.t Ctypes.structure
 ```
 
-> **Gotcha — batch-create/-allocate commands.** `vkCreateGraphicsPipelines`,
-> `vkCreateComputePipelines`, `vkAllocateDescriptorSets` and
-> `vkAllocateCommandBuffers` all have an output array whose length is
-> already implied by an *input* (the `createInfoCount` you're passing in, or
-> a struct field like `descriptorSetCount` that was itself derived from a
-> `~set_layouts` list) rather than a separate `pCount` you get back — that
-> shape isn't the two-call pattern above, and it isn't a single output value
-> either, so the generator's fallback leaves the output pointer raw. You
-> allocate it yourself and dereference it after the call:
->
-> ```ocaml
-> let pipelines = Ctypes.allocate_n Vk.Pipeline.t ~count:1 in
-> let (_ : Vk.Result.t) =
->   Vk.create_compute_pipelines device Vk.PipelineCache.null [ pipeline_create_info ] pipelines
-> in
-> let pipeline = Ctypes.( !@ ) pipelines
-> ```
->
-> (exactly as done in `examples/compute.ml` and
-> `examples/triangle_offscreen.ml`, including the `allocate_descriptor_sets`/
-> `allocate_command_buffers` variants). For more than one at a time, use
-> `Ctypes.allocate_n ... ~count:n` and `Ctypes.CArray.from_ptr ptr n |>
-> Ctypes.CArray.to_list` instead of a single `!@`.
+**Batch-create/-allocate commands.** `vkCreateGraphicsPipelines`,
+`vkCreateComputePipelines`, `vkAllocateDescriptorSets` and
+`vkAllocateCommandBuffers` all have an output array whose length is already
+implied by an *input* (the `createInfoCount` you're passing in, or a struct
+field like `descriptorSetCount` that was itself derived from a
+`~set_layouts` list) rather than a separate `pCount` you get back. That
+shape isn't the two-call pattern above, but it's still fully wrapped: the
+generator allocates the output array itself and returns it as a plain OCaml
+list, so there's no manual `Ctypes` allocation needed on the caller's side.
+
+`create_graphics_pipelines`/`create_compute_pipelines` additionally return
+the `Result.t` alongside the list, because `VK_PIPELINE_COMPILE_REQUIRED_EXT`
+is a success code (the tuple rule from
+[Success-code tuples](#success-code-tuples) above):
+
+```ocaml
+val create_compute_pipelines :
+  ?allocator:Vk.AllocationCallbacks.t Ctypes.structure -> Vk.Device.t -> Vk.PipelineCache.t ->
+  Vk.ComputePipelineCreateInfo.t Ctypes.structure list -> Vk.Result.t * Vk.Pipeline.t list
+
+let _, pipelines =
+  Vk.create_compute_pipelines device Vk.PipelineCache.null [ pipeline_create_info ]
+in
+let pipeline = List.hd pipelines   (* one create-info in, one pipeline out *)
+```
+
+`allocate_command_buffers`/`allocate_descriptor_sets` read their count from
+the input allocate-info struct and have no extra success codes, so they
+return a plain list with no `Result.t`:
+
+```ocaml
+val allocate_command_buffers :
+  Vk.Device.t -> Vk.CommandBufferAllocateInfo.t Ctypes.structure -> Vk.CommandBuffer.t list
+
+let cb =
+  List.hd
+    (Vk.allocate_command_buffers device
+       (Vk.CommandBufferAllocateInfo.make ~command_pool ~level:Vk.CommandBufferLevel.primary
+          ~command_buffer_count:1 ()))
+```
+
+(all four are exercised in `examples/compute.ml` and
+`examples/triangle_offscreen.ml`.)
 
 ## Extensions and function loading
 
@@ -566,14 +597,6 @@ let render_frame () =
        ~image_indices:[ image_index ] ())
 ```
 
-> **Gotcha (same family as above).** `VkPresentInfoKHR.swapchainCount` is
-> the `len` target of *both* `pSwapchains` and `pImageIndices`; the
-> generated `make` derives it from `~image_indices`'s length, not
-> `~swapchains`'s. The snippet above happens to always pass matching
-> one-element lists, so it's unaffected, but presenting to more than one
-> swapchain at once (rare) would need the same `Ctypes.setf` workaround as
-> `WriteDescriptorSet`/`SubpassDescription` above.
-
 ## Threading
 
 Vulkan itself allows calling into most commands from multiple threads as
@@ -599,8 +622,7 @@ restriction on the *Vulkan-call* side. Two OCaml-specific notes:
   triggering Vulkan/OCaml call. A driver or layer that invokes the callback
   from a separate, non-Vulkan-call thread (some validation layers' async
   logging paths do this) could behave differently; this hasn't been
-  exercised on this machine (no validation layer installed) — see
-  [Known generator issues](#known-generator-issues-as-of-this-writing).
+  exercised on this machine (no validation layer installed).
 
 ## The 64-bit integer caveat
 
@@ -642,56 +664,53 @@ re-runs it and fails if the tree isn't clean afterwards, so a registry bump
 or generator change and its regenerated output must land in the same
 commit.
 
-The C struct-layout golden file(s) under `test/layout/` are produced
-separately, compiled against the *real* platform C headers rather than the
-XML registry, specifically so they can catch a generator/registry mistake
-instead of just reproducing it:
+The struct-layout and enum-value golden files under `test/layout/` and
+`test/enum_values/` are produced separately, compiled against the *real*
+platform C headers rather than the XML registry, specifically so they can
+catch a generator/registry mistake instead of just reproducing it — see
+[Golden checks](#golden-checks-struct-layout-and-enum-values) below for how
+they're used and regenerated.
+
+## Golden checks: struct layout and enum values
+
+Two of `test/`'s alcotest suites (`DESIGN.md` §12) don't just exercise the
+binding against lavapipe — they check the *generator's arithmetic* against
+what a real C compiler resolves from the real, pinned `<vulkan/vulkan.h>`,
+so a mistake in the generator or in `registry/vk.xml` can't hide by just
+agreeing with itself:
+
+- **`test_layout.ml`** compares every `(size, [(member, offset)])` entry in
+  `Vk.Layout.all` (`lib/generated/vk_layout.ml`) against
+  `test/layout/x86_64-linux-gnu.txt`, a golden file produced by
+  `gen/layout_check.py` (emits a C11 probe program from the registry) piped
+  through `gcc` against the real `$VULKAN_HEADERS/include/vulkan/vulkan.h`
+  (wrapped by `scripts/gen_layout.sh`). Only struct/union names present on
+  *both* sides are compared — a name the generator doesn't implement yet,
+  or one the installed headers don't declare, isn't a failure. As of this
+  writing that's **1360** struct/union names, **0** mismatches.
+- **`test_enum_values.ml`** does the same for individual enum/bitmask
+  constants: `Vk.Enum_values.all` (`lib/generated/vk_enum_values.ml`)
+  against `test/enum_values/x86_64-linux-gnu.txt`, produced by
+  `gen/enum_check.py`/`scripts/gen_enum_values.sh`. As of this writing
+  that's **4455** constants, **0** mismatches.
+
+Both golden files are committed, so running `dune build @runtest` never
+needs `$VULKAN_HEADERS`/`gcc` — only *regenerating* the golden files does.
+Both tests skip (not fail), with a message, if the golden file for the
+current `gcc -dumpmachine` target triple doesn't exist yet.
+
+Regenerate both after a registry bump or a generator change that touches
+struct layout or enum values:
 
 ```sh
 source /home/ubu3/projects/vk-env.sh   # sets $VULKAN_HEADERS
 ./scripts/gen_layout.sh                 # writes test/layout/<target-triple>.txt
+./scripts/gen_enum_values.sh            # writes test/enum_values/<target-triple>.txt
+git diff --stat test/layout test/enum_values
+dune build -j 2 @runtest
 ```
 
-## Known generator issues (as of this writing)
-
-These were found while writing `examples/compute.ml`,
-`examples/triangle_offscreen.ml` and `examples/debug_utils.ml`; each is
-described in more depth, in context, above. This project's docs/examples
-lane doesn't own `gen/`/`lib/generated/`, so these are workarounds, not
-fixes — see the handoff report for the full precise write-up (root cause in
-`gen/vkgen/emit_types.py`, minimal repros, severity).
-
-1. **`Vk.DescriptorSetLayoutBinding.make` has no `~descriptor_count`
-   argument** — it's always `List.length ~immutable_samplers`, so it's `0`
-   for any binding without immutable samplers (almost all of them). Fix:
-   `Ctypes.setf binding Vk.DescriptorSetLayoutBinding.descriptor_count n`
-   after `make`, before using the binding.
-2. **`Vk.WriteDescriptorSet.make`'s `descriptorCount` always comes from
-   `~texel_buffer_view`**, never `~image_info`/`~buffer_info`, because all
-   three share `len="descriptorCount"` in `vk.xml`. Fix: same `Ctypes.setf`
-   pattern.
-3. **`Vk.SubpassDescription.make`'s `colorAttachmentCount` always comes from
-   `~resolve_attachments`**, never `~color_attachments`, for the same
-   shared-`len` reason — breaks any render pass without MSAA resolve
-   attachments (i.e. almost all of them). Fix: same `Ctypes.setf` pattern.
-4. **The same shared-count shape affects at least
-   `VkPresentInfoKHR.swapchainCount` (`pSwapchains`/`pImageIndices`),
-   `VkSubmitInfo.waitSemaphoreCount` (`pWaitSemaphores`/`pWaitDstStageMask`)
-   and a dozen more structs** — none of these happened to be tripped by the
-   examples in this repository (their two lists always end up the same
-   length in normal use), but they're latent; see the handoff report for
-   the complete list.
-5. **`Vk.create_graphics_pipelines`/`Vk.create_compute_pipelines`/
-   `Vk.allocate_descriptor_sets`/`Vk.allocate_command_buffers` don't return
-   the created handle(s) as a list.** Their output array's length is
-   implied by an input rather than a separate `pCount` out-parameter, a
-   shape `DESIGN.md` §10 doesn't specify a rule for; the generator's
-   fallback leaves the output pointer raw. Allocate it yourself with
-   `Ctypes.allocate_n` and dereference/`CArray.from_ptr` it after the call.
-6. **Naming**: `DebugUtilsMessengerCreateInfoEXT.make`'s callback/user-data
-   arguments are `~pfn_user_callback`/`~p_user_data`, not the
-   prefix-stripped `~user_callback`/`~user_data` that `DESIGN.md` §3's
-   general rule would suggest.
-7. **`PfnDebugUtilsMessengerCallbackEXT.opt` doesn't pass
-   `~runtime_lock:true`** to `Foreign.funptr_opt`, unlike what `DESIGN.md`
-   §8 says it should — see [Threading](#threading).
+Unlike these two scripts, `gen/gen.py` itself never invokes `gcc` or reads
+the real headers — it only ever reads `registry/vk.xml` (`DESIGN.md` §13),
+so a Python-only checkout can still build the library; only regenerating
+the golden files needs a real compiler and `$VULKAN_HEADERS`.

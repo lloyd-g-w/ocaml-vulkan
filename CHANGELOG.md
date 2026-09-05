@@ -29,53 +29,58 @@ repository. Format loosely follows [Keep a Changelog](https://keepachangelog.com
   `dune exec examples/debug_utils.exe`.
 - `docs/GUIDE.md` — a practical, section-by-section guide to the generated
   API (loading/versions, handles, enums/flags, structs/unions/bitfields,
-  memory & lifetime incl. `Bigarray` mapping, commands incl. error handling
-  and the two array-output-command gotchas below, extensions & function
-  loading, an explicitly-untested `tsdl`/SDL2 interop sketch, a threading
-  note, the 64-bit integer caveat, and the regeneration workflow), plus a
-  consolidated "Known generator issues" section.
+  memory & lifetime incl. `Bigarray` mapping, commands incl. error handling,
+  extensions & function loading, an explicitly-untested `tsdl`/SDL2 interop
+  sketch, a threading note, the 64-bit integer caveat, the regeneration
+  workflow, and the struct-layout/enum-value golden checks).
 - `README.md` rewritten against the real generated API: an accurate feature
   list with real counts (see below), corrected install instructions, a
   60-line quick start, an examples table, and a "Status and limitations"
   section.
 - `.gitignore`: ignore `*.ppm` (`triangle_offscreen`'s output).
 
-### Known issues (as of this entry)
+### Fixed — generator, tests, examples & docs reconciled
 
-Found and worked around (in the three new examples) while writing the
-above; not fixed here since `gen/`/`lib/generated/` belong to a different
-part of this project. Full detail, exact symptoms and workarounds are in
-[`docs/GUIDE.md`'s "Known generator issues"](docs/GUIDE.md#known-generator-issues-as-of-this-writing).
+Every generator issue listed in this file's previous "Known issues" entry
+is now fixed (`gen/vkgen/emit_types.py`, `gen/vkgen/emit_api.py`), and the
+examples/docs/README have been reconciled with the fixed API:
 
-- `Vk.DescriptorSetLayoutBinding.make` has no `~descriptor_count` argument
-  (always derived from `~immutable_samplers`'s length, so it's `0` for
-  almost every real binding).
-- `Vk.WriteDescriptorSet.make`'s `descriptorCount` is always derived from
-  `~texel_buffer_view`'s length, never `~image_info`/`~buffer_info`'s.
-- `Vk.SubpassDescription.make`'s `colorAttachmentCount` is always derived
-  from `~resolve_attachments`'s length, never `~color_attachments`'s —
-  breaks any render pass without MSAA resolve attachments.
-- The same "two array members share one `len=` count, only one of them
-  actually drives it" shape also affects (at least) `VkPresentInfoKHR`,
-  `VkSubmitInfo`, `VkIndirectCommandsLayoutNV`, `VkSemaphoreWaitInfo`,
-  `VkWin32KeyedMutexAcquireReleaseInfoKHR`/`NV` and a few more; none of
-  these happened to be tripped by this repository's examples.
-- `Vk.create_graphics_pipelines`/`Vk.create_compute_pipelines`/
-  `Vk.allocate_descriptor_sets`/`Vk.allocate_command_buffers` require the
-  caller to pre-allocate the output handle array (`Ctypes.allocate_n`)
-  rather than returning it as a list.
-- As of this entry, `test/test_compute.ml`, `test/test_graphics.ml` and
-  `test/test_structs.ml` (owned by another part of this project, not
-  touched here) do not compile; the first two fail on exactly the first
-  two generator issues above, independently confirming them.
-- `DESIGN.md` §3's "ergonomic labels drop the p/pp/pfn prefix" rule doesn't
-  hold for `DebugUtilsMessengerCreateInfoEXT.make` (`~pfn_user_callback`/
-  `~p_user_data` keep it), and §8's claim that `PfnDebugUtilsMessengerCallbackEXT.opt`
-  passes `~runtime_lock:true` to `Foreign.funptr_opt` doesn't match the
-  generated code (no `~runtime_lock` argument is passed at all).
-- Pre-existing, not found by this work but re-confirmed while writing
-  `README.md`: `dune-project` declares `(license MIT)` while the committed
-  `LICENSE` file is GPLv3.
+- Struct `make` constructors derive a shared count (`descriptorCount`,
+  `colorAttachmentCount`, `swapchainCount`, ...) from the *longest* of the
+  array arguments that share it, instead of silently picking whichever one
+  happened to be recorded last (`Invalid_argument` if two disagree on a
+  non-zero length). Where every array sharing a count is independently
+  optional (e.g. `VkDescriptorSetLayoutBinding.pImmutableSamplers`), `make`
+  also accepts the count directly as a plain `?xxx_count:int`
+  (`Vk.DescriptorSetLayoutBinding.make ~descriptor_count:1 ...`).
+- `Vk.create_graphics_pipelines`/`Vk.create_compute_pipelines` now return
+  `Result.t * Pipeline.t list`; `Vk.allocate_command_buffers` returns
+  `CommandBuffer.t list`; `Vk.allocate_descriptor_sets` returns
+  `DescriptorSet.t list` — no more caller-allocated output pointers.
+- `test/test_compute.ml`, `test/test_graphics.ml` and `test/test_structs.ml`
+  compile and pass again; `test/layout/*.txt` is now actually mounted into
+  the `runtest` sandbox, so `test_layout.ml` compares instead of silently
+  skipping. `dune build @runtest` is green: **1360** struct/union layouts
+  and **4455** enum/bitmask constants verified against the real C headers
+  (0 mismatches on both), plus the enum/flag round-trip, struct/keep-alive,
+  instance, compute and offscreen-graphics suites (`DESIGN.md` §12; see
+  [`docs/GUIDE.md`'s "Golden checks"](docs/GUIDE.md#golden-checks-struct-layout-and-enum-values)).
+- `dune-project`'s `(license ...)` field now reads `GPL-3.0-only`, matching
+  the committed `LICENSE` file (previously `MIT`) — the mismatch flagged in
+  this file's previous entry is resolved.
+- `examples/compute.ml`/`examples/triangle_offscreen.ml`: every
+  `WORKAROUND`/`Ctypes.allocate_n` block removed in favour of the fixed API
+  used directly; `examples/debug_utils.ml`, `docs/GUIDE.md` and `README.md`
+  reconciled with the fixed API (stale "known generator issues" prose
+  removed; snippets re-checked against `lib/generated/`).
+
+One genuine, non-blocking discrepancy remains (not a generator bug, just a
+naming/threading detail — see
+[`docs/GUIDE.md`](docs/GUIDE.md#extensions-and-function-loading)):
+`DebugUtilsMessengerCreateInfoEXT.make`'s callback/user-data arguments keep
+the `~pfn_`/`~p_` prefix instead of the prefix-stripped form `DESIGN.md` §3
+describes as the general rule, and its `Foreign.funptr_opt` binding doesn't
+pass `~runtime_lock:true` as `DESIGN.md` §8 describes.
 
 ## Initial project skeleton
 

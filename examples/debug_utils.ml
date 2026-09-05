@@ -25,9 +25,10 @@
 
    Note on naming: DESIGN.md §3 says ergonomic argument labels drop the
    p/pp/pfn prefix (e.g. ~user_callback), but the generated
-   DebugUtilsMessengerCreateInfoEXT.make actually keeps it
-   (~pfn_user_callback, ~p_user_data) -- see the handoff report. This file
-   uses the real (~pfn_user_callback) label, not the DESIGN-documented one. *)
+   DebugUtilsMessengerCreateInfoEXT.make keeps it for its two PFN_*/void*
+   members (~pfn_user_callback, ~p_user_data) -- see docs/GUIDE.md's
+   "Extensions and function loading" section. This file uses the real
+   (~pfn_user_callback) label, not the DESIGN-documented one. *)
 
 let messages_seen = ref 0
 

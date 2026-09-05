@@ -190,8 +190,14 @@ class Context:
                 depth = max(depth, 1)
             for _ in range(depth):
                 typ = f"ptr ({typ})"
-        for dim in reversed(member.arrays):
-            typ = f"array {self.array_size(dim)} ({typ})"
+        if strings and member.arrays:
+            # Array parameters decay to pointers in C function prototypes.
+            for dim in reversed(member.arrays[1:]):
+                typ = f"array {self.array_size(dim)} ({typ})"
+            typ = f"ptr ({typ})"
+        else:
+            for dim in reversed(member.arrays):
+                typ = f"array {self.array_size(dim)} ({typ})"
         return typ
 
     def value_type(self, member: Member, *, owner: str | None = None,
@@ -223,8 +229,13 @@ class Context:
                 raise KeyError(member.ctype)
         for _ in range(0 if string_view else member.pointer_depth):
             typ = f"{typ} Ctypes.ptr"
-        for _ in member.arrays:
-            typ = f"{typ} Ctypes.CArray.t"
+        if strings and member.arrays:
+            for _ in member.arrays[1:]:
+                typ = f"{typ} Ctypes.CArray.t"
+            typ = f"{typ} Ctypes.ptr"
+        else:
+            for _ in member.arrays:
+                typ = f"{typ} Ctypes.CArray.t"
         return typ
 
     def array_size(self, expression: str) -> int:

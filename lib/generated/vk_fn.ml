@@ -784,7 +784,7 @@ let cmd_set_depth_bias arg0 arg1 arg2 arg3 =
   | Some f -> f arg0 arg1 arg2 arg3
   | None -> Vk_base.not_loaded "vkCmdSetDepthBias"
 
-let cmd_set_blend_constants_typ = CommandBuffer.t @-> array 4 (Ctypes.float) @-> returning (Ctypes.void)
+let cmd_set_blend_constants_typ = CommandBuffer.t @-> ptr (Ctypes.float) @-> returning (Ctypes.void)
 let cmd_set_blend_constants_ref = ref (bind cmd_set_blend_constants_typ Ctypes.null)
 let cmd_set_blend_constants arg0 arg1 =
   match !cmd_set_blend_constants_ref with
@@ -3605,7 +3605,7 @@ let get_physical_device_refreshable_object_types_khr arg0 arg1 arg2 =
   | Some f -> f arg0 arg1 arg2
   | None -> Vk_base.not_loaded "vkGetPhysicalDeviceRefreshableObjectTypesKHR"
 
-let cmd_set_fragment_shading_rate_khr_typ = CommandBuffer.t @-> ptr (Extent2D.t) @-> array 2 (FragmentShadingRateCombinerOpKHR.t) @-> returning (Ctypes.void)
+let cmd_set_fragment_shading_rate_khr_typ = CommandBuffer.t @-> ptr (Extent2D.t) @-> ptr (FragmentShadingRateCombinerOpKHR.t) @-> returning (Ctypes.void)
 let cmd_set_fragment_shading_rate_khr_ref = ref (bind cmd_set_fragment_shading_rate_khr_typ Ctypes.null)
 let cmd_set_fragment_shading_rate_khr arg0 arg1 arg2 =
   match !cmd_set_fragment_shading_rate_khr_ref with
@@ -3619,7 +3619,7 @@ let get_physical_device_fragment_shading_rates_khr arg0 arg1 arg2 =
   | Some f -> f arg0 arg1 arg2
   | None -> Vk_base.not_loaded "vkGetPhysicalDeviceFragmentShadingRatesKHR"
 
-let cmd_set_fragment_shading_rate_enum_nv_typ = CommandBuffer.t @-> FragmentShadingRateNV.t @-> array 2 (FragmentShadingRateCombinerOpKHR.t) @-> returning (Ctypes.void)
+let cmd_set_fragment_shading_rate_enum_nv_typ = CommandBuffer.t @-> FragmentShadingRateNV.t @-> ptr (FragmentShadingRateCombinerOpKHR.t) @-> returning (Ctypes.void)
 let cmd_set_fragment_shading_rate_enum_nv_ref = ref (bind cmd_set_fragment_shading_rate_enum_nv_typ Ctypes.null)
 let cmd_set_fragment_shading_rate_enum_nv arg0 arg1 arg2 =
   match !cmd_set_fragment_shading_rate_enum_nv_ref with

@@ -1,0 +1,7 @@
+(executable
+ (name vkinfo)
+ (libraries vulkan ctypes))
+
+(executable
+ (name smoke)
+ (libraries vulkan ctypes))

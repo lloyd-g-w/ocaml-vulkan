@@ -198,7 +198,7 @@ let all = [
     ("instanceCustomIndex", offsetof AccelerationStructureInstanceKHR._instance_custom_index_bits);
     ("mask", offsetof AccelerationStructureInstanceKHR._instance_custom_index_bits);
     ("instanceShaderBindingTableRecordOffset", offsetof AccelerationStructureInstanceKHR._instance_shader_binding_table_record_offset_bits);
-    ("flags", offsetof AccelerationStructureInstanceKHR._flags_bits);
+    ("flags", offsetof AccelerationStructureInstanceKHR._instance_shader_binding_table_record_offset_bits);
     ("accelerationStructureReference", offsetof AccelerationStructureInstanceKHR._acceleration_structure_reference);
   ]);
   ("VkAccelerationStructureInstanceNV", sizeof AccelerationStructureInstanceNV.t, [
@@ -206,7 +206,7 @@ let all = [
     ("instanceCustomIndex", offsetof AccelerationStructureInstanceNV._instance_custom_index_bits);
     ("mask", offsetof AccelerationStructureInstanceNV._instance_custom_index_bits);
     ("instanceShaderBindingTableRecordOffset", offsetof AccelerationStructureInstanceNV._instance_shader_binding_table_record_offset_bits);
-    ("flags", offsetof AccelerationStructureInstanceNV._flags_bits);
+    ("flags", offsetof AccelerationStructureInstanceNV._instance_shader_binding_table_record_offset_bits);
     ("accelerationStructureReference", offsetof AccelerationStructureInstanceNV._acceleration_structure_reference);
   ]);
   ("VkAccelerationStructureMatrixMotionInstanceNV", sizeof AccelerationStructureMatrixMotionInstanceNV.t, [
@@ -215,7 +215,7 @@ let all = [
     ("instanceCustomIndex", offsetof AccelerationStructureMatrixMotionInstanceNV._instance_custom_index_bits);
     ("mask", offsetof AccelerationStructureMatrixMotionInstanceNV._instance_custom_index_bits);
     ("instanceShaderBindingTableRecordOffset", offsetof AccelerationStructureMatrixMotionInstanceNV._instance_shader_binding_table_record_offset_bits);
-    ("flags", offsetof AccelerationStructureMatrixMotionInstanceNV._flags_bits);
+    ("flags", offsetof AccelerationStructureMatrixMotionInstanceNV._instance_shader_binding_table_record_offset_bits);
     ("accelerationStructureReference", offsetof AccelerationStructureMatrixMotionInstanceNV._acceleration_structure_reference);
   ]);
   ("VkAccelerationStructureMemoryRequirementsInfoNV", sizeof AccelerationStructureMemoryRequirementsInfoNV.t, [
@@ -246,7 +246,7 @@ let all = [
     ("instanceCustomIndex", offsetof AccelerationStructureSRTMotionInstanceNV._instance_custom_index_bits);
     ("mask", offsetof AccelerationStructureSRTMotionInstanceNV._instance_custom_index_bits);
     ("instanceShaderBindingTableRecordOffset", offsetof AccelerationStructureSRTMotionInstanceNV._instance_shader_binding_table_record_offset_bits);
-    ("flags", offsetof AccelerationStructureSRTMotionInstanceNV._flags_bits);
+    ("flags", offsetof AccelerationStructureSRTMotionInstanceNV._instance_shader_binding_table_record_offset_bits);
     ("accelerationStructureReference", offsetof AccelerationStructureSRTMotionInstanceNV._acceleration_structure_reference);
   ]);
   ("VkAccelerationStructureTrianglesDisplacementMicromapNV", sizeof AccelerationStructureTrianglesDisplacementMicromapNV.t, [

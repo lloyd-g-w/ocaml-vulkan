@@ -18,9 +18,16 @@ include Vk_types_13
 include Vk_types_14
 include Vk_types_15
 module Fn = Vk_fn
+include Vk_api
 module Loader = struct
   include Vk_base.Loader
   let load_instance = Vk_fn.load_instance
   let load_device = Vk_fn.load_device
+  let get_instance_proc_addr instance name =
+    Vk_base.Loader.get_instance_proc_addr
+      (Ctypes.ptr_of_raw_address (Instance.to_nativeint instance)) name
+  let get_device_proc_addr device name =
+    Vk_base.Loader.get_device_proc_addr
+      (Ctypes.ptr_of_raw_address (Device.to_nativeint device)) name
 end
 module Layout = Vk_layout

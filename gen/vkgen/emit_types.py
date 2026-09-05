@@ -45,7 +45,7 @@ def physical_fields(comp: Composite) -> list[PhysicalField]:
         used = 0
         while i < len(comp.members):
             current = comp.members[i]
-            if current.bitfield is None or current.ctype != member.ctype or used + current.bitfield > width:
+            if current.bitfield is None or _storage_bits(current.ctype) != width or used + current.bitfield > width:
                 break
             group.append(current)
             used += current.bitfield

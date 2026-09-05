@@ -2419,8 +2419,6 @@ module AccelerationStructureInstanceKHR = struct
   let instance_custom_index_bits = _instance_custom_index_bits
   let _instance_shader_binding_table_record_offset_bits = field t "instanceShaderBindingTableRecordOffset" (Vk_base.uint32)
   let instance_shader_binding_table_record_offset_bits = _instance_shader_binding_table_record_offset_bits
-  let _flags_bits = field t "flags" (Vk_base.uint32)
-  let flags_bits = _flags_bits
   let _acceleration_structure_reference = field t "accelerationStructureReference" (Vk_base.uint64)
   let acceleration_structure_reference = _acceleration_structure_reference
   let () = seal t
@@ -2430,8 +2428,7 @@ module AccelerationStructureInstanceKHR = struct
     ignore keep;
     (match arg_transform with None -> () | Some x -> setf value _transform x);
     setf value _instance_custom_index_bits ((arg_instance_custom_index land 16777215) lor ((arg_mask land 255) lsl 24));
-    setf value _instance_shader_binding_table_record_offset_bits ((arg_instance_shader_binding_table_record_offset land 16777215));
-    setf value _flags_bits ((arg_flags land 255));
+    setf value _instance_shader_binding_table_record_offset_bits ((arg_instance_shader_binding_table_record_offset land 16777215) lor ((arg_flags land 255) lsl 24));
     setf value _acceleration_structure_reference arg_acceleration_structure_reference;
     value
 end
@@ -2447,8 +2444,6 @@ module AccelerationStructureMatrixMotionInstanceNV = struct
   let instance_custom_index_bits = _instance_custom_index_bits
   let _instance_shader_binding_table_record_offset_bits = field t "instanceShaderBindingTableRecordOffset" (Vk_base.uint32)
   let instance_shader_binding_table_record_offset_bits = _instance_shader_binding_table_record_offset_bits
-  let _flags_bits = field t "flags" (Vk_base.uint32)
-  let flags_bits = _flags_bits
   let _acceleration_structure_reference = field t "accelerationStructureReference" (Vk_base.uint64)
   let acceleration_structure_reference = _acceleration_structure_reference
   let () = seal t
@@ -2459,8 +2454,7 @@ module AccelerationStructureMatrixMotionInstanceNV = struct
     (match arg_transform_t_0 with None -> () | Some x -> setf value _transform_t_0 x);
     (match arg_transform_t_1 with None -> () | Some x -> setf value _transform_t_1 x);
     setf value _instance_custom_index_bits ((arg_instance_custom_index land 16777215) lor ((arg_mask land 255) lsl 24));
-    setf value _instance_shader_binding_table_record_offset_bits ((arg_instance_shader_binding_table_record_offset land 16777215));
-    setf value _flags_bits ((arg_flags land 255));
+    setf value _instance_shader_binding_table_record_offset_bits ((arg_instance_shader_binding_table_record_offset land 16777215) lor ((arg_flags land 255) lsl 24));
     setf value _acceleration_structure_reference arg_acceleration_structure_reference;
     value
 end
@@ -2476,8 +2470,6 @@ module AccelerationStructureSRTMotionInstanceNV = struct
   let instance_custom_index_bits = _instance_custom_index_bits
   let _instance_shader_binding_table_record_offset_bits = field t "instanceShaderBindingTableRecordOffset" (Vk_base.uint32)
   let instance_shader_binding_table_record_offset_bits = _instance_shader_binding_table_record_offset_bits
-  let _flags_bits = field t "flags" (Vk_base.uint32)
-  let flags_bits = _flags_bits
   let _acceleration_structure_reference = field t "accelerationStructureReference" (Vk_base.uint64)
   let acceleration_structure_reference = _acceleration_structure_reference
   let () = seal t
@@ -2488,8 +2480,7 @@ module AccelerationStructureSRTMotionInstanceNV = struct
     (match arg_transform_t_0 with None -> () | Some x -> setf value _transform_t_0 x);
     (match arg_transform_t_1 with None -> () | Some x -> setf value _transform_t_1 x);
     setf value _instance_custom_index_bits ((arg_instance_custom_index land 16777215) lor ((arg_mask land 255) lsl 24));
-    setf value _instance_shader_binding_table_record_offset_bits ((arg_instance_shader_binding_table_record_offset land 16777215));
-    setf value _flags_bits ((arg_flags land 255));
+    setf value _instance_shader_binding_table_record_offset_bits ((arg_instance_shader_binding_table_record_offset land 16777215) lor ((arg_flags land 255) lsl 24));
     setf value _acceleration_structure_reference arg_acceleration_structure_reference;
     value
 end

@@ -11,7 +11,7 @@
 
 (maintainers "Lloyd Williams")
 
-(license MIT)
+(license GPL-3.0-only)
 
 (documentation https://github.com/lloyd-g-w/ocaml-vulkan)
 

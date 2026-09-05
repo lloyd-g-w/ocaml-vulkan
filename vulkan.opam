@@ -5,7 +5,7 @@ description:
   "Complete, generated bindings to Vulkan (core 1.0-1.4 and all registry extensions) built on ctypes. Provides a faithful raw layer plus an ergonomic OCaml layer with labelled struct constructors, lists instead of count/pointer pairs and exceptions for VkResult errors. Loads libvulkan at runtime, no C stubs or headers required."
 maintainer: ["Lloyd Williams"]
 authors: ["Lloyd Williams"]
-license: "MIT"
+license: "GPL-3.0-only"
 tags: ["vulkan" "graphics" "gpu" "compute" "bindings" "ctypes"]
 homepage: "https://github.com/lloyd-g-w/ocaml-vulkan"
 doc: "https://github.com/lloyd-g-w/ocaml-vulkan"

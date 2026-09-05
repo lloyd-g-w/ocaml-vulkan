@@ -50,3 +50,6 @@ __pycache__/
 
 # Output of examples/triangle_offscreen.ml (dune exec examples/triangle_offscreen.exe)
 *.ppm
+
+# docs site build output
+_site/

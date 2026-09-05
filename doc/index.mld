@@ -1,0 +1,57 @@
+{0 vulkan — OCaml bindings to the Vulkan API}
+
+Complete, generated OCaml bindings to {{:https://www.vulkan.org/}Vulkan}
+(core 1.0 – 1.4 and every extension in the Khronos registry), built on
+{{:https://github.com/ocamllabs/ocaml-ctypes}ctypes}. No C stubs and no
+Vulkan headers are needed to build; [libvulkan] is loaded at runtime and
+every entry point is resolved through [vkGetInstanceProcAddr].
+
+{1 Where to start}
+
+- {{:https://lloyd-g-w.github.io/ocaml-vulkan/guide.html}The guide} — a
+  practical walkthrough: loading, handles, enums and flags, struct
+  constructors, [pNext] chains, memory and lifetimes, commands and errors,
+  swapchain result handling, extensions, SDL2 interop, threading.
+- {{:https://lloyd-g-w.github.io/ocaml-vulkan/}Project home} — install,
+  runtime requirements, examples, testing, limitations.
+- {!Vk} — the API reference for the single entry-point module. Every
+  command, struct, enum, flag type and handle links to its Khronos
+  reference page.
+- {{:https://github.com/lloyd-g-w/ocaml-vulkan}Source on GitHub}.
+
+{1 Layout of the [Vk] module}
+
+- {b Commands} — one ergonomic function per Vulkan command, e.g.
+  {!Vk.create_instance}, {!Vk.enumerate_physical_devices},
+  {!Vk.queue_submit}, {!Vk.cmd_draw}. Lists replace count + pointer
+  pairs, output parameters become return values, [VkResult] errors raise
+  {!Vk.Error}. The raw C-shaped versions live in {!Vk.Fn}.
+- {b Structs and unions} — one module per type with the ctypes fields and a
+  labelled [make] constructor that fills [sType] automatically, e.g.
+  {!Vk.InstanceCreateInfo}, {!Vk.DeviceCreateInfo}, {!Vk.ClearValue}.
+- {b Enums and flags} — one module per type with named constants,
+  [to_string] and (for flags) [lor] / [mem], e.g. {!Vk.ImageLayout},
+  {!Vk.ImageUsageFlags}, {!Vk.Result}.
+- {b Handles} — {!Vk.Instance}, {!Vk.Device}, {!Vk.Buffer}, … with
+  [null], [equal] and [nativeint] conversions for interop.
+- {b Runtime} — {!Vk.Loader} (library loading and per-instance function
+  tables), version helpers such as {!Vk.api_version_1_3}, and
+  {!val:Vk.next} for [pNext] chains.
+
+{1 A taste}
+
+{[
+let app = Vk.ApplicationInfo.make ~application_name:"demo" ~api_version:Vk.api_version_1_3 () in
+let instance = Vk.create_instance (Vk.InstanceCreateInfo.make ~application_info:app ()) in
+let pd = List.hd (Vk.enumerate_physical_devices instance) in
+let props = Vk.get_physical_device_properties pd in
+print_endline (Vk.PhysicalDeviceProperties.get_device_name props);
+let queue_info = Vk.DeviceQueueCreateInfo.make ~queue_family_index:0 ~queue_priorities:[ 1.0 ] () in
+let device = Vk.create_device pd (Vk.DeviceCreateInfo.make ~queue_create_infos:[ queue_info ] ()) in
+Vk.destroy_device device ();
+Vk.destroy_instance instance ()
+]}
+
+Do not [open Vk]: module names follow Vulkan, so [Vk.Format], [Vk.Result],
+[Vk.Buffer], [Vk.Queue], [Vk.Semaphore] and [Vk.Event] shadow their
+[Stdlib] namesakes. Use qualified names or [module V = Vk].

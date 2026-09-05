@@ -35,13 +35,8 @@ jobs:
         with:
           ocaml-compiler: "5.2"
 
-      # `opam install .` needs a committed *.opam file to resolve "."  as a
-      # package, but vulkan.opam is dune-generated (dune-project has
-      # `(generate_opam_files true)`) and is intentionally not committed --
-      # materialise it here instead of maintaining a second copy by hand.
-      - name: Generate vulkan.opam from dune-project
-        run: opam exec -- dune build vulkan.opam
-
+      # vulkan.opam is dune-generated from dune-project but committed on
+      # purpose, so `opam install .` can resolve the package before dune exists.
       - name: Install opam dependencies
         run: opam install . --deps-only --with-test
 
@@ -59,6 +54,7 @@ jobs:
           fi
           echo "Found lavapipe ICD manifest: $icd"
           echo "VK_ICD_FILENAMES=$icd" >> "$GITHUB_ENV"
+          echo "VK_DRIVER_FILES=$icd" >> "$GITHUB_ENV"
 
       - name: Vulkan diagnostics (informational, lavapipe should report here)
         continue-on-error: true

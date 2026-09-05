@@ -325,27 +325,71 @@ scripts/embed_spv.ml   embed a compiled .spv file as an OCaml string constant
 
 ## Status and limitations
 
-- **No display/windowing example.** Every example in this repository
-  renders offscreen; there's no `tsdl`/SDL2 swapchain example that's
-  actually been run (this development machine is headless). `docs/GUIDE.md`
-  has an SDL2/`tsdl` interop sketch, explicitly marked as untested code,
-  showing how the pieces (handle-to-`nativeint` conversions,
-  `VkSurfaceKHR`/swapchain creation, `vkAcquireNextImageKHR`/
-  `vkQueuePresentKHR`) fit together.
-- **64-bit integers above `2^63` collide** through this binding's `int`-based
-  views — not merely "lose their sign": `2^63-1` and `2^64-1` both read
-  back as `-1` (documented, inert limitation, unused by real Vulkan values
-  except `UINT64_MAX`-style sentinels, which round-trip correctly — see
-  [`docs/GUIDE.md`](docs/GUIDE.md#the-64-bit-integer-caveat)).
-- **One naming exception**: `DebugUtilsMessengerCreateInfoEXT.make`'s
-  callback/user-data arguments are `~pfn_user_callback`/`~p_user_data`, not
-  the prefix-stripped form the general ergonomic-labelling rule
-  (`DESIGN.md` §3) would suggest — see
-  [`docs/GUIDE.md`](docs/GUIDE.md#extensions-and-function-loading) for
-  detail and the threading implications of its (deliberate, no longer a
-  documentation discrepancy) `~runtime_lock:false`.
-- See `CHANGELOG.md` for anything more specific to the current state of a
-  given area (generator, tests, this documentation lane).
+What is covered and verified is listed under [Status](#status) and
+[Testing](#testing-lavapipe). The known rough edges and deliberate design
+limits — please read these before shipping something on top of the library:
+
+- **No display/windowing example has been run.** Every example renders
+  offscreen (the development machine is headless). `docs/GUIDE.md` has an
+  SDL2/`tsdl` interop sketch (handle ⇄ `nativeint` conversions,
+  `VkSurfaceKHR`/swapchain creation, `acquire_next_image_khr` /
+  `queue_present_khr` result handling) that type-checks conceptually but is
+  explicitly marked untested — see
+  [Interop with SDL2](docs/GUIDE.md#interop-with-sdl2-tsdl).
+- **Memory and lifetimes.** Structures built with `X.make` keep everything
+  they point to alive for as long as the structure itself (strings, arrays,
+  nested structures, `pNext` chains via `Vk.next`); wrappers keep their list
+  arguments alive across the C call. If you fill pointer fields yourself
+  with `Ctypes.setf`, or build `CArray`s of structs by hand, *you* own those
+  lifetimes. Memory mapped with `map_memory` is a raw `unit ptr`
+  (use `Ctypes.bigarray_of_ptr`). See
+  [Memory and lifetime](docs/GUIDE.md#memory-and-lifetime).
+- **Callbacks** (`VK_EXT_debug_utils`, `VkAllocationCallbacks`, …) are
+  supported only when the driver/layer invokes them synchronously on the
+  thread that made the Vulkan call (validation layers do this). Vulkan calls
+  hold the OCaml runtime lock for their duration, and callbacks do not try to
+  reacquire it, so a driver that calls back from its own thread is
+  unsupported. Callbacks registered through struct constructors are retained
+  for the life of the process (never freed). See
+  [Threading](docs/GUIDE.md#threading).
+- **Dispatch tables are process-global (volk style).** `Vk.create_instance`
+  (re)binds every instance- and device-level command through
+  `vkGetInstanceProcAddr` for the newest instance; `Vk.Loader.load_device`
+  is optional and only valid for single-device applications, which is why
+  `Vk.create_device` does not call it. Applications juggling several live
+  instances must call `Vk.Loader.load_instance` before using objects of a
+  different instance. Loader state is mutex-protected across OCaml 5
+  domains, but the runtime lock still serialises actual Vulkan calls. See
+  [Extensions and function loading](docs/GUIDE.md#extensions-and-function-loading).
+- **Extension commands that the loader/driver does not provide** are left
+  unbound: calling one raises `Vk.Not_loaded "vkFooEXT"`. Check the enabled
+  extensions (or the exception) rather than assuming availability.
+- **64-bit integers above `2^62` collide** through the `int`-based views:
+  `2^63-1` and `2^64-1` both read back as `-1`. This is inert for real
+  Vulkan values (the only ones in that range are `UINT64_MAX`-style
+  sentinels such as `Vk.whole_size = -1`, which round-trip correctly) but
+  matters if you store your own data in `uint64` fields. See
+  [The 64-bit integer caveat](docs/GUIDE.md#the-64-bit-integer-caveat).
+- **Registry scope.** Everything with `api="vulkan"` in the registry is
+  generated, including provisional/beta extensions (e.g.
+  `VK_KHR_portability_subset`, needed on macOS/MoltenVK) and the platform
+  window-system extensions (whose foreign handles are plain pointers/ints).
+  Vulkan SC and `supported="disabled"` items are excluded.
+- **Platforms.** 64-bit only (`x86_64`/`aarch64`). Only Linux has actually
+  been exercised; macOS (`libvulkan.1.dylib`) and Windows (`vulkan-1.dll`)
+  should work but are untested. The library name can be overridden with
+  `Vk.Loader.load ~library` or `$OCAML_VULKAN_LIBRARY`.
+- **Don't `open Vk`.** Module names follow Vulkan, so `Vk.Format`,
+  `Vk.Result`, `Vk.Buffer`, `Vk.Queue`, `Vk.Semaphore`, `Vk.Event` shadow
+  their `Stdlib` namesakes; use `Vk.` qualified names or `module V = Vk`.
+- **Naming exception.** `DebugUtilsMessengerCreateInfoEXT.make` takes
+  `~pfn_user_callback`/`~p_user_data` (the general rule strips those
+  prefixes for other structs).
+- Vulkan calls go through `libffi` (`ctypes-foreign`), roughly a few hundred
+  nanoseconds of overhead per call — fine for command recording, but keep it
+  in mind for very hot loops.
+
+`CHANGELOG.md` lists what changed in each area.
 
 ## License
 

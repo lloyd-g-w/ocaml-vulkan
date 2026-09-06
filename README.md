@@ -268,6 +268,16 @@ your platform under `test/layout/`/`test/enum_values/` (see
 for how they're produced); both are skipped with a message, not failed,
 when the golden file for the current target isn't available.
 
+### Windows layouts without Windows
+
+`scripts/check_layout_win64.sh` (also a CI job) emits a C file of
+`_Static_assert`s from `Vk.Layout.all` and compiles it with
+`x86_64-w64-mingw32-gcc -fsyntax-only` against the real headers with
+`VK_USE_PLATFORM_WIN32_KHR` defined, so the sizes and offsets this binding
+assumes are proven for 64-bit Windows even though the test suite only runs
+on Linux. It needs `gcc-mingw-w64-x86-64` and headers matching
+`registry/VERSION` in `$VULKAN_HEADERS/include`.
+
 ## Regeneration
 
 `lib/generated/` is **committed** (so consumers only need `ctypes`/
@@ -381,10 +391,18 @@ limits — please read these before shipping something on top of the library:
   `VK_KHR_portability_subset`, needed on macOS/MoltenVK) and the platform
   window-system extensions (whose foreign handles are plain pointers/ints).
   Vulkan SC and `supported="disabled"` items are excluded.
-- **Platforms.** 64-bit only (`x86_64`/`aarch64`). Only Linux has actually
-  been exercised; macOS (`libvulkan.1.dylib`) and Windows (`vulkan-1.dll`)
-  should work but are untested. The library name can be overridden with
-  `Vk.Loader.load ~library` or `$OCAML_VULKAN_LIBRARY`.
+- **Platforms.** 64-bit only (`x86_64`/`aarch64`). Linux is the only
+  platform where the test suite and examples have actually been *run*.
+  Windows (`vulkan-1.dll`) and macOS (`libvulkan.1.dylib`) are supported by
+  design — the loader picks the right library name, the Win32/Metal
+  window-system extensions are generated, and CI verifies every struct size
+  and member offset (all platform-independent structs plus the Win32-only
+  ones) against the headers with a **Win64 cross compiler**
+  (`scripts/check_layout_win64.sh`, 8,441 compile-time assertions) — but
+  nobody has yet built or run the library on either. On Windows you need an
+  OCaml toolchain with `ctypes-foreign`/`libffi` (opam ≥ 2.2 with mingw-w64
+  works) and the Vulkan runtime; reports welcome. The library name can be
+  overridden with `Vk.Loader.load ~library` or `$OCAML_VULKAN_LIBRARY`.
 - **Don't `open Vk`.** Module names follow Vulkan, so `Vk.Format`,
   `Vk.Result`, `Vk.Buffer`, `Vk.Queue`, `Vk.Semaphore`, `Vk.Event` shadow
   their `Stdlib` namesakes; use `Vk.` qualified names or `module V = Vk`.

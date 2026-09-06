@@ -18,7 +18,16 @@
 ; skips instead of comparing.
 (test
  (name test_runner)
+ (modules :standard \ layout_asserts)
  (libraries vulkan vk_test_shaders alcotest ctypes integers)
  (deps
   (source_tree layout)
   (source_tree enum_values)))
+
+; Not a test: prints C _Static_assert()s for Vk.Layout.all so the layouts can
+; be checked against the headers with a cross compiler
+; (scripts/check_layout_win64.sh).
+(executable
+ (name layout_asserts)
+ (modules layout_asserts)
+ (libraries vulkan))

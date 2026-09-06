@@ -78,3 +78,35 @@ jobs:
 
       - name: Fail if regeneration changed anything not already committed
         run: git diff --exit-code
+
+  win64-layout:
+    name: struct layouts under a Win64 compiler (mingw-w64 cross check)
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install mingw-w64 cross compiler and libffi/pkg-config
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            gcc-mingw-w64-x86-64 libffi-dev pkg-config
+
+      # The headers must match registry/vk.xml (Ubuntu's libvulkan-dev is older).
+      - name: Fetch Vulkan-Headers matching registry/VERSION
+        run: |
+          tag=$(sed -n 's/^Vulkan-Headers tag: //p' registry/VERSION)
+          git clone --depth 1 --branch "$tag" https://github.com/KhronosGroup/Vulkan-Headers.git /tmp/vulkan-headers
+          echo "VULKAN_HEADERS=/tmp/vulkan-headers" >> "$GITHUB_ENV"
+
+      - name: Set up OCaml 5.2
+        uses: ocaml/setup-ocaml@v3
+        with:
+          ocaml-compiler: "5.2"
+
+      - name: Install opam dependencies
+        run: opam install . --deps-only
+
+      - name: Check every struct size/offset with x86_64-w64-mingw32-gcc
+        run: opam exec -- scripts/check_layout_win64.sh

@@ -6,6 +6,10 @@ repository. Format loosely follows [Keep a Changelog](https://keepachangelog.com
 
 ## Unreleased
 
+### Added — Windows layout cross-check
+
+- `test/layout_asserts.ml` + `scripts/check_layout_win64.sh` + a `win64-layout` CI job: every struct size/offset in `Vk.Layout.all` (1,379 structs incl. the 19 Win32-only ones) is checked under `x86_64-w64-mingw32-gcc`.
+
 > The whole project, including this changelog, is AI-written (see
 > [Authorship](README.md#authorship) in the README).
 

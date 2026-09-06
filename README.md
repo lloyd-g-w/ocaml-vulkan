@@ -13,6 +13,12 @@ commands, is resolved through `vkGetInstanceProcAddr`/`vkGetDeviceProcAddr`
 (volk-style), so nothing needs to be relinked when a new extension or
 Vulkan version shows up.
 
+> **This project was written entirely by AI.** Every file in this
+> repository — the code generator, the runtime, the generated bindings, the
+> tests, the examples, the CI workflows, the documentation and this notice —
+> was produced by AI agents with no hand-written human code. See
+> [Authorship](#authorship) for what that means before you depend on it.
+
 `DESIGN.md` at the repository root is the binding contract between the
 generator, the hand-written runtime, the tests and the examples — read it
 if you're modifying any of those. This file is user-facing documentation,
@@ -390,6 +396,36 @@ limits — please read these before shipping something on top of the library:
   in mind for very hot loops.
 
 `CHANGELOG.md` lists what changed in each area.
+
+## Authorship
+
+**The entire project is AI-written.** No line of code, test, shader, script
+or documentation in this repository was written by a human.
+
+- The human owner set the goal ("complete OCaml bindings for Vulkan"),
+  provided the machine and the repository, and made a few policy decisions
+  (license, commit attribution, which models to use). They did not write
+  or line-by-line review the code.
+- The work was orchestrated by a Claude session using the
+  [pi-subagents](https://github.com/nicobailon/pi-subagents) framework and
+  carried out by autonomous agent lanes: the registry parser, generator
+  core and runtime were written by **GPT‑5.6 Sol**; the verification harness,
+  tests, examples, documentation, an independent adversarial review and the
+  fixes that followed were written by **Claude Sonnet 5**. Commits are
+  attributed to `caduc-ai <ai@caduc.co>`.
+- Correctness was established mechanically rather than by human review:
+  every generated struct layout (1,360) and enum constant (4,486) is checked
+  against the real C headers, and the test suite creates real devices,
+  runs a compute shader and renders a triangle on Mesa's lavapipe in CI. An
+  independent AI review pass found and fixed two memory-safety bugs before
+  the first release of this README.
+
+Treat it accordingly: the automated evidence is strong for what it covers
+(layouts, values, the tested code paths) and absent for what it does not
+(windowed swapchain use, macOS/Windows, multi-threaded drivers). Read
+[Status and limitations](#status-and-limitations), keep validation layers
+on during development, and please report anything surprising in the
+[issue tracker](https://github.com/lloyd-g-w/ocaml-vulkan/issues).
 
 ## License
 

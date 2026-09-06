@@ -9,6 +9,11 @@ everywhere; the one remaining real discrepancy (a naming exception in
 `DebugUtilsMessengerCreateInfoEXT.make`) is called out inline in
 [Extensions and function loading](#extensions-and-function-loading).
 
+> **Note:** this guide, like everything else in the repository (generator,
+> runtime, tests, examples, CI), was written entirely by AI agents — see
+> [Authorship in the README](../README.md#authorship). Its code snippets
+> were checked against the generated sources, but read it with that in mind.
+
 Runnable, more complete versions of most of the patterns below live in
 [`examples/`](../examples/): [`vkinfo.ml`](../examples/vkinfo.ml) (query
 instance/device properties), [`smoke.ml`](../examples/smoke.ml) (buffer +

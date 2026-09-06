@@ -1,5 +1,10 @@
 # ocaml-vulkan — design contract
 
+> This contract and every file it governs were written by AI agents (see
+> the README's Authorship section); it was authored by the orchestrating
+> Claude session before any code existed and updated by the agent lanes as
+> the implementation evolved.
+
 This document is the binding contract between the code generator, the
 hand-written runtime, the tests and the examples. **If you change an interface
 described here, update this file in the same commit.**

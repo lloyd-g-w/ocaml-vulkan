@@ -6,6 +6,14 @@ Complete, generated OCaml bindings to {{:https://www.vulkan.org/}Vulkan}
 Vulkan headers are needed to build; [libvulkan] is loaded at runtime and
 every entry point is resolved through [vkGetInstanceProcAddr].
 
+{b This project was written entirely by AI} — the generator, runtime,
+tests, examples and documentation alike, orchestrated by a Claude session
+with GPT‑5.6 Sol and Claude Sonnet 5 agent lanes, with no hand-written human
+code. Correctness rests on automated checks against the C headers and real
+Vulkan runs in CI, not on human review; see
+{{:https://lloyd-g-w.github.io/ocaml-vulkan/#authorship}Authorship} for
+details and caveats.
+
 {1 Where to start}
 
 - {{:https://lloyd-g-w.github.io/ocaml-vulkan/guide.html}The guide} — a

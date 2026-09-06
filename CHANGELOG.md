@@ -6,6 +6,9 @@ repository. Format loosely follows [Keep a Changelog](https://keepachangelog.com
 
 ## Unreleased
 
+> The whole project, including this changelog, is AI-written (see
+> [Authorship](README.md#authorship) in the README).
+
 ### Added — documentation & examples
 
 - `examples/compute.ml` — headless compute end to end: instance → device →
